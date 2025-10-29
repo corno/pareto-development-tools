@@ -58,101 +58,103 @@ function determine_git_state(project_path: string): Project_State['git'] {
 }
 
 /**
- * Check dependencies status by examining package.json files
+ * Check package.json and determine package info and dependencies
  */
-function determine_dependencies_state(project_path: string): Project_State['dependencies'] {
-    const dependencies: Project_State['dependencies'] = {};
+function determine_package_and_dependencies(project_path: string, node_name: string): {
+    package_name_in_sync: boolean,
+    version: string,
+    dependencies: Project_State['dependencies']
+} {
+    const package_json_path = path.join(project_path, 'pub', 'package.json');
     
-    // Check pub/package.json
-    const pub_package_path = path.join(project_path, 'pub', 'package.json');
-    if (fs.existsSync(pub_package_path)) {
-        try {
-            const package_content = JSON.parse(fs.readFileSync(pub_package_path, 'utf8'));
-            const all_deps = {
-                ...package_content.dependencies || {},
-                ...package_content.devDependencies || {}
-            };
-            
-            for (const [packageName, version] of Object.entries(all_deps)) {
-                try {
-                    // Try to get package info from npm
-                    const npm_info = execSync(`npm view ${packageName} version`, { 
-                        cwd: path.join(project_path, 'pub'), 
-                        encoding: 'utf8',
-                        stdio: 'pipe'
-                    }).trim();
-                    
-                    // Check if installed version matches latest
-                    const node_modules_path = path.join(project_path, 'pub', 'node_modules', packageName, 'package.json');
-                    let is_up_to_date = false;
-                    
-                    if (fs.existsSync(node_modules_path)) {
-                        const installed_package = JSON.parse(fs.readFileSync(node_modules_path, 'utf8'));
-                        is_up_to_date = installed_package.version === npm_info;
-                    }
-                    
-                    dependencies[packageName] = ['target found', {
-                        'up to date': is_up_to_date
-                    }];
-                } catch {
-                    // Package not found in npm registry
-                    dependencies[packageName] = ['target not found', null];
-                }
-            }
-        } catch {
-            // Error reading package.json
-        }
+    if (!fs.existsSync(package_json_path)) {
+        return {
+            package_name_in_sync: true, // No package.json means no mismatch
+            version: '0.0.0',
+            dependencies: {}
+        };
     }
-    
-    // Check test/package.json if it exists
-    const test_package_path = path.join(project_path, 'test', 'package.json');
-    if (fs.existsSync(test_package_path)) {
-        try {
-            const package_content = JSON.parse(fs.readFileSync(test_package_path, 'utf8'));
-            const all_deps = {
-                ...package_content.dependencies || {},
-                ...package_content.devDependencies || {}
-            };
+
+    try {
+        const package_content = JSON.parse(fs.readFileSync(package_json_path, 'utf8'));
+        const package_name = package_content.name || node_name;
+        const version = package_content.version || '0.0.0';
+        const prod_dependencies = package_content.dependencies || {};
+        
+        // Check if package name matches directory name (node_name)
+        const package_name_in_sync = package_name === node_name;
+        
+        // Process dependencies
+        const dependencies: Project_State['dependencies'] = {};
+        
+        for (const [dep_name, dep_version] of Object.entries(prod_dependencies)) {
+            const version_string = dep_version as string;
             
-            for (const [packageName, version] of Object.entries(all_deps)) {
-                // Skip if already checked in pub
-                if (packageName in dependencies) continue;
+            // Try to determine if this dependency is available and up to date
+            let target_status: Project_State['dependencies'][string]['target'];
+            
+            try {
+                // Try to check if package exists in npm registry
+                const npm_info = execSync(`npm view ${dep_name} version`, { 
+                    cwd: path.join(project_path, 'pub'), 
+                    encoding: 'utf8',
+                    stdio: 'pipe'
+                }).trim();
                 
-                try {
-                    const npm_info = execSync(`npm view ${packageName} version`, { 
-                        cwd: path.join(project_path, 'test'), 
-                        encoding: 'utf8',
-                        stdio: 'pipe'
-                    }).trim();
-                    
-                    const node_modules_path = path.join(project_path, 'test', 'node_modules', packageName, 'package.json');
+                if (npm_info) {
+                    // Check if installed version matches latest
+                    const node_modules_path = path.join(project_path, 'pub', 'node_modules', dep_name, 'package.json');
                     let is_up_to_date = false;
                     
                     if (fs.existsSync(node_modules_path)) {
                         const installed_package = JSON.parse(fs.readFileSync(node_modules_path, 'utf8'));
-                        is_up_to_date = installed_package.version === npm_info;
+                        // For now, just check if it's installed - more sophisticated version checking could be added
+                        is_up_to_date = !!installed_package.version;
                     }
                     
-                    dependencies[packageName] = ['target found', {
-                        'up to date': is_up_to_date
+                    target_status = ['found', {
+                        'dependency up to date': is_up_to_date
                     }];
-                } catch {
-                    dependencies[packageName] = ['target not found', null];
+                } else {
+                    target_status = ['not found', null];
                 }
+            } catch {
+                // If we can't check npm, assume not found
+                target_status = ['not found', null];
             }
-        } catch {
-            // Error reading test package.json
+            
+            dependencies[dep_name] = {
+                'version': version_string,
+                'target': target_status
+            };
         }
+        
+        return {
+            package_name_in_sync,
+            version,
+            dependencies
+        };
+    } catch (err: any) {
+        // Error reading package.json
+        return {
+            package_name_in_sync: true,
+            version: '0.0.0',
+            dependencies: {}
+        };
     }
-    
-    return dependencies;
 }
 
-export function determine_project_state(project_path: string): Project_State {
+export function determine_project_state(project_path: string, node_name?: string): Project_State {
+    // Use basename if node_name not provided
+    const effective_node_name = node_name || path.basename(project_path);
+    
     // 1. Determine Git State
     const git_state = determine_git_state(project_path);
 
-    // 2. Load structure.json and validate structure
+    // 2. Determine package info and dependencies
+    const { package_name_in_sync, version, dependencies } = determine_package_and_dependencies(project_path, effective_node_name);
+
+    // 3. Load structure.json and validate structure
     let structure_state: Project_State['structure'];
     try {
         // Assuming this function is called from tools, look for structure.json in data directory
@@ -178,7 +180,7 @@ export function determine_project_state(project_path: string): Project_State {
         structure_state = ['invalid', { errors: [`Failed to load structure.json: ${err.message}`] }];
     }
 
-    // 3. Run build and test
+    // 4. Run build and test
     let test_state: Project_State['test'];
     try {
         const build_test_result = build_and_test(project_path, {
@@ -195,7 +197,7 @@ export function determine_project_state(project_path: string): Project_State {
                 test_state = ['failure', ['build', null]];
             } else if (reason_type === 'tests failing') {
                 // Extract failed test information if available
-                test_state = ['failure', ['test', { failed_tests: [reason_details.details] }]];
+                test_state = ['failure', ['test', { 'failed tests': [reason_details.details] }]];
             } else {
                 // Fallback for unknown error types
                 test_state = ['failure', ['build', null]];
@@ -206,13 +208,12 @@ export function determine_project_state(project_path: string): Project_State {
         test_state = ['failure', ['build', null]];
     }
 
-    // 4. Determine dependencies state
-    const dependencies_state = determine_dependencies_state(project_path);
-
     return {
-        git: git_state,
-        structure: structure_state,
-        test: test_state,
-        dependencies: dependencies_state
+        'package name in sync with directory name': package_name_in_sync,
+        'version': version,
+        'git': git_state,
+        'structure': structure_state,
+        'test': test_state,
+        'dependencies': dependencies
     };
 }

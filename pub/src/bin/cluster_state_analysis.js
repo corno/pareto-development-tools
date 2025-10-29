@@ -35,10 +35,11 @@ function main() {
     // Display summary
     console.log('📊 CLUSTER SUMMARY');
     console.log('==================');
+    console.log(`Total nodes: ${summary.total_nodes}`);
     console.log(`Total projects: ${summary.total_projects}`);
+    console.log(`Non-projects: ${summary.non_projects}`);
     console.log(`Healthy projects: ${summary.healthy_projects}`);
     console.log(`Projects with issues: ${summary.projects_with_issues}`);
-    console.log(`Projects ready to commit: ${summary.projects_ready_to_commit}`);
     console.log('');
     
     console.log('🔧 DETAILED BREAKDOWN');
@@ -65,25 +66,32 @@ function main() {
         console.log('========================');
         summary.problematic_project_names.forEach(name => {
             console.log(`  • ${name}`);
-            const project_state = cluster_state[name];
-            
-            // Show specific issues
-            if (project_state.structure[0] === 'invalid') {
-                console.log(`    - Structure errors: ${project_state.structure[1].errors.length}`);
-            }
-            if (project_state.test[0] === 'failure') {
-                console.log(`    - Test failures: ${project_state.test[1][0]}`);
-            }
-            
-            // Check for outdated dependencies
-            let outdated_count = 0;
-            for (const [_, dep_state] of Object.entries(project_state.dependencies)) {
-                if (dep_state[0] === 'target found' && !dep_state[1]['up to date']) {
-                    outdated_count++;
+            const project_entry = cluster_state.projects[name];
+            if (project_entry && project_entry[0] === 'project') {
+                const project_state = project_entry[1];
+                
+                // Show specific issues
+                if (project_state.structure[0] === 'invalid') {
+                    console.log(`    - Structure errors: ${project_state.structure[1].errors.length}`);
                 }
-            }
-            if (outdated_count > 0) {
-                console.log(`    - Outdated dependencies: ${outdated_count}`);
+                if (project_state.test[0] === 'failure') {
+                    console.log(`    - Test failures: ${project_state.test[1][0]}`);
+                }
+                if (!project_state['package name in sync with directory name']) {
+                    console.log(`    - Package name mismatch`);
+                }
+                
+                // Check for dependency issues
+                let dependency_issues = 0;
+                for (const [_, dep_info] of Object.entries(project_state.dependencies)) {
+                    if (dep_info.target[0] === 'not found' || 
+                        (dep_info.target[0] === 'found' && !dep_info.target[1]['dependency up to date'])) {
+                        dependency_issues++;
+                    }
+                }
+                if (dependency_issues > 0) {
+                    console.log(`    - Dependency issues: ${dependency_issues}`);
+                }
             }
         });
         console.log('');
@@ -94,12 +102,17 @@ function main() {
         console.log('📋 DETAILED PROJECT STATES');
         console.log('===========================');
         
-        for (const [project_name, project_state] of Object.entries(cluster_state)) {
-            console.log(`\n🔸 ${project_name}`);
-            console.log(`   Git: staged=${project_state.git['staged files']}, dirty=${project_state.git['dirty working tree']}, unpushed=${project_state.git['unpushed commits']}`);
-            console.log(`   Structure: ${project_state.structure[0]} ${project_state.structure[0] === 'invalid' ? `(${project_state.structure[1].errors.length} errors)` : `(${project_state.structure[1].warnings.length} warnings)`}`);
-            console.log(`   Tests: ${project_state.test[0]}`);
-            console.log(`   Dependencies: ${Object.keys(project_state.dependencies).length} packages`);
+        for (const [project_name, project_entry] of Object.entries(cluster_state.projects)) {
+            if (project_entry[0] === 'project') {
+                const project_state = project_entry[1];
+                console.log(`\n🔸 ${project_name}`);
+                console.log(`   Package name sync: ${project_state['package name in sync with directory name']}`);
+                console.log(`   Version: ${project_state.version}`);
+                console.log(`   Git: staged=${project_state.git['staged files']}, dirty=${project_state.git['dirty working tree']}, unpushed=${project_state.git['unpushed commits']}`);
+                console.log(`   Structure: ${project_state.structure[0]} ${project_state.structure[0] === 'invalid' ? `(${project_state.structure[1].errors.length} errors)` : `(${project_state.structure[1].warnings.length} warnings)`}`);
+                console.log(`   Tests: ${project_state.test[0]}`);
+                console.log(`   Dependencies: ${Object.keys(project_state.dependencies).length} packages`);
+            }
         }
     }
     

@@ -1,7 +1,56 @@
-import { Project_Cluster_State } from "../interface/project_cluster_state";
+import { Project_Cluster_State, Project_State } from "../interface/project_state";
 import { determine_project_state } from "./determine_project_state";
 const fs = require('fs');
 const path = require('path');
+
+/**
+ * Calculate topological order of projects based on their dependencies
+ * @param projects - Projects with their states
+ * @returns Array of project names in dependency order (dependencies first)
+ */
+function calculate_topological_order(projects: { [node_name: string]: ['not a project', null] | ['project', Project_State] }): string[] {
+    const project_names = Object.keys(projects).filter(name => projects[name][0] === 'project');
+    const visited = new Set<string>();
+    const visiting = new Set<string>();
+    const sorted: string[] = [];
+    
+    function visit(project_name: string, path: string[] = []): void {
+        if (visiting.has(project_name)) {
+            // Circular dependency detected - add to end to break cycle
+            console.warn(`Circular dependency detected: ${[...path, project_name].join(' -> ')}`);
+            return;
+        }
+        
+        if (visited.has(project_name)) {
+            return;
+        }
+        
+        visiting.add(project_name);
+        
+        // Visit dependencies first (if they are projects in this cluster)
+        const project_entry = projects[project_name];
+        if (project_entry && project_entry[0] === 'project') {
+            const project_state = project_entry[1];
+            const sibling_deps = Object.keys(project_state.dependencies)
+                .filter(dep_name => project_names.includes(dep_name));
+            
+            for (const dep of sibling_deps) {
+                visit(dep, [...path, project_name]);
+            }
+        }
+        
+        visiting.delete(project_name);
+        visited.add(project_name);
+        sorted.push(project_name);
+    }
+    
+    // Visit all projects
+    for (const project_name of project_names) {
+        visit(project_name);
+    }
+    
+    return sorted;
+}
 
 /**
  * Determine the state of all projects in a cluster directory
@@ -18,13 +67,16 @@ const path = require('path');
  * @returns Project_Cluster_State - Object mapping project names to their states
  */
 export function determine_project_cluster_state(cluster_path: string): Project_Cluster_State {
-    const cluster_state: Project_Cluster_State = {};
+    const projects: { [node_name: string]: ['not a project', null] | ['project', Project_State] } = {};
     
     try {
         // Check if cluster path exists
         if (!fs.existsSync(cluster_path)) {
             console.warn(`Cluster path does not exist: ${cluster_path}`);
-            return cluster_state;
+            return {
+                projects,
+                'topological order': []
+            };
         }
         
         // Read all entries in the cluster directory
@@ -36,38 +88,51 @@ export function determine_project_cluster_state(cluster_path: string): Project_C
             .map((entry: any) => entry.name);
         
         // Check each directory to see if it's a valid project
-        for (const dir_name of directories) {
-            const project_path = path.join(cluster_path, dir_name);
+        for (const node_name of directories) {
+            const project_path = path.join(cluster_path, node_name);
             
             if (is_valid_project(project_path)) {
                 try {
-                    console.log(`Analyzing project: ${dir_name}`);
-                    const project_state = determine_project_state(project_path);
-                    cluster_state[dir_name] = project_state;
+                    console.log(`Analyzing project: ${node_name}`);
+                    const project_state = determine_project_state(project_path, node_name);
+                    projects[node_name] = ['project', project_state];
                 } catch (err: any) {
-                    console.error(`Error analyzing project ${dir_name}:`, err.message);
+                    console.error(`Error analyzing project ${node_name}:`, err.message);
                     // Create a minimal error state for this project
-                    cluster_state[dir_name] = {
-                        git: {
+                    projects[node_name] = ['project', {
+                        'package name in sync with directory name': false,
+                        'version': '0.0.0',
+                        'git': {
                             'staged files': false,
                             'dirty working tree': false,
                             'unpushed commits': false
                         },
-                        structure: ['invalid', { errors: [`Failed to analyze project: ${err.message}`] }],
-                        test: ['failure', ['build', null]],
-                        dependencies: {}
-                    };
+                        'structure': ['invalid', { errors: [`Failed to analyze project: ${err.message}`] }],
+                        'test': ['failure', ['build', null]],
+                        'dependencies': {}
+                    }];
                 }
             } else {
-                console.log(`Skipping non-project directory: ${dir_name}`);
+                console.log(`Skipping non-project directory: ${node_name}`);
+                projects[node_name] = ['not a project', null];
             }
         }
         
+        // Calculate topological order
+        const topological_order = calculate_topological_order(projects);
+        
+        return {
+            projects,
+            'topological order': topological_order
+        };
+        
     } catch (err: any) {
         console.error(`Error reading cluster directory ${cluster_path}:`, err.message);
+        return {
+            projects,
+            'topological order': []
+        };
     }
-    
-    return cluster_state;
 }
 
 /**
@@ -105,83 +170,92 @@ function is_valid_project(project_path: string): boolean {
  */
 export function summarize_cluster_state(cluster_state: Project_Cluster_State) {
     const summary = {
+        total_nodes: 0,
         total_projects: 0,
+        non_projects: 0,
         healthy_projects: 0,
         projects_with_issues: 0,
-        projects_ready_to_commit: 0,
         projects_with_dirty_trees: 0,
         projects_with_staged_files: 0,
         projects_with_unpushed_commits: 0,
         projects_with_structure_errors: 0,
         projects_with_test_failures: 0,
-        projects_with_outdated_dependencies: 0,
+        projects_with_name_mismatches: 0,
+        projects_with_dependency_issues: 0,
         
+        node_names: [] as string[],
         project_names: [] as string[],
+        non_project_names: [] as string[],
         healthy_project_names: [] as string[],
         problematic_project_names: [] as string[]
     };
     
-    for (const [project_name, project_state] of Object.entries(cluster_state)) {
-        summary.total_projects++;
-        summary.project_names.push(project_name);
+    for (const [node_name, node_entry] of Object.entries(cluster_state.projects)) {
+        summary.total_nodes++;
+        summary.node_names.push(node_name);
         
-        let has_issues = false;
-        
-        // Check git state
-        if (project_state.git['staged files']) {
-            summary.projects_with_staged_files++;
-        }
-        if (project_state.git['dirty working tree']) {
-            summary.projects_with_dirty_trees++;
-        }
-        if (project_state.git['unpushed commits']) {
-            summary.projects_with_unpushed_commits++;
-        }
-        
-        // Check structure
-        if (project_state.structure[0] === 'invalid') {
-            summary.projects_with_structure_errors++;
-            has_issues = true;
-        }
-        
-        // Check tests
-        if (project_state.test[0] === 'failure') {
-            summary.projects_with_test_failures++;
-            has_issues = true;
-        }
-        
-        // Check dependencies
-        let has_outdated_deps = false;
-        for (const [_, dep_state] of Object.entries(project_state.dependencies)) {
-            if (dep_state[0] === 'target found' && !dep_state[1]['up to date']) {
-                has_outdated_deps = true;
-                break;
-            }
-        }
-        if (has_outdated_deps) {
-            summary.projects_with_outdated_dependencies++;
-            has_issues = true;
-        }
-        
-        // Determine if project is ready to commit
-        const ready_to_commit = (
-            project_state.structure[0] === 'valid' &&
-            project_state.test[0] === 'success' &&
-            !project_state.git['staged files'] &&
-            !has_outdated_deps
-        );
-        
-        if (ready_to_commit) {
-            summary.projects_ready_to_commit++;
-        }
-        
-        // Categorize project health
-        if (has_issues) {
-            summary.projects_with_issues++;
-            summary.problematic_project_names.push(project_name);
+        if (node_entry[0] === 'not a project') {
+            summary.non_projects++;
+            summary.non_project_names.push(node_name);
         } else {
-            summary.healthy_projects++;
-            summary.healthy_project_names.push(project_name);
+            // It's a project
+            summary.total_projects++;
+            summary.project_names.push(node_name);
+            
+            const project_state = node_entry[1];
+            let has_issues = false;
+            
+            // Check git state
+            if (project_state.git['staged files']) {
+                summary.projects_with_staged_files++;
+            }
+            if (project_state.git['dirty working tree']) {
+                summary.projects_with_dirty_trees++;
+            }
+            if (project_state.git['unpushed commits']) {
+                summary.projects_with_unpushed_commits++;
+            }
+            
+            // Check package name sync
+            if (!project_state['package name in sync with directory name']) {
+                summary.projects_with_name_mismatches++;
+                has_issues = true;
+            }
+            
+            // Check structure
+            if (project_state.structure[0] === 'invalid') {
+                summary.projects_with_structure_errors++;
+                has_issues = true;
+            }
+            
+            // Check tests
+            if (project_state.test[0] === 'failure') {
+                summary.projects_with_test_failures++;
+                has_issues = true;
+            }
+            
+            // Check dependencies
+            let has_dependency_issues = false;
+            for (const [_, dep_info] of Object.entries(project_state.dependencies)) {
+                if (dep_info.target[0] === 'not found' || 
+                    (dep_info.target[0] === 'found' && !dep_info.target[1]['dependency up to date'])) {
+                    has_dependency_issues = true;
+                    break;
+                }
+            }
+            if (has_dependency_issues) {
+                summary.projects_with_dependency_issues++;
+                has_issues = true;
+            }
+            
+            // Categorize project health
+            if (has_issues) {
+                summary.projects_with_issues++;
+                summary.problematic_project_names.push(node_name);
+            } else {
+                summary.healthy_projects++;
+                summary.healthy_project_names.push(node_name);
+            }
         }
     }
     
