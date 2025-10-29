@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+"use strict";
 /**
  * Package Publishing Script
  *
@@ -42,13 +43,47 @@
  *
  * @usage ./publish.js <package-directory> [--dry-run]
  */
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-const ensureValidCommitModule = require('../lib/ensure_valid_commit');
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+const child_process_1 = require("child_process");
+const fs = __importStar(require("fs"));
+const path = __importStar(require("path"));
+const readline = __importStar(require("readline"));
+const ensureValidCommitModule = __importStar(require("../lib/ensure_valid_commit"));
 const ensure_valid_commit = ensureValidCommitModule.$$;
-const compareWithPublishedModule = require('../lib/compare_with_published');
+const compareWithPublishedModule = __importStar(require("../lib/compare_with_published"));
 const compare_with_published = compareWithPublishedModule.$$;
 // Helper function to prompt user for input
 function prompt_user(question) {
@@ -201,21 +236,21 @@ async function main() {
         }
         else {
             // Run npm version patch - this modifies package.json and package-lock.json
-            execSync('npm version patch --git-tag-version=false', { cwd: path.join(package_path, 'pub'), stdio: 'inherit' });
+            (0, child_process_1.execSync)('npm version patch --git-tag-version=false', { cwd: path.join(package_path, 'pub'), stdio: 'inherit' });
             console.log('✓ Version incremented');
             // Commit the version changes at the repository root
             console.log('Committing version changes...');
-            execSync('git add pub/package.json pub/package-lock.json', { cwd: package_path, stdio: 'inherit' });
+            (0, child_process_1.execSync)('git add pub/package.json pub/package-lock.json', { cwd: package_path, stdio: 'inherit' });
             // Get the new version from package.json
             const new_package_json = JSON.parse(fs.readFileSync(package_json_path, 'utf8'));
             const new_version = new_package_json.version;
-            execSync(`git commit -m "${new_version}"`, { cwd: package_path, stdio: 'inherit' });
-            execSync(`git tag v${new_version}`, { cwd: package_path, stdio: 'inherit' });
+            (0, child_process_1.execSync)(`git commit -m "${new_version}"`, { cwd: package_path, stdio: 'inherit' });
+            (0, child_process_1.execSync)(`git tag v${new_version}`, { cwd: package_path, stdio: 'inherit' });
             console.log(`✓ Version ${new_version} committed and tagged`);
             // Push the version commit and tag
             console.log('Pushing version commit and tag...');
-            execSync('git push', { cwd: package_path, stdio: 'inherit' });
-            execSync('git push --tags', { cwd: package_path, stdio: 'inherit' });
+            (0, child_process_1.execSync)('git push', { cwd: package_path, stdio: 'inherit' });
+            (0, child_process_1.execSync)('git push --tags', { cwd: package_path, stdio: 'inherit' });
             console.log('✓ Version commit and tag pushed');
         }
         // Step 4: Publish
@@ -225,7 +260,7 @@ async function main() {
             console.log('✓ Publish skipped (dry run)');
         }
         else {
-            execSync('npm publish', { cwd: path.join(package_path, 'pub'), stdio: 'inherit' });
+            (0, child_process_1.execSync)('npm publish', { cwd: path.join(package_path, 'pub'), stdio: 'inherit' });
             console.log('✓ Package published successfully');
         }
         // Success!

@@ -1,9 +1,44 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-const { is_node_project } = require('../../lib/build_test_utils');
-const { extract_local, extract_published } = require('../../lib/package_compare_utils');
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs = __importStar(require("fs"));
+const path = __importStar(require("path"));
+const child_process_1 = require("child_process");
+const build_test_utils_1 = require("../../lib/build_test_utils");
+const package_compare_utils_1 = require("../../lib/package_compare_utils");
 // Get target directory and flags from command line arguments
 const args = process.argv.slice(2);
 const target_dir = args.find(arg => !arg.startsWith('-'));
@@ -102,7 +137,7 @@ async function check_package_deviation(project_path, package_name, options = {})
         const local_dir = path.join(temp_dir, 'local');
         try {
             // Extract published package
-            const published_result = extract_published(package_name, published_dir, { verbose });
+            const published_result = (0, package_compare_utils_1.extract_published)(package_name, published_dir, { verbose });
             if (published_result.error) {
                 result.error = published_result.error;
                 return result;
@@ -115,7 +150,7 @@ async function check_package_deviation(project_path, package_name, options = {})
             }
             result.published_exists = true;
             // Extract local package
-            const local_result = extract_local(project_path, local_dir, { verbose, skip_build });
+            const local_result = (0, package_compare_utils_1.extract_local)(project_path, local_dir, { verbose, skip_build });
             if (local_result.error) {
                 result.error = local_result.error;
                 return result;
@@ -127,7 +162,7 @@ async function check_package_deviation(project_path, package_name, options = {})
             }
             // Compare the directories using diff
             try {
-                execSync(`diff -r "${published_dir}" "${local_dir}"`, {
+                (0, child_process_1.execSync)(`diff -r "${published_dir}" "${local_dir}"`, {
                     stdio: 'pipe'
                 });
                 result.deviates = false; // Identical
@@ -278,7 +313,7 @@ async function main() {
         .filter(dirent => dirent.isDirectory())
         .map(dirent => {
         const dir_path = path.join(base_dir, dirent.name);
-        if (is_node_project(dir_path)) {
+        if ((0, build_test_utils_1.is_node_project)(dir_path)) {
             return {
                 dir_name: dirent.name,
                 path: dir_path,
@@ -460,7 +495,7 @@ async function main() {
     if (publish_mode) {
         console.log('\n🚀 PUBLISHING MODE');
         console.log('═'.repeat(50));
-        const readline = require('readline');
+        import * as readline from 'readline';
         const rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -542,7 +577,7 @@ async function main() {
                             publish_command = 'npm publish';
                         }
                         console.log(`   Running: ${publish_command}`);
-                        execSync(publish_command, {
+                        (0, child_process_1.execSync)(publish_command, {
                             cwd: project.path,
                             stdio: 'inherit'
                         });

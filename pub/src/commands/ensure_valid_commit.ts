@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-function main() {
+
+function main(): void {
     /**
      * Ensure Valid Commit Command
-     *
+     * 
      * This command ensures the repository has a valid latest commit by:
      * 1. Validating structure
      * 2. Checking staging area is clean
@@ -11,9 +12,9 @@ function main() {
      * 5. Building and testing
      * 6. Committing with provided message
      * 7. Pushing to remote (unless --no-push)
-     *
+     * 
      * See ensure_valid_commit.ts for complete workflow details.
-     *
+     * 
      * @usage ./ensure_valid_commit.js <package-directory> <commit-message> [--force] [--no-push]
      */
     const ensure_valid_commit = ensureValidCommitModule.$$;
@@ -22,6 +23,7 @@ function main() {
             input: process.stdin,
             output: process.stdout
         });
+        
         return new Promise((resolve) => {
             rl.question(question, (answer) => {
                 rl.close();
@@ -64,22 +66,25 @@ function main() {
         // This will be called synchronously when a commit message is needed
         // Use Node.js readline-sync approach
         import * as fs from 'fs';
+        
         // Write prompt to stderr
         process.stderr.write('Enter commit message: ');
+        
         // Read synchronously from stdin
         const BUFFER_SIZE = 256;
         const buffer = Buffer.alloc(BUFFER_SIZE);
         let input = '';
+        
         try {
             const bytesRead = fs.readSync(0, buffer, 0, BUFFER_SIZE, null);
             if (bytesRead > 0) {
                 input = buffer.toString('utf8', 0, bytesRead).trim();
             }
-        }
-        catch (err) {
+        } catch (err) {
             console.error('Failed to read input:', err.message);
             return '';
         }
+        
         return input;
     }, {
         skip_validation: is_force,
@@ -95,10 +100,10 @@ function main() {
             });
         }
         process.exit(0);
-    }
-    else {
+    } else {
         console.error('\n❌ Failed to create valid commit');
         const [reason_type, reason_details] = result[1].reason;
+        
         switch (reason_type) {
             case 'structure not valid':
                 console.error('Structure validation failed:');
@@ -127,7 +132,9 @@ function main() {
             default:
                 console.error(`Unknown error: ${reason_type}`);
         }
+        
         process.exit(1);
     }
 }
+
 main();

@@ -1,45 +1,13 @@
 #!/usr/bin/env node
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
-const build_test_utils_1 = require("../../lib/build_test_utils");
-const dependency_graph_utils_1 = require("../../lib/dependency_graph_utils");
+import { execSync } from 'child_process';
+import * as fs from 'fs';
+import * as path from 'path';
+import { build_project, is_node_project } from '../../lib/build_test_utils';
+import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
+
 // Get target directory from command line argument (skip --verbose flag)
-function main() {
+
+function main(): void {
     const args = process.argv.slice(2);
     const target_dir = args.find(arg => !arg.startsWith('--'));
     if (!target_dir) {
@@ -58,16 +26,15 @@ function main() {
         return rel.startsWith('..') || rel.startsWith('.') ? rel : './' + rel;
     };
     console.log('Analyzing dependencies to determine build order...');
-    const dep_graph = (0, dependency_graph_utils_1.analyze_dependencies)(base_dir, true);
+    const dep_graph = analyze_dependencies(base_dir, true);
     if (dep_graph.projects.length === 0) {
         console.error('No Node.js projects found in the specified directory');
         process.exit(1);
     }
     let build_order;
     try {
-        build_order = (0, dependency_graph_utils_1.get_build_order)(dep_graph);
-    }
-    catch (err) {
+        build_order = get_build_order(dep_graph);
+    } catch (err) {
         console.error(`Error: ${err.message}`);
         process.exit(1);
     }
@@ -83,20 +50,18 @@ function main() {
     for (const project of build_order) {
         console.log(`Building ${get_relative_path(project.path)}...`);
         try {
-            const build_succeeded = (0, build_test_utils_1.build_project)(project.path, {
+            const build_succeeded = build_project(project.path, { 
                 verbose: verbose,
-                throw_on_error: false
+                throw_on_error: false 
             });
             if (build_succeeded) {
                 console.log(`✓ ${get_relative_path(project.path)} built successfully`);
                 success_count++;
-            }
-            else {
+            } else {
                 console.error(`❌ ${get_relative_path(project.path)} build failed`);
                 failed_count++;
             }
-        }
-        catch (err) {
+        } catch (err) {
             console.error(`❌ Failed to build ${get_relative_path(project.path)}:`, err.message);
             failed_count++;
         }
@@ -108,4 +73,5 @@ function main() {
         process.exit(1);
     }
 }
+
 main();

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
-const { is_node_project } = require('../lib/build_test_utils');
-const { $$ } = require('../lib/build_and_test');
+import { execSync } from 'child_process';
+import * as fs from 'fs';
+import * as path from 'path';
+import { is_node_project } from '../lib/build_test_utils';
+import { $$ } from '../lib/build_and_test';
 
 // Get package directory and flags from command line arguments
 const args = process.argv.slice(2);

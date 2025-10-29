@@ -1,44 +1,11 @@
 #!/usr/bin/env node
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
-const structure_validation_utils_1 = require("../lib/structure_validation_utils");
+import * as fs from 'fs';
+import * as path from 'path';
+import { validate_repository_structure } from '../lib/structure_validation_utils';
+
 // Get target repository from command line argument
-function main() {
+
+function main(): void {
     const args = process.argv.slice(2);
     const target_repo = args.find(arg => !arg.startsWith('-'));
     const verbose = args.includes('-v') || args.includes('--verbose');
@@ -59,10 +26,10 @@ function main() {
         console.log('  validate_structure.js ../my-repo');
         console.log('  validate_structure.js ../my-repo --verbose');
         console.log('  validate_structure.js ../my-repo --raw');
+        
         if (!target_repo) {
             process.exit(1);
-        }
-        else {
+        } else {
             process.exit(0);
         }
     }
@@ -81,7 +48,7 @@ function main() {
         process.exit(1);
     }
     const allowed_structure = JSON.parse(fs.readFileSync(structure_path, 'utf8'));
-    const validation_result = (0, structure_validation_utils_1.validate_repository_structure)(repo_path, allowed_structure, verbose);
+    const validation_result = validate_repository_structure(repo_path, allowed_structure, verbose);
     if (raw) {
         console.log(JSON.stringify(validation_result.issues, null, 2));
         process.exit(validation_result.errors.length > 0 ? 1 : 0);
@@ -114,4 +81,5 @@ function main() {
         process.exit(1);
     }
 }
+
 main();

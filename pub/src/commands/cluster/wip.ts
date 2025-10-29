@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-const { is_node_project } = require('../../lib/build_test_utils');
-const { extract_local, extract_published } = require('../../lib/package_compare_utils');
+import * as fs from 'fs';
+import * as path from 'path';
+import { execSync } from 'child_process';
+import { is_node_project } from '../../lib/build_test_utils';
+import { extract_local, extract_published } from '../../lib/package_compare_utils';
 
 // Get target directory and flags from command line arguments
 const args = process.argv.slice(2);
@@ -548,7 +548,7 @@ async function main() {
         console.log('\n🚀 PUBLISHING MODE');
         console.log('═'.repeat(50));
         
-        const readline = require('readline');
+        import * as readline from 'readline';
         const rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout

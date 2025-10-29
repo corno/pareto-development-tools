@@ -1,4 +1,4 @@
-const { clean_project, git_clean_project } = require('./clean_utils');
+import { clean_project } from './clean_project';
 
 export type Status =
     | ['success', {
@@ -20,20 +20,26 @@ export const $$ = (path: string, options: {
     const node_modules_only = options.node_modules_only || false;
     const use_git = options.use_git || false;
     
-    const result = clean_project(path, {
-        verbose,
-        dist_only,
-        node_modules_only,
-        use_git
-    });
-    
-    if (result.success) {
+    try {
+        clean_project(path, {
+            verbose,
+            dist_only,
+            node_modules_only,
+            use_git
+        });
+        
+        // Since clean_project throws on error, if we get here it was successful
+        const cleaned_items: string[] = [];
+        if (!node_modules_only) cleaned_items.push('dist');
+        if (!dist_only) cleaned_items.push('node_modules');
+        if (use_git) cleaned_items.push('git-ignored-files');
+        
         return ['success', {
-            cleaned: result.cleaned
+            cleaned: cleaned_items
         }];
-    } else {
+    } catch (err: any) {
         return ['failure', {
-            errors: result.errors
+            errors: [err.message]
         }];
     }
 }

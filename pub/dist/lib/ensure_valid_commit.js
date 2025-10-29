@@ -83,7 +83,7 @@ const validateStructureModule = require('./validate_structure');
 const validate_structure = validateStructureModule.$$;
 const buildAndTestModule = require('./build_and_test');
 const build_and_test = buildAndTestModule.$$;
-const { clean_project } = require('./clean_utils');
+const clean_project_1 = require("./clean_project");
 /**
  * Traverse the structure and collect all paths where ["generated", false]
  * @param {Object} structure - The structure object or sub-object
@@ -170,12 +170,14 @@ const $$ = (repo_path, structure, prompt_for_commit_message, options = {}) => {
                 }];
         }
         // 4. Clean
-        const clean_result = clean_project(repo_path, { verbose: false, use_git: true });
-        if (!clean_result.success) {
+        try {
+            (0, clean_project_1.clean_project)(repo_path, { verbose: false, use_git: true });
+        }
+        catch (err) {
             unstage_if_needed();
             return ['not ready', {
                     reason: ['clean failed', {
-                            errors: clean_result.errors
+                            errors: [err.message]
                         }]
                 }];
         }

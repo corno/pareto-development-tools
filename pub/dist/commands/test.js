@@ -1,9 +1,44 @@
 #!/usr/bin/env node
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
-const { is_node_project } = require('../lib/build_test_utils');
-const { $$ } = require('../lib/build_and_test');
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+const child_process_1 = require("child_process");
+const fs = __importStar(require("fs"));
+const path = __importStar(require("path"));
+const build_test_utils_1 = require("../lib/build_test_utils");
+const build_and_test_1 = require("../lib/build_and_test");
 // Get package directory and flags from command line arguments
 const args = process.argv.slice(2);
 const package_dir = args.find(arg => !arg.startsWith('-'));
@@ -17,7 +52,7 @@ if (!package_dir) {
 }
 const package_path = path.resolve(package_dir);
 // Check if it's a valid Node.js project
-if (!is_node_project(package_path)) {
+if (!(0, build_test_utils_1.is_node_project)(package_path)) {
     console.error(`Error: package.json not found in ${package_path}`);
     process.exit(1);
 }
@@ -44,7 +79,7 @@ async function main() {
                 console.log('✓ Removed node_modules directory');
                 // Install dependencies after cleaning node_modules
                 console.log('📦 Installing dependencies...');
-                execSync('npm install', {
+                (0, child_process_1.execSync)('npm install', {
                     cwd: path.join(package_path, 'pub'),
                     stdio: is_verbose ? 'inherit' : 'pipe'
                 });
@@ -53,7 +88,7 @@ async function main() {
         }
         // Step 2: Build and Test
         console.log(`\n${step_number++}. Building and testing...`);
-        const result = $$(package_path, {
+        const result = (0, build_and_test_1.$$)(package_path, {
             verbose: is_verbose,
             throw_on_error: false
         });

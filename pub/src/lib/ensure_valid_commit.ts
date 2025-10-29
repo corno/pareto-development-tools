@@ -82,7 +82,7 @@ const validateStructureModule = require('./validate_structure');
 const validate_structure = validateStructureModule.$$;
 const buildAndTestModule = require('./build_and_test');
 const build_and_test = buildAndTestModule.$$;
-const { clean_project } = require('./clean_utils');
+import { clean_project } from './clean_project';
 
 /**
  * Traverse the structure and collect all paths where ["generated", false]
@@ -201,12 +201,13 @@ export const $$ = (repo_path: string, structure: any, prompt_for_commit_message:
         }
         
         // 4. Clean
-        const clean_result = clean_project(repo_path, { verbose: false, use_git: true });
-        if (!clean_result.success) {
+        try {
+            clean_project(repo_path, { verbose: false, use_git: true });
+        } catch (err: any) {
             unstage_if_needed();
             return ['not ready', {
                 reason: ['clean failed', {
-                    errors: clean_result.errors
+                    errors: [err.message]
                 }]
             }];
         }

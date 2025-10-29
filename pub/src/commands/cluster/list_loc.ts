@@ -1,43 +1,10 @@
 #!/usr/bin/env node
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
+import * as fs from 'fs';
+import * as path from 'path';
+
 // Get target directory from command line argument
-function main() {
+
+function main(): void {
     const target_dir = process.argv[2];
     if (!target_dir) {
         console.error('Error: Please provide a target directory path');
@@ -60,8 +27,7 @@ function main() {
         try {
             const content = fs.readFileSync(file_path, 'utf8');
             return content.split('\n').length;
-        }
-        catch (err) {
+        } catch (err) {
             return 0;
         }
     };
@@ -71,85 +37,77 @@ function main() {
      */
     function classify_path(relative_path_parts, structure) {
         let current_structure = structure;
+        
         for (let i = 0; i < relative_path_parts.length; i++) {
             const part = relative_path_parts[i];
             const is_last = i === relative_path_parts.length - 1;
+            
             if (typeof current_structure !== 'object' || Array.isArray(current_structure)) {
                 // We've hit a leaf node but path continues
                 const [type, _] = current_structure || ['unexpected', null];
+                
                 if (type === 'ignore') {
                     return null; // Don't list ignored files
-                }
-                else if (type === 'manual') {
+                } else if (type === 'manual') {
                     return 'manual'; // 'manual' allows anything
-                }
-                else if (type === 'generated') {
+                } else if (type === 'generated') {
                     return 'generated';
-                }
-                else if (type === 'warn') {
+                } else if (type === 'warn') {
                     return 'manual'; // warn patterns are still valid manual files
-                }
-                else if (type === 'wildcards') {
+                } else if (type === 'wildcards') {
                     return 'manual'; // wildcard patterns are manual
                 }
                 return 'unexpected';
             }
+            
             // Check if exact match exists
             if (current_structure[part] !== undefined) {
                 const value = current_structure[part];
+                
                 if (Array.isArray(value)) {
                     const [type, details] = value;
+                    
                     if (is_last) {
                         // This is the file/dir we're checking
                         if (type === 'ignore') {
                             return null; // Don't list ignored files
-                        }
-                        else if (type === 'generated') {
+                        } else if (type === 'generated') {
                             return 'generated';
-                        }
-                        else if (type === 'manual') {
+                        } else if (type === 'manual') {
                             // New format: check details, old format: details is null
                             return 'manual';
-                        }
-                        else if (type === 'file') {
+                        } else if (type === 'file') {
                             // Old format for files
                             return 'manual';
-                        }
-                        else if (type === 'warn') {
+                        } else if (type === 'warn') {
                             return 'manual';
-                        }
-                        else if (type === 'wildcards') {
+                        } else if (type === 'wildcards') {
                             return 'manual';
                         }
                         return 'manual';
-                    }
-                    else {
+                    } else {
                         // Path continues deeper
                         if (type === 'ignore') {
                             return null; // Don't list anything under ignored directories
-                        }
-                        else if (type === 'manual') {
+                        } else if (type === 'manual') {
                             // Manual directory allows anything deeper
                             return 'manual';
-                        }
-                        else if (type === 'generated') {
+                        } else if (type === 'generated') {
                             return 'generated'; // Everything under generated is generated
-                        }
-                        else if (type === 'warn') {
+                        } else if (type === 'warn') {
                             return 'manual';
-                        }
-                        else if (type === 'wildcards') {
+                        } else if (type === 'wildcards') {
                             return 'manual';
                         }
                         return 'unexpected'; // file type doesn't allow subdirectories
                     }
-                }
-                else {
+                } else {
                     // It's an object, continue traversing
                     current_structure = value;
                     continue;
                 }
             }
+            
             // Check wildcards (if current structure is an object)
             if (typeof current_structure === 'object' && !Array.isArray(current_structure)) {
                 for (const [key, value] of Object.entries(current_structure)) {
@@ -157,15 +115,18 @@ function main() {
                         // Check if any wildcard pattern matches
                         const patterns = value[1];
                         const remaining_path = '/' + relative_path_parts.slice(i).join('/');
+                        
                         for (const pattern of patterns) {
                             if (matches_wildcard(remaining_path, pattern)) {
                                 return 'manual';
                             }
                         }
                     }
+                    
                     if (Array.isArray(value) && value[0] === 'warn') {
                         const patterns = value[1];
                         const remaining_path = '/' + relative_path_parts.slice(i).join('/');
+                        
                         for (const pattern of patterns) {
                             if (matches_wildcard(remaining_path, pattern)) {
                                 return 'manual';
@@ -174,9 +135,11 @@ function main() {
                     }
                 }
             }
+            
             // No match found
             return 'unexpected';
         }
+        
         return 'manual';
     }
     /**
@@ -189,7 +152,9 @@ function main() {
             .replace(/\*\*/g, '##DOUBLESTAR##')
             .replace(/\*/g, '[^/]*')
             .replace(/##DOUBLESTAR##/g, '.*');
+        
         regex_pattern = '^' + regex_pattern + '$';
+        
         const regex = new RegExp(regex_pattern);
         return regex.test(file_path);
     }
@@ -200,34 +165,36 @@ function main() {
                 const full_path = path.join(dir_path, item.name);
                 const new_relative_parts = [...relative_path_parts, item.name];
                 const relative_path = new_relative_parts.join('/');
+                
                 // Check classification first to see if we should skip
                 const classification = classify_path(new_relative_parts, allowed_structure);
+                
                 // Skip ignored files/directories
                 if (classification === null) {
                     return;
                 }
+                
                 if (item.isDirectory()) {
                     list_files_recursively(full_path, repository_name, new_relative_parts);
-                }
-                else {
+                } else {
                     const extension = path.extname(item.name);
                     const loc = count_lines(full_path);
                     console.log(`${repository_name},"${relative_path}","${extension}",${loc},${classification}`);
                 }
             });
-        }
-        catch (err) {
+        } catch (err) {
             // Skip directories we can't read
         }
     };
     fs.readdirSync(base_dir, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
         .forEach(dirent => {
-        const dir_path = path.join(base_dir, dirent.name);
-        const package_json = path.join(dir_path, 'pub', 'package.json');
-        if (fs.existsSync(package_json)) {
-            list_files_recursively(dir_path, dirent.name);
-        }
-    });
+            const dir_path = path.join(base_dir, dirent.name);
+            const package_json = path.join(dir_path, 'pub', 'package.json');
+            if (fs.existsSync(package_json)) {
+                list_files_recursively(dir_path, dirent.name);
+            }
+        });
 }
+
 main();

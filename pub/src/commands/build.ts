@@ -1,15 +1,16 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
-const { build_project, is_node_project } = require('../lib/build_test_utils');
+import * as fs from 'fs';
+import * as path from 'path';
+import { build_project, is_node_project } from '../lib/build_test_utils';
 
-// Parse command line arguments
-const args = process.argv.slice(2);
-const flags = args.filter(arg => arg.startsWith('-'));
-const package_dir = args.find(arg => !arg.startsWith('-'));
+function main(): void {
+    // Parse command line arguments
+    const args = process.argv.slice(2);
+    const flags = args.filter(arg => arg.startsWith('-'));
+    const package_dir = args.find(arg => !arg.startsWith('-'));
 
-// Parse flags
-const help = flags.includes('-h') || flags.includes('--help');
+    // Parse flags
+    const help = flags.includes('-h') || flags.includes('--help');
 
 // Show help
 if (help || !package_dir) {
@@ -66,8 +67,11 @@ try {
         console.error(`\n❌ Build failed for ${package_name}`);
         process.exit(1);
     }
-} catch (err) {
-    console.error(`\n❌ Unexpected error building ${package_name}:`);
-    console.error(err.message);
-    process.exit(1);
+    } catch (err: any) {
+        console.error(`\n❌ Unexpected error building ${package_name}:`);
+        console.error(err.message);
+        process.exit(1);
+    }
 }
+
+main();

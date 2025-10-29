@@ -1,46 +1,12 @@
 #!/usr/bin/env node
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-const child_process_1 = require("child_process");
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
-const clean_utils_1 = require("../../lib/clean_utils");
-const dependency_graph_utils_1 = require("../../lib/dependency_graph_utils");
-const determineCommitReadinessModule = __importStar(require("../../lib/determine_commit_readiness"));
-function main() {
+import { execSync } from 'child_process';
+import * as fs from 'fs';
+import * as path from 'path';
+import { clean_project } from '../../lib/clean_utils';
+import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
+import * as determineCommitReadinessModule from '../../lib/determine_commit_readiness';
+
+function main(): void {
     const determine_commit_readiness = determineCommitReadinessModule.$$;
     const args = process.argv.slice(2);
     const is_force = args.includes('--force');
@@ -82,21 +48,19 @@ function main() {
     let allowed_structure = null;
     try {
         allowed_structure = JSON.parse(fs.readFileSync(structure_path, 'utf8'));
-    }
-    catch (err) {
+    } catch (err) {
         console.error('Warning: Could not load structure.json, skipping structure validation');
     }
     console.log('Analyzing dependencies to determine commit order...');
-    const dep_graph = (0, dependency_graph_utils_1.analyze_dependencies)(base_dir, true);
+    const dep_graph = analyze_dependencies(base_dir, true);
     if (dep_graph.projects.length === 0) {
         console.error('No Node.js projects found in the specified directory');
         process.exit(1);
     }
     let commit_order;
     try {
-        commit_order = (0, dependency_graph_utils_1.get_build_order)(dep_graph);
-    }
-    catch (err) {
+        commit_order = get_build_order(dep_graph);
+    } catch (err) {
         console.error(`Error: ${err.message}`);
         process.exit(1);
     }
@@ -117,17 +81,20 @@ function main() {
     const failed_repos = [];
     for (const project of commit_order) {
         console.log(`\nProcessing ${get_relative_path(project.path)}...`);
+        
         try {
             // Check for changes
-            const status = (0, child_process_1.execSync)('git status --porcelain', { cwd: project.path, encoding: 'utf8' }).trim();
+            const status = execSync('git status --porcelain', { cwd: project.path, encoding: 'utf8' }).trim();
+            
             if (status.length === 0) {
                 console.log(`  No changes in ${get_relative_path(project.path)}`);
                 skipped_count++;
                 continue;
             }
+            
             if (!is_force) {
                 // Check if anything is already staged
-                const staged = (0, child_process_1.execSync)('git diff --cached --name-only', { cwd: project.path, encoding: 'utf8' }).trim();
+                const staged = execSync('git diff --cached --name-only', { cwd: project.path, encoding: 'utf8' }).trim();
                 if (staged.length > 0) {
                     console.error(`  ❌ Staged changes detected in ${get_relative_path(project.path)} - aborting`);
                     console.error(`     Use --force to bypass validation or unstage changes first`);
@@ -135,79 +102,83 @@ function main() {
                     failed_count++;
                     continue;
                 }
+                
                 // Stage all changes
                 console.log(`  Staging all changes...`);
-                (0, child_process_1.execSync)('git add .', { cwd: project.path, stdio: 'inherit' });
+                execSync('git add .', { cwd: project.path, stdio: 'inherit' });
+                
                 // Clean
                 console.log(`  Cleaning...`);
                 try {
-                    (0, clean_utils_1.clean_project)(project.path, {
-                        verbose: false,
+                    clean_project(project.path, { 
+                        verbose: false, 
                         use_git: true,
                         dist_only: false,
                         node_modules_only: false
                     });
-                }
-                catch (err) {
+                } catch (err: any) {
                     console.error(`❌ Failed to clean ${project.name}: ${err.message}`);
                     continue;
                 }
+                
                 // Install dependencies
                 console.log(`  Installing dependencies...`);
                 try {
-                    (0, child_process_1.execSync)('npm install', { cwd: path.join(project.path, 'pub'), stdio: 'inherit' });
+                    execSync('npm install', { cwd: path.join(project.path, 'pub'), stdio: 'inherit' });
                     const test_dir = path.join(project.path, 'test');
                     if (fs.existsSync(test_dir) && fs.existsSync(path.join(test_dir, 'package.json'))) {
-                        (0, child_process_1.execSync)('npm install', { cwd: test_dir, stdio: 'inherit' });
+                        execSync('npm install', { cwd: test_dir, stdio: 'inherit' });
                     }
-                }
-                catch (err) {
+                } catch (err) {
                     console.error(`  ❌ npm install failed for ${get_relative_path(project.path)}`);
                     failed_repos.push({ name: project.name, path: project.path, reason: 'npm install failed' });
                     failed_count++;
                     continue;
                 }
+                
                 // Validate commit readiness (structure, build, test)
                 if (allowed_structure) {
                     console.log(`  Validating commit readiness...`);
                     const readiness = determine_commit_readiness(project.path, allowed_structure);
+                    
                     if (readiness[0] === 'not ready') {
                         const [reason_type, reason_details] = readiness[1].reason;
                         console.error(`  ❌ ${reason_type} for ${get_relative_path(project.path)}`);
                         if (reason_type === 'structure not valid') {
                             reason_details.errors.forEach(err => console.error(`     ${err}`));
-                        }
-                        else {
+                        } else {
                             console.error(`     ${reason_details.details}`);
                         }
                         failed_repos.push({ name: project.name, path: project.path, reason: reason_type });
                         failed_count++;
                         continue;
                     }
+                    
                     // Show warnings if any
                     if (readiness[1].warnings.length > 0) {
                         console.log(`  ⚠️  Warnings:`);
                         readiness[1].warnings.forEach(warn => console.log(`     ${warn}`));
                     }
-                }
-                else {
+                } else {
                     console.log(`  ⚠️  Skipping structure validation (structure.json not found)`);
                 }
+                
                 console.log(`  ✓ Build and tests passed`);
-            }
-            else {
+            } else {
                 // Force mode: just stage everything
-                (0, child_process_1.execSync)('git add .', { cwd: project.path, stdio: 'inherit' });
+                execSync('git add .', { cwd: project.path, stdio: 'inherit' });
             }
+            
             // Commit
-            (0, child_process_1.execSync)(`git commit -m "${commit_message}"`, { cwd: project.path, stdio: 'inherit' });
+            execSync(`git commit -m "${commit_message}"`, { cwd: project.path, stdio: 'inherit' });
             console.log(`  ✓ Committed`);
+            
             // Push
-            (0, child_process_1.execSync)('git push', { cwd: project.path, stdio: 'inherit' });
+            execSync('git push', { cwd: project.path, stdio: 'inherit' });
             console.log(`  ✓ Pushed`);
+            
             processed_count++;
-        }
-        catch (err) {
+        } catch (err) {
             console.error(`  ❌ Failed to process ${get_relative_path(project.path)}:`, err.message);
             failed_repos.push({ name: project.name, path: project.path, reason: `Exception: ${err.message}` });
             failed_count++;
@@ -228,4 +199,5 @@ function main() {
         process.exit(1);
     }
 }
+
 main();

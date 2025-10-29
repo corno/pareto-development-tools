@@ -1,45 +1,12 @@
 #!/usr/bin/env node
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
-const structure_validation_utils_1 = require("../../lib/structure_validation_utils");
-const dependency_graph_utils_1 = require("../../lib/dependency_graph_utils");
+import * as fs from 'fs';
+import * as path from 'path';
+import { validate_repository_structure } from '../../lib/structure_validation_utils';
+import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
+
 // Get target directory from command line argument
-function main() {
+
+function main(): void {
     const args = process.argv.slice(2);
     const target_dir = args.find(arg => !arg.startsWith('-'));
     const verbose = args.includes('-v') || args.includes('--verbose');
@@ -57,10 +24,10 @@ function main() {
         console.log('Examples:');
         console.log('  validate_structure.js ../pareto-repositories');
         console.log('  validate_structure.js ../my-repos --verbose');
+        
         if (!target_dir) {
             process.exit(1);
-        }
-        else {
+        } else {
             process.exit(0);
         }
     }
@@ -76,12 +43,12 @@ function main() {
     }
     const allowed_structure = JSON.parse(fs.readFileSync(structure_path, 'utf8'));
     console.log(`Analyzing dependencies in ${target_dir}...`);
-    const graph_data = (0, dependency_graph_utils_1.analyze_dependencies)(base_dir, true);
+    const graph_data = analyze_dependencies(base_dir, true);
     if (!graph_data || !graph_data.projects || graph_data.projects.length === 0) {
         console.log('No Node.js projects found in the specified directory.');
         process.exit(0);
     }
-    const ordered_projects_data = (0, dependency_graph_utils_1.get_build_order)(graph_data);
+    const ordered_projects_data = get_build_order(graph_data);
     const projects = ordered_projects_data.map(pkg => ({
         name: pkg.name,
         path: pkg.path
@@ -92,17 +59,20 @@ function main() {
     let total_warnings = 0;
     const results = [];
     for (const project of projects) {
-        const validation_result = (0, structure_validation_utils_1.validate_repository_structure)(project.path, allowed_structure, verbose);
+        const validation_result = validate_repository_structure(project.path, allowed_structure, verbose);
+        
         const violations = validation_result.errors.map(full_path => ({
             type: fs.statSync(full_path).isDirectory() ? 'directory' : 'file',
             path: path.relative(project.path, full_path),
             full_path: full_path
         }));
+        
         const warnings = validation_result.warnings.map(full_path => ({
             type: fs.statSync(full_path).isDirectory() ? 'directory' : 'file',
             path: path.relative(project.path, full_path),
             full_path: full_path
         }));
+        
         results.push({
             name: project.name,
             path: project.path,
@@ -111,14 +81,14 @@ function main() {
             violation_count: violations.length,
             warning_count: warnings.length
         });
+        
         total_violations += violations.length;
         total_warnings += warnings.length;
     }
     for (const result of results) {
         if (result.violation_count === 0 && result.warning_count === 0) {
             console.log(`✅ ${result.name}: No violations`);
-        }
-        else {
+        } else {
             const parts = [];
             if (result.violation_count > 0) {
                 parts.push(`${result.violation_count} error(s)`);
@@ -128,8 +98,10 @@ function main() {
             }
             const icon = result.violation_count > 0 ? '❌' : '⚠️';
             console.log(`${icon} ${result.name}: ${parts.join(', ')}`);
+            
             // Always show the repository path as a clickable link
             console.log(`   📂 ${result.path}`);
+            
             if (verbose) {
                 if (result.violations.length > 0) {
                     for (const violation of result.violations) {
@@ -158,4 +130,5 @@ function main() {
         process.exit(1);
     }
 }
+
 main();

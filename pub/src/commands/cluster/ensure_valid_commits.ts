@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-function main() {
+
+function main(): void {
     /**
      * Ensure Valid Commits for All Packages
-     *
+     * 
      * This command runs ensure_valid_commit on all packages in a directory.
      * Processes packages in topological order (dependencies first).
      * It will validate structure, stage changes, clean, install dependencies,
      * copy templates, generate .gitignore, build, test, commit and push for each package.
-     *
+     * 
      * @usage ./ensure_valid_commits.js <directory> [--force] [--no-push] [--verbose]
      */
     const args = process.argv.slice(2);
@@ -77,33 +78,39 @@ function main() {
         console.log(`\n${'='.repeat(80)}`);
         console.log(`Processing: ${pkg.name}`);
         console.log('='.repeat(80));
+        
         try {
             // Prompt function for commit message
             const prompt_for_commit_message = () => {
                 import * as fs from 'fs';
+                
                 // Write prompt to stderr
                 process.stderr.write(`[${pkg.name}] Enter commit message: `);
+                
                 // Read synchronously from stdin
                 const BUFFER_SIZE = 256;
                 const buffer = Buffer.alloc(BUFFER_SIZE);
                 let input = '';
+                
                 try {
                     const bytesRead = fs.readSync(0, buffer, 0, BUFFER_SIZE, null);
                     if (bytesRead > 0) {
                         input = buffer.toString('utf8', 0, bytesRead).trim();
                     }
-                }
-                catch (err) {
+                } catch (err) {
                     console.error('Failed to read input:', err.message);
                     return '';
                 }
+                
                 return input;
             };
+            
             const result = ensure_valid_commit(pkg.path, structure, prompt_for_commit_message, {
                 skip_validation: is_force,
                 skip_push: no_push,
                 skip_dep_upgrade: skip_dep_upgrade
             });
+            
             if (result[0] === 'committed') {
                 console.log(`✅ ${pkg.name}: Success`);
                 if (result[1].warnings.length > 0 && verbose) {
@@ -111,31 +118,32 @@ function main() {
                     result[1].warnings.forEach(warning => console.log(`   - ${warning}`));
                 }
                 results.success.push(pkg.name);
-            }
-            else {
+            } else {
                 const [reason_type, reason_details] = result[1].reason;
                 console.error(`❌ ${pkg.name}: Failed - ${reason_type}`);
+                
                 // Always show structure validation errors (not just in verbose mode)
                 if (reason_type === 'structure not valid') {
                     console.error('   Structure validation errors:');
                     reason_details.errors.forEach(error => console.error(`   - ${error}`));
-                }
-                else if (verbose && reason_details && reason_details.details) {
+                } else if (verbose && reason_details && reason_details.details) {
                     console.error(`   ${reason_details.details}`);
                 }
+                
                 results.failed.push({ name: pkg.name, reason: reason_type });
+                
                 // Stop processing after first failure
                 console.error(`\n⚠️  Stopping after first failure. Fix ${pkg.name} and run again.`);
                 break;
             }
-        }
-        catch (err) {
+        } catch (err) {
             console.error(`❌ ${pkg.name}: Unexpected error`);
             if (verbose) {
                 console.error(`   ${err.message}`);
                 console.error(err.stack);
             }
             results.failed.push({ name: pkg.name, reason: 'unexpected error' });
+            
             // Stop processing after first failure
             console.error(`\n⚠️  Stopping after first failure. Fix ${pkg.name} and run again.`);
             break;
@@ -157,4 +165,5 @@ function main() {
     }
     process.exit(results.failed.length > 0 ? 1 : 0);
 }
+
 main();

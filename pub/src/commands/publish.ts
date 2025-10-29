@@ -43,13 +43,13 @@
  * @usage ./publish.js <package-directory> [--dry-run]
  */
 
-const { execSync } = require('child_process');
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-const ensureValidCommitModule = require('../lib/ensure_valid_commit');
+import { execSync } from 'child_process';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as readline from 'readline';
+import * as ensureValidCommitModule from '../lib/ensure_valid_commit';
 const ensure_valid_commit = ensureValidCommitModule.$$;
-const compareWithPublishedModule = require('../lib/compare_with_published');
+import * as compareWithPublishedModule from '../lib/compare_with_published';
 const compare_with_published = compareWithPublishedModule.$$;
 
 // Helper function to prompt user for input

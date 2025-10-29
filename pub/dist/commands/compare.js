@@ -1,9 +1,44 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
-const os = require('os');
-const { is_node_project } = require('../lib/build_test_utils');
-const { extract_local, extract_published, launch_beyond_compare_if_directories_are_not_equal } = require('../lib/package_compare_utils');
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs = __importStar(require("fs"));
+const path = __importStar(require("path"));
+const os = __importStar(require("os"));
+const build_test_utils_1 = require("../lib/build_test_utils");
+const package_compare_utils_1 = require("../lib/package_compare_utils");
 // Get package directory and flags from command line arguments
 const args = process.argv.slice(2);
 const package_dir = args.find(arg => !arg.startsWith('-'));
@@ -17,7 +52,7 @@ if (!package_dir) {
 }
 const package_path = path.resolve(package_dir);
 // Check if it's a valid Node.js project
-if (!is_node_project(package_path)) {
+if (!(0, build_test_utils_1.is_node_project)(package_path)) {
     console.error(`Error: package.json not found in ${package_path}`);
     process.exit(1);
 }
@@ -37,7 +72,7 @@ async function main() {
         const package_json = JSON.parse(fs.readFileSync(package_json_path, 'utf8'));
         const package_name = package_json.name;
         // Extract published package
-        const published_result = extract_published(package_name, published_dir, { verbose: is_verbose });
+        const published_result = (0, package_compare_utils_1.extract_published)(package_name, published_dir, { verbose: is_verbose });
         if (published_result.error) {
             console.error(`❌ Error extracting published package: ${published_result.error}`);
             process.exit(1);
@@ -48,7 +83,7 @@ async function main() {
             process.exit(1);
         }
         // Extract local package
-        const local_result = extract_local(package_path, local_dir, {
+        const local_result = (0, package_compare_utils_1.extract_local)(package_path, local_dir, {
             verbose: is_verbose,
             skip_build: skip_build
         });
@@ -60,7 +95,7 @@ async function main() {
             console.log(`⚠️ Build failed for ${local_result.package_name}, but proceeding with comparison...`);
         }
         // Compare the directories
-        const compare_result = launch_beyond_compare_if_directories_are_not_equal(published_dir, local_dir, {
+        const compare_result = (0, package_compare_utils_1.launch_beyond_compare_if_directories_are_not_equal)(published_dir, local_dir, {
             verbose: is_verbose
         });
         if (compare_result.error) {
