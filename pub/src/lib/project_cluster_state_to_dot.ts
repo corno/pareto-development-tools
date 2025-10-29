@@ -32,7 +32,9 @@ export function project_cluster_state_to_dot(
         version: string | null
         dependencies: { [name: string]: string }
         has_issues: boolean
+        issues: string[]
         is_name_synced: boolean
+        has_unpushed_work: boolean
     }> = [];
 
     const all_project_names = new Set<string>();
@@ -59,24 +61,43 @@ export function project_cluster_state_to_dot(
             }
         }
 
-        // Determine if project has issues
-        const has_issues = (
-            project_state.structure[0] === 'invalid' ||
-            project_state.test[0] === 'failure' ||
-            project_state.git['staged files'] ||
-            project_state.git['dirty working tree'] ||
-            Object.values(project_state.dependencies).some(dep => 
-                dep.target[0] === 'not found' || 
-                (dep.target[0] === 'found' && !dep.target[1]['dependency up to date'])
-            )
-        );
+        // Collect detailed issue information
+        const issues: string[] = [];
+        
+        if (project_state.structure[0] === 'invalid') {
+            issues.push('Structure Invalid');
+        }
+        if (project_state.test[0] === 'failure') {
+            const test_failure = project_state.test[1];
+            if (test_failure[0] === 'build') {
+                issues.push('Build Failed');
+            } else if (test_failure[0] === 'test') {
+                issues.push('Tests Failed');
+            }
+        }
+        if (project_state.git['staged files']) {
+            issues.push('Staged Files');
+        }
+        if (project_state.git['dirty working tree']) {
+            issues.push('Dirty Tree');
+        }
+        if (Object.values(project_state.dependencies).some(dep => 
+            dep.target[0] === 'not found' || 
+            (dep.target[0] === 'found' && !dep.target[1]['dependency up to date'])
+        )) {
+            issues.push('Outdated Deps');
+        }
+
+        const has_issues = issues.length > 0;
 
         projects.push({
             name: project_name,
             version: project_state.version,
             dependencies,
             has_issues,
-            is_name_synced: project_state['package name in sync with directory name']
+            issues,
+            is_name_synced: project_state['package name in sync with directory name'],
+            has_unpushed_work: project_state.git['unpushed commits']
         });
     }
 
@@ -147,30 +168,6 @@ export function project_cluster_state_to_dot(
     labelloc="t";
     label="Dependency Graph\\nGenerated: ${new Date().toISOString()}\\nDirectory: ${cluster_path}";
     
-    // Define node styles${include_legend ? `
-    subgraph cluster_legend {
-        label="Legend";
-        style=filled;
-        color=lightgrey;
-        
-        healthy_project [label="Healthy Project", fillcolor=lightblue, shape=box];
-        problematic_project [label="Project with Issues", fillcolor=lightcoral, shape=box];
-        name_mismatch_project [label="Name Mismatch", fillcolor=orange, shape=box];
-        external_dep [label="External Package", fillcolor=yellow, shape=ellipse];
-        
-        healthy_project -> external_dep [style=invis];
-        problematic_project -> external_dep [style=invis];
-        name_mismatch_project -> external_dep [style=invis];
-        
-        edge_ok [label="OK", style=invis];
-        edge_behind [label="Behind", style=invis];
-        edge_blocked [label="Blocked", style=invis];
-        
-        healthy_project -> edge_ok [color=blue, penwidth=2, label="Up to date"];
-        healthy_project -> edge_behind [color=yellow, penwidth=2, label="Version behind"];
-        healthy_project -> edge_blocked [color=red, penwidth=2, label="Target has issues"];
-    }` : ''}
-    
     // Project nodes (sibling repositories)
 `;
 
@@ -179,7 +176,13 @@ export function project_cluster_state_to_dot(
         const node_id = safe_node_id(project.name);
         const version_display = project.version !== null ? project.version : 'n/a';
         const version_label = version_display === 'n/a' ? 'n/a' : `v${version_display}`;
-        const label = `${escape_dot_string(project.name)}\\n${version_label}`;
+        
+        // Build label with issues
+        let label = `${escape_dot_string(project.name)}<BR/>${version_label}`;
+        if (project.issues.length > 0) {
+            const issues_text = project.issues.join(', ');
+            label += `<BR/><FONT COLOR="red">${escape_dot_string(issues_text)}</FONT>`;
+        }
 
         // Determine node color
         let node_color: string;
@@ -191,7 +194,10 @@ export function project_cluster_state_to_dot(
             node_color = 'lightblue'; // Healthy
         }
 
-        dot_content += `    ${node_id} [label="${label}", fillcolor=${node_color}];\n`;
+        // Add red border if there are unpushed commits
+        const border_style = project.has_unpushed_work ? ', color=red, penwidth=3' : '';
+        
+        dot_content += `    ${node_id} [label=<${label}>, fillcolor=${node_color}${border_style}];\n`;
     }
 
     dot_content += '\n    // External dependency nodes\n';
@@ -222,6 +228,44 @@ export function project_cluster_state_to_dot(
         const clean_version = edge.version.replace(/[\^~]/g, '');
         
         dot_content += `    ${from_id} -> ${to_id} [label="${escape_dot_string(clean_version)}", ${edge_style}];\n`;
+    }
+
+    // Add legend at the bottom
+    if (include_legend) {
+        dot_content += `
+    // Legend (at bottom)
+    {
+        rank=sink;
+        node [shape=box, style=filled];
+        
+        legend_title [label="Legend", shape=plaintext, style=""];
+        
+        healthy_project [label="Healthy Project", fillcolor=lightblue];
+        problematic_project [label="Project with Issues", fillcolor=lightcoral];
+        name_mismatch_project [label="Name Mismatch", fillcolor=orange];
+        unpushed_project [label="Unpushed Commits", fillcolor=lightblue, color=red, penwidth=3];
+        external_dep [label="External Package", fillcolor=yellow, shape=ellipse];
+        
+        legend_title -> healthy_project [style=invis];
+        healthy_project -> problematic_project [style=invis];
+        problematic_project -> name_mismatch_project [style=invis];
+        name_mismatch_project -> unpushed_project [style=invis];
+        unpushed_project -> external_dep [style=invis];
+        
+        edge_legend_title [label="Dependencies:", shape=plaintext, style=""];
+        edge_ok [label="Up to date", shape=plaintext, style="", color=blue];
+        edge_behind [label="Version behind", shape=plaintext, style="", color=yellow];
+        edge_blocked [label="Target has issues", shape=plaintext, style="", color=red];
+        
+        edge_legend_title -> edge_ok [style=invis];
+        edge_ok -> edge_behind [style=invis];
+        edge_behind -> edge_blocked [style=invis];
+        
+        // Sample edges for legend
+        healthy_project -> edge_ok [color=blue, penwidth=2, style=invis];
+        healthy_project -> edge_behind [color=yellow, penwidth=2, style=invis];
+        healthy_project -> edge_blocked [color=red, penwidth=2, style=invis];
+    }`;
     }
 
     dot_content += '}\n';

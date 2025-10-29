@@ -6,35 +6,40 @@ export type Package_State = {
         'dirty working tree': boolean
         'unpushed commits': boolean
     }
-    'structure':
-    | ['valid', {
-        'warnings': string[]
-    }]
-    | ['invalid', { errors: string[] }]
-    'test':
-    | ['skipped', null]
-    | ['success', null]
-    | ['failure',
-        | ['build', null]
-        | ['test', { 'failed tests': string[] }]
-    ]
+    'structure': (
+        | ['valid', {
+            'warnings': string[]
+        }]
+        | ['invalid', { errors: string[] }]
+    )
+    'test': (
+        | ['skipped', null]
+        | ['success', null]
+        | ['failure', (
+            | ['build', null]
+            | ['test', { 'failed tests': string[] }]
+        )
+        ]
+    )
     'dependencies': {
         [name: string]: {
             'version': string
-            'target':
-            | ['not found', null]
-            | ['found', {
-                'dependency up to date': boolean
-            }]
+            'target': (
+                | ['not found', null]
+                | ['found', {
+                    'dependency up to date': boolean
+                }]
+            )
         }
     },
-    'published comparison':
-    | ['not published', null]
-    | ['identical', null]
-    | ['different', {
-        'details': string
-    }]
-    | ['skipped', null]
+    'published comparison': (
+        | ['not published', null]
+        | ['identical', null]
+        | ['different', {
+            'details': string
+        }]
+        | ['skipped', null]
+    )
 }
 
 export type Package_Cluster_State = {

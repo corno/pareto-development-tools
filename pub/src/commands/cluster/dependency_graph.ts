@@ -7,6 +7,7 @@ import { execSync, spawn } from 'child_process';
 import { determine_project_cluster_state } from '../../lib/determine_project_cluster_state';
 import { project_cluster_state_to_dot } from '../../lib/project_cluster_state_to_dot';
 import { differs_from_published } from '../../lib/differs_from_published';
+import type { Package_State } from '../../interface/package_state';
 
 // Get target directory from command line argument
 
@@ -17,7 +18,8 @@ async function main(): Promise<void> {
     const show_command = args.includes('--show-command') || args.includes('-c');
     const output_dot = args.includes('--dot');
     const dont_open_viewer = args.includes('--dont-open-viewer');
-    const show_legend = args.includes('--legend') || args.includes('-l');
+    const hide_legend = args.includes('--no-legend');
+    const show_legend = !hide_legend; // Show legend by default, hide if --no-legend is specified
     const skip_publish_compare = args.includes('--skip-publish-compare');
     const output_svg = !output_dot; // SVG is default
     const auto_open = output_svg && !dont_open_viewer && !show_path && !show_command; // Auto-open SVG unless disabled
@@ -38,7 +40,7 @@ async function main(): Promise<void> {
         console.log('  --verbose, -v            Show verbose output');
         console.log('  --dot                    Output DOT format instead of SVG (no auto-open)');
         console.log('  --dont-open-viewer       Generate SVG but don\'t open it automatically');
-        console.log('  --legend, -l             Include legend in the graph');
+        console.log('  --no-legend              Hide legend from the graph (legend shown by default)');
         console.log('  --skip-publish-compare   Skip checking if packages are in sync with published versions');
         console.log('  --show-path, -p          Show file path after generation (disables auto-open)');
         console.log('  --show-command, -c       Show command to open it (disables auto-open)');
@@ -176,11 +178,28 @@ async function main(): Promise<void> {
                     const all_deps = { ...package_json.dependencies, ...package_json.devDependencies };
                     
                     for (const [dep_name, dep_version] of Object.entries(all_deps)) {
+                        const version_string = dep_version as string;
+                        
+                        // Check if it's a sibling dependency (in the same cluster)
+                        const sibling_pkg = quick_package_list.find(p => p.package_name === dep_name);
+                        
+                        let target_status: Package_State['dependencies'][string]['target'];
+                        
+                        if (sibling_pkg) {
+                            // For sibling dependencies, check if versions match
+                            const clean_required = version_string.replace(/[\^~>=<]/g, '');
+                            const sibling_version = sibling_pkg.version !== null ? sibling_pkg.version : 'n/a';
+                            const is_up_to_date = sibling_version === clean_required;
+                            
+                            target_status = ['found', { 'dependency up to date': is_up_to_date }];
+                        } else {
+                            // External dependencies are marked as 'not found' (not in cluster)
+                            target_status = ['not found', null];
+                        }
+                        
                         dependencies[dep_name] = {
-                            version: dep_version as string,
-                            target: quick_package_list.find(p => p.package_name === dep_name) 
-                                ? ['found', { 'dependency up to date': true }] 
-                                : ['not found', null]
+                            version: version_string,
+                            target: target_status
                         };
                     }
                 } catch (err) {
