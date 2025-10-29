@@ -175,7 +175,7 @@ async function main(): Promise<void> {
             if (fs.existsSync(package_json_path)) {
                 try {
                     const package_json = JSON.parse(fs.readFileSync(package_json_path, 'utf8'));
-                    const all_deps = { ...package_json.dependencies, ...package_json.devDependencies };
+                    const all_deps = package_json.dependencies || {};
                     
                     for (const [dep_name, dep_version] of Object.entries(all_deps)) {
                         const version_string = dep_version as string;

@@ -58,8 +58,8 @@ function project_cluster_state_to_dot(cluster_state, options = {}) {
         if (project_state.git['dirty working tree']) {
             issues.push('Dirty Tree');
         }
-        if (Object.values(project_state.dependencies).some(dep => dep.target[0] === 'not found' ||
-            (dep.target[0] === 'found' && !dep.target[1]['dependency up to date']))) {
+        // Only check sibling dependencies for "Outdated Deps" - ignore external dependencies
+        if (Object.values(project_state.dependencies).some(dep => dep.target[0] === 'found' && !dep.target[1]['dependency up to date'])) {
             issues.push('Outdated Deps');
         }
         const has_issues = issues.length > 0;
@@ -184,7 +184,7 @@ function project_cluster_state_to_dot(cluster_state, options = {}) {
     // Add legend at the bottom
     if (include_legend) {
         dot_content += `
-    // Legend (at bottom)
+    // Legend (at bottom, arranged vertically)
     {
         rank=sink;
         node [shape=box, style=filled];
@@ -197,25 +197,24 @@ function project_cluster_state_to_dot(cluster_state, options = {}) {
         unpushed_project [label="Unpushed Commits", fillcolor=lightblue, color=red, penwidth=3];
         external_dep [label="External Package", fillcolor=yellow, shape=ellipse];
         
+        legend_separator [label="", shape=plaintext, style=""];
+        
+        edge_legend_title [label="Dependencies:", shape=plaintext, style=""];
+        edge_ok [label="Up to date (blue)", shape=plaintext, style=""];
+        edge_behind [label="Version behind (yellow)", shape=plaintext, style=""];
+        edge_blocked [label="Target has issues (red)", shape=plaintext, style=""];
+        
+        // Arrange vertically
         legend_title -> healthy_project [style=invis];
         healthy_project -> problematic_project [style=invis];
         problematic_project -> name_mismatch_project [style=invis];
         name_mismatch_project -> unpushed_project [style=invis];
         unpushed_project -> external_dep [style=invis];
-        
-        edge_legend_title [label="Dependencies:", shape=plaintext, style=""];
-        edge_ok [label="Up to date", shape=plaintext, style="", color=blue];
-        edge_behind [label="Version behind", shape=plaintext, style="", color=yellow];
-        edge_blocked [label="Target has issues", shape=plaintext, style="", color=red];
-        
+        external_dep -> legend_separator [style=invis];
+        legend_separator -> edge_legend_title [style=invis];
         edge_legend_title -> edge_ok [style=invis];
         edge_ok -> edge_behind [style=invis];
         edge_behind -> edge_blocked [style=invis];
-        
-        // Sample edges for legend
-        healthy_project -> edge_ok [color=blue, penwidth=2, style=invis];
-        healthy_project -> edge_behind [color=yellow, penwidth=2, style=invis];
-        healthy_project -> edge_blocked [color=red, penwidth=2, style=invis];
     }`;
     }
     dot_content += '}\n';
