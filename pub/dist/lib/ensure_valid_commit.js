@@ -112,7 +112,7 @@ function collect_gitignore_paths(structure, current_path = '') {
     }
     return ignore_paths;
 }
-const $$ = (repo_path, structure, prompt_for_commit_message, options = {}) => {
+const $$ = async (repo_path, structure, prompt_for_commit_message, options = {}) => {
     const skip_validation = options.skip_validation || false;
     const skip_push = options.skip_push || false;
     const skip_dep_upgrade = options.skip_dep_upgrade || false;
@@ -308,8 +308,8 @@ const $$ = (repo_path, structure, prompt_for_commit_message, options = {}) => {
         // Check if there's anything staged to commit
         const staged = execSync('git diff --cached --name-only', { cwd: repo_path, encoding: 'utf8' }).trim();
         if (staged.length > 0) {
-            // Get commit message from callback
-            const commit_message = prompt_for_commit_message();
+            // Get commit message from callback (may be async)
+            const commit_message = await Promise.resolve(prompt_for_commit_message());
             if (!commit_message || commit_message.trim().length === 0) {
                 unstage_if_needed();
                 return ['not ready', {

@@ -37,12 +37,15 @@ async function main(): Promise<void> {
         });
     }
     const args = process.argv.slice(2);
-    const package_dir = args.find(arg => !arg.startsWith('-'));
+    const non_flag_args = args.filter(arg => !arg.startsWith('-'));
+    const package_dir = non_flag_args[0];
+    const commit_message_arg = non_flag_args[1];
     const is_force = args.includes('--force');
     const no_push = args.includes('--no-push');
     const skip_dep_upgrade = args.includes('--skip-dep-upgrade');
     if (!package_dir) {
-        console.error('Usage: ensure_valid_commit.js <package-directory> [--force] [--no-push] [--skip-dep-upgrade]');
+        console.error('Usage: ensure_valid_commit.js <package-directory> [commit-message] [--force] [--no-push] [--skip-dep-upgrade]');
+        console.error('  commit-message       Optional commit message (will prompt if not provided)');
         console.error('  --force              Skip validation steps (force commit)');
         console.error('  --no-push            Commit but do not push to remote');
         console.error('  --skip-dep-upgrade   Skip dependency upgrade (only install)');
@@ -67,14 +70,19 @@ async function main(): Promise<void> {
     if (no_push) {
         console.log('📌 Will not push to remote');
     }
-    const commit_message = await prompt_user('Enter commit message: ') as string;
-    const result = await ensure_valid_commit(package_path, structure, () => commit_message, {
+    const result = await ensure_valid_commit(package_path, structure, async () => {
+        // Only prompt if commit message wasn't provided
+        if (commit_message_arg) {
+            return commit_message_arg;
+        }
+        return await prompt_user('Enter commit message: ') as string;
+    }, {
         skip_validation: is_force,
         skip_push: no_push,
         skip_dep_upgrade: skip_dep_upgrade
     });
     if (result[0] === 'committed') {
-        console.log('\n✅ Success! Commit created' + (no_push ? '' : ' and pushed'));
+        console.log('\n✅ Success! Valid commit ensured' + (no_push ? '' : ' and pushed'));
         if (result[1].warnings.length > 0) {
             console.log('\n⚠️  Warnings:');
             result[1].warnings.forEach(warning => {
