@@ -89,6 +89,10 @@ const COMMANDS = {
     'cluster-dependency-graph': {
         file: './commands/cluster/dependency_graph.js',
         description: 'Generate and visualize dependency graph'
+    },
+    'cd-local': {
+        file: './commands/cd-local.js',
+        description: 'Change directory while staying within VS Code workspace bounds'
     }
 };
 
