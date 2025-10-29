@@ -36,20 +36,23 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
+const readline = __importStar(require("readline"));
 const child_process_1 = require("child_process");
 const determine_project_cluster_state_1 = require("../../lib/determine_project_cluster_state");
 const project_cluster_state_to_dot_1 = require("../../lib/project_cluster_state_to_dot");
 const differs_from_published_1 = require("../../lib/differs_from_published");
 // Get target directory from command line argument
-function main() {
+async function main() {
     const args = process.argv.slice(2);
     const verbose = args.includes('--verbose') || args.includes('-v');
     const show_path = args.includes('--show-path') || args.includes('-p');
     const show_command = args.includes('--show-command') || args.includes('-c');
     const output_dot = args.includes('--dot');
+    const dont_open_viewer = args.includes('--dont-open-viewer');
     const show_legend = args.includes('--legend') || args.includes('-l');
     const skip_publish_compare = args.includes('--skip-publish-compare');
     const output_svg = !output_dot; // SVG is default
+    const auto_open = output_svg && !dont_open_viewer && !show_path && !show_command; // Auto-open SVG unless disabled
     const positional_args = args.filter(arg => !arg.startsWith('--') && !arg.startsWith('-'));
     const target_dir = positional_args[0];
     let output_file;
@@ -66,11 +69,12 @@ function main() {
         console.log('');
         console.log('Options:');
         console.log('  --verbose, -v            Show verbose output');
-        console.log('  --dot                    Output DOT format instead of SVG format');
+        console.log('  --dot                    Output DOT format instead of SVG (no auto-open)');
+        console.log('  --dont-open-viewer       Generate SVG but don\'t open it automatically');
         console.log('  --legend, -l             Include legend in the graph');
         console.log('  --skip-publish-compare   Skip checking if packages are in sync with published versions');
-        console.log('  --show-path, -p          Show file path after generation (skips auto-open)');
-        console.log('  --show-command, -c       Show command to open it (skips auto-open)');
+        console.log('  --show-path, -p          Show file path after generation (disables auto-open)');
+        console.log('  --show-command, -c       Show command to open it (disables auto-open)');
         console.log('  --help, -h               Show this help message');
         console.log('');
         console.log('Examples:');
@@ -89,54 +93,158 @@ function main() {
         console.error(`Error: Directory ${target_dir} does not exist`);
         process.exit(1);
     }
-    console.log(`Analyzing dependencies in ${target_dir}...`);
-    const cluster_state = (0, determine_project_cluster_state_1.determine_project_cluster_state)(base_dir);
-    const project_names = Object.keys(cluster_state.projects).filter(name => cluster_state.projects[name][0] === 'project');
-    if (project_names.length === 0) {
-        console.error('No projects found in the specified directory');
+    // Early prompts to let user choose what work to do
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    });
+    let shouldAnalyze = true;
+    let shouldComparePublished = false;
+    if (!skip_publish_compare) {
+        // Ask about analysis first
+        shouldAnalyze = await new Promise((resolve) => {
+            rl.question('🔍 Do you want to analyze package states (build and test)? This may be slow. (Y/n): ', (answer) => {
+                const normalizedAnswer = answer.toLowerCase().trim();
+                resolve(normalizedAnswer !== 'n' && normalizedAnswer !== 'no');
+            });
+        });
+        if (shouldAnalyze) {
+            // Ask about published comparison
+            shouldComparePublished = await new Promise((resolve) => {
+                rl.question('📦 Do you want to compare against published versions? This may also be slow. (y/N): ', (answer) => {
+                    const normalizedAnswer = answer.toLowerCase().trim();
+                    resolve(normalizedAnswer === 'y' || normalizedAnswer === 'yes');
+                });
+            });
+        }
+    }
+    rl.close();
+    // First, do a quick scan to list packages
+    console.log(`\nScanning for packages in ${target_dir}...`);
+    const subdirs = fs.readdirSync(base_dir, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .map(dirent => dirent.name)
+        .filter(name => !name.startsWith('.'));
+    const quick_package_list = [];
+    for (const subdir of subdirs) {
+        const package_json_path = path.join(base_dir, subdir, 'pub', 'package.json');
+        if (fs.existsSync(package_json_path)) {
+            try {
+                const package_json = JSON.parse(fs.readFileSync(package_json_path, 'utf8'));
+                quick_package_list.push({
+                    name: subdir,
+                    package_name: package_json.name,
+                    version: package_json.version
+                });
+            }
+            catch (err) {
+                // Skip invalid package.json files
+            }
+        }
+    }
+    if (quick_package_list.length === 0) {
+        console.error('No packages found in the specified directory');
         process.exit(1);
     }
     const get_relative_path = (absolute_path) => {
         const rel = path.relative(process.cwd(), absolute_path);
         return rel.startsWith('..') || rel.startsWith('.') ? rel : './' + rel;
     };
-    console.log(`Found ${project_names.length} projects:`);
-    for (const project_name of project_names) {
-        const project_entry = cluster_state.projects[project_name];
-        if (project_entry && project_entry[0] === 'project') {
-            const project_state = project_entry[1];
-            const project_path = path.join(base_dir, project_name);
-            const dep_count = Object.keys(project_state.dependencies).length;
-            const info = verbose ? ` (${dep_count} deps)` : '';
-            // Check if package name matches directory name
-            const name_mismatch = !project_state['package name in sync with directory name'];
-            const warning = name_mismatch ? ' ⚠️  (name mismatch)' : '';
-            console.log(`  - ${get_relative_path(project_path)}${info}${warning}`);
-            if (name_mismatch && verbose) {
-                console.log(`    ⚠️  Warning: Package name doesn't match directory name '${project_name}'`);
+    console.log(`\nFound ${quick_package_list.length} packages:`);
+    for (const pkg of quick_package_list) {
+        const package_path = path.join(base_dir, pkg.name);
+        const name_mismatch = pkg.name !== pkg.package_name;
+        const warning = name_mismatch ? ' ⚠️  (name mismatch)' : '';
+        console.log(`  - ${get_relative_path(package_path)} (${pkg.package_name}@${pkg.version})${warning}`);
+        if (name_mismatch && verbose) {
+            console.log(`    ⚠️  Warning: Package name '${pkg.package_name}' doesn't match directory name '${pkg.name}'`);
+        }
+    }
+    let cluster_state;
+    let package_names;
+    if (shouldAnalyze) {
+        // Now do the heavy analysis (build/test plus dependency analysis)
+        console.log(`\n🔍 Analyzing package states (build, test, and dependencies)...`);
+        console.log('This may take a while as each package will be built and tested.');
+        cluster_state = (0, determine_project_cluster_state_1.determine_project_cluster_state)(base_dir);
+        package_names = Object.keys(cluster_state.projects).filter(name => cluster_state.projects[name][0] === 'project');
+        if (package_names.length === 0) {
+            console.error('Error: No valid packages found after analysis');
+            process.exit(1);
+        }
+        console.log(`✅ Analysis complete. ${package_names.length} packages successfully analyzed.`);
+    }
+    else {
+        console.log(`\n⏭️  Skipping detailed analysis (user choice)`);
+        // Create minimal cluster state for graph generation with basic dependency info
+        package_names = quick_package_list.map(pkg => pkg.name);
+        cluster_state = {
+            projects: {},
+            'topological order': package_names
+        };
+        // Get basic dependency info from package.json files (fast)
+        for (const pkg of quick_package_list) {
+            const package_json_path = path.join(base_dir, pkg.name, 'pub', 'package.json');
+            let dependencies = {};
+            if (fs.existsSync(package_json_path)) {
+                try {
+                    const package_json = JSON.parse(fs.readFileSync(package_json_path, 'utf8'));
+                    const all_deps = { ...package_json.dependencies, ...package_json.devDependencies };
+                    for (const [dep_name, dep_version] of Object.entries(all_deps)) {
+                        dependencies[dep_name] = {
+                            version: dep_version,
+                            target: quick_package_list.find(p => p.package_name === dep_name)
+                                ? ['found', { 'dependency up to date': true }]
+                                : ['not found', null]
+                        };
+                    }
+                }
+                catch (err) {
+                    // Skip invalid package.json
+                }
             }
+            cluster_state.projects[pkg.name] = ['project', {
+                    'package name in sync with directory name': pkg.name === pkg.package_name,
+                    'version': pkg.version,
+                    'git': {
+                        'staged files': false,
+                        'dirty working tree': false,
+                        'unpushed commits': false
+                    },
+                    'structure': ['valid', { 'warnings': [] }],
+                    'test': ['skipped', null],
+                    'dependencies': dependencies,
+                    'published comparison': ['skipped', null]
+                }];
         }
     }
     const publish_sync_status = new Map();
-    if (!skip_publish_compare) {
-        console.log('\nChecking sync status with published versions... (skip with --skip-publish-compare)');
-        for (const project_name of project_names) {
-            const project_path = path.join(base_dir, project_name);
-            const differs = (0, differs_from_published_1.differs_from_published)(project_path);
-            publish_sync_status.set(project_name, !differs); // in_sync = !differs
-            if (verbose) {
-                console.log(`  - ${project_name}: ${differs ? 'differs' : 'in sync'}`);
+    if (shouldComparePublished && !skip_publish_compare) {
+        console.log('\n🔍 Checking sync status with published versions...');
+        console.log('This may take a while as each package will be compared against npm registry.');
+        for (const package_name of package_names) {
+            const package_path = path.join(base_dir, package_name);
+            process.stdout.write(`  Checking ${package_name}... `);
+            try {
+                const differs = (0, differs_from_published_1.differs_from_published)(package_path);
+                publish_sync_status.set(package_name, !differs); // in_sync = !differs
+                console.log(differs ? '📤 differs' : '✅ in sync');
+            }
+            catch (err) {
+                console.log(`❌ error: ${err.message}`);
+                publish_sync_status.set(package_name, false); // Assume differs on error
             }
         }
         const in_sync_count = Array.from(publish_sync_status.values()).filter(sync => sync).length;
         const out_of_sync_count = publish_sync_status.size - in_sync_count;
-        console.log(`Sync check complete: ${in_sync_count} in sync, ${out_of_sync_count} out of sync`);
+        console.log(`\n📊 Publish sync check complete: ${in_sync_count} in sync, ${out_of_sync_count} out of sync`);
     }
     else {
-        console.log('\nSkipping publish sync check (--skip-publish-compare flag used)');
-        // Set all to null (unknown)
-        for (const project_name of project_names) {
-            publish_sync_status.set(project_name, true); // Assume in sync when skipped
+        const reason = skip_publish_compare ? 'flag used' : 'user choice';
+        console.log(`\n⏭️  Skipping publish sync check (${reason})`);
+        // Set all to true (assume in sync when skipped)
+        for (const package_name of package_names) {
+            publish_sync_status.set(package_name, true);
         }
     }
     const dot_content = (0, project_cluster_state_to_dot_1.project_cluster_state_to_dot)(cluster_state, {
@@ -186,34 +294,34 @@ function main() {
         console.log(`  dot -Tsvg ${path.basename(output_file)} -o dependencies.svg`);
         console.log(`  dot -Tpdf ${path.basename(output_file)} -o dependencies.pdf`);
     }
-    const total_deps = project_names.reduce((sum, name) => {
+    const total_deps = package_names.reduce((sum, name) => {
         const project_entry = cluster_state.projects[name];
         if (project_entry && project_entry[0] === 'project') {
             return sum + Object.keys(project_entry[1].dependencies).length;
         }
         return sum;
     }, 0);
-    const sibling_deps = project_names.reduce((sum, name) => {
+    const sibling_deps = package_names.reduce((sum, name) => {
         const project_entry = cluster_state.projects[name];
         if (project_entry && project_entry[0] === 'project') {
             const project_deps = Object.keys(project_entry[1].dependencies);
-            return sum + project_deps.filter(dep => project_names.includes(dep)).length;
+            return sum + project_deps.filter(dep => package_names.includes(dep)).length;
         }
         return sum;
     }, 0);
     const external_deps = new Set();
-    project_names.forEach(name => {
+    package_names.forEach(name => {
         const project_entry = cluster_state.projects[name];
         if (project_entry && project_entry[0] === 'project') {
             Object.keys(project_entry[1].dependencies).forEach(dep => {
-                if (!project_names.includes(dep)) {
+                if (!package_names.includes(dep)) {
                     external_deps.add(dep);
                 }
             });
         }
     });
     console.log(`\nSummary:`);
-    console.log(`  - ${project_names.length} projects`);
+    console.log(`  - ${package_names.length} packages`);
     console.log(`  - ${external_deps.size} external dependencies`);
     console.log(`  - ${total_deps} total dependency relationships`);
     console.log(`  - ${sibling_deps} sibling dependencies`);
@@ -227,7 +335,7 @@ function main() {
     else {
         console.log(`  - Publish sync check skipped`);
     }
-    if (output_svg && !show_path && !show_command) {
+    if (auto_open) {
         console.log(`\nOpening dependency graph...`);
         try {
             // Try to open the file
@@ -280,10 +388,12 @@ function main() {
             console.error(`❌ Error opening SVG:`, err.message);
         }
     }
-    else if (output_svg && (show_path || show_command)) {
-        if (show_path) {
+    else if (output_svg && (show_path || show_command || dont_open_viewer)) {
+        if (show_path || dont_open_viewer) {
             console.log(`\n📁 SVG file created at: ${output_path}`);
-            console.log(`You can open it with your preferred viewer.`);
+            if (!show_command) {
+                console.log(`You can open it with your preferred viewer.`);
+            }
         }
         if (show_command) {
             console.log(`\n📁 SVG file created at: ${output_path}`);

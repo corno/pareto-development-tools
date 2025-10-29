@@ -21,7 +21,7 @@ function main(): void {
         if (default_commit_idx + 1 < args.length && !args[default_commit_idx + 1].startsWith('--')) {
             default_commit_message = args[default_commit_idx + 1];
         } else {
-            default_commit_message = 'Update cluster projects';
+            default_commit_message = 'Update cluster packages';
         }
     }
     
@@ -93,7 +93,7 @@ function main(): void {
     console.log('Analyzing dependencies to determine commit order...');
     const dep_graph = analyze_dependencies(base_dir, true);
     if (dep_graph.projects.length === 0) {
-        console.error('No Node.js projects found in the specified directory');
+        console.error('No Node.js packages found in the specified directory');
         process.exit(1);
     }
     let commit_order;
@@ -103,7 +103,7 @@ function main(): void {
         console.error(`Error: ${err.message}`);
         process.exit(1);
     }
-    console.log(`Found ${commit_order.length} projects to process in dependency order:`);
+    console.log(`Found ${commit_order.length} packages to process in dependency order:`);
     commit_order.forEach((project, index) => {
         const deps = dep_graph.dependency_map.get(project.name) || [];
         const dep_info = deps.length > 0 ? ` (depends on: ${deps.join(', ')})` : '';
@@ -117,7 +117,7 @@ function main(): void {
     let processed_count = 0;
     let skipped_count = 0;
     let failed_count = 0;
-    const failed_repos = [];
+    const failed_packages = [];
     for (const project of commit_order) {
         console.log(`\nProcessing ${get_relative_path(project.path)}...`);
         
@@ -137,7 +137,7 @@ function main(): void {
                 if (staged.length > 0) {
                     console.error(`  ❌ Staged changes detected in ${get_relative_path(project.path)} - aborting`);
                     console.error(`     Use --force to bypass validation or unstage changes first`);
-                    failed_repos.push({ name: project.name, path: project.path, reason: 'Staged changes detected' });
+                    failed_packages.push({ name: project.name, path: project.path, reason: 'Staged changes detected' });
                     failed_count++;
                     continue;
                 }
@@ -170,7 +170,7 @@ function main(): void {
                     }
                 } catch (err) {
                     console.error(`  ❌ npm install failed for ${get_relative_path(project.path)}`);
-                    failed_repos.push({ name: project.name, path: project.path, reason: 'npm install failed' });
+                    failed_packages.push({ name: project.name, path: project.path, reason: 'npm install failed' });
                     failed_count++;
                     continue;
                 }
@@ -188,7 +188,7 @@ function main(): void {
                         } else {
                             console.error(`     ${reason_details.details}`);
                         }
-                        failed_repos.push({ name: project.name, path: project.path, reason: reason_type });
+                        failed_packages.push({ name: project.name, path: project.path, reason: reason_type });
                         failed_count++;
                         continue;
                     }
@@ -219,7 +219,7 @@ function main(): void {
             processed_count++;
         } catch (err) {
             console.error(`  ❌ Failed to process ${get_relative_path(project.path)}:`, err.message);
-            failed_repos.push({ name: project.name, path: project.path, reason: `Exception: ${err.message}` });
+            failed_packages.push({ name: project.name, path: project.path, reason: `Exception: ${err.message}` });
             failed_count++;
         }
     }
@@ -227,11 +227,11 @@ function main(): void {
     console.log(`Summary:`);
     console.log(`  ✓ ${processed_count} repositories committed and pushed`);
     console.log(`  - ${skipped_count} repositories skipped (no changes)`);
-    console.log(`  ❌ ${failed_count} repositories failed`);
-    if (failed_repos.length > 0) {
-        console.log(`\nFailed repositories:`);
-        failed_repos.forEach(repo => {
-            console.log(`  ❌ ${repo.name} (${get_relative_path(repo.path)}) - ${repo.reason}`);
+    console.log(`  ❌ ${failed_count} packages failed`);
+    if (failed_packages.length > 0) {
+        console.log(`\nFailed packages:`);
+        failed_packages.forEach(package_info => {
+            console.log(`  ❌ ${package_info.name} (${get_relative_path(package_info.path)}) - ${package_info.reason}`);
         });
     }
     if (failed_count > 0) {

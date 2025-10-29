@@ -194,6 +194,7 @@ function determine_project_state(project_path, node_name) {
         'git': git_state,
         'structure': structure_state,
         'test': test_state,
-        'dependencies': dependencies
+        'dependencies': dependencies,
+        'published comparison': ['skipped', null]
     };
 }

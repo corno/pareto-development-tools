@@ -109,7 +109,8 @@ export function determine_project_cluster_state(cluster_path: string): Project_C
                         },
                         'structure': ['invalid', { errors: [`Failed to analyze project: ${err.message}`] }],
                         'test': ['failure', ['build', null]],
-                        'dependencies': {}
+                        'dependencies': {},
+                        'published comparison': ['skipped', null]
                     }];
                 }
             } else {

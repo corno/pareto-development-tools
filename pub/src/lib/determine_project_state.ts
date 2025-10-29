@@ -214,6 +214,7 @@ export function determine_project_state(project_path: string, node_name?: string
         'git': git_state,
         'structure': structure_state,
         'test': test_state,
-        'dependencies': dependencies
+        'dependencies': dependencies,
+        'published comparison': ['skipped', null]
     };
 }

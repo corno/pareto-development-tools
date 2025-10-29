@@ -12,6 +12,7 @@ export type Project_State = {
     }]
     | ['invalid', { errors: string[] }]
     'test':
+    | ['skipped', null]
     | ['success', null]
     | ['failure',
         | ['build', null]
@@ -26,7 +27,14 @@ export type Project_State = {
                 'dependency up to date': boolean
             }]
         }
-    }
+    },
+    'published comparison':
+    | ['not published', null]
+    | ['identical', null]
+    | ['different', {
+        'details': string
+    }]
+    | ['skipped', null]
 }
 
 export type Project_Cluster_State = {
