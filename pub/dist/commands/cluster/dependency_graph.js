@@ -218,14 +218,57 @@ async function main() {
                     // Skip invalid package.json
                 }
             }
-            cluster_state.projects[pkg.name] = ['project', {
-                    'package name in sync with directory name': pkg.name === pkg.package_name,
-                    'version': pkg.version,
-                    'git': {
+            // Check git status for this package
+            const git_status = (() => {
+                try {
+                    const pkg_path = path.join(base_dir, pkg.name);
+                    // Check for dirty working tree
+                    const status_output = (0, child_process_1.execSync)('git status --porcelain', {
+                        cwd: pkg_path,
+                        encoding: 'utf8',
+                        stdio: 'pipe'
+                    }).trim();
+                    const dirty_working_tree = status_output.length > 0;
+                    // Check for staged files
+                    const staged_output = (0, child_process_1.execSync)('git diff --cached --name-only', {
+                        cwd: pkg_path,
+                        encoding: 'utf8',
+                        stdio: 'pipe'
+                    }).trim();
+                    const staged_files = staged_output.length > 0;
+                    // Check for unpushed commits
+                    let unpushed_commits = false;
+                    try {
+                        const unpushed_output = (0, child_process_1.execSync)('git log @{u}.. --oneline', {
+                            cwd: pkg_path,
+                            encoding: 'utf8',
+                            stdio: 'pipe'
+                        }).trim();
+                        unpushed_commits = unpushed_output.length > 0;
+                    }
+                    catch {
+                        // No upstream branch or other error - assume no unpushed commits
+                        unpushed_commits = false;
+                    }
+                    return {
+                        'staged files': staged_files,
+                        'dirty working tree': dirty_working_tree,
+                        'unpushed commits': unpushed_commits
+                    };
+                }
+                catch {
+                    // If any git command fails, return all false
+                    return {
                         'staged files': false,
                         'dirty working tree': false,
                         'unpushed commits': false
-                    },
+                    };
+                }
+            })();
+            cluster_state.projects[pkg.name] = ['project', {
+                    'package name in sync with directory name': pkg.name === pkg.package_name,
+                    'version': pkg.version,
+                    'git': git_status,
                     'structure': ['valid', { 'warnings': [] }],
                     'test': ['skipped', null],
                     'dependencies': dependencies,

@@ -21,6 +21,14 @@ function determine_git_state(project_path: string): Package_State['git'] {
         const unstaged = execSync('git diff --name-only', { cwd: project_path, encoding: 'utf8' }).trim();
         const untracked = execSync('git ls-files --others --exclude-standard', { cwd: project_path, encoding: 'utf8' }).trim();
         const has_dirty_working_tree = unstaged.length > 0 || untracked.length > 0;
+        
+        if (project_path.includes('exupery-resources')) {
+            console.log(`[DEBUG] exupery-resources git state:`)
+            console.log(`  staged: "${staged}" (length: ${staged.length})`)
+            console.log(`  unstaged: "${unstaged}" (length: ${unstaged.length})`)
+            console.log(`  untracked: "${untracked}" (length: ${untracked.length})`)
+            console.log(`  has_dirty_working_tree: ${has_dirty_working_tree}`)
+        }
 
         // Check for unpushed commits
         let has_unpushed_commits = false;

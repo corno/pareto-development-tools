@@ -70,7 +70,7 @@ function project_cluster_state_to_dot(cluster_state, options = {}) {
             has_issues,
             issues,
             is_name_synced: project_state['package name in sync with directory name'],
-            has_unpushed_work: project_state.git['unpushed commits']
+            has_unpushed_work: project_state.git['unpushed commits'] || project_state.git['staged files'] || project_state.git['dirty working tree']
         });
     }
     // Update external dependencies (remove any that are actually in cluster)
@@ -153,7 +153,7 @@ function project_cluster_state_to_dot(cluster_state, options = {}) {
         else {
             node_color = 'lightblue'; // Healthy
         }
-        // Add red border if there are unpushed commits
+        // Add red border if there is unpushed work (dirty tree, staged files, or unpushed commits)
         const border_style = project.has_unpushed_work ? ', color=red, penwidth=3' : '';
         dot_content += `    ${node_id} [label=<${label}>, fillcolor=${node_color}${border_style}];\n`;
     }
@@ -198,7 +198,7 @@ function project_cluster_state_to_dot(cluster_state, options = {}) {
             <TR><TD BGCOLOR="lightblue" WIDTH="20"> </TD><TD ALIGN="LEFT">Healthy Project</TD></TR>
             <TR><TD BGCOLOR="lightcoral" WIDTH="20"> </TD><TD ALIGN="LEFT">Project with Issues</TD></TR>
             <TR><TD BGCOLOR="orange" WIDTH="20"> </TD><TD ALIGN="LEFT">Name Mismatch</TD></TR>
-            <TR><TD BGCOLOR="lightblue" BORDER="3" COLOR="red" WIDTH="20"> </TD><TD ALIGN="LEFT">Unpushed Commits</TD></TR>
+            <TR><TD BGCOLOR="lightblue" BORDER="3" COLOR="red" WIDTH="20"> </TD><TD ALIGN="LEFT">Unpushed Work</TD></TR>
             <TR><TD BGCOLOR="yellow" WIDTH="20"> </TD><TD ALIGN="LEFT">External Package</TD></TR>
             <TR><TD COLSPAN="2"> </TD></TR>
             <TR><TD COLSPAN="2"><B>Edge Colors</B></TD></TR>
