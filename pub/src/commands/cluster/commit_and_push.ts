@@ -6,6 +6,31 @@ import { clean_project } from '../../lib/clean_utils';
 import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
 import * as determineCommitReadinessModule from '../../lib/determine_commit_readiness';
 
+/**
+ * Prompt user for input with a yes/no question
+ * @param question - The question to ask
+ * @returns Promise<boolean> - true for yes, false for no
+ */
+function prompt_user_yes_no(question: string): boolean {
+    process.stderr.write(`${question} (y/n): `);
+    
+    const BUFFER_SIZE = 256;
+    const buffer = Buffer.alloc(BUFFER_SIZE);
+    
+    try {
+        const bytesRead = fs.readSync(0, buffer, 0, BUFFER_SIZE, null);
+        if (bytesRead > 0) {
+            const input = buffer.toString('utf8', 0, bytesRead).trim().toLowerCase();
+            return input === 'y' || input === 'yes';
+        }
+    } catch (err) {
+        console.error('Failed to read input:', err.message);
+        return false;
+    }
+    
+    return false;
+}
+
 function main(): void {
     const determine_commit_readiness = determineCommitReadinessModule.$$;
     const args = process.argv.slice(2);
@@ -45,13 +70,13 @@ function main(): void {
         }
         console.error('');
         console.error('Default behavior:');
-        console.error('  - Validates no changes are staged (aborts if staged changes exist)');
-        console.error('  - Stages all changes');
+        console.error('  - Checks for packages with staged files and prompts user to continue');
+        console.error('  - Stages all changes (or uses existing staged files if user confirmed)');
         console.error('  - Performs clean → install → build → test');
         console.error('  - Commits and pushes only if tests pass');
         console.error('');
         console.error('Flags:');
-        console.error('  --force: Skips build/test validation and commits/pushes immediately');
+        console.error('  --force: Skips all validation (staged files, build/test) and commits/pushes immediately');
         console.error('  --default-commit-message [msg]: Use default or specified commit message');
         process.exit(1);
     }
@@ -109,6 +134,46 @@ function main(): void {
         const dep_info = deps.length > 0 ? ` (depends on: ${deps.join(', ')})` : '';
         console.log(`  ${index + 1}. ${get_relative_path(project.path)}${dep_info}`);
     });
+    
+    // Check for packages with staged files before processing
+    if (!is_force) {
+        console.log('\nChecking for packages with staged files...');
+        const packages_with_staged_files = [];
+        
+        for (const project of commit_order) {
+            try {
+                const staged = execSync('git diff --cached --name-only', { cwd: project.path, encoding: 'utf8' }).trim();
+                if (staged.length > 0) {
+                    packages_with_staged_files.push({
+                        name: project.name,
+                        path: project.path,
+                        relative_path: get_relative_path(project.path)
+                    });
+                }
+            } catch (err) {
+                // If git command fails, skip this package for staged file check
+                console.warn(`  Warning: Could not check staged files for ${get_relative_path(project.path)}`);
+            }
+        }
+        
+        if (packages_with_staged_files.length > 0) {
+            console.log(`\n⚠️  Found ${packages_with_staged_files.length} package(s) with staged files:`);
+            packages_with_staged_files.forEach(pkg => {
+                console.log(`  - ${pkg.relative_path}`);
+            });
+            console.log('\nBy default, packages with staged files are skipped to avoid conflicts.');
+            
+            const continue_with_staged = prompt_user_yes_no('Do you want to continue and process these packages anyway?');
+            
+            if (!continue_with_staged) {
+                console.log('\n⏹️  Operation cancelled by user. Consider using --force to bypass all validations.');
+                process.exit(0);
+            } else {
+                console.log('\n✅ Continuing with staged file packages as requested...');
+            }
+        }
+    }
+    
     console.log(`\n${is_force ? 'Force committing' : 'Committing'} repositories in ${get_relative_path(base_dir)}`);
     console.log(`Commit message: "${commit_message}"`);
     if (is_force) {
@@ -135,16 +200,14 @@ function main(): void {
                 // Check if anything is already staged
                 const staged = execSync('git diff --cached --name-only', { cwd: project.path, encoding: 'utf8' }).trim();
                 if (staged.length > 0) {
-                    console.error(`  ❌ Staged changes detected in ${get_relative_path(project.path)} - aborting`);
-                    console.error(`     Use --force to bypass validation or unstage changes first`);
-                    failed_packages.push({ name: project.name, path: project.path, reason: 'Staged changes detected' });
-                    failed_count++;
-                    continue;
+                    console.log(`  ⚠️  Staged changes detected in ${get_relative_path(project.path)}`);
+                    console.log(`     Continuing with existing staged files (user confirmed earlier)`);
+                    // Don't stage additional changes when files are already staged
+                } else {
+                    // Stage all changes
+                    console.log(`  Staging all changes...`);
+                    execSync('git add .', { cwd: project.path, stdio: 'inherit' });
                 }
-                
-                // Stage all changes
-                console.log(`  Staging all changes...`);
-                execSync('git add .', { cwd: project.path, stdio: 'inherit' });
                 
                 // Clean
                 console.log(`  Cleaning...`);

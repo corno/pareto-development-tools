@@ -1,101 +1,71 @@
 #!/usr/bin/env node
-"use strict";
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || (function () {
-    var ownKeys = function(o) {
-        ownKeys = Object.getOwnPropertyNames || function (o) {
-            var ar = [];
-            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
-            return ar;
-        };
-        return ownKeys(o);
-    };
-    return function (mod) {
-        if (mod && mod.__esModule) return mod;
-        var result = {};
-        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
-        __setModuleDefault(result, mod);
-        return result;
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-const fs = __importStar(require("fs"));
-const path = __importStar(require("path"));
-const clean_project_1 = require("../../lib/clean_project");
-const is_node_project_1 = require("../../lib/is_node_project");
-function main() {
-    // Parse command line arguments
-    const args = process.argv.slice(2);
-    const flags = args.filter(arg => arg.startsWith('-'));
-    const target_dir = args.find(arg => !arg.startsWith('-'));
-    // Parse flags
-    const verbose = flags.includes('-v') || flags.includes('--verbose');
-    const use_git = flags.includes('-g') || flags.includes('--git');
-    const help = flags.includes('-h') || flags.includes('--help');
-    // Show help
-    if (help || !target_dir) {
-        console.log('Usage: pareto cluster clean <directory> [options]');
-        console.log('');
-        console.log('Clean all Node.js projects in a directory');
-        console.log('');
-        console.log('Options:');
-        console.log('  -v, --verbose    Show verbose output');
-        console.log('  -g, --git        Use git clean (removes .gitignore files) instead of manual cleaning');
-        console.log('  -h, --help       Show this help message');
-        console.log('');
-        console.log('Examples:');
-        console.log('  clean_all.js ../my-repos');
-        console.log('  clean_all.js ../my-repos --verbose');
-        console.log('  clean_all.js ../my-repos --git');
-        if (!target_dir) {
-            process.exit(1);
-        }
-        else {
-            process.exit(0);
-        }
-    }
-    const base_dir = path.resolve(target_dir);
-    if (!fs.existsSync(base_dir)) {
-        console.error(`Error: Directory ${target_dir} does not exist`);
+const fs = require('fs');
+const path = require('path');
+const { clean_project } = require('../../dist/lib/clean_project');
+const { is_node_project } = require('../../dist/lib/is_node_project');
+
+// Parse command line arguments
+const args = process.argv.slice(2);
+const flags = args.filter(arg => arg.startsWith('-'));
+const target_dir = args.find(arg => !arg.startsWith('-'));
+
+// Parse flags
+const verbose = flags.includes('-v') || flags.includes('--verbose');
+const use_git = flags.includes('-g') || flags.includes('--git');
+const help = flags.includes('-h') || flags.includes('--help');
+
+// Show help
+if (help || !target_dir) {
+    console.log('Usage: pareto all clean <directory> [options]');
+    console.log('');
+    console.log('Clean all Node.js projects in a directory');
+    console.log('');
+    console.log('Options:');
+    console.log('  -v, --verbose    Show verbose output');
+    console.log('  -g, --git        Use git clean (removes .gitignore files) instead of manual cleaning');
+    console.log('  -h, --help       Show this help message');
+    console.log('');
+    console.log('Examples:');
+    console.log('  clean_all.js ../my-repos');
+    console.log('  clean_all.js ../my-repos --verbose');
+    console.log('  clean_all.js ../my-repos --git');
+    
+    if (!target_dir) {
         process.exit(1);
+    } else {
+        process.exit(0);
     }
-    console.log(`Cleaning all projects in ${target_dir}...`);
-    if (use_git) {
-        console.log('Using git clean mode (removes .gitignore files)');
-    }
-    else {
-        console.log('Using manual clean mode (removes dist and node_modules)');
-    }
-    let total_projects = 0;
-    let successful_cleans = 0;
-    let failed_cleans = 0;
-    try {
-        fs.readdirSync(base_dir, { withFileTypes: true })
-            .filter(dirent => dirent.isDirectory())
-            .forEach(dirent => {
+}
+
+const base_dir = path.resolve(target_dir);
+
+if (!fs.existsSync(base_dir)) {
+    console.error(`Error: Directory ${target_dir} does not exist`);
+    process.exit(1);
+}
+
+console.log(`Cleaning all projects in ${target_dir}...`);
+if (use_git) {
+    console.log('Using git clean mode (removes .gitignore files)');
+} else {
+    console.log('Using manual clean mode (removes dist and node_modules)');
+}
+
+let total_projects = 0;
+let successful_cleans = 0;
+let failed_cleans = 0;
+
+try {
+    fs.readdirSync(base_dir, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .forEach(dirent => {
             const dir_path = path.join(base_dir, dirent.name);
-            if ((0, is_node_project_1.is_node_project)(dir_path)) {
+            if (is_node_project(dir_path)) {
                 total_projects++;
                 try {
-                    (0, clean_project_1.clean_project)(dir_path, { verbose, use_git });
+                    clean_project(dir_path, { verbose, use_git });
                     successful_cleans++;
-                }
-                catch (err) {
+                } catch (err) {
                     failed_cleans++;
                     if (verbose) {
                         console.error(`❌ Failed to clean ${dirent.name}: ${err.message}`);
@@ -103,17 +73,15 @@ function main() {
                 }
             }
         });
-        console.log(`\nCleaning completed:`);
-        console.log(`  - ${total_projects} projects processed`);
-        console.log(`  - ${successful_cleans} cleaned successfully`);
-        if (failed_cleans > 0) {
-            console.log(`  - ${failed_cleans} failed to clean`);
-            process.exit(1);
-        }
-    }
-    catch (err) {
-        console.error(`❌ Failed to read directory: ${err.message}`);
+
+    console.log(`\nCleaning completed:`);
+    console.log(`  - ${total_projects} projects processed`);
+    console.log(`  - ${successful_cleans} cleaned successfully`);
+    if (failed_cleans > 0) {
+        console.log(`  - ${failed_cleans} failed to clean`);
         process.exit(1);
     }
+} catch (err) {
+    console.error(`❌ Failed to read directory: ${err.message}`);
+    process.exit(1);
 }
-main();

@@ -1,6 +1,7 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+
 /**
  * Make files in the bin directories executable
  * @param {string} project_path - Path to the project directory
@@ -11,6 +12,7 @@ function make_bin_executable(project_path, verbose = false) {
         path.join(project_path, 'pub', 'dist', 'bin'),
         path.join(project_path, 'test', 'dist', 'bin')
     ];
+    
     bin_dirs.forEach(bin_dir => {
         if (!fs.existsSync(bin_dir)) {
             if (verbose) {
@@ -19,6 +21,7 @@ function make_bin_executable(project_path, verbose = false) {
             }
             return;
         }
+        
         try {
             const files = fs.readdirSync(bin_dir);
             if (files.length === 0) {
@@ -28,9 +31,11 @@ function make_bin_executable(project_path, verbose = false) {
                 }
                 return;
             }
+            
             files.forEach(file => {
                 const file_path = path.join(bin_dir, file);
                 const stats = fs.statSync(file_path);
+                
                 if (stats.isFile() && file.endsWith('.js')) {
                     try {
                         // Make file executable (add execute permission for owner, group, and others)
@@ -38,24 +43,24 @@ function make_bin_executable(project_path, verbose = false) {
                         if (verbose) {
                             console.log(`Made executable: ${path.relative(project_path, file_path)}`);
                         }
-                    }
-                    catch (chmodErr) {
+                    } catch (chmodErr) {
                         console.warn(`Warning: Could not make ${file} executable:`, chmodErr.message);
                     }
                 }
             });
+            
             const js_files = files.filter(file => file.endsWith('.js'));
             if (verbose && js_files.length > 0) {
                 const relative_path = path.relative(project_path, bin_dir);
                 console.log(`✓ Made ${js_files.length} JavaScript file(s) in ${relative_path} directory executable`);
             }
-        }
-        catch (err) {
+        } catch (err) {
             const relative_path = path.relative(project_path, bin_dir);
             console.warn(`Warning: Could not process ${relative_path} directory:`, err.message);
         }
     });
 }
+
 /**
  * Build a TypeScript project using tsc
  * @param {string} project_path - Path to the project directory
@@ -66,6 +71,7 @@ function make_bin_executable(project_path, verbose = false) {
  */
 function build_project(project_path, options = {}) {
     const { verbose = false, throw_on_error = true } = options;
+    
     try {
         // Build the main project (pub directory)
         if (verbose) {
@@ -74,6 +80,7 @@ function build_project(project_path, options = {}) {
         execSync(`tsc --project ${path.join(project_path, 'pub')}`, {
             stdio: verbose ? 'inherit' : 'pipe'
         });
+        
         // Build the test directory if it exists and has a tsconfig.json
         const test_tsconfig = path.join(project_path, 'test', 'tsconfig.json');
         const test_package_json = path.join(project_path, 'test', 'package.json');
@@ -91,27 +98,29 @@ function build_project(project_path, options = {}) {
                     });
                 }
             }
+            
             if (verbose) {
                 console.log('Building test directory...');
             }
             execSync(`tsc --project ${path.join(project_path, 'test')}`, {
                 stdio: verbose ? 'inherit' : 'pipe'
             });
-        }
-        else if (verbose) {
+        } else if (verbose) {
             console.log('No test tsconfig.json found, skipping test build');
         }
+        
         // After successful build, make bin files executable
         make_bin_executable(project_path, verbose);
+        
         return true;
-    }
-    catch (err) {
+    } catch (err) {
         if (throw_on_error) {
             throw err;
         }
         return false;
     }
 }
+
 /**
  * Run tests for a project
  * @param {string} project_path - Path to the project directory
@@ -123,13 +132,16 @@ function build_project(project_path, options = {}) {
  */
 function test_project(project_path, options = {}) {
     const { verbose = false, throw_on_error = true, test_file = './test/dist/bin/test.js' } = options;
+    
     const full_test_path = path.join(project_path, test_file);
+    
     if (!fs.existsSync(full_test_path)) {
         if (throw_on_error) {
             throw new Error(`Test file not found: ${test_file}`);
         }
         return false;
     }
+    
     try {
         console.log(`Running tests from ${test_file}...`);
         execSync(`node --enable-source-maps ${test_file}`, {
@@ -137,14 +149,14 @@ function test_project(project_path, options = {}) {
             stdio: verbose ? 'inherit' : 'pipe'
         });
         return true;
-    }
-    catch (err) {
+    } catch (err) {
         if (throw_on_error) {
             throw err;
         }
         return false;
     }
 }
+
 /**
  * Check if a directory contains a valid Node.js/TypeScript project
  * @param {string} project_path - Path to check
@@ -153,6 +165,7 @@ function test_project(project_path, options = {}) {
 function is_node_project(project_path) {
     return fs.existsSync(path.join(project_path, 'pub', 'package.json'));
 }
+
 module.exports = {
     build_project,
     test_project,

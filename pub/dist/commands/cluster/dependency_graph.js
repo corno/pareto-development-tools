@@ -348,28 +348,58 @@ async function main() {
                 open_command = 'start';
             }
             else {
-                // Linux and other Unix-like systems
-                open_command = 'xdg-open';
+                // For Linux and other Unix-like systems
+                // Try different viewers in order of preference
+                const linux_viewers = ['feh', 'eog', 'xviewer', 'gpicview'];
+                let viewer_found = false;
+                for (const viewer of linux_viewers) {
+                    try {
+                        (0, child_process_1.execSync)(`which ${viewer}`, { stdio: 'pipe' });
+                        open_command = viewer;
+                        viewer_found = true;
+                        break;
+                    }
+                    catch {
+                        // Viewer not found, try next one
+                    }
+                }
+                if (!viewer_found) {
+                    open_command = 'xdg-open';
+                }
             }
             try {
-                // For Linux, use xdg-open with clean environment to avoid snap conflicts
+                // For Linux, try to use the selected viewer first, fallback to xdg-open
                 if (platform === 'linux') {
                     try {
-                        // Clean environment to avoid snap library conflicts
+                        // Try the selected viewer directly with clean environment
                         const cleanEnv = Object.assign({}, process.env);
                         delete cleanEnv.LD_LIBRARY_PATH;
-                        const proc = (0, child_process_1.spawn)('xdg-open', [output_path], {
+                        const proc = (0, child_process_1.spawn)(open_command, [output_path], {
                             detached: true,
                             stdio: 'ignore',
                             env: cleanEnv
                         });
                         proc.unref();
-                        console.log(`✓ Opened in default viewer`);
+                        console.log(`✓ Opened with ${open_command}`);
                     }
-                    catch (xdgError) {
-                        console.log(`❌ Could not open automatically: ${xdgError.message}`);
-                        console.log(`📁 SVG file created at: ${output_path}`);
-                        console.log(`You can open it manually.`);
+                    catch (viewerError) {
+                        // If the selected viewer fails, fallback to xdg-open
+                        try {
+                            const cleanEnv = Object.assign({}, process.env);
+                            delete cleanEnv.LD_LIBRARY_PATH;
+                            const proc = (0, child_process_1.spawn)('xdg-open', [output_path], {
+                                detached: true,
+                                stdio: 'ignore',
+                                env: cleanEnv
+                            });
+                            proc.unref();
+                            console.log(`✓ Opened with xdg-open (fallback)`);
+                        }
+                        catch (xdgError) {
+                            console.log(`❌ Could not open automatically: ${xdgError.message}`);
+                            console.log(`📁 SVG file created at: ${output_path}`);
+                            console.log(`You can open it manually.`);
+                        }
                     }
                 }
                 else {

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
+
 /**
  * Clean using git clean -fdX (removes all ignored files)
  * @param {string} project_path - Path to the project directory
@@ -12,9 +13,11 @@ function git_clean_project(project_path, options = {}) {
     const { verbose = false } = options;
     const project_name = path.basename(project_path);
     const errors = [];
+
     if (verbose) {
         console.log(`Git cleaning ${project_name}...`);
     }
+
     // Check if .gitignore exists
     const gitignore_path = path.join(project_path, '.gitignore');
     if (!fs.existsSync(gitignore_path)) {
@@ -30,11 +33,11 @@ function git_clean_project(project_path, options = {}) {
             project_name
         };
     }
+
     // Check if git is available
     try {
         execSync('git --version', { stdio: 'pipe' });
-    }
-    catch (err) {
+    } catch (err) {
         const error_msg = `Git command not found for ${project_name}`;
         errors.push(error_msg);
         console.error(error_msg);
@@ -45,11 +48,11 @@ function git_clean_project(project_path, options = {}) {
             project_name
         };
     }
+
     // Check if directory is a git repository
     try {
         execSync('git rev-parse --git-dir', { cwd: project_path, stdio: 'pipe' });
-    }
-    catch (err) {
+    } catch (err) {
         const error_msg = `${project_name} is not a git repository`;
         errors.push(error_msg);
         if (verbose) {
@@ -62,39 +65,39 @@ function git_clean_project(project_path, options = {}) {
             project_name
         };
     }
+
     try {
         // Use git clean to remove ignored files
         // -f: force removal
         // -d: remove directories
         // -X: remove only ignored files (not untracked files)
         const git_clean_cmd = 'git clean -fdX';
+        
         if (verbose) {
             console.log(`Running: ${git_clean_cmd}`);
             execSync(git_clean_cmd, { cwd: project_path, stdio: 'inherit' });
             console.log('✓ Git clean completed');
-        }
-        else {
+        } else {
             const output = execSync(git_clean_cmd, { cwd: project_path, encoding: 'utf8' });
             if (output.trim()) {
                 if (verbose) {
                     console.log('✓ Removed ignored files and directories');
                     console.log(output);
                 }
-            }
-            else {
+            } else {
                 if (verbose) {
                     console.log('✓ No ignored files to clean');
                 }
             }
         }
+
         return {
             success: true,
             cleaned: ['git-ignored-files'],
             errors: [],
             project_name
         };
-    }
-    catch (err) {
+    } catch (err) {
         const error_msg = `Git clean failed for ${project_name}: ${err.message}`;
         errors.push(error_msg);
         console.error(error_msg);
@@ -106,6 +109,7 @@ function git_clean_project(project_path, options = {}) {
         };
     }
 }
+
 /**
  * Clean a single project directory by removing dist and node_modules
  * @param {string} project_path - Path to the project directory
@@ -118,16 +122,20 @@ function git_clean_project(project_path, options = {}) {
  */
 function clean_project(project_path, options = {}) {
     const { verbose = false, dist_only = false, node_modules_only = false, use_git = false } = options;
+    
     // If git cleaning is requested, use that instead
     if (use_git) {
         return git_clean_project(project_path, { verbose });
     }
+    
     const project_name = path.basename(project_path);
     const cleaned = [];
     const errors = [];
+
     if (verbose) {
         console.log(`Cleaning ${project_name}...`);
     }
+
     // Clean dist directory
     if (!node_modules_only) {
         const dist_dir = path.join(project_path, 'pub', 'dist');
@@ -138,14 +146,14 @@ function clean_project(project_path, options = {}) {
                 if (verbose) {
                     console.log('✓ Removed dist directory');
                 }
-            }
-            catch (err) {
+            } catch (err) {
                 const error_msg = `Failed to delete dist in ${project_name}: ${err.message}`;
                 errors.push(error_msg);
                 console.error(error_msg);
             }
         }
     }
+
     // Clean node_modules directory
     if (!dist_only) {
         const node_modules_dir = path.join(project_path, 'pub', 'node_modules');
@@ -156,14 +164,14 @@ function clean_project(project_path, options = {}) {
                 if (verbose) {
                     console.log('✓ Removed node_modules directory');
                 }
-            }
-            catch (err) {
+            } catch (err) {
                 const error_msg = `Failed to delete node_modules in ${project_name}: ${err.message}`;
                 errors.push(error_msg);
                 console.error(error_msg);
             }
         }
     }
+
     return {
         success: errors.length === 0,
         cleaned,
@@ -171,6 +179,7 @@ function clean_project(project_path, options = {}) {
         project_name
     };
 }
+
 /**
  * Check if a directory contains a valid Node.js project
  * @param {string} project_path - Path to check
@@ -179,6 +188,7 @@ function clean_project(project_path, options = {}) {
 function is_node_project(project_path) {
     return fs.existsSync(path.join(project_path, 'pub', 'package.json'));
 }
+
 module.exports = {
     clean_project,
     git_clean_project,
