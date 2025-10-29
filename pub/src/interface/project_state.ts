@@ -1,0 +1,39 @@
+export type Project_State = {
+    'package name in sync with directory name': boolean
+    'version': string
+    'git': {
+        'staged files': boolean
+        'dirty working tree': boolean
+        'unpushed commits': boolean
+    }
+    'structure':
+    | ['valid', {
+        'warnings': string[]
+    }]
+    | ['invalid', { errors: string[] }]
+    'test':
+    | ['success', null]
+    | ['failure',
+        | ['build', null]
+        | ['test', { 'failed tests': string[] }]
+    ]
+    'dependencies': {
+        [name: string]: {
+            'version': string
+            'target':
+            | ['not found', null]
+            | ['found', {
+                'dependency up to date': boolean
+            }]
+        }
+    }
+}
+
+export type Project_Cluster_State = {
+    'projects': {
+        [node_name: string]:
+        | ['not a project', null]
+        | ['project', Project_State]
+    },
+    'topological order': string[]
+}

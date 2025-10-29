@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Pareto development tools",
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "copy-js": "node copy-js-files.js"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
