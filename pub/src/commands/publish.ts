@@ -53,7 +53,7 @@ import * as compareWithPublishedModule from '../lib/compare_with_published';
 const compare_with_published = compareWithPublishedModule.$$;
 
 // Helper function to prompt user for input
-function prompt_user(question) {
+function prompt_user(question: string): Promise<string> {
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
@@ -163,7 +163,7 @@ try {
         // Prompt for commit message synchronously using fs.readSync
         process.stdout.write('Enter commit message: ');
         const buffer = Buffer.alloc(1024);
-        const bytesRead = fs.readSync(0, buffer, 0, 1024);
+        const bytesRead = fs.readSync(process.stdin.fd, buffer, 0, 1024, null);
         const commit_message = buffer.toString('utf8', 0, bytesRead).trim();
         return commit_message;
     }, {
@@ -178,9 +178,9 @@ try {
         console.error(`Reason: ${reason_type}`);
         if (reason_type === 'structure not valid') {
             console.error('Structure validation errors:');
-            reason_details.errors.forEach(error => console.error(`   - ${error}`));
-        } else if (reason_details && reason_details.details) {
-            console.error(reason_details.details);
+            (reason_details as { errors: string[] }).errors.forEach(error => console.error(`   - ${error}`));
+        } else if (reason_details && typeof reason_details === 'object' && 'details' in reason_details) {
+            console.error((reason_details as { details: string }).details);
         }
         process.exit(1);
     }

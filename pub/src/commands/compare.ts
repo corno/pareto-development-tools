@@ -63,7 +63,7 @@ async function main() {
         // Extract local package
         const local_result = extract_local(package_path, local_dir, { 
             verbose: is_verbose, 
-            skip_build: skip_build 
+            skipBuild: skip_build 
         });
         
         if (local_result.error) {

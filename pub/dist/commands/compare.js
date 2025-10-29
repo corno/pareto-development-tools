@@ -85,7 +85,7 @@ async function main() {
         // Extract local package
         const local_result = (0, package_compare_utils_1.extract_local)(package_path, local_dir, {
             verbose: is_verbose,
-            skip_build: skip_build
+            skipBuild: skip_build
         });
         if (local_result.error) {
             console.error(`❌ Error extracting local package: ${local_result.error}`);

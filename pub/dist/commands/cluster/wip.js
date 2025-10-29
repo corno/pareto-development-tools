@@ -36,6 +36,7 @@ var __importStar = (this && this.__importStar) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
+const readline = __importStar(require("readline"));
 const child_process_1 = require("child_process");
 const build_test_utils_1 = require("../../lib/build_test_utils");
 const package_compare_utils_1 = require("../../lib/package_compare_utils");
@@ -150,7 +151,7 @@ async function check_package_deviation(project_path, package_name, options = {})
             }
             result.published_exists = true;
             // Extract local package
-            const local_result = (0, package_compare_utils_1.extract_local)(project_path, local_dir, { verbose, skip_build });
+            const local_result = (0, package_compare_utils_1.extract_local)(project_path, local_dir, { verbose, skipBuild: skip_build });
             if (local_result.error) {
                 result.error = local_result.error;
                 return result;
@@ -495,7 +496,6 @@ async function main() {
     if (publish_mode) {
         console.log('\n🚀 PUBLISHING MODE');
         console.log('═'.repeat(50));
-        import * as readline from 'readline';
         const rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout

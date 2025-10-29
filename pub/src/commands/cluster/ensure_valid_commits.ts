@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+import * as fs from 'fs';
+import * as path from 'path';
+import * as ensureValidCommitModule from '../../lib/ensure_valid_commit';
+import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
+
 function main(): void {
     /**
      * Ensure Valid Commits for All Packages
@@ -82,7 +87,6 @@ function main(): void {
         try {
             // Prompt function for commit message
             const prompt_for_commit_message = () => {
-                import * as fs from 'fs';
                 
                 // Write prompt to stderr
                 process.stderr.write(`[${pkg.name}] Enter commit message: `);
@@ -125,9 +129,9 @@ function main(): void {
                 // Always show structure validation errors (not just in verbose mode)
                 if (reason_type === 'structure not valid') {
                     console.error('   Structure validation errors:');
-                    reason_details.errors.forEach(error => console.error(`   - ${error}`));
-                } else if (verbose && reason_details && reason_details.details) {
-                    console.error(`   ${reason_details.details}`);
+                    (reason_details as { errors: string[] }).errors.forEach(error => console.error(`   - ${error}`));
+                } else if (verbose && reason_details && typeof reason_details === 'object' && 'details' in reason_details) {
+                    console.error(`   ${(reason_details as { details: string }).details}`);
                 }
                 
                 results.failed.push({ name: pkg.name, reason: reason_type });

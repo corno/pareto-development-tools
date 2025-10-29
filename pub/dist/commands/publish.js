@@ -185,7 +185,7 @@ async function main() {
             // Prompt for commit message synchronously using fs.readSync
             process.stdout.write('Enter commit message: ');
             const buffer = Buffer.alloc(1024);
-            const bytesRead = fs.readSync(0, buffer, 0, 1024);
+            const bytesRead = fs.readSync(process.stdin.fd, buffer, 0, 1024, null);
             const commit_message = buffer.toString('utf8', 0, bytesRead).trim();
             return commit_message;
         }, {
@@ -201,7 +201,7 @@ async function main() {
                 console.error('Structure validation errors:');
                 reason_details.errors.forEach(error => console.error(`   - ${error}`));
             }
-            else if (reason_details && reason_details.details) {
+            else if (reason_details && typeof reason_details === 'object' && 'details' in reason_details) {
                 console.error(reason_details.details);
             }
             process.exit(1);

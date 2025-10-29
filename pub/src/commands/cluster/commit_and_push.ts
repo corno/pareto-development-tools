@@ -9,10 +9,40 @@ import * as determineCommitReadinessModule from '../../lib/determine_commit_read
 function main(): void {
     const determine_commit_readiness = determineCommitReadinessModule.$$;
     const args = process.argv.slice(2);
+    
+    // Parse flags
     const is_force = args.includes('--force');
-    const non_flag_args = args.filter(arg => !arg.startsWith('--'));
-    if (non_flag_args.length < 2) {
-        console.error('Usage: pareto all commit <directory> "<commit message>" [--force]');
+    const default_commit_idx = args.indexOf('--default-commit-message');
+    const has_default_commit_flag = default_commit_idx !== -1;
+    
+    let default_commit_message = '';
+    if (has_default_commit_flag) {
+        // Check if there's a value after --default-commit-message
+        if (default_commit_idx + 1 < args.length && !args[default_commit_idx + 1].startsWith('--')) {
+            default_commit_message = args[default_commit_idx + 1];
+        } else {
+            default_commit_message = 'Update cluster projects';
+        }
+    }
+    
+    // Filter out flag arguments to get positional arguments
+    const non_flag_args = args.filter((arg, index) => {
+        if (arg.startsWith('--')) return false;
+        // Skip the value following --default-commit-message
+        if (index > 0 && args[index - 1] === '--default-commit-message') return false;
+        return true;
+    });
+    
+    // Determine required arguments based on whether we have --default-commit-message
+    const required_args = has_default_commit_flag ? 1 : 2;
+    
+    if (non_flag_args.length < required_args) {
+        if (has_default_commit_flag) {
+            console.error('Usage: pareto cluster-commit <directory> [--default-commit-message [message]] [--force]');
+        } else {
+            console.error('Usage: pareto cluster-commit <directory> "<commit message>" [--force]');
+            console.error('       pareto cluster-commit <directory> [--default-commit-message [message]] [--force]');
+        }
         console.error('');
         console.error('Default behavior:');
         console.error('  - Validates no changes are staged (aborts if staged changes exist)');
@@ -20,19 +50,28 @@ function main(): void {
         console.error('  - Performs clean → install → build → test');
         console.error('  - Commits and pushes only if tests pass');
         console.error('');
-        console.error('--force: Skips build/test validation and commits/pushes immediately');
+        console.error('Flags:');
+        console.error('  --force: Skips build/test validation and commits/pushes immediately');
+        console.error('  --default-commit-message [msg]: Use default or specified commit message');
         process.exit(1);
     }
+    
     const target_dir = non_flag_args[0];
-    const commit_message = non_flag_args[1];
+    let commit_message: string;
+    
+    if (has_default_commit_flag) {
+        commit_message = default_commit_message;
+        console.log(`Using default commit message: "${commit_message}"`);
+    } else {
+        commit_message = non_flag_args[1];
+        if (!commit_message) {
+            console.error('Error: Please provide a commit message or use --default-commit-message');
+            process.exit(1);
+        }
+    }
+    
     if (!target_dir) {
         console.error('Error: Please provide a target directory path');
-        console.error('Usage: pareto all commit <directory> "<commit message>" [--force]');
-        process.exit(1);
-    }
-    if (!commit_message) {
-        console.error('Error: Please provide a commit message');
-        console.error('Usage: pareto all commit <directory> "<commit message>" [--force]');
         process.exit(1);
     }
     const base_dir = path.resolve(target_dir);

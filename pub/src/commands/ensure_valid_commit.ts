@@ -1,5 +1,10 @@
 #!/usr/bin/env node
 
+import * as fs from 'fs';
+import * as path from 'path';
+import * as readline from 'readline';
+import * as ensureValidCommitModule from '../lib/ensure_valid_commit';
+
 function main(): void {
     /**
      * Ensure Valid Commit Command
@@ -65,7 +70,6 @@ function main(): void {
     const result = ensure_valid_commit(package_path, structure, () => {
         // This will be called synchronously when a commit message is needed
         // Use Node.js readline-sync approach
-        import * as fs from 'fs';
         
         // Write prompt to stderr
         process.stderr.write('Enter commit message: ');
@@ -76,7 +80,7 @@ function main(): void {
         let input = '';
         
         try {
-            const bytesRead = fs.readSync(0, buffer, 0, BUFFER_SIZE, null);
+            const bytesRead = fs.readSync(process.stdin.fd, buffer, 0, BUFFER_SIZE, null);
             if (bytesRead > 0) {
                 input = buffer.toString('utf8', 0, bytesRead).trim();
             }

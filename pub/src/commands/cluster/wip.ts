@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import * as fs from 'fs';
 import * as path from 'path';
+import * as readline from 'readline';
 import { execSync } from 'child_process';
 import { is_node_project } from '../../lib/build_test_utils';
 import { extract_local, extract_published } from '../../lib/package_compare_utils';
@@ -97,7 +98,7 @@ function get_project_dependencies(project_path, include_dev_deps = false) {
  * @param {object} options - Options for checking
  * @returns {Promise<object>} - Result object with deviation status
  */
-async function check_package_deviation(project_path, package_name, options = {}) {
+async function check_package_deviation(project_path: string, package_name: string, options: { verbose?: boolean; skip_build?: boolean } = {}) {
     const { verbose = false, skip_build = false } = options;
     
     const result = {
@@ -132,7 +133,7 @@ async function check_package_deviation(project_path, package_name, options = {})
             result.published_exists = true;
             
             // Extract local package
-            const local_result = extract_local(project_path, local_dir, { verbose, skip_build });
+            const local_result = extract_local(project_path, local_dir, { verbose, skipBuild: skip_build });
             
             if (local_result.error) {
                 result.error = local_result.error;
@@ -401,7 +402,7 @@ async function main() {
         Object.entries(project.dependencies).forEach(([dep_name, version]) => {
             if (sibling_projects.has(dep_name)) {
                 const actual_version = project_versions.get(dep_name);
-                const clean_required_version = version.replace(/[\^~>=<]/g, ''); // Remove version range operators
+                const clean_required_version = (version as string).replace(/[\^~>=<]/g, ''); // Remove version range operators
                 
                 if (actual_version !== clean_required_version) {
                     packages_with_lagging_deps.add(project.name);
@@ -498,7 +499,7 @@ async function main() {
             Object.entries(project.dependencies).forEach(([dep_name, version]) => {
                 if (sibling_projects.has(dep_name)) {
                     const actual_version = project_versions.get(dep_name);
-                    const clean_required_version = version.replace(/[\^~>=<]/g, '');
+                    const clean_required_version = (version as string).replace(/[\^~>=<]/g, '');
                     
                     if (actual_version !== clean_required_version) {
                         lagging_count++;
@@ -527,7 +528,7 @@ async function main() {
             Object.entries(project.dependencies).forEach(([dep_name, version]) => {
                 if (sibling_projects.has(dep_name)) {
                     const actual_version = project_versions.get(dep_name);
-                    const clean_required_version = version.replace(/[\^~>=<]/g, '');
+                    const clean_required_version = (version as string).replace(/[\^~>=<]/g, '');
                     
                     if (actual_version !== clean_required_version) {
                         console.log(`${''.padEnd(nameWidth)} ${''.padEnd(publishWidth)} ↳ ${dep_name}: ${version} → ${actual_version}`);
@@ -548,7 +549,6 @@ async function main() {
         console.log('\n🚀 PUBLISHING MODE');
         console.log('═'.repeat(50));
         
-        import * as readline from 'readline';
         const rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
@@ -616,10 +616,10 @@ async function main() {
                 
                 const answer = await askQuestion('   Do you want to publish this package? (y/n/q): ');
                 
-                if (answer.toLowerCase() === 'q') {
+                if ((answer as string).toLowerCase() === 'q') {
                     console.log('\n⏹️  Publishing cancelled by user');
                     break;
-                } else if (answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes') {
+                } else if ((answer as string).toLowerCase() === 'y' || (answer as string).toLowerCase() === 'yes') {
                     console.log(`   🚀 Publishing ${package_name}...`);
                     
                     try {

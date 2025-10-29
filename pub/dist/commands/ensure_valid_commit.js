@@ -1,4 +1,43 @@
 #!/usr/bin/env node
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+const fs = __importStar(require("fs"));
+const path = __importStar(require("path"));
+const readline = __importStar(require("readline"));
+const ensureValidCommitModule = __importStar(require("../lib/ensure_valid_commit"));
 function main() {
     /**
      * Ensure Valid Commit Command
@@ -63,7 +102,6 @@ function main() {
     const result = ensure_valid_commit(package_path, structure, () => {
         // This will be called synchronously when a commit message is needed
         // Use Node.js readline-sync approach
-        import * as fs from 'fs';
         // Write prompt to stderr
         process.stderr.write('Enter commit message: ');
         // Read synchronously from stdin
@@ -71,7 +109,7 @@ function main() {
         const buffer = Buffer.alloc(BUFFER_SIZE);
         let input = '';
         try {
-            const bytesRead = fs.readSync(0, buffer, 0, BUFFER_SIZE, null);
+            const bytesRead = fs.readSync(process.stdin.fd, buffer, 0, BUFFER_SIZE, null);
             if (bytesRead > 0) {
                 input = buffer.toString('utf8', 0, bytesRead).trim();
             }
