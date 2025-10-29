@@ -184,37 +184,29 @@ function project_cluster_state_to_dot(cluster_state, options = {}) {
     // Add legend at the bottom
     if (include_legend) {
         dot_content += `
-    // Legend (at bottom, arranged vertically)
-    {
-        rank=sink;
-        node [shape=box, style=filled];
+    // Legend (at bottom, compact vertical layout)
+    subgraph cluster_legend {
+        label="Legend";
+        style=filled;
+        color=lightgrey;
         
-        legend_title [label="Legend", shape=plaintext, style=""];
+        node [shape=plaintext, fontsize=10];
         
-        healthy_project [label="Healthy Project", fillcolor=lightblue];
-        problematic_project [label="Project with Issues", fillcolor=lightcoral];
-        name_mismatch_project [label="Name Mismatch", fillcolor=orange];
-        unpushed_project [label="Unpushed Commits", fillcolor=lightblue, color=red, penwidth=3];
-        external_dep [label="External Package", fillcolor=yellow, shape=ellipse];
-        
-        legend_separator [label="", shape=plaintext, style=""];
-        
-        edge_legend_title [label="Dependencies:", shape=plaintext, style=""];
-        edge_ok [label="Up to date (blue)", shape=plaintext, style=""];
-        edge_behind [label="Version behind (yellow)", shape=plaintext, style=""];
-        edge_blocked [label="Target has issues (red)", shape=plaintext, style=""];
-        
-        // Arrange vertically
-        legend_title -> healthy_project [style=invis];
-        healthy_project -> problematic_project [style=invis];
-        problematic_project -> name_mismatch_project [style=invis];
-        name_mismatch_project -> unpushed_project [style=invis];
-        unpushed_project -> external_dep [style=invis];
-        external_dep -> legend_separator [style=invis];
-        legend_separator -> edge_legend_title [style=invis];
-        edge_legend_title -> edge_ok [style=invis];
-        edge_ok -> edge_behind [style=invis];
-        edge_behind -> edge_blocked [style=invis];
+        legend_nodes [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+            <TR><TD COLSPAN="2"><B>Node Types</B></TD></TR>
+            <TR><TD BGCOLOR="lightblue" WIDTH="20"> </TD><TD ALIGN="LEFT">Healthy Project</TD></TR>
+            <TR><TD BGCOLOR="lightcoral" WIDTH="20"> </TD><TD ALIGN="LEFT">Project with Issues</TD></TR>
+            <TR><TD BGCOLOR="orange" WIDTH="20"> </TD><TD ALIGN="LEFT">Name Mismatch</TD></TR>
+            <TR><TD BGCOLOR="lightblue" BORDER="3" COLOR="red" WIDTH="20"> </TD><TD ALIGN="LEFT">Unpushed Commits</TD></TR>
+            <TR><TD BGCOLOR="yellow" WIDTH="20"> </TD><TD ALIGN="LEFT">External Package</TD></TR>
+            <TR><TD COLSPAN="2"> </TD></TR>
+            <TR><TD COLSPAN="2"><B>Edge Colors</B></TD></TR>
+            <TR><TD COLOR="blue" WIDTH="20">━━━</TD><TD ALIGN="LEFT">Up to date</TD></TR>
+            <TR><TD COLOR="yellow" WIDTH="20">━━━</TD><TD ALIGN="LEFT">Version behind</TD></TR>
+            <TR><TD COLOR="red" WIDTH="20">━━━</TD><TD ALIGN="LEFT">Target has issues</TD></TR>
+            </TABLE>
+        >];
     }`;
     }
     dot_content += '}\n';

@@ -5,7 +5,7 @@ import * as path from 'path';
 import * as readline from 'readline';
 import * as ensureValidCommitModule from '../lib/ensure_valid_commit';
 
-function main(): void {
+async function main(): Promise<void> {
     /**
      * Ensure Valid Commit Command
      * 
@@ -67,30 +67,8 @@ function main(): void {
     if (no_push) {
         console.log('📌 Will not push to remote');
     }
-    const result = ensure_valid_commit(package_path, structure, () => {
-        // This will be called synchronously when a commit message is needed
-        // Use Node.js readline-sync approach
-        
-        // Write prompt to stderr
-        process.stderr.write('Enter commit message: ');
-        
-        // Read synchronously from stdin
-        const BUFFER_SIZE = 256;
-        const buffer = Buffer.alloc(BUFFER_SIZE);
-        let input = '';
-        
-        try {
-            const bytesRead = fs.readSync(process.stdin.fd, buffer, 0, BUFFER_SIZE, null);
-            if (bytesRead > 0) {
-                input = buffer.toString('utf8', 0, bytesRead).trim();
-            }
-        } catch (err) {
-            console.error('Failed to read input:', err.message);
-            return '';
-        }
-        
-        return input;
-    }, {
+    const commit_message = await prompt_user('Enter commit message: ') as string;
+    const result = await ensure_valid_commit(package_path, structure, () => commit_message, {
         skip_validation: is_force,
         skip_push: no_push,
         skip_dep_upgrade: skip_dep_upgrade
@@ -107,38 +85,13 @@ function main(): void {
     } else {
         console.error('\n❌ Failed to create valid commit');
         const [reason_type, reason_details] = result[1].reason;
-        
-        switch (reason_type) {
-            case 'structure not valid':
-                console.error('Structure validation failed:');
-                reason_details.errors.forEach(error => {
-                    console.error(`   - ${error}`);
-                });
-                break;
-            case 'already staged':
-                console.error('Staging area is not clean. Please commit or reset staged changes first.');
-                console.error('Use --force to bypass this check.');
-                break;
-            case 'tests failing':
-            case 'build failing':
-            case 'npm install failed':
-            case 'commit failed':
-            case 'push failed':
-                console.error(`${reason_type}:`);
-                console.error(reason_details.details);
-                break;
-            case 'clean failed':
-                console.error('Clean operations failed:');
-                reason_details.errors.forEach(error => {
-                    console.error(`   - ${error}`);
-                });
-                break;
-            default:
-                console.error(`Unknown error: ${reason_type}`);
+        if (reason_type === 'commit failed') {
+            console.error('commit failed:');
+            console.error(reason_details);
+        } else {
+            console.error('Unknown error:', reason_type, reason_details);
         }
-        
         process.exit(1);
     }
 }
-
 main();
