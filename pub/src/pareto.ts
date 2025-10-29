@@ -26,44 +26,44 @@ const COMMANDS = {
         file: './commands/build.js',
         description: 'Build a single package'
     },
-    'all-build': {
-        file: './commands/all/build.js',
+    'cluster-build': {
+        file: './commands/cluster/build.js',
         description: 'Build all packages in dependency order'
     },
     'test': {
         file: './commands/test.js',
         description: 'Run tests for a single package'
     },
-    'all-test': {
-        file: './commands/all/test.js',
+    'cluster-test': {
+        file: './commands/cluster/test.js',
         description: 'Run tests for all packages'
     },
     'clean': {
         file: './commands/clean.js',
         description: 'Clean build artifacts from a package'
     },
-    'all-clean': {
-        file: './commands/all/clean.js',
+    'cluster-clean': {
+        file: './commands/cluster/clean.js',
         description: 'Clean build artifacts from all packages'
     },
-    'all-commit': {
-        file: './commands/all/commit_and_push.js',
+    'cluster-commit': {
+        file: './commands/cluster/commit_and_push.js',
         description: 'Commit and push all packages with validation'
     },
-    'all-ensure-valid-commits': {
-        file: './commands/all/ensure_valid_commits.js',
+    'cluster-ensure-valid-commits': {
+        file: './commands/cluster/ensure_valid_commits.js',
         description: 'Ensure valid commits for all packages (topological order)'
     },
-    'all-stage': {
-        file: './commands/all/stage.js',
+    'cluster-stage': {
+        file: './commands/cluster/stage.js',
         description: 'Stage changes in all packages'
     },
     'update': {
         file: './commands/update.js',
         description: 'Update dependencies in a single package'
     },
-    'all-update': {
-        file: './commands/all/update.js',
+    'cluster-update': {
+        file: './commands/cluster/update.js',
         description: 'Update dependencies in all packages'
     },
     'compare': {
@@ -74,20 +74,20 @@ const COMMANDS = {
         file: './commands/validate_structure.js',
         description: 'Validate that the repository structure does not deviate from the standard'
     },
-    'all-validate-structure': {
-        file: './commands/all/validate_structure.js',
+    'cluster-validate-structure': {
+        file: './commands/cluster/validate_structure.js',
         description: 'for each repo in the directory; Validate that the repository structure does not deviate from the standard'
     },
-    'all-wip': {
-        file: './commands/all/wip.js',
+    'cluster-wip': {
+        file: './commands/cluster/wip.js',
         description: 'List work-in-progress packages (uncommitted/unpublished changes)'
     },
-    'all-list-loc': {
-        file: './commands/all/list_loc.js',
+    'cluster-list-loc': {
+        file: './commands/cluster/list_loc.js',
         description: 'List all files with line counts (CSV format)'
     },
-    'all-dependency-graph': {
-        file: './commands/all/dependency_graph.js',
+    'cluster-dependency-graph': {
+        file: './commands/cluster/dependency_graph.js',
         description: 'Generate and visualize dependency graph'
     }
 };
@@ -112,12 +112,12 @@ function show_help() {
 // Parse arguments
 const [,, command, subcommand, ...args] = process.argv;
 
-// Handle 'all' prefix commands (e.g., 'pareto all build')
+// Handle 'cluster' prefix commands (e.g., 'pareto cluster build')
 let effective_command = command;
 let effective_args = subcommand ? [subcommand, ...args] : args;
 
-if (command === 'all' && subcommand) {
-    effective_command = `all-${subcommand}`;
+if (command === 'cluster' && subcommand) {
+    effective_command = `cluster-${subcommand}`;
     effective_args = args;
 }
 
@@ -129,9 +129,9 @@ if (!command || command === '--help' || command === '-h' || command === 'help') 
 
 // Check if command exists
 if (!COMMANDS[effective_command]) {
-    if (command === 'all' && subcommand) {
-        console.error(`Error: Unknown 'all' sub-command '${subcommand}'`);
-        console.error(`\nAvailable 'all' sub-commands: build, test, clean, commit, ensure-valid-commits, stage, update, validate-structure, wip, list-loc, dependency-graph`);
+    if (command === 'cluster' && subcommand) {
+        console.error(`Error: Unknown 'cluster' sub-command '${subcommand}'`);
+        console.error(`\nAvailable cluster sub-commands: build, test, clean, commit, ensure-valid-commits, stage, update, validate-structure, wip, list-loc, dependency-graph`);
     } else {
         console.error(`Error: Unknown command '${command}'`);
     }
