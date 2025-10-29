@@ -1,0 +1,12 @@
+{
+  "name": "pareto-development-tools",
+  "version": "1.0.0",
+  "description": "Pareto development tools",
+  "scripts": {
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  }
+}
