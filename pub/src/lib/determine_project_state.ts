@@ -1,4 +1,4 @@
-import { Project_State } from "../interface/project_state";
+import { Package_State } from "../interface/package_state";
 const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
@@ -11,7 +11,7 @@ const build_and_test = buildAndTestModule.$$;
 /**
  * Check git status to determine staged files, dirty working tree, and unpushed commits
  */
-function determine_git_state(project_path: string): Project_State['git'] {
+function determine_git_state(project_path: string): Package_State['git'] {
     try {
         // Check for staged files
         const staged = execSync('git diff --cached --name-only', { cwd: project_path, encoding: 'utf8' }).trim();
@@ -63,7 +63,7 @@ function determine_git_state(project_path: string): Project_State['git'] {
 function determine_package_and_dependencies(project_path: string, node_name: string): {
     package_name_in_sync: boolean,
     version: string,
-    dependencies: Project_State['dependencies']
+    dependencies: Package_State['dependencies']
 } {
     const package_json_path = path.join(project_path, 'pub', 'package.json');
     
@@ -85,13 +85,13 @@ function determine_package_and_dependencies(project_path: string, node_name: str
         const package_name_in_sync = package_name === node_name;
         
         // Process dependencies
-        const dependencies: Project_State['dependencies'] = {};
+        const dependencies: Package_State['dependencies'] = {};
         
         for (const [dep_name, dep_version] of Object.entries(prod_dependencies)) {
             const version_string = dep_version as string;
             
             // Try to determine if this dependency is available and up to date
-            let target_status: Project_State['dependencies'][string]['target'];
+            let target_status: Package_State['dependencies'][string]['target'];
             
             try {
                 // Try to check if package exists in npm registry
@@ -144,7 +144,7 @@ function determine_package_and_dependencies(project_path: string, node_name: str
     }
 }
 
-export function determine_project_state(project_path: string, node_name?: string): Project_State {
+export function determine_project_state(project_path: string, node_name?: string): Package_State {
     // Use basename if node_name not provided
     const effective_node_name = node_name || path.basename(project_path);
     
@@ -155,7 +155,7 @@ export function determine_project_state(project_path: string, node_name?: string
     const { package_name_in_sync, version, dependencies } = determine_package_and_dependencies(project_path, effective_node_name);
 
     // 3. Load structure.json and validate structure
-    let structure_state: Project_State['structure'];
+    let structure_state: Package_State['structure'];
     try {
         // Assuming this function is called from tools, look for structure.json in data directory
         const tools_dir = path.join(__dirname, '../../..');
@@ -181,7 +181,7 @@ export function determine_project_state(project_path: string, node_name?: string
     }
 
     // 4. Run build and test
-    let test_state: Project_State['test'];
+    let test_state: Package_State['test'];
     try {
         const build_test_result = build_and_test(project_path, {
             verbose: false,

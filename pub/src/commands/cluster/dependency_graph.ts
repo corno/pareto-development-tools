@@ -108,7 +108,7 @@ async function main(): Promise<void> {
                 quick_package_list.push({
                     name: subdir,
                     package_name: package_json.name,
-                    version: package_json.version
+                    version: package_json.version || null
                 });
             } catch (err) {
                 // Skip invalid package.json files
@@ -131,7 +131,8 @@ async function main(): Promise<void> {
         const package_path = path.join(base_dir, pkg.name);
         const name_mismatch = pkg.name !== pkg.package_name;
         const warning = name_mismatch ? ' ⚠️  (name mismatch)' : '';
-        console.log(`  - ${get_relative_path(package_path)} (${pkg.package_name}@${pkg.version})${warning}`);
+        const version_display = pkg.version !== null ? pkg.version : 'n/a';
+        console.log(`  - ${get_relative_path(package_path)} (${pkg.package_name}@${version_display})${warning}`);
         if (name_mismatch && verbose) {
             console.log(`    ⚠️  Warning: Package name '${pkg.package_name}' doesn't match directory name '${pkg.name}'`);
         }

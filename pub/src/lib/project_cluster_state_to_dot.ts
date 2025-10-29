@@ -1,4 +1,4 @@
-import * as d_in from "../interface/project_state"
+import * as d_in from "../interface/package_state"
 
 /**
  * Convert Project_Cluster_State to GraphViz DOT format
@@ -8,7 +8,7 @@ import * as d_in from "../interface/project_state"
  * @returns DOT format string for GraphViz
  */
 export function project_cluster_state_to_dot(
-    cluster_state: d_in.Project_Cluster_State,
+    cluster_state: d_in.Package_Cluster_State,
     options: {
         include_legend?: boolean
         cluster_path?: string
@@ -29,7 +29,7 @@ export function project_cluster_state_to_dot(
     // Extract project information from cluster state
     const projects: Array<{
         name: string
-        version: string
+        version: string | null
         dependencies: { [name: string]: string }
         has_issues: boolean
         is_name_synced: boolean
@@ -108,7 +108,8 @@ export function project_cluster_state_to_dot(
                 if (target_project) {
                     // Clean version strings for comparison (remove ^ ~ >= etc.)
                     const clean_required = dep_version.replace(/[\^~>=<]/g, '');
-                    has_version_mismatch = target_project.version !== clean_required;
+                    const target_version = target_project.version !== null ? target_project.version : 'n/a';
+                    has_version_mismatch = target_version !== clean_required;
                     target_has_issues = target_project.has_issues;
                 }
             }
@@ -176,7 +177,9 @@ export function project_cluster_state_to_dot(
     // Add project nodes
     for (const project of projects) {
         const node_id = safe_node_id(project.name);
-        const label = `${escape_dot_string(project.name)}\\nv${project.version}`;
+        const version_display = project.version !== null ? project.version : 'n/a';
+        const version_label = version_display === 'n/a' ? 'n/a' : `v${version_display}`;
+        const label = `${escape_dot_string(project.name)}\\n${version_label}`;
 
         // Determine node color
         let node_color: string;

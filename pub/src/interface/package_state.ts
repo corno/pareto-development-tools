@@ -1,6 +1,6 @@
-export type Project_State = {
+export type Package_State = {
     'package name in sync with directory name': boolean
-    'version': string
+    'version': null | string
     'git': {
         'staged files': boolean
         'dirty working tree': boolean
@@ -37,11 +37,11 @@ export type Project_State = {
     | ['skipped', null]
 }
 
-export type Project_Cluster_State = {
+export type Package_Cluster_State = {
     'projects': {
         [node_name: string]:
         | ['not a project', null]
-        | ['project', Project_State]
+        | ['project', Package_State]
     },
     'topological order': string[]
 }

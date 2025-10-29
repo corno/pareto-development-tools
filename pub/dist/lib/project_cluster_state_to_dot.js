@@ -70,7 +70,8 @@ function project_cluster_state_to_dot(cluster_state, options = {}) {
                 if (target_project) {
                     // Clean version strings for comparison (remove ^ ~ >= etc.)
                     const clean_required = dep_version.replace(/[\^~>=<]/g, '');
-                    has_version_mismatch = target_project.version !== clean_required;
+                    const target_version = target_project.version !== null ? target_project.version : 'n/a';
+                    has_version_mismatch = target_version !== clean_required;
                     target_has_issues = target_project.has_issues;
                 }
             }
@@ -137,7 +138,9 @@ function project_cluster_state_to_dot(cluster_state, options = {}) {
     // Add project nodes
     for (const project of projects) {
         const node_id = safe_node_id(project.name);
-        const label = `${escape_dot_string(project.name)}\\nv${project.version}`;
+        const version_display = project.version !== null ? project.version : 'n/a';
+        const version_label = version_display === 'n/a' ? 'n/a' : `v${version_display}`;
+        const label = `${escape_dot_string(project.name)}\\n${version_label}`;
         // Determine node color
         let node_color;
         if (!project.is_name_synced) {

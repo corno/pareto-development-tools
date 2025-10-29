@@ -1,4 +1,4 @@
-import { Project_Cluster_State, Project_State } from "../interface/project_state";
+import { Package_Cluster_State, Package_State } from "../interface/package_state";
 import { determine_project_state } from "./determine_project_state";
 const fs = require('fs');
 const path = require('path');
@@ -8,7 +8,7 @@ const path = require('path');
  * @param projects - Projects with their states
  * @returns Array of project names in dependency order (dependencies first)
  */
-function calculate_topological_order(projects: { [node_name: string]: ['not a project', null] | ['project', Project_State] }): string[] {
+function calculate_topological_order(projects: { [node_name: string]: ['not a project', null] | ['project', Package_State] }): string[] {
     const project_names = Object.keys(projects).filter(name => projects[name][0] === 'project');
     const visited = new Set<string>();
     const visiting = new Set<string>();
@@ -66,8 +66,8 @@ function calculate_topological_order(projects: { [node_name: string]: ['not a pr
  * @param cluster_path - Path to the directory containing multiple projects
  * @returns Project_Cluster_State - Object mapping project names to their states
  */
-export function determine_project_cluster_state(cluster_path: string): Project_Cluster_State {
-    const projects: { [node_name: string]: ['not a project', null] | ['project', Project_State] } = {};
+export function determine_project_cluster_state(cluster_path: string): Package_Cluster_State {
+    const projects: { [node_name: string]: ['not a project', null] | ['project', Package_State] } = {};
     
     try {
         // Check if cluster path exists
@@ -169,7 +169,7 @@ function is_valid_project(project_path: string): boolean {
  * @param cluster_state - The cluster state object
  * @returns Summary object with counts and lists
  */
-export function summarize_cluster_state(cluster_state: Project_Cluster_State) {
+export function summarize_cluster_state(cluster_state: Package_Cluster_State) {
     const summary = {
         total_nodes: 0,
         total_projects: 0,
