@@ -4,18 +4,18 @@ import * as d_in from "../interface/package_state"
  * Convert Project_Cluster_State to GraphViz DOT format
  *  * 
  * @param cluster_state - The project cluster state
- * @param options - Configuration options
+ * @param $p - Configuration options
  * @returns DOT format string for GraphViz
  */
 export function project_cluster_state_to_dot(
     cluster_state: d_in.Cluster_State,
-    options: {
-        include_legend?: boolean
-        cluster_path?: string
-        show_warnings?: boolean
-    } = {}
+    $p: {
+        include_legend: boolean
+        cluster_path: string
+        show_warnings: boolean
+        'time stamp': string
+    }
 ): string {
-    const { include_legend = true, cluster_path = ".", show_warnings = false } = options;
 
     // Handle 'not found' case
     if (cluster_state[0] === 'not found') {
@@ -176,7 +176,7 @@ export function project_cluster_state_to_dot(
     
     // Graph title
     labelloc="t";
-    label="Dependency Graph\\nGenerated: ${new Date().toISOString()}\\nDirectory: ${cluster_path}";
+    label="Dependency Graph\\nGenerated: ${new Date().toISOString()}\\nDirectory: ${$p.cluster_path}";
     
     // Project nodes (sibling repositories)
 `;
@@ -241,7 +241,7 @@ export function project_cluster_state_to_dot(
     }
 
     // Add legend at the bottom
-    if (include_legend) {
+    if ($p.include_legend) {
         dot_content += `
     // Legend (at bottom, compact vertical layout)
     subgraph cluster_legend {
