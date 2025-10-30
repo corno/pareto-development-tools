@@ -1,11 +1,6 @@
 import * as fs from 'fs'
 import * as path from 'path'
-
-export type Directory = { [name: string]: Node }
-
-export type Node =
- | ['file', null]
- | ['directory', Directory]
+import { Directory } from '../interface/filesystem'
 
 
 export const get_directory_tree = (directory_path: string): Directory => {

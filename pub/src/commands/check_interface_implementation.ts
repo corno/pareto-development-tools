@@ -4,7 +4,7 @@ import * as path from 'path'
 import * as fs from 'fs'
 import { get_directory_tree } from '../queries/get_directory_tree'
 import { compare_directories } from '../transformations/compare_directories'
-import type { Directory_Diff, Node_Diff } from '../transformations/compare_directories'
+import type { Directory_Diff, Node_Diff } from "../interface/filesystem_compare"
 
 function print_diff(diff: Directory_Diff, indent: string = ''): boolean {
     let has_errors = false

@@ -1,21 +1,9 @@
-import * as gdt from "../queries/get_directory_tree"
+import * as d_in from "../interface/filesystem"
+import * as d_out from "../interface/filesystem_compare"
 
-export type Directory_Diff = { [name: string]: Node_Diff }
 
-export type Node_Diff =
-    | ['error',
-        | ['missing', null]
-        | ['superfluous', null]
-        | ['not a directory', null]
-        | ['not a file', null]
-    ]
-    | ['success', 
-        | ['file', null]
-        | ['directory', Directory_Diff]
-    ]
-
-export const compare_directories = (benchmark: gdt.Directory, focus: gdt.Directory): Directory_Diff => {
-    const result: Directory_Diff = {}
+export const compare_directories = (benchmark: d_in.Directory, focus: d_in.Directory): d_out.Directory_Diff => {
+    const result: d_out.Directory_Diff = {}
 
     for (const [name, node] of Object.entries(focus)) {
         const benchmark_node = benchmark[name]

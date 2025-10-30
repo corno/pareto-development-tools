@@ -85,7 +85,7 @@ const build_and_test = buildAndTestModule.$$;
 import { clean_project } from './clean_project';
 import { get_directory_tree } from '../queries/get_directory_tree';
 import { compare_directories } from '../transformations/compare_directories';
-import type { Directory_Diff } from '../transformations/compare_directories';
+import type { Directory_Diff } from "../interface/filesystem_compare";
 
 /**
  * Traverse the structure and collect all paths where ["generated", false]
