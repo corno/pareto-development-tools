@@ -42,7 +42,7 @@ export type Package_State = {
     )
 }
 
-export type Package_Cluster_State = 
+export type Cluster_State = 
 | ['not found', null]
 | ['cluster', {
     'projects': {
@@ -50,5 +50,7 @@ export type Package_Cluster_State =
         | ['not a project', null]
         | ['project', Package_State]
     },
-    'topological order': string[]
+    'topological order': 
+    | ['circular dependencies', null]
+    | ['valid order', string[]]
 }]

@@ -14,42 +14,42 @@ function calculate_topological_order(projects: { [node_name: string]: ['not a pr
     const visited = new Set<string>();
     const visiting = new Set<string>();
     const sorted: string[] = [];
-    
+
     function visit(project_name: string, path: string[] = []): void {
         if (visiting.has(project_name)) {
             // Circular dependency detected - add to end to break cycle
             console.warn(`Circular dependency detected: ${[...path, project_name].join(' -> ')}`);
             return;
         }
-        
+
         if (visited.has(project_name)) {
             return;
         }
-        
+
         visiting.add(project_name);
-        
+
         // Visit dependencies first (if they are projects in this cluster)
         const project_entry = projects[project_name];
         if (project_entry && project_entry[0] === 'project') {
             const project_state = project_entry[1];
             const sibling_deps = Object.keys(project_state.dependencies)
                 .filter(dep_name => project_names.includes(dep_name));
-            
+
             for (const dep of sibling_deps) {
                 visit(dep, [...path, project_name]);
             }
         }
-        
+
         visiting.delete(project_name);
         visited.add(project_name);
         sorted.push(project_name);
     }
-    
+
     // Visit all projects
     for (const project_name of project_names) {
         visit(project_name);
     }
-    
+
     return sorted;
 }
 
@@ -69,69 +69,59 @@ function calculate_topological_order(projects: { [node_name: string]: ['not a pr
  */
 export const $$: (cluster_path: string) => Package_Cluster_State = (cluster_path) => {
     const projects: { [node_name: string]: ['not a project', null] | ['project', Package_State] } = {};
-    
-    try {
-        // Check if cluster path exists
-        if (!fs.existsSync(cluster_path)) {
-            console.warn(`Cluster path does not exist: ${cluster_path}`);
-            return ['not found', null];
-        }
-        
-        // Read all entries in the cluster directory
-        const entries = fs.readdirSync(cluster_path, { withFileTypes: true });
-        
-        // Filter to only directories
-        const directories = entries
-            .filter((entry: any) => entry.isDirectory())
-            .map((entry: any) => entry.name);
-        
-        // Check each directory to see if it's a valid project
-        for (const node_name of directories) {
-            const project_path = path.join(cluster_path, node_name);
-            
-            if (is_valid_project(project_path)) {
-                try {
-                    console.log(`Analyzing project: ${node_name}`);
-                    const project_state = determine_project_state(project_path, node_name);
-                    projects[node_name] = ['project', project_state];
-                } catch (err: any) {
-                    console.error(`Error analyzing project ${node_name}:`, err.message);
-                    // Create a minimal error state for this project
-                    projects[node_name] = ['project', {
-                        'package name in sync with directory name': false,
-                        'version': '0.0.0',
-                        'git': {
-                            'staged files': false,
-                            'dirty working tree': false,
-                            'unpushed commits': false
-                        },
-                        'structure': ['invalid', { errors: [`Failed to analyze project: ${err.message}`] }],
-                        'test': ['failure', ['build', null]],
-                        'dependencies': {},
-                        'published comparison': ['skipped', null]
-                    }];
-                }
-            } else {
-                console.log(`Skipping non-project directory: ${node_name}`);
-                projects[node_name] = ['not a project', null];
+
+    // Check if cluster path exists
+    if (!fs.existsSync(cluster_path)) {
+        return ['not found', null];
+    }
+
+    // Read all entries in the cluster directory
+    const entries = fs.readdirSync(cluster_path, { withFileTypes: true });
+
+    // Filter to only directories
+    const directories = entries
+        .filter((entry: any) => entry.isDirectory())
+        .map((entry: any) => entry.name);
+
+    // Check each directory to see if it's a valid project
+    for (const node_name of directories) {
+        const project_path = path.join(cluster_path, node_name);
+
+        const looks_like_project = (project_path: string): boolean => {
+            try {
+                // Check for common project indicators
+                const indicators = [
+                    path.join(project_path, 'pub'),           // Pareto-style project
+                    path.join(project_path, 'package.json'),  // Node.js project
+                    path.join(project_path, '.git'),          // Git repository
+                    path.join(project_path, 'src'),           // Source directory
+                    path.join(project_path, 'tsconfig.json'), // TypeScript project
+                    path.join(project_path, 'README.md')      // Documentation
+                ];
+
+                // Return true if any indicator exists
+                return indicators.some(indicator => fs.existsSync(indicator));
+
+            } catch (err) {
+                // If we can't check the directory, assume it's not a project
+                return false;
             }
         }
-        
-        // Calculate topological order
-        const topological_order = calculate_topological_order(projects);
-        
-        return ['cluster', {
-            projects,
-            'topological order': topological_order
-        }];
-        
-    } catch (err: any) {
-        console.error(`Error reading cluster directory ${cluster_path}:`, err.message);
-        return ['cluster', {
-            projects,
-            'topological order': []
-        }];
+        if (looks_like_project(project_path)) {
+            const project_state = determine_project_state(project_path, node_name);
+            projects[node_name] = ['project', project_state];
+        } else {
+            projects[node_name] = ['not a project', null];
+        }
     }
+
+    // Calculate topological order
+    const topological_order = calculate_topological_order(projects);
+
+    return ['cluster', {
+        projects,
+        'topological order': topological_order
+    }];
 }
 
 /**
@@ -140,26 +130,6 @@ export const $$: (cluster_path: string) => Package_Cluster_State = (cluster_path
  * @param project_path - Path to the potential project directory
  * @returns boolean - True if the directory appears to be a project
  */
-function is_valid_project(project_path: string): boolean {
-    try {
-        // Check for common project indicators
-        const indicators = [
-            path.join(project_path, 'pub'),           // Pareto-style project
-            path.join(project_path, 'package.json'),  // Node.js project
-            path.join(project_path, '.git'),          // Git repository
-            path.join(project_path, 'src'),           // Source directory
-            path.join(project_path, 'tsconfig.json'), // TypeScript project
-            path.join(project_path, 'README.md')      // Documentation
-        ];
-        
-        // Return true if any indicator exists
-        return indicators.some(indicator => fs.existsSync(indicator));
-        
-    } catch (err) {
-        // If we can't check the directory, assume it's not a project
-        return false;
-    }
-}
 
 /**
  * Get a summary of the cluster state
@@ -181,18 +151,18 @@ export function summarize_cluster_state(cluster_state: Package_Cluster_State[1])
         projects_with_test_failures: 0,
         projects_with_name_mismatches: 0,
         projects_with_dependency_issues: 0,
-        
+
         node_names: [] as string[],
         project_names: [] as string[],
         non_project_names: [] as string[],
         healthy_project_names: [] as string[],
         problematic_project_names: [] as string[]
     };
-    
+
     for (const [node_name, node_entry] of Object.entries(cluster_state.projects)) {
         summary.total_nodes++;
         summary.node_names.push(node_name);
-        
+
         if (node_entry[0] === 'not a project') {
             summary.non_projects++;
             summary.non_project_names.push(node_name);
@@ -200,10 +170,10 @@ export function summarize_cluster_state(cluster_state: Package_Cluster_State[1])
             // It's a project
             summary.total_projects++;
             summary.project_names.push(node_name);
-            
+
             const project_state = node_entry[1];
             let has_issues = false;
-            
+
             // Check git state
             if (project_state.git['staged files']) {
                 summary.projects_with_staged_files++;
@@ -214,29 +184,29 @@ export function summarize_cluster_state(cluster_state: Package_Cluster_State[1])
             if (project_state.git['unpushed commits']) {
                 summary.projects_with_unpushed_commits++;
             }
-            
+
             // Check package name sync
             if (!project_state['package name in sync with directory name']) {
                 summary.projects_with_name_mismatches++;
                 has_issues = true;
             }
-            
+
             // Check structure
             if (project_state.structure[0] === 'invalid') {
                 summary.projects_with_structure_errors++;
                 has_issues = true;
             }
-            
+
             // Check tests
             if (project_state.test[0] === 'failure') {
                 summary.projects_with_test_failures++;
                 has_issues = true;
             }
-            
+
             // Check dependencies
             let has_dependency_issues = false;
             for (const [_, dep_info] of Object.entries(project_state.dependencies)) {
-                if (dep_info.target[0] === 'not found' || 
+                if (dep_info.target[0] === 'not found' ||
                     (dep_info.target[0] === 'found' && !dep_info.target[1]['dependency up to date'])) {
                     has_dependency_issues = true;
                     break;
@@ -246,7 +216,7 @@ export function summarize_cluster_state(cluster_state: Package_Cluster_State[1])
                 summary.projects_with_dependency_issues++;
                 has_issues = true;
             }
-            
+
             // Categorize project health
             if (has_issues) {
                 summary.projects_with_issues++;
@@ -257,6 +227,6 @@ export function summarize_cluster_state(cluster_state: Package_Cluster_State[1])
             }
         }
     }
-    
+
     return summary;
 }
