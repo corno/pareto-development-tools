@@ -1,5 +1,5 @@
 export type Package_State = {
-    'package name in sync with directory name': boolean
+    'package name in package.json': string
     'version': null | string
     'git': {
         'staged files': boolean

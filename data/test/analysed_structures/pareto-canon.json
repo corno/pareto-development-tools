@@ -9,7 +9,7 @@
             "astn": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "astn",
                     "version": "0.111.29",
                     "git": {
                         "staged files": false,
@@ -100,7 +100,7 @@
             "astn-to-git": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "astn-to-git",
                     "version": "0.0.0",
                     "git": {
                         "staged files": false,
@@ -155,7 +155,7 @@
             "astn-to-xml": [
                 "project",
                 {
-                    "package name in sync with directory name": false,
+                    "package name in package.json": "@different/astn-to-xml",
                     "version": "0.0.0",
                     "git": {
                         "staged files": false,
@@ -208,7 +208,7 @@
             "exupery": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "exupery",
                     "version": "0.1.30",
                     "git": {
                         "staged files": false,
@@ -293,7 +293,7 @@
             "exupery-resources": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "exupery-resources",
                     "version": "0.1.20",
                     "git": {
                         "staged files": false,
@@ -348,7 +348,7 @@
             "exupery-standard-library": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "exupery-standard-library",
                     "version": "0.1.17",
                     "git": {
                         "staged files": false,
@@ -385,7 +385,7 @@
             "pareto": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "pareto",
                     "version": "0.76.68",
                     "git": {
                         "staged files": false,
@@ -488,7 +488,7 @@
             "pareto-boekhouding": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "pareto-boekhouding",
                     "version": "0.1.6",
                     "git": {
                         "staged files": false,
@@ -561,7 +561,7 @@
             "pareto-fountain-pen": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "pareto-fountain-pen",
                     "version": "0.1.41",
                     "git": {
                         "staged files": false,
@@ -643,7 +643,7 @@
             "pareto-json": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "pareto-json",
                     "version": "0.1.15",
                     "git": {
                         "staged files": false,
@@ -716,7 +716,7 @@
             "pareto-lionweb": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "pareto-lionweb",
                     "version": "0.0.4",
                     "git": {
                         "staged files": false,
@@ -801,7 +801,7 @@
             "pareto-standard-operations": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "pareto-standard-operations",
                     "version": "0.1.17",
                     "git": {
                         "staged files": false,
@@ -847,7 +847,7 @@
             "pareto-targets": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "pareto-targets",
                     "version": "0.0.3",
                     "git": {
                         "staged files": false,
@@ -923,7 +923,7 @@
             "pareto-vscode-backend": [
                 "project",
                 {
-                    "package name in sync with directory name": true,
+                    "package name in package.json": "pareto-vscode-backend",
                     "version": "0.1.22",
                     "git": {
                         "staged files": false,
