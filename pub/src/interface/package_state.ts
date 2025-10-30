@@ -42,11 +42,13 @@ export type Package_State = {
     )
 }
 
-export type Package_Cluster_State = {
+export type Package_Cluster_State = 
+| ['not found', null]
+| ['cluster', {
     'projects': {
-        [node_name: string]:
+        [node_name: string]: 
         | ['not a project', null]
         | ['project', Package_State]
     },
     'topological order': string[]
-}
+}]
