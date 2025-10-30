@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cluster Status Report - pareto-canon</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        .metadata {
+            color: #666;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .package-name {
+            font-weight: bold;
+            color: #2196F3;
+        }
+        .status-ok {
+            color: green;
+            font-weight: bold;
+        }
+        .status-warning {
+            color: orange;
+            font-weight: bold;
+        }
+        .status-error {
+            color: red;
+            font-weight: bold;
+        }
+        .status-skip {
+            color: gray;
+        }
+        .version {
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cluster Status Report</h1>
+    <div class="metadata">
+        <div>Cluster: pareto-canon</div>
+        <div>Generated: FIXED_TIMESTAMP_FOR_TESTING</div>
+        <div>Total Projects: 14</div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Package</th>
+                <th>Version</th>
+                <th>Name Sync</th>
+                <th>Structure</th>
+                <th>Tests</th>
+                <th>Git Status</th>
+                <th>Dependencies</th>
+                <th>Published</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="package-name">astn</td>
+                <td class="version">0.111.29</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ Pass</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ 7</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">astn-to-git</td>
+                <td class="version">0.0.0</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ Pass</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ 3</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">astn-to-xml</td>
+                <td class="version">0.0.0</td>
+                <td><span class="status-error">✗ Mismatch</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-error">✗ Test failed</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ 2</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">exupery</td>
+                <td class="version">0.1.30</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-error">✗ Build failed</span></td>
+                <td><span class="status-warning">Dirty</span></td>
+                <td><span class="status-ok">✓ 6</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">exupery-resources</td>
+                <td class="version">0.1.20</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ Pass</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ 3</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">exupery-standard-library</td>
+                <td class="version">0.1.17</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ Pass</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ 1</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">pareto</td>
+                <td class="version">0.76.68</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-error">✗ Build failed</span></td>
+                <td><span class="status-warning">Dirty</span></td>
+                <td><span class="status-ok">✓ 8</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">pareto-boekhouding</td>
+                <td class="version">0.1.6</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ Pass</span></td>
+                <td><span class="status-warning">Dirty</span></td>
+                <td><span class="status-ok">✓ 5</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">pareto-fountain-pen</td>
+                <td class="version">0.1.41</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ Pass</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ 6</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">pareto-json</td>
+                <td class="version">0.1.15</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ Pass</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ 5</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">pareto-lionweb</td>
+                <td class="version">0.0.4</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-error">✗ Build failed</span></td>
+                <td><span class="status-warning">Dirty</span></td>
+                <td><span class="status-ok">✓ 6</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">pareto-standard-operations</td>
+                <td class="version">0.1.17</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ Pass</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓ 2</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">pareto-targets</td>
+                <td class="version">0.0.3</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-error">✗ Build failed</span></td>
+                <td><span class="status-warning">Dirty</span></td>
+                <td><span class="status-ok">✓ 5</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+            <tr>
+                <td class="package-name">pareto-vscode-backend</td>
+                <td class="version">0.1.22</td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
+                <td><span class="status-error">✗ Build failed</span></td>
+                <td><span class="status-warning">Dirty</span></td>
+                <td><span class="status-ok">✓ 1</span></td>
+                <td><span class="status-skip">Skipped</span></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
