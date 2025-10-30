@@ -2,8 +2,8 @@
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
-import { is_node_project } from '../../lib/build_test_utils';
-import { $$ } from '../../lib/build_and_test';
+import { is_node_project } from '../../old_lib/build_test_utils';
+import { $$ } from '../../old_lib/build_and_test';
 
 // Get target directory from command line argument (skip --silent flag)
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as fs from 'fs';
 import * as path from 'path';
-import { build_project, is_node_project } from '../lib/build_test_utils';
+import { build_project, is_node_project } from '../old_lib/build_test_utils';
 
 function main(): void {
     // Parse command line arguments

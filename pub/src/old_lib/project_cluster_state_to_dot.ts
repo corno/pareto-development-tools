@@ -17,6 +17,16 @@ export function project_cluster_state_to_dot(
 ): string {
     const { include_legend = true, cluster_path = ".", show_warnings = false } = options;
 
+    // Handle 'not found' case
+    if (cluster_state[0] === 'not found') {
+        return `digraph dependencies {
+    label="Cluster not found";
+}`;
+    }
+
+    // Extract the cluster data from the tagged union
+    const cluster_data = cluster_state[1];
+
     // Helper functions (replicated from dependency graph)
     function escape_dot_string(str: string): string {
         return str.replace(/"/g, '\\"');
@@ -41,7 +51,7 @@ export function project_cluster_state_to_dot(
     const external_dependencies = new Set<string>();
 
     // Process each project in cluster state
-    for (const [project_name, project_entry] of Object.entries(cluster_state.projects)) {
+    for (const [project_name, project_entry] of Object.entries(cluster_data.projects)) {
         // Only process actual projects, skip non-projects
         if (project_entry[0] === 'not a project') {
             continue;
@@ -53,7 +63,8 @@ export function project_cluster_state_to_dot(
         // Extract dependencies with their version strings
         const dependencies: { [name: string]: string } = {};
         for (const [dep_name, dep_info] of Object.entries(project_state.dependencies)) {
-            dependencies[dep_name] = dep_info.version;
+            const dependency_info = dep_info as d_in.Package_State['dependencies'][string];
+            dependencies[dep_name] = dependency_info.version;
             
             // Track external dependencies (not in cluster)
             if (!all_project_names.has(dep_name)) {
@@ -82,9 +93,10 @@ export function project_cluster_state_to_dot(
             issues.push('Dirty Tree');
         }
         // Only check sibling dependencies for "Outdated Deps" - ignore external dependencies
-        if (Object.values(project_state.dependencies).some(dep => 
-            dep.target[0] === 'found' && !dep.target[1]['dependency up to date']
-        )) {
+        if (Object.values(project_state.dependencies).some(dep => {
+            const dependency_info = dep as d_in.Package_State['dependencies'][string];
+            return dependency_info.target[0] === 'found' && !dependency_info.target[1]['dependency up to date'];
+        })) {
             issues.push('Outdated Deps');
         }
 

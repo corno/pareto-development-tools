@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import * as fs from 'fs';
 import * as path from 'path';
-import { clean_project } from '../../lib/clean_project';
-import { is_node_project } from '../../lib/is_node_project';
+import { clean_project } from '../../old_lib/clean_project';
+import { is_node_project } from '../../old_lib/is_node_project';
 
 function main(): void {
     // Parse command line arguments

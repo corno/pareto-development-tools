@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 import * as fs from 'fs';
 import * as path from 'path';
-import { validate_repository_structure } from '../../lib/structure_validation_utils';
-import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
+import { validate_repository_structure } from '../../old_lib/structure_validation_utils';
+import { analyze_dependencies, get_build_order } from '../../old_lib/dependency_graph_utils';
 
 // Get target directory from command line argument
 

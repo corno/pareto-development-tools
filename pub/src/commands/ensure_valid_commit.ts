@@ -3,7 +3,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as readline from 'readline';
-import * as ensureValidCommitModule from '../lib/ensure_valid_commit';
+import * as ensureValidCommitModule from '../old_lib/ensure_valid_commit';
 
 async function main(): Promise<void> {
     /**

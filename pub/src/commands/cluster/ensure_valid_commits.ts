@@ -2,8 +2,8 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
-import * as ensureValidCommitModule from '../../lib/ensure_valid_commit';
-import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
+import * as ensureValidCommitModule from '../../old_lib/ensure_valid_commit';
+import { analyze_dependencies, get_build_order } from '../../old_lib/dependency_graph_utils';
 
 async function main(): Promise<void> {
     /**

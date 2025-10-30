@@ -3,8 +3,8 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as readline from 'readline';
 import { execSync } from 'child_process';
-import { is_node_project } from '../../lib/build_test_utils';
-import { extract_local, extract_published } from '../../lib/package_compare_utils';
+import { is_node_project } from '../../old_lib/build_test_utils';
+import { extract_local, extract_published } from '../../old_lib/package_compare_utils';
 
 // Get target directory and flags from command line arguments
 const args = process.argv.slice(2);

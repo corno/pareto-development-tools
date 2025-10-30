@@ -2,8 +2,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
-import { is_node_project } from '../lib/build_test_utils';
-import { extract_local, extract_published, launch_beyond_compare_if_directories_are_not_equal } from '../lib/package_compare_utils';
+import { is_node_project } from '../old_lib/build_test_utils';
+import { extract_local, extract_published, launch_beyond_compare_if_directories_are_not_equal } from '../old_lib/package_compare_utils';
 
 // Get package directory and flags from command line arguments
 const args = process.argv.slice(2);

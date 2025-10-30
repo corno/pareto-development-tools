@@ -1,5 +1,6 @@
 import { Package_Cluster_State, Package_State } from "../interface/package_state";
-import { determine_project_state } from "./determine_project_state";
+import { determine_project_state } from "../old_lib/determine_project_state";
+
 const fs = require('fs');
 const path = require('path');
 
@@ -53,7 +54,7 @@ function calculate_topological_order(projects: { [node_name: string]: ['not a pr
 }
 
 /**
- * Determine the state of all projects in a cluster directory
+ * Analyze a cluster of projects and return their states
  * 
  * This function scans the given cluster path for subdirectories and
  * determines the project state for each one that appears to be a valid project.
@@ -64,19 +65,16 @@ function calculate_topological_order(projects: { [node_name: string]: ['not a pr
  * - It contains a '.git' directory
  * 
  * @param cluster_path - Path to the directory containing multiple projects
- * @returns Project_Cluster_State - Object mapping project names to their states
+ * @returns Package_Cluster_State - Tagged union with cluster data or not found
  */
-export function determine_project_cluster_state(cluster_path: string): Package_Cluster_State {
+export const $$: (cluster_path: string) => Package_Cluster_State = (cluster_path) => {
     const projects: { [node_name: string]: ['not a project', null] | ['project', Package_State] } = {};
     
     try {
         // Check if cluster path exists
         if (!fs.existsSync(cluster_path)) {
             console.warn(`Cluster path does not exist: ${cluster_path}`);
-            return {
-                projects,
-                'topological order': []
-            };
+            return ['not found', null];
         }
         
         // Read all entries in the cluster directory
@@ -122,17 +120,17 @@ export function determine_project_cluster_state(cluster_path: string): Package_C
         // Calculate topological order
         const topological_order = calculate_topological_order(projects);
         
-        return {
+        return ['cluster', {
             projects,
             'topological order': topological_order
-        };
+        }];
         
     } catch (err: any) {
         console.error(`Error reading cluster directory ${cluster_path}:`, err.message);
-        return {
+        return ['cluster', {
             projects,
             'topological order': []
-        };
+        }];
     }
 }
 
@@ -166,10 +164,10 @@ function is_valid_project(project_path: string): boolean {
 /**
  * Get a summary of the cluster state
  * 
- * @param cluster_state - The cluster state object
+ * @param cluster_state - The cluster state object (unwrapped)
  * @returns Summary object with counts and lists
  */
-export function summarize_cluster_state(cluster_state: Package_Cluster_State) {
+export function summarize_cluster_state(cluster_state: Package_Cluster_State[1]) {
     const summary = {
         total_nodes: 0,
         total_projects: 0,

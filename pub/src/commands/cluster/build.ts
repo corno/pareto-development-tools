@@ -2,8 +2,8 @@
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
-import { build_project, is_node_project } from '../../lib/build_test_utils';
-import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
+import { build_project, is_node_project } from '../../old_lib/build_test_utils';
+import { analyze_dependencies, get_build_order } from '../../old_lib/dependency_graph_utils';
 
 // Get target directory from command line argument (skip --verbose flag)
 

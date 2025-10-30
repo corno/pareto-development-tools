@@ -4,9 +4,9 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as readline from 'readline';
 import { execSync, spawn } from 'child_process';
-import { determine_project_cluster_state } from '../../lib/determine_project_cluster_state';
-import { project_cluster_state_to_dot } from '../../lib/project_cluster_state_to_dot';
-import { differs_from_published } from '../../lib/differs_from_published';
+import { $$ as analyse_cluster } from '../../queries/analyse_cluster';
+import { project_cluster_state_to_dot } from '../../old_lib/project_cluster_state_to_dot';
+import { differs_from_published } from '../../old_lib/differs_from_published';
 import type { Package_State } from '../../interface/package_state';
 
 // Get target directory from command line argument
@@ -147,10 +147,18 @@ async function main(): Promise<void> {
         // Now do the heavy analysis (build/test plus dependency analysis)
         console.log(`\n🔍 Analyzing package states (build, test, and dependencies)...`);
         console.log('This may take a while as each package will be built and tested.');
-        cluster_state = determine_project_cluster_state(base_dir);
+        const cluster_result = analyse_cluster(base_dir);
         
-        package_names = Object.keys(cluster_state.projects).filter(name => 
-            cluster_state.projects[name][0] === 'project'
+        if (cluster_result[0] === 'not found') {
+            console.error('Error: Cluster not found');
+            process.exit(1);
+        }
+        
+        cluster_state = cluster_result;
+        const cluster_data = cluster_result[1];
+        
+        package_names = Object.keys(cluster_data.projects).filter(name => 
+            cluster_data.projects[name][0] === 'project'
         );
         if (package_names.length === 0) {
             console.error('Error: No valid packages found after analysis');
@@ -162,10 +170,7 @@ async function main(): Promise<void> {
         console.log(`\n⏭️  Skipping detailed analysis (user choice)`);
         // Create minimal cluster state for graph generation with basic dependency info
         package_names = quick_package_list.map(pkg => pkg.name);
-        cluster_state = {
-            projects: {},
-            'topological order': package_names
-        };
+        const projects_data: { [name: string]: ['not a project', null] | ['project', Package_State] } = {};
         
         // Get basic dependency info from package.json files (fast)
         for (const pkg of quick_package_list) {
@@ -257,7 +262,7 @@ async function main(): Promise<void> {
                 }
             })();
             
-            cluster_state.projects[pkg.name] = ['project', {
+            projects_data[pkg.name] = ['project', {
                 'package name in sync with directory name': pkg.name === pkg.package_name,
                 'version': pkg.version,
                 'git': git_status,
@@ -267,6 +272,12 @@ async function main(): Promise<void> {
                 'published comparison': ['skipped', null]
             }];
         }
+        
+        // Wrap in tagged union
+        cluster_state = ['cluster', {
+            projects: projects_data,
+            'topological order': package_names
+        }];
     }
     const publish_sync_status = new Map<string, boolean>();
     

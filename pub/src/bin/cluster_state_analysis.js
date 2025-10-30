@@ -9,7 +9,7 @@
  */
 
 const path = require('path');
-const { determine_project_cluster_state, summarize_cluster_state } = require('../lib/determine_project_cluster_state');
+const { determine_project_cluster_state, summarize_cluster_state } = require('../queries/analyse_cluster');
 
 function main() {
     const args = process.argv.slice(2);

@@ -2,9 +2,9 @@
 import { execSync } from 'child_process';
 import * as fs from 'fs';
 import * as path from 'path';
-import { clean_project } from '../../lib/clean_utils';
-import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
-import * as determineCommitReadinessModule from '../../lib/determine_commit_readiness';
+import { clean_project } from '../../old_lib/clean_utils';
+import { analyze_dependencies, get_build_order } from '../../old_lib/dependency_graph_utils';
+import * as determineCommitReadinessModule from '../../old_lib/determine_commit_readiness';
 
 /**
  * Prompt user for input with a yes/no question

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as fs from 'fs';
 import * as path from 'path';
-import { validate_repository_structure } from '../lib/structure_validation_utils';
+import { validate_repository_structure } from '../old_lib/structure_validation_utils';
 
 // Get target repository from command line argument
 
