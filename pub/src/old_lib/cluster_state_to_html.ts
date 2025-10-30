@@ -14,5 +14,5 @@ export function cluster_state_to_html(
     }
 ): string {
     const doc = cluster_state_to_document(cluster_state, options)
-    return render_document_to_html(doc, { 'cluster path': options['cluster path'], 'time stamp': options['time stamp'] })
+    return render_document_to_html(doc)
 }

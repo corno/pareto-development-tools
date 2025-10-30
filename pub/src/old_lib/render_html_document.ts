@@ -82,45 +82,17 @@ function renderTable(table: { classes: string[]; children: Table_Section[] }): s
     return `<table${classAttr}>\n${headerHtml}\n${bodyHtml}\n${footerHtml}\n</table>`
 }
 
-export function render_document_to_html(doc: Document, options: { 'cluster path': string, 'time stamp': string }): string {
-    const cluster_path = options['cluster path']
-    const time_stamp = options['time stamp']
-
-    // Special case: empty document means 'not found'
-    if (doc.root.children.length === 0) {
-        return `<!DOCTYPE html>
-<html>
-<head>
-    <title>Cluster not found</title>
-</head>
-<body>
-    <h1>Cluster not found</h1>
-</body>
-</html>`
-    }
-
-    const head = `<!DOCTYPE html>
+export function render_document_to_html(doc: Document): string {
+    const html = `<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Cluster Status Report - ${escapeHtml(cluster_path)}</title>
 <style>
 ${doc.css}
 </style>
 </head>
-<body>`
-
-    const metadata = `<h1>Cluster Status Report</h1>
-<div class="metadata">
-<div>Cluster: ${escapeHtml(cluster_path)}</div>
-<div>Generated: ${escapeHtml(time_stamp)}</div>
-</div>`
-
-    const body = renderDiv(doc.root)
-
-    const html = `${head}
-${metadata}
-${body}
+<body>
+${renderDiv(doc.root)}
 </body>
 </html>`
     

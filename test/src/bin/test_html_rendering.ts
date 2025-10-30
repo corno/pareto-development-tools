@@ -77,10 +77,7 @@ for (const json_file of json_files) {
     const document: Document = JSON.parse(fs.readFileSync(json_path, 'utf8'));
     
     // Generate HTML content
-    const html_content = render_document_to_html(document, {
-        'cluster path': base_name,
-        'time stamp': 'FIXED_TIMESTAMP_FOR_TESTING'
-    });
+    const html_content = render_document_to_html(document)
     
     // If overwrite expected, write to expected directory
     if (overwrite_expected) {
