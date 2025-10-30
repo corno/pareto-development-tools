@@ -63,8 +63,7 @@ export function project_cluster_state_to_dot(
         // Extract dependencies with their version strings
         const dependencies: { [name: string]: string } = {};
         for (const [dep_name, dep_info] of Object.entries(project_state.dependencies)) {
-            const dependency_info = dep_info as d_in.Package_State['dependencies'][string];
-            dependencies[dep_name] = dependency_info.version;
+            dependencies[dep_name] = dep_info.version;
             
             // Track external dependencies (not in cluster)
             if (!all_project_names.has(dep_name)) {
@@ -93,10 +92,9 @@ export function project_cluster_state_to_dot(
             issues.push('Dirty Tree');
         }
         // Only check sibling dependencies for "Outdated Deps" - ignore external dependencies
-        if (Object.values(project_state.dependencies).some(dep => {
-            const dependency_info = dep as d_in.Package_State['dependencies'][string];
-            return dependency_info.target[0] === 'found' && !dependency_info.target[1]['dependency up to date'];
-        })) {
+        if (Object.values(project_state.dependencies).some(dep => 
+            dep.target[0] === 'found' && !dep.target[1]['dependency up to date']
+        )) {
             issues.push('Outdated Deps');
         }
 
