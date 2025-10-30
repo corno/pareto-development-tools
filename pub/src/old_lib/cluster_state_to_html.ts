@@ -165,10 +165,12 @@ export function cluster_state_to_html(
             background-color: #333;
             color: white;
             border-radius: 4px;
-            white-space: nowrap;
+            white-space: pre-wrap;
             z-index: 1000;
             font-size: 0.85em;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            max-width: 400px;
+            text-align: left;
         }
     </style>
 </head>
@@ -187,6 +189,7 @@ export function cluster_state_to_html(
                 <th>Name Sync</th>
                 <th>Git Status</th>
                 <th>Structure</th>
+                <th>Int⟷Imp</th>
                 <th>Dependencies</th>
                 <th>Tests</th>
                 <th>Same as Published</th>
@@ -227,6 +230,27 @@ export function cluster_state_to_html(
         } else {
             const errors = state.structure[1].errors;
             structureStatus = `<span class="status-error">✗ ${errors.length} error(s)</span>`;
+            worstSeverity = 'error';
+        }
+        
+        // Interface implementation match status
+        let interfaceImplStatus: string;
+        if (state['interface implementation match'][0] === 'matched') {
+            interfaceImplStatus = '<span class="status-ok">✓</span>';
+        } else if (state['interface implementation match'][0] === 'root interface direcory missing') {
+            interfaceImplStatus = '<span class="status-warning" title="Interface algorithms directory not found">⚠ No Int</span>';
+            if (worstSeverity === 'ok') worstSeverity = 'warning';
+        } else if (state['interface implementation match'][0] === 'root implementation direcory missing') {
+            interfaceImplStatus = '<span class="status-warning" title="Implementation algorithms directory not found">⚠ No Impl</span>';
+            if (worstSeverity === 'ok') worstSeverity = 'warning';
+        } else {
+            const differences = state['interface implementation match'][1].differences;
+            const diffDetails = differences.map(diff => {
+                const problem = diff.problem[0];
+                const icon = problem === 'missing' ? '−' : '+';
+                return `${icon} ${escapeHtml(diff.path)}`;
+            }).join('\n');
+            interfaceImplStatus = `<span class="status-error" title="${escapeHtml(diffDetails)}">✗ ${differences.length} issue(s)</span>`;
             worstSeverity = 'error';
         }
         
@@ -330,6 +354,7 @@ export function cluster_state_to_html(
                 <td>${nameSync}</td>
                 <td>${gitStatus}</td>
                 <td>${structureStatus}</td>
+                <td>${interfaceImplStatus}</td>
                 <td>${depsStatus}</td>
                 <td>${testStatus}</td>
                 <td>${publishedStatus}</td>

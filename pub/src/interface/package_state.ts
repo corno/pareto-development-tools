@@ -13,6 +13,8 @@ export type Package_State = {
         | ['invalid', { errors: string[] }]
     )
     'interface implementation match': (
+        | ['root interface direcory missing', null]
+        | ['root implementation direcory missing', null]
         | ['matched', null]
         | ['mismatched', {
             'differences': {

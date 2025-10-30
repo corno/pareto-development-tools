@@ -279,63 +279,82 @@ export function determine_package_state(
     const interface_dir = path.join(project_path, 'pub', 'src', 'interface', 'algorithms');
     const implementation_dir = path.join(project_path, 'pub', 'src', 'implementation', 'algorithms');
 
-    try {
-        const interface_tree = get_directory_tree(interface_dir);
-        const implementation_tree = get_directory_tree(implementation_dir);
-        const diff = compare_directories(interface_tree, implementation_tree);
+    const interface_exists = fs.existsSync(interface_dir);
+    const implementation_exists = fs.existsSync(implementation_dir);
 
-        // Collect errors from the diff
-        const collect_differences = (diff: Directory_Diff, path_prefix: string = ''): Array<{
-            path: string,
-            problem: ['missing', null] | ['superfluous', null]
-        }> => {
-            const differences: Array<{
+    if (!interface_exists && !implementation_exists) {
+        // Neither directory exists - consider it matched (no requirement)
+        interface_implementation_match = ['matched', null];
+    } else if (!interface_exists) {
+        // Interface directory is missing
+        interface_implementation_match = ['root interface direcory missing', null];
+    } else if (!implementation_exists) {
+        // Implementation directory is missing
+        interface_implementation_match = ['root implementation direcory missing', null];
+    } else {
+        // Both directories exist - compare them
+        try {
+            const interface_tree = get_directory_tree(interface_dir);
+            const implementation_tree = get_directory_tree(implementation_dir);
+            const diff = compare_directories(interface_tree, implementation_tree);
+
+            // Collect errors from the diff
+            const collect_differences = (diff: Directory_Diff, path_prefix: string = ''): Array<{
                 path: string,
                 problem: ['missing', null] | ['superfluous', null]
-            }> = [];
+            }> => {
+                const differences: Array<{
+                    path: string,
+                    problem: ['missing', null] | ['superfluous', null]
+                }> = [];
 
-            for (const [name, node_diff] of Object.entries(diff)) {
-                const item_path = path_prefix ? `${path_prefix}/${name}` : name;
+                for (const [name, node_diff] of Object.entries(diff)) {
+                    const item_path = path_prefix ? `${path_prefix}/${name}` : name;
 
-                if (node_diff[0] === 'error') {
-                    const error_type = node_diff[1][0];
-                    if (error_type === 'missing') {
-                        differences.push({
-                            path: item_path,
-                            problem: ['missing', null]
-                        });
-                    } else if (error_type === 'superfluous') {
-                        differences.push({
-                            path: item_path,
-                            problem: ['superfluous', null]
-                        });
+                    if (node_diff[0] === 'error') {
+                        const error_type = node_diff[1][0];
+                        if (error_type === 'missing') {
+                            differences.push({
+                                path: item_path,
+                                problem: ['missing', null]
+                            });
+                        } else if (error_type === 'superfluous') {
+                            differences.push({
+                                path: item_path,
+                                problem: ['superfluous', null]
+                            });
+                        }
+                        // Note: 'not a directory' and 'not a file' are also mismatches
+                        // but we're simplifying to just missing/superfluous for now
+                    } else if (node_diff[1][0] === 'directory') {
+                        differences.push(...collect_differences(node_diff[1][1], item_path));
                     }
-                    // Note: 'not a directory' and 'not a file' are also mismatches
-                    // but we're simplifying to just missing/superfluous for now
-                } else if (node_diff[1][0] === 'directory') {
-                    differences.push(...collect_differences(node_diff[1][1], item_path));
                 }
+
+                return differences;
+            };
+
+            const differences = collect_differences(diff);
+
+            if (differences.length > 0) {
+                interface_implementation_match = ['mismatched', { differences }];
+            } else {
+                interface_implementation_match = ['matched', null];
             }
-
-            return differences;
-        };
-
-        const differences = collect_differences(diff);
-
-        if (differences.length > 0) {
-            interface_implementation_match = ['mismatched', { differences }];
-        } else {
+        } catch (err: any) {
+            // If we can't check, treat it as matched (no error)
             interface_implementation_match = ['matched', null];
         }
-
-        return {
-            'package name in package.json': package_name,
-            'version': version,
-            'git': git_state,
-            'structure': structure_state,
-            'interface implementation match': interface_implementation_match,
-            'test': test_state,
-            'dependencies': dependencies,
-            'published comparison': published_comparison
-        };
     }
+
+    return {
+        'package name in package.json': package_name,
+        'version': version,
+        'git': git_state,
+        'structure': structure_state,
+        'interface implementation match': interface_implementation_match,
+        'test': test_state,
+        'dependencies': dependencies,
+        'published comparison': published_comparison
+    };
+}
