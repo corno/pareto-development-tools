@@ -25,6 +25,7 @@ export type Package_State = {
         [name: string]: {
             'version': string
             'target': (
+                /** the target is found if there is a sibling directory with this name, this is not about the npm registry */
                 | ['not found', null]
                 | ['found', {
                     'dependency up to date': boolean

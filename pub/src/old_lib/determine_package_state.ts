@@ -112,36 +112,33 @@ export function determine_package_state(
             for (const [dep_name, dep_version] of Object.entries(prod_dependencies)) {
                 const version_string = dep_version as string;
 
-                // Try to determine if this dependency is available and up to date
+                // Check if this dependency exists as a sibling directory in the cluster
                 let target_status: Package_State['dependencies'][string]['target'];
 
-                try {
-                    // Try to check if package exists in npm registry
-                    const npm_info = execSync(`npm view ${dep_name} version`, {
-                        cwd: path.join(project_path, 'pub'),
-                        encoding: 'utf8',
-                        stdio: 'pipe'
-                    }).trim();
+                const sibling_dep_path = path.join($p['path to package'], dep_name);
+                
+                if (fs.existsSync(sibling_dep_path) && fs.statSync(sibling_dep_path).isDirectory()) {
+                    // Dependency exists as a sibling directory
+                    // Check if it has a package.json to verify version
+                    const sibling_package_json = path.join(sibling_dep_path, 'pub', 'package.json');
+                    let is_up_to_date = false;
 
-                    if (npm_info) {
-                        // Check if installed version matches latest
-                        const node_modules_path = path.join(project_path, 'pub', 'node_modules', dep_name, 'package.json');
-                        let is_up_to_date = false;
-
-                        if (fs.existsSync(node_modules_path)) {
-                            const installed_package = JSON.parse(fs.readFileSync(node_modules_path, 'utf8'));
-                            // For now, just check if it's installed - more sophisticated version checking could be added
-                            is_up_to_date = !!installed_package.version;
+                    if (fs.existsSync(sibling_package_json)) {
+                        try {
+                            const sibling_package = JSON.parse(fs.readFileSync(sibling_package_json, 'utf8'));
+                            const sibling_version = sibling_package.version;
+                            // Simple version check - could be made more sophisticated
+                            is_up_to_date = version_string.includes(sibling_version);
+                        } catch {
+                            // Error reading sibling package.json
+                            is_up_to_date = false;
                         }
-
-                        target_status = ['found', {
-                            'dependency up to date': is_up_to_date
-                        }];
-                    } else {
-                        target_status = ['not found', null];
                     }
-                } catch {
-                    // If we can't check npm, assume not found
+
+                    target_status = ['found', {
+                        'dependency up to date': is_up_to_date
+                    }];
+                } else {
                     target_status = ['not found', null];
                 }
 
