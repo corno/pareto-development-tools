@@ -43,7 +43,22 @@
         }
         .package-name {
             font-weight: bold;
-            color: #2196F3;
+        }
+        .package-name-ok {
+            color: green;
+        }
+        .package-name-warning {
+            color: orange;
+        }
+        .package-name-error {
+            color: red;
+        }
+        .package-name a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .package-name a:hover {
+            text-decoration: underline;
         }
         .status-ok {
             color: green;
@@ -111,7 +126,7 @@
         </thead>
         <tbody>
             <tr>
-                <td class="package-name">exupery-resources</td>
+                <td class="package-name package-name-ok"><a href="vscode://filepareto-canon/exupery-resources">exupery-resources</a></td>
                 <td class="version">0.1.20</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -121,7 +136,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">exupery-standard-library</td>
+                <td class="package-name package-name-ok"><a href="vscode://filepareto-canon/exupery-standard-library">exupery-standard-library</a></td>
                 <td class="version">0.1.17</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -131,7 +146,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">pareto-standard-operations</td>
+                <td class="package-name package-name-ok"><a href="vscode://filepareto-canon/pareto-standard-operations">pareto-standard-operations</a></td>
                 <td class="version">0.1.17</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -141,7 +156,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">pareto-fountain-pen</td>
+                <td class="package-name package-name-ok"><a href="vscode://filepareto-canon/pareto-fountain-pen">pareto-fountain-pen</a></td>
                 <td class="version">0.1.41</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -151,7 +166,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">pareto-json</td>
+                <td class="package-name package-name-ok"><a href="vscode://filepareto-canon/pareto-json">pareto-json</a></td>
                 <td class="version">0.1.15</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -161,7 +176,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">astn</td>
+                <td class="package-name package-name-ok"><a href="vscode://filepareto-canon/astn">astn</a></td>
                 <td class="version">0.111.29</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -171,7 +186,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">astn-to-git</td>
+                <td class="package-name package-name-ok"><a href="vscode://filepareto-canon/astn-to-git">astn-to-git</a></td>
                 <td class="version">0.0.0</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -181,7 +196,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">astn-to-xml</td>
+                <td class="package-name package-name-error"><a href="vscode://filepareto-canon/astn-to-xml">astn-to-xml</a></td>
                 <td class="version">0.0.0</td>
                 <td><span class="status-error" title="Package name in package.json: @different/astn-to-xml">✗ Mismatch</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -191,7 +206,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">exupery</td>
+                <td class="package-name package-name-error"><a href="vscode://filepareto-canon/exupery">exupery</a></td>
                 <td class="version">0.1.30</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -201,7 +216,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">pareto</td>
+                <td class="package-name package-name-error"><a href="vscode://filepareto-canon/pareto">pareto</a></td>
                 <td class="version">0.76.68</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -211,7 +226,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">pareto-boekhouding</td>
+                <td class="package-name package-name-warning"><a href="vscode://filepareto-canon/pareto-boekhouding">pareto-boekhouding</a></td>
                 <td class="version">0.1.6</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -221,7 +236,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">pareto-lionweb</td>
+                <td class="package-name package-name-error"><a href="vscode://filepareto-canon/pareto-lionweb">pareto-lionweb</a></td>
                 <td class="version">0.0.4</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -231,7 +246,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">pareto-targets</td>
+                <td class="package-name package-name-error"><a href="vscode://filepareto-canon/pareto-targets">pareto-targets</a></td>
                 <td class="version">0.0.3</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
@@ -241,7 +256,7 @@
                 <td><span class="status-skip">Not tested</span></td>
             </tr>
             <tr>
-                <td class="package-name">pareto-vscode-backend</td>
+                <td class="package-name package-name-error"><a href="vscode://filepareto-canon/pareto-vscode-backend">pareto-vscode-backend</a></td>
                 <td class="version">0.1.22</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>

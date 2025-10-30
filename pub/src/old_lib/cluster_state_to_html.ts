@@ -111,7 +111,22 @@ export function cluster_state_to_html(
         }
         .package-name {
             font-weight: bold;
-            color: #2196F3;
+        }
+        .package-name-ok {
+            color: green;
+        }
+        .package-name-warning {
+            color: orange;
+        }
+        .package-name-error {
+            color: red;
+        }
+        .package-name a {
+            color: inherit;
+            text-decoration: none;
+        }
+        .package-name a:hover {
+            text-decoration: underline;
         }
         .status-ok {
             color: green;
@@ -187,9 +202,15 @@ export function cluster_state_to_html(
         // Version
         const version = state.version !== null ? state.version : 'n/a';
         
+        // Determine worst issue severity for package name coloring
+        let worstSeverity: 'ok' | 'warning' | 'error' = 'ok';
+        
         // Name sync status
         const packageNameInJson = state['package name in package.json'];
-        const nameSync = packageNameInJson === project.name
+        const nameSyncOk = packageNameInJson === project.name;
+        if (!nameSyncOk) worstSeverity = 'error';
+        
+        const nameSync = nameSyncOk
             ? '<span class="status-ok" title="Package name matches directory name">✓</span>'
             : `<span class="status-error" title="Package name in package.json: ${escapeHtml(packageNameInJson)}">✗ Mismatch</span>`;
         
@@ -199,12 +220,14 @@ export function cluster_state_to_html(
             const warnings = state.structure[1].warnings;
             if (warnings.length > 0) {
                 structureStatus = `<span class="status-warning">⚠ ${warnings.length} warning(s)</span>`;
+                if (worstSeverity === 'ok') worstSeverity = 'warning';
             } else {
                 structureStatus = '<span class="status-ok">✓</span>';
             }
         } else {
             const errors = state.structure[1].errors;
             structureStatus = `<span class="status-error">✗ ${errors.length} error(s)</span>`;
+            worstSeverity = 'error';
         }
         
         // Test status
@@ -216,17 +239,26 @@ export function cluster_state_to_html(
         } else {
             const failType = state.test[1][0];
             testStatus = `<span class="status-error">✗ ${failType === 'build' ? 'Build' : 'Test'} failed</span>`;
+            worstSeverity = 'error';
         }
         
         // Git status - show individual issues in order: working tree clean, no staged changes, all commits pushed
         const gitStatuses: string[] = [];
-        gitStatuses.push(state.git['dirty working tree'] 
+        const hasDirtyTree = state.git['dirty working tree'];
+        const hasStagedFiles = state.git['staged files'];
+        const hasUnpushedCommits = state.git['unpushed commits'];
+        
+        if (hasDirtyTree || hasStagedFiles || hasUnpushedCommits) {
+            if (worstSeverity === 'ok') worstSeverity = 'warning';
+        }
+        
+        gitStatuses.push(hasDirtyTree
             ? '<span class="status-warning">Dirty</span>' 
             : '<span class="status-ok" title="Working tree clean">✓</span>');
-        gitStatuses.push(state.git['staged files'] 
+        gitStatuses.push(hasStagedFiles
             ? '<span class="status-warning">Staged</span>' 
             : '<span class="status-ok" title="No staged files">✓</span>');
-        gitStatuses.push(state.git['unpushed commits'] 
+        gitStatuses.push(hasUnpushedCommits
             ? '<span class="status-warning">Unpushed</span>' 
             : '<span class="status-ok" title="All commits pushed">✓</span>');
         
@@ -241,6 +273,10 @@ export function cluster_state_to_html(
         const upToDateDeps = deps.filter(([_, dep]) => 
             dep.target[0] === 'found' && dep.target[1]['dependency up to date']
         );
+        
+        if (outdatedDeps.length > 0) {
+            if (worstSeverity === 'ok') worstSeverity = 'warning';
+        }
         
         let depsStatus: string;
         if (deps.length === 0) {
@@ -278,11 +314,18 @@ export function cluster_state_to_html(
                 publishedStatus = '<span class="status-ok">✓ In sync</span>';
             } else {
                 publishedStatus = '<span class="status-warning">Different</span>';
+                if (worstSeverity === 'ok') worstSeverity = 'warning';
             }
         }
         
+        // Create package name with VS Code link and color based on worst severity
+        const packagePath = `${cluster_path}/${project.name}`;
+        const vscodeUrl = `vscode://file${packagePath}`;
+        const packageNameClass = `package-name package-name-${worstSeverity}`;
+        const packageNameHtml = `<a href="${vscodeUrl}">${escapeHtml(project.name)}</a>`;
+        
         html += `            <tr>
-                <td class="package-name">${escapeHtml(project.name)}</td>
+                <td class="${packageNameClass}">${packageNameHtml}</td>
                 <td class="version">${escapeHtml(version)}</td>
                 <td>${nameSync}</td>
                 <td>${gitStatus}</td>
