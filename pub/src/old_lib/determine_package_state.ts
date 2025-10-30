@@ -6,6 +6,9 @@ import { execSync } from 'child_process';
 
 import * as validateStructureModule from "./validate_structure"
 import * as buildAndTestModule from "./build_and_test"
+import { get_directory_tree } from "../queries/get_directory_tree"
+import { compare_directories } from "../transformations/compare_directories"
+import type { Directory_Diff } from "../interface/filesystem_compare"
 
 
 const validate_structure = validateStructureModule.$$;
@@ -113,7 +116,7 @@ export function determine_package_state(
                 let target_status: Package_State['dependencies'][string]['target'];
 
                 const sibling_dep_path = path.join($p['path to package'], dep_name);
-                
+
                 if (fs.existsSync(sibling_dep_path) && fs.statSync(sibling_dep_path).isDirectory()) {
                     // Dependency exists as a sibling directory
                     // Check if it has a package.json to verify version
@@ -259,7 +262,7 @@ export function determine_package_state(
                         const output = npmError.stdout.toString();
                         if (output.includes('E404')) {
                             published_comparison = ['could not compare', ['not published', null]];
-                           
+
                         }
                     }
                     // Can't check npm - assume not published
@@ -271,13 +274,68 @@ export function determine_package_state(
         published_comparison = ['skipped', null];
     }
 
-    return {
-        'package name in package.json': package_name,
-        'version': version,
-        'git': git_state,
-        'structure': structure_state,
-        'test': test_state,
-        'dependencies': dependencies,
-        'published comparison': published_comparison
-    };
-}
+    // 6. Check interface vs implementation (if both directories exist)
+    let interface_implementation_match: Package_State['interface implementation match'];
+    const interface_dir = path.join(project_path, 'pub', 'src', 'interface', 'algorithms');
+    const implementation_dir = path.join(project_path, 'pub', 'src', 'implementation', 'algorithms');
+
+    try {
+        const interface_tree = get_directory_tree(interface_dir);
+        const implementation_tree = get_directory_tree(implementation_dir);
+        const diff = compare_directories(interface_tree, implementation_tree);
+
+        // Collect errors from the diff
+        const collect_differences = (diff: Directory_Diff, path_prefix: string = ''): Array<{
+            path: string,
+            problem: ['missing', null] | ['superfluous', null]
+        }> => {
+            const differences: Array<{
+                path: string,
+                problem: ['missing', null] | ['superfluous', null]
+            }> = [];
+
+            for (const [name, node_diff] of Object.entries(diff)) {
+                const item_path = path_prefix ? `${path_prefix}/${name}` : name;
+
+                if (node_diff[0] === 'error') {
+                    const error_type = node_diff[1][0];
+                    if (error_type === 'missing') {
+                        differences.push({
+                            path: item_path,
+                            problem: ['missing', null]
+                        });
+                    } else if (error_type === 'superfluous') {
+                        differences.push({
+                            path: item_path,
+                            problem: ['superfluous', null]
+                        });
+                    }
+                    // Note: 'not a directory' and 'not a file' are also mismatches
+                    // but we're simplifying to just missing/superfluous for now
+                } else if (node_diff[1][0] === 'directory') {
+                    differences.push(...collect_differences(node_diff[1][1], item_path));
+                }
+            }
+
+            return differences;
+        };
+
+        const differences = collect_differences(diff);
+
+        if (differences.length > 0) {
+            interface_implementation_match = ['mismatched', { differences }];
+        } else {
+            interface_implementation_match = ['matched', null];
+        }
+
+        return {
+            'package name in package.json': package_name,
+            'version': version,
+            'git': git_state,
+            'structure': structure_state,
+            'interface implementation match': interface_implementation_match,
+            'test': test_state,
+            'dependencies': dependencies,
+            'published comparison': published_comparison
+        };
+    }

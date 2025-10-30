@@ -12,6 +12,18 @@ export type Package_State = {
         }]
         | ['invalid', { errors: string[] }]
     )
+    'interface implementation match': (
+        | ['matched', null]
+        | ['mismatched', {
+            'differences': {
+                'path': string
+                'problem': (
+                    | ['missing', null]
+                    | ['superfluous', null]
+                )
+            }[]
+        }]
+    )
     'test': (
         | ['skipped', null]
         | ['success', null]

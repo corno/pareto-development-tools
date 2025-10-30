@@ -272,6 +272,7 @@ async function main(): Promise<void> {
                 'version': pkg.version,
                 'git': git_status,
                 'structure': ['valid', { 'warnings': [] }],
+                'interface implementation match': ['matched', null],
                 'test': ['skipped', null],
                 'dependencies': dependencies,
                 'published comparison': ['skipped', null]

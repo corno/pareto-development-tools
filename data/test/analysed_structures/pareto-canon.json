@@ -22,6 +22,10 @@
                             "warnings": []
                         }
                     ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
                     "test": [
                         "success",
                         null
@@ -113,6 +117,10 @@
                             "warnings": []
                         }
                     ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
                     "test": [
                         "success",
                         null
@@ -168,6 +176,10 @@
                             "warnings": []
                         }
                     ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
                     "test": [
                         "failure",
                         [
@@ -220,6 +232,10 @@
                         {
                             "warnings": []
                         }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
                     ],
                     "test": [
                         "failure",
@@ -306,6 +322,10 @@
                             "warnings": []
                         }
                     ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
                     "test": [
                         "success",
                         null
@@ -361,6 +381,10 @@
                             "warnings": []
                         }
                     ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
                     "test": [
                         "success",
                         null
@@ -397,6 +421,10 @@
                         {
                             "warnings": []
                         }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
                     ],
                     "test": [
                         "failure",
@@ -501,6 +529,10 @@
                             "warnings": []
                         }
                     ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
                     "test": [
                         "success",
                         null
@@ -573,6 +605,10 @@
                         {
                             "warnings": []
                         }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
                     ],
                     "test": [
                         "success",
@@ -656,6 +692,10 @@
                             "warnings": []
                         }
                     ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
                     "test": [
                         "success",
                         null
@@ -728,6 +768,10 @@
                         {
                             "warnings": []
                         }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
                     ],
                     "test": [
                         "failure",
@@ -814,6 +858,10 @@
                             "warnings": []
                         }
                     ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
                     "test": [
                         "success",
                         null
@@ -859,6 +907,10 @@
                         {
                             "warnings": []
                         }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
                     ],
                     "test": [
                         "failure",
@@ -935,6 +987,10 @@
                         {
                             "warnings": []
                         }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
                     ],
                     "test": [
                         "failure",
