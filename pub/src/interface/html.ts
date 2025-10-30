@@ -46,6 +46,19 @@ export namespace Div {
                 'text': string
                 'div': Div
             }]
+            | ['img', {
+                'classes': Classes
+                'src': string
+                'alt': string
+                'width'?: number
+                'height'?: number
+            }]
+            | ['svg', {
+                'classes': Classes
+                'content': string  // SVG markup as string
+                'width'?: number
+                'height'?: number
+            }]
         )
     }
 
@@ -67,10 +80,13 @@ export type Table_Row = {
         | ['th', null]
         | ['td', null]
     )
+    'height'?: number
     'cells': Table_Cell[]
 }
 
 export type Table_Cell = {
     'classes': Classes
+    'width'?: number
+    'height'?: number
     'div': Div
 }

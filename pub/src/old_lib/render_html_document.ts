@@ -32,6 +32,9 @@ function renderSpan(span: Span): string {
 
 function renderDiv(div: Div): string {
     const classAttr = div.classes.length > 0 ? ` class="${div.classes.join(' ')}"` : ''
+    const widthAttr = div.width ? ` style="width: ${div.width}px"` : ''
+    const heightAttr = div.height ? ` style="height: ${div.height}px"` : ''
+    const styleAttr = (div.width || div.height) ? ` style="${div.width ? `width: ${div.width}px;` : ''}${div.height ? ` height: ${div.height}px;` : ''}"` : ''
     
     const childrenHtml = div.children.map(child => {
         if (child.type[0] === 'div') {
@@ -42,12 +45,24 @@ function renderDiv(div: Div): string {
             const label = child.type[1]
             const labelClassAttr = label.classes.length > 0 ? ` class="${label.classes.join(' ')}"` : ''
             return `<div${labelClassAttr}><label>${escapeHtml(label.text)}</label>${renderDiv(label.div)}</div>`
+        } else if (child.type[0] === 'img') {
+            const img = child.type[1]
+            const imgClassAttr = img.classes.length > 0 ? ` class="${img.classes.join(' ')}"` : ''
+            const imgWidthAttr = img.width ? ` width="${img.width}"` : ''
+            const imgHeightAttr = img.height ? ` height="${img.height}"` : ''
+            return `<img${imgClassAttr} src="${escapeHtml(img.src)}" alt="${escapeHtml(img.alt)}"${imgWidthAttr}${imgHeightAttr}>`
+        } else if (child.type[0] === 'svg') {
+            const svg = child.type[1]
+            const svgClassAttr = svg.classes.length > 0 ? ` class="${svg.classes.join(' ')}"` : ''
+            const svgWidthAttr = svg.width ? ` width="${svg.width}"` : ''
+            const svgHeightAttr = svg.height ? ` height="${svg.height}"` : ''
+            return `<div${svgClassAttr}${svgWidthAttr}${svgHeightAttr}>${svg.content}</div>`
         } else { // 'table'
             return renderTable(child.type[1])
         }
     }).join('')
     
-    return `<div${classAttr}>${childrenHtml}</div>`
+    return `<div${classAttr}${styleAttr}>${childrenHtml}</div>`
 }
 
 function renderTable(table: { classes: string[]; children: Table_Section[] }): string {
@@ -58,20 +73,30 @@ function renderTable(table: { classes: string[]; children: Table_Section[] }): s
     const footer = table.children.filter(s => s.type[0] === 'footer')
 
     const renderRows = (rows: Table_Row[]) => rows.map(r => {
+        const rowHeightAttr = r.height ? ` style="height: ${r.height}px"` : ''
+        
         if (r.type[0] === 'th') {
             // Header row - render cells as <th> elements
             const cells = r.cells.map(c => {
                 const cellClassAttr = c.classes.length > 0 ? ` class="${c.classes.join(' ')}"` : ''
-                return `<th${cellClassAttr}>${renderDiv(c.div)}</th>`
+                const cellStyleParts: string[] = []
+                if (c.width) cellStyleParts.push(`width: ${c.width}px`)
+                if (c.height) cellStyleParts.push(`height: ${c.height}px`)
+                const cellStyleAttr = cellStyleParts.length > 0 ? ` style="${cellStyleParts.join('; ')}"` : ''
+                return `<th${cellClassAttr}${cellStyleAttr}>${renderDiv(c.div)}</th>`
             }).join('')
-            return `<tr>${cells}</tr>`
+            return `<tr${rowHeightAttr}>${cells}</tr>`
         } else {
             // Data row - render cells as <td> elements
             const cells = r.cells.map(c => {
                 const cellClassAttr = c.classes.length > 0 ? ` class="${c.classes.join(' ')}"` : ''
-                return `<td${cellClassAttr}>${renderDiv(c.div)}</td>`
+                const cellStyleParts: string[] = []
+                if (c.width) cellStyleParts.push(`width: ${c.width}px`)
+                if (c.height) cellStyleParts.push(`height: ${c.height}px`)
+                const cellStyleAttr = cellStyleParts.length > 0 ? ` style="${cellStyleParts.join('; ')}"` : ''
+                return `<td${cellClassAttr}${cellStyleAttr}>${renderDiv(c.div)}</td>`
             }).join('')
-            return `<tr>${cells}</tr>`
+            return `<tr${rowHeightAttr}>${cells}</tr>`
         }
     }).join('\n')
 
