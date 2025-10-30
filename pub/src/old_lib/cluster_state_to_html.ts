@@ -238,18 +238,30 @@ export function cluster_state_to_html(
         if (state['interface implementation match'][0] === 'matched') {
             interfaceImplStatus = '<span class="status-ok">✓</span>';
         } else if (state['interface implementation match'][0] === 'root interface direcory missing') {
-            interfaceImplStatus = '<span class="status-warning" title="Interface algorithms directory not found">⚠ No Int</span>';
+            interfaceImplStatus = '<span class="status-warning" title="pub/src/interface/algorithms directory not found">⚠ No Int</span>';
             if (worstSeverity === 'ok') worstSeverity = 'warning';
         } else if (state['interface implementation match'][0] === 'root implementation direcory missing') {
-            interfaceImplStatus = '<span class="status-warning" title="Implementation algorithms directory not found">⚠ No Impl</span>';
+            interfaceImplStatus = '<span class="status-warning" title="pub/src/implementation/algorithms directory not found">⚠ No Impl</span>';
             if (worstSeverity === 'ok') worstSeverity = 'warning';
         } else {
             const differences = state['interface implementation match'][1].differences;
-            const diffDetails = differences.map(diff => {
-                const problem = diff.problem[0];
-                const icon = problem === 'missing' ? '−' : '+';
-                return `${icon} ${escapeHtml(diff.path)}`;
-            }).join('\n');
+            
+            // Group by problem type for better readability
+            const missing = differences.filter(d => d.problem[0] === 'missing');
+            const superfluous = differences.filter(d => d.problem[0] === 'superfluous');
+            
+            const parts: string[] = [];
+            if (missing.length > 0) {
+                parts.push(`Missing in implementation (${missing.length}):`);
+                parts.push(...missing.map(d => `  − ${escapeHtml(d.path)}`));
+            }
+            if (superfluous.length > 0) {
+                if (parts.length > 0) parts.push(''); // blank line separator
+                parts.push(`Superfluous in implementation (${superfluous.length}):`);
+                parts.push(...superfluous.map(d => `  + ${escapeHtml(d.path)}`));
+            }
+            
+            const diffDetails = parts.join('\n');
             interfaceImplStatus = `<span class="status-error" title="${escapeHtml(diffDetails)}">✗ ${differences.length} issue(s)</span>`;
             worstSeverity = 'error';
         }

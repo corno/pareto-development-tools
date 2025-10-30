@@ -97,10 +97,12 @@
             background-color: #333;
             color: white;
             border-radius: 4px;
-            white-space: nowrap;
+            white-space: pre-wrap;
             z-index: 1000;
             font-size: 0.85em;
             box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            max-width: 400px;
+            text-align: left;
         }
     </style>
 </head>
@@ -119,6 +121,7 @@
                 <th>Name Sync</th>
                 <th>Git Status</th>
                 <th>Structure</th>
+                <th>Int⟷Imp</th>
                 <th>Dependencies</th>
                 <th>Tests</th>
                 <th>Same as Published</th>
@@ -131,6 +134,7 @@
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-external" title="exupery-core-alg, exupery-core-async, exupery-core-dev">External (3)</span></td>
                 <td><span class="status-ok">✓ Pass</span></td>
                 <td><span class="status-warning">Different</span></td>
@@ -140,6 +144,7 @@
                 <td class="version">0.1.17</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
                 <td><span class="status-external" title="exupery-core-alg">External (1)</span></td>
                 <td><span class="status-ok">✓ Pass</span></td>
@@ -151,6 +156,7 @@
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="exupery-standard-library">At latest (1)</span> <span class="status-external" title="exupery-core-alg">External (1)</span></td>
                 <td><span class="status-ok">✓ Pass</span></td>
                 <td><span class="status-warning">Different</span></td>
@@ -160,6 +166,7 @@
                 <td class="version">0.1.41</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="exupery-resources, pareto-standard-operations">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data, exupery-core-dev">External (4)</span></td>
                 <td><span class="status-ok">✓ Pass</span></td>
@@ -171,6 +178,7 @@
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="pareto-fountain-pen, pareto-standard-operations">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data">External (3)</span></td>
                 <td><span class="status-ok">✓ Pass</span></td>
                 <td><span class="status-warning">Different</span></td>
@@ -180,6 +188,7 @@
                 <td class="version">0.111.29</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="pareto-fountain-pen, pareto-json, pareto-standard-operations">At latest (3)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data, exupery-core-dev">External (4)</span></td>
                 <td><span class="status-ok">✓ Pass</span></td>
@@ -191,6 +200,7 @@
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="pareto-fountain-pen">At latest (1)</span> <span class="status-external" title="exupery-core-alg, exupery-core-dev">External (2)</span></td>
                 <td><span class="status-ok">✓ Pass</span></td>
                 <td><span class="status-skip">not published</span></td>
@@ -200,6 +210,7 @@
                 <td class="version">0.0.0</td>
                 <td><span class="status-error" title="Package name in package.json: astn-to-git">✗ Mismatch</span></td>
                 <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="pareto-fountain-pen">At latest (1)</span> <span class="status-external" title="exupery-core-dev">External (1)</span></td>
                 <td><span class="status-error">✗ Test failed</span></td>
@@ -211,6 +222,7 @@
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="pareto-fountain-pen, pareto-standard-operations">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data, exupery-core-dev">External (4)</span></td>
                 <td><span class="status-error">✗ Build failed</span></td>
                 <td><span class="status-warning">Different</span></td>
@@ -220,6 +232,7 @@
                 <td class="version">0.76.68</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="astn, exupery, pareto-fountain-pen, pareto-standard-operations">At latest (4)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data, exupery-core-dev">External (4)</span></td>
                 <td><span class="status-error">✗ Build failed</span></td>
@@ -231,6 +244,7 @@
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="pareto-fountain-pen, pareto-standard-operations">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data">External (3)</span></td>
                 <td><span class="status-ok">✓ Pass</span></td>
                 <td><span class="status-warning">Different</span></td>
@@ -240,6 +254,7 @@
                 <td class="version">0.0.4</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="astn, exupery-resources, pareto-standard-operations">At latest (3)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-rawdata">External (3)</span></td>
                 <td><span class="status-error">✗ Build failed</span></td>
@@ -251,6 +266,7 @@
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="pareto, pareto-json">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-data, exupery-core-dev">External (3)</span></td>
                 <td><span class="status-error">✗ Build failed</span></td>
                 <td><span class="status-warning">Different</span></td>
@@ -260,6 +276,7 @@
                 <td class="version">0.1.22</td>
                 <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
                 <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
+                <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok">✓</span></td>
                 <td><span class="status-ok" title="pareto">At latest (1)</span></td>
                 <td><span class="status-error">✗ Build failed</span></td>
