@@ -106,7 +106,7 @@ export function project_cluster_state_to_dot(
             dependencies,
             has_issues,
             issues,
-            is_name_synced: project_state['package name in sync with directory name'],
+            is_name_synced: project_state['package name in package.json'] === project_name,
             has_unpushed_work: project_state.git['unpushed commits'] || project_state.git['staged files'] || project_state.git['dirty working tree']
         });
     }

@@ -128,9 +128,32 @@ export function cluster_state_to_html(
         .status-skip {
             color: gray;
         }
+        .status-external {
+            color: gray;
+        }
         .version {
             color: #666;
             font-size: 0.9em;
+        }
+        span[title] {
+            cursor: help;
+            position: relative;
+        }
+        span[title]:hover::after {
+            content: attr(title);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 100%;
+            margin-bottom: 5px;
+            padding: 8px 12px;
+            background-color: #333;
+            color: white;
+            border-radius: 4px;
+            white-space: nowrap;
+            z-index: 1000;
+            font-size: 0.85em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
     </style>
 </head>
@@ -165,9 +188,10 @@ export function cluster_state_to_html(
         const version = state.version !== null ? state.version : 'n/a';
         
         // Name sync status
-        const nameSync = state['package name in sync with directory name']
-            ? '<span class="status-ok">✓</span>'
-            : '<span class="status-error">✗ Mismatch</span>';
+        const packageNameInJson = state['package name in package.json'];
+        const nameSync = packageNameInJson === project.name
+            ? '<span class="status-ok" title="Package name matches directory name">✓</span>'
+            : `<span class="status-error" title="Package name in package.json: ${escapeHtml(packageNameInJson)}">✗ Mismatch</span>`;
         
         // Structure status
         let structureStatus: string;
@@ -194,51 +218,57 @@ export function cluster_state_to_html(
             testStatus = `<span class="status-error">✗ ${failType === 'build' ? 'Build' : 'Test'} failed</span>`;
         }
         
-        // Git status - show individual issues
+        // Git status - show individual issues in order: working tree clean, no staged changes, all commits pushed
         const gitStatuses: string[] = [];
-        gitStatuses.push(state.git['staged files'] 
-            ? '<span class="status-warning">Staged</span>' 
-            : '<span class="status-ok">✓</span>');
         gitStatuses.push(state.git['dirty working tree'] 
             ? '<span class="status-warning">Dirty</span>' 
-            : '<span class="status-ok">✓</span>');
+            : '<span class="status-ok" title="Working tree clean">✓</span>');
+        gitStatuses.push(state.git['staged files'] 
+            ? '<span class="status-warning">Staged</span>' 
+            : '<span class="status-ok" title="No staged files">✓</span>');
         gitStatuses.push(state.git['unpushed commits'] 
             ? '<span class="status-warning">Unpushed</span>' 
-            : '<span class="status-ok">✓</span>');
+            : '<span class="status-ok" title="All commits pushed">✓</span>');
         
         const gitStatus = gitStatuses.join(' ');
         
-        // Dependencies status - show 'at latest' or 'behind'
+        // Dependencies status - show 'at latest' or 'behind' with tooltips
         const deps = Object.entries(state.dependencies);
         const outdatedDeps = deps.filter(([_, dep]) => 
             dep.target[0] === 'found' && !dep.target[1]['dependency up to date']
         );
-        const missingDeps = deps.filter(([_, dep]) => dep.target[0] === 'not found');
+        const externalDeps = deps.filter(([_, dep]) => dep.target[0] === 'not found');
+        const upToDateDeps = deps.filter(([_, dep]) => 
+            dep.target[0] === 'found' && dep.target[1]['dependency up to date']
+        );
         
         let depsStatus: string;
         if (deps.length === 0) {
             depsStatus = '<span class="status-skip">None</span>';
-        } else if (outdatedDeps.length > 0 || missingDeps.length > 0) {
+        } else if (outdatedDeps.length > 0 || externalDeps.length > 0) {
             const parts: string[] = [];
             if (outdatedDeps.length > 0) {
-                parts.push(`<span class="status-warning">Behind (${outdatedDeps.length})</span>`);
+                const outdatedNames = outdatedDeps.map(([name]) => escapeHtml(name)).join(', ');
+                parts.push(`<span class="status-warning" title="${outdatedNames}">Behind (${outdatedDeps.length})</span>`);
             }
-            if (missingDeps.length > 0) {
-                parts.push(`<span class="status-error">Missing (${missingDeps.length})</span>`);
+            if (upToDateDeps.length > 0) {
+                const upToDateNames = upToDateDeps.map(([name]) => escapeHtml(name)).join(', ');
+                parts.push(`<span class="status-ok" title="${upToDateNames}">At latest (${upToDateDeps.length})</span>`);
             }
-            const atLatest = deps.length - outdatedDeps.length - missingDeps.length;
-            if (atLatest > 0) {
-                parts.push(`<span class="status-ok">At latest (${atLatest})</span>`);
+            if (externalDeps.length > 0) {
+                const externalNames = externalDeps.map(([name]) => escapeHtml(name)).join(', ');
+                parts.push(`<span class="status-external" title="${externalNames}">External (${externalDeps.length})</span>`);
             }
             depsStatus = parts.join(' ');
         } else {
-            depsStatus = `<span class="status-ok">At latest (${deps.length})</span>`;
+            const upToDateNames = upToDateDeps.map(([name]) => escapeHtml(name)).join(', ');
+            depsStatus = `<span class="status-ok" title="${upToDateNames}">At latest (${deps.length})</span>`;
         }
         
         // Published comparison status
         let publishedStatus: string;
         if (state['published comparison'][0] === 'skipped') {
-            publishedStatus = '<span class="status-skip">Unknown</span>';
+            publishedStatus = '<span class="status-skip">Not tested</span>';
         } else if (state['published comparison'][0] === 'could not compare') {
             const reason = state['published comparison'][1][0];
             publishedStatus = `<span class="status-skip">${reason.replace(/-/g, ' ')}</span>`;

@@ -83,7 +83,7 @@ export function determine_package_state(
      * Check package.json and determine package info and dependencies
      */
     function determine_package_and_dependencies(project_path: string, node_name: string): {
-        package_name_in_sync: boolean,
+        package_name: string,
         version: string,
         dependencies: Package_State['dependencies']
     } {
@@ -91,7 +91,7 @@ export function determine_package_state(
 
         if (!fs.existsSync(package_json_path)) {
             return {
-                package_name_in_sync: true, // No package.json means no mismatch
+                package_name: node_name,
                 version: '0.0.0',
                 dependencies: {}
             };
@@ -102,9 +102,6 @@ export function determine_package_state(
             const package_name = package_content.name || node_name;
             const version = package_content.version || '0.0.0';
             const prod_dependencies = package_content.dependencies || {};
-
-            // Check if package name matches directory name (node_name)
-            const package_name_in_sync = package_name === node_name;
 
             // Process dependencies
             const dependencies: Package_State['dependencies'] = {};
@@ -149,20 +146,20 @@ export function determine_package_state(
             }
 
             return {
-                package_name_in_sync,
+                package_name,
                 version,
                 dependencies
             };
         } catch (err: any) {
             // Error reading package.json
             return {
-                package_name_in_sync: true,
+                package_name: node_name,
                 version: '0.0.0',
                 dependencies: {}
             };
         }
     }
-    const { package_name_in_sync, version, dependencies } = determine_package_and_dependencies(project_path, $p['directory name']);
+    const { package_name, version, dependencies } = determine_package_and_dependencies(project_path, $p['directory name']);
 
     // 3. Load structure.json and validate structure
     let structure_state: Package_State['structure'];
@@ -275,7 +272,7 @@ export function determine_package_state(
     }
 
     return {
-        'package name in sync with directory name': package_name_in_sync,
+        'package name in package.json': package_name,
         'version': version,
         'git': git_state,
         'structure': structure_state,
