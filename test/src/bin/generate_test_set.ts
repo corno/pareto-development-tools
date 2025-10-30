@@ -2,7 +2,7 @@
 
 import { $$ as generate_test_set } from "../lib/generate_test_set"
 
-// generate_test_set <path-to-cluster> <test-name> [--bt] [-cp]
+// generate_test_set <path-to-cluster> <test-name> [--bt] [--cp]
 
 const args = process.argv.slice(2)
 
@@ -13,7 +13,7 @@ const positional_args: string[] = []
 for (const arg of args) {
     if (arg === '--bt') {
         build_and_test = true
-    } else if (arg === '-cp') {
+    } else if (arg === '--cp') {
         compare_to_published = true
     } else {
         positional_args.push(arg)
@@ -21,7 +21,7 @@ for (const arg of args) {
 }
 
 if (positional_args.length !== 3) {
-    console.log('Usage: generate_test_set <path-to-cluster> <path-to-test> <test-name> [--bt] [-cp]')
+    console.log('Usage: generate_test_set <path-to-cluster> <path-to-test> <test-name> [--bt] [--cp]')
     process.exit(1)
 }
 
