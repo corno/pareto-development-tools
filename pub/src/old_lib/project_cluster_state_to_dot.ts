@@ -8,7 +8,7 @@ import * as d_in from "../interface/package_state"
  * @returns DOT format string for GraphViz
  */
 export function project_cluster_state_to_dot(
-    cluster_state: d_in.Package_Cluster_State,
+    cluster_state: d_in.Cluster_State,
     options: {
         include_legend?: boolean
         cluster_path?: string

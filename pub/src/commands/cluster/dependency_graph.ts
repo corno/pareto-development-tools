@@ -147,7 +147,12 @@ async function main(): Promise<void> {
         // Now do the heavy analysis (build/test plus dependency analysis)
         console.log(`\n🔍 Analyzing package states (build, test, and dependencies)...`);
         console.log('This may take a while as each package will be built and tested.');
-        const cluster_result = analyse_cluster(base_dir);
+        const cluster_result = analyse_cluster({
+            'cluster path': base_dir,
+            'build and test': true,
+            'compare to published': shouldComparePublished,
+
+        });
         
         if (cluster_result[0] === 'not found') {
             console.error('Error: Cluster not found');
@@ -276,7 +281,7 @@ async function main(): Promise<void> {
         // Wrap in tagged union
         cluster_state = ['cluster', {
             projects: projects_data,
-            'topological order': package_names
+            'topological order': ['valid order', package_names]
         }];
     }
     const publish_sync_status = new Map<string, boolean>();

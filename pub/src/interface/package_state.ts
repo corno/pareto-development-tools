@@ -33,24 +33,28 @@ export type Package_State = {
         }
     },
     'published comparison': (
-        | ['not published', null]
-        | ['identical', null]
-        | ['different', {
-            'details': string
-        }]
+        | ['could not compare',
+            | ['no package', null]
+            | ['no package name', null]
+            | ['not published', null]
+        ]
+        | ['could compare',
+            | ['identical', null]
+            | ['different', null]
+        ]
         | ['skipped', null]
     )
 }
 
-export type Cluster_State = 
-| ['not found', null]
-| ['cluster', {
-    'projects': {
-        [node_name: string]: 
-        | ['not a project', null]
-        | ['project', Package_State]
-    },
-    'topological order': 
-    | ['circular dependencies', null]
-    | ['valid order', string[]]
-}]
+export type Cluster_State =
+    | ['not found', null]
+    | ['cluster', {
+        'projects': {
+            [node_name: string]:
+            | ['not a project', null]
+            | ['project', Package_State]
+        },
+        'topological order':
+        | ['circular dependencies', null]
+        | ['valid order', string[]]
+    }]

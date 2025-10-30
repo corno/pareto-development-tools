@@ -1,14 +1,20 @@
 import { Cluster_State } from "pareto-development-tools/dist/interface/package_state"
 
-import { $$ as analyse_cluster } from "pareto-development-tools/dist/queries/analyse_cluster"
+import { $$ as analyse_cluster, Parameters } from "pareto-development-tools/dist/queries/analyse_cluster"
 
 import * as fs from "fs"
 
 
-export const $$ = (path_to_cluster: string, path_to_test: string, test_name: string): void => {
+export const $$ = (
+    $p: {
+        'analyse parameters': Parameters
+        'path to test': string,
+        'test name': string,
+    }
+): void => {
 
-    const result: Cluster_State = analyse_cluster(path_to_cluster)
+    const result: Cluster_State = analyse_cluster($p['analyse parameters'])
 
-   fs.writeFileSync(`${path_to_test}/analysed_structures/${test_name}.json`, JSON.stringify(result, null, 4))
+   fs.writeFileSync(`${$p['path to test']}/analysed_structures/${$p['test name']}.json`, JSON.stringify(result, null, 4))
 
 }

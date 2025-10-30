@@ -23,7 +23,7 @@
                         }
                     ],
                     "test": [
-                        "success",
+                        "skipped",
                         null
                     ],
                     "dependencies": {
@@ -114,7 +114,7 @@
                         }
                     ],
                     "test": [
-                        "success",
+                        "skipped",
                         null
                     ],
                     "dependencies": {
@@ -169,15 +169,8 @@
                         }
                     ],
                     "test": [
-                        "failure",
-                        [
-                            "test",
-                            {
-                                "failed tests": [
-                                    "Tests failed"
-                                ]
-                            }
-                        ]
+                        "skipped",
+                        null
                     ],
                     "dependencies": {
                         "exupery-core-dev": {
@@ -222,11 +215,8 @@
                         }
                     ],
                     "test": [
-                        "failure",
-                        [
-                            "build",
-                            null
-                        ]
+                        "skipped",
+                        null
                     ],
                     "dependencies": {
                         "exupery-core-alg": {
@@ -307,7 +297,7 @@
                         }
                     ],
                     "test": [
-                        "success",
+                        "skipped",
                         null
                     ],
                     "dependencies": {
@@ -362,7 +352,7 @@
                         }
                     ],
                     "test": [
-                        "success",
+                        "skipped",
                         null
                     ],
                     "dependencies": {
@@ -399,11 +389,8 @@
                         }
                     ],
                     "test": [
-                        "failure",
-                        [
-                            "build",
-                            null
-                        ]
+                        "skipped",
+                        null
                     ],
                     "dependencies": {
                         "astn": {
@@ -502,7 +489,7 @@
                         }
                     ],
                     "test": [
-                        "success",
+                        "skipped",
                         null
                     ],
                     "dependencies": {
@@ -575,7 +562,7 @@
                         }
                     ],
                     "test": [
-                        "success",
+                        "skipped",
                         null
                     ],
                     "dependencies": {
@@ -657,7 +644,7 @@
                         }
                     ],
                     "test": [
-                        "success",
+                        "skipped",
                         null
                     ],
                     "dependencies": {
@@ -730,11 +717,8 @@
                         }
                     ],
                     "test": [
-                        "failure",
-                        [
-                            "build",
-                            null
-                        ]
+                        "skipped",
+                        null
                     ],
                     "dependencies": {
                         "astn": {
@@ -815,7 +799,7 @@
                         }
                     ],
                     "test": [
-                        "success",
+                        "skipped",
                         null
                     ],
                     "dependencies": {
@@ -861,11 +845,8 @@
                         }
                     ],
                     "test": [
-                        "failure",
-                        [
-                            "build",
-                            null
-                        ]
+                        "skipped",
+                        null
                     ],
                     "dependencies": {
                         "exupery-core-alg": {
@@ -937,11 +918,8 @@
                         }
                     ],
                     "test": [
-                        "failure",
-                        [
-                            "build",
-                            null
-                        ]
+                        "skipped",
+                        null
                     ],
                     "dependencies": {
                         "pareto": {
