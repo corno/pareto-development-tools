@@ -52,20 +52,38 @@ try {
     failed_test_types.push('svgs');
 }
 
-// Test 3: HTML generation
-console.log('\n3. Testing HTML generation...');
+// Test 3: Document generation (Cluster_State → Document JSON)
+console.log('\n3. Testing Document generation...');
 try {
     const cmd = overwrite_expected 
-        ? 'node ./dist/bin/test_html_generation.js --overwrite-expected'
-        : 'node ./dist/bin/test_html_generation.js';
+        ? 'node ./dist/bin/test_document_generation.js --overwrite-expected'
+        : 'node ./dist/bin/test_document_generation.js';
     execSync(cmd, {
         cwd: test_base_dir,
         stdio: 'inherit'
     });
-    console.log('✓ HTML generation test passed');
+    console.log('✓ Document generation test passed');
     passed_tests++;
 } catch (err) {
-    console.error('✗ HTML generation test failed');
+    console.error('✗ Document generation test failed');
+    failed_tests++;
+    failed_test_types.push('html_as_json');
+}
+
+// Test 4: HTML rendering (Document JSON → HTML)
+console.log('\n4. Testing HTML rendering...');
+try {
+    const cmd = overwrite_expected 
+        ? 'node ./dist/bin/test_html_rendering.js --overwrite-expected'
+        : 'node ./dist/bin/test_html_rendering.js';
+    execSync(cmd, {
+        cwd: test_base_dir,
+        stdio: 'inherit'
+    });
+    console.log('✓ HTML rendering test passed');
+    passed_tests++;
+} catch (err) {
+    console.error('✗ HTML rendering test failed');
     failed_tests++;
     failed_test_types.push('html');
 }

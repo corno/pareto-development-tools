@@ -1,0 +1,32 @@
+{
+  "css": "\n        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }\n        h1 { color: #333; }\n        .metadata { color: #666; font-size: 0.9em; margin-bottom: 20px; }\n        table { border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }\n        th { background-color: #4CAF50; color: white; font-weight: bold; position: sticky; top: 0; }\n        tr:nth-child(even) { background-color: #f9f9f9; }\n        tr:hover { background-color: #f5f5f5; }\n        .package-name { font-weight: bold; }\n        .package-name-ok { color: green; }\n        .package-name-warning { color: orange; }\n        .package-name-error { color: red; }\n        .status-ok { color: green; font-weight: bold; }\n        .status-warning { color: orange; font-weight: bold; }\n        .status-error { color: red; font-weight: bold; }\n        .status-skip { color: gray; }\n        .status-external { color: gray; }\n        .version { color: #666; font-size: 0.9em; }\n        span[title] { cursor: help; position: relative; }\n        span[title]:hover::after {\n            content: attr(title); position: absolute; left: 50%; transform: translateX(-50%); bottom: 100%; margin-bottom: 5px;\n            padding: 8px 12px; background-color: #333; color: white; border-radius: 4px; white-space: pre-wrap; z-index: 1000;\n            font-size: 0.85em; box-shadow: 0 2px 8px rgba(0,0,0,0.2); max-width: 400px; text-align: left;\n        }\n    ",
+  "classes": [],
+  "root": {
+    "children": {
+      "classes": [],
+      "type": [
+        "table",
+        {
+          "children": [
+            {
+              "classes": [],
+              "type": [
+                "header",
+                null
+              ],
+              "rows": []
+            },
+            {
+              "classes": [],
+              "type": [
+                "body",
+                null
+              ],
+              "rows": []
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

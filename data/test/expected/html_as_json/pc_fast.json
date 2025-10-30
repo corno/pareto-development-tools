@@ -1,0 +1,2250 @@
+{
+  "css": "\n        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }\n        h1 { color: #333; }\n        .metadata { color: #666; font-size: 0.9em; margin-bottom: 20px; }\n        table { border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }\n        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }\n        th { background-color: #4CAF50; color: white; font-weight: bold; position: sticky; top: 0; }\n        tr:nth-child(even) { background-color: #f9f9f9; }\n        tr:hover { background-color: #f5f5f5; }\n        .package-name { font-weight: bold; }\n        .package-name-ok { color: green; }\n        .package-name-warning { color: orange; }\n        .package-name-error { color: red; }\n        .status-ok { color: green; font-weight: bold; }\n        .status-warning { color: orange; font-weight: bold; }\n        .status-error { color: red; font-weight: bold; }\n        .status-skip { color: gray; }\n        .status-external { color: gray; }\n        .version { color: #666; font-size: 0.9em; }\n        span[title] { cursor: help; position: relative; }\n        span[title]:hover::after {\n            content: attr(title); position: absolute; left: 50%; transform: translateX(-50%); bottom: 100%; margin-bottom: 5px;\n            padding: 8px 12px; background-color: #333; color: white; border-radius: 4px; white-space: pre-wrap; z-index: 1000;\n            font-size: 0.85em; box-shadow: 0 2px 8px rgba(0,0,0,0.2); max-width: 400px; text-align: left;\n        }\n    ",
+  "classes": [],
+  "root": {
+    "children": {
+      "classes": [],
+      "type": [
+        "table",
+        {
+          "children": [
+            {
+              "classes": [],
+              "type": [
+                "header",
+                null
+              ],
+              "rows": [
+                {
+                  "classes": [],
+                  "type": [
+                    "th",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Package",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Version",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Name Sync",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Git Status",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Structure",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Int⟷Imp",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Dependencies",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Tests",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Same as Published",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "classes": [],
+              "type": [
+                "body",
+                null
+              ],
+              "rows": [
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "exupery-resources",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.1.20",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Clean | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "3",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "exupery-standard-library",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.1.17",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Clean | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "1",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "pareto-standard-operations",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.1.17",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Clean | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "2",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "pareto-fountain-pen",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.1.41",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Clean | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "6",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "pareto-json",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.1.15",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Clean | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "5",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "astn",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.111.29",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Clean | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "7",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "astn-to-git",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.0.0",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Clean | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "3",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "astn-to-xml",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.0.0",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✗ @different/astn-to-xml",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Clean | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "2",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "exupery",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.1.30",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Dirty | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "6",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "pareto",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.76.68",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Dirty | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "8",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "pareto-boekhouding",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.1.6",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Dirty | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "5",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "pareto-lionweb",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.0.4",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Dirty | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "6",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "pareto-targets",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.0.3",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Dirty | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "5",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "classes": [],
+                  "type": [
+                    "td",
+                    null
+                  ],
+                  "cells": [
+                    {
+                      "classes": [
+                        "package-name"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "pareto-vscode-backend",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [
+                        "version"
+                      ],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "0.1.22",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Dirty | NoStaged | Pushed",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "OK",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "✓",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "1",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Skipped",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    },
+                    {
+                      "classes": [],
+                      "div": {
+                        "children": {
+                          "classes": [],
+                          "type": [
+                            "span",
+                            {
+                              "content": "Not tested",
+                              "children": []
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
