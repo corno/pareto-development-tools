@@ -1,288 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <title>Cluster Status Report - pc_with_build_and_test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f5f5f5;
-        }
-        h1 {
-            color: #333;
-        }
-        .metadata {
-            color: #666;
-            font-size: 0.9em;
-            margin-bottom: 20px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            background-color: white;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-            font-weight: bold;
-            position: sticky;
-            top: 0;
-        }
-        tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        .package-name {
-            font-weight: bold;
-        }
-        .package-name-ok {
-            color: green;
-        }
-        .package-name-warning {
-            color: orange;
-        }
-        .package-name-error {
-            color: red;
-        }
-        .package-name a {
-            color: inherit;
-            text-decoration: none;
-        }
-        .package-name a:hover {
-            text-decoration: underline;
-        }
-        .status-ok {
-            color: green;
-            font-weight: bold;
-        }
-        .status-warning {
-            color: orange;
-            font-weight: bold;
-        }
-        .status-error {
-            color: red;
-            font-weight: bold;
-        }
-        .status-skip {
-            color: gray;
-        }
-        .status-external {
-            color: gray;
-        }
-        .version {
-            color: #666;
-            font-size: 0.9em;
-        }
-        span[title] {
-            cursor: help;
-            position: relative;
-        }
+<meta charset="UTF-8">
+<title>Cluster Status Report - pc_with_build_and_test</title>
+<style>
+
+        body { font-family: Arial, sans-serif; margin: 20px; background-color: #f5f5f5; }
+        h1 { color: #333; }
+        .metadata { color: #666; font-size: 0.9em; margin-bottom: 20px; }
+        table { border-collapse: collapse; width: 100%; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #4CAF50; color: white; font-weight: bold; position: sticky; top: 0; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        tr:hover { background-color: #f5f5f5; }
+        .package-name { font-weight: bold; }
+        .package-name-ok { color: green; }
+        .package-name-warning { color: orange; }
+        .package-name-error { color: red; }
+        .status-ok { color: green; font-weight: bold; }
+        .status-warning { color: orange; font-weight: bold; }
+        .status-error { color: red; font-weight: bold; }
+        .status-skip { color: gray; }
+        .status-external { color: gray; }
+        .version { color: #666; font-size: 0.9em; }
+        span[title] { cursor: help; position: relative; }
         span[title]:hover::after {
-            content: attr(title);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            bottom: 100%;
-            margin-bottom: 5px;
-            padding: 8px 12px;
-            background-color: #333;
-            color: white;
-            border-radius: 4px;
-            white-space: pre-wrap;
-            z-index: 1000;
-            font-size: 0.85em;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            max-width: 400px;
-            text-align: left;
+            content: attr(title); position: absolute; left: 50%; transform: translateX(-50%); bottom: 100%; margin-bottom: 5px;
+            padding: 8px 12px; background-color: #333; color: white; border-radius: 4px; white-space: pre-wrap; z-index: 1000;
+            font-size: 0.85em; box-shadow: 0 2px 8px rgba(0,0,0,0.2); max-width: 400px; text-align: left;
         }
-    </style>
+    
+</style>
 </head>
 <body>
-    <h1>Cluster Status Report</h1>
-    <div class="metadata">
-        <div>Cluster: pc_with_build_and_test</div>
-        <div>Generated: FIXED_TIMESTAMP_FOR_TESTING</div>
-        <div>Total Projects: 14</div>
-    </div>
-    <table>
-        <thead>
-            <tr>
-                <th>Package</th>
-                <th>Version</th>
-                <th>Name Sync</th>
-                <th>Git Status</th>
-                <th>Structure</th>
-                <th>Int⟷Imp</th>
-                <th>Dependencies</th>
-                <th>Tests</th>
-                <th>Same as Published</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="package-name package-name-ok"><a href="vscode://filepc_with_build_and_test/exupery-resources">exupery-resources</a></td>
-                <td class="version">0.1.20</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-external" title="exupery-core-alg, exupery-core-async, exupery-core-dev">External (3)</span></td>
-                <td><span class="status-ok">✓ Pass</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-ok"><a href="vscode://filepc_with_build_and_test/exupery-standard-library">exupery-standard-library</a></td>
-                <td class="version">0.1.17</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-external" title="exupery-core-alg">External (1)</span></td>
-                <td><span class="status-ok">✓ Pass</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-ok"><a href="vscode://filepc_with_build_and_test/pareto-standard-operations">pareto-standard-operations</a></td>
-                <td class="version">0.1.17</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="exupery-standard-library">At latest (1)</span> <span class="status-external" title="exupery-core-alg">External (1)</span></td>
-                <td><span class="status-ok">✓ Pass</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-ok"><a href="vscode://filepc_with_build_and_test/pareto-fountain-pen">pareto-fountain-pen</a></td>
-                <td class="version">0.1.41</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="exupery-resources, pareto-standard-operations">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data, exupery-core-dev">External (4)</span></td>
-                <td><span class="status-ok">✓ Pass</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-ok"><a href="vscode://filepc_with_build_and_test/pareto-json">pareto-json</a></td>
-                <td class="version">0.1.15</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="pareto-fountain-pen, pareto-standard-operations">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data">External (3)</span></td>
-                <td><span class="status-ok">✓ Pass</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-ok"><a href="vscode://filepc_with_build_and_test/astn">astn</a></td>
-                <td class="version">0.111.29</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="pareto-fountain-pen, pareto-json, pareto-standard-operations">At latest (3)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data, exupery-core-dev">External (4)</span></td>
-                <td><span class="status-ok">✓ Pass</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-ok"><a href="vscode://filepc_with_build_and_test/astn-to-git">astn-to-git</a></td>
-                <td class="version">0.0.0</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="pareto-fountain-pen">At latest (1)</span> <span class="status-external" title="exupery-core-alg, exupery-core-dev">External (2)</span></td>
-                <td><span class="status-ok">✓ Pass</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-error"><a href="vscode://filepc_with_build_and_test/astn-to-xml">astn-to-xml</a></td>
-                <td class="version">0.0.0</td>
-                <td><span class="status-error" title="Package name in package.json: @different/astn-to-xml">✗ Mismatch</span></td>
-                <td><span class="status-ok" title="Working tree clean">✓</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="pareto-fountain-pen">At latest (1)</span> <span class="status-external" title="exupery-core-dev">External (1)</span></td>
-                <td><span class="status-error">✗ Test failed</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-error"><a href="vscode://filepc_with_build_and_test/exupery">exupery</a></td>
-                <td class="version">0.1.30</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="pareto-fountain-pen, pareto-standard-operations">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data, exupery-core-dev">External (4)</span></td>
-                <td><span class="status-error">✗ Build failed</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-error"><a href="vscode://filepc_with_build_and_test/pareto">pareto</a></td>
-                <td class="version">0.76.68</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="astn, exupery, pareto-fountain-pen, pareto-standard-operations">At latest (4)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data, exupery-core-dev">External (4)</span></td>
-                <td><span class="status-error">✗ Build failed</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-warning"><a href="vscode://filepc_with_build_and_test/pareto-boekhouding">pareto-boekhouding</a></td>
-                <td class="version">0.1.6</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="pareto-fountain-pen, pareto-standard-operations">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-data">External (3)</span></td>
-                <td><span class="status-ok">✓ Pass</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-error"><a href="vscode://filepc_with_build_and_test/pareto-lionweb">pareto-lionweb</a></td>
-                <td class="version">0.0.4</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="astn, exupery-resources, pareto-standard-operations">At latest (3)</span> <span class="status-external" title="exupery-core-alg, exupery-core-bin, exupery-core-rawdata">External (3)</span></td>
-                <td><span class="status-error">✗ Build failed</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-error"><a href="vscode://filepc_with_build_and_test/pareto-targets">pareto-targets</a></td>
-                <td class="version">0.0.3</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="pareto, pareto-json">At latest (2)</span> <span class="status-external" title="exupery-core-alg, exupery-core-data, exupery-core-dev">External (3)</span></td>
-                <td><span class="status-error">✗ Build failed</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-            <tr>
-                <td class="package-name package-name-error"><a href="vscode://filepc_with_build_and_test/pareto-vscode-backend">pareto-vscode-backend</a></td>
-                <td class="version">0.1.22</td>
-                <td><span class="status-ok" title="Package name matches directory name">✓</span></td>
-                <td><span class="status-warning">Dirty</span> <span class="status-ok" title="No staged files">✓</span> <span class="status-ok" title="All commits pushed">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok">✓</span></td>
-                <td><span class="status-ok" title="pareto">At latest (1)</span></td>
-                <td><span class="status-error">✗ Build failed</span></td>
-                <td><span class="status-skip">Not tested</span></td>
-            </tr>
-        </tbody>
-    </table>
+<h1>Cluster Status Report</h1>
+<div class="metadata">
+<div>Cluster: pc_with_build_and_test</div>
+<div>Generated: FIXED_TIMESTAMP_FOR_TESTING</div>
+</div>
+<div><table>
+<thead><tr><th class=""><div><span>Package</span></div></th><th class=""><div><span>Version</span></div></th><th class=""><div><span>Name Sync</span></div></th><th class=""><div><span>Git Status</span></div></th><th class=""><div><span>Structure</span></div></th><th class=""><div><span>Int⟷Imp</span></div></th><th class=""><div><span>Dependencies</span></div></th><th class=""><div><span>Tests</span></div></th><th class=""><div><span>Same as Published</span></div></th></tr></thead>
+<tbody><tr><td class="package-name"><div><span>exupery-resources</span></div></td><td class="version"><div><span>0.1.20</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Clean | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>3</span></div></td><td class=""><div><span>Pass</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>exupery-standard-library</span></div></td><td class="version"><div><span>0.1.17</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Clean | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>1</span></div></td><td class=""><div><span>Pass</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>pareto-standard-operations</span></div></td><td class="version"><div><span>0.1.17</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Clean | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>2</span></div></td><td class=""><div><span>Pass</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>pareto-fountain-pen</span></div></td><td class="version"><div><span>0.1.41</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Clean | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>6</span></div></td><td class=""><div><span>Pass</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>pareto-json</span></div></td><td class="version"><div><span>0.1.15</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Clean | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>5</span></div></td><td class=""><div><span>Pass</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>astn</span></div></td><td class="version"><div><span>0.111.29</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Clean | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>7</span></div></td><td class=""><div><span>Pass</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>astn-to-git</span></div></td><td class="version"><div><span>0.0.0</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Clean | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>3</span></div></td><td class=""><div><span>Pass</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>astn-to-xml</span></div></td><td class="version"><div><span>0.0.0</span></div></td><td class=""><div><span>✗ @different/astn-to-xml</span></div></td><td class=""><div><span>Clean | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>2</span></div></td><td class=""><div><span>Fail</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>exupery</span></div></td><td class="version"><div><span>0.1.30</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Dirty | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>6</span></div></td><td class=""><div><span>Fail</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>pareto</span></div></td><td class="version"><div><span>0.76.68</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Dirty | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>8</span></div></td><td class=""><div><span>Fail</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>pareto-boekhouding</span></div></td><td class="version"><div><span>0.1.6</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Dirty | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>5</span></div></td><td class=""><div><span>Pass</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>pareto-lionweb</span></div></td><td class="version"><div><span>0.0.4</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Dirty | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>6</span></div></td><td class=""><div><span>Fail</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>pareto-targets</span></div></td><td class="version"><div><span>0.0.3</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Dirty | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>5</span></div></td><td class=""><div><span>Fail</span></div></td><td class=""><div><span>Not tested</span></div></td></tr>
+<tr><td class="package-name"><div><span>pareto-vscode-backend</span></div></td><td class="version"><div><span>0.1.22</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>Dirty | NoStaged | Pushed</span></div></td><td class=""><div><span>OK</span></div></td><td class=""><div><span>✓</span></div></td><td class=""><div><span>1</span></div></td><td class=""><div><span>Fail</span></div></td><td class=""><div><span>Not tested</span></div></td></tr></tbody>
+
+</table></div>
 </body>
 </html>
