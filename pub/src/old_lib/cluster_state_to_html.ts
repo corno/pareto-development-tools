@@ -47,8 +47,23 @@ export function cluster_state_to_html(
         }
     }
 
-    // Sort projects alphabetically
-    projects.sort((a, b) => a.name.localeCompare(b.name));
+    // Sort projects topologically if available, otherwise alphabetically
+    if (cluster_data['topological order'][0] === 'valid order') {
+        const order = cluster_data['topological order'][1];
+        const orderMap = new Map(order.map((name, index) => [name, index]));
+        projects.sort((a, b) => {
+            const orderA = orderMap.get(a.name);
+            const orderB = orderMap.get(b.name);
+            if (orderA !== undefined && orderB !== undefined) {
+                return orderA - orderB;
+            }
+            // If not in order, sort alphabetically
+            return a.name.localeCompare(b.name);
+        });
+    } else {
+        // Circular dependencies or no order available - sort alphabetically
+        projects.sort((a, b) => a.name.localeCompare(b.name));
+    }
 
     // Generate HTML
     let html = `<!DOCTYPE html>
@@ -132,11 +147,11 @@ export function cluster_state_to_html(
                 <th>Package</th>
                 <th>Version</th>
                 <th>Name Sync</th>
-                <th>Structure</th>
-                <th>Tests</th>
                 <th>Git Status</th>
+                <th>Structure</th>
                 <th>Dependencies</th>
-                <th>Published</th>
+                <th>Tests</th>
+                <th>Same as Published</th>
             </tr>
         </thead>
         <tbody>
@@ -179,17 +194,21 @@ export function cluster_state_to_html(
             testStatus = `<span class="status-error">✗ ${failType === 'build' ? 'Build' : 'Test'} failed</span>`;
         }
         
-        // Git status
-        const gitIssues: string[] = [];
-        if (state.git['staged files']) gitIssues.push('Staged');
-        if (state.git['dirty working tree']) gitIssues.push('Dirty');
-        if (state.git['unpushed commits']) gitIssues.push('Unpushed');
+        // Git status - show individual issues
+        const gitStatuses: string[] = [];
+        gitStatuses.push(state.git['staged files'] 
+            ? '<span class="status-warning">Staged</span>' 
+            : '<span class="status-ok">✓</span>');
+        gitStatuses.push(state.git['dirty working tree'] 
+            ? '<span class="status-warning">Dirty</span>' 
+            : '<span class="status-ok">✓</span>');
+        gitStatuses.push(state.git['unpushed commits'] 
+            ? '<span class="status-warning">Unpushed</span>' 
+            : '<span class="status-ok">✓</span>');
         
-        const gitStatus = gitIssues.length > 0
-            ? `<span class="status-warning">${gitIssues.join(', ')}</span>`
-            : '<span class="status-ok">✓</span>';
+        const gitStatus = gitStatuses.join(' ');
         
-        // Dependencies status
+        // Dependencies status - show 'at latest' or 'behind'
         const deps = Object.entries(state.dependencies);
         const outdatedDeps = deps.filter(([_, dep]) => 
             dep.target[0] === 'found' && !dep.target[1]['dependency up to date']
@@ -200,18 +219,26 @@ export function cluster_state_to_html(
         if (deps.length === 0) {
             depsStatus = '<span class="status-skip">None</span>';
         } else if (outdatedDeps.length > 0 || missingDeps.length > 0) {
-            const issues: string[] = [];
-            if (outdatedDeps.length > 0) issues.push(`${outdatedDeps.length} outdated`);
-            if (missingDeps.length > 0) issues.push(`${missingDeps.length} missing`);
-            depsStatus = `<span class="status-warning">${issues.join(', ')}</span>`;
+            const parts: string[] = [];
+            if (outdatedDeps.length > 0) {
+                parts.push(`<span class="status-warning">Behind (${outdatedDeps.length})</span>`);
+            }
+            if (missingDeps.length > 0) {
+                parts.push(`<span class="status-error">Missing (${missingDeps.length})</span>`);
+            }
+            const atLatest = deps.length - outdatedDeps.length - missingDeps.length;
+            if (atLatest > 0) {
+                parts.push(`<span class="status-ok">At latest (${atLatest})</span>`);
+            }
+            depsStatus = parts.join(' ');
         } else {
-            depsStatus = `<span class="status-ok">✓ ${deps.length}</span>`;
+            depsStatus = `<span class="status-ok">At latest (${deps.length})</span>`;
         }
         
         // Published comparison status
         let publishedStatus: string;
         if (state['published comparison'][0] === 'skipped') {
-            publishedStatus = '<span class="status-skip">Skipped</span>';
+            publishedStatus = '<span class="status-skip">Unknown</span>';
         } else if (state['published comparison'][0] === 'could not compare') {
             const reason = state['published comparison'][1][0];
             publishedStatus = `<span class="status-skip">${reason.replace(/-/g, ' ')}</span>`;
@@ -228,10 +255,10 @@ export function cluster_state_to_html(
                 <td class="package-name">${escapeHtml(project.name)}</td>
                 <td class="version">${escapeHtml(version)}</td>
                 <td>${nameSync}</td>
-                <td>${structureStatus}</td>
-                <td>${testStatus}</td>
                 <td>${gitStatus}</td>
+                <td>${structureStatus}</td>
                 <td>${depsStatus}</td>
+                <td>${testStatus}</td>
                 <td>${publishedStatus}</td>
             </tr>
 `;
