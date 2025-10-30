@@ -4,7 +4,7 @@ digraph dependencies {
     
     // Graph title
     labelloc="t";
-    label="Dependency Graph\nGenerated: 2025-10-30T12:52:01.395Z\nDirectory: pc_with_build_and_test";
+    label="Dependency Graph\nGenerated: FIXED_TIMESTAMP_FOR_TESTING\nDirectory: pc_with_build_and_test";
     
     // Project nodes (sibling repositories)
     astn [label=<astn<BR/>v0.111.29>, fillcolor=lightblue];

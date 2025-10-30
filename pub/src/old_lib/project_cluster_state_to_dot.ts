@@ -176,7 +176,7 @@ export function project_cluster_state_to_dot(
     
     // Graph title
     labelloc="t";
-    label="Dependency Graph\\nGenerated: ${new Date().toISOString()}\\nDirectory: ${$p.cluster_path}";
+    label="Dependency Graph\\nGenerated: ${$p['time stamp']}\\nDirectory: ${$p.cluster_path}";
     
     // Project nodes (sibling repositories)
 `;

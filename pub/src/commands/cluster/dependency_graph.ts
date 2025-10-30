@@ -50,7 +50,7 @@ async function main(): Promise<void> {
         console.log('  dependency-graph ../my-repos');
         console.log('  dependency-graph ../my-repos deps.svg --verbose');
         console.log('  dependency-graph ../my-repos deps.dot --dot');
-        
+
         if (!target_dir) {
             process.exit(1);
         } else {
@@ -62,16 +62,16 @@ async function main(): Promise<void> {
         console.error(`Error: Directory ${target_dir} does not exist`);
         process.exit(1);
     }
-    
+
     // Early prompts to let user choose what work to do
     const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
     });
-    
+
     let shouldAnalyze = true;
     let shouldComparePublished = false;
-    
+
     if (!skip_publish_compare) {
         // Ask about analysis first
         shouldAnalyze = await new Promise<boolean>((resolve) => {
@@ -80,7 +80,7 @@ async function main(): Promise<void> {
                 resolve(normalizedAnswer !== 'n' && normalizedAnswer !== 'no');
             });
         });
-        
+
         if (shouldAnalyze) {
             // Ask about published comparison
             shouldComparePublished = await new Promise<boolean>((resolve) => {
@@ -91,16 +91,16 @@ async function main(): Promise<void> {
             });
         }
     }
-    
+
     rl.close();
-    
+
     // First, do a quick scan to list packages
     console.log(`\nScanning for packages in ${target_dir}...`);
     const subdirs = fs.readdirSync(base_dir, { withFileTypes: true })
         .filter(dirent => dirent.isDirectory())
         .map(dirent => dirent.name)
         .filter(name => !name.startsWith('.'));
-    
+
     const quick_package_list = [];
     for (const subdir of subdirs) {
         const package_json_path = path.join(base_dir, subdir, 'pub', 'package.json');
@@ -117,17 +117,17 @@ async function main(): Promise<void> {
             }
         }
     }
-    
+
     if (quick_package_list.length === 0) {
         console.error('No packages found in the specified directory');
         process.exit(1);
     }
-    
+
     const get_relative_path = (absolute_path: string) => {
         const rel = path.relative(process.cwd(), absolute_path);
         return rel.startsWith('..') || rel.startsWith('.') ? rel : './' + rel;
     };
-    
+
     console.log(`\nFound ${quick_package_list.length} packages:`);
     for (const pkg of quick_package_list) {
         const package_path = path.join(base_dir, pkg.name);
@@ -139,10 +139,10 @@ async function main(): Promise<void> {
             console.log(`    ⚠️  Warning: Package name '${pkg.package_name}' doesn't match directory name '${pkg.name}'`);
         }
     }
-    
+
     let cluster_state;
     let package_names;
-    
+
     if (shouldAnalyze) {
         // Now do the heavy analysis (build/test plus dependency analysis)
         console.log(`\n🔍 Analyzing package states (build, test, and dependencies)...`);
@@ -153,60 +153,60 @@ async function main(): Promise<void> {
             'compare to published': shouldComparePublished,
 
         });
-        
+
         if (cluster_result[0] === 'not found') {
             console.error('Error: Cluster not found');
             process.exit(1);
         }
-        
+
         cluster_state = cluster_result;
         const cluster_data = cluster_result[1];
-        
-        package_names = Object.keys(cluster_data.projects).filter(name => 
+
+        package_names = Object.keys(cluster_data.projects).filter(name =>
             cluster_data.projects[name][0] === 'project'
         );
         if (package_names.length === 0) {
             console.error('Error: No valid packages found after analysis');
             process.exit(1);
         }
-        
+
         console.log(`✅ Analysis complete. ${package_names.length} packages successfully analyzed.`);
     } else {
         console.log(`\n⏭️  Skipping detailed analysis (user choice)`);
         // Create minimal cluster state for graph generation with basic dependency info
         package_names = quick_package_list.map(pkg => pkg.name);
         const projects_data: { [name: string]: ['not a project', null] | ['project', Package_State] } = {};
-        
+
         // Get basic dependency info from package.json files (fast)
         for (const pkg of quick_package_list) {
             const package_json_path = path.join(base_dir, pkg.name, 'pub', 'package.json');
             let dependencies = {};
-            
+
             if (fs.existsSync(package_json_path)) {
                 try {
                     const package_json = JSON.parse(fs.readFileSync(package_json_path, 'utf8'));
                     const all_deps = package_json.dependencies || {};
-                    
+
                     for (const [dep_name, dep_version] of Object.entries(all_deps)) {
                         const version_string = dep_version as string;
-                        
+
                         // Check if it's a sibling dependency (in the same cluster)
                         const sibling_pkg = quick_package_list.find(p => p.package_name === dep_name);
-                        
+
                         let target_status: Package_State['dependencies'][string]['target'];
-                        
+
                         if (sibling_pkg) {
                             // For sibling dependencies, check if versions match
                             const clean_required = version_string.replace(/[\^~>=<]/g, '');
                             const sibling_version = sibling_pkg.version !== null ? sibling_pkg.version : 'n/a';
                             const is_up_to_date = sibling_version === clean_required;
-                            
+
                             target_status = ['found', { 'dependency up to date': is_up_to_date }];
                         } else {
                             // External dependencies are marked as 'not found' (not in cluster)
                             target_status = ['not found', null];
                         }
-                        
+
                         dependencies[dep_name] = {
                             version: version_string,
                             target: target_status
@@ -216,33 +216,33 @@ async function main(): Promise<void> {
                     // Skip invalid package.json
                 }
             }
-            
+
             // Check git status for this package
             const git_status = (() => {
                 try {
                     const pkg_path = path.join(base_dir, pkg.name);
-                    
+
                     // Check for dirty working tree
-                    const status_output = execSync('git status --porcelain', { 
-                        cwd: pkg_path, 
+                    const status_output = execSync('git status --porcelain', {
+                        cwd: pkg_path,
                         encoding: 'utf8',
                         stdio: 'pipe'
                     }).trim();
                     const dirty_working_tree = status_output.length > 0;
-                    
+
                     // Check for staged files
-                    const staged_output = execSync('git diff --cached --name-only', { 
-                        cwd: pkg_path, 
+                    const staged_output = execSync('git diff --cached --name-only', {
+                        cwd: pkg_path,
                         encoding: 'utf8',
                         stdio: 'pipe'
                     }).trim();
                     const staged_files = staged_output.length > 0;
-                    
+
                     // Check for unpushed commits
                     let unpushed_commits = false;
                     try {
-                        const unpushed_output = execSync('git log @{u}.. --oneline', { 
-                            cwd: pkg_path, 
+                        const unpushed_output = execSync('git log @{u}.. --oneline', {
+                            cwd: pkg_path,
                             encoding: 'utf8',
                             stdio: 'pipe'
                         }).trim();
@@ -251,7 +251,7 @@ async function main(): Promise<void> {
                         // No upstream branch or other error - assume no unpushed commits
                         unpushed_commits = false;
                     }
-                    
+
                     return {
                         'staged files': staged_files,
                         'dirty working tree': dirty_working_tree,
@@ -266,7 +266,7 @@ async function main(): Promise<void> {
                     };
                 }
             })();
-            
+
             projects_data[pkg.name] = ['project', {
                 'package name in sync with directory name': pkg.name === pkg.package_name,
                 'version': pkg.version,
@@ -277,7 +277,7 @@ async function main(): Promise<void> {
                 'published comparison': ['skipped', null]
             }];
         }
-        
+
         // Wrap in tagged union
         cluster_state = ['cluster', {
             projects: projects_data,
@@ -285,11 +285,11 @@ async function main(): Promise<void> {
         }];
     }
     const publish_sync_status = new Map<string, boolean>();
-    
+
     if (shouldComparePublished && !skip_publish_compare) {
         console.log('\n🔍 Checking sync status with published versions...');
         console.log('This may take a while as each package will be compared against npm registry.');
-        
+
         for (const package_name of package_names) {
             const package_path = path.join(base_dir, package_name);
             process.stdout.write(`  Checking ${package_name}... `);
@@ -302,7 +302,7 @@ async function main(): Promise<void> {
                 publish_sync_status.set(package_name, false); // Assume differs on error
             }
         }
-        
+
         const in_sync_count = Array.from(publish_sync_status.values()).filter(sync => sync).length;
         const out_of_sync_count = publish_sync_status.size - in_sync_count;
         console.log(`\n📊 Publish sync check complete: ${in_sync_count} in sync, ${out_of_sync_count} out of sync`);
@@ -314,11 +314,15 @@ async function main(): Promise<void> {
             publish_sync_status.set(package_name, true);
         }
     }
-    const dot_content = project_cluster_state_to_dot(cluster_state, {
-        include_legend: show_legend,
-        cluster_path: base_dir,
-        show_warnings: verbose
-    });
+    const dot_content = project_cluster_state_to_dot(
+        cluster_state,
+        {
+            include_legend: show_legend,
+            cluster_path: base_dir,
+            show_warnings: verbose,
+            'time stamp': new Date().toISOString()
+        }
+    );
     const output_path = path.resolve(output_file);
     if (output_svg) {
         // Generate SVG directly using GraphViz
@@ -333,17 +337,17 @@ async function main(): Promise<void> {
                 console.error('On macOS: brew install graphviz');
                 process.exit(1);
             }
-            
+
             // Create a temporary DOT file for processing
             const temp_dot_file = `/tmp/temp-${Date.now()}.dot`;
             fs.writeFileSync(temp_dot_file, dot_content);
-            
+
             // Generate SVG from DOT
             execSync(`dot -Tsvg ${temp_dot_file} -o ${output_path}`, { stdio: 'pipe' });
-            
+
             // Clean up temporary DOT file
             fs.unlinkSync(temp_dot_file);
-            
+
             console.log(`\nDependency graph generated as SVG: ${output_path}`);
         } catch (err: any) {
             console.error(`❌ Error generating SVG:`, err.message);
@@ -404,12 +408,12 @@ async function main(): Promise<void> {
     }
     if (auto_open) {
         console.log(`\nOpening dependency graph...`);
-        
+
         try {
             // Try to open the file
             let open_command: string;
             const platform = process.platform;
-            
+
             if (platform === 'darwin') {
                 open_command = 'open';
             } else if (platform === 'win32') {
@@ -419,7 +423,7 @@ async function main(): Promise<void> {
                 // Try different viewers in order of preference
                 const linux_viewers = ['feh', 'eog', 'xviewer', 'gpicview'];
                 let viewer_found = false;
-                
+
                 for (const viewer of linux_viewers) {
                     try {
                         execSync(`which ${viewer}`, { stdio: 'pipe' });
@@ -430,12 +434,12 @@ async function main(): Promise<void> {
                         // Viewer not found, try next one
                     }
                 }
-                
+
                 if (!viewer_found) {
                     open_command = 'xdg-open';
                 }
             }
-            
+
             try {
                 // For Linux, try to use the selected viewer first, fallback to xdg-open
                 if (platform === 'linux') {
@@ -443,28 +447,28 @@ async function main(): Promise<void> {
                         // Try the selected viewer directly with clean environment
                         const cleanEnv = Object.assign({}, process.env);
                         delete cleanEnv.LD_LIBRARY_PATH;
-                        
+
                         const proc = spawn(open_command, [output_path], {
                             detached: true,
                             stdio: 'ignore',
                             env: cleanEnv
                         });
                         proc.unref();
-                        
+
                         console.log(`✓ Opened with ${open_command}`);
                     } catch (viewerError: any) {
                         // If the selected viewer fails, fallback to xdg-open
                         try {
                             const cleanEnv = Object.assign({}, process.env);
                             delete cleanEnv.LD_LIBRARY_PATH;
-                            
+
                             const proc = spawn('xdg-open', [output_path], {
                                 detached: true,
                                 stdio: 'ignore',
                                 env: cleanEnv
                             });
                             proc.unref();
-                            
+
                             console.log(`✓ Opened with xdg-open (fallback)`);
                         } catch (xdgError: any) {
                             console.log(`❌ Could not open automatically: ${xdgError.message}`);
@@ -482,7 +486,7 @@ async function main(): Promise<void> {
                 console.log(`📁 SVG file created at: ${output_path}`);
                 console.log(`You can open it manually with your preferred viewer.`);
             }
-            
+
         } catch (err: any) {
             console.error(`❌ Error opening SVG:`, err.message);
         }
@@ -493,7 +497,7 @@ async function main(): Promise<void> {
                 console.log(`You can open it with your preferred viewer.`);
             }
         }
-        
+
         if (show_command) {
             console.log(`\n📁 SVG file created at: ${output_path}`);
             console.log(`\nTo open it, run one of these commands:`);
