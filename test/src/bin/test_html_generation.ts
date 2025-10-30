@@ -10,41 +10,43 @@ const overwrite_expected = args.includes('--overwrite-expected');
 
 const data_dir = path.join(__dirname, '../../../data');
 const analysed_structures_dir = path.join(data_dir, 'test/analysed_structures');
-const html_dir = path.join(data_dir, 'test/html');
-const expected_dir = path.join(html_dir, 'expected');
-const actual_dir = path.join(html_dir, 'actual');
+const test_data_dir = path.join(data_dir, 'test');
+const expected_dir = path.join(test_data_dir, 'expected');
+const actual_dir = path.join(test_data_dir, 'actual');
 
 console.log('Generating HTML from analysed structures...\n');
 
-// Clear actual directory
-if (fs.existsSync(actual_dir)) {
-    const files = fs.readdirSync(actual_dir);
+// Clear actual/html directory
+const actual_html_dir = path.join(actual_dir, 'html');
+if (fs.existsSync(actual_html_dir)) {
+    const files = fs.readdirSync(actual_html_dir);
     for (const file of files) {
-        fs.unlinkSync(path.join(actual_dir, file));
+        fs.unlinkSync(path.join(actual_html_dir, file));
     }
-    console.log(`✓ Cleared ${actual_dir}`);
+    console.log(`✓ Cleared ${actual_html_dir}`);
 } else {
-    fs.mkdirSync(actual_dir, { recursive: true });
-    console.log(`✓ Created ${actual_dir}`);
+    fs.mkdirSync(actual_html_dir, { recursive: true });
+    console.log(`✓ Created ${actual_html_dir}`);
 }
 
-// If overwrite expected flag is set, clear expected directory
+// If overwrite expected flag is set, clear expected/html directory
+const expected_html_dir = path.join(expected_dir, 'html');
 if (overwrite_expected) {
-    if (fs.existsSync(expected_dir)) {
-        const files = fs.readdirSync(expected_dir);
+    if (fs.existsSync(expected_html_dir)) {
+        const files = fs.readdirSync(expected_html_dir);
         for (const file of files) {
-            fs.unlinkSync(path.join(expected_dir, file));
+            fs.unlinkSync(path.join(expected_html_dir, file));
         }
-        console.log(`✓ Cleared ${expected_dir}`);
+        console.log(`✓ Cleared ${expected_html_dir}`);
     } else {
-        fs.mkdirSync(expected_dir, { recursive: true });
-        console.log(`✓ Created ${expected_dir}`);
+        fs.mkdirSync(expected_html_dir, { recursive: true });
+        console.log(`✓ Created ${expected_html_dir}`);
     }
 }
 
-// Ensure expected directory exists
-if (!fs.existsSync(expected_dir)) {
-    fs.mkdirSync(expected_dir, { recursive: true });
+// Ensure expected/html directory exists
+if (!fs.existsSync(expected_html_dir)) {
+    fs.mkdirSync(expected_html_dir, { recursive: true });
 }
 
 // Read all JSON files from analysed_structures directory
@@ -74,16 +76,16 @@ for (const json_file of json_files) {
     
     // If overwrite expected, write to expected directory
     if (overwrite_expected) {
-        const expected_path = path.join(expected_dir, html_name);
+        const expected_path = path.join(expected_html_dir, html_name);
         fs.writeFileSync(expected_path, html_content);
         console.log(`  ✓ Written to expected: ${html_name}`);
     } else {
         // Compare with expected
-        const expected_path = path.join(expected_dir, html_name);
+        const expected_path = path.join(expected_html_dir, html_name);
         
         if (!fs.existsSync(expected_path)) {
             // No expected file exists, write to actual
-            const actual_path = path.join(actual_dir, html_name);
+            const actual_path = path.join(actual_html_dir, html_name);
             fs.writeFileSync(actual_path, html_content);
             console.log(`  ⚠️  No expected file found, written to actual: ${html_name}`);
             differences_found++;
@@ -96,7 +98,7 @@ for (const json_file of json_files) {
                 matches_found++;
             } else {
                 // Write to actual directory
-                const actual_path = path.join(actual_dir, html_name);
+                const actual_path = path.join(actual_html_dir, html_name);
                 fs.writeFileSync(actual_path, html_content);
                 console.log(`  ❌ Differs from expected, written to actual: ${html_name}`);
                 differences_found++;
@@ -114,7 +116,7 @@ if (overwrite_expected) {
     console.log(`  - ${differences_found} file(s) differ or missing expected`);
     
     if (differences_found > 0) {
-        console.log(`\n⚠️  Differences found! Check files in: ${actual_dir}`);
+        console.log(`\n⚠️  Differences found! Check files in: ${actual_html_dir}`);
         console.log(`To set new baseline, run with: --overwrite-expected`);
         process.exit(1);
     } else {
