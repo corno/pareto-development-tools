@@ -48,34 +48,36 @@
             },
             "implementation": {
                 "generated": ["generated", true],
-                "operations": {
-                    "impure": ["wildcards", [
-                        "/*/*.ts"
-                    ]],
-                    "pure": ["wildcards", [
-                        "/*/*.ts"
+                "algorithms": {
+                    "operations": {
+                        "impure": ["wildcards", [
+                            "/*/*.ts"
+                        ]],
+                        "pure": ["wildcards", [
+                            "/*/*.ts"
+                        ]]
+                    },
+                    "procedures": {
+                        "guaranteed": ["wildcards", [
+                            "/*.ts"
+                        ]],
+                        "unguaranteed": ["wildcards", [
+                            "/*.ts"
+                        ]]
+                    
+                    },
+                    "queries": {
+                        "guaranteed": ["wildcards", [
+                            "/*.ts"
+                        ]],
+                        "unguaranteed": ["wildcards", [
+                            "/*.ts"
+                        ]]
+                    },
+                    "transformations": ["wildcards", [
+                        "/*/**/*.ts"
                     ]]
-                },
-                "procedures": {
-                    "guaranteed": ["wildcards", [
-                        "/*.ts"
-                    ]],
-                    "unguaranteed": ["wildcards", [
-                        "/*.ts"
-                    ]]
-                
-                },
-                "queries": {
-                    "guaranteed": ["wildcards", [
-                        "/*.ts"
-                    ]],
-                    "unguaranteed": ["wildcards", [
-                        "/*.ts"
-                    ]]
-                },
-                "transformations": ["wildcards", [
-                    "/*/**/*.ts"
-                ]]
+                }
             },
 
             "bin": ["wildcards", [

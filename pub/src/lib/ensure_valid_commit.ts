@@ -83,6 +83,9 @@ const validate_structure = validateStructureModule.$$;
 const buildAndTestModule = require('./build_and_test');
 const build_and_test = buildAndTestModule.$$;
 import { clean_project } from './clean_project';
+import { get_directory_tree } from '../queries/get_directory_tree';
+import { compare_directories } from '../transformations/compare_directories';
+import type { Directory_Diff } from '../transformations/compare_directories';
 
 /**
  * Traverse the structure and collect all paths where ["generated", false]
@@ -123,6 +126,9 @@ export type Status =
     | ['not ready', {
         reason: 
         | ['structure not valid', { 
+            errors: string[]
+        }]
+        | ['interface implementation mismatch', {
             errors: string[]
         }]
         | ['already staged', null]
@@ -170,6 +176,58 @@ export const $$ = async (repo_path: string, structure: any, prompt_for_commit_me
     
     // Collect warnings from structure validation
     all_warnings.push(...validation_result[1].warnings);
+    
+    // 1.5. Check interface vs implementation (if both directories exist)
+    const interface_dir = path.join(repo_path, 'pub', 'src', 'interface', 'algorithms');
+    const implementation_dir = path.join(repo_path, 'pub', 'src', 'implementation', 'algorithms');
+    
+    if (fs.existsSync(interface_dir) && fs.existsSync(implementation_dir)) {
+        try {
+            const interface_tree = get_directory_tree(interface_dir);
+            const implementation_tree = get_directory_tree(implementation_dir);
+            const diff = compare_directories(interface_tree, implementation_tree);
+            
+            // Collect errors from the diff
+            const collect_errors = (diff: Directory_Diff, path_prefix: string = ''): string[] => {
+                const errors: string[] = [];
+                for (const [name, node_diff] of Object.entries(diff)) {
+                    const item_path = path_prefix ? `${path_prefix}/${name}` : name;
+                    if (node_diff[0] === 'error') {
+                        const error_type = node_diff[1][0];
+                        switch (error_type) {
+                            case 'missing':
+                                errors.push(`${item_path} - MISSING in implementation`);
+                                break;
+                            case 'superfluous':
+                                errors.push(`${item_path} - SUPERFLUOUS (not in interface)`);
+                                break;
+                            case 'not a directory':
+                                errors.push(`${item_path} - should be a DIRECTORY`);
+                                break;
+                            case 'not a file':
+                                errors.push(`${item_path} - should be a FILE`);
+                                break;
+                        }
+                    } else if (node_diff[1][0] === 'directory') {
+                        errors.push(...collect_errors(node_diff[1][1], item_path));
+                    }
+                }
+                return errors;
+            };
+            
+            const interface_errors = collect_errors(diff);
+            if (interface_errors.length > 0) {
+                return ['not ready', {
+                    reason: ['interface implementation mismatch', {
+                        errors: interface_errors
+                    }]
+                }];
+            }
+        } catch (err: any) {
+            // If we can't check, treat it as a warning
+            all_warnings.push(`Failed to check interface vs implementation: ${err.message}`);
+        }
+    }
     
     if (!skip_validation) {
         // 2. Check if anything is already staged

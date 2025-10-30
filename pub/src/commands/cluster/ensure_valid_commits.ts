@@ -5,7 +5,7 @@ import * as path from 'path';
 import * as ensureValidCommitModule from '../../lib/ensure_valid_commit';
 import { analyze_dependencies, get_build_order } from '../../lib/dependency_graph_utils';
 
-function main(): void {
+async function main(): Promise<void> {
     /**
      * Ensure Valid Commits for All Packages
      * 
@@ -109,7 +109,7 @@ function main(): void {
                 return input;
             };
             
-            const result = ensure_valid_commit(pkg.path, structure, prompt_for_commit_message, {
+            const result = await ensure_valid_commit(pkg.path, structure, prompt_for_commit_message, {
                 skip_validation: is_force,
                 skip_push: no_push,
                 skip_dep_upgrade: skip_dep_upgrade
@@ -126,11 +126,20 @@ function main(): void {
                 const [reason_type, reason_details] = result[1].reason;
                 console.error(`❌ ${pkg.name}: Failed - ${reason_type}`);
                 
-                // Always show structure validation errors (not just in verbose mode)
+                // Show detailed error information based on type
                 if (reason_type === 'structure not valid') {
                     console.error('   Structure validation errors:');
-                    (reason_details as { errors: string[] }).errors.forEach(error => console.error(`   - ${error}`));
-                } else if (verbose && reason_details && typeof reason_details === 'object' && 'details' in reason_details) {
+                    (reason_details as { errors: string[] }).errors.forEach(error => console.error(`     ${error}`));
+                } else if (reason_type === 'interface implementation mismatch') {
+                    console.error('   Interface/Implementation mismatch:');
+                    (reason_details as { errors: string[] }).errors.forEach(error => console.error(`     ${error}`));
+                } else if (reason_type === 'already staged') {
+                    console.error('   There are already staged files. Commit or unstage them first.');
+                    console.error('   Use --force to bypass this check.');
+                } else if (reason_type === 'clean failed') {
+                    console.error('   Clean errors:');
+                    (reason_details as { errors: string[] }).errors.forEach(error => console.error(`     ${error}`));
+                } else if (reason_details && typeof reason_details === 'object' && 'details' in reason_details) {
                     console.error(`   ${(reason_details as { details: string }).details}`);
                 }
                 

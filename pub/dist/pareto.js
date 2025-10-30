@@ -72,6 +72,10 @@ const COMMANDS = {
         file: './commands/validate_structure.js',
         description: 'Validate that the repository structure does not deviate from the standard'
     },
+    'check-interface-implementation': {
+        file: './commands/check_interface_implementation.js',
+        description: 'Compare interface/algorithms vs implementation structure'
+    },
     'cluster-validate-structure': {
         file: './commands/cluster/validate_structure.js',
         description: 'for each repo in the directory; Validate that the repository structure does not deviate from the standard'

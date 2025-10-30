@@ -38,7 +38,7 @@ const fs = __importStar(require("fs"));
 const path = __importStar(require("path"));
 const ensureValidCommitModule = __importStar(require("../../lib/ensure_valid_commit"));
 const dependency_graph_utils_1 = require("../../lib/dependency_graph_utils");
-function main() {
+async function main() {
     /**
      * Ensure Valid Commits for All Packages
      *
@@ -137,7 +137,7 @@ function main() {
                 }
                 return input;
             };
-            const result = ensure_valid_commit(pkg.path, structure, prompt_for_commit_message, {
+            const result = await ensure_valid_commit(pkg.path, structure, prompt_for_commit_message, {
                 skip_validation: is_force,
                 skip_push: no_push,
                 skip_dep_upgrade: skip_dep_upgrade
@@ -153,12 +153,24 @@ function main() {
             else {
                 const [reason_type, reason_details] = result[1].reason;
                 console.error(`❌ ${pkg.name}: Failed - ${reason_type}`);
-                // Always show structure validation errors (not just in verbose mode)
+                // Show detailed error information based on type
                 if (reason_type === 'structure not valid') {
                     console.error('   Structure validation errors:');
-                    reason_details.errors.forEach(error => console.error(`   - ${error}`));
+                    reason_details.errors.forEach(error => console.error(`     ${error}`));
                 }
-                else if (verbose && reason_details && typeof reason_details === 'object' && 'details' in reason_details) {
+                else if (reason_type === 'interface implementation mismatch') {
+                    console.error('   Interface/Implementation mismatch:');
+                    reason_details.errors.forEach(error => console.error(`     ${error}`));
+                }
+                else if (reason_type === 'already staged') {
+                    console.error('   There are already staged files. Commit or unstage them first.');
+                    console.error('   Use --force to bypass this check.');
+                }
+                else if (reason_type === 'clean failed') {
+                    console.error('   Clean errors:');
+                    reason_details.errors.forEach(error => console.error(`     ${error}`));
+                }
+                else if (reason_details && typeof reason_details === 'object' && 'details' in reason_details) {
                     console.error(`   ${reason_details.details}`);
                 }
                 results.failed.push({ name: pkg.name, reason: reason_type });

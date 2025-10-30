@@ -93,11 +93,40 @@ async function main(): Promise<void> {
     } else {
         console.error('\n❌ Failed to create valid commit');
         const [reason_type, reason_details] = result[1].reason;
-        if (reason_type === 'commit failed') {
-            console.error('commit failed:');
-            console.error(reason_details);
-        } else {
-            console.error('Unknown error:', reason_type, reason_details);
+        
+        switch (reason_type) {
+            case 'structure not valid':
+                console.error('\nStructure validation errors:');
+                reason_details.errors.forEach((error: string) => {
+                    console.error(`  - ${error}`);
+                });
+                break;
+            case 'interface implementation mismatch':
+                console.error('\nInterface/Implementation mismatch errors:');
+                reason_details.errors.forEach((error: string) => {
+                    console.error(`  - ${error}`);
+                });
+                break;
+            case 'already staged':
+                console.error('\nThere are already staged files. Commit or unstage them first.');
+                console.error('Use --force to bypass this check.');
+                break;
+            case 'tests failing':
+            case 'build failing':
+            case 'npm install failed':
+            case 'commit failed':
+            case 'push failed':
+                console.error(`\n${reason_type}:`);
+                console.error(reason_details.details);
+                break;
+            case 'clean failed':
+                console.error('\nClean failed:');
+                reason_details.errors.forEach((error: string) => {
+                    console.error(`  - ${error}`);
+                });
+                break;
+            default:
+                console.error('Unknown error:', reason_type, reason_details);
         }
         process.exit(1);
     }
