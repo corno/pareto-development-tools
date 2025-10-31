@@ -79,22 +79,14 @@ function renderTable(table: { classes: string[]; children: Table_Section[] }): s
             // Header row - render cells as <th> elements
             const cells = r.cells.map(c => {
                 const cellClassAttr = c.classes.length > 0 ? ` class="${c.classes.join(' ')}"` : ''
-                const cellStyleParts: string[] = []
-                if (c.width) cellStyleParts.push(`width: ${c.width}px`)
-                if (c.height) cellStyleParts.push(`height: ${c.height}px`)
-                const cellStyleAttr = cellStyleParts.length > 0 ? ` style="${cellStyleParts.join('; ')}"` : ''
-                return `<th${cellClassAttr}${cellStyleAttr}>${renderDiv(c.div)}</th>`
+                return `<th${cellClassAttr}>${renderDiv(c.div)}</th>`
             }).join('')
             return `<tr${rowHeightAttr}>${cells}</tr>`
         } else {
             // Data row - render cells as <td> elements
             const cells = r.cells.map(c => {
                 const cellClassAttr = c.classes.length > 0 ? ` class="${c.classes.join(' ')}"` : ''
-                const cellStyleParts: string[] = []
-                if (c.width) cellStyleParts.push(`width: ${c.width}px`)
-                if (c.height) cellStyleParts.push(`height: ${c.height}px`)
-                const cellStyleAttr = cellStyleParts.length > 0 ? ` style="${cellStyleParts.join('; ')}"` : ''
-                return `<td${cellClassAttr}${cellStyleAttr}>${renderDiv(c.div)}</td>`
+                return `<td${cellClassAttr}>${renderDiv(c.div)}</td>`
             }).join('')
             return `<tr${rowHeightAttr}>${cells}</tr>`
         }

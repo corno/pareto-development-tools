@@ -86,7 +86,5 @@ export type Table_Row = {
 
 export type Table_Cell = {
     'classes': Classes
-    'width'?: number
-    'height'?: number
     'div': Div
 }
