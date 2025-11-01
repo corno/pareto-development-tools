@@ -354,7 +354,57 @@ export const $$ = async (args: string[]): Promise<void> => {
         console.log(`Analyzing cluster: ${path.basename(cluster_dir)}`)
         console.log('='.repeat(60))
         
-        // Analyze cluster state
+        // Check Git clean status for all packages BEFORE analysis (for all modes except --structural)
+        if (!structural_analysis) {
+            // Do a quick directory scan to find packages before full analysis
+            if (!fs.existsSync(cluster_dir)) {
+                console.error(`Error: Directory does not exist: ${cluster_dir}`)
+                process.exit(1)
+            }
+            
+            const entries = fs.readdirSync(cluster_dir, { withFileTypes: true })
+            const packageDirs = entries.filter(entry => entry.isDirectory()).map(entry => entry.name)
+            
+            let anyPackageNeedsCleaning = false
+            
+            console.log('⚠ Checking Git workspace cleanup status for all packages...\n')
+            
+            for (const packageName of packageDirs) {
+                const package_path = path.join(cluster_dir, packageName)
+                // Check if it looks like a package (has pub/package.json)
+                const pubPackageJson = path.join(package_path, 'pub', 'package.json')
+                if (fs.existsSync(pubPackageJson)) {
+                    const cleanStatus = checkGitCleanStatus(package_path)
+                    
+                    if (cleanStatus.shouldClean) {
+                        anyPackageNeedsCleaning = true
+                        console.log(`📦 ${packageName}:`)
+                        
+                        if (cleanStatus.ignoredFiles.length > 0) {
+                            console.log('  Files/directories that would be removed (ignored files):')
+                            cleanStatus.ignoredFiles.forEach(file => console.log(`    ${file}`))
+                        }
+                        
+                        if (cleanStatus.trackedIgnoredFiles.length > 0) {
+                            console.log('  Tracked files that are now ignored:')
+                            cleanStatus.trackedIgnoredFiles.forEach(file => console.log(`    ${file}`))
+                        }
+                        console.log('')
+                    }
+                }
+            }
+            
+            if (anyPackageNeedsCleaning) {
+                const shouldContinue = await askUserConfirmation()
+                if (!shouldContinue) {
+                    console.log('Analysis cancelled by user.')
+                    process.exit(0)
+                }
+                console.log('')
+            }
+        }
+        
+        // Now perform the full analysis
         const cluster_state = analyse_cluster({
             'cluster path': cluster_dir
         })

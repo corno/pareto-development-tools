@@ -10,7 +10,7 @@
 <title>dependencies</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-386 1101.18,-386 1101.18,4 -4,4"/>
 <text text-anchor="middle" x="548.59" y="-366.8" font-family="Times,serif" font-size="14.00">Dependency Graph</text>
-<text text-anchor="middle" x="548.59" y="-351.8" font-family="Times,serif" font-size="14.00">Generated: 2025&#45;11&#45;01T16:47:49.000Z</text>
+<text text-anchor="middle" x="548.59" y="-351.8" font-family="Times,serif" font-size="14.00">Generated: 2025&#45;11&#45;01T16:52:21.668Z</text>
 <text text-anchor="middle" x="548.59" y="-336.8" font-family="Times,serif" font-size="14.00">Directory: my_test_cluster</text>
 <g id="clust1" class="cluster">
 <title>cluster_legend</title>

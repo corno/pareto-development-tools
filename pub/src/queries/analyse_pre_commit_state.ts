@@ -1,7 +1,6 @@
 import { Pre_Commit_State } from "../interface/package_state"
 
 import * as path from 'path';
-import * as child_process from 'child_process';
 
 import * as buildAndTestModule from "../old_lib/build_and_test"
 import { analyse_structural_state } from "./analyse_structural_state"
@@ -25,31 +24,6 @@ export function analyse_pre_commit_state(
         'directory name': $p['directory name'],
         'package name': $p['package name']
     });
-
-    // Clean git workspace and update dependencies
-    try {
-        // Clean ignored files
-        child_process.execSync('git clean -fXd', { cwd: package_path, stdio: 'inherit' });
-        
-        // Clean tracked files that are now ignored
-        child_process.execSync('git ls-files -ci --exclude-standard | xargs -r git rm --cached', { 
-            cwd: package_path, 
-            stdio: 'inherit',
-            shell: '/bin/bash'
-        });
-        
-        // Update to latest dependencies in pub directory
-        const pubDir = path.join(package_path, 'pub');
-        child_process.execSync('update2latest . dependencies', { cwd: pubDir, stdio: 'inherit' });
-        child_process.execSync('npm install', { cwd: pubDir, stdio: 'inherit' });
-        
-        // Update to latest dependencies in test directory
-        const testDir = path.join(package_path, 'test');
-        child_process.execSync('update2latest . dependencies', { cwd: testDir, stdio: 'inherit' });
-        child_process.execSync('npm install', { cwd: testDir, stdio: 'inherit' });
-    } catch (error) {
-        console.warn(`Warning: Some cleanup/update commands failed: ${error}`);
-    }
 
     // 2. Run build and test (always)
     let test_state: Pre_Commit_State['test'];
