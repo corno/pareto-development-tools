@@ -1,5 +1,5 @@
 import { Package_State, Pre_Publish_State, Pre_Commit_State, Structural_State } from "../interface/package_state"
-import { Package_Analysis_Result } from "../interface/analysis_result"
+import { Package_Analysis_Result } from "../interface/temp/analysis_result"
 
 export const structural_state_to_analysis_result = (structural_state: Structural_State): Package_Analysis_Result => {
     

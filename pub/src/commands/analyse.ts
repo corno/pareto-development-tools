@@ -17,20 +17,20 @@
  * This will analyze /path/to/my-package-repo/pub/package.json
  */
 
-import * as fs from 'fs'
-import * as path from 'path'
-import * as child_process from 'child_process'
-import { determine_package_state } from '../queries/analyse_package'
-import { determine_pre_publish_state } from '../queries/analyse_package_pre_publish'
-import { determine_pre_commit_state } from '../queries/analyse_package_pre_commit'
-import { determine_structural_state } from '../queries/analyse_package_structural'
+import * as fs from "fs"
+import * as path from "path"
+import * as child_process from "child_process"
+import { determine_package_state } from "../queries/analyse_package"
+import { determine_pre_publish_state } from "../queries/analyse_package_pre_publish"
+import { determine_pre_commit_state } from "../queries/analyse_package_pre_commit"
+import { determine_structural_state } from "../queries/analyse_package_structural"
 import { 
     package_state_to_analysis_result,
     pre_publish_state_to_analysis_result,
     pre_commit_state_to_analysis_result,
     structural_state_to_analysis_result
-} from '../transformations/state_to_analysis_result'
-import type { Package_Analysis_Result } from '../interface/analysis_result'
+} from "../transformations/state_to_analysis_result"
+import type { Package_Analysis_Result } from "../interface/temp/analysis_result"
 
     function getStatusColor(status: string): string {
         switch (status) {

@@ -21,16 +21,16 @@
  * Example: pareto cluster analyse /path/to/my-cluster
  */
 
-import * as fs from 'fs'
-import * as path from 'path'
-import { execSync } from 'child_process'
-import * as child_process from 'child_process'
-import { $$ as analyse_cluster } from '../../queries/analyse_cluster'
-import { package_state_to_analysis_result } from '../../transformations/state_to_analysis_result'
-import { project_cluster_state_to_dot } from '../../old_lib/project_cluster_state_to_dot'
-import { dot_to_svg } from '../../old_lib/dot_to_svg'
-import { cluster_state_to_html } from '../../old_lib/cluster_state_to_html'
-import type { Package_Analysis_Result, Cluster_Analysis_Result } from '../../interface/analysis_result'
+import * as fs from "fs"
+import * as path from "path"
+import { execSync } from "child_process"
+import * as child_process from "child_process"
+import { $$ as analyse_cluster } from "../../queries/analyse_cluster"
+import { package_state_to_analysis_result } from "../../transformations/state_to_analysis_result"
+import { project_cluster_state_to_dot } from "../../old_lib/project_cluster_state_to_dot"
+import { dot_to_svg } from "../../old_lib/dot_to_svg"
+import { cluster_state_to_html } from "../../old_lib/cluster_state_to_html"
+import type { Package_Analysis_Result, Cluster_Analysis_Result } from "../../interface/temp/analysis_result"
 
     function getStatusColor(status: string): string {
         switch (status) {
