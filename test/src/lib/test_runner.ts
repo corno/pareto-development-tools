@@ -74,8 +74,6 @@ export const $$ = ($p: TestRunner): boolean => {
         const base_name = path.basename(input_file, path.extname(input_file));
         const output_name = `${base_name}.${$p.target_extension}`;
         
-        console.log(`Processing ${input_file}...`);
-        
         try {
             // Read input file
             const input_path = path.join(input_dir, input_file);
@@ -88,7 +86,7 @@ export const $$ = ($p: TestRunner): boolean => {
             if ($p.overwrite_expected) {
                 const expected_path = path.join(expected_output_dir, output_name);
                 fs.writeFileSync(expected_path, output_content);
-                console.log(`  ✓ Written to expected: ${output_name}`);
+                console.log(`\x1b[32m${base_name} ✓\x1b[0m`);
             } else {
                 // Compare with expected
                 const expected_path = path.join(expected_output_dir, output_name);
@@ -97,26 +95,26 @@ export const $$ = ($p: TestRunner): boolean => {
                     // No expected file exists, write to actual
                     const actual_path = path.join(actual_output_dir, output_name);
                     fs.writeFileSync(actual_path, output_content);
-                    console.log(`  ⚠️  No expected file found, written to actual: ${output_name}`);
+                    console.log(`\x1b[31m${base_name} ❌\x1b[0m`);
                     differences_found++;
                 } else {
                     // Compare with expected
                     const expected_content = fs.readFileSync(expected_path, 'utf8');
                     
                     if (output_content === expected_content) {
-                        console.log(`  ✓ Matches expected: ${output_name}`);
+                        console.log(`\x1b[32m${base_name} ✓\x1b[0m`);
                         matches_found++;
                     } else {
                         // Write to actual directory
                         const actual_path = path.join(actual_output_dir, output_name);
                         fs.writeFileSync(actual_path, output_content);
-                        console.log(`  ❌ Differs from expected, written to actual: ${output_name}`);
+                        console.log(`\x1b[31m${base_name} ❌\x1b[0m`);
                         differences_found++;
                     }
                 }
             }
         } catch (error) {
-            console.error(`  ❌ Error processing ${input_file}: ${error}`);
+            console.log(`\x1b[31m${base_name} ❌\x1b[0m`);
             differences_found++;
         }
     }
