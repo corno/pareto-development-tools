@@ -84,7 +84,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -249,7 +249,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -378,7 +378,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -498,7 +498,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -654,7 +654,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -783,7 +783,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -894,7 +894,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1068,7 +1068,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1215,7 +1215,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1371,7 +1371,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1518,7 +1518,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1674,7 +1674,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1794,7 +1794,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1941,7 +1941,7 @@
         "category": "test",
         "outcome": "skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []

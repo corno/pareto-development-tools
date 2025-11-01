@@ -166,7 +166,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -295,7 +295,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -415,7 +415,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -571,7 +571,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -700,7 +700,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -811,7 +811,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -985,7 +985,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1132,7 +1132,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1288,7 +1288,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1435,7 +1435,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1591,7 +1591,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1711,7 +1711,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1858,7 +1858,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
@@ -1969,7 +1969,7 @@
         "category": "published comparison",
         "outcome": "comparison skipped",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": []
