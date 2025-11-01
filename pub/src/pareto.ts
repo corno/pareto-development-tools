@@ -94,6 +94,14 @@ const COMMANDS = {
         file: './commands/cluster/dependency_graph.js',
         description: 'Generate and visualize dependency graph'
     },
+    'analyse': {
+        file: './commands/analyse.js',
+        description: 'Analyze a package repository (specify parent of pub/ directory)'
+    },
+    'cluster-analyse': {
+        file: './commands/cluster/analyse.js',
+        description: 'Analyze all package repositories in a cluster with colored output'
+    },
     'cd-local': {
         file: './commands/cd-local.js',
         description: 'Change directory while staying within VS Code workspace bounds'
@@ -139,7 +147,7 @@ if (!command || command === '--help' || command === '-h' || command === 'help') 
 if (!COMMANDS[effective_command]) {
     if (command === 'cluster' && subcommand) {
         console.error(`Error: Unknown 'cluster' sub-command '${subcommand}'`);
-        console.error(`\nAvailable cluster sub-commands: build, test, clean, commit, ensure-valid-commits, stage, update, validate-structure, wip, list-loc, dependency-graph`);
+        console.error(`\nAvailable cluster sub-commands: build, test, clean, commit, ensure-valid-commits, stage, update, validate-structure, wip, list-loc, dependency-graph, analyse`);
     } else {
         console.error(`Error: Unknown command '${command}'`);
     }

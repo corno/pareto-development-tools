@@ -9,10 +9,10 @@ _pareto_completions() {
     local prev="${COMP_WORDS[COMP_CWORD-1]}"
     
     # List of all available commands
-    local commands="publish ensure-valid-commit build test clean compare validate-structure update cluster help --help -h"
+    local commands="publish ensure-valid-commit build test clean compare validate-structure update analyse cluster help --help -h"
     
     # Sub-commands for 'cluster'
-    local cluster_subcommands="build test clean commit stage update compare validate-structure ensure-valid-commits wip list-loc dependency-graph"
+    local cluster_subcommands="build test clean commit stage update compare validate-structure ensure-valid-commits wip list-loc dependency-graph analyse"
     
     # If completing first argument after 'pareto'
     if [ "$COMP_CWORD" -eq 1 ]; then
@@ -26,12 +26,12 @@ _pareto_completions() {
             return 0
         fi    # Command-specific completions
     case "${prev}" in
-        publish|ensure-valid-commit|build|test|clean|compare|validate-structure|update)
+        publish|ensure-valid-commit|build|test|clean|compare|validate-structure|update|analyse)
             # These commands take a directory path as argument
             COMPREPLY=($(compgen -d -- ${cur}))
             return 0
             ;;
-        commit|stage|update|dependency-graph|wip|list-loc|ensure-valid-commits)
+        commit|stage|update|dependency-graph|wip|list-loc|ensure-valid-commits|analyse)
             # Sub-commands of 'cluster' that take a directory path
             if [[ "${COMP_WORDS[1]}" == "cluster" ]]; then
                 COMPREPLY=($(compgen -d -- ${cur}))

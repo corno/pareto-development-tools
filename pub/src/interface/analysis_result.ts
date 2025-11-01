@@ -5,6 +5,7 @@ export type Package_Analysis_Result = {
     | ['success', null]
     | ['error', null]
     | ['warning', null]
+    | ['unknown', null]
     'children': Package_Analysis_Result[]
 }
 

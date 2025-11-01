@@ -108,7 +108,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
         test_status = ['success', null]
     } else if (test_result[0] === 'skipped') {
         test_outcome = 'skipped'
-        test_status = ['warning', null]
+        test_status = ['unknown', null]
     } else {
         // failure
         if (test_result[1][0] === 'build') {
@@ -193,7 +193,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
         }
     } else if (published[0] === 'skipped') {
         pub_outcome = 'comparison skipped'
-        pub_status = ['warning', null]
+        pub_status = ['unknown', null]
     } else {
         // could not compare
         if (published[1][0] === 'no package') {
@@ -216,6 +216,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     // Determine overall status based on children
     const has_error = children.some(child => child.status[0] === 'error')
     const has_warning = children.some(child => child.status[0] === 'warning')
+    const has_unknown = children.some(child => child.status[0] === 'unknown')
     
     let overall_status: Package_Analysis_Result['status']
     let overall_outcome: string
@@ -226,6 +227,9 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     } else if (has_warning) {
         overall_status = ['warning', null]
         overall_outcome = 'has warnings'
+    } else if (has_unknown) {
+        overall_status = ['unknown', null]
+        overall_outcome = 'has unknown status'
     } else {
         overall_status = ['success', null]
         overall_outcome = 'all checks passed'

@@ -5,9 +5,13 @@ import * as path from 'path';
 import { $$ as test_runner, TestRunner } from '../lib/test_runner';
 import cluster_state_to_document from 'pareto-development-tools/dist/old_lib/cluster_state_to_document';
 import { project_cluster_state_to_dot } from 'pareto-development-tools/dist/old_lib/project_cluster_state_to_dot';
+import { dot_to_svg } from 'pareto-development-tools/dist/old_lib/dot_to_svg';
+import { cluster_state_to_html } from 'pareto-development-tools/dist/old_lib/cluster_state_to_html';
+import render_document_to_html from 'pareto-development-tools/dist/old_lib/render_html_document';
 import * as package_state_to_analysis_result_module from 'pareto-development-tools/dist/transformations/package_state_to_analysis_result';
 import type { Cluster_State, Package_State } from 'pareto-development-tools/dist/interface/package_state';
 import type { Package_Analysis_Result, Cluster_Analysis_Result } from 'pareto-development-tools/dist/interface/analysis_result';
+import type { Document } from 'pareto-development-tools/dist/interface/html';
 
 const test_base_dir = '/home/corno/workspace/pareto-development-tools/test';
 const data_dir = '/home/corno/workspace/pareto-development-tools/data/test';
@@ -103,6 +107,53 @@ const tests: Array<{ name: string, config: TestRunner }> = [
                     };
                     return JSON.stringify(error_result, null, 2);
                 }
+            },
+            'overwrite_expected': overwrite_expected
+        }
+    },
+    {
+        name: 'SVG generation',
+        config: {
+            'input_dir_name': 'expected/dot_files',
+            'output_dir_name': 'svgs',
+            'target_extension': 'svg',
+            'transformer': (input_content: string, filename: string): string => {
+                // Check if GraphViz is available
+                try {
+                    execSync('which dot', { stdio: 'pipe' });
+                } catch {
+                    throw new Error('GraphViz (dot command) not found. Please install GraphViz first.');
+                }
+                return dot_to_svg(input_content);
+            },
+            'overwrite_expected': overwrite_expected
+        }
+    },
+    {
+        name: 'HTML generation from cluster state',
+        config: {
+            'input_dir_name': 'analysed_structures',
+            'output_dir_name': 'html',
+            'target_extension': 'html',
+            'transformer': (input_content: string, filename: string): string => {
+                const cluster_state: Cluster_State = JSON.parse(input_content);
+                return cluster_state_to_html(cluster_state, {
+                    'time stamp': 'FIXED_TIMESTAMP_FOR_TESTING',
+                    'cluster path': filename
+                });
+            },
+            'overwrite_expected': overwrite_expected
+        }
+    },
+    {
+        name: 'HTML rendering from document JSON',
+        config: {
+            'input_dir_name': 'expected/html_as_json',
+            'output_dir_name': 'html',
+            'target_extension': 'html',
+            'transformer': (input_content: string, filename: string): string => {
+                const document: Document = JSON.parse(input_content);
+                return render_document_to_html(document);
             },
             'overwrite_expected': overwrite_expected
         }
