@@ -19,6 +19,7 @@
 
 import * as fs from 'fs'
 import * as path from 'path'
+import * as child_process from 'child_process'
 import { determine_package_state } from '../queries/analyse_package'
 import { determine_pre_publish_state } from '../queries/analyse_package_pre_publish'
 import { determine_pre_commit_state } from '../queries/analyse_package_pre_commit'
@@ -43,6 +44,46 @@ import type { Package_Analysis_Result } from '../interface/analysis_result'
 
 function resetColor(): string {
     return '\x1b[0m'
+}
+
+function checkGitCleanStatus(package_dir: string): { shouldClean: boolean, ignoredFiles: string[], trackedIgnoredFiles: string[] } {
+    try {
+        // Check for ignored files that would be removed
+        const ignoredResult = child_process.execSync('git clean -fXd --dry-run', { 
+            cwd: package_dir, 
+            encoding: 'utf8' 
+        }).trim()
+        const ignoredFiles = ignoredResult ? ignoredResult.split('\n').filter(line => line.startsWith('Would remove')) : []
+        
+        // Check for tracked files that are now ignored
+        const trackedIgnoredResult = child_process.execSync('git ls-files -i --exclude-standard', { 
+            cwd: package_dir, 
+            encoding: 'utf8' 
+        }).trim()
+        const trackedIgnoredFiles = trackedIgnoredResult ? trackedIgnoredResult.split('\n').filter(line => line.trim()) : []
+        
+        const shouldClean = ignoredFiles.length > 0 || trackedIgnoredFiles.length > 0
+        
+        return { shouldClean, ignoredFiles, trackedIgnoredFiles }
+    } catch (error) {
+        // If git commands fail, assume no cleaning needed
+        return { shouldClean: false, ignoredFiles: [], trackedIgnoredFiles: [] }
+    }
+}
+
+function askUserConfirmation(): Promise<boolean> {
+    const readline = require('readline')
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    })
+    
+    return new Promise<boolean>((resolve) => {
+        rl.question('Do you want to continue? (y/N): ', (answer: string) => {
+            rl.close()
+            resolve(answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes')
+        })
+    })
 }
 
 function printAnalysisResult(result: Package_Analysis_Result, depth: number = 0, category?: string): void {
@@ -114,7 +155,7 @@ Examples:
 `)
 }
 
-export const $$ = (args: string[]): void => {
+export const $$ = async (args: string[]): Promise<void> => {
     // Check for help flag
     if (args.includes('--help') || args.includes('-h')) {
         showHelp()
@@ -167,6 +208,39 @@ export const $$ = (args: string[]): void => {
     try {
         console.log(`Analyzing package: ${path.basename(package_dir)}`)
         console.log('='.repeat(50))
+        
+        // Check Git clean status for non-structural analysis
+        if (!structural_analysis) {
+            const { shouldClean, ignoredFiles, trackedIgnoredFiles } = checkGitCleanStatus(package_dir)
+            
+            if (shouldClean) {
+                console.log(`${getStatusColor('warning')}⚠ Git workspace cleanup detected:${resetColor()}`)
+                console.log('')
+                
+                if (ignoredFiles.length > 0) {
+                    console.log('Files/directories that would be removed (ignored files):')
+                    ignoredFiles.forEach(file => {
+                        console.log(`  ${file}`)
+                    })
+                    console.log('')
+                }
+                
+                if (trackedIgnoredFiles.length > 0) {
+                    console.log('Tracked files that are now ignored (would be removed from Git index):')
+                    trackedIgnoredFiles.forEach(file => {
+                        console.log(`  ${file}`)
+                    })
+                    console.log('')
+                }
+                
+                const userConfirmed = await askUserConfirmation()
+                if (!userConfirmed) {
+                    console.log('Analysis cancelled by user.')
+                    process.exit(0)
+                }
+                console.log('')
+            }
+        }
         
         // Get package name for the analysis functions
         function getPackageName(package_dir: string): string {

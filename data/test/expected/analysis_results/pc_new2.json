@@ -1,2175 +1,1882 @@
 {
-  ".vscode": {
-    "category": "project",
-    "outcome": ".vscode: not a project",
-    "status": [
-      "warning",
-      null
-    ],
-    "children": []
-  },
-  "astn": {
-    "category": "package",
-    "outcome": "has pre-publish warnings",
-    "status": [
-      "warning",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish warnings",
-        "status": [
-          "warning",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "clean",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependencies",
-            "outcome": "4 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-bin",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-data",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-dev",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-fountain-pen",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-json",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-standard-operations",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "astn-to-git": {
-    "category": "package",
-    "outcome": "has pre-publish warnings",
-    "status": [
-      "warning",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish warnings",
-        "status": [
-          "warning",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "clean",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependencies",
-            "outcome": "2 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-dev",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-fountain-pen",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "not published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "astn-to-xml": {
-    "category": "package",
-    "outcome": "has pre-publish issues",
-    "status": [
-      "issue",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish issues",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "unpushed work",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "staged files",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dirty working tree",
-                "outcome": "yes",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "unpushed commits",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "dependencies",
-            "outcome": "1 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-dev",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-fountain-pen",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "not published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "exupery": {
-    "category": "package",
-    "outcome": "has pre-publish warnings",
-    "status": [
-      "warning",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish warnings",
-        "status": [
-          "warning",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "clean",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependencies",
-            "outcome": "4 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-bin",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-data",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-dev",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-fountain-pen",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-standard-operations",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "exupery-resources": {
-    "category": "package",
-    "outcome": "has pre-publish warnings",
-    "status": [
-      "warning",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish warnings",
-        "status": [
-          "warning",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "clean",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependencies",
-            "outcome": "3 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-async",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-dev",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "exupery-standard-library": {
-    "category": "package",
-    "outcome": "has pre-publish warnings",
-    "status": [
-      "warning",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish warnings",
-        "status": [
-          "warning",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "clean",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependencies",
-            "outcome": "1 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "pareto": {
-    "category": "package",
-    "outcome": "has pre-publish issues",
-    "status": [
-      "issue",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish issues",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "unpushed work",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "staged files",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dirty working tree",
-                "outcome": "yes",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "unpushed commits",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "dependencies",
-            "outcome": "4 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency astn",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-bin",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-data",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-dev",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-fountain-pen",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-standard-operations",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "has pre-commit issues",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "build failed",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "pareto-boekhouding": {
-    "category": "package",
-    "outcome": "has pre-publish issues",
-    "status": [
-      "issue",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish issues",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "unpushed work",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "staged files",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dirty working tree",
-                "outcome": "yes",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "unpushed commits",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "dependencies",
-            "outcome": "3 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-bin",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-data",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-fountain-pen",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-standard-operations",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "pareto-fountain-pen": {
-    "category": "package",
-    "outcome": "has pre-publish warnings",
-    "status": [
-      "warning",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish warnings",
-        "status": [
-          "warning",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "clean",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependencies",
-            "outcome": "4 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-bin",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-data",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-dev",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-resources",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-standard-operations",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "pareto-json": {
-    "category": "package",
-    "outcome": "has pre-publish warnings",
-    "status": [
-      "warning",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish warnings",
-        "status": [
-          "warning",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "clean",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependencies",
-            "outcome": "3 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-bin",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-data",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-fountain-pen",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-standard-operations",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "pareto-lionweb": {
-    "category": "package",
-    "outcome": "has pre-publish issues",
-    "status": [
-      "issue",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish issues",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "unpushed work",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "staged files",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dirty working tree",
-                "outcome": "yes",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "unpushed commits",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "dependencies",
-            "outcome": "3 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency astn",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-bin",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-rawdata",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-resources",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-standard-operations",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "has pre-commit issues",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "build failed",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "pareto-standard-operations": {
-    "category": "package",
-    "outcome": "has pre-publish warnings",
-    "status": [
-      "warning",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish warnings",
-        "status": [
-          "warning",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "clean",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependencies",
-            "outcome": "1 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-standard-library",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "pre-commit checks passed",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "passed",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "pareto-targets": {
-    "category": "package",
-    "outcome": "has pre-publish issues",
-    "status": [
-      "issue",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish issues",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "unpushed work",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "staged files",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dirty working tree",
-                "outcome": "yes",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "unpushed commits",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "dependencies",
-            "outcome": "3 unknown",
-            "status": [
-              "unknown",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency exupery-core-alg",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-data",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency exupery-core-dev",
-                "outcome": "not found locally",
-                "status": [
-                  "unknown",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dependency pareto-json",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "has pre-commit issues",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "build failed",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "pareto-vscode-backend": {
-    "category": "package",
-    "outcome": "has pre-publish issues",
-    "status": [
-      "issue",
-      null
-    ],
-    "children": [
-      {
-        "category": "pre-publish",
-        "outcome": "has pre-publish issues",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": [
-          {
-            "category": "git",
-            "outcome": "unpushed work",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "staged files",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dirty working tree",
-                "outcome": "yes",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "unpushed commits",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "dependencies",
-            "outcome": "all up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": [
-              {
-                "category": "dependency pareto",
-                "outcome": "up to date",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
-          },
-          {
-            "category": "published comparison",
-            "outcome": "differs from published",
-            "status": [
-              "warning",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "pre-commit",
-            "outcome": "has pre-commit issues",
-            "status": [
-              "issue",
-              null
-            ],
-            "children": [
-              {
-                "category": "test",
-                "outcome": "build failed",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "structural",
-                "outcome": "structure valid",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": [
-                  {
-                    "category": "package name",
-                    "outcome": "matches directory",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "structure",
-                    "outcome": "valid",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  },
-                  {
-                    "category": "interface implementation",
-                    "outcome": "matched",
-                    "status": [
-                      "success",
-                      null
-                    ],
-                    "children": []
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      }
-    ]
-  }
+  ".vscode": [
+    "leaf",
+    {
+      "outcome": ".vscode: not a project",
+      "status": [
+        "warning",
+        null
+      ]
+    }
+  ],
+  "astn": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-json": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "astn-to-git": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "astn-to-xml": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exupery": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exupery-resources": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-async": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exupery-standard-library": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "astn": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "build failed",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-boekhouding": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-fountain-pen": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-resources": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-json": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-lionweb": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "astn": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-rawdata": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-resources": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "build failed",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-standard-operations": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-standard-library": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-targets": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "not found locally",
+              "status": [
+                "unknown",
+                null
+              ]
+            }
+          ],
+          "pareto": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-json": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "build failed",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-vscode-backend": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "pareto": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "differs from published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "build failed",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

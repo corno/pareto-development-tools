@@ -163,7 +163,7 @@ Examples:
 `)
 }
 
-export const $$ = (args: string[]): void => {
+export const $$ = async (args: string[]): Promise<void> => {
     // Check for help flag
     if (args.includes('--help') || args.includes('-h')) {
         showHelp()

@@ -83,12 +83,10 @@ const tests: Array<{ name: string, config: TestRunner }> = [
                             const analysis_result = state_to_analysis_result_module.package_state_to_analysis_result(package_state);
                             projects[project_name] = analysis_result;
                         } else {
-                            const not_project_analysis: Package_Analysis_Result = {
-                                'category': 'project',
+                            const not_project_analysis: Package_Analysis_Result = ['leaf', {
                                 'outcome': `${project_name}: not a project`,
-                                'status': ['warning', null],
-                                'children': []
-                            };
+                                'status': ['warning', null]
+                            }];
                             projects[project_name] = not_project_analysis;
                         }
                     }
@@ -98,12 +96,10 @@ const tests: Array<{ name: string, config: TestRunner }> = [
                     return JSON.stringify(cluster_result, null, 2);
                 } else {
                     const error_result: Cluster_Analysis_Result = {
-                        'invalid_cluster': {
-                            'category': 'cluster',
+                        'invalid_cluster': ['leaf', {
                             'outcome': 'not found or invalid',
-                            'status': ['issue', null],
-                            'children': []
-                        }
+                            'status': ['issue', null]
+                        }]
                     };
                     return JSON.stringify(error_result, null, 2);
                 }

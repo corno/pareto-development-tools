@@ -45,34 +45,71 @@ function resetColor(): string {
     return '\x1b[0m'
 }
 
-function printAnalysisResult(result: Package_Analysis_Result, depth: number = 0): void {
+function printAnalysisResult(result: Package_Analysis_Result, depth: number = 0, category?: string): void {
     const indent = '  '.repeat(depth)
-    const color = getStatusColor(result.status[0])
     const reset = resetColor()
     
-    console.log(`${indent}${color}${result.category}: ${result.outcome}${reset}`)
-    
-    // Print children with increased indentation
-    for (const child of result.children) {
-        printAnalysisResult(child, depth + 1)
+    if (result[0] === 'leaf') {
+        // Leaf node - show category and outcome with status color
+        const color = getStatusColor(result[1].status[0])
+        const displayCategory = category || 'result'
+        console.log(`${indent}${color}${displayCategory}: ${result[1].outcome}${reset}`)
+    } else {
+        // Composite node - show category with colored prefix icon, but use default text color
+        const getCompositeStatus = (compositeResult: Package_Analysis_Result): string => {
+            if (compositeResult[0] === 'leaf') {
+                return compositeResult[1].status[0]
+            } else {
+                const childStatuses = Object.values(compositeResult[1]).map(child => getCompositeStatus(child))
+                if (childStatuses.some(s => s === 'issue')) return 'issue'
+                if (childStatuses.some(s => s === 'warning')) return 'warning'
+                if (childStatuses.some(s => s === 'unknown')) return 'unknown'
+                return 'success'
+            }
+        }
+        
+        const status = getCompositeStatus(result)
+        const iconColor = getStatusColor(status)
+        const icon = status === 'issue' ? '✗' : status === 'warning' ? '⚠' : status === 'unknown' ? '?' : '✓'
+        const displayCategory = category || 'composite'
+        
+        // Use colored icon, then explicitly reset to default for text
+        console.log(`${indent}${iconColor}${icon}\x1b[0m ${displayCategory}`)
+        
+        // Print children with increased indentation
+        for (const [childCategory, child] of Object.entries(result[1])) {
+            printAnalysisResult(child, depth + 1, childCategory)
+        }
     }
 }
 
 function printClusterAnalysis(cluster_result: Cluster_Analysis_Result): void {
     const project_names = Object.keys(cluster_result).sort()
     
+    // Helper function to get status from Package_Analysis_Result
+    const getOverallStatus = (result: Package_Analysis_Result): string => {
+        if (result[0] === 'leaf') {
+            return result[1].status[0]
+        } else {
+            const childStatuses = Object.values(result[1]).map(child => getOverallStatus(child))
+            if (childStatuses.some(s => s === 'issue')) return 'issue'
+            if (childStatuses.some(s => s === 'warning')) return 'warning'
+            if (childStatuses.some(s => s === 'unknown')) return 'unknown'
+            return 'success'
+        }
+    }
+    
     for (const project_name of project_names) {
         const project_result = cluster_result[project_name]
-        const color = getStatusColor(project_result.status[0])
+        const status = getOverallStatus(project_result)
+        const color = getStatusColor(status)
         const reset = resetColor()
         
-        console.log(`\n${color}📦 ${project_name}: ${project_result.outcome}${reset}`)
+        console.log(`\n${color}📦 ${project_name}${reset}`)
         console.log('─'.repeat(60))
         
         // Print the analysis details
-        for (const child of project_result.children) {
-            printAnalysisResult(child, 1)
-        }
+        printAnalysisResult(project_result, 1, 'package')
     }
 }
 
@@ -217,7 +254,7 @@ function openInViewer(filePath: string): void {
     }
 }
 
-export const $$ = (args: string[]): void => {
+export const $$ = async (args: string[]): Promise<void> => {
     // Check for help flag
     if (args.includes('--help') || args.includes('-h')) {
         showHelp()
@@ -290,22 +327,34 @@ export const $$ = (args: string[]): void => {
                 const analysis_result = package_state_to_analysis_result(package_state)
                 cluster_analysis[project_name] = analysis_result
                 
+                // Helper function to get status from Package_Analysis_Result
+                const getOverallStatus = (result: Package_Analysis_Result): string => {
+                    if (result[0] === 'leaf') {
+                        return result[1].status[0]
+                    } else {
+                        const childStatuses = Object.values(result[1]).map(child => getOverallStatus(child))
+                        if (childStatuses.some(s => s === 'issue')) return 'issue'
+                        if (childStatuses.some(s => s === 'warning')) return 'warning'
+                        if (childStatuses.some(s => s === 'unknown')) return 'unknown'
+                        return 'success'
+                    }
+                }
+                
                 // Track overall status
-                if (analysis_result.status[0] === 'issue') {
+                const status = getOverallStatus(analysis_result)
+                if (status === 'issue') {
                     overall_has_issue = true
-                } else if (analysis_result.status[0] === 'warning') {
+                } else if (status === 'warning') {
                     overall_has_warning = true
-                } else if (analysis_result.status[0] === 'unknown') {
+                } else if (status === 'unknown') {
                     overall_has_unknown = true
                 }
             } else {
                 // Not a project
-                cluster_analysis[project_name] = {
-                    'category': 'project',
+                cluster_analysis[project_name] = ['leaf', {
                     'outcome': 'not a project',
-                    'status': ['warning', null],
-                    'children': []
-                }
+                    'status': ['warning', null]
+                }]
                 overall_has_warning = true
             }
         }
@@ -315,12 +364,25 @@ export const $$ = (args: string[]): void => {
         
         console.log('\n' + '='.repeat(60))
         
+        // Helper function to get status from Package_Analysis_Result
+        const getOverallStatus = (result: Package_Analysis_Result): string => {
+            if (result[0] === 'leaf') {
+                return result[1].status[0]
+            } else {
+                const childStatuses = Object.values(result[1]).map(child => getOverallStatus(child))
+                if (childStatuses.some(s => s === 'issue')) return 'issue'
+                if (childStatuses.some(s => s === 'warning')) return 'warning'
+                if (childStatuses.some(s => s === 'unknown')) return 'unknown'
+                return 'success'
+            }
+        }
+        
         // Summary
         const total_projects = Object.keys(cluster_analysis).length
-        const issue_count = Object.values(cluster_analysis).filter(p => p.status[0] === 'issue').length
-        const warning_count = Object.values(cluster_analysis).filter(p => p.status[0] === 'warning').length
-        const unknown_count = Object.values(cluster_analysis).filter(p => p.status[0] === 'unknown').length
-        const success_count = Object.values(cluster_analysis).filter(p => p.status[0] === 'success').length
+        const issue_count = Object.values(cluster_analysis).filter(p => getOverallStatus(p) === 'issue').length
+        const warning_count = Object.values(cluster_analysis).filter(p => getOverallStatus(p) === 'warning').length
+        const unknown_count = Object.values(cluster_analysis).filter(p => getOverallStatus(p) === 'unknown').length
+        const success_count = Object.values(cluster_analysis).filter(p => getOverallStatus(p) === 'success').length
         
         console.log(`Summary: ${total_projects} project(s)`)
         console.log(`${getStatusColor('success')}✓ ${success_count} successful${resetColor()}`)
