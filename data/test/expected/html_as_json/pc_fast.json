@@ -643,7 +643,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -651,7 +651,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -680,7 +680,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -948,7 +948,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -956,7 +956,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -985,7 +985,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -1271,7 +1271,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -1279,7 +1279,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -1308,7 +1308,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -1594,7 +1594,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -1602,7 +1602,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -1631,7 +1631,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -1917,7 +1917,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -1925,7 +1925,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -1954,7 +1954,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -2240,7 +2240,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -2248,7 +2248,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -2277,7 +2277,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -2563,7 +2563,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -2571,7 +2571,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -2600,7 +2600,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -2886,7 +2886,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -2894,7 +2894,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -2923,7 +2923,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -3209,7 +3209,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -3217,7 +3217,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -3246,7 +3246,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -3532,7 +3532,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -3540,7 +3540,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -3569,7 +3569,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -3855,7 +3855,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -3863,7 +3863,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -3892,7 +3892,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -4178,7 +4178,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -4186,7 +4186,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -4215,7 +4215,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -4501,7 +4501,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -4509,7 +4509,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -4538,7 +4538,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }
@@ -4806,7 +4806,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -4814,7 +4814,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Skipped"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -4843,7 +4843,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "Not tested"
+                                                  "text": "not published"
                                                 }
                                               ]
                                             }

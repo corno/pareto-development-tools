@@ -94,9 +94,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -107,7 +107,7 @@
                 "project",
                 {
                     "package name in package.json": "astn-to-git",
-                    "version": "0.0.0",
+                    "version": null,
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
@@ -171,8 +171,8 @@
             "astn-to-xml": [
                 "project",
                 {
-                    "package name in package.json": "@different/astn-to-xml",
-                    "version": "0.0.0",
+                    "package name in package.json": "astn-to-xml",
+                    "version": null,
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
@@ -195,7 +195,7 @@
                         },
                         "git": {
                             "staged files": false,
-                            "dirty working tree": false,
+                            "dirty working tree": true,
                             "unpushed commits": false
                         },
                         "dependencies": {
@@ -253,7 +253,7 @@
                         },
                         "git": {
                             "staged files": false,
-                            "dirty working tree": true,
+                            "dirty working tree": false,
                             "unpushed commits": false
                         },
                         "dependencies": {
@@ -305,9 +305,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -368,9 +368,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -417,9 +417,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -434,8 +434,11 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "success",
-                                null
+                                "failure",
+                                [
+                                    "build",
+                                    null
+                                ]
                             ],
                             "structural": {
                                 "package name the same as directory": true,
@@ -523,9 +526,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -604,9 +607,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -692,9 +695,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -773,9 +776,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -790,8 +793,11 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "success",
-                                null
+                                "failure",
+                                [
+                                    "build",
+                                    null
+                                ]
                             ],
                             "structural": {
                                 "package name the same as directory": true,
@@ -863,9 +869,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -921,9 +927,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -938,8 +944,11 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "success",
-                                null
+                                "failure",
+                                [
+                                    "build",
+                                    null
+                                ]
                             ],
                             "structural": {
                                 "package name the same as directory": true,
@@ -1002,9 +1011,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]
@@ -1019,8 +1028,11 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "success",
-                                null
+                                "failure",
+                                [
+                                    "build",
+                                    null
+                                ]
                             ],
                             "structural": {
                                 "package name the same as directory": true,
@@ -1053,9 +1065,9 @@
                             }
                         },
                         "published comparison": [
-                            "could not compare",
+                            "could compare",
                             [
-                                "not published",
+                                "different",
                                 null
                             ]
                         ]

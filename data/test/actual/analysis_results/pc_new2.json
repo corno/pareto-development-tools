@@ -108,7 +108,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -324,12 +324,40 @@
         "children": [
           {
             "category": "git",
-            "outcome": "clean",
+            "outcome": "unpushed work",
             "status": [
-              "success",
+              "issue",
               null
             ],
-            "children": []
+            "children": [
+              {
+                "category": "staged files",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dirty working tree",
+                "outcome": "yes",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "unpushed commits",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
           },
           {
             "category": "dependencies",
@@ -370,17 +398,17 @@
           },
           {
             "category": "pre-commit",
-            "outcome": "has pre-commit issues",
+            "outcome": "pre-commit checks passed",
             "status": [
-              "issue",
+              "success",
               null
             ],
             "children": [
               {
                 "category": "test",
-                "outcome": "tests failed (1 failures)",
+                "outcome": "passed",
                 "status": [
-                  "issue",
+                  "success",
                   null
                 ],
                 "children": []
@@ -430,56 +458,28 @@
   },
   "exupery": {
     "category": "package",
-    "outcome": "has pre-publish issues",
+    "outcome": "has pre-publish warnings",
     "status": [
-      "issue",
+      "warning",
       null
     ],
     "children": [
       {
         "category": "pre-publish",
-        "outcome": "has pre-publish issues",
+        "outcome": "has pre-publish warnings",
         "status": [
-          "issue",
+          "warning",
           null
         ],
         "children": [
           {
             "category": "git",
-            "outcome": "unpushed work",
+            "outcome": "clean",
             "status": [
-              "issue",
+              "success",
               null
             ],
-            "children": [
-              {
-                "category": "staged files",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "dirty working tree",
-                "outcome": "yes",
-                "status": [
-                  "issue",
-                  null
-                ],
-                "children": []
-              },
-              {
-                "category": "unpushed commits",
-                "outcome": "no",
-                "status": [
-                  "success",
-                  null
-                ],
-                "children": []
-              }
-            ]
+            "children": []
           },
           {
             "category": "dependencies",
@@ -547,7 +547,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -556,17 +556,17 @@
           },
           {
             "category": "pre-commit",
-            "outcome": "has pre-commit issues",
+            "outcome": "pre-commit checks passed",
             "status": [
-              "issue",
+              "success",
               null
             ],
             "children": [
               {
                 "category": "test",
-                "outcome": "build failed",
+                "outcome": "passed",
                 "status": [
-                  "issue",
+                  "success",
                   null
                 ],
                 "children": []
@@ -678,7 +678,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -791,7 +791,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -995,7 +995,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -1172,7 +1172,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -1330,7 +1330,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -1479,7 +1479,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -1665,7 +1665,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -1787,7 +1787,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -1964,7 +1964,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null
@@ -2105,7 +2105,7 @@
           },
           {
             "category": "published comparison",
-            "outcome": "not published",
+            "outcome": "differs from published",
             "status": [
               "warning",
               null

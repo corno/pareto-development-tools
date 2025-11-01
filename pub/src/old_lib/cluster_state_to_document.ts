@@ -430,9 +430,7 @@ export function cluster_state_to_document(
         
         // Test
         let testSpan: Span
-        if (state['pre-publish']['pre-commit'].test[0] === 'skipped') {
-            testSpan = textSpan('Skipped', ['status-skip'])
-        } else if (state['pre-publish']['pre-commit'].test[0] === 'success') {
+        if (state['pre-publish']['pre-commit'].test[0] === 'success') {
             testSpan = textSpan('✓ Pass', ['status-ok'])
         } else {
             const failType = state['pre-publish']['pre-commit'].test[1][0]
@@ -495,9 +493,7 @@ export function cluster_state_to_document(
         
         // Published
         let publishedSpan: Span
-        if (state['pre-publish']['published comparison'][0] === 'skipped') {
-            publishedSpan = textSpan('Not tested', ['status-skip'])
-        } else if (state['pre-publish']['published comparison'][0] === 'could not compare') {
+        if (state['pre-publish']['published comparison'][0] === 'could not compare') {
             const reason = state['pre-publish']['published comparison'][1][0]
             publishedSpan = textSpan(reason.replace(/-/g, ' '), ['status-skip'])
         } else {

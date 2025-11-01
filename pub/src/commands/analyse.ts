@@ -21,7 +21,13 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { determine_package_state } from '../queries/analyse_package'
+import { determine_pre_publish_state } from '../queries/analyse_package_pre_publish'
+import { determine_pre_commit_state } from '../queries/analyse_package_pre_commit'
+import { determine_structural_state } from '../queries/analyse_package_structural'
 import { $$ as package_state_to_analysis_result } from '../transformations/package_state_to_analysis_result'
+import { $$ as pre_publish_state_to_analysis_result } from '../transformations/pre_publish_state_to_analysis_result'
+import { $$ as pre_commit_state_to_analysis_result } from '../transformations/pre_commit_state_to_analysis_result'
+import { $$ as structural_state_to_analysis_result } from '../transformations/structural_state_to_analysis_result'
 import type { Package_Analysis_Result } from '../interface/analysis_result'
 
     function getStatusColor(status: string): string {
@@ -59,26 +65,28 @@ Usage:
   pareto analyse [options] [package-root-directory]
 
 Options:
-  --help                              Show this help message
-  --fast                              Fast analysis (skip build, test, and published comparison)
-  --skip-build-and-test              Skip building and testing (faster analysis)
-  --skip-compare-against-published   Skip comparison with published version
+  --help                Show this help message
+  --all                 Full package analysis (default - includes all checks)
+  --pre-publish         Pre-publish analysis (includes build, test, structure, and published comparison)
+  --pre-commit          Pre-commit analysis (includes build, test, and structure validation)
+  --structural          Structural analysis only (fastest - only structure validation)
 
-By default, the analysis includes:
-  • Building and testing the package
-  • Comparing against the published version
-
-You can use --fast or individual skip flags to speed up the analysis, by skipping build, test, and published comparison.
+Analysis levels (from most comprehensive to fastest):
+  • --all: Complete package state analysis (default)
+  • --pre-publish: Pre-publish checks (git state, dependencies, testing, structure, published comparison)
+  • --pre-commit: Pre-commit checks (testing and structure validation)
+  • --structural: Structure validation only
 
 Arguments:
   package-root-directory   Path to package root (defaults to current directory)
                           Expected structure: <path>/pub/package.json
 
 Examples:
-  pareto analyse                     # Analyze current directory (full analysis)
-  pareto analyse /path/to/package    # Analyze specific package (full analysis)
-  pareto analyse --fast              # Fast analysis (skips build, test, and comparison)
-  pareto analyse --skip-build-and-test --skip-compare-against-published  # Same as --fast
+  pareto analyse                          # Full analysis (--all)
+  pareto analyse /path/to/package         # Full analysis of specific package
+  pareto analyse --structural             # Fast structural check only
+  pareto analyse --pre-commit             # Pre-commit validation
+  pareto analyse --pre-publish            # Pre-publish validation
 `)
 }
 
@@ -92,10 +100,18 @@ export const $$ = (): void => {
         process.exit(0)
     }
     
-    // Parse flags
-    const fast_mode = args.includes('--fast')
-    const skip_build_and_test = args.includes('--skip-build-and-test') || fast_mode
-    const skip_compare_against_published = args.includes('--skip-compare-against-published') || fast_mode
+    // Parse analysis level flags
+    const all_analysis = args.includes('--all') || (!args.includes('--pre-publish') && !args.includes('--pre-commit') && !args.includes('--structural'))
+    const pre_publish_analysis = args.includes('--pre-publish')
+    const pre_commit_analysis = args.includes('--pre-commit')
+    const structural_analysis = args.includes('--structural')
+    
+    // Validate that only one analysis level is specified
+    const analysis_flags = [all_analysis, pre_publish_analysis, pre_commit_analysis, structural_analysis].filter(Boolean)
+    if (analysis_flags.length > 1) {
+        console.error('Error: Please specify only one analysis level (--all, --pre-publish, --pre-commit, or --structural)')
+        process.exit(1)
+    }
     
     // Get package directory (non-flag arguments)
     const non_flag_args = args.filter(arg => !arg.startsWith('--'))
@@ -112,24 +128,47 @@ export const $$ = (): void => {
     
     try {
         console.log(`Analyzing package: ${path.basename(package_dir)}`)
-        
-        // Show information about default behavior and available speed-up options
-        if (!skip_build_and_test || !skip_compare_against_published) {
-            console.log('💡 Tip: You can use --fast to speed up the analysis')
-        }
-        
         console.log('='.repeat(50))
         
-        // Determine package state
-        const package_state = determine_package_state({
+        // Get package name for the analysis functions
+        function getPackageName(package_dir: string): string {
+            const package_json_path = path.join(package_dir, 'pub', 'package.json')
+            try {
+                const package_content = JSON.parse(fs.readFileSync(package_json_path, 'utf8'))
+                return package_content.name || path.basename(package_dir)
+            } catch {
+                return path.basename(package_dir)
+            }
+        }
+        
+        const package_name = getPackageName(package_dir)
+        
+        const analysis_params = {
             'path to package': path.dirname(package_dir),
             'directory name': path.basename(package_dir),
-            'build and test': !skip_build_and_test,  // Default to true, skip if flag set
-            'compare to published': !skip_compare_against_published  // Default to true, skip if flag set
-        })
+            'package name': package_name
+        }
         
-        // Transform to analysis result
-        const analysis_result = package_state_to_analysis_result(package_state)
+        let analysis_result: Package_Analysis_Result
+        
+        if (structural_analysis) {
+            console.log('Running structural analysis...')
+            const structural_state = determine_structural_state(analysis_params)
+            analysis_result = structural_state_to_analysis_result(structural_state)
+        } else if (pre_commit_analysis) {
+            console.log('Running pre-commit analysis...')
+            const pre_commit_state = determine_pre_commit_state(analysis_params)
+            analysis_result = pre_commit_state_to_analysis_result(pre_commit_state)
+        } else if (pre_publish_analysis) {
+            console.log('Running pre-publish analysis...')
+            const pre_publish_state = determine_pre_publish_state(analysis_params)
+            analysis_result = pre_publish_state_to_analysis_result(pre_publish_state)
+        } else {
+            // Full analysis (--all or default)
+            console.log('Running full package analysis...')
+            const package_state = determine_package_state(analysis_params)
+            analysis_result = package_state_to_analysis_result(package_state)
+        }
         
         // Print colored analysis result
         printAnalysisResult(analysis_result)

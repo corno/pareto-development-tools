@@ -11,8 +11,6 @@ export type Parameters = {
     'path to package': string,
     'directory name': string,
     'package name': string,
-    'build and test': boolean,
-    'compare to published': boolean,
 }
 
 export function analyse_pre_publish_state(
@@ -132,46 +130,41 @@ export function analyse_pre_publish_state(
 
     const dependencies = determine_dependencies(project_path);
 
-    // 3. Compare with published version
+    // 3. Compare with published version (always)
     let published_comparison: Pre_Publish_State['published comparison'];
-    if ($p['compare to published']) {
-        const comparison_result = compare_with_published({ 'package path': project_path });
+    const comparison_result = compare_with_published({ 'package path': project_path });
+    
+    if (comparison_result[0] === 'could not compare') {
+        const [_, reason] = comparison_result;
         
-        if (comparison_result[0] === 'could not compare') {
-            const [_, reason] = comparison_result;
-            
-            switch (reason[0]) {
-                case 'no package json':
-                    published_comparison = ['could not compare', ['no package', null]];
-                    break;
-                case 'no package name':
-                    published_comparison = ['could not compare', ['no package name', null]];
-                    break;
-                case 'not published':
-                    published_comparison = ['could not compare', ['not published', null]];
-                    break;
-            }
-        } else {
-            // comparison_result[0] === 'could compare'
-            const [_, result] = comparison_result;
-            
-            if (result[0] === 'identical') {
-                published_comparison = ['could compare', ['identical', null]];
-            } else {
-                // result[0] === 'different'
-                published_comparison = ['could compare', ['different', null]];
-            }
+        switch (reason[0]) {
+            case 'no package json':
+                published_comparison = ['could not compare', ['no package', null]];
+                break;
+            case 'no package name':
+                published_comparison = ['could not compare', ['no package name', null]];
+                break;
+            case 'not published':
+                published_comparison = ['could not compare', ['not published', null]];
+                break;
         }
     } else {
-        published_comparison = ['skipped', null];
+        // comparison_result[0] === 'could compare'
+        const [_, result] = comparison_result;
+        
+        if (result[0] === 'identical') {
+            published_comparison = ['could compare', ['identical', null]];
+        } else {
+            // result[0] === 'different'
+            published_comparison = ['could compare', ['different', null]];
+        }
     }
 
     // 4. Analyse pre-commit state
     const pre_commit_state = analyse_pre_commit_state({
         'path to package': $p['path to package'],
         'directory name': $p['directory name'],
-        'package name': $p['package name'],
-        'build and test': $p['build and test']
+        'package name': $p['package name']
     });
 
     return {

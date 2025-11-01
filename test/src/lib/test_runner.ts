@@ -114,8 +114,19 @@ export const $$ = ($p: TestRunner): boolean => {
                 }
             }
         } catch (error) {
+            // Write error information to actual file so we can see what went wrong
+            const actual_path = path.join(actual_output_dir, output_name);
+            const error_content = `ERROR during transformation:\n${error instanceof Error ? error.stack : String(error)}`;
+            fs.writeFileSync(actual_path, error_content);
+            
             console.log(`\x1b[31m${base_name} ❌\x1b[0m`);
-            differences_found++;
+            console.log('\n' + '-'.repeat(60));
+            console.error(`❌ FATAL ERROR during transformation of ${base_name}:`);
+            console.error(error instanceof Error ? error.message : String(error));
+            console.error(`Full error details written to: ${actual_path}`);
+            console.error(`\nAborting test run due to transformation error.`);
+            console.log('='.repeat(60));
+            process.exit(1);
         }
     }
     

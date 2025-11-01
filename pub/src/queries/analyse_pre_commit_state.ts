@@ -11,7 +11,6 @@ export type Parameters = {
     'path to package': string,
     'directory name': string,
     'package name': string,
-    'build and test': boolean,
 }
 
 export function analyse_pre_commit_state(
@@ -19,35 +18,31 @@ export function analyse_pre_commit_state(
 ): Pre_Commit_State {
     const project_path = path.join($p['path to package'], $p["directory name"]);
 
-    // 1. Run build and test
+    // 1. Run build and test (always)
     let test_state: Pre_Commit_State['test'];
-    if ($p['build and test']) {
-        try {
-            const build_test_result = build_and_test(project_path, {
-                verbose: false,
-                skip_tests: false
-            });
+    try {
+        const build_test_result = build_and_test(project_path, {
+            verbose: false,
+            skip_tests: false
+        });
 
-            if (build_test_result[0] === 'success') {
-                test_state = ['success', null];
+        if (build_test_result[0] === 'success') {
+            test_state = ['success', null];
+        } else {
+            const [reason_type, reason_details] = build_test_result[1].reason;
+            if (reason_type === 'build failing') {
+                test_state = ['failure', ['build', null]];
+            } else if (reason_type === 'tests failing') {
+                // Extract failed test information if available
+                test_state = ['failure', ['test', { 'failed tests': [reason_details.details] }]];
             } else {
-                const [reason_type, reason_details] = build_test_result[1].reason;
-                if (reason_type === 'build failing') {
-                    test_state = ['failure', ['build', null]];
-                } else if (reason_type === 'tests failing') {
-                    // Extract failed test information if available
-                    test_state = ['failure', ['test', { 'failed tests': [reason_details.details] }]];
-                } else {
-                    // Fallback for unknown error types
-                    test_state = ['failure', ['build', null]];
-                }
+                // Fallback for unknown error types
+                test_state = ['failure', ['build', null]];
             }
-        } catch (err: any) {
-            // If build_and_test throws an error, treat it as build failure
-            test_state = ['failure', ['build', null]];
         }
-    } else {
-        test_state = ['skipped', null];
+    } catch (err: any) {
+        // If build_and_test throws an error, treat it as build failure
+        test_state = ['failure', ['build', null]];
     }
 
     // 2. Analyse structural state

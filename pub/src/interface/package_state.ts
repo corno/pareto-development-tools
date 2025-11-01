@@ -47,13 +47,11 @@ export type Pre_Publish_State = {
             | ['identical', null]
             | ['different', null]
         ]
-        | ['skipped', null]
     )
 }
 
 export type Pre_Commit_State = {
     'test': (
-        | ['skipped', null]
         | ['success', null]
         | ['failure', (
             | ['build', null]

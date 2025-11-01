@@ -8,8 +8,6 @@ import { analyse_pre_publish_state } from "./analyse_pre_publish_state"
 export type Parameters = {
     'path to package': string,
     'directory name': string,
-    'build and test': boolean,
-    'compare to published': boolean,
 }
 
 export function determine_package_state(
@@ -55,9 +53,7 @@ export function determine_package_state(
     const pre_publish_state = analyse_pre_publish_state({
         'path to package': $p['path to package'],
         'directory name': $p['directory name'],
-        'package name': package_name,
-        'build and test': $p['build and test'],
-        'compare to published': $p['compare to published']
+        'package name': package_name
     });
 
     return {

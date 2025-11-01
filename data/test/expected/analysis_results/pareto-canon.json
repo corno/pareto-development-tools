@@ -10,68 +10,23 @@
   },
   "astn": {
     "category": "package",
-    "outcome": "has unknown status",
+    "outcome": "has pre-publish warnings",
     "status": [
-      "unknown",
+      "warning",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
+        "category": "pre-publish",
+        "outcome": "has pre-publish warnings",
         "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "clean",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "passed",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
+          "warning",
           null
         ],
         "children": [
           {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
+            "category": "git",
+            "outcome": "clean",
             "status": [
               "success",
               null
@@ -79,136 +34,166 @@
             "children": []
           },
           {
-            "category": "dependency exupery-core-bin",
-            "outcome": "up to date",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-bin",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-data",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-dev",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-fountain-pen",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-json",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-standard-operations",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
               null
             ],
             "children": []
           },
           {
-            "category": "dependency exupery-core-data",
-            "outcome": "up to date",
+            "category": "pre-commit",
+            "outcome": "pre-commit checks passed",
             "status": [
               "success",
               null
             ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-dev",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-fountain-pen",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-json",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-standard-operations",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
+            "children": [
+              {
+                "category": "test",
+                "outcome": "passed",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "astn-to-git": {
     "category": "package",
-    "outcome": "has unknown status",
+    "outcome": "has pre-publish warnings",
     "status": [
-      "unknown",
+      "warning",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
+        "category": "pre-publish",
+        "outcome": "has pre-publish warnings",
         "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "clean",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "passed",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
+          "warning",
           null
         ],
         "children": [
           {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
+            "category": "git",
+            "outcome": "clean",
             "status": [
               "success",
               null
@@ -216,100 +201,130 @@
             "children": []
           },
           {
-            "category": "dependency exupery-core-dev",
-            "outcome": "up to date",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-dev",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-fountain-pen",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
               null
             ],
             "children": []
           },
           {
-            "category": "dependency pareto-fountain-pen",
-            "outcome": "up to date",
+            "category": "pre-commit",
+            "outcome": "pre-commit checks passed",
             "status": [
               "success",
               null
             ],
-            "children": []
+            "children": [
+              {
+                "category": "test",
+                "outcome": "passed",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "astn-to-xml": {
     "category": "package",
-    "outcome": "has issues",
+    "outcome": "has pre-publish issues",
     "status": [
       "issue",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "clean",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "tests failed (1 failures)",
+        "category": "pre-publish",
+        "outcome": "has pre-publish issues",
         "status": [
           "issue",
           null
         ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
-          null
-        ],
         "children": [
           {
-            "category": "dependency exupery-core-dev",
-            "outcome": "up to date",
+            "category": "git",
+            "outcome": "clean",
             "status": [
               "success",
               null
@@ -317,247 +332,307 @@
             "children": []
           },
           {
-            "category": "dependency pareto-fountain-pen",
-            "outcome": "up to date",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
               null
             ],
+            "children": [
+              {
+                "category": "dependency exupery-core-dev",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-fountain-pen",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
+              null
+            ],
             "children": []
+          },
+          {
+            "category": "pre-commit",
+            "outcome": "has pre-commit issues",
+            "status": [
+              "issue",
+              null
+            ],
+            "children": [
+              {
+                "category": "test",
+                "outcome": "tests failed (1 failures)",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "exupery": {
     "category": "package",
-    "outcome": "has issues",
+    "outcome": "has pre-publish issues",
     "status": [
       "issue",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "unpushed work",
+        "category": "pre-publish",
+        "outcome": "has pre-publish issues",
         "status": [
           "issue",
           null
         ],
         "children": [
           {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "yes",
+            "category": "git",
+            "outcome": "unpushed work",
             "status": [
               "issue",
               null
             ],
-            "children": []
+            "children": [
+              {
+                "category": "staged files",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dirty working tree",
+                "outcome": "yes",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "unpushed commits",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
           },
           {
-            "category": "unpushed commits",
-            "outcome": "no",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
               null
             ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-bin",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-data",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-dev",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-fountain-pen",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-standard-operations",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
+              null
+            ],
             "children": []
+          },
+          {
+            "category": "pre-commit",
+            "outcome": "has pre-commit issues",
+            "status": [
+              "issue",
+              null
+            ],
+            "children": [
+              {
+                "category": "test",
+                "outcome": "build failed",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "build failed",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
-          null
-        ],
-        "children": [
-          {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-bin",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-data",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-dev",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-fountain-pen",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-standard-operations",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "exupery-resources": {
     "category": "package",
-    "outcome": "has unknown status",
+    "outcome": "has pre-publish warnings",
     "status": [
-      "unknown",
+      "warning",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
+        "category": "pre-publish",
+        "outcome": "has pre-publish warnings",
         "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "clean",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "passed",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
+          "warning",
           null
         ],
         "children": [
           {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
+            "category": "git",
+            "outcome": "clean",
             "status": [
               "success",
               null
@@ -565,504 +640,624 @@
             "children": []
           },
           {
-            "category": "dependency exupery-core-async",
-            "outcome": "up to date",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-async",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-dev",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
               null
             ],
             "children": []
           },
           {
-            "category": "dependency exupery-core-dev",
-            "outcome": "up to date",
+            "category": "pre-commit",
+            "outcome": "pre-commit checks passed",
             "status": [
               "success",
               null
             ],
-            "children": []
+            "children": [
+              {
+                "category": "test",
+                "outcome": "passed",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "exupery-standard-library": {
     "category": "package",
-    "outcome": "has unknown status",
+    "outcome": "has pre-publish warnings",
     "status": [
-      "unknown",
+      "warning",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
+        "category": "pre-publish",
+        "outcome": "has pre-publish warnings",
         "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "clean",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "passed",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
+          "warning",
           null
         ],
         "children": [
           {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
+            "category": "git",
+            "outcome": "clean",
             "status": [
               "success",
               null
             ],
             "children": []
+          },
+          {
+            "category": "dependencies",
+            "outcome": "all up to date",
+            "status": [
+              "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
+              null
+            ],
+            "children": []
+          },
+          {
+            "category": "pre-commit",
+            "outcome": "pre-commit checks passed",
+            "status": [
+              "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "test",
+                "outcome": "passed",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "pareto": {
     "category": "package",
-    "outcome": "has issues",
+    "outcome": "has pre-publish issues",
     "status": [
       "issue",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "unpushed work",
+        "category": "pre-publish",
+        "outcome": "has pre-publish issues",
         "status": [
           "issue",
           null
         ],
         "children": [
           {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "yes",
+            "category": "git",
+            "outcome": "unpushed work",
             "status": [
               "issue",
               null
             ],
-            "children": []
+            "children": [
+              {
+                "category": "staged files",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dirty working tree",
+                "outcome": "yes",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "unpushed commits",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
           },
           {
-            "category": "unpushed commits",
-            "outcome": "no",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
               null
             ],
+            "children": [
+              {
+                "category": "dependency astn",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-bin",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-data",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-dev",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-fountain-pen",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-standard-operations",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
+              null
+            ],
             "children": []
+          },
+          {
+            "category": "pre-commit",
+            "outcome": "has pre-commit issues",
+            "status": [
+              "issue",
+              null
+            ],
+            "children": [
+              {
+                "category": "test",
+                "outcome": "build failed",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "build failed",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
-          null
-        ],
-        "children": [
-          {
-            "category": "dependency astn",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-bin",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-data",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-dev",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-fountain-pen",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-standard-operations",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "pareto-boekhouding": {
     "category": "package",
-    "outcome": "has issues",
+    "outcome": "has pre-publish issues",
     "status": [
       "issue",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "unpushed work",
+        "category": "pre-publish",
+        "outcome": "has pre-publish issues",
         "status": [
           "issue",
           null
         ],
         "children": [
           {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "yes",
+            "category": "git",
+            "outcome": "unpushed work",
             "status": [
               "issue",
               null
             ],
-            "children": []
+            "children": [
+              {
+                "category": "staged files",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dirty working tree",
+                "outcome": "yes",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "unpushed commits",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
           },
           {
-            "category": "unpushed commits",
-            "outcome": "no",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
               null
             ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-bin",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-data",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-fountain-pen",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-standard-operations",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
+              null
+            ],
             "children": []
+          },
+          {
+            "category": "pre-commit",
+            "outcome": "pre-commit checks passed",
+            "status": [
+              "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "test",
+                "outcome": "passed",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "passed",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
-          null
-        ],
-        "children": [
-          {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-bin",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-data",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-fountain-pen",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-standard-operations",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "pareto-fountain-pen": {
     "category": "package",
-    "outcome": "has unknown status",
+    "outcome": "has pre-publish warnings",
     "status": [
-      "unknown",
+      "warning",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
+        "category": "pre-publish",
+        "outcome": "has pre-publish warnings",
         "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "clean",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "passed",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
+          "warning",
           null
         ],
         "children": [
           {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
+            "category": "git",
+            "outcome": "clean",
             "status": [
               "success",
               null
@@ -1070,127 +1265,157 @@
             "children": []
           },
           {
-            "category": "dependency exupery-core-bin",
-            "outcome": "up to date",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-bin",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-data",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-dev",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-resources",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-standard-operations",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
               null
             ],
             "children": []
           },
           {
-            "category": "dependency exupery-core-data",
-            "outcome": "up to date",
+            "category": "pre-commit",
+            "outcome": "pre-commit checks passed",
             "status": [
               "success",
               null
             ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-dev",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-resources",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-standard-operations",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
+            "children": [
+              {
+                "category": "test",
+                "outcome": "passed",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "pareto-json": {
     "category": "package",
-    "outcome": "has unknown status",
+    "outcome": "has pre-publish warnings",
     "status": [
-      "unknown",
+      "warning",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
+        "category": "pre-publish",
+        "outcome": "has pre-publish warnings",
         "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "clean",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "passed",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
+          "warning",
           null
         ],
         "children": [
           {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
+            "category": "git",
+            "outcome": "clean",
             "status": [
               "success",
               null
@@ -1198,274 +1423,334 @@
             "children": []
           },
           {
-            "category": "dependency exupery-core-bin",
-            "outcome": "up to date",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-bin",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-data",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-fountain-pen",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-standard-operations",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
               null
             ],
             "children": []
           },
           {
-            "category": "dependency exupery-core-data",
-            "outcome": "up to date",
+            "category": "pre-commit",
+            "outcome": "pre-commit checks passed",
             "status": [
               "success",
               null
             ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-fountain-pen",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-standard-operations",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
+            "children": [
+              {
+                "category": "test",
+                "outcome": "passed",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "pareto-lionweb": {
     "category": "package",
-    "outcome": "has issues",
+    "outcome": "has pre-publish issues",
     "status": [
       "issue",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "unpushed work",
+        "category": "pre-publish",
+        "outcome": "has pre-publish issues",
         "status": [
           "issue",
           null
         ],
         "children": [
           {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "yes",
+            "category": "git",
+            "outcome": "unpushed work",
             "status": [
               "issue",
               null
             ],
-            "children": []
+            "children": [
+              {
+                "category": "staged files",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dirty working tree",
+                "outcome": "yes",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "unpushed commits",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
           },
           {
-            "category": "unpushed commits",
-            "outcome": "no",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
               null
             ],
+            "children": [
+              {
+                "category": "dependency astn",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-bin",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-rawdata",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-resources",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-standard-operations",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
+              null
+            ],
             "children": []
+          },
+          {
+            "category": "pre-commit",
+            "outcome": "has pre-commit issues",
+            "status": [
+              "issue",
+              null
+            ],
+            "children": [
+              {
+                "category": "test",
+                "outcome": "build failed",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "build failed",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
-          null
-        ],
-        "children": [
-          {
-            "category": "dependency astn",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-bin",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-rawdata",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-resources",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-standard-operations",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "pareto-standard-operations": {
     "category": "package",
-    "outcome": "has unknown status",
+    "outcome": "has pre-publish warnings",
     "status": [
-      "unknown",
+      "warning",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
+        "category": "pre-publish",
+        "outcome": "has pre-publish warnings",
         "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "clean",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "passed",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
+          "warning",
           null
         ],
         "children": [
           {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
+            "category": "git",
+            "outcome": "clean",
             "status": [
               "success",
               null
@@ -1473,282 +1758,417 @@
             "children": []
           },
           {
-            "category": "dependency exupery-standard-library",
-            "outcome": "up to date",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
               null
             ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-standard-library",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
+              null
+            ],
             "children": []
+          },
+          {
+            "category": "pre-commit",
+            "outcome": "pre-commit checks passed",
+            "status": [
+              "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "test",
+                "outcome": "passed",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "pareto-targets": {
     "category": "package",
-    "outcome": "has issues",
+    "outcome": "has pre-publish issues",
     "status": [
       "issue",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "unpushed work",
+        "category": "pre-publish",
+        "outcome": "has pre-publish issues",
         "status": [
           "issue",
           null
         ],
         "children": [
           {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "yes",
+            "category": "git",
+            "outcome": "unpushed work",
             "status": [
               "issue",
               null
             ],
-            "children": []
+            "children": [
+              {
+                "category": "staged files",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dirty working tree",
+                "outcome": "yes",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "unpushed commits",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
           },
           {
-            "category": "unpushed commits",
-            "outcome": "no",
+            "category": "dependencies",
+            "outcome": "all up to date",
             "status": [
               "success",
               null
             ],
+            "children": [
+              {
+                "category": "dependency exupery-core-alg",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-data",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency exupery-core-dev",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dependency pareto-json",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
+              null
+            ],
             "children": []
+          },
+          {
+            "category": "pre-commit",
+            "outcome": "has pre-commit issues",
+            "status": [
+              "issue",
+              null
+            ],
+            "children": [
+              {
+                "category": "test",
+                "outcome": "build failed",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "build failed",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
-          null
-        ],
-        "children": [
-          {
-            "category": "dependency exupery-core-alg",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-data",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency exupery-core-dev",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dependency pareto-json",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   },
   "pareto-vscode-backend": {
     "category": "package",
-    "outcome": "has issues",
+    "outcome": "has pre-publish issues",
     "status": [
       "issue",
       null
     ],
     "children": [
       {
-        "category": "package name",
-        "outcome": "matches directory",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "git",
-        "outcome": "unpushed work",
+        "category": "pre-publish",
+        "outcome": "has pre-publish issues",
         "status": [
           "issue",
           null
         ],
         "children": [
           {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "yes",
+            "category": "git",
+            "outcome": "unpushed work",
             "status": [
               "issue",
               null
             ],
+            "children": [
+              {
+                "category": "staged files",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "dirty working tree",
+                "outcome": "yes",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "unpushed commits",
+                "outcome": "no",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "dependencies",
+            "outcome": "all up to date",
+            "status": [
+              "success",
+              null
+            ],
+            "children": [
+              {
+                "category": "dependency pareto",
+                "outcome": "up to date",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": []
+              }
+            ]
+          },
+          {
+            "category": "published comparison",
+            "outcome": "not published",
+            "status": [
+              "warning",
+              null
+            ],
             "children": []
           },
           {
-            "category": "unpushed commits",
-            "outcome": "no",
+            "category": "pre-commit",
+            "outcome": "has pre-commit issues",
             "status": [
-              "success",
+              "issue",
               null
             ],
-            "children": []
+            "children": [
+              {
+                "category": "test",
+                "outcome": "build failed",
+                "status": [
+                  "issue",
+                  null
+                ],
+                "children": []
+              },
+              {
+                "category": "structural",
+                "outcome": "structure valid",
+                "status": [
+                  "success",
+                  null
+                ],
+                "children": [
+                  {
+                    "category": "package name",
+                    "outcome": "matches directory",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "structure",
+                    "outcome": "valid",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  },
+                  {
+                    "category": "interface implementation",
+                    "outcome": "matched",
+                    "status": [
+                      "success",
+                      null
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
           }
         ]
-      },
-      {
-        "category": "structure",
-        "outcome": "valid",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "interface implementation",
-        "outcome": "matched",
-        "status": [
-          "success",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "test",
-        "outcome": "build failed",
-        "status": [
-          "issue",
-          null
-        ],
-        "children": []
-      },
-      {
-        "category": "dependencies",
-        "outcome": "all up to date",
-        "status": [
-          "success",
-          null
-        ],
-        "children": [
-          {
-            "category": "dependency pareto",
-            "outcome": "up to date",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
-      },
-      {
-        "category": "published comparison",
-        "outcome": "comparison skipped",
-        "status": [
-          "unknown",
-          null
-        ],
-        "children": []
       }
     ]
   }

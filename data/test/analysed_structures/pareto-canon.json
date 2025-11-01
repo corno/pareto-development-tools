@@ -102,8 +102,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -168,8 +171,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -232,8 +238,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -328,8 +337,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -394,8 +406,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -442,8 +457,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -556,8 +574,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -640,8 +661,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -733,8 +757,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -817,8 +844,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -913,8 +943,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -970,8 +1003,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -1057,8 +1093,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }
@@ -1108,8 +1147,11 @@
                             }
                         },
                         "published comparison": [
-                            "skipped",
-                            null
+                            "could not compare",
+                            [
+                                "not published",
+                                null
+                            ]
                         ]
                     }
                 }

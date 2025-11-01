@@ -30,8 +30,6 @@ const [path_to_cluster, path_to_test, test_name] = positional_args
 generate_test_set({
     'analyse parameters': {
         'cluster path': path_to_cluster,
-        'build and test': build_and_test,
-        'compare to published': compare_to_published,
     },
     'path to test': path_to_test,
     'test name': test_name,

@@ -148,10 +148,7 @@ async function main(): Promise<void> {
         console.log(`\n🔍 Analyzing package states (build, test, and dependencies)...`);
         console.log('This may take a while as each package will be built and tested.');
         const cluster_result = analyse_cluster({
-            'cluster path': base_dir,
-            'build and test': true,
-            'compare to published': shouldComparePublished,
-
+            'cluster path': base_dir
         });
 
         if (cluster_result[0] === 'not found') {
@@ -272,7 +269,7 @@ async function main(): Promise<void> {
                 'version': pkg.version,
                 'pre-publish': {
                     'pre-commit': {
-                        'test': ['skipped', null],
+                        'test': ['success', null],
                         'structural': {
                             'package name the same as directory': pkg.package_name === pkg.name,
                             'structure': ['valid', { 'warnings': [] }],
@@ -281,7 +278,7 @@ async function main(): Promise<void> {
                     },
                     'git': git_status,
                     'dependencies': dependencies,
-                    'published comparison': ['skipped', null]
+                    'published comparison': ['could not compare', ['not published', null]]
                 }
             }];
         }

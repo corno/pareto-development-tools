@@ -14,7 +14,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -111,7 +111,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -176,7 +176,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -234,7 +234,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -322,7 +322,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -385,7 +385,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -434,7 +434,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -540,7 +540,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -621,7 +621,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -709,7 +709,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -790,7 +790,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -880,7 +880,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -938,7 +938,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {
@@ -1019,7 +1019,7 @@
                     "pre-publish": {
                         "pre-commit": {
                             "test": [
-                                "skipped",
+                                "success",
                                 null
                             ],
                             "structural": {

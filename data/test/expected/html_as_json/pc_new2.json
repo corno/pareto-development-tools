@@ -57,7 +57,7 @@
                                         "type": [
                                           "p",
                                           {
-                                            "text": "Cluster: pareto-canon"
+                                            "text": "Cluster: pc_new2"
                                           }
                                         ]
                                       }
@@ -406,7 +406,7 @@
                                         {
                                           "classes": [
                                             "package-name",
-                                            "package-name-ok"
+                                            "package-name-warning"
                                           ],
                                           "children": [
                                             {
@@ -415,7 +415,7 @@
                                                 "a",
                                                 {
                                                   "text": "exupery-resources",
-                                                  "href": "vscode://filepareto-canon/exupery-resources"
+                                                  "href": "vscode://filepc_new2/exupery-resources"
                                                 }
                                               ]
                                             }
@@ -622,7 +622,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (3)"
+                                                  "text": "External (3)"
                                                 }
                                               ]
                                             }
@@ -672,7 +672,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -680,7 +680,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }
@@ -711,7 +711,7 @@
                                         {
                                           "classes": [
                                             "package-name",
-                                            "package-name-ok"
+                                            "package-name-warning"
                                           ],
                                           "children": [
                                             {
@@ -720,7 +720,312 @@
                                                 "a",
                                                 {
                                                   "text": "exupery-standard-library",
-                                                  "href": "vscode://filepareto-canon/exupery-standard-library"
+                                                  "href": "vscode://filepc_new2/exupery-standard-library"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "version"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "0.1.17"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-ok"
+                                          ],
+                                          "title": "Package name matches directory name",
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-ok"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-ok"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (1)"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-ok"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓ Pass"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-warning"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "Different"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "classes": [],
+                            "type": [
+                              "td",
+                              null
+                            ],
+                            "cells": [
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "package-name",
+                                            "package-name-warning"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "a",
+                                                {
+                                                  "text": "pareto-standard-operations",
+                                                  "href": "vscode://filepc_new2/pareto-standard-operations"
                                                 }
                                               ]
                                             }
@@ -930,190 +1235,6 @@
                                                   "text": "At latest (1)"
                                                 }
                                               ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-ok"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓ Pass"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-skip"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "not published"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          },
-                          {
-                            "classes": [],
-                            "type": [
-                              "td",
-                              null
-                            ],
-                            "cells": [
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "package-name",
-                                            "package-name-ok"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "a",
-                                                {
-                                                  "text": "pareto-standard-operations",
-                                                  "href": "vscode://filepareto-canon/pareto-standard-operations"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "version"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "0.1.17"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-ok"
-                                          ],
-                                          "title": "Package name matches directory name",
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
                                             },
                                             {
                                               "classes": [],
@@ -1129,110 +1250,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": " "
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-ok"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-ok"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "At latest (2)"
+                                                  "text": "External (1)"
                                                 }
                                               ]
                                             }
@@ -1282,7 +1300,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -1290,7 +1308,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }
@@ -1321,7 +1339,7 @@
                                         {
                                           "classes": [
                                             "package-name",
-                                            "package-name-ok"
+                                            "package-name-warning"
                                           ],
                                           "children": [
                                             {
@@ -1330,7 +1348,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-fountain-pen",
-                                                  "href": "vscode://filepareto-canon/pareto-fountain-pen"
+                                                  "href": "vscode://filepc_new2/pareto-fountain-pen"
                                                 }
                                               ]
                                             }
@@ -1537,7 +1555,25 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (6)"
+                                                  "text": "At latest (2)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (4)"
                                                 }
                                               ]
                                             }
@@ -1587,7 +1623,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -1595,7 +1631,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }
@@ -1626,7 +1662,7 @@
                                         {
                                           "classes": [
                                             "package-name",
-                                            "package-name-ok"
+                                            "package-name-warning"
                                           ],
                                           "children": [
                                             {
@@ -1635,7 +1671,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-json",
-                                                  "href": "vscode://filepareto-canon/pareto-json"
+                                                  "href": "vscode://filepc_new2/pareto-json"
                                                 }
                                               ]
                                             }
@@ -1842,7 +1878,25 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (5)"
+                                                  "text": "At latest (2)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (3)"
                                                 }
                                               ]
                                             }
@@ -1892,7 +1946,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -1900,7 +1954,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }
@@ -1931,7 +1985,7 @@
                                         {
                                           "classes": [
                                             "package-name",
-                                            "package-name-ok"
+                                            "package-name-warning"
                                           ],
                                           "children": [
                                             {
@@ -1940,7 +1994,7 @@
                                                 "a",
                                                 {
                                                   "text": "astn",
-                                                  "href": "vscode://filepareto-canon/astn"
+                                                  "href": "vscode://filepc_new2/astn"
                                                 }
                                               ]
                                             }
@@ -2147,7 +2201,25 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (7)"
+                                                  "text": "At latest (3)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (4)"
                                                 }
                                               ]
                                             }
@@ -2197,7 +2269,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -2205,7 +2277,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }
@@ -2245,7 +2317,7 @@
                                                 "a",
                                                 {
                                                   "text": "astn-to-git",
-                                                  "href": "vscode://filepareto-canon/astn-to-git"
+                                                  "href": "vscode://filepc_new2/astn-to-git"
                                                 }
                                               ]
                                             }
@@ -2274,7 +2346,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "0.0.0"
+                                                  "text": "n/a"
                                                 }
                                               ]
                                             }
@@ -2452,7 +2524,25 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (3)"
+                                                  "text": "At latest (1)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (2)"
                                                 }
                                               ]
                                             }
@@ -2541,7 +2631,7 @@
                                         {
                                           "classes": [
                                             "package-name",
-                                            "package-name-error"
+                                            "package-name-warning"
                                           ],
                                           "children": [
                                             {
@@ -2550,7 +2640,7 @@
                                                 "a",
                                                 {
                                                   "text": "astn-to-xml",
-                                                  "href": "vscode://filepareto-canon/astn-to-xml"
+                                                  "href": "vscode://filepc_new2/astn-to-xml"
                                                 }
                                               ]
                                             }
@@ -2579,312 +2669,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "0.0.0"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-error"
-                                          ],
-                                          "title": "Package name in package.json: @different/astn-to-xml",
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✗ Mismatch"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": " "
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": " "
-                                                }
-                                              ]
-                                            },
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-ok"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-ok"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✓"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "At latest (2)"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-error"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "✗ Test failed"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "status-skip"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "not published"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              }
-                            ]
-                          },
-                          {
-                            "classes": [],
-                            "type": [
-                              "td",
-                              null
-                            ],
-                            "cells": [
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "package-name",
-                                            "package-name-error"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "a",
-                                                {
-                                                  "text": "exupery",
-                                                  "href": "vscode://filepareto-canon/exupery"
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              },
-                              {
-                                "classes": [],
-                                "div": {
-                                  "classes": [],
-                                  "children": [
-                                    {
-                                      "type": [
-                                        "span",
-                                        {
-                                          "classes": [
-                                            "version"
-                                          ],
-                                          "children": [
-                                            {
-                                              "classes": [],
-                                              "type": [
-                                                "p",
-                                                {
-                                                  "text": "0.1.30"
+                                                  "text": "n/a"
                                                 }
                                               ]
                                             }
@@ -3062,7 +2847,25 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (6)"
+                                                  "text": "At latest (1)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (1)"
                                                 }
                                               ]
                                             }
@@ -3083,7 +2886,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-error"
+                                            "status-ok"
                                           ],
                                           "children": [
                                             {
@@ -3091,7 +2894,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "✗ Build failed"
+                                                  "text": "✓ Pass"
                                                 }
                                               ]
                                             }
@@ -3151,6 +2954,329 @@
                                         {
                                           "classes": [
                                             "package-name",
+                                            "package-name-warning"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "a",
+                                                {
+                                                  "text": "exupery",
+                                                  "href": "vscode://filepc_new2/exupery"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "version"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "0.1.30"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-ok"
+                                          ],
+                                          "title": "Package name matches directory name",
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-ok"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-ok"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "At latest (2)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (4)"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-ok"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "✓ Pass"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              },
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "status-warning"
+                                          ],
+                                          "children": [
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "Different"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              }
+                            ]
+                          },
+                          {
+                            "classes": [],
+                            "type": [
+                              "td",
+                              null
+                            ],
+                            "cells": [
+                              {
+                                "classes": [],
+                                "div": {
+                                  "classes": [],
+                                  "children": [
+                                    {
+                                      "type": [
+                                        "span",
+                                        {
+                                          "classes": [
+                                            "package-name",
                                             "package-name-error"
                                           ],
                                           "children": [
@@ -3160,7 +3286,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto",
-                                                  "href": "vscode://filepareto-canon/pareto"
+                                                  "href": "vscode://filepc_new2/pareto"
                                                 }
                                               ]
                                             }
@@ -3367,7 +3493,25 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (8)"
+                                                  "text": "At latest (4)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (4)"
                                                 }
                                               ]
                                             }
@@ -3417,7 +3561,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -3425,7 +3569,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }
@@ -3465,7 +3609,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-boekhouding",
-                                                  "href": "vscode://filepareto-canon/pareto-boekhouding"
+                                                  "href": "vscode://filepc_new2/pareto-boekhouding"
                                                 }
                                               ]
                                             }
@@ -3672,7 +3816,25 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (5)"
+                                                  "text": "At latest (2)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (3)"
                                                 }
                                               ]
                                             }
@@ -3722,7 +3884,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -3730,7 +3892,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }
@@ -3770,7 +3932,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-lionweb",
-                                                  "href": "vscode://filepareto-canon/pareto-lionweb"
+                                                  "href": "vscode://filepc_new2/pareto-lionweb"
                                                 }
                                               ]
                                             }
@@ -3977,7 +4139,25 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (6)"
+                                                  "text": "At latest (3)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (3)"
                                                 }
                                               ]
                                             }
@@ -4027,7 +4207,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -4035,7 +4215,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }
@@ -4075,7 +4255,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-targets",
-                                                  "href": "vscode://filepareto-canon/pareto-targets"
+                                                  "href": "vscode://filepc_new2/pareto-targets"
                                                 }
                                               ]
                                             }
@@ -4282,7 +4462,25 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "At latest (5)"
+                                                  "text": "At latest (2)"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": " "
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "classes": [],
+                                              "type": [
+                                                "p",
+                                                {
+                                                  "text": "External (3)"
                                                 }
                                               ]
                                             }
@@ -4332,7 +4530,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -4340,7 +4538,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }
@@ -4380,7 +4578,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-vscode-backend",
-                                                  "href": "vscode://filepareto-canon/pareto-vscode-backend"
+                                                  "href": "vscode://filepc_new2/pareto-vscode-backend"
                                                 }
                                               ]
                                             }
@@ -4637,7 +4835,7 @@
                                         "span",
                                         {
                                           "classes": [
-                                            "status-skip"
+                                            "status-warning"
                                           ],
                                           "children": [
                                             {
@@ -4645,7 +4843,7 @@
                                               "type": [
                                                 "p",
                                                 {
-                                                  "text": "not published"
+                                                  "text": "Different"
                                                 }
                                               ]
                                             }

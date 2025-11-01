@@ -85,31 +85,33 @@ Usage:
   pareto cluster analyse [options] [cluster-directory]
 
 Options:
-  --help                              Show this help message
-  --fast                              Fast analysis (skip build, test, and published comparison)
-  --skip-build-and-test              Skip building and testing (faster analysis)
-  --skip-compare-against-published   Skip comparison with published version
-  --graph                             Generate dependency graph (SVG) and open in viewer
-  --table                             Generate HTML table report and open in viewer
+  --help                Show this help message
+  --all                 Full cluster analysis (default - includes all checks)
+  --pre-publish         Pre-publish analysis for all packages
+  --pre-commit          Pre-commit analysis for all packages
+  --structural          Structural analysis only for all packages
+  --graph               Generate dependency graph (SVG) and open in viewer
+  --table               Generate HTML table report and open in viewer
 
-By default, the analysis includes:
-  • Building and testing each package
-  • Comparing against the published version
-
-You can use --fast or individual skip flags to speed up the analysis, by skipping build, test, and published comparison.
+Analysis levels (from most comprehensive to fastest):
+  • --all: Complete package state analysis for all packages (default)
+  • --pre-publish: Pre-publish checks for all packages
+  • --pre-commit: Pre-commit checks for all packages
+  • --structural: Structure validation only for all packages
 
 Arguments:
   cluster-directory   Path to cluster directory (defaults to current directory)
                      Expected structure: <path>/<package>/pub/package.json
 
 Examples:
-  pareto cluster analyse                     # Analyze current directory (full analysis)
-  pareto cluster analyse /path/to/cluster    # Analyze specific cluster (full analysis)
-  pareto cluster analyse --fast              # Fast analysis (skips build, test, and comparison)
-  pareto cluster analyse --graph             # Generate and view dependency graph
-  pareto cluster analyse --table             # Generate and view HTML table report
-  pareto cluster analyse --graph --table     # Generate both graph and table
-  pareto cluster analyse --skip-build-and-test --skip-compare-against-published  # Same as --fast
+  pareto cluster analyse                          # Full analysis (--all)
+  pareto cluster analyse /path/to/cluster         # Full analysis of specific cluster
+  pareto cluster analyse --structural             # Fast structural check only
+  pareto cluster analyse --pre-commit             # Pre-commit validation
+  pareto cluster analyse --pre-publish            # Pre-publish validation
+  pareto cluster analyse --graph                  # Generate and view dependency graph
+  pareto cluster analyse --table                  # Generate and view HTML table report
+  pareto cluster analyse --graph --table          # Generate both graph and table
 `)
 }
 
@@ -228,12 +230,20 @@ export const $$ = (): void => {
         process.exit(0)
     }
     
-    // Parse flags
-    const fast_mode = args.includes('--fast')
-    const skip_build_and_test = args.includes('--skip-build-and-test') || fast_mode
-    const skip_compare_against_published = args.includes('--skip-compare-against-published') || fast_mode
+    // Parse analysis level flags
+    const all_analysis = args.includes('--all') || (!args.includes('--pre-publish') && !args.includes('--pre-commit') && !args.includes('--structural'))
+    const pre_publish_analysis = args.includes('--pre-publish')
+    const pre_commit_analysis = args.includes('--pre-commit')
+    const structural_analysis = args.includes('--structural')
     const generate_graph = args.includes('--graph')
     const generate_table = args.includes('--table')
+    
+    // Validate that only one analysis level is specified
+    const analysis_flags = [all_analysis, pre_publish_analysis, pre_commit_analysis, structural_analysis].filter(Boolean)
+    if (analysis_flags.length > 1) {
+        console.error('Error: Please specify only one analysis level (--all, --pre-publish, --pre-commit, or --structural)')
+        process.exit(1)
+    }
     
     // Get cluster directory (non-flag arguments)
     const non_flag_args = args.filter(arg => !arg.startsWith('--'))
@@ -241,19 +251,11 @@ export const $$ = (): void => {
     
     try {
         console.log(`Analyzing cluster: ${path.basename(cluster_dir)}`)
-        
-        // Show information about default behavior and available speed-up options
-        if (!skip_build_and_test || !skip_compare_against_published) {
-            console.log('💡 Tip: You can use --fast to speed up the analysis')
-        }
-        
         console.log('='.repeat(60))
         
         // Analyze cluster state
         const cluster_state = analyse_cluster({
-            'cluster path': cluster_dir,
-            'build and test': !skip_build_and_test,  // Default to true, skip if flag set
-            'compare to published': !skip_compare_against_published  // Default to true, skip if flag set
+            'cluster path': cluster_dir
         })
         
         // Check if it's actually a cluster

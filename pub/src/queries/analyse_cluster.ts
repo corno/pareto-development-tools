@@ -6,8 +6,6 @@ const path = require('path');
 
 export type Parameters = {
     'cluster path': string
-    'build and test': boolean,
-    'compare to published': boolean,
 }
 
 export const $$ = (
@@ -55,8 +53,6 @@ export const $$ = (
         if (looks_like_project(project_path)) {
             const project_state = determine_package_state(
                 {
-                    'build and test': $p['build and test'],
-                    'compare to published': $p['compare to published'],
                     'directory name': node_name,
                     'path to package': $p['cluster path'],
                 }
