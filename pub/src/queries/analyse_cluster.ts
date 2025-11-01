@@ -1,5 +1,5 @@
 import { Cluster_State, Package_State } from "../interface/package_state"
-import { determine_package_state } from "../old_lib/determine_package_state"
+import { determine_package_state } from "./analyse_package"
 
 const fs = require('fs');
 const path = require('path');

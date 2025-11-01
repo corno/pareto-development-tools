@@ -20,7 +20,7 @@
 
 import * as fs from 'fs'
 import * as path from 'path'
-import { determine_package_state } from '../old_lib/determine_package_state'
+import { determine_package_state } from '../queries/analyse_package'
 import { $$ as package_state_to_analysis_result } from '../transformations/package_state_to_analysis_result'
 import type { Package_Analysis_Result } from '../interface/analysis_result'
 
