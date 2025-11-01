@@ -63,9 +63,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "4 warnings",
+        "outcome": "4 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -73,7 +73,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -82,7 +82,7 @@
             "category": "dependency exupery-core-bin",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -91,7 +91,7 @@
             "category": "dependency exupery-core-data",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -100,7 +100,7 @@
             "category": "dependency exupery-core-dev",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -200,9 +200,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "2 warnings",
+        "outcome": "2 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -210,7 +210,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -219,7 +219,7 @@
             "category": "dependency exupery-core-dev",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -301,9 +301,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "1 warnings",
+        "outcome": "1 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -311,7 +311,7 @@
             "category": "dependency exupery-core-dev",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -421,9 +421,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "4 warnings",
+        "outcome": "4 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -431,7 +431,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -440,7 +440,7 @@
             "category": "dependency exupery-core-bin",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -449,7 +449,7 @@
             "category": "dependency exupery-core-data",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -458,7 +458,7 @@
             "category": "dependency exupery-core-dev",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -549,9 +549,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "3 warnings",
+        "outcome": "3 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -559,7 +559,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -568,7 +568,7 @@
             "category": "dependency exupery-core-async",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -577,7 +577,7 @@
             "category": "dependency exupery-core-dev",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -650,9 +650,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "1 warnings",
+        "outcome": "1 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -660,7 +660,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -761,9 +761,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "4 warnings",
+        "outcome": "4 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -789,7 +789,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -798,7 +798,7 @@
             "category": "dependency exupery-core-bin",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -807,7 +807,7 @@
             "category": "dependency exupery-core-data",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -816,7 +816,7 @@
             "category": "dependency exupery-core-dev",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -935,9 +935,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "3 warnings",
+        "outcome": "3 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -945,7 +945,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -954,7 +954,7 @@
             "category": "dependency exupery-core-bin",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -963,7 +963,7 @@
             "category": "dependency exupery-core-data",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1054,9 +1054,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "4 warnings",
+        "outcome": "4 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -1064,7 +1064,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1073,7 +1073,7 @@
             "category": "dependency exupery-core-bin",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1082,7 +1082,7 @@
             "category": "dependency exupery-core-data",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1091,7 +1091,7 @@
             "category": "dependency exupery-core-dev",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1182,9 +1182,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "3 warnings",
+        "outcome": "3 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -1192,7 +1192,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1201,7 +1201,7 @@
             "category": "dependency exupery-core-bin",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1210,7 +1210,7 @@
             "category": "dependency exupery-core-data",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1329,9 +1329,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "3 warnings",
+        "outcome": "3 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -1348,7 +1348,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1357,7 +1357,7 @@
             "category": "dependency exupery-core-bin",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1366,7 +1366,7 @@
             "category": "dependency exupery-core-rawdata",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1457,9 +1457,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "1 warnings",
+        "outcome": "1 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -1467,7 +1467,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1577,9 +1577,9 @@
       },
       {
         "category": "dependencies",
-        "outcome": "3 warnings",
+        "outcome": "3 unknown",
         "status": [
-          "warning",
+          "unknown",
           null
         ],
         "children": [
@@ -1587,7 +1587,7 @@
             "category": "dependency exupery-core-alg",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1596,7 +1596,7 @@
             "category": "dependency exupery-core-data",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []
@@ -1605,7 +1605,7 @@
             "category": "dependency exupery-core-dev",
             "outcome": "not found locally",
             "status": [
-              "warning",
+              "unknown",
               null
             ],
             "children": []

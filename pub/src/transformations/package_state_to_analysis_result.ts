@@ -149,7 +149,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
             dependency_children.push({
                 'category': `dependency ${dep_name}`,
                 'outcome': 'not found locally',
-                'status': ['warning', null],
+                'status': ['unknown', null],
                 'children': []
             })
         }
@@ -158,16 +158,26 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     if (dependency_children.length > 0) {
         const dep_errors = dependency_children.filter(child => child.status[0] === 'error').length
         const dep_warnings = dependency_children.filter(child => child.status[0] === 'warning').length
+        const dep_unknown = dependency_children.filter(child => child.status[0] === 'unknown').length
         
         let dep_outcome: string
         let dep_status: Package_Analysis_Result['status']
         
         if (dep_errors > 0) {
             dep_outcome = `${dep_errors} errors, ${dep_warnings} warnings`
+            if (dep_unknown > 0) {
+                dep_outcome += `, ${dep_unknown} unknown`
+            }
             dep_status = ['error', null]
         } else if (dep_warnings > 0) {
             dep_outcome = `${dep_warnings} warnings`
+            if (dep_unknown > 0) {
+                dep_outcome += `, ${dep_unknown} unknown`
+            }
             dep_status = ['warning', null]
+        } else if (dep_unknown > 0) {
+            dep_outcome = `${dep_unknown} unknown`
+            dep_status = ['unknown', null]
         } else {
             dep_outcome = 'all up to date'
             dep_status = ['success', null]
