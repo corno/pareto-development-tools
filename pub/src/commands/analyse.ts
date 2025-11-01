@@ -108,6 +108,17 @@ export const $$ = (args: string[]): void => {
         process.exit(1)
     }
     
+    // If no analysis flags specified, inform user about available options
+    if (analysis_flags.length === 0) {
+        console.log('Running full package analysis (all checks)...')
+        console.log('Available analysis levels:')
+        console.log('  --structural   : Structure validation only (fastest)')
+        console.log('  --pre-commit   : Build, test, and structure validation')
+        console.log('  --pre-publish  : All pre-commit checks plus git state, dependencies, and published comparison')
+        console.log('  (no flag)      : Complete package analysis (default)')
+        console.log('')
+    }
+    
     // Get package directory (non-flag arguments) - path is required
     const non_flag_args = args.filter(arg => !arg.startsWith('--'))
     if (non_flag_args.length === 0) {

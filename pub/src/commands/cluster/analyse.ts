@@ -238,6 +238,20 @@ export const $$ = (args: string[]): void => {
         process.exit(1)
     }
     
+    // If no analysis flags specified, inform user about available options
+    if (analysis_flags.length === 0) {
+        console.log('Running full cluster analysis (all checks for all packages)...')
+        console.log('Available analysis levels:')
+        console.log('  --structural   : Structure validation only for all packages (fastest)')
+        console.log('  --pre-commit   : Build, test, and structure validation for all packages')
+        console.log('  --pre-publish  : All pre-commit checks plus git state, dependencies, and published comparison for all packages')
+        console.log('  (no flag)      : Complete package analysis for all packages (default)')
+        console.log('Additional options:')
+        console.log('  --graph        : Generate dependency graph (SVG) and open in viewer')
+        console.log('  --table        : Generate HTML table report and open in viewer')
+        console.log('')
+    }
+    
     // Get cluster directory (non-flag arguments) - path is required
     const non_flag_args = args.filter(arg => !arg.startsWith('--'))
     if (non_flag_args.length === 0) {
