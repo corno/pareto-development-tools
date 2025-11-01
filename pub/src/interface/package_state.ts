@@ -1,65 +1,71 @@
 export type Package_State = {
     'package name in package.json': string
-    'package name the same as directory': boolean
     'version': null | string
-    'git': {
-        'staged files': boolean
-        'dirty working tree': boolean
-        'unpushed commits': boolean
-    }
-    'structure': (
-        | ['valid', {
-            'warnings': string[]
-        }]
-        | ['invalid', { errors: string[] }]
-    )
-    'interface implementation match': (
-        | ['root interface direcory missing', null]
-        | ['root implementation direcory missing', null]
-        | ['matched', null]
-        | ['mismatched', {
-            'differences': {
-                'path': string
-                'problem': (
-                    | ['missing', null]
-                    | ['superfluous', null]
+    'pre-publish': {
+        'pre-commit': {
+            'test': (
+                | ['skipped', null]
+                | ['success', null]
+                | ['failure', (
+                    | ['build', null]
+                    | ['test', { 'failed tests': string[] }]
                 )
-            }[]
-        }]
-    )
-    'test': (
-        | ['skipped', null]
-        | ['success', null]
-        | ['failure', (
-            | ['build', null]
-            | ['test', { 'failed tests': string[] }]
-        )
-        ]
-    )
-    'dependencies': {
-        [name: string]: {
-            'version': string
-            'target': (
-                /** the target is found if there is a sibling directory with this name, this is not about the npm registry */
-                | ['not found', null]
-                | ['found', {
-                    'dependency up to date': boolean
-                }]
+                ]
             )
+            'structural': {
+                'package name the same as directory': boolean
+                'structure': (
+                    | ['valid', {
+                        'warnings': string[]
+                    }]
+                    | ['invalid', { errors: string[] }]
+                )
+                'interface implementation match': (
+                    | ['root interface direcory missing', null]
+                    | ['root implementation direcory missing', null]
+                    | ['matched', null]
+                    | ['mismatched', {
+                        'differences': {
+                            'path': string
+                            'problem': (
+                                | ['missing', null]
+                                | ['superfluous', null]
+                            )
+                        }[]
+                    }]
+                )
+            }
         }
-    },
-    'published comparison': (
-        | ['could not compare',
-            | ['no package', null]
-            | ['no package name', null]
-            | ['not published', null]
-        ]
-        | ['could compare',
-            | ['identical', null]
-            | ['different', null]
-        ]
-        | ['skipped', null]
-    )
+        'git': {
+            'staged files': boolean
+            'dirty working tree': boolean
+            'unpushed commits': boolean
+        }
+        'dependencies': {
+            [name: string]: {
+                'version': string
+                'target': (
+                    /** the target is found if there is a sibling directory with this name, this is not about the npm registry */
+                    | ['not found', null]
+                    | ['found', {
+                        'dependency up to date': boolean
+                    }]
+                )
+            }
+        },
+        'published comparison': (
+            | ['could not compare',
+                | ['no package', null]
+                | ['no package name', null]
+                | ['not published', null]
+            ]
+            | ['could compare',
+                | ['identical', null]
+                | ['different', null]
+            ]
+            | ['skipped', null]
+        )
+    }
 }
 
 export type Cluster_State =
