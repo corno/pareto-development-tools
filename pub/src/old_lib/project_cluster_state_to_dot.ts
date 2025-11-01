@@ -62,7 +62,7 @@ export function project_cluster_state_to_dot(
 
         // Extract dependencies with their version strings
         const dependencies: { [name: string]: string } = {};
-        for (const [dep_name, dep_info] of Object.entries(project_state.dependencies)) {
+        for (const [dep_name, dep_info] of Object.entries(project_state['pre-publish'].dependencies)) {
             dependencies[dep_name] = dep_info.version;
             
             // Track external dependencies (not in cluster)
@@ -74,25 +74,25 @@ export function project_cluster_state_to_dot(
         // Collect detailed issue information
         const issues: string[] = [];
         
-        if (project_state.structure[0] === 'invalid') {
+        if (project_state['pre-publish']['pre-commit']['structural'].structure[0] === 'invalid') {
             issues.push('Structure Invalid');
         }
-        if (project_state.test[0] === 'failure') {
-            const test_failure = project_state.test[1];
+        if (project_state['pre-publish']['pre-commit'].test[0] === 'failure') {
+            const test_failure = project_state['pre-publish']['pre-commit'].test[1];
             if (test_failure[0] === 'build') {
                 issues.push('Build Failed');
             } else if (test_failure[0] === 'test') {
                 issues.push('Tests Failed');
             }
         }
-        if (project_state.git['staged files']) {
+        if (project_state['pre-publish'].git['staged files']) {
             issues.push('Staged Files');
         }
-        if (project_state.git['dirty working tree']) {
+        if (project_state['pre-publish'].git['dirty working tree']) {
             issues.push('Dirty Tree');
         }
         // Only check sibling dependencies for "Outdated Deps" - ignore external dependencies
-        if (Object.values(project_state.dependencies).some(dep => 
+        if (Object.values(project_state['pre-publish'].dependencies).some(dep => 
             dep.target[0] === 'found' && !dep.target[1]['dependency up to date']
         )) {
             issues.push('Outdated Deps');
@@ -107,7 +107,7 @@ export function project_cluster_state_to_dot(
             has_issues,
             issues,
             is_name_synced: project_state['package name in package.json'] === project_name,
-            has_unpushed_work: project_state.git['unpushed commits'] || project_state.git['staged files'] || project_state.git['dirty working tree']
+            has_unpushed_work: project_state['pre-publish'].git['unpushed commits'] || project_state['pre-publish'].git['staged files'] || project_state['pre-publish'].git['dirty working tree']
         });
     }
 

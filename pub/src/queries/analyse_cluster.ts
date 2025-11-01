@@ -97,7 +97,7 @@ export const $$ = (
             const project_entry = projects[project_name];
             if (project_entry && project_entry[0] === 'project') {
                 const project_state = project_entry[1];
-                const sibling_deps = Object.keys(project_state.dependencies)
+                const sibling_deps = Object.keys(project_state['pre-publish'].dependencies)
                     .filter(dep_name => project_names.includes(dep_name));
 
                 for (const dep of sibling_deps) {

@@ -18,6 +18,7 @@ export const $$ = ($p: TestRunner): boolean => {
     const expected_dir = path.join(test_data_dir, 'expected');
     const actual_dir = path.join(test_data_dir, 'actual');
     
+    console.log('='.repeat(60));
     console.log(`Running test: ${$p.input_dir_name} → ${$p.output_dir_name}\n`);
     
     // Check if input directory exists
@@ -120,9 +121,10 @@ export const $$ = ($p: TestRunner): boolean => {
         }
     }
     
-    console.log('\n' + '='.repeat(60));
+    console.log('\n' + '-'.repeat(60));
     if ($p.overwrite_expected) {
         console.log(`✓ Baseline set: ${input_files.length} file(s) written to expected directory`);
+        console.log('='.repeat(60));
         return true;
     } else {
         console.log(`Summary:`);
@@ -132,9 +134,11 @@ export const $$ = ($p: TestRunner): boolean => {
         if (differences_found > 0) {
             console.log(`\n⚠️  Differences found! Check files in: ${actual_output_dir}`);
             console.log(`To set new baseline, run with: --overwrite-expected`);
+            console.log('='.repeat(60));
             return false;
         } else {
             console.log(`\n✓ All generated files match expected`);
+            console.log('='.repeat(60));
             return true;
         }
     }

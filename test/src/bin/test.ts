@@ -21,7 +21,7 @@ const overwrite_expected = args.includes('--overwrite-expected');
 const specific_test = args.find(arg => arg.startsWith('--test='))?.split('=')[1];
 
 console.log('Running all tests...\n');
-console.log('='.repeat(60));
+console.log('-'.repeat(60));
 
 let failed_tests = 0;
 let passed_tests = 0;
@@ -163,27 +163,23 @@ const tests: Array<{ name: string, config: TestRunner }> = [
 // Run each test
 for (let i = 0; i < tests.length; i++) {
     const test = tests[i];
-    console.log(`\n${i + 1}. Testing ${test.name}...`);
     
     try {
         const success = test_runner(test.config);
         if (success) {
-            console.log(`✓ ${test.name} test passed`);
             passed_tests++;
         } else {
-            console.error(`✗ ${test.name} test failed`);
             failed_tests++;
             failed_test_types.push(test.config.output_dir_name);
         }
     } catch (err) {
-        console.error(`✗ ${test.name} test failed with error: ${err}`);
         failed_tests++;
         failed_test_types.push(test.config.output_dir_name);
     }
 }
 
 // Summary
-console.log('\n' + '='.repeat(60));
+console.log('\n' + '-'.repeat(60));
 console.log(`Test Summary:`);
 console.log(`  - ${passed_tests} test(s) passed`);
 console.log(`  - ${failed_tests} test(s) failed`);

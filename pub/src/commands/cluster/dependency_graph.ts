@@ -193,7 +193,7 @@ async function main(): Promise<void> {
                         // Check if it's a sibling dependency (in the same cluster)
                         const sibling_pkg = quick_package_list.find(p => p.package_name === dep_name);
 
-                        let target_status: Package_State['dependencies'][string]['target'];
+                        let target_status: Package_State['pre-publish']['dependencies'][string]['target'];
 
                         if (sibling_pkg) {
                             // For sibling dependencies, check if versions match
@@ -269,14 +269,20 @@ async function main(): Promise<void> {
 
             projects_data[pkg.name] = ['project', {
                 'package name in package.json': pkg.package_name,
-                'package name the same as directory': pkg.package_name === pkg.name,
                 'version': pkg.version,
-                'git': git_status,
-                'structure': ['valid', { 'warnings': [] }],
-                'interface implementation match': ['matched', null],
-                'test': ['skipped', null],
-                'dependencies': dependencies,
-                'published comparison': ['skipped', null]
+                'pre-publish': {
+                    'pre-commit': {
+                        'test': ['skipped', null],
+                        'structural': {
+                            'package name the same as directory': pkg.package_name === pkg.name,
+                            'structure': ['valid', { 'warnings': [] }],
+                            'interface implementation match': ['matched', null]
+                        }
+                    },
+                    'git': git_status,
+                    'dependencies': dependencies,
+                    'published comparison': ['skipped', null]
+                }
             }];
         }
 

@@ -34,7 +34,7 @@ export function determine_package_state(
     /**
      * Check git status to determine staged files, dirty working tree, and unpushed commits
      */
-    function determine_git_state(project_path: string): Package_State['git'] {
+    function determine_git_state(project_path: string): Package_State['pre-publish']['git'] {
         try {
             // Check for staged files
             const staged = execSync('git diff --cached --name-only', { cwd: project_path, encoding: 'utf8' }).trim();
@@ -89,7 +89,7 @@ export function determine_package_state(
     function determine_package_and_dependencies(project_path: string, node_name: string): {
         package_name: string,
         version: string,
-        dependencies: Package_State['dependencies']
+        dependencies: Package_State['pre-publish']['dependencies']
     } {
         const package_json_path = path.join(project_path, 'pub', 'package.json');
 
@@ -108,13 +108,13 @@ export function determine_package_state(
             const prod_dependencies = package_content.dependencies || {};
 
             // Process dependencies
-            const dependencies: Package_State['dependencies'] = {};
+            const dependencies: Package_State['pre-publish']['dependencies'] = {};
 
             for (const [dep_name, dep_version] of Object.entries(prod_dependencies)) {
                 const version_string = dep_version as string;
 
                 // Check if this dependency exists as a sibling directory in the cluster
-                let target_status: Package_State['dependencies'][string]['target'];
+                let target_status: Package_State['pre-publish']['dependencies'][string]['target'];
 
                 const sibling_dep_path = path.join($p['path to package'], dep_name);
 
@@ -166,7 +166,7 @@ export function determine_package_state(
     const { package_name, version, dependencies } = determine_package_and_dependencies(project_path, $p['directory name']);
 
     // 3. Load structure.json and validate structure
-    let structure_state: Package_State['structure'];
+    let structure_state: Package_State['pre-publish']['pre-commit']['structural']['structure'];
     try {
         // Assuming this function is called from tools, look for structure.json in data directory
         const tools_dir = path.join(__dirname, '../../..');
@@ -192,7 +192,7 @@ export function determine_package_state(
     }
 
     // 4. Run build and test
-    let test_state: Package_State['test'];
+    let test_state: Package_State['pre-publish']['pre-commit']['test'];
     if ($p['build and test']) {
         try {
             const build_test_result = build_and_test(project_path, {
@@ -223,7 +223,7 @@ export function determine_package_state(
     }
 
     // 5. Compare with published version
-    let published_comparison: Package_State['published comparison'];
+    let published_comparison: Package_State['pre-publish']['published comparison'];
     if ($p['compare to published']) {
         const comparison_result = compare_with_published({ 'package path': project_path });
         
@@ -257,7 +257,7 @@ export function determine_package_state(
     }
 
     // 6. Check interface vs implementation (if both directories exist)
-    let interface_implementation_match: Package_State['interface implementation match'];
+    let interface_implementation_match: Package_State['pre-publish']['pre-commit']['structural']['interface implementation match'];
     const interface_dir = path.join(project_path, 'pub', 'src', 'interface', 'algorithms');
     const implementation_dir = path.join(project_path, 'pub', 'src', 'implementation', 'algorithms');
 
@@ -331,13 +331,19 @@ export function determine_package_state(
 
     return {
         'package name in package.json': package_name,
-        'package name the same as directory': package_name === $p['directory name'],
         'version': version,
-        'git': git_state,
-        'structure': structure_state,
-        'interface implementation match': interface_implementation_match,
-        'test': test_state,
-        'dependencies': dependencies,
-        'published comparison': published_comparison
+        'pre-publish': {
+            'pre-commit': {
+                'test': test_state,
+                'structural': {
+                    'package name the same as directory': package_name === $p['directory name'],
+                    'structure': structure_state,
+                    'interface implementation match': interface_implementation_match
+                }
+            },
+            'git': git_state,
+            'dependencies': dependencies,
+            'published comparison': published_comparison
+        }
     };
 }

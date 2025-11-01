@@ -381,9 +381,10 @@ export function cluster_state_to_document(
             : textSpan('✗ Mismatch', ['status-error'], `Package name in package.json: ${packageNameInJson}`)
         
         // Structure
+        // Structure validation
         let structureSpan: Span
-        if (state.structure[0] === 'valid') {
-            const warnings = state.structure[1].warnings
+        if (state['pre-publish']['pre-commit']['structural'].structure[0] === 'valid') {
+            const warnings = state['pre-publish']['pre-commit']['structural'].structure[1].warnings
             if (warnings.length > 0) {
                 structureSpan = textSpan(`⚠ ${warnings.length} warning(s)`, ['status-warning'])
                 if (worstSeverity === 'ok') worstSeverity = 'warning'
@@ -391,14 +392,14 @@ export function cluster_state_to_document(
                 structureSpan = textSpan('✓', ['status-ok'])
             }
         } else {
-            const errors = state.structure[1].errors
+            const errors = state['pre-publish']['pre-commit']['structural'].structure[1].errors
             structureSpan = textSpan(`✗ ${errors.length} error(s)`, ['status-error'])
             worstSeverity = 'error'
         }
         
         // Interface implementation match
         let intImpSpan: Span
-        const iim = state['interface implementation match']
+        const iim = state['pre-publish']['pre-commit']['structural']['interface implementation match']
         if (iim[0] === 'matched') {
             intImpSpan = textSpan('✓', ['status-ok'])
         } else if (iim[0] === 'root interface direcory missing') {
@@ -429,20 +430,20 @@ export function cluster_state_to_document(
         
         // Test
         let testSpan: Span
-        if (state.test[0] === 'skipped') {
+        if (state['pre-publish']['pre-commit'].test[0] === 'skipped') {
             testSpan = textSpan('Skipped', ['status-skip'])
-        } else if (state.test[0] === 'success') {
+        } else if (state['pre-publish']['pre-commit'].test[0] === 'success') {
             testSpan = textSpan('✓ Pass', ['status-ok'])
         } else {
-            const failType = state.test[1][0]
+            const failType = state['pre-publish']['pre-commit'].test[1][0]
             testSpan = textSpan(`✗ ${failType === 'build' ? 'Build' : 'Test'} failed`, ['status-error'])
             worstSeverity = 'error'
         }
         
         // Git status
-        const hasDirtyTree = state.git['dirty working tree']
-        const hasStagedFiles = state.git['staged files']
-        const hasUnpushedCommits = state.git['unpushed commits']
+        const hasDirtyTree = state['pre-publish'].git['dirty working tree']
+        const hasStagedFiles = state['pre-publish'].git['staged files']
+        const hasUnpushedCommits = state['pre-publish'].git['unpushed commits']
         
         if (hasDirtyTree || hasStagedFiles || hasUnpushedCommits) {
             if (worstSeverity === 'ok') worstSeverity = 'warning'
@@ -462,7 +463,7 @@ export function cluster_state_to_document(
         }
         
         // Dependencies
-        const deps = Object.entries(state.dependencies)
+        const deps = Object.entries(state['pre-publish'].dependencies)
         const outdatedDeps = deps.filter(([_, dep]) => dep.target[0] === 'found' && !dep.target[1]['dependency up to date'])
         const externalDeps = deps.filter(([_, dep]) => dep.target[0] === 'not found')
         const upToDateDeps = deps.filter(([_, dep]) => dep.target[0] === 'found' && dep.target[1]['dependency up to date'])
@@ -494,13 +495,13 @@ export function cluster_state_to_document(
         
         // Published
         let publishedSpan: Span
-        if (state['published comparison'][0] === 'skipped') {
+        if (state['pre-publish']['published comparison'][0] === 'skipped') {
             publishedSpan = textSpan('Not tested', ['status-skip'])
-        } else if (state['published comparison'][0] === 'could not compare') {
-            const reason = state['published comparison'][1][0]
+        } else if (state['pre-publish']['published comparison'][0] === 'could not compare') {
+            const reason = state['pre-publish']['published comparison'][1][0]
             publishedSpan = textSpan(reason.replace(/-/g, ' '), ['status-skip'])
         } else {
-            const comparison = state['published comparison'][1][0]
+            const comparison = state['pre-publish']['published comparison'][1][0]
             if (comparison === 'identical') {
                 publishedSpan = textSpan('✓ In sync', ['status-ok'])
             } else {

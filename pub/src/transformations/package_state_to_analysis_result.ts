@@ -8,17 +8,17 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     // Check package name consistency
     children.push({
         'category': 'package name',
-        'outcome': package_state['package name the same as directory'] 
+        'outcome': package_state['pre-publish']['pre-commit']['structural']['package name the same as directory'] 
             ? 'matches directory' 
             : 'differs from directory',
-        'status': package_state['package name the same as directory'] 
+        'status': package_state['pre-publish']['pre-commit']['structural']['package name the same as directory'] 
             ? ['success', null] 
             : ['issue', null],
         'children': []
     })
     
     // Check git status
-    const git_status = package_state.git
+    const git_status = package_state['pre-publish'].git
     const has_git_issues = git_status['staged files'] || git_status['dirty working tree'] || git_status['unpushed commits']
     
     // Only add detailed git sub-results if there are git issues
@@ -54,13 +54,13 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     })
     
     // Check structure validation
-    if (package_state.structure[0] === 'valid') {
+    if (package_state['pre-publish']['pre-commit']['structural'].structure[0] === 'valid') {
         children.push({
             'category': 'structure',
-            'outcome': package_state.structure[1].warnings.length > 0 
-                ? `valid with ${package_state.structure[1].warnings.length} warnings`
+            'outcome': package_state['pre-publish']['pre-commit']['structural'].structure[1].warnings.length > 0 
+                ? `valid with ${package_state['pre-publish']['pre-commit']['structural'].structure[1].warnings.length} warnings`
                 : 'valid',
-            'status': package_state.structure[1].warnings.length > 0 
+            'status': package_state['pre-publish']['pre-commit']['structural'].structure[1].warnings.length > 0 
                 ? ['warning', null] 
                 : ['success', null],
             'children': []
@@ -68,14 +68,14 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     } else {
         children.push({
             'category': 'structure',
-            'outcome': `invalid (${package_state.structure[1].errors.length} issues)`,
+            'outcome': `invalid (${package_state['pre-publish']['pre-commit']['structural'].structure[1].errors.length} issues)`,
             'status': ['issue', null],
             'children': []
         })
     }
     
     // Check interface implementation match
-    const iim = package_state['interface implementation match']
+    const iim = package_state['pre-publish']['pre-commit']['structural']['interface implementation match']
     let iim_outcome: string
     let iim_status: Package_Analysis_Result['status']
     
@@ -102,7 +102,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     })
     
     // Check test results
-    const test_result = package_state.test
+    const test_result = package_state['pre-publish']['pre-commit'].test
     let test_outcome: string
     let test_status: Package_Analysis_Result['status']
     
@@ -130,7 +130,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     })
     
     // Check dependencies
-    const dependencies = package_state.dependencies
+    const dependencies = package_state['pre-publish'].dependencies
     const dependency_children: Package_Analysis_Result[] = []
     
     for (const [dep_name, dep_info] of Object.entries(dependencies)) {
@@ -192,7 +192,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     }
     
     // Check published comparison
-    const published = package_state['published comparison']
+    const published = package_state['pre-publish']['published comparison']
     let pub_outcome: string
     let pub_status: Package_Analysis_Result['status']
     
