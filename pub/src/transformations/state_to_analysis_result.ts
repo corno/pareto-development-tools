@@ -30,11 +30,18 @@ export const structural_state_to_analysis_result = (structural_state: Structural
             'children': []
         })
     } else {
+        const errorChildren: Package_Analysis_Result[] = structural_state.structure[1].errors.map(error => ({
+            'category': 'structure error',
+            'outcome': error,
+            'status': ['issue', null] as Package_Analysis_Result['status'],
+            'children': []
+        }))
+        
         children.push({
             'category': 'structure',
             'outcome': `invalid (${structural_state.structure[1].errors.length} issues)`,
             'status': ['issue', null],
-            'children': []
+            'children': errorChildren
         })
     }
     
@@ -42,6 +49,7 @@ export const structural_state_to_analysis_result = (structural_state: Structural
     const iim = structural_state['interface implementation match']
     let iim_outcome: string
     let iim_status: Package_Analysis_Result['status']
+    let differenceChildren: Package_Analysis_Result[] = []
     
     if (iim[0] === 'matched') {
         iim_outcome = 'matched'
@@ -54,6 +62,13 @@ export const structural_state_to_analysis_result = (structural_state: Structural
         iim_status = ['warning', null]
     } else {
         // mismatched
+        differenceChildren = iim[1].differences.map(diff => ({
+            'category': 'interface implementation difference',
+            'outcome': `${diff.path}: ${diff.problem[0]}`,
+            'status': ['issue', null] as Package_Analysis_Result['status'],
+            'children': []
+        }))
+        
         iim_outcome = `mismatched (${iim[1].differences.length} differences)`
         iim_status = ['issue', null]
     }
@@ -62,7 +77,7 @@ export const structural_state_to_analysis_result = (structural_state: Structural
         'category': 'interface implementation',
         'outcome': iim_outcome,
         'status': iim_status,
-        'children': []
+        'children': differenceChildren
     })
     
     // Determine overall status based on children
