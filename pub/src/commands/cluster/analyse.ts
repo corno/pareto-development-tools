@@ -73,20 +73,71 @@ function printClusterAnalysis(cluster_result: Cluster_Analysis_Result): void {
     }
 }
 
+function showHelp(): void {
+    console.log(`
+Cluster Analysis Tool
+
+Usage: 
+  pareto cluster analyse [options] [cluster-directory]
+
+Options:
+  --help                              Show this help message
+  --fast                              Fast analysis (skip build, test, and published comparison)
+  --skip-build-and-test              Skip building and testing (faster analysis)
+  --skip-compare-against-published   Skip comparison with published version
+
+By default, the analysis includes:
+  • Building and testing each package
+  • Comparing against the published version
+
+You can use --fast or individual skip flags to speed up the analysis, by skipping build, test, and published comparison.
+
+Arguments:
+  cluster-directory   Path to cluster directory (defaults to current directory)
+                     Expected structure: <path>/<package>/pub/package.json
+
+Examples:
+  pareto cluster analyse                     # Analyze current directory (full analysis)
+  pareto cluster analyse /path/to/cluster    # Analyze specific cluster (full analysis)
+  pareto cluster analyse --fast              # Fast analysis (skips build, test, and comparison)
+  pareto cluster analyse --skip-build-and-test --skip-compare-against-published  # Same as --fast
+`)
+}
+
 export const $$ = (): void => {
-    // Get cluster directory from command line argument or current directory
+    // Parse command line arguments
     const args = process.argv.slice(2)
-    const cluster_dir = args.length > 0 ? path.resolve(args[0]) : process.cwd()
+    
+    // Check for help flag
+    if (args.includes('--help') || args.includes('-h')) {
+        showHelp()
+        process.exit(0)
+    }
+    
+    // Parse flags
+    const fast_mode = args.includes('--fast')
+    const skip_build_and_test = args.includes('--skip-build-and-test') || fast_mode
+    const skip_compare_against_published = args.includes('--skip-compare-against-published') || fast_mode
+    
+    // Get cluster directory (non-flag arguments)
+    const non_flag_args = args.filter(arg => !arg.startsWith('--'))
+    const cluster_dir = non_flag_args.length > 0 ? path.resolve(non_flag_args[0]) : process.cwd()
     
     try {
         console.log(`Analyzing cluster: ${path.basename(cluster_dir)}`)
+        
+        // Show information about default behavior and available speed-up options
+        if (!skip_build_and_test || !skip_compare_against_published) {
+            console.log('💡 Tip: You can use --fast to speed up the analysis')
+        }
+        
         console.log('='.repeat(60))
         
-        // Analyze cluster state (analysis-only, no building/testing)
+        // Analyze cluster state
         const cluster_state = analyse_cluster({
             'cluster path': cluster_dir,
-            'build and test': false,  // Analysis should be read-only
-            'compare to published': true
+            'build and test': !skip_build_and_test,  // Default to true, skip if flag set
+            'compare to published': !skip_compare_against_published  // Default to true, skip if flag set
         })
         
         // Check if it's actually a cluster
