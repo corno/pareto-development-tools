@@ -196,7 +196,6 @@ export function determine_package_state(
         try {
             const build_test_result = build_and_test(project_path, {
                 verbose: false,
-                throw_on_error: false,
                 skip_tests: false
             });
 
