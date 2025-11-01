@@ -13,7 +13,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
             : 'differs from directory',
         'status': package_state['package name the same as directory'] 
             ? ['success', null] 
-            : ['warning', null],
+            : ['error', null],
         'children': []
     })
     

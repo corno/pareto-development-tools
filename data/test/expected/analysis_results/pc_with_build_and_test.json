@@ -10,17 +10,17 @@
   },
   "astn": {
     "category": "package",
-    "outcome": "has warnings",
+    "outcome": "has unknown status",
     "status": [
-      "warning",
+      "unknown",
       null
     ],
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -147,17 +147,17 @@
   },
   "astn-to-git": {
     "category": "package",
-    "outcome": "has warnings",
+    "outcome": "has unknown status",
     "status": [
-      "warning",
+      "unknown",
       null
     ],
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -256,9 +256,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -348,9 +348,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -496,17 +496,17 @@
   },
   "exupery-resources": {
     "category": "package",
-    "outcome": "has warnings",
+    "outcome": "has unknown status",
     "status": [
-      "warning",
+      "unknown",
       null
     ],
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -597,17 +597,17 @@
   },
   "exupery-standard-library": {
     "category": "package",
-    "outcome": "has warnings",
+    "outcome": "has unknown status",
     "status": [
-      "warning",
+      "unknown",
       null
     ],
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -688,9 +688,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -862,9 +862,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1001,17 +1001,17 @@
   },
   "pareto-fountain-pen": {
     "category": "package",
-    "outcome": "has warnings",
+    "outcome": "has unknown status",
     "status": [
-      "warning",
+      "unknown",
       null
     ],
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1129,17 +1129,17 @@
   },
   "pareto-json": {
     "category": "package",
-    "outcome": "has warnings",
+    "outcome": "has unknown status",
     "status": [
-      "warning",
+      "unknown",
       null
     ],
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1256,9 +1256,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1404,17 +1404,17 @@
   },
   "pareto-standard-operations": {
     "category": "package",
-    "outcome": "has warnings",
+    "outcome": "has unknown status",
     "status": [
-      "warning",
+      "unknown",
       null
     ],
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1504,9 +1504,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1651,9 +1651,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []

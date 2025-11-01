@@ -10,6 +10,7 @@
                 "project",
                 {
                     "package name in package.json": "astn",
+                    "package name the same as directory": true,
                     "version": "0.111.29",
                     "git": {
                         "staged files": false,
@@ -88,16 +89,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "astn-to-git": [
                 "project",
                 {
                     "package name in package.json": "astn-to-git",
+                    "package name the same as directory": true,
                     "version": "0.0.0",
                     "git": {
                         "staged files": false,
@@ -144,16 +148,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could not compare",
+                        [
+                            "not published",
+                            null
+                        ]
+                    ]
                 }
             ],
             "astn-to-xml": [
                 "project",
                 {
-                    "package name in package.json": "@different/astn-to-xml",
+                    "package name in package.json": "astn-to-git",
+                    "package name the same as directory": false,
                     "version": "0.0.0",
                     "git": {
                         "staged files": false,
@@ -171,15 +178,8 @@
                         null
                     ],
                     "test": [
-                        "failure",
-                        [
-                            "test",
-                            {
-                                "failed tests": [
-                                    "Tests failed"
-                                ]
-                            }
-                        ]
+                        "success",
+                        null
                     ],
                     "dependencies": {
                         "exupery-core-dev": {
@@ -200,16 +200,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could not compare",
+                        [
+                            "not published",
+                            null
+                        ]
+                    ]
                 }
             ],
             "exupery": [
                 "project",
                 {
                     "package name in package.json": "exupery",
+                    "package name the same as directory": true,
                     "version": "0.1.30",
                     "git": {
                         "staged files": false,
@@ -282,16 +285,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "exupery-resources": [
                 "project",
                 {
                     "package name in package.json": "exupery-resources",
+                    "package name the same as directory": true,
                     "version": "0.1.20",
                     "git": {
                         "staged files": false,
@@ -336,16 +342,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "exupery-standard-library": [
                 "project",
                 {
                     "package name in package.json": "exupery-standard-library",
+                    "package name the same as directory": true,
                     "version": "0.1.17",
                     "git": {
                         "staged files": false,
@@ -376,16 +385,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "pareto": [
                 "project",
                 {
                     "package name in package.json": "pareto",
+                    "package name the same as directory": true,
                     "version": "0.76.68",
                     "git": {
                         "staged files": false,
@@ -476,16 +488,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "pareto-boekhouding": [
                 "project",
                 {
                     "package name in package.json": "pareto-boekhouding",
+                    "package name the same as directory": true,
                     "version": "0.1.6",
                     "git": {
                         "staged files": false,
@@ -548,16 +563,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "pareto-fountain-pen": [
                 "project",
                 {
                     "package name in package.json": "pareto-fountain-pen",
+                    "package name the same as directory": true,
                     "version": "0.1.41",
                     "git": {
                         "staged files": false,
@@ -627,16 +645,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "pareto-json": [
                 "project",
                 {
                     "package name in package.json": "pareto-json",
+                    "package name the same as directory": true,
                     "version": "0.1.15",
                     "git": {
                         "staged files": false,
@@ -699,16 +720,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "pareto-lionweb": [
                 "project",
                 {
                     "package name in package.json": "pareto-lionweb",
+                    "package name the same as directory": true,
                     "version": "0.0.4",
                     "git": {
                         "staged files": false,
@@ -783,16 +807,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "pareto-standard-operations": [
                 "project",
                 {
                     "package name in package.json": "pareto-standard-operations",
+                    "package name the same as directory": true,
                     "version": "0.1.17",
                     "git": {
                         "staged files": false,
@@ -832,16 +859,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "pareto-targets": [
                 "project",
                 {
                     "package name in package.json": "pareto-targets",
+                    "package name the same as directory": true,
                     "version": "0.0.3",
                     "git": {
                         "staged files": false,
@@ -907,16 +937,19 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ],
             "pareto-vscode-backend": [
                 "project",
                 {
                     "package name in package.json": "pareto-vscode-backend",
+                    "package name the same as directory": true,
                     "version": "0.1.22",
                     "git": {
                         "staged files": false,
@@ -952,10 +985,12 @@
                         }
                     },
                     "published comparison": [
-                        "skipped",
-                        null
-                    ],
-                    "package name the same as directory": true
+                        "could compare",
+                        [
+                            "different",
+                            null
+                        ]
+                    ]
                 }
             ]
         },

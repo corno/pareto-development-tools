@@ -93,7 +93,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "astn-to-git": [
@@ -151,7 +152,8 @@
                             "not published",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "astn-to-xml": [
@@ -209,7 +211,8 @@
                             "not published",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "exupery": [
@@ -293,7 +296,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "exupery-resources": [
@@ -349,7 +353,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "exupery-standard-library": [
@@ -391,7 +396,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto": [
@@ -493,7 +499,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-boekhouding": [
@@ -567,7 +574,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-fountain-pen": [
@@ -648,7 +656,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-json": [
@@ -722,7 +731,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-lionweb": [
@@ -808,7 +818,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-standard-operations": [
@@ -859,7 +870,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-targets": [
@@ -936,7 +948,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-vscode-backend": [
@@ -983,7 +996,8 @@
                             "different",
                             null
                         ]
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ]
         },

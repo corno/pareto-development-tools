@@ -18,9 +18,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -155,9 +155,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -256,9 +256,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -348,9 +348,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -504,9 +504,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -605,9 +605,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -688,9 +688,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -862,9 +862,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1009,9 +1009,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1137,9 +1137,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1256,9 +1256,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1412,9 +1412,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1504,9 +1504,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []
@@ -1651,9 +1651,9 @@
     "children": [
       {
         "category": "package name",
-        "outcome": "differs from directory",
+        "outcome": "matches directory",
         "status": [
-          "warning",
+          "success",
           null
         ],
         "children": []

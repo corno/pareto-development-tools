@@ -90,7 +90,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "astn-to-git": [
@@ -145,7 +146,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "astn-to-xml": [
@@ -193,7 +195,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "exupery": [
@@ -271,7 +274,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "exupery-resources": [
@@ -324,7 +328,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "exupery-standard-library": [
@@ -363,7 +368,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto": [
@@ -459,7 +465,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-boekhouding": [
@@ -530,7 +537,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-fountain-pen": [
@@ -608,7 +616,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-json": [
@@ -679,7 +688,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-lionweb": [
@@ -759,7 +769,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-standard-operations": [
@@ -807,7 +818,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-targets": [
@@ -878,7 +890,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ],
             "pareto-vscode-backend": [
@@ -919,7 +932,8 @@
                     "published comparison": [
                         "skipped",
                         null
-                    ]
+                    ],
+                    "package name the same as directory": true
                 }
             ]
         },
