@@ -1,10 +1,9 @@
-#!/usr/bin/env node
 /**
  * Cluster Analysis Command
  * 
  * Analyzes all package repositories in a cluster directory and displays results with color-coded output.
  * 
- * Usage: pareto cluster analyse <cluster-directory>
+ * Usage: pareto cluster analyse [options] [cluster-directory]
  * 
  * The cluster directory should contain multiple package repository subdirectories.
  * Each package repository should have the structure:
@@ -26,7 +25,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 import { execSync } from 'child_process'
 import { $$ as analyse_cluster } from '../../queries/analyse_cluster'
-import { $$ as package_state_to_analysis_result } from '../../transformations/package_state_to_analysis_result'
+import { package_state_to_analysis_result } from '../../transformations/state_to_analysis_result'
 import { project_cluster_state_to_dot } from '../../old_lib/project_cluster_state_to_dot'
 import { dot_to_svg } from '../../old_lib/dot_to_svg'
 import { cluster_state_to_html } from '../../old_lib/cluster_state_to_html'
@@ -86,7 +85,6 @@ Usage:
 
 Options:
   --help                Show this help message
-  --all                 Full cluster analysis (default - includes all checks)
   --pre-publish         Pre-publish analysis for all packages
   --pre-commit          Pre-commit analysis for all packages
   --structural          Structural analysis only for all packages
@@ -94,7 +92,7 @@ Options:
   --table               Generate HTML table report and open in viewer
 
 Analysis levels (from most comprehensive to fastest):
-  • --all: Complete package state analysis for all packages (default)
+  • (no flag): Complete package state analysis for all packages (default)
   • --pre-publish: Pre-publish checks for all packages
   • --pre-commit: Pre-commit checks for all packages
   • --structural: Structure validation only for all packages
@@ -104,7 +102,7 @@ Arguments:
                      Expected structure: <path>/<package>/pub/package.json
 
 Examples:
-  pareto cluster analyse                          # Full analysis (--all)
+  pareto cluster analyse                          # Full analysis (default)
   pareto cluster analyse /path/to/cluster         # Full analysis of specific cluster
   pareto cluster analyse --structural             # Fast structural check only
   pareto cluster analyse --pre-commit             # Pre-commit validation
@@ -220,18 +218,14 @@ function openInViewer(filePath: string): void {
     }
 }
 
-export const $$ = (): void => {
-    // Parse command line arguments
-    const args = process.argv.slice(2)
-    
+export const $$ = (args: string[]): void => {
     // Check for help flag
     if (args.includes('--help') || args.includes('-h')) {
         showHelp()
         process.exit(0)
     }
     
-    // Parse analysis level flags
-    const all_analysis = args.includes('--all') || (!args.includes('--pre-publish') && !args.includes('--pre-commit') && !args.includes('--structural'))
+    // Parse analysis level flags - removed --all flag, default is full analysis
     const pre_publish_analysis = args.includes('--pre-publish')
     const pre_commit_analysis = args.includes('--pre-commit')
     const structural_analysis = args.includes('--structural')
@@ -239,9 +233,9 @@ export const $$ = (): void => {
     const generate_table = args.includes('--table')
     
     // Validate that only one analysis level is specified
-    const analysis_flags = [all_analysis, pre_publish_analysis, pre_commit_analysis, structural_analysis].filter(Boolean)
+    const analysis_flags = [pre_publish_analysis, pre_commit_analysis, structural_analysis].filter(Boolean)
     if (analysis_flags.length > 1) {
-        console.error('Error: Please specify only one analysis level (--all, --pre-publish, --pre-commit, or --structural)')
+        console.error('Error: Please specify only one analysis level (--pre-publish, --pre-commit, or --structural)')
         process.exit(1)
     }
     
@@ -393,9 +387,4 @@ export const $$ = (): void => {
         console.error(`Error analyzing cluster: ${error}`)
         process.exit(1)
     }
-}
-
-// Run if called directly
-if (require.main === module) {
-    $$()
 }

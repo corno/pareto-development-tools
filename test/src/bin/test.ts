@@ -8,7 +8,7 @@ import { project_cluster_state_to_dot } from 'pareto-development-tools/dist/old_
 import { dot_to_svg } from 'pareto-development-tools/dist/old_lib/dot_to_svg';
 import { cluster_state_to_html } from 'pareto-development-tools/dist/old_lib/cluster_state_to_html';
 import render_document_to_html from 'pareto-development-tools/dist/old_lib/render_html_document';
-import * as package_state_to_analysis_result_module from 'pareto-development-tools/dist/transformations/package_state_to_analysis_result';
+import * as state_to_analysis_result_module from 'pareto-development-tools/dist/transformations/state_to_analysis_result';
 import type { Cluster_State, Package_State } from 'pareto-development-tools/dist/interface/package_state';
 import type { Package_Analysis_Result, Cluster_Analysis_Result } from 'pareto-development-tools/dist/interface/analysis_result';
 import type { Document } from 'pareto-development-tools/dist/interface/html';
@@ -80,7 +80,7 @@ const tests: Array<{ name: string, config: TestRunner }> = [
                     for (const [project_name, project_data] of Object.entries(cluster_data.projects)) {
                         if (project_data[0] === 'project') {
                             const package_state = project_data[1] as Package_State;
-                            const analysis_result = package_state_to_analysis_result_module.$$(package_state);
+                            const analysis_result = state_to_analysis_result_module.package_state_to_analysis_result(package_state);
                             projects[project_name] = analysis_result;
                         } else {
                             const not_project_analysis: Package_Analysis_Result = {

@@ -1,10 +1,9 @@
-#!/usr/bin/env node
 /**
  * Package Analysis Command
  * 
  * Analyzes a single package repository and displays results with color-coded output.
  * 
- * Usage: pareto analyse <repository-root-directory>
+ * Usage: pareto analyse [options] [package-root-directory]
  * 
  * The directory should be the repository root containing a pub/ subdirectory.
  * Expected structure:
@@ -24,10 +23,12 @@ import { determine_package_state } from '../queries/analyse_package'
 import { determine_pre_publish_state } from '../queries/analyse_package_pre_publish'
 import { determine_pre_commit_state } from '../queries/analyse_package_pre_commit'
 import { determine_structural_state } from '../queries/analyse_package_structural'
-import { $$ as package_state_to_analysis_result } from '../transformations/package_state_to_analysis_result'
-import { $$ as pre_publish_state_to_analysis_result } from '../transformations/pre_publish_state_to_analysis_result'
-import { $$ as pre_commit_state_to_analysis_result } from '../transformations/pre_commit_state_to_analysis_result'
-import { $$ as structural_state_to_analysis_result } from '../transformations/structural_state_to_analysis_result'
+import { 
+    package_state_to_analysis_result,
+    pre_publish_state_to_analysis_result,
+    pre_commit_state_to_analysis_result,
+    structural_state_to_analysis_result
+} from '../transformations/state_to_analysis_result'
 import type { Package_Analysis_Result } from '../interface/analysis_result'
 
     function getStatusColor(status: string): string {
@@ -62,60 +63,61 @@ function showHelp(): void {
 Package Analysis Tool
 
 Usage: 
-  pareto analyse [options] [package-root-directory]
+  pareto analyse [options] <package-root-directory>
 
 Options:
   --help                Show this help message
-  --all                 Full package analysis (default - includes all checks)
   --pre-publish         Pre-publish analysis (includes build, test, structure, and published comparison)
   --pre-commit          Pre-commit analysis (includes build, test, and structure validation)
   --structural          Structural analysis only (fastest - only structure validation)
 
 Analysis levels (from most comprehensive to fastest):
-  • --all: Complete package state analysis (default)
+  • (no flag): Complete package state analysis (default)
   • --pre-publish: Pre-publish checks (git state, dependencies, testing, structure, published comparison)
   • --pre-commit: Pre-commit checks (testing and structure validation)
   • --structural: Structure validation only
 
 Arguments:
-  package-root-directory   Path to package root (defaults to current directory)
+  package-root-directory   Path to package root (required)
                           Expected structure: <path>/pub/package.json
 
 Examples:
-  pareto analyse                          # Full analysis (--all)
-  pareto analyse /path/to/package         # Full analysis of specific package
-  pareto analyse --structural             # Fast structural check only
-  pareto analyse --pre-commit             # Pre-commit validation
-  pareto analyse --pre-publish            # Pre-publish validation
+  pareto analyse /path/to/package                 # Full analysis (default)
+  pareto analyse /path/to/package --structural    # Fast structural check only
+  pareto analyse /path/to/package --pre-commit    # Pre-commit validation
+  pareto analyse /path/to/package --pre-publish   # Pre-publish validation
 `)
 }
 
-export const $$ = (): void => {
-    // Parse command line arguments
-    const args = process.argv.slice(2)
-    
+export const $$ = (args: string[]): void => {
     // Check for help flag
     if (args.includes('--help') || args.includes('-h')) {
         showHelp()
         process.exit(0)
     }
     
-    // Parse analysis level flags
-    const all_analysis = args.includes('--all') || (!args.includes('--pre-publish') && !args.includes('--pre-commit') && !args.includes('--structural'))
+    // Parse analysis level flags - no --all flag, default is full analysis
     const pre_publish_analysis = args.includes('--pre-publish')
     const pre_commit_analysis = args.includes('--pre-commit')
     const structural_analysis = args.includes('--structural')
     
     // Validate that only one analysis level is specified
-    const analysis_flags = [all_analysis, pre_publish_analysis, pre_commit_analysis, structural_analysis].filter(Boolean)
+    const analysis_flags = [pre_publish_analysis, pre_commit_analysis, structural_analysis].filter(Boolean)
     if (analysis_flags.length > 1) {
-        console.error('Error: Please specify only one analysis level (--all, --pre-publish, --pre-commit, or --structural)')
+        console.error('Error: Please specify only one analysis level (--pre-publish, --pre-commit, or --structural)')
         process.exit(1)
     }
     
-    // Get package directory (non-flag arguments)
+    // Get package directory (non-flag arguments) - path is required
     const non_flag_args = args.filter(arg => !arg.startsWith('--'))
-    const package_dir = non_flag_args.length > 0 ? path.resolve(non_flag_args[0]) : process.cwd()
+    if (non_flag_args.length === 0) {
+        console.error('Error: Package directory path is required')
+        console.error('Usage: pareto analyse [options] <package-root-directory>')
+        console.error('Expected structure: <your-path>/pub/package.json')
+        process.exit(1)
+    }
+    
+    const package_dir = path.resolve(non_flag_args[0])
     
     // Check if this is a valid package structure (has pub/package.json)
     const package_json_path = path.join(package_dir, 'pub', 'package.json')
@@ -164,7 +166,7 @@ export const $$ = (): void => {
             const pre_publish_state = determine_pre_publish_state(analysis_params)
             analysis_result = pre_publish_state_to_analysis_result(pre_publish_state)
         } else {
-            // Full analysis (--all or default)
+            // Full analysis (default when no flags specified)
             console.log('Running full package analysis...')
             const package_state = determine_package_state(analysis_params)
             analysis_result = package_state_to_analysis_result(package_state)
@@ -199,9 +201,4 @@ export const $$ = (): void => {
         console.error(`Error analyzing package: ${error}`)
         process.exit(1)
     }
-}
-
-// Run if called directly
-if (require.main === module) {
-    $$()
 }

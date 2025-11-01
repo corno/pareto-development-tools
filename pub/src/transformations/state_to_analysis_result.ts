@@ -1,8 +1,156 @@
-import { Pre_Publish_State } from "../interface/package_state"
+import { Package_State, Pre_Publish_State, Pre_Commit_State, Structural_State } from "../interface/package_state"
 import { Package_Analysis_Result } from "../interface/analysis_result"
-import { $$ as pre_commit_state_to_analysis_result } from "./pre_commit_state_to_analysis_result"
 
-export const $$ = (pre_publish_state: Pre_Publish_State): Package_Analysis_Result => {
+export const structural_state_to_analysis_result = (structural_state: Structural_State): Package_Analysis_Result => {
+    
+    const children: Package_Analysis_Result[] = []
+    
+    // Check package name consistency
+    children.push({
+        'category': 'package name',
+        'outcome': structural_state['package name the same as directory'] 
+            ? 'matches directory' 
+            : 'differs from directory',
+        'status': structural_state['package name the same as directory'] 
+            ? ['success', null] 
+            : ['issue', null],
+        'children': []
+    })
+    
+    // Check structure validation
+    if (structural_state.structure[0] === 'valid') {
+        children.push({
+            'category': 'structure',
+            'outcome': structural_state.structure[1].warnings.length > 0 
+                ? `valid with ${structural_state.structure[1].warnings.length} warnings`
+                : 'valid',
+            'status': structural_state.structure[1].warnings.length > 0 
+                ? ['warning', null] 
+                : ['success', null],
+            'children': []
+        })
+    } else {
+        children.push({
+            'category': 'structure',
+            'outcome': `invalid (${structural_state.structure[1].errors.length} issues)`,
+            'status': ['issue', null],
+            'children': []
+        })
+    }
+    
+    // Check interface implementation match
+    const iim = structural_state['interface implementation match']
+    let iim_outcome: string
+    let iim_status: Package_Analysis_Result['status']
+    
+    if (iim[0] === 'matched') {
+        iim_outcome = 'matched'
+        iim_status = ['success', null]
+    } else if (iim[0] === 'root interface direcory missing') {
+        iim_outcome = 'interface directory missing'
+        iim_status = ['warning', null]
+    } else if (iim[0] === 'root implementation direcory missing') {
+        iim_outcome = 'implementation directory missing'
+        iim_status = ['warning', null]
+    } else {
+        // mismatched
+        iim_outcome = `mismatched (${iim[1].differences.length} differences)`
+        iim_status = ['issue', null]
+    }
+    
+    children.push({
+        'category': 'interface implementation',
+        'outcome': iim_outcome,
+        'status': iim_status,
+        'children': []
+    })
+    
+    // Determine overall status based on children
+    const has_issue = children.some(child => child.status[0] === 'issue')
+    const has_warning = children.some(child => child.status[0] === 'warning')
+    
+    let overall_status: Package_Analysis_Result['status']
+    let overall_outcome: string
+    
+    if (has_issue) {
+        overall_status = ['issue', null]
+        overall_outcome = 'has structural issues'
+    } else if (has_warning) {
+        overall_status = ['warning', null]
+        overall_outcome = 'has structural warnings'
+    } else {
+        overall_status = ['success', null]
+        overall_outcome = 'structure valid'
+    }
+    
+    return {
+        'category': 'structural',
+        'outcome': overall_outcome,
+        'status': overall_status,
+        'children': children
+    }
+}
+
+export const pre_commit_state_to_analysis_result = (pre_commit_state: Pre_Commit_State): Package_Analysis_Result => {
+    
+    const children: Package_Analysis_Result[] = []
+    
+    // Check test results
+    const test_result = pre_commit_state.test
+    let test_outcome: string
+    let test_status: Package_Analysis_Result['status']
+    
+    if (test_result[0] === 'success') {
+        test_outcome = 'passed'
+        test_status = ['success', null]
+    } else {
+        // failure
+        if (test_result[1][0] === 'build') {
+            test_outcome = 'build failed'
+        } else {
+            test_outcome = `tests failed (${test_result[1][1]['failed tests'].length} failures)`
+        }
+        test_status = ['issue', null]
+    }
+    
+    children.push({
+        'category': 'test',
+        'outcome': test_outcome,
+        'status': test_status,
+        'children': []
+    })
+    
+    // Add structural analysis as a child
+    const structural_result = structural_state_to_analysis_result(pre_commit_state.structural)
+    children.push(structural_result)
+    
+    // Determine overall status based on children
+    const has_issue = children.some(child => child.status[0] === 'issue')
+    const has_warning = children.some(child => child.status[0] === 'warning')
+    
+    let overall_status: Package_Analysis_Result['status']
+    let overall_outcome: string
+    
+    if (has_issue) {
+        overall_status = ['issue', null]
+        overall_outcome = 'has pre-commit issues'
+    } else if (has_warning) {
+        overall_status = ['warning', null]
+        overall_outcome = 'has pre-commit warnings'
+    } else {
+        overall_status = ['success', null]
+        overall_outcome = 'pre-commit checks passed'
+    }
+    
+    return {
+        'category': 'pre-commit',
+        'outcome': overall_outcome,
+        'status': overall_status,
+        'children': children
+    }
+}
+
+export const pre_publish_state_to_analysis_result = (pre_publish_state: Pre_Publish_State): Package_Analysis_Result => {
     
     const children: Package_Analysis_Result[] = []
     
@@ -164,6 +312,26 @@ export const $$ = (pre_publish_state: Pre_Publish_State): Package_Analysis_Resul
     
     return {
         'category': 'pre-publish',
+        'outcome': overall_outcome,
+        'status': overall_status,
+        'children': children
+    }
+}
+
+export const package_state_to_analysis_result = (package_state: Package_State): Package_Analysis_Result => {
+    
+    const children: Package_Analysis_Result[] = []
+    
+    // Add pre-publish analysis as the main child
+    const pre_publish_result = pre_publish_state_to_analysis_result(package_state['pre-publish'])
+    children.push(pre_publish_result)
+    
+    // Determine overall status based on pre-publish result
+    const overall_status = pre_publish_result.status
+    const overall_outcome = pre_publish_result.outcome
+    
+    return {
+        'category': 'package',
         'outcome': overall_outcome,
         'status': overall_status,
         'children': children

@@ -11,99 +11,99 @@
  */
 
 const path = require('path');
-const { spawn } = require('child_process');
+const fs = require('fs');
 
 const COMMANDS = {
     'publish': {
-        file: './commands/publish.js',
+        module: './commands/publish',
         description: 'Publish a package with validation and testing'
     },
     'ensure-valid-commit': {
-        file: './commands/ensure_valid_commit.js',
+        module: './commands/ensure_valid_commit',
         description: 'Ensure repository has a valid latest commit'
     },
     'build': {
-        file: './commands/build.js',
+        module: './commands/build',
         description: 'Build a single package'
     },
     'cluster-build': {
-        file: './commands/cluster/build.js',
+        module: './commands/cluster/build',
         description: 'Build all packages in dependency order'
     },
     'test': {
-        file: './commands/test.js',
+        module: './commands/test',
         description: 'Run tests for a single package'
     },
     'cluster-test': {
-        file: './commands/cluster/test.js',
+        module: './commands/cluster/test',
         description: 'Run tests for all packages'
     },
     'clean': {
-        file: './commands/clean.js',
+        module: './commands/clean',
         description: 'Clean build artifacts from a package'
     },
     'cluster-clean': {
-        file: './commands/cluster/clean.js',
+        module: './commands/cluster/clean',
         description: 'Clean build artifacts from all packages'
     },
     'cluster-commit': {
-        file: './commands/cluster/commit_and_push.js',
+        module: './commands/cluster/commit_and_push',
         description: 'Commit and push all packages with validation'
     },
     'cluster-ensure-valid-commits': {
-        file: './commands/cluster/ensure_valid_commits.js',
+        module: './commands/cluster/ensure_valid_commits',
         description: 'Ensure valid commits for all packages (topological order)'
     },
     'cluster-stage': {
-        file: './commands/cluster/stage.js',
+        module: './commands/cluster/stage',
         description: 'Stage changes in all packages'
     },
     'update': {
-        file: './commands/update.js',
+        module: './commands/update',
         description: 'Update dependencies in a single package'
     },
     'cluster-update': {
-        file: './commands/cluster/update.js',
+        module: './commands/cluster/update',
         description: 'Update dependencies in all packages'
     },
     'compare': {
-        file: './commands/compare.js',
+        module: './commands/compare',
         description: 'Compare local package with published version'
     },
     'validate-structure': {
-        file: './commands/validate_structure.js',
+        module: './commands/validate_structure',
         description: 'Validate that the repository structure does not deviate from the standard'
     },
     'check-interface-implementation': {
-        file: './commands/check_interface_implementation.js',
+        module: './commands/check_interface_implementation',
         description: 'Compare interface/algorithms vs implementation structure'
     },
     'cluster-validate-structure': {
-        file: './commands/cluster/validate_structure.js',
+        module: './commands/cluster/validate_structure',
         description: 'for each repo in the directory; Validate that the repository structure does not deviate from the standard'
     },
     'cluster-wip': {
-        file: './commands/cluster/wip.js',
+        module: './commands/cluster/wip',
         description: 'List work-in-progress packages (uncommitted/unpublished changes)'
     },
     'cluster-list-loc': {
-        file: './commands/cluster/list_loc.js',
+        module: './commands/cluster/list_loc',
         description: 'List all files with line counts (CSV format)'
     },
     'cluster-dependency-graph': {
-        file: './commands/cluster/dependency_graph.js',
+        module: './commands/cluster/dependency_graph',
         description: 'Generate and visualize dependency graph'
     },
     'analyse': {
-        file: './commands/analyse.js',
-        description: 'Analyze a package repository (specify parent of pub/ directory)'
+        module: './commands/analyse',
+        description: 'Analyze a package repository'
     },
     'cluster-analyse': {
-        file: './commands/cluster/analyse.js',
+        module: './commands/cluster/analyse',
         description: 'Analyze all package repositories in a cluster with colored output'
     },
     'cd-local': {
-        file: './commands/cd-local.js',
+        module: './commands/cd-local',
         description: 'Change directory while staying within VS Code workspace bounds'
     }
 };
@@ -155,18 +155,19 @@ if (!COMMANDS[effective_command]) {
     process.exit(1);
 }
 
-// Execute the command by spawning the corresponding script
-const script_path = path.join(__dirname, COMMANDS[effective_command].file);
-const child = spawn('node', [script_path, ...effective_args], {
-    stdio: 'inherit',
-    cwd: process.cwd()
-});
-
-child.on('exit', (code) => {
-    process.exit(code || 0);
-});
-
-child.on('error', (err) => {
+// Execute the command by requiring the module and calling its exported function
+try {
+    const command_module = require(COMMANDS[effective_command].module);
+    const command_function = command_module.$$;
+    
+    if (typeof command_function !== 'function') {
+        console.error(`Error: Command module ${effective_command} does not export a $$ function`);
+        process.exit(1);
+    }
+    
+    // Call the command function with the arguments (let each command handle its own path parsing)
+    command_function(effective_args);
+} catch (err) {
     console.error(`Error executing ${command}:`, err.message);
     process.exit(1);
-});
+}
