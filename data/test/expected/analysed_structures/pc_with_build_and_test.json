@@ -1,0 +1,968 @@
+[
+    "cluster",
+    {
+        "projects": {
+            ".vscode": [
+                "not a project",
+                null
+            ],
+            "astn": [
+                "project",
+                {
+                    "package name in package.json": "astn",
+                    "version": "0.111.29",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": false,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "success",
+                        null
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-bin": {
+                            "version": "^0.1.18",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-data": {
+                            "version": "^0.1.11",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-dev": {
+                            "version": "^0.1.3",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "pareto-fountain-pen": {
+                            "version": "^0.1.41",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "pareto-json": {
+                            "version": "^0.1.15",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "pareto-standard-operations": {
+                            "version": "^0.1.17",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "astn-to-git": [
+                "project",
+                {
+                    "package name in package.json": "astn-to-git",
+                    "version": "0.0.0",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": false,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "success",
+                        null
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-dev": {
+                            "version": "^0.1.3",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "pareto-fountain-pen": {
+                            "version": "^0.1.41",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "astn-to-xml": [
+                "project",
+                {
+                    "package name in package.json": "@different/astn-to-xml",
+                    "version": "0.0.0",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": false,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "failure",
+                        [
+                            "test",
+                            {
+                                "failed tests": [
+                                    "Tests failed"
+                                ]
+                            }
+                        ]
+                    ],
+                    "dependencies": {
+                        "exupery-core-dev": {
+                            "version": "^0.1.3",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "pareto-fountain-pen": {
+                            "version": "^0.1.41",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "exupery": [
+                "project",
+                {
+                    "package name in package.json": "exupery",
+                    "version": "0.1.30",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": true,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "failure",
+                        [
+                            "build",
+                            null
+                        ]
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-bin": {
+                            "version": "^0.1.18",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-data": {
+                            "version": "^0.1.11",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-dev": {
+                            "version": "^0.1.3",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "pareto-fountain-pen": {
+                            "version": "^0.1.41",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "pareto-standard-operations": {
+                            "version": "^0.1.17",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "exupery-resources": [
+                "project",
+                {
+                    "package name in package.json": "exupery-resources",
+                    "version": "0.1.20",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": false,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "success",
+                        null
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-async": {
+                            "version": "^0.1.43",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-dev": {
+                            "version": "^0.1.3",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "exupery-standard-library": [
+                "project",
+                {
+                    "package name in package.json": "exupery-standard-library",
+                    "version": "0.1.17",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": false,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "success",
+                        null
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "pareto": [
+                "project",
+                {
+                    "package name in package.json": "pareto",
+                    "version": "0.76.68",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": true,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "failure",
+                        [
+                            "build",
+                            null
+                        ]
+                    ],
+                    "dependencies": {
+                        "astn": {
+                            "version": "^0.111.29",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "exupery": {
+                            "version": "^0.1.30",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-bin": {
+                            "version": "^0.1.18",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-data": {
+                            "version": "^0.1.11",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-dev": {
+                            "version": "^0.1.3",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "pareto-fountain-pen": {
+                            "version": "^0.1.41",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "pareto-standard-operations": {
+                            "version": "^0.1.17",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "pareto-boekhouding": [
+                "project",
+                {
+                    "package name in package.json": "pareto-boekhouding",
+                    "version": "0.1.6",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": true,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "success",
+                        null
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-bin": {
+                            "version": "^0.1.18",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-data": {
+                            "version": "^0.1.11",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "pareto-fountain-pen": {
+                            "version": "^0.1.41",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "pareto-standard-operations": {
+                            "version": "^0.1.17",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "pareto-fountain-pen": [
+                "project",
+                {
+                    "package name in package.json": "pareto-fountain-pen",
+                    "version": "0.1.41",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": false,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "success",
+                        null
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-bin": {
+                            "version": "^0.1.18",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-data": {
+                            "version": "^0.1.11",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-dev": {
+                            "version": "^0.1.3",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-resources": {
+                            "version": "^0.1.20",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "pareto-standard-operations": {
+                            "version": "^0.1.17",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "pareto-json": [
+                "project",
+                {
+                    "package name in package.json": "pareto-json",
+                    "version": "0.1.15",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": false,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "success",
+                        null
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-bin": {
+                            "version": "^0.1.18",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-data": {
+                            "version": "^0.1.11",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "pareto-fountain-pen": {
+                            "version": "^0.1.41",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "pareto-standard-operations": {
+                            "version": "^0.1.17",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "pareto-lionweb": [
+                "project",
+                {
+                    "package name in package.json": "pareto-lionweb",
+                    "version": "0.0.4",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": true,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "failure",
+                        [
+                            "build",
+                            null
+                        ]
+                    ],
+                    "dependencies": {
+                        "astn": {
+                            "version": "^0.111.29",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-bin": {
+                            "version": "^0.1.18",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-rawdata": {
+                            "version": "^0.1.7",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-resources": {
+                            "version": "^0.1.20",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "pareto-standard-operations": {
+                            "version": "^0.1.17",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "pareto-standard-operations": [
+                "project",
+                {
+                    "package name in package.json": "pareto-standard-operations",
+                    "version": "0.1.17",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": false,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "success",
+                        null
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-standard-library": {
+                            "version": "^0.1.17",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "pareto-targets": [
+                "project",
+                {
+                    "package name in package.json": "pareto-targets",
+                    "version": "0.0.3",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": true,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "failure",
+                        [
+                            "build",
+                            null
+                        ]
+                    ],
+                    "dependencies": {
+                        "exupery-core-alg": {
+                            "version": "^0.1.12",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-data": {
+                            "version": "^0.1.11",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "exupery-core-dev": {
+                            "version": "^0.1.3",
+                            "target": [
+                                "not found",
+                                null
+                            ]
+                        },
+                        "pareto": {
+                            "version": "^0.76.68",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        },
+                        "pareto-json": {
+                            "version": "^0.1.15",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ],
+            "pareto-vscode-backend": [
+                "project",
+                {
+                    "package name in package.json": "pareto-vscode-backend",
+                    "version": "0.1.22",
+                    "git": {
+                        "staged files": false,
+                        "dirty working tree": true,
+                        "unpushed commits": false
+                    },
+                    "structure": [
+                        "valid",
+                        {
+                            "warnings": []
+                        }
+                    ],
+                    "interface implementation match": [
+                        "matched",
+                        null
+                    ],
+                    "test": [
+                        "failure",
+                        [
+                            "build",
+                            null
+                        ]
+                    ],
+                    "dependencies": {
+                        "pareto": {
+                            "version": "^0.76.68",
+                            "target": [
+                                "found",
+                                {
+                                    "dependency up to date": true
+                                }
+                            ]
+                        }
+                    },
+                    "published comparison": [
+                        "skipped",
+                        null
+                    ]
+                }
+            ]
+        },
+        "topological order": [
+            "valid order",
+            [
+                "exupery-resources",
+                "exupery-standard-library",
+                "pareto-standard-operations",
+                "pareto-fountain-pen",
+                "pareto-json",
+                "astn",
+                "astn-to-git",
+                "astn-to-xml",
+                "exupery",
+                "pareto",
+                "pareto-boekhouding",
+                "pareto-lionweb",
+                "pareto-targets",
+                "pareto-vscode-backend"
+            ]
+        ]
+    }
+]

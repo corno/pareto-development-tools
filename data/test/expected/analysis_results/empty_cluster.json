@@ -1,0 +1,11 @@
+{
+  "invalid_cluster": {
+    "category": "cluster",
+    "outcome": "not found or invalid",
+    "status": [
+      "error",
+      null
+    ],
+    "children": []
+  }
+}

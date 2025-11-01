@@ -1,8 +1,11 @@
-
-export type Analysis_Result = {
+export type Package_Analysis_Result = {
+    'category': string
+    'outcome': string
     'status':
     | ['success', null]
     | ['error', null]
     | ['warning', null]
-    'children': Analysis_Result[]
+    'children': Package_Analysis_Result[]
 }
+
+export type Cluster_Analysis_Result = { [key: string]: Package_Analysis_Result }

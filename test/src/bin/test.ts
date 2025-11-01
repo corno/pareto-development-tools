@@ -2,12 +2,19 @@
 
 import { execSync } from 'child_process';
 import * as path from 'path';
+import { $$ as test_runner, TestRunner } from '../lib/test_runner';
+import cluster_state_to_document from 'pareto-development-tools/dist/old_lib/cluster_state_to_document';
+import { project_cluster_state_to_dot } from 'pareto-development-tools/dist/old_lib/project_cluster_state_to_dot';
+import * as package_state_to_analysis_result_module from 'pareto-development-tools/dist/transformations/package_state_to_analysis_result';
+import type { Cluster_State, Package_State } from 'pareto-development-tools/dist/interface/package_state';
+import type { Package_Analysis_Result, Cluster_Analysis_Result } from 'pareto-development-tools/dist/interface/analysis_result';
 
 const test_base_dir = '/home/corno/workspace/pareto-development-tools/test';
 const data_dir = '/home/corno/workspace/pareto-development-tools/data/test';
 
 const args = process.argv.slice(2);
 const overwrite_expected = args.includes('--overwrite-expected');
+const specific_test = args.find(arg => arg.startsWith('--test='))?.split('=')[1];
 
 console.log('Running all tests...\n');
 console.log('='.repeat(60));
@@ -16,76 +23,112 @@ let failed_tests = 0;
 let passed_tests = 0;
 const failed_test_types: string[] = [];
 
-// Test 1: DOT file generation
-console.log('\n1. Testing DOT file generation...');
-try {
-    const cmd = overwrite_expected 
-        ? 'node ./dist/bin/test_dot_file_generation.js --overwrite-expected'
-        : 'node ./dist/bin/test_dot_file_generation.js';
-    execSync(cmd, {
-        cwd: test_base_dir,
-        stdio: 'inherit'
-    });
-    console.log('✓ DOT file generation test passed');
-    passed_tests++;
-} catch (err) {
-    console.error('✗ DOT file generation test failed');
-    failed_tests++;
-    failed_test_types.push('dot_files');
-}
+// Define all tests to run
+const tests: Array<{ name: string, config: TestRunner }> = [
+    {
+        name: 'DOT file generation',
+        config: {
+            'input_dir_name': 'analysed_structures',
+            'output_dir_name': 'dot_files',
+            'target_extension': 'dot',
+            'transformer': (input_content: string, filename: string): string => {
+                const cluster_state: Cluster_State = JSON.parse(input_content);
+                return project_cluster_state_to_dot(cluster_state, {
+                    'include_legend': true,
+                    'cluster_path': filename,
+                    'show_warnings': false,
+                    'time stamp': 'FIXED_TIMESTAMP_FOR_TESTING'
+                });
+            },
+            'overwrite_expected': overwrite_expected && (!specific_test || specific_test === 'dot')
+        }
+    },
+    {
+        name: 'Document generation',
+        config: {
+            'input_dir_name': 'analysed_structures',
+            'output_dir_name': 'html_as_json',
+            'target_extension': 'json',
+            'transformer': (input_content: string, filename: string): string => {
+                const cluster_state: Cluster_State = JSON.parse(input_content);
+                const document = cluster_state_to_document(cluster_state, {
+                    'time stamp': 'FIXED_TIMESTAMP_FOR_TESTING',
+                    'cluster path': filename
+                });
+                return JSON.stringify(document, null, 2);
+            },
+            'overwrite_expected': overwrite_expected
+        }
+    },
+    {
+        name: 'Package State to Analysis Result transformation',
+        config: {
+            'input_dir_name': 'analysed_structures',
+            'output_dir_name': 'analysis_results',
+            'target_extension': 'json',
+            'transformer': (input_content: string, filename: string): string => {
+                const cluster_state = JSON.parse(input_content);
+                
+                if (cluster_state[0] === 'cluster') {
+                    const cluster_data = cluster_state[1];
+                    const projects: { [key: string]: Package_Analysis_Result } = {};
+                    
+                    for (const [project_name, project_data] of Object.entries(cluster_data.projects)) {
+                        if (project_data[0] === 'project') {
+                            const package_state = project_data[1] as Package_State;
+                            const analysis_result = package_state_to_analysis_result_module.$$(package_state);
+                            projects[project_name] = analysis_result;
+                        } else {
+                            const not_project_analysis: Package_Analysis_Result = {
+                                'category': 'project',
+                                'outcome': `${project_name}: not a project`,
+                                'status': ['warning', null],
+                                'children': []
+                            };
+                            projects[project_name] = not_project_analysis;
+                        }
+                    }
+                    
+                    const cluster_result: Cluster_Analysis_Result = projects;
+                    
+                    return JSON.stringify(cluster_result, null, 2);
+                } else {
+                    const error_result: Cluster_Analysis_Result = {
+                        'invalid_cluster': {
+                            'category': 'cluster',
+                            'outcome': 'not found or invalid',
+                            'status': ['error', null],
+                            'children': []
+                        }
+                    };
+                    return JSON.stringify(error_result, null, 2);
+                }
+            },
+            'overwrite_expected': overwrite_expected
+        }
+    }
+];
 
-// Test 2: SVG generation
-console.log('\n2. Testing SVG generation...');
-try {
-    const cmd = overwrite_expected 
-        ? 'node ./dist/bin/test_svg_generation.js --overwrite-expected'
-        : 'node ./dist/bin/test_svg_generation.js';
-    execSync(cmd, {
-        cwd: test_base_dir,
-        stdio: 'inherit'
-    });
-    console.log('✓ SVG generation test passed');
-    passed_tests++;
-} catch (err) {
-    console.error('✗ SVG generation test failed');
-    failed_tests++;
-    failed_test_types.push('svgs');
-}
-
-// Test 3: Document generation (Cluster_State → Document JSON)
-console.log('\n3. Testing Document generation...');
-try {
-    const cmd = overwrite_expected 
-        ? 'node ./dist/bin/test_document_generation.js --overwrite-expected'
-        : 'node ./dist/bin/test_document_generation.js';
-    execSync(cmd, {
-        cwd: test_base_dir,
-        stdio: 'inherit'
-    });
-    console.log('✓ Document generation test passed');
-    passed_tests++;
-} catch (err) {
-    console.error('✗ Document generation test failed');
-    failed_tests++;
-    failed_test_types.push('html_as_json');
-}
-
-// Test 4: HTML rendering (Document JSON → HTML)
-console.log('\n4. Testing HTML rendering...');
-try {
-    const cmd = overwrite_expected 
-        ? 'node ./dist/bin/test_html_rendering.js --overwrite-expected'
-        : 'node ./dist/bin/test_html_rendering.js';
-    execSync(cmd, {
-        cwd: test_base_dir,
-        stdio: 'inherit'
-    });
-    console.log('✓ HTML rendering test passed');
-    passed_tests++;
-} catch (err) {
-    console.error('✗ HTML rendering test failed');
-    failed_tests++;
-    failed_test_types.push('html');
+// Run each test
+for (let i = 0; i < tests.length; i++) {
+    const test = tests[i];
+    console.log(`\n${i + 1}. Testing ${test.name}...`);
+    
+    try {
+        const success = test_runner(test.config);
+        if (success) {
+            console.log(`✓ ${test.name} test passed`);
+            passed_tests++;
+        } else {
+            console.error(`✗ ${test.name} test failed`);
+            failed_tests++;
+            failed_test_types.push(test.config.output_dir_name);
+        }
+    } catch (err) {
+        console.error(`✗ ${test.name} test failed with error: ${err}`);
+        failed_tests++;
+        failed_test_types.push(test.config.output_dir_name);
+    }
 }
 
 // Summary

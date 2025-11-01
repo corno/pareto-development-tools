@@ -269,6 +269,7 @@ async function main(): Promise<void> {
 
             projects_data[pkg.name] = ['project', {
                 'package name in package.json': pkg.package_name,
+                'package name the same as directory': pkg.package_name === pkg.name,
                 'version': pkg.version,
                 'git': git_status,
                 'structure': ['valid', { 'warnings': [] }],

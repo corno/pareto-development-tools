@@ -349,6 +349,7 @@ export function determine_package_state(
 
     return {
         'package name in package.json': package_name,
+        'package name the same as directory': package_name === $p['directory name'],
         'version': version,
         'git': git_state,
         'structure': structure_state,
