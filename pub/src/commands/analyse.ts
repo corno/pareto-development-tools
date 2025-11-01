@@ -45,16 +45,41 @@ function resetColor(): string {
     return '\x1b[0m'
 }
 
-function printAnalysisResult(result: Package_Analysis_Result, depth: number = 0): void {
+function printAnalysisResult(result: Package_Analysis_Result, depth: number = 0, category?: string): void {
     const indent = '  '.repeat(depth)
-    const color = getStatusColor(result.status[0])
     const reset = resetColor()
     
-    console.log(`${indent}${color}${result.category}: ${result.outcome}${reset}`)
-    
-    // Print children with increased indentation
-    for (const child of result.children) {
-        printAnalysisResult(child, depth + 1)
+    if (result[0] === 'leaf') {
+        // Leaf node - show category and outcome with status color
+        const color = getStatusColor(result[1].status[0])
+        const displayCategory = category || 'result'
+        console.log(`${indent}${color}${displayCategory}: ${result[1].outcome}${reset}`)
+    } else {
+        // Composite node - show category with colored prefix icon, but use default text color
+        const getCompositeStatus = (compositeResult: Package_Analysis_Result): string => {
+            if (compositeResult[0] === 'leaf') {
+                return compositeResult[1].status[0]
+            } else {
+                const childStatuses = Object.values(compositeResult[1]).map(child => getCompositeStatus(child))
+                if (childStatuses.some(s => s === 'issue')) return 'issue'
+                if (childStatuses.some(s => s === 'warning')) return 'warning'
+                if (childStatuses.some(s => s === 'unknown')) return 'unknown'
+                return 'success'
+            }
+        }
+        
+        const status = getCompositeStatus(result)
+        const iconColor = getStatusColor(status)
+        const icon = status === 'issue' ? '✗' : status === 'warning' ? '⚠' : status === 'unknown' ? '?' : '✓'
+        const displayCategory = category || 'composite'
+        
+        // Use colored icon, then explicitly reset to default for text
+        console.log(`${indent}${iconColor}${icon}\x1b[0m ${displayCategory}`)
+        
+        // Print children with increased indentation
+        for (const [childCategory, child] of Object.entries(result[1])) {
+            printAnalysisResult(child, depth + 1, childCategory)
+        }
     }
 }
 
@@ -184,12 +209,26 @@ export const $$ = (args: string[]): void => {
         }
         
         // Print colored analysis result
-        printAnalysisResult(analysis_result)
+        printAnalysisResult(analysis_result, 0, 'package')
         
         console.log('='.repeat(50))
         
         // Exit with appropriate code based on overall status
-        switch (analysis_result.status[0]) {
+        const getOverallStatus = (result: Package_Analysis_Result): string => {
+            if (result[0] === 'leaf') {
+                return result[1].status[0]
+            } else {
+                const childStatuses = Object.values(result[1]).map(child => getOverallStatus(child))
+                if (childStatuses.some(s => s === 'issue')) return 'issue'
+                if (childStatuses.some(s => s === 'warning')) return 'warning'
+                if (childStatuses.some(s => s === 'unknown')) return 'unknown'
+                return 'success'
+            }
+        }
+        
+        const overall_status = getOverallStatus(analysis_result)
+        
+        switch (overall_status) {
             case 'success':
                 console.log(`${getStatusColor('success')}✓ Analysis complete: All checks passed${resetColor()}`)
                 process.exit(0)
