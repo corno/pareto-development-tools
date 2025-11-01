@@ -15,95 +15,95 @@ const fs = require('fs');
 
 const COMMANDS = {
     'publish': {
-        module: './commands/publish',
+        module: '../src/commands/publish',
         description: 'Publish a package with validation and testing'
     },
     'ensure-valid-commit': {
-        module: './commands/ensure_valid_commit',
+        module: '../src/commands/ensure_valid_commit',
         description: 'Ensure repository has a valid latest commit'
     },
     'build': {
-        module: './commands/build',
+        module: '../src/commands/build',
         description: 'Build a single package'
     },
     'cluster-build': {
-        module: './commands/cluster/build',
+        module: '../src/commands/cluster/build',
         description: 'Build all packages in dependency order'
     },
     'test': {
-        module: './commands/test',
+        module: '../src/commands/test',
         description: 'Run tests for a single package'
     },
     'cluster-test': {
-        module: './commands/cluster/test',
+        module: '../src/commands/cluster/test',
         description: 'Run tests for all packages'
     },
     'clean': {
-        module: './commands/clean',
+        module: '../src/commands/clean',
         description: 'Clean build artifacts from a package'
     },
     'cluster-clean': {
-        module: './commands/cluster/clean',
+        module: '../src/commands/cluster/clean',
         description: 'Clean build artifacts from all packages'
     },
     'cluster-commit': {
-        module: './commands/cluster/commit_and_push',
+        module: '../src/commands/cluster/commit_and_push',
         description: 'Commit and push all packages with validation'
     },
     'cluster-ensure-valid-commits': {
-        module: './commands/cluster/ensure_valid_commits',
+        module: '../src/commands/cluster/ensure_valid_commits',
         description: 'Ensure valid commits for all packages (topological order)'
     },
     'cluster-stage': {
-        module: './commands/cluster/stage',
+        module: '../src/commands/cluster/stage',
         description: 'Stage changes in all packages'
     },
     'update': {
-        module: './commands/update',
+        module: '../src/commands/update',
         description: 'Update dependencies in a single package'
     },
     'cluster-update': {
-        module: './commands/cluster/update',
+        module: '../src/commands/cluster/update',
         description: 'Update dependencies in all packages'
     },
     'compare': {
-        module: './commands/compare',
+        module: '../src/commands/compare',
         description: 'Compare local package with published version'
     },
     'validate-structure': {
-        module: './commands/validate_structure',
+        module: '../src/commands/validate_structure',
         description: 'Validate that the repository structure does not deviate from the standard'
     },
     'check-interface-implementation': {
-        module: './commands/check_interface_implementation',
+        module: '../src/commands/check_interface_implementation',
         description: 'Compare interface/algorithms vs implementation structure'
     },
     'cluster-validate-structure': {
-        module: './commands/cluster/validate_structure',
+        module: '../src/commands/cluster/validate_structure',
         description: 'for each repo in the directory; Validate that the repository structure does not deviate from the standard'
     },
     'cluster-wip': {
-        module: './commands/cluster/wip',
+        module: '../src/commands/cluster/wip',
         description: 'List work-in-progress packages (uncommitted/unpublished changes)'
     },
     'cluster-list-loc': {
-        module: './commands/cluster/list_loc',
+        module: '../src/commands/cluster/list_loc',
         description: 'List all files with line counts (CSV format)'
     },
     'cluster-dependency-graph': {
-        module: './commands/cluster/dependency_graph',
+        module: '../src/commands/cluster/dependency_graph',
         description: 'Generate and visualize dependency graph'
     },
     'analyse': {
-        module: './commands/analyse',
+        module: '../src/commands/analyse',
         description: 'Analyze a package repository'
     },
     'cluster-analyse': {
-        module: './commands/cluster/analyse',
+        module: '../src/commands/cluster/analyse',
         description: 'Analyze all package repositories in a cluster with colored output'
     },
     'cd-local': {
-        module: './commands/cd-local',
+        module: '../src/commands/cd-local',
         description: 'Change directory while staying within VS Code workspace bounds'
     }
 };
