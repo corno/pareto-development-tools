@@ -55,8 +55,8 @@ function checkGitCleanStatus(package_dir: string): { shouldClean: boolean, ignor
         }).trim()
         const ignoredFiles = ignoredResult ? ignoredResult.split('\n').filter(line => line.startsWith('Would remove')) : []
         
-        // Check for tracked files that are now ignored
-        const trackedIgnoredResult = child_process.execSync('git ls-files -i --exclude-standard', { 
+        // Check for tracked files that are now ignored (cached files that match ignore patterns)
+        const trackedIgnoredResult = child_process.execSync('git ls-files -ci --exclude-standard', { 
             cwd: package_dir, 
             encoding: 'utf8' 
         }).trim()
