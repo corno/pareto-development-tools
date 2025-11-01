@@ -32,35 +32,7 @@
           "success",
           null
         ],
-        "children": [
-          {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "unpushed commits",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "category": "structure",
@@ -197,35 +169,7 @@
           "success",
           null
         ],
-        "children": [
-          {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "unpushed commits",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "category": "structure",
@@ -326,35 +270,7 @@
           "success",
           null
         ],
-        "children": [
-          {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "unpushed commits",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "category": "structure",
@@ -602,35 +518,7 @@
           "success",
           null
         ],
-        "children": [
-          {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "unpushed commits",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "category": "structure",
@@ -731,35 +619,7 @@
           "success",
           null
         ],
-        "children": [
-          {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "unpushed commits",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "category": "structure",
@@ -1163,35 +1023,7 @@
           "success",
           null
         ],
-        "children": [
-          {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "unpushed commits",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "category": "structure",
@@ -1319,35 +1151,7 @@
           "success",
           null
         ],
-        "children": [
-          {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "unpushed commits",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "category": "structure",
@@ -1622,35 +1426,7 @@
           "success",
           null
         ],
-        "children": [
-          {
-            "category": "staged files",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "dirty working tree",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          },
-          {
-            "category": "unpushed commits",
-            "outcome": "no",
-            "status": [
-              "success",
-              null
-            ],
-            "children": []
-          }
-        ]
+        "children": []
       },
       {
         "category": "structure",

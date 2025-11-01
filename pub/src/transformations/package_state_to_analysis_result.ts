@@ -19,30 +19,33 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     
     // Check git status
     const git_status = package_state.git
-    const git_children: Package_Analysis_Result[] = []
-    
-    git_children.push({
-        'category': 'staged files',
-        'outcome': git_status['staged files'] ? 'yes' : 'no',
-        'status': git_status['staged files'] ? ['error', null] : ['success', null],
-        'children': []
-    })
-    
-    git_children.push({
-        'category': 'dirty working tree',
-        'outcome': git_status['dirty working tree'] ? 'yes' : 'no',
-        'status': git_status['dirty working tree'] ? ['error', null] : ['success', null],
-        'children': []
-    })
-    
-    git_children.push({
-        'category': 'unpushed commits',
-        'outcome': git_status['unpushed commits'] ? 'yes' : 'no',
-        'status': git_status['unpushed commits'] ? ['error', null] : ['success', null],
-        'children': []
-    })
-    
     const has_git_issues = git_status['staged files'] || git_status['dirty working tree'] || git_status['unpushed commits']
+    
+    // Only add detailed git sub-results if there are git issues
+    const git_children: Package_Analysis_Result[] = []
+    if (has_git_issues) {
+        git_children.push({
+            'category': 'staged files',
+            'outcome': git_status['staged files'] ? 'yes' : 'no',
+            'status': git_status['staged files'] ? ['error', null] : ['success', null],
+            'children': []
+        })
+        
+        git_children.push({
+            'category': 'dirty working tree',
+            'outcome': git_status['dirty working tree'] ? 'yes' : 'no',
+            'status': git_status['dirty working tree'] ? ['error', null] : ['success', null],
+            'children': []
+        })
+        
+        git_children.push({
+            'category': 'unpushed commits',
+            'outcome': git_status['unpushed commits'] ? 'yes' : 'no',
+            'status': git_status['unpushed commits'] ? ['error', null] : ['success', null],
+            'children': []
+        })
+    }
+    
     children.push({
         'category': 'git',
         'outcome': has_git_issues ? 'unpushed work' : 'clean',
