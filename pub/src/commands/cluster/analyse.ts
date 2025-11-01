@@ -125,11 +125,10 @@ Options:
   --pre-publish         Pre-publish analysis for all packages
   --pre-commit          Pre-commit analysis for all packages
   --structural          Structural analysis only for all packages
-  --graph               Generate dependency graph (SVG) and open in viewer
-  --table               Generate HTML table report and open in viewer
 
 Analysis levels (from most comprehensive to fastest):
   • (no flag): Complete package state analysis for all packages (default)
+              Includes dependency graph and HTML report generation
   • --pre-publish: Pre-publish checks for all packages
   • --pre-commit: Pre-commit checks for all packages
   • --structural: Structure validation only for all packages
@@ -139,13 +138,10 @@ Arguments:
                      Expected structure: <path>/<package>/pub/package.json
 
 Examples:
-  pareto cluster analyse /path/to/cluster                 # Full analysis (default)
+  pareto cluster analyse /path/to/cluster                 # Full analysis with graph and table (default)
   pareto cluster analyse /path/to/cluster --structural    # Fast structural check only
   pareto cluster analyse /path/to/cluster --pre-commit    # Pre-commit validation
   pareto cluster analyse /path/to/cluster --pre-publish   # Pre-publish validation
-  pareto cluster analyse /path/to/cluster --graph         # Generate and view dependency graph
-  pareto cluster analyse /path/to/cluster --table         # Generate and view HTML table report
-  pareto cluster analyse /path/to/cluster --graph --table # Generate both graph and table
 `)
 }
 
@@ -265,8 +261,6 @@ export const $$ = async (args: string[]): Promise<void> => {
     const pre_publish_analysis = args.includes('--pre-publish')
     const pre_commit_analysis = args.includes('--pre-commit')
     const structural_analysis = args.includes('--structural')
-    const generate_graph = args.includes('--graph')
-    const generate_table = args.includes('--table')
     
     // Validate that only one analysis level is specified
     const analysis_flags = [pre_publish_analysis, pre_commit_analysis, structural_analysis].filter(Boolean)
@@ -282,10 +276,7 @@ export const $$ = async (args: string[]): Promise<void> => {
         console.log('  --structural   : Structure validation only for all packages (fastest)')
         console.log('  --pre-commit   : Build, test, and structure validation for all packages')
         console.log('  --pre-publish  : All pre-commit checks plus git state, dependencies, and published comparison for all packages')
-        console.log('  (no flag)      : Complete package analysis for all packages (default)')
-        console.log('Additional options:')
-        console.log('  --graph        : Generate dependency graph (SVG) and open in viewer')
-        console.log('  --table        : Generate HTML table report and open in viewer')
+        console.log('  (no flag)      : Complete package analysis for all packages with graph and table generation (default)')
         console.log('')
     }
     
@@ -398,53 +389,51 @@ export const $$ = async (args: string[]): Promise<void> => {
         
         console.log('='.repeat(60))
         
-        // Generate graph and/or table if requested
-        if (generate_graph || generate_table) {
+        // Generate graph and table automatically for full analysis (when no level flags specified)
+        if (analysis_flags.length === 0) {
             console.log('')
             
-            if (generate_graph) {
-                try {
-                    console.log('🔄 Generating dependency graph...')
-                    const dot_content = project_cluster_state_to_dot(cluster_state, {
-                        include_legend: true,
-                        cluster_path: path.basename(cluster_dir),
-                        show_warnings: false,
-                        'time stamp': new Date().toISOString()
-                    })
-                    
-                    const svg_content = dot_to_svg(dot_content)
-                    const graph_filename = `${path.basename(cluster_dir)}-dependency-graph.svg`
-                    const graph_path = path.join(process.cwd(), graph_filename)
-                    
-                    fs.writeFileSync(graph_path, svg_content)
-                    console.log(`✅ Dependency graph generated: ${graph_filename}`)
-                    
-                    // Open in viewer
-                    openInViewer(graph_path)
-                } catch (error) {
-                    console.error(`${getStatusColor('issue')}✗ Failed to generate dependency graph: ${error}${resetColor()}`)
-                }
+            // Generate dependency graph
+            try {
+                console.log('🔄 Generating dependency graph...')
+                const dot_content = project_cluster_state_to_dot(cluster_state, {
+                    include_legend: true,
+                    cluster_path: path.basename(cluster_dir),
+                    show_warnings: false,
+                    'time stamp': new Date().toISOString()
+                })
+                
+                const svg_content = dot_to_svg(dot_content)
+                const graph_filename = `${path.basename(cluster_dir)}-dependency-graph.svg`
+                const graph_path = path.join(process.cwd(), graph_filename)
+                
+                fs.writeFileSync(graph_path, svg_content)
+                console.log(`✅ Dependency graph generated: ${graph_filename}`)
+                
+                // Open in viewer
+                openInViewer(graph_path)
+            } catch (error) {
+                console.error(`${getStatusColor('issue')}✗ Failed to generate dependency graph: ${error}${resetColor()}`)
             }
             
-            if (generate_table) {
-                try {
-                    console.log('🔄 Generating HTML table report...')
-                    const html_content = cluster_state_to_html(cluster_state, {
-                        'time stamp': new Date().toISOString(),
-                        'cluster path': path.basename(cluster_dir)
-                    })
-                    
-                    const table_filename = `${path.basename(cluster_dir)}-analysis-report.html`
-                    const table_path = path.join(process.cwd(), table_filename)
-                    
-                    fs.writeFileSync(table_path, html_content)
-                    console.log(`✅ HTML table report generated: ${table_filename}`)
-                    
-                    // Open in viewer
-                    openInViewer(table_path)
-                } catch (error) {
-                    console.error(`${getStatusColor('issue')}✗ Failed to generate HTML table report: ${error}${resetColor()}`)
-                }
+            // Generate HTML table report
+            try {
+                console.log('🔄 Generating HTML table report...')
+                const html_content = cluster_state_to_html(cluster_state, {
+                    'time stamp': new Date().toISOString(),
+                    'cluster path': path.basename(cluster_dir)
+                })
+                
+                const table_filename = `${path.basename(cluster_dir)}-analysis-report.html`
+                const table_path = path.join(process.cwd(), table_filename)
+                
+                fs.writeFileSync(table_path, html_content)
+                console.log(`✅ HTML table report generated: ${table_filename}`)
+                
+                // Open in viewer
+                openInViewer(table_path)
+            } catch (error) {
+                console.error(`${getStatusColor('issue')}✗ Failed to generate HTML table report: ${error}${resetColor()}`)
             }
             
             console.log('')

@@ -17,7 +17,7 @@ export type Parameters = {
 export function analyse_pre_commit_state(
     $p: Parameters
 ): Pre_Commit_State {
-    const project_path = path.join($p['path to package'], $p["directory name"]);
+    const package_path = path.join($p['path to package'], $p["directory name"]);
 
     // 1. Analyse structural state
     const structural_state = analyse_structural_state({
@@ -29,22 +29,22 @@ export function analyse_pre_commit_state(
     // Clean git workspace and update dependencies
     try {
         // Clean ignored files
-        child_process.execSync('git clean -fXd', { cwd: project_path, stdio: 'inherit' });
+        child_process.execSync('git clean -fXd', { cwd: package_path, stdio: 'inherit' });
         
         // Clean tracked files that are now ignored
         child_process.execSync('git ls-files -ci --exclude-standard | xargs -r git rm --cached', { 
-            cwd: project_path, 
+            cwd: package_path, 
             stdio: 'inherit',
             shell: '/bin/bash'
         });
         
         // Update to latest dependencies in pub directory
-        const pubDir = path.join(project_path, 'pub');
+        const pubDir = path.join(package_path, 'pub');
         child_process.execSync('update2latest . dependencies', { cwd: pubDir, stdio: 'inherit' });
         child_process.execSync('npm install', { cwd: pubDir, stdio: 'inherit' });
         
         // Update to latest dependencies in test directory
-        const testDir = path.join(project_path, 'test');
+        const testDir = path.join(package_path, 'test');
         child_process.execSync('update2latest . dependencies', { cwd: testDir, stdio: 'inherit' });
         child_process.execSync('npm install', { cwd: testDir, stdio: 'inherit' });
     } catch (error) {
@@ -53,7 +53,7 @@ export function analyse_pre_commit_state(
 
     // 2. Run build and test (always)
     let test_state: Pre_Commit_State['test'];
-    const build_test_result = build_and_test(project_path, {
+    const build_test_result = build_and_test(package_path, {
         verbose: false,
         skip_tests: false
     });
