@@ -24,8 +24,12 @@
 
 import * as fs from 'fs'
 import * as path from 'path'
+import { execSync } from 'child_process'
 import { $$ as analyse_cluster } from '../../queries/analyse_cluster'
 import { $$ as package_state_to_analysis_result } from '../../transformations/package_state_to_analysis_result'
+import { project_cluster_state_to_dot } from '../../old_lib/project_cluster_state_to_dot'
+import { dot_to_svg } from '../../old_lib/dot_to_svg'
+import { cluster_state_to_html } from '../../old_lib/cluster_state_to_html'
 import type { Package_Analysis_Result, Cluster_Analysis_Result } from '../../interface/analysis_result'
 
 function getStatusColor(status: Package_Analysis_Result['status'][0]): string {
@@ -85,6 +89,8 @@ Options:
   --fast                              Fast analysis (skip build, test, and published comparison)
   --skip-build-and-test              Skip building and testing (faster analysis)
   --skip-compare-against-published   Skip comparison with published version
+  --graph                             Generate dependency graph (SVG) and open in viewer
+  --table                             Generate HTML table report and open in viewer
 
 By default, the analysis includes:
   • Building and testing each package
@@ -100,8 +106,116 @@ Examples:
   pareto cluster analyse                     # Analyze current directory (full analysis)
   pareto cluster analyse /path/to/cluster    # Analyze specific cluster (full analysis)
   pareto cluster analyse --fast              # Fast analysis (skips build, test, and comparison)
+  pareto cluster analyse --graph             # Generate and view dependency graph
+  pareto cluster analyse --table             # Generate and view HTML table report
+  pareto cluster analyse --graph --table     # Generate both graph and table
   pareto cluster analyse --skip-build-and-test --skip-compare-against-published  # Same as --fast
 `)
+}
+
+function openInViewer(filePath: string): void {
+    try {
+        // Try different commands to open the file based on the platform
+        const platform = process.platform
+        
+        if (platform === 'darwin') {
+            // macOS
+            execSync(`open "${filePath}"`, { stdio: 'ignore' })
+        } else if (platform === 'win32') {
+            // Windows
+            execSync(`start "" "${filePath}"`, { stdio: 'ignore' })
+        } else {
+            // Linux and others - try multiple approaches to avoid snap issues
+            const fileExtension = filePath.toLowerCase().split('.').pop()
+            
+            if (fileExtension === 'svg') {
+                // For SVG files, try multiple viewers in order of preference
+                const svgViewers = [
+                    'inkscape',           // Inkscape (if installed)
+                    'firefox',            // Firefox can view SVG files
+                    'chromium-browser',   // Chromium
+                    'google-chrome',      // Chrome
+                    'eog',               // Eye of GNOME (might be snap)
+                    'xviewer'            // Alternative image viewer
+                ]
+                
+                let opened = false
+                for (const viewer of svgViewers) {
+                    try {
+                        execSync(`which ${viewer}`, { stdio: 'pipe' })
+                        execSync(`${viewer} "${filePath}" &`, { stdio: 'ignore' })
+                        opened = true
+                        break
+                    } catch {
+                        // Try next viewer
+                        continue
+                    }
+                }
+                
+                if (!opened) {
+                    // Last resort: try xdg-open
+                    try {
+                        execSync(`xdg-open "${filePath}"`, { stdio: 'ignore' })
+                        opened = true
+                    } catch {
+                        // Still failed
+                    }
+                }
+                
+                if (!opened) {
+                    console.log(`📁 Generated file: ${filePath}`)
+                    console.log('   (Could not open automatically - please open manually with: firefox, inkscape, or any SVG viewer)')
+                }
+            } else if (fileExtension === 'html') {
+                // For HTML files, try browsers
+                const browsers = [
+                    'firefox',
+                    'chromium-browser',
+                    'google-chrome',
+                    'opera'
+                ]
+                
+                let opened = false
+                for (const browser of browsers) {
+                    try {
+                        execSync(`which ${browser}`, { stdio: 'pipe' })
+                        execSync(`${browser} "${filePath}" &`, { stdio: 'ignore' })
+                        opened = true
+                        break
+                    } catch {
+                        // Try next browser
+                        continue
+                    }
+                }
+                
+                if (!opened) {
+                    // Last resort: try xdg-open
+                    try {
+                        execSync(`xdg-open "${filePath}"`, { stdio: 'ignore' })
+                        opened = true
+                    } catch {
+                        // Still failed
+                    }
+                }
+                
+                if (!opened) {
+                    console.log(`📁 Generated file: ${filePath}`)
+                    console.log('   (Could not open automatically - please open manually with: firefox or any web browser)')
+                }
+            } else {
+                // For other files, try xdg-open
+                try {
+                    execSync(`xdg-open "${filePath}"`, { stdio: 'ignore' })
+                } catch {
+                    console.log(`📁 Generated file: ${filePath}`)
+                    console.log('   (Could not open automatically - please open manually)')
+                }
+            }
+        }
+    } catch (error) {
+        console.log(`📁 Generated file: ${filePath}`)
+        console.log('   (Could not open automatically - please open manually)')
+    }
 }
 
 export const $$ = (): void => {
@@ -118,6 +232,8 @@ export const $$ = (): void => {
     const fast_mode = args.includes('--fast')
     const skip_build_and_test = args.includes('--skip-build-and-test') || fast_mode
     const skip_compare_against_published = args.includes('--skip-compare-against-published') || fast_mode
+    const generate_graph = args.includes('--graph')
+    const generate_table = args.includes('--table')
     
     // Get cluster directory (non-flag arguments)
     const non_flag_args = args.filter(arg => !arg.startsWith('--'))
@@ -203,6 +319,58 @@ export const $$ = (): void => {
         }
         
         console.log('='.repeat(60))
+        
+        // Generate graph and/or table if requested
+        if (generate_graph || generate_table) {
+            console.log('')
+            
+            if (generate_graph) {
+                try {
+                    console.log('🔄 Generating dependency graph...')
+                    const dot_content = project_cluster_state_to_dot(cluster_state, {
+                        include_legend: true,
+                        cluster_path: path.basename(cluster_dir),
+                        show_warnings: false,
+                        'time stamp': new Date().toISOString()
+                    })
+                    
+                    const svg_content = dot_to_svg(dot_content)
+                    const graph_filename = `${path.basename(cluster_dir)}-dependency-graph.svg`
+                    const graph_path = path.join(process.cwd(), graph_filename)
+                    
+                    fs.writeFileSync(graph_path, svg_content)
+                    console.log(`✅ Dependency graph generated: ${graph_filename}`)
+                    
+                    // Open in viewer
+                    openInViewer(graph_path)
+                } catch (error) {
+                    console.error(`${getStatusColor('error')}✗ Failed to generate dependency graph: ${error}${resetColor()}`)
+                }
+            }
+            
+            if (generate_table) {
+                try {
+                    console.log('🔄 Generating HTML table report...')
+                    const html_content = cluster_state_to_html(cluster_state, {
+                        'time stamp': new Date().toISOString(),
+                        'cluster path': path.basename(cluster_dir)
+                    })
+                    
+                    const table_filename = `${path.basename(cluster_dir)}-analysis-report.html`
+                    const table_path = path.join(process.cwd(), table_filename)
+                    
+                    fs.writeFileSync(table_path, html_content)
+                    console.log(`✅ HTML table report generated: ${table_filename}`)
+                    
+                    // Open in viewer
+                    openInViewer(table_path)
+                } catch (error) {
+                    console.error(`${getStatusColor('error')}✗ Failed to generate HTML table report: ${error}${resetColor()}`)
+                }
+            }
+            
+            console.log('')
+        }
         
         // Exit with appropriate code based on overall status
         if (overall_has_error) {
