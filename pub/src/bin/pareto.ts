@@ -16,6 +16,7 @@ const fs = require('fs');
 import { $$ as c_compare } from "../commands/compare"
 import { $$ as c_build } from "../commands/build"
 import { $$ as c_analyse } from "../commands/analyse"
+import { $$ as c_commit_and_push } from "../commands/commit_and_push"
 // import { $$ as c_publish } from "../commands/publish"
 // import { $$ as c_ensure_valid_commit } from "../commands/ensure_valid_commit"
 // import { $$ as c_test } from "../commands/test"
@@ -120,6 +121,10 @@ const COMMANDS : { [key: string]: { module: () => (args: string[]) => Promise<vo
     'analyse': {
         module: () => c_analyse,
         description: 'Analyze a package repository'
+    },
+    'commit-and-push': {
+        module: () => c_commit_and_push,
+        description: 'Commit and push changes after pre-commit validation'
     },
     'cluster-analyse': {
         module: () => c_cluster_analyse,
