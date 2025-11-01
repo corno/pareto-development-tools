@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import * as os from 'os';
 import { execSync } from 'child_process';
 import { differs_from_published } from '../old_lib/differs_from_published';
 
@@ -16,9 +17,8 @@ export type Compare_With_Published_Result =
     | ['could compare',
         | ['identical', null]
         | ['different', {
-            'local version': string
-            'published version': string
-            'content differs': boolean
+            'path to local': string
+            'path to published': string
         }]
     ]
 
@@ -96,10 +96,88 @@ export function compare_with_published(
     if (!content_differs && !version_differs) {
         return ['could compare', ['identical', null]];
     } else {
-        return ['could compare', ['different', {
-            'local version': local_version,
-            'published version': published_version,
-            'content differs': content_differs
-        }]];
+        // Packages differ - extract both for comparison
+        const temp_dir = fs.mkdtempSync(path.join(os.tmpdir(), 'package-compare-'));
+        const published_dir = path.join(temp_dir, 'published');
+        const local_dir = path.join(temp_dir, 'local');
+        
+        try {
+            // Extract published package
+            fs.mkdirSync(published_dir, { recursive: true });
+            execSync(`npm pack ${package_name}`, {
+                cwd: published_dir,
+                stdio: 'pipe'
+            });
+            
+            const published_tgz = fs.readdirSync(published_dir).find(file => file.endsWith('.tgz'));
+            if (published_tgz) {
+                execSync(`tar -xzf "${published_tgz}"`, {
+                    cwd: published_dir,
+                    stdio: 'pipe'
+                });
+                
+                // Move contents from package/ subdirectory
+                const package_sub_dir = path.join(published_dir, 'package');
+                if (fs.existsSync(package_sub_dir)) {
+                    const files = fs.readdirSync(package_sub_dir);
+                    files.forEach(file => {
+                        const source = path.join(package_sub_dir, file);
+                        const dest = path.join(published_dir, file);
+                        fs.renameSync(source, dest);
+                    });
+                    fs.rmSync(package_sub_dir, { recursive: true });
+                }
+                
+                // Clean up tgz file
+                fs.unlinkSync(path.join(published_dir, published_tgz));
+            }
+            
+            // Extract local package
+            fs.mkdirSync(local_dir, { recursive: true });
+            const pub_path = path.join($p['package path'], 'pub');
+            execSync(`npm pack "${pub_path}"`, {
+                cwd: local_dir,
+                stdio: 'pipe'
+            });
+            
+            const local_tgz = fs.readdirSync(local_dir).find(file => file.endsWith('.tgz'));
+            if (local_tgz) {
+                execSync(`tar -xzf "${local_tgz}"`, {
+                    cwd: local_dir,
+                    stdio: 'pipe'
+                });
+                
+                // Move contents from package/ subdirectory
+                const package_sub_dir = path.join(local_dir, 'package');
+                if (fs.existsSync(package_sub_dir)) {
+                    const files = fs.readdirSync(package_sub_dir);
+                    files.forEach(file => {
+                        const source = path.join(package_sub_dir, file);
+                        const dest = path.join(local_dir, file);
+                        fs.renameSync(source, dest);
+                    });
+                    fs.rmSync(package_sub_dir, { recursive: true });
+                }
+                
+                // Clean up tgz file
+                fs.unlinkSync(path.join(local_dir, local_tgz));
+            }
+            
+            return ['could compare', ['different', {
+                'path to local': local_dir,
+                'path to published': published_dir
+            }]];
+            
+        } catch (error) {
+            // Clean up on error
+            if (fs.existsSync(temp_dir)) {
+                fs.rmSync(temp_dir, { recursive: true, force: true });
+            }
+            // If extraction fails, fall back to just indicating difference
+            return ['could compare', ['different', {
+                'path to local': '',
+                'path to published': ''
+            }]];
+        }
     }
 }
