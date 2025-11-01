@@ -13,7 +13,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
             : 'differs from directory',
         'status': package_state['package name the same as directory'] 
             ? ['success', null] 
-            : ['error', null],
+            : ['issue', null],
         'children': []
     })
     
@@ -27,21 +27,21 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
         git_children.push({
             'category': 'staged files',
             'outcome': git_status['staged files'] ? 'yes' : 'no',
-            'status': git_status['staged files'] ? ['error', null] : ['success', null],
+            'status': git_status['staged files'] ? ['issue', null] : ['success', null],
             'children': []
         })
         
         git_children.push({
             'category': 'dirty working tree',
             'outcome': git_status['dirty working tree'] ? 'yes' : 'no',
-            'status': git_status['dirty working tree'] ? ['error', null] : ['success', null],
+            'status': git_status['dirty working tree'] ? ['issue', null] : ['success', null],
             'children': []
         })
         
         git_children.push({
             'category': 'unpushed commits',
             'outcome': git_status['unpushed commits'] ? 'yes' : 'no',
-            'status': git_status['unpushed commits'] ? ['error', null] : ['success', null],
+            'status': git_status['unpushed commits'] ? ['issue', null] : ['success', null],
             'children': []
         })
     }
@@ -49,7 +49,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     children.push({
         'category': 'git',
         'outcome': has_git_issues ? 'unpushed work' : 'clean',
-        'status': has_git_issues ? ['error', null] : ['success', null],
+        'status': has_git_issues ? ['issue', null] : ['success', null],
         'children': git_children
     })
     
@@ -68,8 +68,8 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     } else {
         children.push({
             'category': 'structure',
-            'outcome': `invalid (${package_state.structure[1].errors.length} errors)`,
-            'status': ['error', null],
+            'outcome': `invalid (${package_state.structure[1].errors.length} issues)`,
+            'status': ['issue', null],
             'children': []
         })
     }
@@ -91,7 +91,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     } else {
         // mismatched
         iim_outcome = `mismatched (${iim[1].differences.length} differences)`
-        iim_status = ['error', null]
+        iim_status = ['issue', null]
     }
     
     children.push({
@@ -119,7 +119,7 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
         } else {
             test_outcome = `tests failed (${test_result[1][1]['failed tests'].length} failures)`
         }
-        test_status = ['error', null]
+        test_status = ['issue', null]
     }
     
     children.push({
@@ -156,19 +156,19 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     }
     
     if (dependency_children.length > 0) {
-        const dep_errors = dependency_children.filter(child => child.status[0] === 'error').length
+        const dep_issues = dependency_children.filter(child => child.status[0] === 'issue').length
         const dep_warnings = dependency_children.filter(child => child.status[0] === 'warning').length
         const dep_unknown = dependency_children.filter(child => child.status[0] === 'unknown').length
         
         let dep_outcome: string
         let dep_status: Package_Analysis_Result['status']
         
-        if (dep_errors > 0) {
-            dep_outcome = `${dep_errors} errors, ${dep_warnings} warnings`
+        if (dep_issues > 0) {
+            dep_outcome = `${dep_issues} issues, ${dep_warnings} warnings`
             if (dep_unknown > 0) {
                 dep_outcome += `, ${dep_unknown} unknown`
             }
-            dep_status = ['error', null]
+            dep_status = ['issue', null]
         } else if (dep_warnings > 0) {
             dep_outcome = `${dep_warnings} warnings`
             if (dep_unknown > 0) {
@@ -227,16 +227,16 @@ export const $$ = (package_state: Package_State): Package_Analysis_Result => {
     })
     
     // Determine overall status based on children
-    const has_error = children.some(child => child.status[0] === 'error')
+    const has_issue = children.some(child => child.status[0] === 'issue')
     const has_warning = children.some(child => child.status[0] === 'warning')
     const has_unknown = children.some(child => child.status[0] === 'unknown')
     
     let overall_status: Package_Analysis_Result['status']
     let overall_outcome: string
     
-    if (has_error) {
-        overall_status = ['error', null]
-        overall_outcome = 'has errors'
+    if (has_issue) {
+        overall_status = ['issue', null]
+        overall_outcome = 'has issues'
     } else if (has_warning) {
         overall_status = ['warning', null]
         overall_outcome = 'has warnings'

@@ -3,7 +3,7 @@
     "category": "cluster",
     "outcome": "not found or invalid",
     "status": [
-      "error",
+      "issue",
       null
     ],
     "children": []

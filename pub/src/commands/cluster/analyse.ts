@@ -32,15 +32,15 @@ import { dot_to_svg } from '../../old_lib/dot_to_svg'
 import { cluster_state_to_html } from '../../old_lib/cluster_state_to_html'
 import type { Package_Analysis_Result, Cluster_Analysis_Result } from '../../interface/analysis_result'
 
-function getStatusColor(status: Package_Analysis_Result['status'][0]): string {
-    switch (status) {
-        case 'success': return '\x1b[32m' // green
-        case 'warning': return '\x1b[33m' // yellow  
-        case 'error': return '\x1b[31m'   // red
-        case 'unknown': return '\x1b[90m' // grey
-        default: return '\x1b[0m'         // reset
+    function getStatusColor(status: string): string {
+        switch (status) {
+            case 'success': return '\x1b[32m'  // Green
+            case 'issue': return '\x1b[31m'    // Red
+            case 'warning': return '\x1b[33m'  // Yellow
+            case 'unknown': return '\x1b[90m'  // Gray
+            default: return '\x1b[0m'
+        }
     }
-}
 
 function resetColor(): string {
     return '\x1b[0m'
@@ -264,7 +264,7 @@ export const $$ = (): void => {
         
         // Transform each project to analysis result
         const cluster_analysis: Cluster_Analysis_Result = {}
-        let overall_has_error = false
+        let overall_has_issue = false
         let overall_has_warning = false
         let overall_has_unknown = false
         
@@ -275,8 +275,8 @@ export const $$ = (): void => {
                 cluster_analysis[project_name] = analysis_result
                 
                 // Track overall status
-                if (analysis_result.status[0] === 'error') {
-                    overall_has_error = true
+                if (analysis_result.status[0] === 'issue') {
+                    overall_has_issue = true
                 } else if (analysis_result.status[0] === 'warning') {
                     overall_has_warning = true
                 } else if (analysis_result.status[0] === 'unknown') {
@@ -301,7 +301,7 @@ export const $$ = (): void => {
         
         // Summary
         const total_projects = Object.keys(cluster_analysis).length
-        const error_count = Object.values(cluster_analysis).filter(p => p.status[0] === 'error').length
+        const issue_count = Object.values(cluster_analysis).filter(p => p.status[0] === 'issue').length
         const warning_count = Object.values(cluster_analysis).filter(p => p.status[0] === 'warning').length
         const unknown_count = Object.values(cluster_analysis).filter(p => p.status[0] === 'unknown').length
         const success_count = Object.values(cluster_analysis).filter(p => p.status[0] === 'success').length
@@ -314,8 +314,8 @@ export const $$ = (): void => {
         if (unknown_count > 0) {
             console.log(`${getStatusColor('unknown')}? ${unknown_count} with unknown status${resetColor()}`)
         }
-        if (error_count > 0) {
-            console.log(`${getStatusColor('error')}✗ ${error_count} with errors${resetColor()}`)
+        if (issue_count > 0) {
+            console.log(`${getStatusColor('issue')}✗ ${issue_count} with issues${resetColor()}`)
         }
         
         console.log('='.repeat(60))
@@ -344,7 +344,7 @@ export const $$ = (): void => {
                     // Open in viewer
                     openInViewer(graph_path)
                 } catch (error) {
-                    console.error(`${getStatusColor('error')}✗ Failed to generate dependency graph: ${error}${resetColor()}`)
+                    console.error(`${getStatusColor('issue')}✗ Failed to generate dependency graph: ${error}${resetColor()}`)
                 }
             }
             
@@ -365,7 +365,7 @@ export const $$ = (): void => {
                     // Open in viewer
                     openInViewer(table_path)
                 } catch (error) {
-                    console.error(`${getStatusColor('error')}✗ Failed to generate HTML table report: ${error}${resetColor()}`)
+                    console.error(`${getStatusColor('issue')}✗ Failed to generate HTML table report: ${error}${resetColor()}`)
                 }
             }
             
@@ -373,8 +373,8 @@ export const $$ = (): void => {
         }
         
         // Exit with appropriate code based on overall status
-        if (overall_has_error) {
-            console.log(`${getStatusColor('error')}✗ Cluster analysis complete: Has errors${resetColor()}`)
+        if (issue_count > 0) {
+            console.log(`${getStatusColor('issue')}✗ Cluster analysis complete: Has issues${resetColor()}`)
             process.exit(1)
         } else if (overall_has_warning) {
             console.log(`${getStatusColor('warning')}⚠ Cluster analysis complete: Has warnings${resetColor()}`)

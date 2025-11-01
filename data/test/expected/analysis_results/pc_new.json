@@ -248,9 +248,9 @@
   },
   "astn-to-xml": {
     "category": "package",
-    "outcome": "has errors",
+    "outcome": "has issues",
     "status": [
-      "error",
+      "issue",
       null
     ],
     "children": [
@@ -258,7 +258,7 @@
         "category": "package name",
         "outcome": "differs from directory",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": []
@@ -340,9 +340,9 @@
   },
   "exupery": {
     "category": "package",
-    "outcome": "has errors",
+    "outcome": "has issues",
     "status": [
-      "error",
+      "issue",
       null
     ],
     "children": [
@@ -359,7 +359,7 @@
         "category": "git",
         "outcome": "unpushed work",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": [
@@ -376,7 +376,7 @@
             "category": "dirty working tree",
             "outcome": "yes",
             "status": [
-              "error",
+              "issue",
               null
             ],
             "children": []
@@ -414,7 +414,7 @@
         "category": "test",
         "outcome": "build failed",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": []
@@ -680,9 +680,9 @@
   },
   "pareto": {
     "category": "package",
-    "outcome": "has errors",
+    "outcome": "has issues",
     "status": [
-      "error",
+      "issue",
       null
     ],
     "children": [
@@ -699,7 +699,7 @@
         "category": "git",
         "outcome": "unpushed work",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": [
@@ -716,7 +716,7 @@
             "category": "dirty working tree",
             "outcome": "yes",
             "status": [
-              "error",
+              "issue",
               null
             ],
             "children": []
@@ -754,7 +754,7 @@
         "category": "test",
         "outcome": "build failed",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": []
@@ -854,9 +854,9 @@
   },
   "pareto-boekhouding": {
     "category": "package",
-    "outcome": "has errors",
+    "outcome": "has issues",
     "status": [
-      "error",
+      "issue",
       null
     ],
     "children": [
@@ -873,7 +873,7 @@
         "category": "git",
         "outcome": "unpushed work",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": [
@@ -890,7 +890,7 @@
             "category": "dirty working tree",
             "outcome": "yes",
             "status": [
-              "error",
+              "issue",
               null
             ],
             "children": []
@@ -1248,9 +1248,9 @@
   },
   "pareto-lionweb": {
     "category": "package",
-    "outcome": "has errors",
+    "outcome": "has issues",
     "status": [
-      "error",
+      "issue",
       null
     ],
     "children": [
@@ -1267,7 +1267,7 @@
         "category": "git",
         "outcome": "unpushed work",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": [
@@ -1284,7 +1284,7 @@
             "category": "dirty working tree",
             "outcome": "yes",
             "status": [
-              "error",
+              "issue",
               null
             ],
             "children": []
@@ -1322,7 +1322,7 @@
         "category": "test",
         "outcome": "build failed",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": []
@@ -1496,9 +1496,9 @@
   },
   "pareto-targets": {
     "category": "package",
-    "outcome": "has errors",
+    "outcome": "has issues",
     "status": [
-      "error",
+      "issue",
       null
     ],
     "children": [
@@ -1515,7 +1515,7 @@
         "category": "git",
         "outcome": "unpushed work",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": [
@@ -1532,7 +1532,7 @@
             "category": "dirty working tree",
             "outcome": "yes",
             "status": [
-              "error",
+              "issue",
               null
             ],
             "children": []
@@ -1570,7 +1570,7 @@
         "category": "test",
         "outcome": "build failed",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": []
@@ -1643,9 +1643,9 @@
   },
   "pareto-vscode-backend": {
     "category": "package",
-    "outcome": "has errors",
+    "outcome": "has issues",
     "status": [
-      "error",
+      "issue",
       null
     ],
     "children": [
@@ -1662,7 +1662,7 @@
         "category": "git",
         "outcome": "unpushed work",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": [
@@ -1679,7 +1679,7 @@
             "category": "dirty working tree",
             "outcome": "yes",
             "status": [
-              "error",
+              "issue",
               null
             ],
             "children": []
@@ -1717,7 +1717,7 @@
         "category": "test",
         "outcome": "build failed",
         "status": [
-          "error",
+          "issue",
           null
         ],
         "children": []

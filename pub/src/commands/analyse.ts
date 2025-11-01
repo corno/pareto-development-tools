@@ -24,15 +24,15 @@ import { determine_package_state } from '../old_lib/determine_package_state'
 import { $$ as package_state_to_analysis_result } from '../transformations/package_state_to_analysis_result'
 import type { Package_Analysis_Result } from '../interface/analysis_result'
 
-function getStatusColor(status: Package_Analysis_Result['status'][0]): string {
-    switch (status) {
-        case 'success': return '\x1b[32m' // green
-        case 'warning': return '\x1b[33m' // yellow  
-        case 'error': return '\x1b[31m'   // red
-        case 'unknown': return '\x1b[90m' // grey
-        default: return '\x1b[0m'         // reset
+    function getStatusColor(status: string): string {
+        switch (status) {
+            case 'success': return '\x1b[32m'  // Green
+            case 'issue': return '\x1b[31m'    // Red
+            case 'warning': return '\x1b[33m'  // Yellow
+            case 'unknown': return '\x1b[90m'  // Gray
+            default: return '\x1b[0m'
+        }
     }
-}
 
 function resetColor(): string {
     return '\x1b[0m'
@@ -150,8 +150,8 @@ export const $$ = (): void => {
                 console.log(`${getStatusColor('unknown')}? Analysis complete: Unknown status (some checks skipped)${resetColor()}`)
                 process.exit(0)
                 break
-            case 'error':
-                console.log(`${getStatusColor('error')}✗ Analysis complete: Has errors${resetColor()}`)
+            case 'issue':
+                console.log(`${getStatusColor('issue')}✗ Analysis complete: Has issues${resetColor()}`)
                 process.exit(1)
                 break
         }

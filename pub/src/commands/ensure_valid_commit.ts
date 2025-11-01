@@ -96,13 +96,13 @@ async function main(): Promise<void> {
         
         switch (reason_type) {
             case 'structure not valid':
-                console.error('\nStructure validation errors:');
+                console.error('\nStructure validation issues:');
                 reason_details.errors.forEach((error: string) => {
                     console.error(`  - ${error}`);
                 });
                 break;
             case 'interface implementation mismatch':
-                console.error('\nInterface/Implementation mismatch errors:');
+                console.error('\nInterface/Implementation mismatch issues:');
                 reason_details.errors.forEach((error: string) => {
                     console.error(`  - ${error}`);
                 });

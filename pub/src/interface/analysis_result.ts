@@ -3,7 +3,7 @@ export type Package_Analysis_Result = {
     'outcome': string
     'status':
     | ['success', null]
-    | ['error', null]
+    | ['issue', null]
     | ['warning', null]
     | ['unknown', null]
     'children': Package_Analysis_Result[]

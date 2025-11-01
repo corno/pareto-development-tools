@@ -101,7 +101,7 @@ const tests: Array<{ name: string, config: TestRunner }> = [
                         'invalid_cluster': {
                             'category': 'cluster',
                             'outcome': 'not found or invalid',
-                            'status': ['error', null],
+                            'status': ['issue', null],
                             'children': []
                         }
                     };
