@@ -24,6 +24,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 import { execSync } from 'child_process'
+import * as child_process from 'child_process'
 import { $$ as analyse_cluster } from '../../queries/analyse_cluster'
 import { package_state_to_analysis_result } from '../../transformations/state_to_analysis_result'
 import { project_cluster_state_to_dot } from '../../old_lib/project_cluster_state_to_dot'
@@ -43,6 +44,46 @@ import type { Package_Analysis_Result, Cluster_Analysis_Result } from '../../int
 
 function resetColor(): string {
     return '\x1b[0m'
+}
+
+function checkGitCleanStatus(package_dir: string): { shouldClean: boolean, ignoredFiles: string[], trackedIgnoredFiles: string[] } {
+    try {
+        // Check for ignored files that would be removed
+        const ignoredResult = child_process.execSync('git clean -fXd --dry-run', { 
+            cwd: package_dir, 
+            encoding: 'utf8' 
+        }).trim()
+        const ignoredFiles = ignoredResult ? ignoredResult.split('\n').filter(line => line.startsWith('Would remove')) : []
+        
+        // Check for tracked files that are now ignored (cached files that match ignore patterns)
+        const trackedIgnoredResult = child_process.execSync('git ls-files -ci --exclude-standard', { 
+            cwd: package_dir, 
+            encoding: 'utf8' 
+        }).trim()
+        const trackedIgnoredFiles = trackedIgnoredResult ? trackedIgnoredResult.split('\n').filter(line => line.trim()) : []
+        
+        const shouldClean = ignoredFiles.length > 0 || trackedIgnoredFiles.length > 0
+        
+        return { shouldClean, ignoredFiles, trackedIgnoredFiles }
+    } catch (error) {
+        // If git commands fail, assume no cleaning needed
+        return { shouldClean: false, ignoredFiles: [], trackedIgnoredFiles: [] }
+    }
+}
+
+function askUserConfirmation(): Promise<boolean> {
+    const readline = require('readline')
+    const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+    })
+    
+    return new Promise((resolve) => {
+        rl.question('Do you want to continue? (y/N): ', (answer) => {
+            rl.close()
+            resolve(answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes')
+        })
+    })
 }
 
 function printAnalysisResult(result: Package_Analysis_Result, depth: number = 0, category?: string): void {
@@ -146,16 +187,22 @@ Examples:
 }
 
 function openInViewer(filePath: string): void {
+    console.log(`🔄 Opening file: ${filePath}`)
+    
     try {
         // Try different commands to open the file based on the platform
         const platform = process.platform
         
         if (platform === 'darwin') {
             // macOS
+            console.log('   Using macOS open command...')
             execSync(`open "${filePath}"`, { stdio: 'ignore' })
+            console.log('   ✅ Opened successfully')
         } else if (platform === 'win32') {
             // Windows
+            console.log('   Using Windows start command...')
             execSync(`start "" "${filePath}"`, { stdio: 'ignore' })
+            console.log('   ✅ Opened successfully')
         } else {
             // Linux and others - try multiple approaches to avoid snap issues
             const fileExtension = filePath.toLowerCase().split('.').pop()
@@ -163,10 +210,10 @@ function openInViewer(filePath: string): void {
             if (fileExtension === 'svg') {
                 // For SVG files, try multiple viewers in order of preference
                 const svgViewers = [
-                    'inkscape',           // Inkscape (if installed)
                     'firefox',            // Firefox can view SVG files
                     'chromium-browser',   // Chromium
                     'google-chrome',      // Chrome
+                    'inkscape',           // Inkscape (if installed)
                     'eog',               // Eye of GNOME (might be snap)
                     'xviewer'            // Alternative image viewer
                 ]
@@ -174,12 +221,14 @@ function openInViewer(filePath: string): void {
                 let opened = false
                 for (const viewer of svgViewers) {
                     try {
+                        console.log(`   Trying ${viewer}...`)
                         execSync(`which ${viewer}`, { stdio: 'pipe' })
-                        execSync(`${viewer} "${filePath}" &`, { stdio: 'ignore' })
+                        execSync(`${viewer} "${filePath}" >/dev/null 2>&1 &`, { stdio: 'ignore' })
+                        console.log(`   ✅ Opened with ${viewer}`)
                         opened = true
                         break
                     } catch {
-                        // Try next viewer
+                        console.log(`   ❌ ${viewer} not available or failed`)
                         continue
                     }
                 }
@@ -187,10 +236,12 @@ function openInViewer(filePath: string): void {
                 if (!opened) {
                     // Last resort: try xdg-open
                     try {
+                        console.log('   Trying xdg-open as fallback...')
                         execSync(`xdg-open "${filePath}"`, { stdio: 'ignore' })
+                        console.log('   ✅ Opened with xdg-open')
                         opened = true
-                    } catch {
-                        // Still failed
+                    } catch (error) {
+                        console.log(`   ❌ xdg-open failed: ${error}`)
                     }
                 }
                 
@@ -210,12 +261,14 @@ function openInViewer(filePath: string): void {
                 let opened = false
                 for (const browser of browsers) {
                     try {
+                        console.log(`   Trying ${browser}...`)
                         execSync(`which ${browser}`, { stdio: 'pipe' })
-                        execSync(`${browser} "${filePath}" &`, { stdio: 'ignore' })
+                        execSync(`${browser} "${filePath}" >/dev/null 2>&1 &`, { stdio: 'ignore' })
+                        console.log(`   ✅ Opened with ${browser}`)
                         opened = true
                         break
                     } catch {
-                        // Try next browser
+                        console.log(`   ❌ ${browser} not available or failed`)
                         continue
                     }
                 }
@@ -223,10 +276,12 @@ function openInViewer(filePath: string): void {
                 if (!opened) {
                     // Last resort: try xdg-open
                     try {
+                        console.log('   Trying xdg-open as fallback...')
                         execSync(`xdg-open "${filePath}"`, { stdio: 'ignore' })
+                        console.log('   ✅ Opened with xdg-open')
                         opened = true
-                    } catch {
-                        // Still failed
+                    } catch (error) {
+                        console.log(`   ❌ xdg-open failed: ${error}`)
                     }
                 }
                 
@@ -237,14 +292,18 @@ function openInViewer(filePath: string): void {
             } else {
                 // For other files, try xdg-open
                 try {
+                    console.log('   Trying xdg-open...')
                     execSync(`xdg-open "${filePath}"`, { stdio: 'ignore' })
-                } catch {
+                    console.log('   ✅ Opened with xdg-open')
+                } catch (error) {
+                    console.log(`   ❌ xdg-open failed: ${error}`)
                     console.log(`📁 Generated file: ${filePath}`)
                     console.log('   (Could not open automatically - please open manually)')
                 }
             }
         }
     } catch (error) {
+        console.log(`❌ Error opening file: ${error}`)
         console.log(`📁 Generated file: ${filePath}`)
         console.log('   (Could not open automatically - please open manually)')
     }
