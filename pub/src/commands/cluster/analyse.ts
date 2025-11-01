@@ -81,7 +81,7 @@ function showHelp(): void {
 Cluster Analysis Tool
 
 Usage: 
-  pareto cluster analyse [options] [cluster-directory]
+  pareto cluster analyse [options] <cluster-directory>
 
 Options:
   --help                Show this help message
@@ -98,18 +98,17 @@ Analysis levels (from most comprehensive to fastest):
   • --structural: Structure validation only for all packages
 
 Arguments:
-  cluster-directory   Path to cluster directory (defaults to current directory)
+  cluster-directory   Path to cluster directory (required)
                      Expected structure: <path>/<package>/pub/package.json
 
 Examples:
-  pareto cluster analyse                          # Full analysis (default)
-  pareto cluster analyse /path/to/cluster         # Full analysis of specific cluster
-  pareto cluster analyse --structural             # Fast structural check only
-  pareto cluster analyse --pre-commit             # Pre-commit validation
-  pareto cluster analyse --pre-publish            # Pre-publish validation
-  pareto cluster analyse --graph                  # Generate and view dependency graph
-  pareto cluster analyse --table                  # Generate and view HTML table report
-  pareto cluster analyse --graph --table          # Generate both graph and table
+  pareto cluster analyse /path/to/cluster                 # Full analysis (default)
+  pareto cluster analyse /path/to/cluster --structural    # Fast structural check only
+  pareto cluster analyse /path/to/cluster --pre-commit    # Pre-commit validation
+  pareto cluster analyse /path/to/cluster --pre-publish   # Pre-publish validation
+  pareto cluster analyse /path/to/cluster --graph         # Generate and view dependency graph
+  pareto cluster analyse /path/to/cluster --table         # Generate and view HTML table report
+  pareto cluster analyse /path/to/cluster --graph --table # Generate both graph and table
 `)
 }
 
@@ -239,9 +238,16 @@ export const $$ = (args: string[]): void => {
         process.exit(1)
     }
     
-    // Get cluster directory (non-flag arguments)
+    // Get cluster directory (non-flag arguments) - path is required
     const non_flag_args = args.filter(arg => !arg.startsWith('--'))
-    const cluster_dir = non_flag_args.length > 0 ? path.resolve(non_flag_args[0]) : process.cwd()
+    if (non_flag_args.length === 0) {
+        console.error('Error: Cluster directory path is required')
+        console.error('Usage: pareto cluster analyse [options] <cluster-directory>')
+        console.error('Expected structure: <cluster-path>/<package>/pub/package.json')
+        process.exit(1)
+    }
+    
+    const cluster_dir = path.resolve(non_flag_args[0])
     
     try {
         console.log(`Analyzing cluster: ${path.basename(cluster_dir)}`)

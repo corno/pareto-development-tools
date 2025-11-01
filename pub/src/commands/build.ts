@@ -146,7 +146,7 @@ function showHelp(): void {
 Package Build Tool
 
 Usage: 
-  pareto build [options] [package-root-directory]
+  pareto build [options] <package-root-directory>
 
 Options:
   --help                Show this help message
@@ -154,21 +154,17 @@ Options:
   --quiet               Suppress all output except errors
 
 Arguments:
-  package-root-directory   Path to package root (defaults to current directory)
+  package-root-directory   Path to package root (required)
                           Expected structure: <path>/pub/package.json
 
 Examples:
-  pareto build                     # Build current directory
-  pareto build /path/to/package    # Build specific package
-  pareto build --verbose           # Build with detailed output
-  pareto build --quiet             # Build silently
+  pareto build /path/to/package            # Build specific package
+  pareto build /path/to/package --verbose  # Build with detailed output
+  pareto build /path/to/package --quiet    # Build silently
 `)
 }
 
-export const $$ = (): void => {
-    // Parse command line arguments
-    const args = process.argv.slice(2)
-    
+export const $$ = (args: string[]): void => {
     // Check for help flag
     if (args.includes('--help') || args.includes('-h')) {
         showHelp()
@@ -179,9 +175,16 @@ export const $$ = (): void => {
     const verbose = args.includes('--verbose')
     const quiet = args.includes('--quiet')
     
-    // Get package directory (non-flag arguments)
+    // Get package directory (non-flag arguments) - path is required
     const non_flag_args = args.filter(arg => !arg.startsWith('--'))
-    const package_dir = non_flag_args.length > 0 ? path.resolve(non_flag_args[0]) : process.cwd()
+    if (non_flag_args.length === 0) {
+        console.error('Error: Package directory path is required')
+        console.error('Usage: pareto build [options] <package-root-directory>')
+        console.error('Expected structure: <your-path>/pub/package.json')
+        process.exit(1)
+    }
+    
+    const package_dir = path.resolve(non_flag_args[0])
     
     // Check if this is a valid package structure (has pub/package.json)
     const package_json_path = path.join(package_dir, 'pub', 'package.json')
@@ -229,9 +232,4 @@ export const $$ = (): void => {
         console.error(err.message)
         process.exit(1)
     }
-}
-
-// Run if called directly
-if (require.main === module) {
-    $$()
 }
