@@ -14,7 +14,7 @@ const path = require('path');
 const fs = require('fs');
 
 import { $$ as c_compare } from "../commands/compare"
-import { $$ as c_build } from "../commands/build"
+import { $$ as c_build_and_test } from "../commands/build_and_test"
 import { $$ as c_analyse } from "../commands/analyse"
 import { $$ as c_commit_and_push } from "../commands/commit_and_push"
 // import { $$ as c_publish } from "../commands/publish"
@@ -46,9 +46,9 @@ const COMMANDS : { [key: string]: { module: () => (args: string[]) => Promise<vo
     //     module: () => require('../commands/ensure_valid_commit').$$,
     //     description: 'Ensure repository has a valid latest commit'
     // },
-    'build': {
-        module: () => c_build,
-        description: 'Build a single package'
+    'build-and-test': {
+        module: () => c_build_and_test,
+        description: 'Build and test a single package'
     },
     // 'cluster-build': {
     //     module: () => require('../commands/cluster/build').$$,

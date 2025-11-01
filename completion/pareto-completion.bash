@@ -9,13 +9,16 @@ _pareto_completions() {
     local prev="${COMP_WORDS[COMP_CWORD-1]}"
     
     # List of currently available commands (only uncommented ones)
-            commands="build compare analyse cluster-analyse commit-and-push"
+            commands="build-and-test compare analyse cluster-analyse commit-and-push"
     
     # Analysis flags for analyse and cluster-analyse commands
     local analyse_flags="--help -h --structural --pre-commit --pre-publish"
     
     # Commit and push flags
     local commit_push_flags="--help -h --dry-run --no-push"
+    
+    # Build and test flags
+    local build_test_flags="--help -h --verbose -v --skip-tests"
     
     # If completing first argument after 'pareto'
     if [ "$COMP_CWORD" -eq 1 ]; then
@@ -25,7 +28,17 @@ _pareto_completions() {
     
     # Command-specific completions
     case "${prev}" in
-        build|compare)
+        build-and-test)
+            # Check if we're completing a flag
+            if [[ "${cur}" == -* ]]; then
+                COMPREPLY=($(compgen -W "${build_test_flags}" -- ${cur}))
+            else
+                # Complete directory path
+                COMPREPLY=($(compgen -d -- ${cur}))
+            fi
+            return 0
+            ;;
+        compare)
             # These commands take a directory path as argument
             COMPREPLY=($(compgen -d -- ${cur}))
             return 0
@@ -67,6 +80,16 @@ _pareto_completions() {
     if [[ "${COMP_WORDS[1]}" == "commit-and-push" ]]; then
         # Check if previous word was a flag
         if [[ "${prev}" == "--dry-run" || "${prev}" == "--no-push" || "${prev}" == "--help" ]]; then
+            COMPREPLY=($(compgen -d -- ${cur}))
+            return 0
+        fi
+    fi
+    
+    # If previous argument was build-and-test, and current is a flag,
+    # still allow directory completion for the path argument
+    if [[ "${COMP_WORDS[1]}" == "build-and-test" ]]; then
+        # Check if previous word was a flag
+        if [[ "${prev}" == "--verbose" || "${prev}" == "-v" || "${prev}" == "--skip-tests" || "${prev}" == "--help" ]]; then
             COMPREPLY=($(compgen -d -- ${cur}))
             return 0
         fi

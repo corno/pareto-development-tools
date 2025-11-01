@@ -78,7 +78,9 @@ function build_project(project_path: string, options: { verbose?: boolean, throw
         if (verbose) {
             console.log('Building pub directory...');
         }
-        execSync(`tsc --project ${path.join(project_path, 'pub')}`, {
+        console.log(`tsc --project ${project_path}/pub`)
+        execSync(`tsc --project ${project_path}/pub`, {
+            cwd: project_path,
             stdio: verbose ? 'inherit' : 'pipe'
         });
         
