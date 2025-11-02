@@ -1,0 +1,1882 @@
+{
+  ".vscode": [
+    "leaf",
+    {
+      "outcome": ".vscode: not a project",
+      "status": [
+        "warning",
+        null
+      ]
+    }
+  ],
+  "astn": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-json": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "astn-to-git": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "astn-to-xml": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "tests failed (1 failures)",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exupery": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "build failed",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exupery-resources": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-async": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "exupery-standard-library": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "astn": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "build failed",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-boekhouding": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-fountain-pen": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-resources": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-json": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-fountain-pen": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-lionweb": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "astn": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-bin": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-rawdata": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-resources": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-standard-operations": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "build failed",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-standard-operations": [
+    "composite",
+    {
+      "git": [
+        "leaf",
+        {
+          "outcome": "clean",
+          "status": [
+            "success",
+            null
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-standard-library": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "passed",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-targets": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "exupery-core-alg": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-data": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "exupery-core-dev": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "pareto-json": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "build failed",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "pareto-vscode-backend": [
+    "composite",
+    {
+      "git": [
+        "composite",
+        {
+          "dirty working tree": [
+            "leaf",
+            {
+              "outcome": "yes",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "staged files": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ],
+          "unpushed commits": [
+            "leaf",
+            {
+              "outcome": "no",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "dependencies": [
+        "composite",
+        {
+          "pareto": [
+            "leaf",
+            {
+              "outcome": "up to date",
+              "status": [
+                "success",
+                null
+              ]
+            }
+          ]
+        }
+      ],
+      "published comparison": [
+        "leaf",
+        {
+          "outcome": "not published",
+          "status": [
+            "warning",
+            null
+          ]
+        }
+      ],
+      "pre-commit": [
+        "composite",
+        {
+          "test": [
+            "leaf",
+            {
+              "outcome": "build failed",
+              "status": [
+                "issue",
+                null
+              ]
+            }
+          ],
+          "structural": [
+            "composite",
+            {
+              "package name": [
+                "leaf",
+                {
+                  "outcome": "matches directory",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "structure": [
+                "leaf",
+                {
+                  "outcome": "valid",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ],
+              "interface implementation": [
+                "leaf",
+                {
+                  "outcome": "matched",
+                  "status": [
+                    "success",
+                    null
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

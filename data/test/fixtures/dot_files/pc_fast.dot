@@ -1,0 +1,118 @@
+digraph dependencies {
+    rankdir=TB;
+    node [shape=box, style=filled];
+    
+    // Graph title
+    labelloc="t";
+    label="Dependency Graph\nGenerated: FIXED_TIMESTAMP_FOR_TESTING\nDirectory: pc_fast";
+    
+    // Project nodes (sibling repositories)
+    astn [label=<astn<BR/>v0.111.29>, fillcolor=lightblue];
+    astn_to_git [label=<astn-to-git<BR/>v0.0.0>, fillcolor=lightblue];
+    astn_to_xml [label=<astn-to-xml<BR/>v0.0.0>, fillcolor=orange];
+    exupery [label=<exupery<BR/>v0.1.30<BR/><FONT COLOR="red">Dirty Tree</FONT>>, fillcolor=lightcoral, color=red, penwidth=3];
+    exupery_resources [label=<exupery-resources<BR/>v0.1.20>, fillcolor=lightblue];
+    exupery_standard_library [label=<exupery-standard-library<BR/>v0.1.17>, fillcolor=lightblue];
+    pareto [label=<pareto<BR/>v0.76.68<BR/><FONT COLOR="red">Dirty Tree</FONT>>, fillcolor=lightcoral, color=red, penwidth=3];
+    pareto_boekhouding [label=<pareto-boekhouding<BR/>v0.1.6<BR/><FONT COLOR="red">Dirty Tree</FONT>>, fillcolor=lightcoral, color=red, penwidth=3];
+    pareto_fountain_pen [label=<pareto-fountain-pen<BR/>v0.1.41>, fillcolor=lightblue];
+    pareto_json [label=<pareto-json<BR/>v0.1.15>, fillcolor=lightblue];
+    pareto_lionweb [label=<pareto-lionweb<BR/>v0.0.4<BR/><FONT COLOR="red">Dirty Tree</FONT>>, fillcolor=lightcoral, color=red, penwidth=3];
+    pareto_standard_operations [label=<pareto-standard-operations<BR/>v0.1.17>, fillcolor=lightblue];
+    pareto_targets [label=<pareto-targets<BR/>v0.0.3<BR/><FONT COLOR="red">Dirty Tree</FONT>>, fillcolor=lightcoral, color=red, penwidth=3];
+    pareto_vscode_backend [label=<pareto-vscode-backend<BR/>v0.1.22<BR/><FONT COLOR="red">Dirty Tree</FONT>>, fillcolor=lightcoral, color=red, penwidth=3];
+
+    // External dependency nodes
+    exupery_core_alg [label="exupery-core-alg", fillcolor=yellow, shape=ellipse];
+    exupery_core_bin [label="exupery-core-bin", fillcolor=yellow, shape=ellipse];
+    exupery_core_data [label="exupery-core-data", fillcolor=yellow, shape=ellipse];
+    exupery_core_dev [label="exupery-core-dev", fillcolor=yellow, shape=ellipse];
+    exupery_core_async [label="exupery-core-async", fillcolor=yellow, shape=ellipse];
+    exupery_core_rawdata [label="exupery-core-rawdata", fillcolor=yellow, shape=ellipse];
+
+    // Dependencies
+    astn -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    astn -> exupery_core_bin [label="0.1.18", color=lightgrey, style=dashed];
+    astn -> exupery_core_data [label="0.1.11", color=lightgrey, style=dashed];
+    astn -> exupery_core_dev [label="0.1.3", color=lightgrey, style=dashed];
+    astn -> pareto_fountain_pen [label="0.1.41", color=blue, penwidth=2];
+    astn -> pareto_json [label="0.1.15", color=blue, penwidth=2];
+    astn -> pareto_standard_operations [label="0.1.17", color=blue, penwidth=2];
+    astn_to_git -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    astn_to_git -> exupery_core_dev [label="0.1.3", color=lightgrey, style=dashed];
+    astn_to_git -> pareto_fountain_pen [label="0.1.41", color=blue, penwidth=2];
+    astn_to_xml -> exupery_core_dev [label="0.1.3", color=lightgrey, style=dashed];
+    astn_to_xml -> pareto_fountain_pen [label="0.1.41", color=blue, penwidth=2];
+    exupery -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    exupery -> exupery_core_bin [label="0.1.18", color=lightgrey, style=dashed];
+    exupery -> exupery_core_data [label="0.1.11", color=lightgrey, style=dashed];
+    exupery -> exupery_core_dev [label="0.1.3", color=lightgrey, style=dashed];
+    exupery -> pareto_fountain_pen [label="0.1.41", color=blue, penwidth=2];
+    exupery -> pareto_standard_operations [label="0.1.17", color=blue, penwidth=2];
+    exupery_resources -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    exupery_resources -> exupery_core_async [label="0.1.43", color=lightgrey, style=dashed];
+    exupery_resources -> exupery_core_dev [label="0.1.3", color=lightgrey, style=dashed];
+    exupery_standard_library -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    pareto -> astn [label="0.111.29", color=blue, penwidth=2];
+    pareto -> exupery [label="0.1.30", color=red, penwidth=2];
+    pareto -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    pareto -> exupery_core_bin [label="0.1.18", color=lightgrey, style=dashed];
+    pareto -> exupery_core_data [label="0.1.11", color=lightgrey, style=dashed];
+    pareto -> exupery_core_dev [label="0.1.3", color=lightgrey, style=dashed];
+    pareto -> pareto_fountain_pen [label="0.1.41", color=blue, penwidth=2];
+    pareto -> pareto_standard_operations [label="0.1.17", color=blue, penwidth=2];
+    pareto_boekhouding -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    pareto_boekhouding -> exupery_core_bin [label="0.1.18", color=lightgrey, style=dashed];
+    pareto_boekhouding -> exupery_core_data [label="0.1.11", color=lightgrey, style=dashed];
+    pareto_boekhouding -> pareto_fountain_pen [label="0.1.41", color=blue, penwidth=2];
+    pareto_boekhouding -> pareto_standard_operations [label="0.1.17", color=blue, penwidth=2];
+    pareto_fountain_pen -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    pareto_fountain_pen -> exupery_core_bin [label="0.1.18", color=lightgrey, style=dashed];
+    pareto_fountain_pen -> exupery_core_data [label="0.1.11", color=lightgrey, style=dashed];
+    pareto_fountain_pen -> exupery_core_dev [label="0.1.3", color=lightgrey, style=dashed];
+    pareto_fountain_pen -> exupery_resources [label="0.1.20", color=blue, penwidth=2];
+    pareto_fountain_pen -> pareto_standard_operations [label="0.1.17", color=blue, penwidth=2];
+    pareto_json -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    pareto_json -> exupery_core_bin [label="0.1.18", color=lightgrey, style=dashed];
+    pareto_json -> exupery_core_data [label="0.1.11", color=lightgrey, style=dashed];
+    pareto_json -> pareto_fountain_pen [label="0.1.41", color=blue, penwidth=2];
+    pareto_json -> pareto_standard_operations [label="0.1.17", color=blue, penwidth=2];
+    pareto_lionweb -> astn [label="0.111.29", color=blue, penwidth=2];
+    pareto_lionweb -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    pareto_lionweb -> exupery_core_bin [label="0.1.18", color=lightgrey, style=dashed];
+    pareto_lionweb -> exupery_core_rawdata [label="0.1.7", color=lightgrey, style=dashed];
+    pareto_lionweb -> exupery_resources [label="0.1.20", color=blue, penwidth=2];
+    pareto_lionweb -> pareto_standard_operations [label="0.1.17", color=blue, penwidth=2];
+    pareto_standard_operations -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    pareto_standard_operations -> exupery_standard_library [label="0.1.17", color=blue, penwidth=2];
+    pareto_targets -> exupery_core_alg [label="0.1.12", color=lightgrey, style=dashed];
+    pareto_targets -> exupery_core_data [label="0.1.11", color=lightgrey, style=dashed];
+    pareto_targets -> exupery_core_dev [label="0.1.3", color=lightgrey, style=dashed];
+    pareto_targets -> pareto [label="0.76.68", color=red, penwidth=2];
+    pareto_targets -> pareto_json [label="0.1.15", color=blue, penwidth=2];
+    pareto_vscode_backend -> pareto [label="0.76.68", color=red, penwidth=2];
+
+    // Legend (at bottom, compact vertical layout)
+    subgraph cluster_legend {
+        label="Legend";
+        style=filled;
+        color=lightgrey;
+        
+        node [shape=plaintext, fontsize=10];
+        
+        legend_nodes [label=<
+            <TABLE BORDER="0" CELLBORDER="0" CELLSPACING="2">
+            <TR><TD COLSPAN="2"><B>Node Types</B></TD></TR>
+            <TR><TD BGCOLOR="lightblue" WIDTH="20"> </TD><TD ALIGN="LEFT">Healthy Project</TD></TR>
+            <TR><TD BGCOLOR="lightcoral" WIDTH="20"> </TD><TD ALIGN="LEFT">Project with Issues</TD></TR>
+            <TR><TD BGCOLOR="orange" WIDTH="20"> </TD><TD ALIGN="LEFT">Name Mismatch</TD></TR>
+            <TR><TD BGCOLOR="lightblue" BORDER="3" COLOR="red" WIDTH="20"> </TD><TD ALIGN="LEFT">Unpushed Work</TD></TR>
+            <TR><TD BGCOLOR="yellow" WIDTH="20"> </TD><TD ALIGN="LEFT">External Package</TD></TR>
+            <TR><TD COLSPAN="2"> </TD></TR>
+            <TR><TD COLSPAN="2"><B>Edge Colors</B></TD></TR>
+            <TR><TD COLOR="blue" WIDTH="20">━━━</TD><TD ALIGN="LEFT">Up to date</TD></TR>
+            <TR><TD COLOR="yellow" WIDTH="20">━━━</TD><TD ALIGN="LEFT">Version behind</TD></TR>
+            <TR><TD COLOR="red" WIDTH="20">━━━</TD><TD ALIGN="LEFT">Target has issues</TD></TR>
+            </TABLE>
+        >];
+    }}
