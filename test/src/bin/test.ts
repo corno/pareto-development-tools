@@ -110,7 +110,7 @@ const tests: Array<{ name: string, config: TestRunner }> = [
     {
         name: 'SVG generation',
         config: {
-            'input_dir_name': 'expected/dot_files',
+            'input_dir_name': 'dot_files',
             'output_dir_name': 'svgs',
             'target_extension': 'svg',
             'transformer': (input_content: string, filename: string): string => {
@@ -144,7 +144,7 @@ const tests: Array<{ name: string, config: TestRunner }> = [
     {
         name: 'HTML rendering from document JSON',
         config: {
-            'input_dir_name': 'expected/html_as_json',
+            'input_dir_name': 'html_as_json',
             'output_dir_name': 'html',
             'target_extension': 'html',
             'transformer': (input_content: string, filename: string): string => {

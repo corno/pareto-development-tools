@@ -13,8 +13,9 @@ export type TestRunner = {
 
 export const $$ = ($p: TestRunner): boolean => {
     const data_dir = path.join(__dirname, '../../../data');
-    const input_dir = path.join(data_dir, 'test', $p.input_dir_name);
     const test_data_dir = path.join(data_dir, 'test');
+    const fixtures_dir = path.join(test_data_dir, 'fixtures');
+    const input_dir = path.join(fixtures_dir, $p.input_dir_name);
     const expected_dir = path.join(test_data_dir, 'expected');
     const actual_dir = path.join(test_data_dir, 'actual');
     
