@@ -4,23 +4,27 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export type TestRunner = {
-    'input_dir_name': string,
-    'output_dir_name': string,
+    'test name': string,
     'target_extension': string,  // e.g., 'json', 'txt', 'dot'
     'transformer': (input_content: string, filename_without_extension: string) => string,
     'overwrite_expected': boolean
+}
+
+function to_snake_case(str: string): string {
+    return str.toLowerCase().replace(/\s+/g, '_');
 }
 
 export const $$ = ($p: TestRunner): boolean => {
     const data_dir = path.join(__dirname, '../../../data');
     const test_data_dir = path.join(data_dir, 'test');
     const fixtures_dir = path.join(test_data_dir, 'fixtures');
-    const input_dir = path.join(fixtures_dir, $p.input_dir_name);
+    const test_dir_name = to_snake_case($p['test name']);
+    const input_dir = path.join(fixtures_dir, test_dir_name);
     const expected_dir = path.join(test_data_dir, 'expected');
     const actual_dir = path.join(test_data_dir, 'actual');
     
     console.log('='.repeat(60));
-    console.log(`Running test: ${$p.input_dir_name} → ${$p.output_dir_name}\n`);
+    console.log(`Running test: ${$p['test name']}\n`);
     
     // Check if input directory exists
     if (!fs.existsSync(input_dir)) {
@@ -28,26 +32,19 @@ export const $$ = ($p: TestRunner): boolean => {
         return false;
     }
     
-    // Clear/create actual output directory
-    const actual_output_dir = path.join(actual_dir, $p.output_dir_name);
-    if (fs.existsSync(actual_output_dir)) {
-        const files = fs.readdirSync(actual_output_dir);
-        for (const file of files) {
-            fs.unlinkSync(path.join(actual_output_dir, file));
-        }
-        console.log(`✓ Cleared ${actual_output_dir}`);
-    } else {
+    // Ensure actual output directory exists
+    const actual_output_dir = path.join(actual_dir, test_dir_name);
+    if (!fs.existsSync(actual_output_dir)) {
         fs.mkdirSync(actual_output_dir, { recursive: true });
-        console.log(`✓ Created ${actual_output_dir}`);
     }
     
     // Clear/create expected output directory if overwrite flag is set
-    const expected_output_dir = path.join(expected_dir, $p.output_dir_name);
+    const expected_output_dir = path.join(expected_dir, test_dir_name);
     if ($p.overwrite_expected) {
         // Only clear if the directory exists and has files
         if (fs.existsSync(expected_output_dir)) {
             const files = fs.readdirSync(expected_output_dir);
-            console.log(`⚠️  Overwrite mode: Will replace ${files.length} existing expected file(s) in ${$p.output_dir_name}`);
+            console.log(`⚠️  Overwrite mode: Will replace ${files.length} existing expected file(s) in ${test_dir_name}`);
             for (const file of files) {
                 fs.unlinkSync(path.join(expected_output_dir, file));
             }
