@@ -10,7 +10,6 @@ export function cluster_state_to_html(
     cluster_state: d_in.Cluster_State,
     options: {
         'time stamp': string
-        'cluster path': string
     }
 ): string {
     const doc = cluster_state_to_document(cluster_state, options)

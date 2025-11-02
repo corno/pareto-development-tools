@@ -11,7 +11,6 @@ export function project_cluster_state_to_dot(
     cluster_state: d_in.Cluster_State,
     $p: {
         include_legend: boolean
-        cluster_path: string
         show_warnings: boolean
         'time stamp': string
     }
@@ -176,7 +175,7 @@ export function project_cluster_state_to_dot(
     
     // Graph title
     labelloc="t";
-    label="Dependency Graph\\nGenerated: ${$p['time stamp']}\\nDirectory: ${$p.cluster_path}";
+    label="Dependency Graph\\nGenerated: ${$p['time stamp']}";
     
     // Project nodes (sibling repositories)
 `;

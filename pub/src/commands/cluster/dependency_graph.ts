@@ -323,7 +323,6 @@ async function main(): Promise<void> {
         cluster_state,
         {
             include_legend: show_legend,
-            cluster_path: base_dir,
             show_warnings: verbose,
             'time stamp': new Date().toISOString()
         }

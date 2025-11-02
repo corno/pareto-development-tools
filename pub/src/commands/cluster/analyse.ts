@@ -507,7 +507,6 @@ export const $$ = async (args: string[]): Promise<void> => {
                 console.log('🔄 Generating dependency graph...')
                 const dot_content = project_cluster_state_to_dot(cluster_state, {
                     include_legend: true,
-                    cluster_path: path.basename(cluster_dir),
                     show_warnings: false,
                     'time stamp': new Date().toISOString()
                 })
@@ -530,7 +529,6 @@ export const $$ = async (args: string[]): Promise<void> => {
                 console.log('🔄 Generating HTML table report...')
                 const html_content = cluster_state_to_html(cluster_state, {
                     'time stamp': new Date().toISOString(),
-                    'cluster path': path.basename(cluster_dir)
                 })
                 
                 const table_filename = `${path.basename(cluster_dir)}-analysis-report.html`

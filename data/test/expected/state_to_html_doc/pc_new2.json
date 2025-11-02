@@ -57,7 +57,7 @@
                                         "type": [
                                           "p",
                                           {
-                                            "text": "Cluster: pc_new2"
+                                            "text": "Cluster: xxx"
                                           }
                                         ]
                                       }
@@ -415,7 +415,7 @@
                                                 "a",
                                                 {
                                                   "text": "exupery-resources",
-                                                  "href": "vscode://filepc_new2/exupery-resources"
+                                                  "href": "vscode://fileexupery-resources"
                                                 }
                                               ]
                                             }
@@ -720,7 +720,7 @@
                                                 "a",
                                                 {
                                                   "text": "exupery-standard-library",
-                                                  "href": "vscode://filepc_new2/exupery-standard-library"
+                                                  "href": "vscode://fileexupery-standard-library"
                                                 }
                                               ]
                                             }
@@ -1025,7 +1025,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-standard-operations",
-                                                  "href": "vscode://filepc_new2/pareto-standard-operations"
+                                                  "href": "vscode://filepareto-standard-operations"
                                                 }
                                               ]
                                             }
@@ -1348,7 +1348,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-fountain-pen",
-                                                  "href": "vscode://filepc_new2/pareto-fountain-pen"
+                                                  "href": "vscode://filepareto-fountain-pen"
                                                 }
                                               ]
                                             }
@@ -1671,7 +1671,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-json",
-                                                  "href": "vscode://filepc_new2/pareto-json"
+                                                  "href": "vscode://filepareto-json"
                                                 }
                                               ]
                                             }
@@ -1994,7 +1994,7 @@
                                                 "a",
                                                 {
                                                   "text": "astn",
-                                                  "href": "vscode://filepc_new2/astn"
+                                                  "href": "vscode://fileastn"
                                                 }
                                               ]
                                             }
@@ -2317,7 +2317,7 @@
                                                 "a",
                                                 {
                                                   "text": "astn-to-git",
-                                                  "href": "vscode://filepc_new2/astn-to-git"
+                                                  "href": "vscode://fileastn-to-git"
                                                 }
                                               ]
                                             }
@@ -2640,7 +2640,7 @@
                                                 "a",
                                                 {
                                                   "text": "astn-to-xml",
-                                                  "href": "vscode://filepc_new2/astn-to-xml"
+                                                  "href": "vscode://fileastn-to-xml"
                                                 }
                                               ]
                                             }
@@ -2963,7 +2963,7 @@
                                                 "a",
                                                 {
                                                   "text": "exupery",
-                                                  "href": "vscode://filepc_new2/exupery"
+                                                  "href": "vscode://fileexupery"
                                                 }
                                               ]
                                             }
@@ -3286,7 +3286,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto",
-                                                  "href": "vscode://filepc_new2/pareto"
+                                                  "href": "vscode://filepareto"
                                                 }
                                               ]
                                             }
@@ -3609,7 +3609,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-boekhouding",
-                                                  "href": "vscode://filepc_new2/pareto-boekhouding"
+                                                  "href": "vscode://filepareto-boekhouding"
                                                 }
                                               ]
                                             }
@@ -3932,7 +3932,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-lionweb",
-                                                  "href": "vscode://filepc_new2/pareto-lionweb"
+                                                  "href": "vscode://filepareto-lionweb"
                                                 }
                                               ]
                                             }
@@ -4255,7 +4255,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-targets",
-                                                  "href": "vscode://filepc_new2/pareto-targets"
+                                                  "href": "vscode://filepareto-targets"
                                                 }
                                               ]
                                             }
@@ -4578,7 +4578,7 @@
                                                 "a",
                                                 {
                                                   "text": "pareto-vscode-backend",
-                                                  "href": "vscode://filepc_new2/pareto-vscode-backend"
+                                                  "href": "vscode://filepareto-vscode-backend"
                                                 }
                                               ]
                                             }

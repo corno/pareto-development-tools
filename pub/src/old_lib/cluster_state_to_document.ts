@@ -30,10 +30,8 @@ export function cluster_state_to_document(
     cluster_state: d_in.Cluster_State,
     options: {
         'time stamp': string
-        'cluster path': string
     }
 ): Document {
-    const cluster_path = options['cluster path']
     const time_stamp = options['time stamp']
 
     const css = `
@@ -507,7 +505,7 @@ export function cluster_state_to_document(
         }
         
         // Package name (with link and color)
-        const packagePath = `${cluster_path}/${project.name}`
+        const packagePath = `${project.name}`
         const vscodeUrl = `vscode://file${packagePath}`
         const packageNameSpan = linkSpan(project.name, vscodeUrl, ['package-name', `package-name-${worstSeverity}`])
         
@@ -558,7 +556,7 @@ export function cluster_state_to_document(
                                                         classes: [],
                                                         children: [{
                                                             classes: [],
-                                                            type: ['p', { text: `Cluster: ${cluster_path}` }]
+                                                            type: ['p', { text: `Cluster: xxx` }]
                                                         }]
                                                     }]
                                                 }]
