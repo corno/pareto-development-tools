@@ -3,7 +3,9 @@
     "test": "ts-node src/bin/test.ts"
   },
   "dependencies": {
-    "pareto-development-tools": "file:../pub"
+    "exupery-core-alg": "^0.1.12",
+    "pareto-development-tools": "file:../pub",
+    "pareto-test": "^0.0.1"
   },
   "devDependencies": {
     "ts-node": "^10.9.2"
