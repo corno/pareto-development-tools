@@ -7,8 +7,10 @@ import * as _ea from 'exupery-core-alg'
 
 import { $$ as p_log_error } from "exupery-resources/dist/implementation/algorithms/procedures/guaranteed/log_error"
 
-import { $$ as p_command_assert_clean } from "./project_commands/assert-clean"
+import { $$ as p_command_assert_clean } from "./project_commands/git-assert-clean"
 import { $$ as p_command_git_commit } from "./project_commands/git-commit"
+import { $$ as p_command_git_remove_tracked_but_ignored } from "./project_commands/git-remove-tracked-but-ignored"
+
 
 import { $$ as q_read_dir } from "exupery-resources/dist/implementation/algorithms/queries/unguaranteed/read_directory"
 
@@ -43,6 +45,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.
             const commands: _et.Dictionary<_easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error>> = _ea.dictionary_literal({
                 'assert-clean': p_command_assert_clean,
                 'git-commit': p_command_git_commit,
+                'git-remove-tracked-but-ignored': p_command_git_remove_tracked_but_ignored,
             })
             op_remove_first($p.arguments).transform(
                 ($) => {

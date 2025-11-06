@@ -1,0 +1,79 @@
+import * as _easync from 'exupery-core-async'
+import * as _ei from 'exupery-core-internals'
+import * as _et from 'exupery-core-types'
+import * as _ed from 'exupery-core-dev'
+import * as _eb from 'exupery-core-bin'
+import * as _ea from 'exupery-core-alg'
+
+import { $$ as pu_epe } from "exupery-resources/dist/implementation/algorithms/procedures/unguaranteed/execute_procedure_executable"
+
+import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
+import * as d_gic from "../../../queries/unguaranteed/git_is_clean"
+
+import { $$ as pu_assert_git_is_clean } from "./git-assert-clean"
+
+import { $$ as pu_conditional_async } from "../../../../../temp/conditional_async"
+import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
+
+export type Parameters = {
+    'path': string,
+}
+
+export type Error =
+    | ['not clean', null]
+    | ['could not remove', d_eqe.Error]
+    | ['could not add', d_eqe.Error]
+    | ['unexpected error', d_gic.Error]
+
+
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> = (
+    $p,
+) => {
+    return _easync.__create_unguaranteed_procedure({
+        'execute': (on_success, on_exception) => {
+            pu_three_steps(
+                pu_assert_git_is_clean({
+                    'path': $p.path,
+                }),
+                pu_epe({
+                    'program': `git`,
+                    'args': _ea.array_literal([
+                        `-C`,
+                        $p.path,
+                        `rm`,
+                        `-r`,
+                        `--cached`,
+                        `.`
+                    ]),
+                }),
+                pu_epe({
+                    'program': `git`,
+                    'args': _ea.array_literal([
+                        `-C`,
+                        $p.path,
+                        `add`,
+                        `--all`,
+                    ]),
+                }),
+            ).__start(
+                on_success,
+                ($) => {
+                    on_exception(_ea.cc($, ($) => {
+                        switch ($[0]) {
+                            case 'step1': return _ea.ss($, ($) => _ea.cc($, ($) => {
+                                switch ($[0]) {
+                                    case 'working directory is not clean':return _ea.ss($, ($) => ['not clean', null])
+                                    case 'unexpected error': return _ea.ss($, ($) => ['unexpected error', $])
+                                    default: return _ea.au($[0])
+                                }
+                            }))
+                            case 'step2': return _ea.ss($, ($) => ['could not remove', $])
+                            case 'step3': return _ea.ss($, ($) => ['could not add', $])
+                            default: return _ea.au($[0])
+                        }
+                    }))
+                },
+            )
+        }
+    })
+}
