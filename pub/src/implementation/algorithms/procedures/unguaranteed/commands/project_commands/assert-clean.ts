@@ -18,7 +18,9 @@ const op_dictionary_size = <T>($: _et.Dictionary<T>): number => {
     return count
 }
 
-import { Project_Parameters } from '../../../../../../interface/project_command'
+import { Project_Parameters } from "../../../../../../interface/project_command"
+
+import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
 
 
 export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error> = (
@@ -26,33 +28,21 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
-            let count_down = op_dictionary_size($p.packages)
-            let has_errors = false
-            const decrement_and_wrap_up_if_done = () => {
-                count_down -= 1
-                if (count_down === 0) {
-                    if (has_errors) {
-                        on_exception({
-                            'exit code': 1,
-                        })
-                    } else {
-                        on_success()
-                    }
+            do_procedure_dict(
+                $p.packages.map(($, key) => {
+                    return p_api_assert_clean_package({
+                        'path': key,
+                    })
+                }),
+            ).__start(
+                on_success,
+                ($) => {
+                    _ed.log_debug_message(`clean errors`, () => {})
+                    on_exception({
+                        'exit code': 1
+                    })
                 }
-            }
-            $p.packages.map(($, key) => {
-                p_api_assert_clean_package({
-                    'path': key,
-                }).__start(
-                    () => {
-                        decrement_and_wrap_up_if_done()
-                    },
-                    () => {
-                        has_errors = true
-                        decrement_and_wrap_up_if_done()
-                    },
-                )
-            })
+            )
         }
     })
 }
