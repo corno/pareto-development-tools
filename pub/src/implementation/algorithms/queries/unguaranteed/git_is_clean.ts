@@ -44,18 +44,21 @@ export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Erro
                 },
                 ($) => {
                     const err = $
-                    qu_is_inside_work_tree({'path': $p.path}).__start(
-                        ($) => {
-                            if (!$) {
-                                on_exception(['not a git repository', null])
-                            } else {
-                                on_exception(['could not determine git status', err])
-                            }
-                        },
-                        ($) => {
-                            on_exception(['unknown issue', $])
-                        }
-                    )
+
+                    // qu_is_inside_work_tree({ 'path': $p.path }).__start(
+                    //     ($) => {
+                    //         if (!$) {
+                    //             on_exception(['not a git repository', null])
+                    //         } else {
+                    //             on_exception(['could not determine git status', err])
+                    //         }
+                    //     },
+                    //     ($) => {
+                    //         on_exception(['unknown issue', $])
+                    //     }
+                    // )
+                    on_exception(['could not determine git status', err])
+
                 }
             )
         }
