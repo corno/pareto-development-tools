@@ -12,6 +12,7 @@ import { $$ as op_to_list } from "pareto-standard-operations/dist/implementation
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 import { $$ as p_command_assert_clean } from "./commands/assert-clean"
+import { $$ as p_command_project } from "./commands/project"
 
 const log_and_exit = (
     on_exception: ($: _eb.Error) => void,
@@ -36,7 +37,8 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             const commands: _et.Dictionary<_easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error>> = _ea.dictionary_literal({
-                'assert-clean': p_command_assert_clean
+                'assert-clean': p_command_assert_clean,
+                'project': p_command_project,
             })
             op_remove_first($p.arguments).transform(
                 ($) => {
