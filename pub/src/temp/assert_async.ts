@@ -1,0 +1,36 @@
+import * as _et from 'exupery-core-types'
+import * as _easync from 'exupery-core-async'
+import * as _ea from 'exupery-core-alg'
+
+export type Error<Assertion_Error, Procedure_Error> =
+    | ['assertion error', Assertion_Error]
+    | ['assertion failed', null]
+    | ['procedure error', Procedure_Error]
+
+export const $$ = <Assertion_Error, Procedure_Error>(
+    assertion: _easync._Unguaranteed_Query<boolean, Assertion_Error>,
+    procedure: _easync.Unguaranteed_Procedure<Procedure_Error>,
+): _easync.Unguaranteed_Procedure<Error<Assertion_Error, Procedure_Error>> => {
+    return {
+        __start: (on_success, on_exception) => {
+            assertion.__start(
+                ($) => {
+                    if ($) {
+                        procedure.__start(
+                            on_success,
+                            ($) => {
+                                on_exception(['procedure error', $])
+                            }
+                        )
+                    } else {
+                        on_exception(['assertion failed', null])
+                    }
+                },
+                ($) => {
+                    on_exception(['assertion error', $])
+                }
+            )
+
+        }
+    }
+}

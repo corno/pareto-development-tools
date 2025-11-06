@@ -5,18 +5,7 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import { $$ as p_log_error } from "exupery-resources/dist/implementation/algorithms/procedures/guaranteed/log_error"
 import { $$ as p_api_assert_clean_package } from "../../api/git-assert-clean"
-
-const op_dictionary_size = <T>($: _et.Dictionary<T>): number => {
-    let count = 0
-    $.map(
-        () => {
-            count += 1
-        }
-    )
-    return count
-}
 
 import { Project_Parameters } from "../../../../../../interface/project_command"
 

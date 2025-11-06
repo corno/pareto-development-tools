@@ -6,7 +6,7 @@ import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
 import { $$ as p_log_error } from "exupery-resources/dist/implementation/algorithms/procedures/guaranteed/log_error"
-import { $$ as p_api_git_commit } from "../../api/git-commit"
+import { $$ as p_api_git_commit } from "../../api/git-extended-commit"
 
 import { $$ as op_remove_first } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/list/remove_first_element"
 
@@ -63,7 +63,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                                             return `failed to spawn process: ${$.message}`
                                         })
                                         case 'non zero exit code': return _ea.ss($, ($) => {
-                                            return `non zero exit code: ${$.exitCode}>${$.stderr}`
+                                            return `non zero exit code: ${$['exit code'].transform(($) => ``+$, () => `-`)}>${$.stderr}`
                                         })
                                         default: return _ea.au($[0])
                                     }

@@ -37,7 +37,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                                     return `failed to spawn process: ${$.message}`
                                 })
                                 case 'non zero exit code': return _ea.ss($, ($) => {
-                                    return `non zero exit code: ${$.exitCode}>${$.stderr}`
+                                    return `non zero exit code: ${$['exit code'].transform(($) => `` + $, () => `-`)}>${$.stderr}`
                                 })
                                 default: return _ea.au($[0])
                             }
@@ -48,12 +48,12 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                         _ea.cc($, ($) => {
                             switch ($[0]) {
                                 case 'not clean': return _ea.ss($, ($) => {
-                                    _ed.log_debug_message(`${key}: not clean`, () => {})
+                                    _ed.log_debug_message(`${key}: not clean`, () => { })
                                 })
                                 case 'unexpected error': return _ea.ss($, ($) => {
-                                    _ed.log_debug_message(`${key}: error while asserting git is not clean: ${_ea.cc($, ($) => {
+                                    _ed.log_debug_message(`${key}: ${_ea.cc($, ($) => {
                                         switch ($[0]) {
-                                            case 'not a git repository': return _ea.ss($, ($) => `not a git rep`)
+                                            case 'not a git repository': return _ea.ss($, ($) => `not a git repository`)
                                             case 'could not determine git status': return _ea.ss($, ($) => `could not determine status, ${eqe_to_string($)}`)
                                             case 'unknown issue': return _ea.ss($, ($) => `unknown issue: ${_ea.cc($, ($) => {
                                                 switch ($[0]) {
