@@ -53,6 +53,8 @@ export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Erro
                             case 'non zero exit code': return _ea.ss($, ($) => {
                                 if ($.stderr === `fatal: not a git repository (or any of the parent directories): .git`) {
                                     on_success(false)
+                                } else {
+                                    on_exception(['unexpected output', $.stderr])
                                 }
                             })
                             default: return _ea.au($[0])

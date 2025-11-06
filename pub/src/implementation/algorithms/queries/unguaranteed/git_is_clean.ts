@@ -48,19 +48,15 @@ export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Erro
                     qu_is_inside_work_tree({ 'path': $p.path }).__start(
                         ($) => {
                             if (!$) {
-                                _ed.log_debug_message(`XXX`, () => { })
-                                // on_exception(['not a git repository', null])
+                                on_exception(['not a git repository', null])
                             } else {
-                                _ed.log_debug_message(`XXX`, () => { })
-                                // on_exception(['could not determine git status', err])
+                                on_exception(['could not determine git status', err])
                             }
                         },
                         ($) => {
-                            _ed.log_debug_message(`XXX`, () => { })
-                            // on_exception(['unknown issue', $])
+                            on_exception(['unknown issue', $])
                         }
                     )
-                    on_exception(['could not determine git status', err])
 
                 }
             )
