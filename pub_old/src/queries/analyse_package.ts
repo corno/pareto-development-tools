@@ -1,4 +1,4 @@
-import { Package_State } from "../interface/package_state"
+import { Package_Pre_Publish_State } from "../interface/package_state"
 
 import * as fs from 'fs';
 import * as path from 'path';
@@ -12,7 +12,7 @@ export type Parameters = {
 
 export function determine_package_state(
     $p: Parameters
-): Package_State {
+): Package_Pre_Publish_State {
     const project_path = path.join($p['path to package'], $p["directory name"]);
 
     // Determine package info
@@ -59,6 +59,6 @@ export function determine_package_state(
     return {
         'package name in package.json': package_name,
         'version': version,
-        'pre-publish': pre_publish_state
+        'level': pre_publish_state
     };
 }

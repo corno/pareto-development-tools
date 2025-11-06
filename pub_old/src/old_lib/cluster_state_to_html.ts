@@ -7,7 +7,7 @@ import render_document_to_html from "./render_html_document"
  * Document format and then rendering that Document to HTML.
  */
 export function cluster_state_to_html(
-    cluster_state: d_in.Cluster_State,
+    cluster_state: d_in.Cluster_Pre_Publish_State,
     options: {
         'time stamp': string
     }

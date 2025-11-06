@@ -1,4 +1,4 @@
-import { Cluster_State, Package_State } from "../interface/package_state"
+import { Cluster_Pre_Publish_State, Package_Pre_Publish_State } from "../interface/package_state"
 import { determine_package_state } from "./analyse_package"
 
 const fs = require('fs');
@@ -10,8 +10,8 @@ export type Parameters = {
 
 export const $$ = (
     $p: Parameters
-): Cluster_State => {
-    const projects: { [node_name: string]: ['not a project', null] | ['project', Package_State] } = {};
+): Cluster_Pre_Publish_State => {
+    const projects: { [node_name: string]: ['not a project', null] | ['project', Package_Pre_Publish_State] } = {};
 
     // Check if cluster path exists
     if (!fs.existsSync($p['cluster path'])) {
@@ -69,7 +69,7 @@ export const $$ = (
      * @param projects - Projects with their states
      * @returns Tagged union: circular dependencies detected or valid order array
      */
-    function calculate_topological_order(projects: { [node_name: string]: ['not a project', null] | ['project', Package_State] }): ['circular dependencies', null] | ['valid order', string[]] {
+    function calculate_topological_order(projects: { [node_name: string]: ['not a project', null] | ['project', Package_Pre_Publish_State] }): ['circular dependencies', null] | ['valid order', string[]] {
         const project_names = Object.keys(projects).filter(name => projects[name][0] === 'project');
         const visited = new Set<string>();
         const visiting = new Set<string>();
@@ -93,7 +93,7 @@ export const $$ = (
             const project_entry = projects[project_name];
             if (project_entry && project_entry[0] === 'project') {
                 const project_state = project_entry[1];
-                const sibling_deps = Object.keys(project_state['pre-publish'].dependencies)
+                const sibling_deps = Object.keys(project_state['level'].dependencies)
                     .filter(dep_name => project_names.includes(dep_name));
 
                 for (const dep of sibling_deps) {

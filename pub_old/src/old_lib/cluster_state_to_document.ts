@@ -27,7 +27,7 @@ function divWithSpan(span: Span): Div {
 }
 
 export function cluster_state_to_document(
-    cluster_state: d_in.Cluster_State,
+    cluster_state: d_in.Cluster_Pre_Publish_State,
     options: {
         'time stamp': string
     }
@@ -329,7 +329,7 @@ export function cluster_state_to_document(
     }
 
     const cluster_data = cluster_state[1]
-    const projects: Array<{ name: string; state: d_in.Package_State }> = []
+    const projects: Array<{ name: string; state: d_in.Package_Pre_Publish_State }> = []
     
     for (const [project_name, project_entry] of Object.entries(cluster_data.projects)) {
         if (project_entry[0] === 'project') {
@@ -381,8 +381,8 @@ export function cluster_state_to_document(
         // Structure
         // Structure validation
         let structureSpan: Span
-        if (state['pre-publish']['pre-commit']['structural'].structure[0] === 'valid') {
-            const warnings = state['pre-publish']['pre-commit']['structural'].structure[1].warnings
+        if (state['level']['pre-commit']['structural'].structure[0] === 'valid') {
+            const warnings = state['level']['pre-commit']['structural'].structure[1].warnings
             if (warnings.length > 0) {
                 structureSpan = textSpan(`⚠ ${warnings.length} warning(s)`, ['status-warning'])
                 if (worstSeverity === 'ok') worstSeverity = 'warning'
@@ -390,14 +390,14 @@ export function cluster_state_to_document(
                 structureSpan = textSpan('✓', ['status-ok'])
             }
         } else {
-            const errors = state['pre-publish']['pre-commit']['structural'].structure[1].errors
+            const errors = state['level']['pre-commit']['structural'].structure[1].errors
             structureSpan = textSpan(`✗ ${errors.length} error(s)`, ['status-error'])
             worstSeverity = 'error'
         }
         
         // Interface implementation match
         let intImpSpan: Span
-        const iim = state['pre-publish']['pre-commit']['structural']['interface implementation match']
+        const iim = state['level']['pre-commit']['structural']['interface implementation match']
         if (iim[0] === 'matched') {
             intImpSpan = textSpan('✓', ['status-ok'])
         } else if (iim[0] === 'root interface direcory missing') {
@@ -428,18 +428,18 @@ export function cluster_state_to_document(
         
         // Test
         let testSpan: Span
-        if (state['pre-publish']['pre-commit'].test[0] === 'success') {
+        if (state['level']['pre-commit'].test[0] === 'success') {
             testSpan = textSpan('✓ Pass', ['status-ok'])
         } else {
-            const failType = state['pre-publish']['pre-commit'].test[1][0]
+            const failType = state['level']['pre-commit'].test[1][0]
             testSpan = textSpan(`✗ ${failType === 'build' ? 'Build' : 'Test'} failed`, ['status-error'])
             worstSeverity = 'error'
         }
         
         // Git status
-        const hasDirtyTree = state['pre-publish'].git['dirty working tree']
-        const hasStagedFiles = state['pre-publish'].git['staged files']
-        const hasUnpushedCommits = state['pre-publish'].git['unpushed commits']
+        const hasDirtyTree = state['level'].git['dirty working tree']
+        const hasStagedFiles = state['level'].git['staged files']
+        const hasUnpushedCommits = state['level'].git['unpushed commits']
         
         if (hasDirtyTree || hasStagedFiles || hasUnpushedCommits) {
             if (worstSeverity === 'ok') worstSeverity = 'warning'
@@ -459,7 +459,7 @@ export function cluster_state_to_document(
         }
         
         // Dependencies
-        const deps = Object.entries(state['pre-publish'].dependencies)
+        const deps = Object.entries(state['level'].dependencies)
         const outdatedDeps = deps.filter(([_, dep]) => dep.target[0] === 'found' && !dep.target[1]['dependency up to date'])
         const externalDeps = deps.filter(([_, dep]) => dep.target[0] === 'not found')
         const upToDateDeps = deps.filter(([_, dep]) => dep.target[0] === 'found' && dep.target[1]['dependency up to date'])
@@ -491,11 +491,11 @@ export function cluster_state_to_document(
         
         // Published
         let publishedSpan: Span
-        if (state['pre-publish']['published comparison'][0] === 'could not compare') {
-            const reason = state['pre-publish']['published comparison'][1][0]
+        if (state['level']['published comparison'][0] === 'could not compare') {
+            const reason = state['level']['published comparison'][1][0]
             publishedSpan = textSpan(reason.replace(/-/g, ' '), ['status-skip'])
         } else {
-            const comparison = state['pre-publish']['published comparison'][1][0]
+            const comparison = state['level']['published comparison'][1][0]
             if (comparison === 'identical') {
                 publishedSpan = textSpan('✓ In sync', ['status-ok'])
             } else {

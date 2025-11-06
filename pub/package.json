@@ -1,19 +1,9 @@
 {
-  "name": "pareto-development-tools",
-  "version": "1.0.0",
-  "description": "Pareto development tools",
-  "bin": {
-    "pareto": "./dist/bin/pareto.js"
-  },
-  "scripts": {
-    "build": "tsc",
-    "copy-js": "node copy-js-files.js"
-  },
-  "devDependencies": {
-    "@types/node": "^20.0.0",
-    "typescript": "^5.0.0"
-  },
   "dependencies": {
-    "exupery-core-alg": "^0.1.12"
+    "exupery-core-async": "^0.2.0",
+    "exupery-core-bin": "^0.2.0",
+    "exupery-core-dev": "^0.2.0",
+    "exupery-resources": "^0.2.0",
+    "pareto-standard-operations": "^0.2.0"
   }
 }

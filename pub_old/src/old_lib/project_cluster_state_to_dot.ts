@@ -8,7 +8,7 @@ import * as d_in from "../interface/package_state"
  * @returns DOT format string for GraphViz
  */
 export function project_cluster_state_to_dot(
-    cluster_state: d_in.Cluster_State,
+    cluster_state: d_in.Cluster_Pre_Publish_State,
     $p: {
         include_legend: boolean
         show_warnings: boolean
@@ -61,7 +61,7 @@ export function project_cluster_state_to_dot(
 
         // Extract dependencies with their version strings
         const dependencies: { [name: string]: string } = {};
-        for (const [dep_name, dep_info] of Object.entries(project_state['pre-publish'].dependencies)) {
+        for (const [dep_name, dep_info] of Object.entries(project_state['level'].dependencies)) {
             dependencies[dep_name] = dep_info.version;
             
             // Track external dependencies (not in cluster)
@@ -73,25 +73,25 @@ export function project_cluster_state_to_dot(
         // Collect detailed issue information
         const issues: string[] = [];
         
-        if (project_state['pre-publish']['pre-commit']['structural'].structure[0] === 'invalid') {
+        if (project_state['level']['pre-commit']['structural'].structure[0] === 'invalid') {
             issues.push('Structure Invalid');
         }
-        if (project_state['pre-publish']['pre-commit'].test[0] === 'failure') {
-            const test_failure = project_state['pre-publish']['pre-commit'].test[1];
+        if (project_state['level']['pre-commit'].test[0] === 'failure') {
+            const test_failure = project_state['level']['pre-commit'].test[1];
             if (test_failure[0] === 'build') {
                 issues.push('Build Failed');
             } else if (test_failure[0] === 'test') {
                 issues.push('Tests Failed');
             }
         }
-        if (project_state['pre-publish'].git['staged files']) {
+        if (project_state['level'].git['staged files']) {
             issues.push('Staged Files');
         }
-        if (project_state['pre-publish'].git['dirty working tree']) {
+        if (project_state['level'].git['dirty working tree']) {
             issues.push('Dirty Tree');
         }
         // Only check sibling dependencies for "Outdated Deps" - ignore external dependencies
-        if (Object.values(project_state['pre-publish'].dependencies).some(dep => 
+        if (Object.values(project_state['level'].dependencies).some(dep => 
             dep.target[0] === 'found' && !dep.target[1]['dependency up to date']
         )) {
             issues.push('Outdated Deps');
@@ -106,7 +106,7 @@ export function project_cluster_state_to_dot(
             has_issues,
             issues,
             is_name_synced: project_state['package name in package.json'] === project_name,
-            has_unpushed_work: project_state['pre-publish'].git['unpushed commits'] || project_state['pre-publish'].git['staged files'] || project_state['pre-publish'].git['dirty working tree']
+            has_unpushed_work: project_state['level'].git['unpushed commits'] || project_state['level'].git['staged files'] || project_state['level'].git['dirty working tree']
         });
     }
 

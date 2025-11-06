@@ -7,7 +7,7 @@ import { execSync, spawn } from 'child_process';
 import { $$ as analyse_cluster } from '../../queries/analyse_cluster';
 import { project_cluster_state_to_dot } from '../../old_lib/project_cluster_state_to_dot';
 import { differs_from_published } from '../../old_lib/differs_from_published';
-import type { Package_State } from '../../interface/package_state';
+import type { Package_Pre_Publish_State } from '../../interface/package_state';
 
 // Get target directory from command line argument
 
@@ -172,7 +172,7 @@ async function main(): Promise<void> {
         console.log(`\n⏭️  Skipping detailed analysis (user choice)`);
         // Create minimal cluster state for graph generation with basic dependency info
         package_names = quick_package_list.map(pkg => pkg.name);
-        const projects_data: { [name: string]: ['not a project', null] | ['project', Package_State] } = {};
+        const projects_data: { [name: string]: ['not a project', null] | ['project', Package_Pre_Publish_State] } = {};
 
         // Get basic dependency info from package.json files (fast)
         for (const pkg of quick_package_list) {
@@ -190,7 +190,7 @@ async function main(): Promise<void> {
                         // Check if it's a sibling dependency (in the same cluster)
                         const sibling_pkg = quick_package_list.find(p => p.package_name === dep_name);
 
-                        let target_status: Package_State['pre-publish']['dependencies'][string]['target'];
+                        let target_status: Package_Pre_Publish_State['level']['dependencies'][string]['target'];
 
                         if (sibling_pkg) {
                             // For sibling dependencies, check if versions match
@@ -267,7 +267,7 @@ async function main(): Promise<void> {
             projects_data[pkg.name] = ['project', {
                 'package name in package.json': pkg.package_name,
                 'version': pkg.version,
-                'pre-publish': {
+                'level': {
                     'pre-commit': {
                         'test': ['success', null],
                         'structural': {

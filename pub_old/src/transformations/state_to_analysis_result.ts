@@ -1,4 +1,4 @@
-import { Package_State, Pre_Publish_State, Pre_Commit_State, Structural_State } from "../interface/package_state"
+import { Package_Pre_Publish_State, Pre_Publish_State, Pre_Commit_State, Structural_State } from "../interface/package_state"
 import { Package_Analysis_Result } from "../interface/temp/analysis_result"
 
 export const structural_state_to_analysis_result = (structural_state: Structural_State): Package_Analysis_Result => {
@@ -341,10 +341,10 @@ export const pre_publish_state_to_analysis_result = (pre_publish_state: Pre_Publ
     return ['composite', children]
 }
 
-export const package_state_to_analysis_result = (package_state: Package_State): Package_Analysis_Result => {
+export const package_state_to_analysis_result = (package_state: Package_Pre_Publish_State): Package_Analysis_Result => {
     
     // Add pre-publish analysis as the main child
-    const pre_publish_result = pre_publish_state_to_analysis_result(package_state['pre-publish'])
+    const pre_publish_result = pre_publish_state_to_analysis_result(package_state['level'])
     
     // Package level is just a container - no summary needed since it's the root
     return pre_publish_result

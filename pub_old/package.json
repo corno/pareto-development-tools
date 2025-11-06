@@ -1,0 +1,19 @@
+{
+  "name": "pareto-development-tools",
+  "version": "1.0.0",
+  "description": "Pareto development tools",
+  "bin": {
+    "pareto": "./dist/bin/pareto.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "copy-js": "node copy-js-files.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "exupery-core-alg": "^0.1.12"
+  }
+}

@@ -32,15 +32,15 @@ import { dot_to_svg } from "../../old_lib/dot_to_svg"
 import { cluster_state_to_html } from "../../old_lib/cluster_state_to_html"
 import type { Package_Analysis_Result, Cluster_Analysis_Result } from "../../interface/temp/analysis_result"
 
-    function getStatusColor(status: string): string {
-        switch (status) {
-            case 'success': return '\x1b[32m'  // Green
-            case 'issue': return '\x1b[31m'    // Red
-            case 'warning': return '\x1b[33m'  // Yellow
-            case 'unknown': return '\x1b[90m'  // Gray
-            default: return '\x1b[0m'
-        }
+function getStatusColor(status: string): string {
+    switch (status) {
+        case 'success': return '\x1b[32m'  // Green
+        case 'issue': return '\x1b[31m'    // Red
+        case 'warning': return '\x1b[33m'  // Yellow
+        case 'unknown': return '\x1b[90m'  // Gray
+        default: return '\x1b[0m'
     }
+}
 
 function resetColor(): string {
     return '\x1b[0m'
@@ -49,21 +49,21 @@ function resetColor(): string {
 function checkGitCleanStatus(package_dir: string): { shouldClean: boolean, ignoredFiles: string[], trackedIgnoredFiles: string[] } {
     try {
         // Check for ignored files that would be removed
-        const ignoredResult = child_process.execSync('git clean -fXd --dry-run', { 
-            cwd: package_dir, 
-            encoding: 'utf8' 
+        const ignoredResult = child_process.execSync('git clean -fXd --dry-run', {
+            cwd: package_dir,
+            encoding: 'utf8'
         }).trim()
         const ignoredFiles = ignoredResult ? ignoredResult.split('\n').filter(line => line.startsWith('Would remove')) : []
-        
+
         // Check for tracked files that are now ignored (cached files that match ignore patterns)
-        const trackedIgnoredResult = child_process.execSync('git ls-files -ci --exclude-standard', { 
-            cwd: package_dir, 
-            encoding: 'utf8' 
+        const trackedIgnoredResult = child_process.execSync('git ls-files -ci --exclude-standard', {
+            cwd: package_dir,
+            encoding: 'utf8'
         }).trim()
         const trackedIgnoredFiles = trackedIgnoredResult ? trackedIgnoredResult.split('\n').filter(line => line.trim()) : []
-        
+
         const shouldClean = ignoredFiles.length > 0 || trackedIgnoredFiles.length > 0
-        
+
         return { shouldClean, ignoredFiles, trackedIgnoredFiles }
     } catch (error) {
         // If git commands fail, assume no cleaning needed
@@ -77,7 +77,7 @@ function askUserConfirmation(): Promise<boolean> {
         input: process.stdin,
         output: process.stdout
     })
-    
+
     return new Promise((resolve) => {
         rl.question('Do you want to continue? (y/N): ', (answer) => {
             rl.close()
@@ -89,7 +89,7 @@ function askUserConfirmation(): Promise<boolean> {
 function printAnalysisResult(result: Package_Analysis_Result, depth: number = 0, category?: string): void {
     const indent = '  '.repeat(depth)
     const reset = resetColor()
-    
+
     if (result[0] === 'leaf') {
         // Leaf node - show category and outcome with status color
         const color = getStatusColor(result[1].status[0])
@@ -108,15 +108,15 @@ function printAnalysisResult(result: Package_Analysis_Result, depth: number = 0,
                 return 'success'
             }
         }
-        
+
         const status = getCompositeStatus(result)
         const iconColor = getStatusColor(status)
         const icon = status === 'issue' ? '✗' : status === 'warning' ? '⚠' : status === 'unknown' ? '?' : '✓'
         const displayCategory = category || 'composite'
-        
+
         // Use colored icon, then explicitly reset to default for text
         console.log(`${indent}${iconColor}${icon}\x1b[0m ${displayCategory}`)
-        
+
         // Print children with increased indentation
         for (const [childCategory, child] of Object.entries(result[1])) {
             printAnalysisResult(child, depth + 1, childCategory)
@@ -126,7 +126,7 @@ function printAnalysisResult(result: Package_Analysis_Result, depth: number = 0,
 
 function printClusterAnalysis(cluster_result: Cluster_Analysis_Result): void {
     const project_names = Object.keys(cluster_result).sort()
-    
+
     // Helper function to get status from Package_Analysis_Result
     const getOverallStatus = (result: Package_Analysis_Result): string => {
         if (result[0] === 'leaf') {
@@ -139,16 +139,16 @@ function printClusterAnalysis(cluster_result: Cluster_Analysis_Result): void {
             return 'success'
         }
     }
-    
+
     for (const project_name of project_names) {
         const project_result = cluster_result[project_name]
         const status = getOverallStatus(project_result)
         const color = getStatusColor(status)
         const reset = resetColor()
-        
+
         console.log(`\n${color}📦 ${project_name}${reset}`)
         console.log('─'.repeat(60))
-        
+
         // Print the analysis details
         printAnalysisResult(project_result, 1, 'package')
     }
@@ -162,17 +162,20 @@ Usage:
   pareto cluster analyse [options] <cluster-directory>
 
 Options:
-  --help                Show this help message
-  --pre-publish         Pre-publish analysis for all packages
-  --pre-commit          Pre-commit analysis for all packages
-  --structural          Structural analysis only for all packages
+  --structural
+  --test 
+  --pre-commit        
+  --pre-publish       
 
-Analysis levels (from most comprehensive to fastest):
+  --help                Show this help message
+
+Analysis levels (from fastest to most comprehensive):
+  • --structural: validating directory structure against expected layout, validating implementation against interface, 
+  • --test: --structural + building and testing
+  • --pre-commit: --test + cleaning, upgrading dependencies, installing default files
+  • --pre-publish: --pre-commit + ensuring git is clean and comparing against published version and validating that dependencies are up to date
   • (no flag): Complete package state analysis for all packages (default)
               Includes dependency graph and HTML report generation
-  • --pre-publish: Pre-publish checks for all packages
-  • --pre-commit: Pre-commit checks for all packages
-  • --structural: Structure validation only for all packages
 
 Arguments:
   cluster-directory   Path to cluster directory (required)
@@ -188,11 +191,11 @@ Examples:
 
 function openInViewer(filePath: string): void {
     console.log(`🔄 Opening file: ${filePath}`)
-    
+
     try {
         // Try different commands to open the file based on the platform
         const platform = process.platform
-        
+
         if (platform === 'darwin') {
             // macOS
             console.log('   Using macOS open command...')
@@ -206,7 +209,7 @@ function openInViewer(filePath: string): void {
         } else {
             // Linux and others - try multiple approaches to avoid snap issues
             const fileExtension = filePath.toLowerCase().split('.').pop()
-            
+
             if (fileExtension === 'svg') {
                 // For SVG files, try multiple viewers in order of preference
                 const svgViewers = [
@@ -217,7 +220,7 @@ function openInViewer(filePath: string): void {
                     'eog',               // Eye of GNOME (might be snap)
                     'xviewer'            // Alternative image viewer
                 ]
-                
+
                 let opened = false
                 for (const viewer of svgViewers) {
                     try {
@@ -232,7 +235,7 @@ function openInViewer(filePath: string): void {
                         continue
                     }
                 }
-                
+
                 if (!opened) {
                     // Last resort: try xdg-open
                     try {
@@ -244,7 +247,7 @@ function openInViewer(filePath: string): void {
                         console.log(`   ❌ xdg-open failed: ${error}`)
                     }
                 }
-                
+
                 if (!opened) {
                     console.log(`📁 Generated file: ${filePath}`)
                     console.log('   (Could not open automatically - please open manually with: firefox, inkscape, or any SVG viewer)')
@@ -257,7 +260,7 @@ function openInViewer(filePath: string): void {
                     'google-chrome',
                     'opera'
                 ]
-                
+
                 let opened = false
                 for (const browser of browsers) {
                     try {
@@ -272,7 +275,7 @@ function openInViewer(filePath: string): void {
                         continue
                     }
                 }
-                
+
                 if (!opened) {
                     // Last resort: try xdg-open
                     try {
@@ -284,7 +287,7 @@ function openInViewer(filePath: string): void {
                         console.log(`   ❌ xdg-open failed: ${error}`)
                     }
                 }
-                
+
                 if (!opened) {
                     console.log(`📁 Generated file: ${filePath}`)
                     console.log('   (Could not open automatically - please open manually with: firefox or any web browser)')
@@ -315,19 +318,19 @@ export const $$ = async (args: string[]): Promise<void> => {
         showHelp()
         process.exit(0)
     }
-    
+
     // Parse analysis level flags - removed --all flag, default is full analysis
     const pre_publish_analysis = args.includes('--pre-publish')
     const pre_commit_analysis = args.includes('--pre-commit')
     const structural_analysis = args.includes('--structural')
-    
+
     // Validate that only one analysis level is specified
     const analysis_flags = [pre_publish_analysis, pre_commit_analysis, structural_analysis].filter(Boolean)
     if (analysis_flags.length > 1) {
         console.error('Error: Please specify only one analysis level (--pre-publish, --pre-commit, or --structural)')
         process.exit(1)
     }
-    
+
     // If no analysis flags specified, inform user about available options
     if (analysis_flags.length === 0) {
         console.log('Running full cluster analysis (all checks for all packages)...')
@@ -338,7 +341,7 @@ export const $$ = async (args: string[]): Promise<void> => {
         console.log('  (no flag)      : Complete package analysis for all packages with graph and table generation (default)')
         console.log('')
     }
-    
+
     // Get cluster directory (non-flag arguments) - path is required
     const non_flag_args = args.filter(arg => !arg.startsWith('--'))
     if (non_flag_args.length === 0) {
@@ -347,13 +350,13 @@ export const $$ = async (args: string[]): Promise<void> => {
         console.error('Expected structure: <cluster-path>/<package>/pub/package.json')
         process.exit(1)
     }
-    
+
     const cluster_dir = path.resolve(non_flag_args[0])
-    
+
     try {
         console.log(`Analyzing cluster: ${path.basename(cluster_dir)}`)
         console.log('='.repeat(60))
-        
+
         // Check Git clean status for all packages BEFORE analysis (for all modes except --structural)
         if (!structural_analysis) {
             // Do a quick directory scan to find packages before full analysis
@@ -361,30 +364,30 @@ export const $$ = async (args: string[]): Promise<void> => {
                 console.error(`Error: Directory does not exist: ${cluster_dir}`)
                 process.exit(1)
             }
-            
+
             const entries = fs.readdirSync(cluster_dir, { withFileTypes: true })
             const packageDirs = entries.filter(entry => entry.isDirectory()).map(entry => entry.name)
-            
+
             let anyPackageNeedsCleaning = false
-            
+
             console.log('⚠ Checking Git workspace cleanup status for all packages...\n')
-            
+
             for (const packageName of packageDirs) {
                 const package_path = path.join(cluster_dir, packageName)
                 // Check if it looks like a package (has pub/package.json)
                 const pubPackageJson = path.join(package_path, 'pub', 'package.json')
                 if (fs.existsSync(pubPackageJson)) {
                     const cleanStatus = checkGitCleanStatus(package_path)
-                    
+
                     if (cleanStatus.shouldClean) {
                         anyPackageNeedsCleaning = true
                         console.log(`📦 ${packageName}:`)
-                        
+
                         if (cleanStatus.ignoredFiles.length > 0) {
                             console.log('  Files/directories that would be removed (ignored files):')
                             cleanStatus.ignoredFiles.forEach(file => console.log(`    ${file}`))
                         }
-                        
+
                         if (cleanStatus.trackedIgnoredFiles.length > 0) {
                             console.log('  Tracked files that are now ignored:')
                             cleanStatus.trackedIgnoredFiles.forEach(file => console.log(`    ${file}`))
@@ -393,7 +396,7 @@ export const $$ = async (args: string[]): Promise<void> => {
                     }
                 }
             }
-            
+
             if (anyPackageNeedsCleaning) {
                 const shouldContinue = await askUserConfirmation()
                 if (!shouldContinue) {
@@ -403,30 +406,30 @@ export const $$ = async (args: string[]): Promise<void> => {
                 console.log('')
             }
         }
-        
+
         // Now perform the full analysis
         const cluster_state = analyse_cluster({
             'cluster path': cluster_dir
         })
-        
+
         // Check if it's actually a cluster
         if (cluster_state[0] !== 'cluster') {
             console.error(`Error: Directory is not a valid cluster: ${cluster_dir}`)
             process.exit(1)
         }
-        
+
         // Transform each project to analysis result
         const cluster_analysis: Cluster_Analysis_Result = {}
         let overall_has_issue = false
         let overall_has_warning = false
         let overall_has_unknown = false
-        
+
         for (const [project_name, project_data] of Object.entries(cluster_state[1].projects)) {
             if (project_data[0] === 'project') {
                 const package_state = project_data[1]
                 const analysis_result = package_state_to_analysis_result(package_state)
                 cluster_analysis[project_name] = analysis_result
-                
+
                 // Helper function to get status from Package_Analysis_Result
                 const getOverallStatus = (result: Package_Analysis_Result): string => {
                     if (result[0] === 'leaf') {
@@ -439,7 +442,7 @@ export const $$ = async (args: string[]): Promise<void> => {
                         return 'success'
                     }
                 }
-                
+
                 // Track overall status
                 const status = getOverallStatus(analysis_result)
                 if (status === 'issue') {
@@ -458,12 +461,12 @@ export const $$ = async (args: string[]): Promise<void> => {
                 overall_has_warning = true
             }
         }
-        
+
         // Print colored cluster analysis
         printClusterAnalysis(cluster_analysis)
-        
+
         console.log('\n' + '='.repeat(60))
-        
+
         // Helper function to get status from Package_Analysis_Result
         const getOverallStatus = (result: Package_Analysis_Result): string => {
             if (result[0] === 'leaf') {
@@ -476,14 +479,14 @@ export const $$ = async (args: string[]): Promise<void> => {
                 return 'success'
             }
         }
-        
+
         // Summary
         const total_projects = Object.keys(cluster_analysis).length
         const issue_count = Object.values(cluster_analysis).filter(p => getOverallStatus(p) === 'issue').length
         const warning_count = Object.values(cluster_analysis).filter(p => getOverallStatus(p) === 'warning').length
         const unknown_count = Object.values(cluster_analysis).filter(p => getOverallStatus(p) === 'unknown').length
         const success_count = Object.values(cluster_analysis).filter(p => getOverallStatus(p) === 'success').length
-        
+
         console.log(`Summary: ${total_projects} project(s)`)
         console.log(`${getStatusColor('success')}✓ ${success_count} successful${resetColor()}`)
         if (warning_count > 0) {
@@ -495,13 +498,13 @@ export const $$ = async (args: string[]): Promise<void> => {
         if (issue_count > 0) {
             console.log(`${getStatusColor('issue')}✗ ${issue_count} with issues${resetColor()}`)
         }
-        
+
         console.log('='.repeat(60))
-        
+
         // Generate graph and table automatically for full analysis (when no level flags specified)
         if (analysis_flags.length === 0) {
             console.log('')
-            
+
             // Generate dependency graph
             try {
                 console.log('🔄 Generating dependency graph...')
@@ -510,42 +513,42 @@ export const $$ = async (args: string[]): Promise<void> => {
                     show_warnings: false,
                     'time stamp': new Date().toISOString()
                 })
-                
+
                 const svg_content = dot_to_svg(dot_content)
                 const graph_filename = `${path.basename(cluster_dir)}-dependency-graph.svg`
                 const graph_path = path.join(process.cwd(), graph_filename)
-                
+
                 fs.writeFileSync(graph_path, svg_content)
                 console.log(`✅ Dependency graph generated: ${graph_filename}`)
-                
+
                 // Open in viewer
                 openInViewer(graph_path)
             } catch (error) {
                 console.error(`${getStatusColor('issue')}✗ Failed to generate dependency graph: ${error}${resetColor()}`)
             }
-            
+
             // Generate HTML table report
             try {
                 console.log('🔄 Generating HTML table report...')
                 const html_content = cluster_state_to_html(cluster_state, {
                     'time stamp': new Date().toISOString(),
                 })
-                
+
                 const table_filename = `${path.basename(cluster_dir)}-analysis-report.html`
                 const table_path = path.join(process.cwd(), table_filename)
-                
+
                 fs.writeFileSync(table_path, html_content)
                 console.log(`✅ HTML table report generated: ${table_filename}`)
-                
+
                 // Open in viewer
                 openInViewer(table_path)
             } catch (error) {
                 console.error(`${getStatusColor('issue')}✗ Failed to generate HTML table report: ${error}${resetColor()}`)
             }
-            
+
             console.log('')
         }
-        
+
         // Exit with appropriate code based on overall status
         if (issue_count > 0) {
             console.log(`${getStatusColor('issue')}✗ Cluster analysis complete: Has issues${resetColor()}`)
@@ -560,7 +563,7 @@ export const $$ = async (args: string[]): Promise<void> => {
             console.log(`${getStatusColor('success')}✓ Cluster analysis complete: All checks passed${resetColor()}`)
             process.exit(0)
         }
-        
+
     } catch (error) {
         console.error(`Error analyzing cluster: ${error}`)
         process.exit(1)

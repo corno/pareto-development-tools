@@ -1,22 +1,28 @@
 
-export type Cluster_State =
-    | ['not found', null]
-    | ['cluster', {
-        'projects': {
-            [node_name: string]:
-            | ['not a project', null]
-            | ['project', Package_State]
-        },
-        'topological order':
-        | ['circular dependencies', null]
-        | ['valid order', string[]]
-    }]
+export namespace Basics {
 
-export type Package_State = {
-    'package name in package.json': string
-    'version': null | string
-    'pre-publish': Pre_Publish_State
+    export type Cluste_State<Level> =
+        | ['not found', null]
+        | ['cluster', {
+            'projects': {
+                [node_name: string]:
+                | ['not a project', null]
+                | ['project', Package_State<Level>]
+            },
+            'topological order':
+            | ['circular dependencies', null]
+            | ['valid order', string[]]
+        }]
+
+    export type Package_State<Level> = {
+        'package name in package.json': string
+        'version': null | string
+        'level': Level
+    }
 }
+
+
+
 
 export type Pre_Publish_State = {
     'pre-commit': Pre_Commit_State
@@ -85,5 +91,33 @@ export type Structural_State = {
         }]
     )
 }
+
+
+
+
+
+
+
+export type Cluster_Pre_Publish_State = Basics.Cluste_State<Pre_Publish_State>
+
+export type Package_Pre_Publish_State = Basics.Package_State<Pre_Publish_State>
+
+
+
+
+
+export type Cluster_Pre_Commit_State = Basics.Cluste_State<Pre_Commit_State>
+
+export type Package_Pre_Commit_State = Basics.Package_State<Pre_Commit_State>
+
+
+
+
+
+
+export type Cluster_Structural_State = Basics.Cluste_State<Structural_State>
+
+export type Package_Structural_State = Basics.Package_State<Structural_State>
+
 
 
