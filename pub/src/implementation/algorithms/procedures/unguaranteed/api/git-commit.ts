@@ -38,7 +38,6 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> =
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
-            _ed.log_debug_message(`starting commit`, () => {})
             pu_conditional_async(
                 qu_transform(
                     qu_git_is_clean({
