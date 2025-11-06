@@ -56,8 +56,6 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                             on_success()
                         },
                         ($) => {
-                            _ed.log_debug_message(`project git commit failed`, () => { })
-
                             const eqe_to_string = ($: d_eqe.Error): string => {
                                 return _ea.cc($, ($) => {
                                     switch ($[0]) {

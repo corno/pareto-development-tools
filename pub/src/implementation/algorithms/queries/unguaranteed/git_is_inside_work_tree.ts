@@ -54,6 +54,7 @@ export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Erro
                                 if ($.stderr === `fatal: not a git repository (or any of the parent directories): .git`) {
                                     on_success(false)
                                 } else {
+                                    _ed.log_debug_message(`>${$.stderr}<`, () => { })
                                     on_exception(['unexpected output', $.stderr])
                                 }
                             })
