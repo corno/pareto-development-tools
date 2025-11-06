@@ -73,8 +73,8 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                             $.map(($, key): string => {
                                 return _ea.cc($, ($) => {
                                     switch ($[0]) {
-                                        case 'error building pub': return _ea.ss($, ($) => `${key}/pub:${t_tsc_error_to_string($)}`)
-                                        case 'error building test': return _ea.ss($, ($) => `${key}/test:${t_tsc_error_to_string($)}`)
+                                        case 'error building pub': return _ea.ss($, ($) => `${key}/pub:\n${t_tsc_error_to_string($)}`)
+                                        case 'error building test': return _ea.ss($, ($) => `${key}/test:\n${t_tsc_error_to_string($)}`)
                                         default: return _ea.au($[0])
                                     }
                                 })

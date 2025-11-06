@@ -2,3 +2,8 @@
 /pub/dist
 /test/node_modules
 /test/dist
+
+/pub_old/node_modules
+/pub_old/dist
+/test_old/node_modules
+/test_old/dist

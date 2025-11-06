@@ -7,6 +7,8 @@ import * as _ea from 'exupery-core-alg'
 
 import { $$ as pu_epe } from "exupery-resources/dist/implementation/algorithms/procedures/unguaranteed/execute_smelly_procedure_executable"
 
+import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
+
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
 
 export type Parameters = {
@@ -26,10 +28,18 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> =
         'execute': (on_success, on_exception) => {
             pu_epe({
                 'program': `tsc`,
-                'args': $p.path.transform(($) => _ea.array_literal([
-                    `--project`,
-                    $,
-                ]), () => _ea.array_literal([])),
+                'args': op_flatten(_ea.array_literal([
+                    $p.path.transform(
+                        ($) => _ea.array_literal([
+                            `--project`,
+                            $,
+                        ]),
+                        () => _ea.array_literal([])
+                    ),
+                    _ea.array_literal([
+                        `--pretty`,
+                    ]),
+                ])),
             }).__start(
                 on_success,
                 ($) => {
