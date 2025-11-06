@@ -6,22 +6,18 @@ import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
 import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
-import * as d_iwt from "./git_is_inside_work_tree"
 
 import { $$ as q_exec } from "exupery-resources/dist/implementation/algorithms/queries/unguaranteed/execute_query_executable"
-
-import { $$ as qu_is_inside_work_tree } from "./git_is_inside_work_tree"
-
-
 
 export type Parameters = {
     'path': string,
 }
 
 export type Error =
-    | ['could not determine git status', d_eqe.Error]
-    | ['not a git repository', null]
-    | ['unknown issue', d_iwt.Error]
+    | ['could not run git command', {
+        'message': string
+    }]
+    | ['unexpected output', string]
 
 export type Result = boolean
 
@@ -35,27 +31,33 @@ export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Erro
                 'args': _ea.array_literal([
                     `-C`,
                     $p.path,
-                    `status`,
-                    `--porcelain`,
+                    `rev-parse`,
+                    `--is-inside-work-tree`,
                 ]),
             }).__start(
                 ($) => {
-                    on_success($.stdout === ``)
+                    if ($.stdout === `true`) {
+                        on_success(true)
+                    } else {
+                        on_exception(['unexpected output', $.stdout])
+                    }
                 },
                 ($) => {
-                    const err = $
-                    qu_is_inside_work_tree({'path': $p.path}).__start(
-                        ($) => {
-                            if (!$) {
-                                on_exception(['not a git repository', null])
-                            } else {
-                                on_exception(['could not determine git status', err])
-                            }
-                        },
-                        ($) => {
-                            on_exception(['unknown issue', $])
+                    _ea.cc($, ($) => {
+                        switch ($[0]) {
+                            case 'failed to spawn': return _ea.ss($, ($) => {
+                                on_exception(['could not run git command', {
+                                    'message': $.message
+                                }])
+                            })
+                            case 'non zero exit code': return _ea.ss($, ($) => {
+                                if ($.stderr === `fatal: not a git repository (or any of the parent directories): .git`) {
+                                    on_success(false)
+                                }
+                            })
+                            default: return _ea.au($[0])
                         }
-                    )
+                    })
                 }
             )
         }

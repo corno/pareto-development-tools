@@ -6,11 +6,7 @@ import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
 import { $$ as p_log_error } from "exupery-resources/dist/implementation/algorithms/procedures/guaranteed/log_error"
-import { $$ as p_exec } from "exupery-resources/dist/implementation/algorithms/procedures/unguaranteed/execute_procedure_executable"
 import { $$ as p_api_assert_clean_package } from "../../api/git-assert-clean"
-
-import { $$ as op_remove_first } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/list/remove_first_element"
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 const op_dictionary_size = <T>($: _et.Dictionary<T>): number => {
     let count = 0
@@ -24,22 +20,6 @@ const op_dictionary_size = <T>($: _et.Dictionary<T>): number => {
 
 import { Project_Parameters } from '../../../../../../interface/project_command'
 
-const log_and_exit = (
-    on_exception: ($: _eb.Error) => void,
-    message: _et.Array<string>,
-): () => void => {
-    return () => {
-        p_log_error({
-            'lines': message
-        }).__start(
-            () => {
-                on_exception({
-                    'exit code': 1,
-                })
-            },
-        )
-    }
-}
 
 export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error> = (
     $p,

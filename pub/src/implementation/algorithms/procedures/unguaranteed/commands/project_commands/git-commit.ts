@@ -75,8 +75,21 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                             $.map(($, key) => {
                                 _ea.cc($, ($) => {
                                     switch ($[0]) {
-                                        case 'could not determine git status': return _ea.ss($, ($) => {
-                                            _ed.log_debug_message(`${key}: could not determine git status: ${eqe_to_string($)}`, () => { })
+                                        case 'asserting git not clean': return _ea.ss($, ($) => {
+                                            _ed.log_debug_message(`${key}: error while asserting git is not clean: ${_ea.cc($, ($) => {
+                                                switch ($[0]) {
+                                                    case 'not a git repository': return _ea.ss($, ($) => `not a git rep`)
+                                                    case 'could not determine git status': return _ea.ss($, ($) => `could not determine status, ${eqe_to_string($)}`)
+                                                    case 'unknown issue': return _ea.ss($, ($) => `unknown issue: ${_ea.cc($, ($) => {
+                                                        switch ($[0]) {
+                                                            case 'could not run git command': return _ea.ss($, ($) => `could not run git command: ${$.message}`)
+                                                            case 'unexpected output': return _ea.ss($, ($) => `unexpected output: ${$}`)
+                                                            default: return _ea.au($[0])
+                                                        }
+                                                    })}`)
+                                                    default: return _ea.au($[0])
+                                                }
+                                            })}`, () => { })
                                         })
                                         case 'could not stage': return _ea.ss($, ($) => {
                                             _ed.log_debug_message(`${key}: could not stage: ${eqe_to_string($)}`, () => { })
@@ -87,9 +100,6 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                                         case 'could not push': return _ea.ss($, ($) => {
                                             _ed.log_debug_message(`${key}: could not push: ${eqe_to_string($)}`, () => { })
                                         })
-                                        // case 'working directory is not clean': return _ea.ss($, ($) => {
-                                        //     _ed.log_debug_message(`working dir not clean`, () => {})
-                                        // })
                                         default: return _ea.au($[0])
                                     }
                                 })

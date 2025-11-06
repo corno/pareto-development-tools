@@ -8,6 +8,7 @@ import * as _ea from 'exupery-core-alg'
 import { $$ as pu_epe } from "exupery-resources/dist/implementation/algorithms/procedures/unguaranteed/execute_procedure_executable"
 
 import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
+import * as d_gic from "../../../queries/unguaranteed/git_is_clean"
 
 import { $$ as qu_git_is_clean } from "../../../queries/unguaranteed/git_is_clean"
 import { $$ as qu_transform } from "../../../../../temp/transform_query"
@@ -26,7 +27,7 @@ export type Parameters = {
 }
 
 export type Error =
-    | ['could not determine git status', d_eqe.Error]
+    | ['asserting git not clean', d_gic.Error]
     | ['could not stage', d_eqe.Error]
     | ['could not commit', d_eqe.Error]
     | ['could not push', d_eqe.Error]
@@ -84,7 +85,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> =
                 ($) => {
                     on_exception(_ea.cc($, ($) => {
                         switch ($[0]) {
-                            case 'precondition': return _ea.ss($, ($) => $)
+                            case 'precondition': return _ea.ss($, ($) => ['asserting git not clean', $])
                             case 'procedure': return _ea.ss($, ($) => _ea.cc($, ($) => {
                                 switch ($[0]) {
                                     case 'step1': return _ea.ss($, ($) => ['could not stage', $])
