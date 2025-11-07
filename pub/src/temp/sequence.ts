@@ -23,7 +23,6 @@ export const $$ = <Err>(
     return {
         __start: (on_success, on_exception) => {
             const as_list = op_dictionary_to_list_based_on_insertion_order(steps)
-            const length = as_list.__get_length()
 
             let current = 0
 
