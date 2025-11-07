@@ -12,10 +12,11 @@ import { $$ as q_exec } from "exupery-resources/dist/implementation/algorithms/q
 
 import { $$ as qu_is_inside_work_tree } from "./git_is_inside_work_tree"
 
+import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 
 export type Parameters = {
-    'path': string,
+    'path': _et.Optional_Value<string>,
 }
 
 export type Error =
@@ -32,12 +33,19 @@ export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Erro
         'execute': (on_success, on_exception) => {
             q_exec({
                 'program': `git`,
-                'args': _ea.array_literal([
-                    `-C`,
-                    $p.path,
-                    `status`,
-                    `--porcelain`,
-                ]),
+                'args': op_flatten(_ea.array_literal([
+                    $p.path.transform(
+                        ($) => _ea.array_literal([
+                            `-C`,
+                            $,
+                        ]),
+                        () => _ea.array_literal([])
+                    ),
+                    _ea.array_literal([
+                        `status`,
+                        `--porcelain`,
+                    ])
+                ])),
             }).__start(
                 ($) => {
                     on_success($.stdout === ``)

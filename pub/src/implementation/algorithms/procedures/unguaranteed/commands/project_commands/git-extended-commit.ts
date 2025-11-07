@@ -44,7 +44,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                     do_procedure_dict(
                         $p.packages.map(($, key) => {
                             return p_api_git_commit({
-                                'path': key,
+                                'path': _ea.set(key),
                                 'commit message': commit_message,
                                 'stage all changes': true,
                                 'push after commit': true,
@@ -63,7 +63,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                                             return `failed to spawn process: ${$.message}`
                                         })
                                         case 'non zero exit code': return _ea.ss($, ($) => {
-                                            return `non zero exit code: ${$['exit code'].transform(($) => ``+$, () => `-`)}>${$.stderr}`
+                                            return `non zero exit code: ${$['exit code'].transform(($) => `` + $, () => `-`)}>${$.stderr}`
                                         })
                                         default: return _ea.au($[0])
                                     }

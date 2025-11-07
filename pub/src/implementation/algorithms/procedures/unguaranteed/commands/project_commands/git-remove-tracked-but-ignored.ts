@@ -21,7 +21,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
             do_procedure_dict(
                 $p.packages.map(($, key) => {
                     return p_api_git_remove_tracked_but_ignored({
-                        'path': key,
+                        'path': _ea.set(key),
                     })
                 }),
             ).__start(

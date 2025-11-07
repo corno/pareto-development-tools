@@ -20,7 +20,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
             do_procedure_dict(
                 $p.packages.map(($, key) => {
                     return p_api_assert_clean_package({
-                        'path': key,
+                        'path': _ea.set(key),
                     })
                 }),
             ).__start(

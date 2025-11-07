@@ -40,7 +40,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.
             op_remove_first($p.arguments).transform(
                 ($) => {
                     op_api_assert_clean({
-                        'path': $.element,
+                        'path': _ea.set($.element),
                     }).__start(
                         on_success,
                         () => ({

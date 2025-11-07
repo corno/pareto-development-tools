@@ -17,10 +17,10 @@ import { $$ as pu_conditional_async } from "../../../../../temp/conditional_asyn
 import { $$ as pu_conditional_sync } from "../../../../../temp/conditional_sync"
 import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
 
-import * as d_sequence from "../../../../../temp/sequence"
+import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 export type Parameters = {
-    'path': string,
+    'path': _et.Optional_Value<string>,
     'commit message': string
     'stage all changes': boolean,
     'push after commit': boolean,
@@ -50,33 +50,54 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> =
                         $p['stage all changes'],
                         pu_epe({
                             'program': `git`,
-                            'args': _ea.array_literal([
-                                `-C`,
-                                $p.path,
-                                `add`,
-                                `--all`,
-                            ]),
+                            'args': op_flatten(_ea.array_literal([
+                                $p.path.transform(
+                                    ($) => _ea.array_literal([
+                                        `-C`,
+                                        $,
+                                    ]),
+                                    () => _ea.array_literal([])
+                                ),
+                                _ea.array_literal([
+                                    `add`,
+                                    `--all`,
+                                ])
+                            ])),
                         })
                     ),
                     pu_epe({
                         'program': `git`,
-                        'args': _ea.array_literal([
-                            `-C`,
-                            $p.path,
-                            `commit`,
-                            `-m`,
-                            $p['commit message'],
-                        ]),
+                        'args': op_flatten(_ea.array_literal([
+                            $p.path.transform(
+                                ($) => _ea.array_literal([
+                                    `-C`,
+                                    $,
+                                ]),
+                                () => _ea.array_literal([])
+                            ),
+                            _ea.array_literal([
+                                `commit`,
+                                `-m`,
+                                $p['commit message'],
+                            ])
+                        ])),
                     }),
                     pu_conditional_sync(
                         $p['push after commit'],
                         pu_epe({
                             'program': `git`,
-                            'args': _ea.array_literal([
-                                `-C`,
-                                $p.path,
-                                `push`,
-                            ]),
+                            'args': op_flatten(_ea.array_literal([
+                                $p.path.transform(
+                                    ($) => _ea.array_literal([
+                                        `-C`,
+                                        $,
+                                    ]),
+                                    () => _ea.array_literal([])
+                                ),
+                                _ea.array_literal([
+                                    `push`,
+                                ])
+                            ]))
                         })
                     )
                 ),

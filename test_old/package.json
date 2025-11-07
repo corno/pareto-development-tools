@@ -1,7 +1,4 @@
 {
-  "scripts": {
-    "test": "ts-node src/bin/test.ts"
-  },
   "dependencies": {
     "exupery-core-alg": "^0.1.12",
     "pareto-development-tools": "file:../pub",

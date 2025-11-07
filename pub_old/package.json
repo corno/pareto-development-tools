@@ -5,10 +5,6 @@
   "bin": {
     "pareto": "./dist/bin/pareto.js"
   },
-  "scripts": {
-    "build": "tsc",
-    "copy-js": "node copy-js-files.js"
-  },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "typescript": "^5.0.0"

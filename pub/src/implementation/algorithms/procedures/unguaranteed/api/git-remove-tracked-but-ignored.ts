@@ -16,8 +16,10 @@ import { $$ as pu_conditional_async } from "../../../../../temp/conditional_asyn
 import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
 
 export type Parameters = {
-    'path': string,
+    'path': _et.Optional_Value<string>,
 }
+
+import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 export type Error =
     | ['not clean', null]
@@ -37,23 +39,37 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> =
                 }),
                 pu_epe({
                     'program': `git`,
-                    'args': _ea.array_literal([
-                        `-C`,
-                        $p.path,
-                        `rm`,
-                        `-r`,
-                        `--cached`,
-                        `.`
-                    ]),
+                    'args': op_flatten(_ea.array_literal([
+                        $p.path.transform(
+                            ($) => _ea.array_literal([
+                                `-C`,
+                                $,
+                            ]),
+                            () => _ea.array_literal([])
+                        ),
+                        _ea.array_literal([
+                            `rm`,
+                            `-r`,
+                            `--cached`,
+                            `.`
+                        ])
+                    ]))
                 }),
                 pu_epe({
                     'program': `git`,
-                    'args': _ea.array_literal([
-                        `-C`,
-                        $p.path,
-                        `add`,
-                        `--all`,
-                    ]),
+                    'args': op_flatten(_ea.array_literal([
+                        $p.path.transform(
+                            ($) => _ea.array_literal([
+                                `-C`,
+                                $,
+                            ]),
+                            () => _ea.array_literal([])
+                        ),
+                        _ea.array_literal([
+                            `add`,
+                            `--all`,
+                        ])
+                    ]))
                 }),
             ).__start(
                 on_success,
@@ -62,7 +78,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> =
                         switch ($[0]) {
                             case 'step1': return _ea.ss($, ($) => _ea.cc($, ($) => {
                                 switch ($[0]) {
-                                    case 'working directory is not clean':return _ea.ss($, ($) => ['not clean', null])
+                                    case 'working directory is not clean': return _ea.ss($, ($) => ['not clean', null])
                                     case 'unexpected error': return _ea.ss($, ($) => ['unexpected error', $])
                                     default: return _ea.au($[0])
                                 }

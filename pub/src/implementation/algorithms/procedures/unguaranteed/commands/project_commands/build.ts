@@ -18,22 +18,6 @@ import { $$ as p_write_to_stderr } from "exupery-resources/dist/implementation/a
 import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/dictionary/to_list_sorted_by_code_point"
 import { $$ as op_join } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/text/join_list_of_texts"
 
-
-const log_and_exit = (
-    on_exception: ($: _eb.Error) => void,
-    data: string,
-): () => void => {
-    return () => {
-        p_write_to_stderr(data).__start(
-            () => {
-                on_exception({
-                    'exit code': 1,
-                })
-            },
-        )
-    }
-}
-
 export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error> = (
     $p,
 ) => {

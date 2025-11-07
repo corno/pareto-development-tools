@@ -10,7 +10,7 @@ import { $$ as q_is_git_clean } from "../../../queries/unguaranteed/git_is_clean
 import * as d_gic from "../../../queries/unguaranteed/git_is_clean"
 
 export type Parameters = {
-    'path': string,
+    'path': _et.Optional_Value<string>,
 }
 
 export type Error =
