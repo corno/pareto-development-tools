@@ -6,8 +6,8 @@ export const $$ = <Procedure_Error>(
     precondition: boolean,
     procedure: _easync.Unguaranteed_Procedure_Promise<Procedure_Error>,
 ): _easync.Unguaranteed_Procedure_Promise<Procedure_Error> => {
-    return {
-        __start: (on_success, on_exception) => {
+    return _easync.__create_unguaranteed_procedure({
+        'execute': (on_success, on_exception) => {
             if (precondition) {
                 procedure.__start(
                     on_success,
@@ -16,7 +16,6 @@ export const $$ = <Procedure_Error>(
             } else {
                 on_success()
             }
-
         }
-    }
+    })
 }

@@ -12,8 +12,8 @@ export const $$ = <Step_1_Error, Step_2_Error, Step_3_Error>(
     step_2: _easync.Unguaranteed_Procedure_Promise<Step_2_Error>,
     step_3: _easync.Unguaranteed_Procedure_Promise<Step_3_Error>,
 ): _easync.Unguaranteed_Procedure_Promise<Error<Step_1_Error, Step_2_Error, Step_3_Error>> => {
-    return {
-        __start: (on_success, on_exception) => {
+    return _easync.__create_unguaranteed_procedure({
+        'execute': (on_success, on_exception) => {
             step_1.__start(
                 () => {
                     step_2.__start(
@@ -35,5 +35,5 @@ export const $$ = <Step_1_Error, Step_2_Error, Step_3_Error>(
                 }
             )
         }
-    }
+    })
 }

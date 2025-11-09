@@ -15,8 +15,8 @@ export const $$ = <Precondition_Error, Procedure_Error>(
     preconditions: _et.Dictionary<_easync.Basic_Unguaranteed_Query_Promise<boolean, Precondition_Error>>,
     procedure: _easync.Unguaranteed_Procedure_Promise<Procedure_Error>,
 ): _easync.Unguaranteed_Procedure_Promise<Conditional_Error<Precondition_Error, Procedure_Error>> => {
-    return {
-        __start: (on_success, on_exception) => {
+    return _easync.__create_unguaranteed_procedure({
+        'execute': (on_success, on_exception) => {
             do_query_dictionary(
                 preconditions,
             ).__start(
@@ -40,5 +40,5 @@ export const $$ = <Precondition_Error, Procedure_Error>(
                 }
             )
         }
-    }
+    })
 }

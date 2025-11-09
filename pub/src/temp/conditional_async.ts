@@ -15,8 +15,8 @@ export const $$ = <Precondition_Error, Procedure_Error>(
     precondition: _easync.Basic_Unguaranteed_Query_Promise<boolean, Precondition_Error>,
     procedure: _easync.Unguaranteed_Procedure_Promise<Procedure_Error>,
 ): _easync.Unguaranteed_Procedure_Promise<Conditional_Error<Precondition_Error, Procedure_Error>> => {
-    return {
-        __start: (on_success, on_exception) => {
+    return _easync.__create_unguaranteed_procedure({
+        'execute': (on_success, on_exception) => {
             precondition.__start(
                 ($) => {
                     if ($) {
@@ -36,7 +36,6 @@ export const $$ = <Precondition_Error, Procedure_Error>(
                     on_exception(['precondition', $])
                 }
             )
-
         }
-    }
+    })
 }

@@ -11,8 +11,8 @@ export const $$ = <Assertion_Error, Procedure_Error>(
     assertion: _easync.Unguaranteed_Query_Promise<boolean, Assertion_Error>,
     procedure: _easync.Unguaranteed_Procedure_Promise<Procedure_Error>,
 ): _easync.Unguaranteed_Procedure_Promise<Error<Assertion_Error, Procedure_Error>> => {
-    return {
-        __start: (on_success, on_exception) => {
+    return _easync.__create_unguaranteed_procedure({
+        'execute': (on_success, on_exception) => {
             assertion.__start(
                 ($) => {
                     if ($) {
@@ -30,7 +30,6 @@ export const $$ = <Assertion_Error, Procedure_Error>(
                     on_exception(['assertion error', $])
                 }
             )
-
         }
-    }
+    })
 }

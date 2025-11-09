@@ -20,8 +20,8 @@ export type Error<Err> = {
 export const $$ = <Err>(
     steps: _et.Dictionary<_easync.Unguaranteed_Procedure_Promise<Err>>,
 ): _easync.Unguaranteed_Procedure_Promise<Error<Err>> => {
-    return {
-        __start: (on_success, on_exception) => {
+    return _easync.__create_unguaranteed_procedure({
+        'execute': (on_success, on_exception) => {
             const as_list = op_dictionary_to_list_based_on_insertion_order(steps)
 
             let current = 0
@@ -50,5 +50,5 @@ export const $$ = <Err>(
             }
             do_next()
         }
-    }
+    })
 }

@@ -27,43 +27,34 @@ export type Error =
 export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
     $p,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
-        'execute': (on_success, on_exception) => {
-            pu_epe(
-                {
-                    'program': `npm`,
-                    'args': op_flatten(_ea.array_literal([
-                        $p.path.transform(
-                            ($) => _ea.array_literal([
-                                `--prefix`,
-                                $,
-                            ]),
-                            () => _ea.array_literal([])
-                        ),
-                        _ea.cc($p.operation, ($) => {
-                            switch ($[0]) {
-                                case 'update': return _ea.ss($, ($) => {
-                                    return _ea.array_literal([
-                                        `update`,
-                                    ])
-                                })
-                                case 'install': return _ea.ss($, ($) => {
-                                    return _ea.array_literal([
-                                        `install`,
-                                    ])
-                                })
-                                default: return _ea.au($[0])
-                            }
+    return pu_epe(
+        {
+            'program': `npm`,
+            'args': op_flatten(_ea.array_literal([
+                $p.path.transform(
+                    ($) => _ea.array_literal([
+                        `--prefix`,
+                        $,
+                    ]),
+                    () => _ea.array_literal([])
+                ),
+                _ea.cc($p.operation, ($) => {
+                    switch ($[0]) {
+                        case 'update': return _ea.ss($, ($) => {
+                            return _ea.array_literal([
+                                `update`,
+                            ])
                         })
-                    ])),
-                },
-                null,
-            ).__start(
-                on_success,
-                ($) => {
-                    on_exception(['error while running tsc', $])
-                },
-            )
-        }
-    })
+                        case 'install': return _ea.ss($, ($) => {
+                            return _ea.array_literal([
+                                `install`,
+                            ])
+                        })
+                        default: return _ea.au($[0])
+                    }
+                })
+            ])),
+        },
+        null,
+    ).transform_error(($) => ['error while running tsc', $])
 }
