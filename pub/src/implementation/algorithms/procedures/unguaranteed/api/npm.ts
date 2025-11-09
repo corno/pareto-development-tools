@@ -56,5 +56,5 @@ export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
             ])),
         },
         null,
-    ).transform_error(($) => ['error while running tsc', $])
+    ).map_error(($) => ['error while running tsc', $])
 }

@@ -31,74 +31,65 @@ export type Error =
 export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
     $p,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
-        'execute': (on_success, on_exception) => {
-            pu_three_steps(
-                pu_assert_git_is_clean(
-                    {
-                        'path': $p.path,
-                    },
-                    null,
-                ),
-                pu_epe(
-                    {
-                        'program': `git`,
-                        'args': op_flatten(_ea.array_literal([
-                            $p.path.transform(
-                                ($) => _ea.array_literal([
-                                    `-C`,
-                                    $,
-                                ]),
-                                () => _ea.array_literal([])
-                            ),
-                            _ea.array_literal([
-                                `rm`,
-                                `-r`,
-                                `--cached`,
-                                `.`
-                            ])
-                        ]))
-                    },
-                    null,
-                ),
-                pu_epe(
-                    {
-                        'program': `git`,
-                        'args': op_flatten(_ea.array_literal([
-                            $p.path.transform(
-                                ($) => _ea.array_literal([
-                                    `-C`,
-                                    $,
-                                ]),
-                                () => _ea.array_literal([])
-                            ),
-                            _ea.array_literal([
-                                `add`,
-                                `--all`,
-                            ])
-                        ]))
-                    },
-                    null,
-                ),
-            ).__start(
-                on_success,
-                ($) => {
-                    on_exception(_ea.cc($, ($) => {
-                        switch ($[0]) {
-                            case 'step1': return _ea.ss($, ($) => _ea.cc($, ($) => {
-                                switch ($[0]) {
-                                    case 'working directory is not clean': return _ea.ss($, ($) => ['not clean', null])
-                                    case 'unexpected error': return _ea.ss($, ($) => ['unexpected error', $])
-                                    default: return _ea.au($[0])
-                                }
-                            }))
-                            case 'step2': return _ea.ss($, ($) => ['could not remove', $])
-                            case 'step3': return _ea.ss($, ($) => ['could not add', $])
-                            default: return _ea.au($[0])
-                        }
-                    }))
-                },
-            )
+    return pu_three_steps(
+        pu_assert_git_is_clean(
+            {
+                'path': $p.path,
+            },
+            null,
+        ),
+        pu_epe(
+            {
+                'program': `git`,
+                'args': op_flatten(_ea.array_literal([
+                    $p.path.transform(
+                        ($) => _ea.array_literal([
+                            `-C`,
+                            $,
+                        ]),
+                        () => _ea.array_literal([])
+                    ),
+                    _ea.array_literal([
+                        `rm`,
+                        `-r`,
+                        `--cached`,
+                        `.`
+                    ])
+                ]))
+            },
+            null,
+        ),
+        pu_epe(
+            {
+                'program': `git`,
+                'args': op_flatten(_ea.array_literal([
+                    $p.path.transform(
+                        ($) => _ea.array_literal([
+                            `-C`,
+                            $,
+                        ]),
+                        () => _ea.array_literal([])
+                    ),
+                    _ea.array_literal([
+                        `add`,
+                        `--all`,
+                    ])
+                ]))
+            },
+            null,
+        ),
+    ).map_error(($) => _ea.cc($, ($) => {
+        switch ($[0]) {
+            case 'step1': return _ea.ss($, ($) => _ea.cc($, ($) => {
+                switch ($[0]) {
+                    case 'working directory is not clean': return _ea.ss($, ($) => ['not clean', null])
+                    case 'unexpected error': return _ea.ss($, ($) => ['unexpected error', $])
+                    default: return _ea.au($[0])
+                }
+            }))
+            case 'step2': return _ea.ss($, ($) => ['could not remove', $])
+            case 'step3': return _ea.ss($, ($) => ['could not add', $])
+            default: return _ea.au($[0])
         }
-    })
+    }))
 }

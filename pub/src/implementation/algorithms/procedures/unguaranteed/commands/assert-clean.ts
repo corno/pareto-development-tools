@@ -14,6 +14,33 @@ import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation
 
 import { $$ as op_api_assert_clean } from "../api/git-assert-clean"
 
+const execute_procedure_and_write_errors_to_log = <Error>(
+    procedure: _easync.Unguaranteed_Procedure_Promise<Error>,
+    error_message: _et.Array<string>,
+) => {
+    return _easync.__create_unguaranteed_procedure({
+        'execute': (on_success, on_exception) => {
+            procedure.__start(
+                on_success,
+                ($) => {
+                    p_log_error(
+                        {
+                            'lines': error_message
+                        },
+                        null,
+                    ).__start(
+                        () => {
+                            on_exception({
+                                'exit code': 1,
+                            })
+                        },
+                    )
+                }
+            )
+        }
+    })
+}
+
 const log_and_exit = (
     on_exception: ($: _eb.Error) => void,
     message: _et.Array<string>,

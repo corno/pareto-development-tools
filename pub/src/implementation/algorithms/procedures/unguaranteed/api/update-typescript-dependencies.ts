@@ -29,49 +29,42 @@ export type Resources = null
 export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
     $p,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
-        'execute': (on_success, on_exception) => {
-            pu_three_steps(
-                pu_git_clean(
-                    {
-                        'path': _ea.set($p.path),
-                    },
-                    null,
-                ),
-                pu_update2latest(
-                    {
-                        'path': $p.path,
-                        'verbose': false,
-                        'what': ['dependencies', null],
-                    },
-                    null,
-                ),
-                pu_npm(
-                    {
-                        'path': _ea.set($p.path),
-                        'operation': ['install', null],
-                    },
-                    null,
-                ),
-            ).__start(
-                on_success,
-                ($) => {
-                    _ea.cc($, ($) => {
-                        switch ($[0]) {
-                            case 'step1': return _ea.ss($, ($) => {
-                                on_exception(['could not clean', $])
-                            })
-                            case 'step2': return _ea.ss($, ($) => {
-                                on_exception(['could not update to latest', $])
-                            })
-                            case 'step3': return _ea.ss($, ($) => {
-                                on_exception(['could not install', $])
-                            })
-                            default: return _ea.au($[0])
-                        }
-                    })
-                },
-            )
-        }
+    return pu_three_steps(
+        pu_git_clean(
+            {
+                'path': _ea.set($p.path),
+            },
+            null,
+        ),
+        pu_update2latest(
+            {
+                'path': $p.path,
+                'verbose': false,
+                'what': ['dependencies', null],
+            },
+            null,
+        ),
+        pu_npm(
+            {
+                'path': _ea.set($p.path),
+                'operation': ['install', null],
+            },
+            null,
+        ),
+    ).map_error(($) => {
+        return _ea.cc($, ($) => {
+            switch ($[0]) {
+                case 'step1': return _ea.ss($, ($) => {
+                    return ['could not clean', $]
+                })
+                case 'step2': return _ea.ss($, ($) => {
+                    return ['could not update to latest', $]
+                })
+                case 'step3': return _ea.ss($, ($) => {
+                    return ['could not install', $]
+                })
+                default: return _ea.au($[0])
+            }
+        })
     })
 }

@@ -5,7 +5,7 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import { $$ as pu_utd } from "./update-typescript-dependencies"
+import { $$ as pu_update_typescript_dependencies } from "./update-typescript-dependencies"
 
 import { $$ as pu_two_steps } from "../../../../../temp/two_steps"
 
@@ -24,37 +24,28 @@ export type Resources = null
 export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
     $p,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
-        'execute': (on_success, on_exception) => {
-            pu_two_steps(
-                pu_utd(
-                    {
-                        'path': `${$p.path}/pub`,
-                    },
-                    null,
-                ),
-                pu_utd(
-                    {
-                        'path': `${$p.path}/test`,
-                    },
-                    null,
-                ),
-            ).__start(
-                on_success,
-                ($) => {
-                    _ea.cc($, ($) => {
-                        switch ($[0]) {
-                            case 'step1': return _ea.ss($, ($) => {
-                                on_exception(['error building pub', $])
-                            })
-                            case 'step2': return _ea.ss($, ($) => {
-                                on_exception(['error building test', $])
-                            })
-                            default: return _ea.au($[0])
-                        }
-                    })
-                },
-            )
+    return pu_two_steps(
+        pu_update_typescript_dependencies(
+            {
+                'path': `${$p.path}/pub`,
+            },
+            null,
+        ),
+        pu_update_typescript_dependencies(
+            {
+                'path': `${$p.path}/test`,
+            },
+            null,
+        ),
+    ).map_error(($) => _ea.cc($, ($) => {
+        switch ($[0]) {
+            case 'step1': return _ea.ss($, ($) => {
+                return ['error building pub', $]
+            })
+            case 'step2': return _ea.ss($, ($) => {
+                return ['error building test', $]
+            })
+            default: return _ea.au($[0])
         }
-    })
+    }))
 }

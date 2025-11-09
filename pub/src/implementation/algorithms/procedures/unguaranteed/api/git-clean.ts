@@ -21,35 +21,26 @@ export type Error =
 export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
     $p,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
-        'execute': (on_success, on_exception) => {
-            pu_epe(
-                {
-                    'program': `git`,
-                    'args': op_flatten(_ea.array_literal([
-                        $p.path.transform(
-                            ($) => _ea.array_literal([
-                                `-C`,
-                                $,
-                            ]),
-                            () => _ea.array_literal([])
-                        ),
-                        _ea.array_literal([
-                            `clean`,
-                            `--force`,
-                            `-d`, // remove whole directories
-                            `-X`, // remove only ignored files (not the capital X as opposed to -x which removes all untracked files, including unignored ones)
+    return pu_epe(
+        {
+            'program': `git`,
+            'args': op_flatten(_ea.array_literal([
+                $p.path.transform(
+                    ($) => _ea.array_literal([
+                        `-C`,
+                        $,
+                    ]),
+                    () => _ea.array_literal([])
+                ),
+                _ea.array_literal([
+                    `clean`,
+                    `--force`,
+                    `-d`, // remove whole directories
+                    `-X`, // remove only ignored files (not the capital X as opposed to -x which removes all untracked files, including unignored ones)
 
-                        ])
-                    ])),
-                },
-                null,
-            ).__start(
-                on_success,
-                ($) => {
-                    on_exception(['unexpected error', $])
-                }
-            )
-        }
-    })
+                ])
+            ])),
+        },
+        null,
+    ).map_error(($) => ['unexpected error', $])
 }
