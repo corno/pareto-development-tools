@@ -24,25 +24,35 @@ export type Error =
     | ['could not update to latest', d_update_dependencies.Error]
     | ['could not install', d_npm.Error]
 
+export type Resources = null
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, Resources> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             pu_three_steps(
-                pu_git_clean({
-                    'path': _ea.set($p.path),
-                }),
-                pu_update2latest({
-                    'path': $p.path,
-                    'verbose': false,
-                    'what': ['dependencies', null],
-                }),
-                pu_npm({
-                    'path': _ea.set($p.path),
-                    'operation': ['install', null],
-                }),
+                pu_git_clean(
+                    {
+                        'path': _ea.set($p.path),
+                    },
+                    null,
+                ),
+                pu_update2latest(
+                    {
+                        'path': $p.path,
+                        'verbose': false,
+                        'what': ['dependencies', null],
+                    },
+                    null,
+                ),
+                pu_npm(
+                    {
+                        'path': _ea.set($p.path),
+                        'operation': ['install', null],
+                    },
+                    null,
+                ),
             ).__start(
                 on_success,
                 ($) => {

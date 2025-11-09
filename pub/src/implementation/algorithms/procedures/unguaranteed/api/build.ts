@@ -20,18 +20,24 @@ export type Error =
     | ['error building test', d_tsc.Error]
 
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             pu_two_steps(
-                pu_tsc({
-                    'path': _ea.set($p.path + `/pub`),
-                }),
-                pu_tsc({
-                    'path': _ea.set($p.path + `/test`),
-                }),
+                pu_tsc(
+                    {
+                        'path': _ea.set($p.path + `/pub`),
+                    },
+                    null,
+                ),
+                pu_tsc(
+                    {
+                        'path': _ea.set($p.path + `/test`),
+                    },
+                    null,
+                ),
             ).__start(
                 on_success,
                 ($) => {

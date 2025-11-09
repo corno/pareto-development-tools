@@ -19,9 +19,12 @@ const log_and_exit = (
     message: _et.Array<string>,
 ): () => void => {
     return () => {
-        p_log_error({
-            'lines': message
-        }).__start(
+        p_log_error(
+            {
+                'lines': message
+            },
+            null,
+        ).__start(
             () => {
                 on_exception({
                     'exit code': 1,
@@ -31,7 +34,7 @@ const log_and_exit = (
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
@@ -39,9 +42,12 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.
 
             op_remove_first($p.arguments).transform(
                 ($) => {
-                    op_api_assert_clean({
-                        'path': _ea.set($.element),
-                    }).__start(
+                    op_api_assert_clean(
+                        {
+                            'path': _ea.set($.element),
+                        },
+                        null,
+                    ).__start(
                         on_success,
                         () => ({
                             'exit code': 1,

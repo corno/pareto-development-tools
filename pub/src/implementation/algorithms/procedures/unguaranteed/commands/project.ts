@@ -27,9 +27,12 @@ const log_and_exit = (
     message: _et.Array<string>,
 ): () => void => {
     return () => {
-        p_log_error({
-            'lines': message
-        }).__start(
+        p_log_error(
+            {
+                'lines': message
+            },
+            null,
+        ).__start(
             () => {
                 on_exception({
                     'exit code': 1,
@@ -39,12 +42,12 @@ const log_and_exit = (
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
-            const commands: _et.Dictionary<_easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error>> = _ea.dictionary_literal({
+            const commands: _et.Dictionary<_easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error, null>> = _ea.dictionary_literal({
                 'assert-clean': p_command_assert_clean,
                 'git-commit': p_command_git_commit,
                 'git-remove-tracked-but-ignored': p_command_git_remove_tracked_but_ignored,
@@ -60,19 +63,25 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.
                             commands.__get_entry($.element).transform(
                                 ($) => {
                                     const command = $
-                                    q_read_dir({
-                                        'path': {
-                                            'escape spaces in path': true,
-                                            'path': `${path}/packages`,
+                                    q_read_dir(
+                                        {
+                                            'path': {
+                                                'escape spaces in path': true,
+                                                'path': `${path}/packages`,
+                                            },
+                                            'prepend results with path': true,
                                         },
-                                        'prepend results with path': true,
-                                    }).__start(
+                                        null,
+                                    ).__start(
                                         ($) => {
 
-                                            command({
-                                                'packages': $.map(($) => null),
-                                                'arguments': rest_of_the_arguments
-                                            }).__start(
+                                            command(
+                                                {
+                                                    'packages': $.map(($) => null),
+                                                    'arguments': rest_of_the_arguments
+                                                },
+                                                null,
+                                            ).__start(
                                                 on_success,
                                                 on_exception,
                                             )

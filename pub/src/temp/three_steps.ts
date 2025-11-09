@@ -8,10 +8,10 @@ export type Error<Step_1_Error, Step_2_Error, Step_3_Error> =
     | ['step3', Step_3_Error]
 
 export const $$ = <Step_1_Error, Step_2_Error, Step_3_Error>(
-    step_1: _easync.Unguaranteed_Procedure<Step_1_Error>,
-    step_2: _easync.Unguaranteed_Procedure<Step_2_Error>,
-    step_3: _easync.Unguaranteed_Procedure<Step_3_Error>,
-): _easync.Unguaranteed_Procedure<Error<Step_1_Error, Step_2_Error, Step_3_Error>> => {
+    step_1: _easync.Unguaranteed_Procedure_Promise<Step_1_Error>,
+    step_2: _easync.Unguaranteed_Procedure_Promise<Step_2_Error>,
+    step_3: _easync.Unguaranteed_Procedure_Promise<Step_3_Error>,
+): _easync.Unguaranteed_Procedure_Promise<Error<Step_1_Error, Step_2_Error, Step_3_Error>> => {
     return {
         __start: (on_success, on_exception) => {
             step_1.__start(

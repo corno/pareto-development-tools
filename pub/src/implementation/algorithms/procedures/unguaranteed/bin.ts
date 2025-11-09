@@ -19,9 +19,12 @@ const log_and_exit = (
     message: _et.Array<string>,
 ): () => void => {
     return () => {
-        p_log_error({
-            'lines': message
-        }).__start(
+        p_log_error(
+            {
+                'lines': message
+            },
+            null,
+        ).__start(
             () => {
                 on_exception({
                     'exit code': 1,
@@ -31,12 +34,14 @@ const log_and_exit = (
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error> = (
+export type Resources = null
+
+export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error, Resources> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
-            const commands: _et.Dictionary<_easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error>> = _ea.dictionary_literal({
+            const commands: _et.Dictionary<_easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error, Resources>> = _ea.dictionary_literal({
                 'assert-clean': p_command_assert_clean,
                 'project': p_command_project,
             })
@@ -45,9 +50,12 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.
                     const rest = $.array
                     commands.__get_entry($.element).transform(
                         ($) => {
-                            $({
-                                'arguments': rest
-                            }).__start(
+                            $(
+                                {
+                                    'arguments': rest
+                                },
+                                null,
+                            ).__start(
                                 on_success,
                                 on_exception,
                             )

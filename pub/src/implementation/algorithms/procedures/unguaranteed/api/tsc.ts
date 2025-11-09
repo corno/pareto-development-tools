@@ -21,26 +21,29 @@ export type Error =
 // | ['could not push', d_eqe.Error]
 
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
-            pu_epe({
-                'program': `tsc`,
-                'args': op_flatten(_ea.array_literal([
-                    $p.path.transform(
-                        ($) => _ea.array_literal([
-                            `--project`,
-                            $,
+            pu_epe(
+                {
+                    'program': `tsc`,
+                    'args': op_flatten(_ea.array_literal([
+                        $p.path.transform(
+                            ($) => _ea.array_literal([
+                                `--project`,
+                                $,
+                            ]),
+                            () => _ea.array_literal([])
+                        ),
+                        _ea.array_literal([
+                            `--pretty`,
                         ]),
-                        () => _ea.array_literal([])
-                    ),
-                    _ea.array_literal([
-                        `--pretty`,
-                    ]),
-                ])),
-            }).__start(
+                    ])),
+                },
+                null,
+            ).__start(
                 on_success,
                 ($) => {
                     on_exception(['error while running tsc', $])

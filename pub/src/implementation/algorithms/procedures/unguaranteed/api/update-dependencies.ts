@@ -19,19 +19,26 @@ export type Error =
     | ['error building pub', d_utd.Error]
     | ['error building test', d_utd.Error]
 
+export type Resources = null
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, Resources> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             pu_two_steps(
-                pu_utd({
-                    'path': `${$p.path}/pub`,
-                }),
-                pu_utd({
-                    'path': `${$p.path}/test`,
-                }),
+                pu_utd(
+                    {
+                        'path': `${$p.path}/pub`,
+                    },
+                    null,
+                ),
+                pu_utd(
+                    {
+                        'path': `${$p.path}/test`,
+                    },
+                    null,
+                ),
             ).__start(
                 on_success,
                 ($) => {

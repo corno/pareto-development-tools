@@ -28,49 +28,58 @@ export type Error =
     | ['unexpected error', d_gic.Error]
 
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             pu_three_steps(
-                pu_assert_git_is_clean({
-                    'path': $p.path,
-                }),
-                pu_epe({
-                    'program': `git`,
-                    'args': op_flatten(_ea.array_literal([
-                        $p.path.transform(
-                            ($) => _ea.array_literal([
-                                `-C`,
-                                $,
-                            ]),
-                            () => _ea.array_literal([])
-                        ),
-                        _ea.array_literal([
-                            `rm`,
-                            `-r`,
-                            `--cached`,
-                            `.`
-                        ])
-                    ]))
-                }),
-                pu_epe({
-                    'program': `git`,
-                    'args': op_flatten(_ea.array_literal([
-                        $p.path.transform(
-                            ($) => _ea.array_literal([
-                                `-C`,
-                                $,
-                            ]),
-                            () => _ea.array_literal([])
-                        ),
-                        _ea.array_literal([
-                            `add`,
-                            `--all`,
-                        ])
-                    ]))
-                }),
+                pu_assert_git_is_clean(
+                    {
+                        'path': $p.path,
+                    },
+                    null,
+                ),
+                pu_epe(
+                    {
+                        'program': `git`,
+                        'args': op_flatten(_ea.array_literal([
+                            $p.path.transform(
+                                ($) => _ea.array_literal([
+                                    `-C`,
+                                    $,
+                                ]),
+                                () => _ea.array_literal([])
+                            ),
+                            _ea.array_literal([
+                                `rm`,
+                                `-r`,
+                                `--cached`,
+                                `.`
+                            ])
+                        ]))
+                    },
+                    null,
+                ),
+                pu_epe(
+                    {
+                        'program': `git`,
+                        'args': op_flatten(_ea.array_literal([
+                            $p.path.transform(
+                                ($) => _ea.array_literal([
+                                    `-C`,
+                                    $,
+                                ]),
+                                () => _ea.array_literal([])
+                            ),
+                            _ea.array_literal([
+                                `add`,
+                                `--all`,
+                            ])
+                        ]))
+                    },
+                    null,
+                ),
             ).__start(
                 on_success,
                 ($) => {

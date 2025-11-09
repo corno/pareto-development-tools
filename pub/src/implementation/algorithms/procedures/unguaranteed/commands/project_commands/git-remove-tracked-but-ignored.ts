@@ -13,16 +13,19 @@ import { Project_Parameters } from "../../../../../../interface/project_command"
 import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
 
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             do_procedure_dict(
                 $p.packages.map(($, key) => {
-                    return p_api_git_remove_tracked_but_ignored({
-                        'path': _ea.set(key),
-                    })
+                    return p_api_git_remove_tracked_but_ignored(
+                        {
+                            'path': _ea.set(key),
+                        },
+                        null,
+                    )
                 }),
             ).__start(
                 () => {

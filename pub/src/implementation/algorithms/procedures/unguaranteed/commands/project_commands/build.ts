@@ -18,16 +18,19 @@ import { $$ as p_write_to_stderr } from "exupery-resources/dist/implementation/a
 import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/dictionary/to_list_sorted_by_code_point"
 import { $$ as op_join } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/text/join_list_of_texts"
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             do_procedure_dict(
                 $p.packages.map(($, key) => {
-                    return p_api_build({
-                        'path': key,
-                    })
+                    return p_api_build(
+                        {
+                            'path': key,
+                        },
+                        null,
+                    )
                 }),
             ).__start(
                 on_success,
@@ -66,7 +69,7 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
 
                         ).map(($) => $.value)
                     )
-                    p_write_to_stderr(data).__start(
+                    p_write_to_stderr(data, null).__start(
                         () => {
                             on_exception({
                                 'exit code': 1,

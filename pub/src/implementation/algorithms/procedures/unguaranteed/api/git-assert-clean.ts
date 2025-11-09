@@ -17,14 +17,19 @@ export type Error =
     | ['unexpected error', d_gic.Error]
     | ['working directory is not clean', null]
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> = (
+export type Resources = null
+
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, Resources> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
-            q_is_git_clean({
-                'path': $p.path,
-            }).__start(
+            q_is_git_clean(
+                {
+                    'path': $p.path,
+                },
+                null,
+            ).__start(
                 ($) => {
                     if ($) {
                         on_success()

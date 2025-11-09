@@ -32,23 +32,48 @@ export type Error =
     | ['could not commit', d_eqe.Error]
     | ['could not push', d_eqe.Error]
 
+export type Resources = null
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, Resources> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             pu_conditional_async(
                 qu_transform(
-                    qu_git_is_clean({
-                        'path': $p.path
-                    }),
+                    qu_git_is_clean(
+                        {
+                            'path': $p.path
+                        },
+                        null,
+                    ),
                     ($) => !$
                 ),
                 pu_three_steps(
                     pu_conditional_sync(
                         $p['stage all changes'],
-                        pu_epe({
+                        pu_epe(
+                            {
+                                'program': `git`,
+                                'args': op_flatten(_ea.array_literal([
+                                    $p.path.transform(
+                                        ($) => _ea.array_literal([
+                                            `-C`,
+                                            $,
+                                        ]),
+                                        () => _ea.array_literal([])
+                                    ),
+                                    _ea.array_literal([
+                                        `add`,
+                                        `--all`,
+                                    ])
+                                ])),
+                            },
+                            null,
+                        )
+                    ),
+                    pu_epe(
+                        {
                             'program': `git`,
                             'args': op_flatten(_ea.array_literal([
                                 $p.path.transform(
@@ -59,46 +84,34 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error> =
                                     () => _ea.array_literal([])
                                 ),
                                 _ea.array_literal([
-                                    `add`,
-                                    `--all`,
+                                    `commit`,
+                                    `-m`,
+                                    $p['commit message'],
                                 ])
                             ])),
-                        })
+                        },
+                        null,
                     ),
-                    pu_epe({
-                        'program': `git`,
-                        'args': op_flatten(_ea.array_literal([
-                            $p.path.transform(
-                                ($) => _ea.array_literal([
-                                    `-C`,
-                                    $,
-                                ]),
-                                () => _ea.array_literal([])
-                            ),
-                            _ea.array_literal([
-                                `commit`,
-                                `-m`,
-                                $p['commit message'],
-                            ])
-                        ])),
-                    }),
                     pu_conditional_sync(
                         $p['push after commit'],
-                        pu_epe({
-                            'program': `git`,
-                            'args': op_flatten(_ea.array_literal([
-                                $p.path.transform(
-                                    ($) => _ea.array_literal([
-                                        `-C`,
-                                        $,
-                                    ]),
-                                    () => _ea.array_literal([])
-                                ),
-                                _ea.array_literal([
-                                    `push`,
-                                ])
-                            ]))
-                        })
+                        pu_epe(
+                            {
+                                'program': `git`,
+                                'args': op_flatten(_ea.array_literal([
+                                    $p.path.transform(
+                                        ($) => _ea.array_literal([
+                                            `-C`,
+                                            $,
+                                        ]),
+                                        () => _ea.array_literal([])
+                                    ),
+                                    _ea.array_literal([
+                                        `push`,
+                                    ])
+                                ]))
+                            },
+                            null,
+                        )
                     )
                 ),
             ).__start(

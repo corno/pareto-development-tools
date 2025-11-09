@@ -13,35 +13,40 @@ export type Parameters = {
     'path': _et.Optional_Value<string>,
 }
 
+export type Result = boolean
+
 export type Error =
     | ['could not run git command', {
         'message': string
     }]
     | ['unexpected output', string]
 
-export type Result = boolean
+export type Resources = null
 
-export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Error> = (
+export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Error, Resources> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_query({
         'execute': (on_success, on_exception) => {
-            q_exec({
-                'program': `git`,
-                'args': op_flatten(_ea.array_literal([
-                    $p.path.transform(
-                        ($) => _ea.array_literal([
-                            `-C`,
-                            $,
-                        ]),
-                        () => _ea.array_literal([])
-                    ),
-                    _ea.array_literal([
-                        `rev-parse`,
-                        `--is-inside-work-tree`,
-                    ])
-                ])),
-            }).__start(
+            q_exec(
+                {
+                    'program': `git`,
+                    'args': op_flatten(_ea.array_literal([
+                        $p.path.transform(
+                            ($) => _ea.array_literal([
+                                `-C`,
+                                $,
+                            ]),
+                            () => _ea.array_literal([])
+                        ),
+                        _ea.array_literal([
+                            `rev-parse`,
+                            `--is-inside-work-tree`,
+                        ])
+                    ])),
+                },
+                null,
+            ).__start(
                 ($) => {
                     if ($.stdout === `true`) {
                         on_success(true)

@@ -17,9 +17,12 @@ const log_and_exit = (
     message: _et.Array<string>,
 ): () => void => {
     return () => {
-        p_log_error({
-            'lines': message
-        }).__start(
+        p_log_error(
+            {
+                'lines': message
+            },
+            null,
+        ).__start(
             () => {
                 on_exception({
                     'exit code': 1,
@@ -33,7 +36,7 @@ import { Project_Parameters } from "../../../../../../interface/project_command"
 import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
 
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error> = (
+export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
@@ -43,12 +46,15 @@ export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, 
                     const commit_message = $.element
                     do_procedure_dict(
                         $p.packages.map(($, key) => {
-                            return p_api_git_commit({
-                                'path': _ea.set(key),
-                                'commit message': commit_message,
-                                'stage all changes': true,
-                                'push after commit': true,
-                            })
+                            return p_api_git_commit(
+                                {
+                                    'path': _ea.set(key),
+                                    'commit message': commit_message,
+                                    'stage all changes': true,
+                                    'push after commit': true,
+                                },
+                                null,
+                            )
                         }),
                     ).__start(
                         () => {

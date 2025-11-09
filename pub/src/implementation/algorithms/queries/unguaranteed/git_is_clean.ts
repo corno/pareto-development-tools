@@ -19,41 +19,51 @@ export type Parameters = {
     'path': _et.Optional_Value<string>,
 }
 
+export type Result = boolean
+
 export type Error =
     | ['could not determine git status', d_eqe.Error]
     | ['not a git repository', null]
     | ['unknown issue', d_iwt.Error]
 
-export type Result = boolean
+export type Resources = null
 
-export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Error> = (
+export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Error, Resources> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_query({
         'execute': (on_success, on_exception) => {
-            q_exec({
-                'program': `git`,
-                'args': op_flatten(_ea.array_literal([
-                    $p.path.transform(
-                        ($) => _ea.array_literal([
-                            `-C`,
-                            $,
-                        ]),
-                        () => _ea.array_literal([])
-                    ),
-                    _ea.array_literal([
-                        `status`,
-                        `--porcelain`,
-                    ])
-                ])),
-            }).__start(
+            q_exec(
+                {
+                    'program': `git`,
+                    'args': op_flatten(_ea.array_literal([
+                        $p.path.transform(
+                            ($) => _ea.array_literal([
+                                `-C`,
+                                $,
+                            ]),
+                            () => _ea.array_literal([])
+                        ),
+                        _ea.array_literal([
+                            `status`,
+                            `--porcelain`,
+                        ])
+                    ])),
+                },
+                null,
+            ).__start(
                 ($) => {
                     on_success($.stdout === ``)
                 },
                 ($) => {
                     const err = $
 
-                    qu_is_inside_work_tree({ 'path': $p.path }).__start(
+                    qu_is_inside_work_tree(
+                        {
+                            'path': $p.path
+                        },
+                        null,
+                    ).__start(
                         ($) => {
                             if (!$) {
                                 on_exception(['not a git repository', null])

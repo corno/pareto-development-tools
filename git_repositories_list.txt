@@ -1,0 +1,8 @@
+Repository: pareto-development-tools
+Path: /home/corno/workspace/pareto-canon/packages/pareto-development-tools
+Last Commit: 2025-11-07 (1f596e4)
+Message: updated to latest core
+Branch: main
+Remote: git@github.com:corno/pareto-development-tools
+-------------------------------------------------
+

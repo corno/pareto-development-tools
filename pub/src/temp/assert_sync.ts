@@ -8,8 +8,8 @@ export type Error<Procedure_Error> =
 
 export const $$ = <Assertion_Error, Procedure_Error>(
     assertion: boolean,
-    procedure: _easync.Unguaranteed_Procedure<Procedure_Error>,
-): _easync.Unguaranteed_Procedure<Error<Procedure_Error>> => {
+    procedure: _easync.Unguaranteed_Procedure_Promise<Procedure_Error>,
+): _easync.Unguaranteed_Procedure_Promise<Error<Procedure_Error>> => {
     return {
         __start: (on_success, on_exception) => {
             if (!assertion) {
