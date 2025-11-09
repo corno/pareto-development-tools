@@ -28,7 +28,7 @@ export type Error =
 
 export type Resources = null
 
-export const $$: _easync.Unguaranteed_Query_Initializer<Parameters, Result, Error, Resources> = (
+export const $$: _easync.Unguaranteed_Query<Parameters, Result, Error, Resources> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_query({

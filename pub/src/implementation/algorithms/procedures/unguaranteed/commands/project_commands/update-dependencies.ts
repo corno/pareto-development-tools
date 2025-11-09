@@ -20,7 +20,7 @@ import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/imp
 import { $$ as op_join } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/text/join_list_of_texts"
 
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error, null> = (
+export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({

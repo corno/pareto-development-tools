@@ -34,7 +34,7 @@ const log_and_exit = (
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error, null> = (
+export const $$: _easync.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({

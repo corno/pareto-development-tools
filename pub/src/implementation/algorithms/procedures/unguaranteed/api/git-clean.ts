@@ -18,7 +18,7 @@ export type Parameters = {
 export type Error =
     | ['unexpected error', d_epe.Error]
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, null> = (
+export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({

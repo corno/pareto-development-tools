@@ -42,12 +42,12 @@ const log_and_exit = (
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<_eb.Parameters, _eb.Error, null> = (
+export const $$: _easync.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
-            const commands: _et.Dictionary<_easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error, null>> = _ea.dictionary_literal({
+            const commands: _et.Dictionary<_easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, null>> = _ea.dictionary_literal({
                 'assert-clean': p_command_assert_clean,
                 'git-commit': p_command_git_commit,
                 'git-remove-tracked-but-ignored': p_command_git_remove_tracked_but_ignored,

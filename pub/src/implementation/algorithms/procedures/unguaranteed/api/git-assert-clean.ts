@@ -19,7 +19,7 @@ export type Error =
 
 export type Resources = null
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, Resources> = (
+export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({

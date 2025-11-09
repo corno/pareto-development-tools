@@ -36,7 +36,7 @@ import { Project_Parameters } from "../../../../../../interface/project_command"
 import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
 
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Project_Parameters, _eb.Error, null> = (
+export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({

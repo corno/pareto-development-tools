@@ -21,7 +21,7 @@ export type Error =
 // | ['could not push', d_eqe.Error]
 
 
-export const $$: _easync.Unguaranteed_Procedure_Initializer<Parameters, Error, null> = (
+export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
     $p,
 ) => {
     return _easync.__create_unguaranteed_procedure({
