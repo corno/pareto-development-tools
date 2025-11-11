@@ -14,14 +14,23 @@ import { Project_Parameters } from "../../../../../../interface/project_command"
 
 import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
 
-import { $$ as p_write_to_stderr } from "exupery-resources/dist/implementation/algorithms/procedures/guaranteed/write_to_stderr"
-
 import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/dictionary/to_list_sorted_by_code_point"
 import { $$ as op_join } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/text/join_list_of_texts"
 
+import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+import * as d_write_to_stderr from "exupery-resources/dist/interface/generated/pareto/schemas/write_to_stderr/data_types/source"
+
+export type Resources = {
+    'git procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'npm procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'write to stderr': _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+
+}
 
 const execute_and_write_errors_to_stderr_and_set_exit_code_to_1 = (
     procedure: _easync.Unguaranteed_Procedure_Promise<string>,
+    p_write_to_stderr: _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
 ): _easync.Unguaranteed_Procedure_Promise<_eb.Error> => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
@@ -42,8 +51,8 @@ const execute_and_write_errors_to_stderr_and_set_exit_code_to_1 = (
 }
 
 
-export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, null> = (
-    $p,
+export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
+    $p, $r,
 ) => {
     return execute_and_write_errors_to_stderr_and_set_exit_code_to_1(
         do_procedure_dict(
@@ -52,7 +61,11 @@ export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, n
                     {
                         'path': key,
                     },
-                    null,
+                    {
+                        'git procedure': $r['git procedure'],
+                        'npm procedure': $r['npm procedure'],
+                        'update2latest': $r.update2latest,
+                    },
                 )
             }),
         ).map_error(($) => {
@@ -112,6 +125,7 @@ export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, n
                 ).map(($) => $.value)
             )
             return data
-        })
+        }),
+        $r['write to stderr'],
     )
 }

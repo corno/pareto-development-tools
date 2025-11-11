@@ -6,20 +6,25 @@ import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
 import * as d_tsc from "../../api/tsc"
-
-import { $$ as p_api_build } from "../../api/build"
-
+import * as d_espe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
+import * as d_write_to_stderr from "exupery-resources/dist/interface/generated/pareto/schemas/write_to_stderr/data_types/source"
 import { Project_Parameters } from "../../../../../../interface/project_command"
 
+import { $$ as p_api_build } from "../../api/build"
 import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
-
-import { $$ as p_write_to_stderr } from "exupery-resources/dist/implementation/algorithms/procedures/guaranteed/write_to_stderr"
-
 import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/dictionary/to_list_sorted_by_code_point"
 import { $$ as op_join } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/text/join_list_of_texts"
 
-export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, null> = (
-    $p,
+
+export type Resources = {
+    'procedures': {
+        'tsc': _easync.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
+        'write to stderr': _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+    }
+}
+
+export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
+    $p, $r,
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
@@ -29,7 +34,7 @@ export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, n
                         {
                             'path': key,
                         },
-                        null,
+                        $r,
                     )
                 }),
             ).__start(
@@ -69,7 +74,7 @@ export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, n
 
                         ).map(($) => $.value)
                     )
-                    p_write_to_stderr(data, null).__start(
+                    $r.procedures['write to stderr'](data, null).__start(
                         () => {
                             on_exception({
                                 'exit code': 1,

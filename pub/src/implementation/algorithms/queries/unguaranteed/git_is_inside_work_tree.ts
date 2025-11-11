@@ -5,9 +5,9 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
+import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
 
-import { $$ as q_exec } from "exupery-resources/dist/implementation/algorithms/queries/unguaranteed/execute_query_executable"
+import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 export type Parameters = {
     'path': _et.Optional_Value<string>,
@@ -21,16 +21,19 @@ export type Error =
     }]
     | ['unexpected output', string]
 
-export type Resources = null
+export type Resources = {
+    'queries': {
+        'git': _easync.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+    }
+}
 
 export const $$: _easync.Unguaranteed_Query<Parameters, Result, Error, Resources> = (
-    $p,
+    $p, $r,
 ) => {
     return _easync.__create_unguaranteed_query({
         'execute': (on_success, on_exception) => {
-            q_exec(
+            $r.queries.git(
                 {
-                    'program': `git`,
                     'args': op_flatten(_ea.array_literal([
                         $p.path.transform(
                             ($) => _ea.array_literal([

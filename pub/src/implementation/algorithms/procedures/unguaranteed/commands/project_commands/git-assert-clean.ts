@@ -11,9 +11,22 @@ import { Project_Parameters } from "../../../../../../interface/project_command"
 
 import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
 
+import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
+import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 
-export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, null> = (
-    $p,
+export type Resources = {
+    'queries': {
+        'git': _easync.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+    }
+    'procedures': {
+        'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    }
+}
+
+
+
+export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
+    $p, $r
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
@@ -23,7 +36,7 @@ export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, n
                         {
                             'path': _ea.set(key),
                         },
-                        null,
+                        $r,
                     )
                 }),
             ).__start(

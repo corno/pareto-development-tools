@@ -10,6 +10,7 @@ import { $$ as pu_update_typescript_dependencies } from "./update-typescript-dep
 import { $$ as pu_two_steps } from "../../../../../temp/two_steps"
 
 import * as d_utd from "./update-typescript-dependencies"
+import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 
 export type Parameters = {
     'path': string,
@@ -19,23 +20,35 @@ export type Error =
     | ['error building pub', d_utd.Error]
     | ['error building test', d_utd.Error]
 
-export type Resources = null
+export type Resources = {
+    'git procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'npm procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+}
 
 export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
-    $p,
+    $p, $r,
 ) => {
     return pu_two_steps(
         pu_update_typescript_dependencies(
             {
                 'path': `${$p.path}/pub`,
             },
-            null,
+            {
+                'git procedure': $r['git procedure'],
+                'npm procedure': $r['npm procedure'],
+                'update2latest': $r.update2latest,
+            },
         ),
         pu_update_typescript_dependencies(
             {
                 'path': `${$p.path}/test`,
             },
-            null,
+            {
+                'git procedure': $r['git procedure'],
+                'npm procedure': $r['npm procedure'],
+                'update2latest': $r.update2latest,
+            },
         ),
     ).map_error(($) => _ea.cc($, ($) => {
         switch ($[0]) {

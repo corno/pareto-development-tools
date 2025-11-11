@@ -5,14 +5,12 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import { $$ as pu_epe } from "exupery-resources/dist/implementation/algorithms/procedures/unguaranteed/execute_procedure_executable"
-
+import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
 import * as d_gic from "../../../queries/unguaranteed/git_is_clean"
 
 import { $$ as pu_assert_git_is_clean } from "./git-assert-clean"
 
-import { $$ as pu_conditional_async } from "../../../../../temp/conditional_async"
 import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
 
 export type Parameters = {
@@ -27,20 +25,27 @@ export type Error =
     | ['could not add', d_eqe.Error]
     | ['unexpected error', d_gic.Error]
 
+export type Resources = {
+    'queries': {
+        'git': _easync.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+    }
+    'procedures': {
+        'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    }
+}
 
-export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
-    $p,
+export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
+    $p, $r,
 ) => {
     return pu_three_steps(
         pu_assert_git_is_clean(
             {
                 'path': $p.path,
             },
-            null,
+            $r,
         ),
-        pu_epe(
+        $r.procedures.git(
             {
-                'program': `git`,
                 'args': op_flatten(_ea.array_literal([
                     $p.path.transform(
                         ($) => _ea.array_literal([
@@ -59,9 +64,8 @@ export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
             },
             null,
         ),
-        pu_epe(
+        $r.procedures.git(
             {
-                'program': `git`,
                 'args': op_flatten(_ea.array_literal([
                     $p.path.transform(
                         ($) => _ea.array_literal([

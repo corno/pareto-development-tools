@@ -5,11 +5,14 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
+
+import * as d_espe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
+import * as d_tsc from "./tsc"
+
 import { $$ as pu_tsc } from "./tsc"
 
 import { $$ as pu_two_steps } from "../../../../../temp/two_steps"
 
-import * as d_tsc from "./tsc"
 
 export type Parameters = {
     'path': string,
@@ -20,8 +23,14 @@ export type Error =
     | ['error building test', d_tsc.Error]
 
 
-export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
-    $p,
+export type Resources = {
+    'procedures': {
+        'tsc': _easync.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
+    }
+}
+
+export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
+    $p, $r
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
@@ -30,13 +39,13 @@ export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, null> = (
                     {
                         'path': _ea.set($p.path + `/pub`),
                     },
-                    null,
+                    $r,
                 ),
                 pu_tsc(
                     {
                         'path': _ea.set($p.path + `/test`),
                     },
-                    null,
+                    $r,
                 ),
             ).__start(
                 on_success,
