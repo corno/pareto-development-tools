@@ -8,16 +8,11 @@ import * as _ea from 'exupery-core-alg'
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 import * as d_espe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
+import * as d_tsc from "../../../../../interface/temp/tsc"
 
 export type Parameters = {
     'path': _et.Optional_Value<string>,
 }
-
-export type Error =
-    | ['error while running tsc', d_espe.Error]
-// | ['could not commit', d_eqe.Error]
-// | ['could not push', d_eqe.Error]
-
 
 export type Resources = {
     'procedures': {
@@ -25,7 +20,7 @@ export type Resources = {
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
+export const $$: _easync.Unguaranteed_Procedure<Parameters, d_tsc.Error, Resources> = (
     $p, $r,
 ) => {
     return $r.procedures.tsc(

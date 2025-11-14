@@ -33,10 +33,25 @@ _eb.run_unguaranteed_main_procedure<d_bin.Resources>(
                         null
                     )
                 },
+                'log': ($p, $r) => {
+                    return $rr.procedures.log(
+                        $p,
+                        null
+                    )
+                },
                 'npm': ($p, $r) => {
                     return $rr.procedures['execute any procedure executable'](
                         {
                             'program': `npm`,
+                            'args': $p.args,
+                        },
+                        null
+                    )
+                },
+                'node': ($p, $r) => {
+                    return $rr.procedures['execute any procedure executable'](
+                        {
+                            'program': `node`,
                             'args': $p.args,
                         },
                         null
@@ -57,12 +72,6 @@ _eb.run_unguaranteed_main_procedure<d_bin.Resources>(
                             'program': `update2latest`,
                             'args': $p.args,
                         },
-                        null
-                    )
-                },
-                'log': ($p, $r) => {
-                    return $rr.procedures.log(
-                        $p,
                         null
                     )
                 },

@@ -7,7 +7,7 @@ import * as _ea from 'exupery-core-alg'
 
 import { $$ as q_is_git_clean } from "../../../queries/unguaranteed/git_is_clean"
 
-import * as d_gic from "../../../queries/unguaranteed/git_is_clean"
+import * as d_gic from "../../../../../interface/temp/git_is_clean"
 
 import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"

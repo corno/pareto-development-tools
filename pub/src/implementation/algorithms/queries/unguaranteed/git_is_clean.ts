@@ -5,36 +5,14 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
-import * as d_iwt from "./git_is_inside_work_tree"
-
 import { $$ as qu_is_inside_work_tree } from "./git_is_inside_work_tree"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
+import * as d from "../../../../interface/temp/git_is_clean"
 
-export type Parameters = {
-    'path': _et.Optional_Value<string>,
-}
 
-export type Result = boolean
-
-export type Error =
-    | ['could not determine git status', d_eqe.Error]
-    | ['not a git repository', null]
-    | ['unknown issue', d_iwt.Error]
-
-export type Resources = {
-    'queries': {
-        'git': _easync.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
-    }
-    'procedures': {
-        'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    }
-}
-
-export const $$: _easync.Unguaranteed_Query<Parameters, Result, Error, Resources> = (
+export const $$: _easync.Unguaranteed_Query<d.Parameters, d.Result, d.Error, d.Resources> = (
     $p, $r,
 ) => {
     return _easync.__create_unguaranteed_query({

@@ -13,6 +13,9 @@ import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schema
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 import * as d_log from "exupery-resources/dist/interface/generated/pareto/schemas/log/data_types/source"
 
+import * as t_eqe_to_string from "../../../../transformers/execute_query_executable/text"
+import * as t_git_extended_commit_to_text from "../../../../transformers/git_extended_commit/text"
+
 const log_and_exit = (
     on_exception: ($: _eb.Error) => void,
     message: _et.Array<string>,
@@ -74,51 +77,9 @@ export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, R
                             on_success()
                         },
                         ($) => {
-                            const eqe_to_string = ($: d_eqe.Error): string => {
-                                return _ea.cc($, ($) => {
-                                    switch ($[0]) {
-                                        case 'failed to spawn': return _ea.ss($, ($) => {
-                                            return `failed to spawn process: ${$.message}`
-                                        })
-                                        case 'non zero exit code': return _ea.ss($, ($) => {
-                                            return `non zero exit code: ${$['exit code'].transform(($) => `` + $, () => `-`)}>${$.stderr}`
-                                        })
-                                        default: return _ea.au($[0])
-                                    }
-                                })
-                            }
 
                             $.map(($, key) => {
-                                _ea.cc($, ($) => {
-                                    switch ($[0]) {
-                                        case 'asserting git not clean': return _ea.ss($, ($) => {
-                                            _ed.log_debug_message(`${key}: error while asserting git is not clean: ${_ea.cc($, ($) => {
-                                                switch ($[0]) {
-                                                    case 'not a git repository': return _ea.ss($, ($) => `not a git rep`)
-                                                    case 'could not determine git status': return _ea.ss($, ($) => `could not determine status, ${eqe_to_string($)}`)
-                                                    case 'unknown issue': return _ea.ss($, ($) => `unknown issue: ${_ea.cc($, ($) => {
-                                                        switch ($[0]) {
-                                                            case 'could not run git command': return _ea.ss($, ($) => `could not run git command: ${$.message}`)
-                                                            case 'unexpected output': return _ea.ss($, ($) => `unexpected output: ${$}`)
-                                                            default: return _ea.au($[0])
-                                                        }
-                                                    })}`)
-                                                    default: return _ea.au($[0])
-                                                }
-                                            })}`, () => { })
-                                        })
-                                        case 'could not stage': return _ea.ss($, ($) => {
-                                            _ed.log_debug_message(`${key}: could not stage: ${eqe_to_string($)}`, () => { })
-                                        })
-                                        case 'could not commit': return _ea.ss($, ($) => {
-                                            _ed.log_debug_message(`${key}: could not commit: ${eqe_to_string($)}`, () => { })
-                                        })
-                                        case 'could not push': return _ea.ss($, ($) => {
-                                            _ed.log_debug_message(`${key}: could not push: ${eqe_to_string($)}`, () => { })
-                                        })
-                                        default: return _ea.au($[0])
-                                    }
-                                })
+                                _ed.log_debug_message(`${key}: ${t_git_extended_commit_to_text.Error($)}`, () => { })
                             })
                             on_exception({
                                 'exit code': 1,

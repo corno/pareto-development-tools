@@ -21,10 +21,11 @@ export type Resources = {
     },
     'procedures': {
         'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'tsc': _easync.Unguaranteed_Procedure<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error, null>
-        'npm': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
         'log': _easync.Guaranteed_Procedure<d_log.Parameters, null>
+        'node': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'npm': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'tsc': _easync.Unguaranteed_Procedure<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error, null>
+        'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
         'write to stderr': _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
 
     }
@@ -36,10 +37,11 @@ export type Command_Resources = {
     },
     'procedures': {
         'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'tsc': _easync.Unguaranteed_Procedure<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error, null>
-        'npm': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
         'log': _easync.Guaranteed_Procedure<d_log.Parameters, null>
+        'node': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'npm': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'tsc': _easync.Unguaranteed_Procedure<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error, null>
+        'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
         'write to stderr': _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
 
     }
@@ -49,6 +51,7 @@ import { $$ as p_command_assert_clean } from "./project_commands/git-assert-clea
 import { $$ as p_command_git_commit } from "./project_commands/git-extended-commit"
 import { $$ as p_command_git_remove_tracked_but_ignored } from "./project_commands/git-remove-tracked-but-ignored"
 import { $$ as p_command_build } from "./project_commands/build"
+import { $$ as p_command_build_and_test } from "./project_commands/build-and-test"
 import { $$ as p_update_dependencies } from "./project_commands/update-dependencies"
 
 import { $$ as op_remove_first } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/list/remove_first_element"
@@ -89,6 +92,17 @@ export const $$: _easync.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, Resou
                 'build': ($p, $r) => {
                     return _easync.__create_unguaranteed_procedure({
                         'execute': (on_success, on_error) => p_command_build(
+                            $p,
+                            $r,
+                        ).__start(
+                            on_success,
+                            on_error,
+                        )
+                    })
+                },
+                'build-and-test': ($p, $r) => {
+                    return _easync.__create_unguaranteed_procedure({
+                        'execute': (on_success, on_error) => p_command_build_and_test(
                             $p,
                             $r,
                         ).__start(

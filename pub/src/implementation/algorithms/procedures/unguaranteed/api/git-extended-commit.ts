@@ -5,9 +5,7 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
-import * as d_gic from "../../../queries/unguaranteed/git_is_clean"
+import * as d from "../../../../../interface/temp/git_extended_commit"
 
 import { $$ as qu_git_is_clean } from "../../../queries/unguaranteed/git_is_clean"
 import { $$ as qu_transform } from "../../../../../temp/transform_query"
@@ -18,31 +16,8 @@ import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
-export type Parameters = {
-    'path': _et.Optional_Value<string>,
-    'commit message': string
-    'stage all changes': boolean,
-    'push after commit': boolean,
-}
 
-export type Error =
-    | ['asserting git not clean', d_gic.Error]
-    | ['could not stage', d_eqe.Error]
-    | ['could not commit', d_eqe.Error]
-    | ['could not push', d_eqe.Error]
-
-
-export type Resources = {
-    'queries': {
-        'git': _easync.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
-    }
-    'procedures': {
-        'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    }
-}
-
-
-export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
+export const $$: _easync.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
     $p, $r
 ) => {
     return pu_conditional_async(

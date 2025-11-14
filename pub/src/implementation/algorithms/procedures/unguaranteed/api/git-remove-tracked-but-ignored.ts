@@ -5,36 +5,16 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
-import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
-import * as d_gic from "../../../queries/unguaranteed/git_is_clean"
+import * as d from "../../../../../interface/temp/git_remove_tracked_but_ignored"
 
 import { $$ as pu_assert_git_is_clean } from "./git-assert-clean"
 
 import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
 
-export type Parameters = {
-    'path': _et.Optional_Value<string>,
-}
-
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
-export type Error =
-    | ['not clean', null]
-    | ['could not remove', d_eqe.Error]
-    | ['could not add', d_eqe.Error]
-    | ['unexpected error', d_gic.Error]
 
-export type Resources = {
-    'queries': {
-        'git': _easync.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
-    }
-    'procedures': {
-        'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    }
-}
-
-export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
+export const $$: _easync.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
     $p, $r,
 ) => {
     return pu_three_steps(

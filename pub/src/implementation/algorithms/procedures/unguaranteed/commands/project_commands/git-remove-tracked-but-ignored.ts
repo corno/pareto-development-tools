@@ -13,6 +13,10 @@ import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schema
 import { Project_Parameters } from "../../../../../../interface/project_command"
 import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
 
+import * as t_git_extended_commit_to_text from "../../../../transformers/git_extended_commit/text"
+import * as t_eqe_to_text from "../../../../transformers/execute_query_executable/text"
+import * as t_git_remove_tracked_but_ignored_to_text from "../../../../transformers/git_remove_tracked_but_ignored/text"
+
 
 export type Resources = {
     'queries': {
@@ -43,51 +47,10 @@ export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, R
                     on_success()
                 },
                 ($) => {
-                    const eqe_to_string = ($: d_eqe.Error): string => {
-                        return _ea.cc($, ($) => {
-                            switch ($[0]) {
-                                case 'failed to spawn': return _ea.ss($, ($) => {
-                                    return `failed to spawn process: ${$.message}`
-                                })
-                                case 'non zero exit code': return _ea.ss($, ($) => {
-                                    return `non zero exit code: ${$['exit code'].transform(($) => `` + $, () => `-`)}>${$.stderr}`
-                                })
-                                default: return _ea.au($[0])
-                            }
-                        })
-                    }
+                    
 
                     $.map(($, key) => {
-                        _ea.cc($, ($) => {
-                            switch ($[0]) {
-                                case 'not clean': return _ea.ss($, ($) => {
-                                    _ed.log_debug_message(`${key}: not clean`, () => { })
-                                })
-                                case 'unexpected error': return _ea.ss($, ($) => {
-                                    _ed.log_debug_message(`${key}: ${_ea.cc($, ($) => {
-                                        switch ($[0]) {
-                                            case 'not a git repository': return _ea.ss($, ($) => `not a git repository`)
-                                            case 'could not determine git status': return _ea.ss($, ($) => `could not determine status, ${eqe_to_string($)}`)
-                                            case 'unknown issue': return _ea.ss($, ($) => `unknown issue: ${_ea.cc($, ($) => {
-                                                switch ($[0]) {
-                                                    case 'could not run git command': return _ea.ss($, ($) => `could not run git command: ${$.message}`)
-                                                    case 'unexpected output': return _ea.ss($, ($) => `unexpected output: ${$}`)
-                                                    default: return _ea.au($[0])
-                                                }
-                                            })}`)
-                                            default: return _ea.au($[0])
-                                        }
-                                    })}`, () => { })
-                                })
-                                case 'could not remove': return _ea.ss($, ($) => {
-                                    _ed.log_debug_message(`${key}: could not remove: ${eqe_to_string($)}`, () => { })
-                                })
-                                case 'could not add': return _ea.ss($, ($) => {
-                                    _ed.log_debug_message(`${key}: could not add: ${eqe_to_string($)}`, () => { })
-                                })
-                                default: return _ea.au($[0])
-                            }
-                        })
+                        _ed.log_debug_message(`${key}: ${t_git_remove_tracked_but_ignored_to_text.Error($)}`, () => { })
                     })
                     on_exception({
                         'exit code': 1,

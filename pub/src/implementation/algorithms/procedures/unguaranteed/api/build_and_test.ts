@@ -5,12 +5,10 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../../../../interface/temp/build"
+import * as d from "../../../../../interface/temp/build_and_test"
 
-import { $$ as pu_tsc } from "./tsc"
-
+import { $$ as pu_build } from "./build"
 import { $$ as pu_two_steps } from "../../../../../temp/two_steps"
-
 
 export const $$: _easync.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
     $p, $r
@@ -18,17 +16,19 @@ export const $$: _easync.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resourc
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             pu_two_steps(
-                pu_tsc(
+                pu_build(
                     {
-                        'path': _ea.set($p.path + `/pub`),
+                        'path': $p.path,
                     },
                     $r,
                 ),
-                pu_tsc(
+                $r.procedures.node(
                     {
-                        'path': _ea.set($p.path + `/test`),
+                        'args': _ea.array_literal([
+                            $p.path + `/test/dist/bin/test.js`,
+                        ])
                     },
-                    $r,
+                    null,
                 ),
             ).__start(
                 on_success,
@@ -36,10 +36,10 @@ export const $$: _easync.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resourc
                     _ea.cc($, ($) => {
                         switch ($[0]) {
                             case 'step1': return _ea.ss($, ($) => {
-                                on_exception(['error building pub', $])
+                                on_exception(['error building', $])
                             })
                             case 'step2': return _ea.ss($, ($) => {
-                                on_exception(['error building test', $])
+                                on_exception(['error testing', $])
                             })
                             default: return _ea.au($[0])
                         }

@@ -5,21 +5,25 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import * as d_tsc from "../../../../../../interface/temp/tsc"
 import * as d_espe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
+import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+
 import * as d_write_to_stderr from "exupery-resources/dist/interface/generated/pareto/schemas/write_to_stderr/data_types/source"
 import { Project_Parameters } from "../../../../../../interface/project_command"
 
-import { $$ as p_api_build } from "../../api/build"
+import { $$ as p_api_build_and_test } from "../../api/build_and_test"
 import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
 import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/dictionary/to_list_sorted_by_insertion"
 import { $$ as op_join } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/text/join_list_of_texts"
+
+import * as t_build_and_test_to_text from "../../../../transformers/build_and_test/text"
 
 
 export type Resources = {
     'procedures': {
         'tsc': _easync.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
         'write to stderr': _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+        'node': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
     }
 }
 
@@ -30,7 +34,7 @@ export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, R
         'execute': (on_success, on_exception) => {
             do_procedure_dict(
                 $p.packages.map(($, key) => {
-                    return p_api_build(
+                    return p_api_build_and_test(
                         {
                             'path': key,
                         },
@@ -40,36 +44,11 @@ export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, R
             ).__start(
                 on_success,
                 ($) => {
-                    const t_tsc_error_to_string = ($: d_tsc.Error): string => {
-                        return _ea.cc($, ($): string => {
-                            switch ($[0]) {
-                                case 'error while running tsc': return _ea.ss($, ($) => {
-                                    return _ea.cc($, ($) => {
-                                        switch ($[0]) {
-                                            case 'failed to spawn': return _ea.ss($, ($): string => {
-                                                return `failed to spawn`
-                                            })
-                                            case 'non zero exit code': return _ea.ss($, ($) => {
-                                                return $.stderr + $.stdout
-                                            })
-                                            default: return _ea.au($[0])
-                                        }
-                                    })
-                                })
-                                default: return _ea.au($[0])
-                            }
-                        })
-                    }
+                    
                     const data: string = op_join(
                         op_dictionary_to_list(
                             $.map(($, key): string => {
-                                return _ea.cc($, ($) => {
-                                    switch ($[0]) {
-                                        case 'error building pub': return _ea.ss($, ($) => `${key}/pub:\n${t_tsc_error_to_string($)}`)
-                                        case 'error building test': return _ea.ss($, ($) => `${key}/test:\n${t_tsc_error_to_string($)}`)
-                                        default: return _ea.au($[0])
-                                    }
-                                })
+                                return `${key}:\n` + t_build_and_test_to_text.Error($)
                             })
 
                         ).map(($) => $.value)

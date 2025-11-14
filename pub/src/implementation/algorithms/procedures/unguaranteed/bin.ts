@@ -47,10 +47,11 @@ export type Resources = {
     },
     'procedures': {
         'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'tsc': _easync.Unguaranteed_Procedure<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error, null>
-        'npm': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
         'log': _easync.Guaranteed_Procedure<d_log.Parameters, null>
+        'node': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'npm': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'tsc': _easync.Unguaranteed_Procedure<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error, null>
+        'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
         'write to stderr': _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
 
     }
