@@ -13,7 +13,7 @@ import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation
 
 
 
-export const $$: _easync.Unguaranteed_Query<d.Parameters, d.Result, d.Error, d.Resources> = (
+export const $$: _et.Unguaranteed_Query<d.Parameters, d.Result, d.Error, d.Resources> = (
     $p, $r,
 ) => {
     return _easync.__create_unguaranteed_query({

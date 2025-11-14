@@ -21,12 +21,12 @@ export type Error =
     | ['error building test', d_utd.Error]
 
 export type Resources = {
-    'git procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    'npm procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'git procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'npm procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'update2latest': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
 }
 
-export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<Parameters, Error, Resources> = (
     $p, $r,
 ) => {
     return pu_two_steps(

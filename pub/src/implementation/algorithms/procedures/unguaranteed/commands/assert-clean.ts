@@ -5,7 +5,7 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import { $$ as op_remove_first } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/list/remove_first_element"
+import { $$ as op_remove_first } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/list/pop_first_element"
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 import { $$ as op_api_assert_clean } from "../api/git-assert-clean"
@@ -16,11 +16,11 @@ import * as d_log from "exupery-resources/dist/interface/generated/pareto/schema
 
 export type Resources = {
     'queries': {
-        'git': _easync.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
     }
     'procedures': {
-        'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'log': _easync.Guaranteed_Procedure<d_log.Parameters, null>
+        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'log': _et.Guaranteed_Procedure<d_log.Parameters, null>
     }
 }
 
@@ -29,7 +29,7 @@ export type Resources = {
 const log_and_exit = (
     on_exception: ($: _eb.Error) => void,
     message: _et.Array<string>,
-    p_log_error: _easync.Guaranteed_Procedure<d_log.Parameters, null>
+    p_log_error: _et.Guaranteed_Procedure<d_log.Parameters, null>
 ): () => void => {
     return () => {
         p_log_error(
@@ -46,7 +46,7 @@ const log_and_exit = (
         )
     }
 }
-export const $$: _easync.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, Resources> = (
     $p, $r
 ) => {
     return _easync.__create_unguaranteed_procedure({

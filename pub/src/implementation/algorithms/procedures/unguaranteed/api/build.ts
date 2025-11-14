@@ -12,7 +12,7 @@ import { $$ as pu_tsc } from "./tsc"
 import { $$ as pu_two_steps } from "../../../../../temp/two_steps"
 
 
-export const $$: _easync.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
+export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
     $p, $r
 ) => {
     return _easync.__create_unguaranteed_procedure({

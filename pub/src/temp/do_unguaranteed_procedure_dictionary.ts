@@ -8,8 +8,8 @@ import * as _ea from 'exupery-core-alg'
 import { $$ as op_dictionary_size } from "./dictionary_size"
 
 export const $$ = <Error>(
-    $: _et.Dictionary<_easync.Unguaranteed_Procedure_Promise<Error>>,
-): _easync.Unguaranteed_Procedure_Promise<_et.Dictionary<Error>> => {
+    $: _et.Dictionary<_et.Unguaranteed_Procedure_Promise<Error>>,
+): _et.Unguaranteed_Procedure_Promise<_et.Dictionary<Error>> => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             let count_down = op_dictionary_size($)

@@ -21,17 +21,17 @@ import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schema
 import * as d_write_to_stderr from "exupery-resources/dist/interface/generated/pareto/schemas/write_to_stderr/data_types/source"
 
 export type Resources = {
-    'git procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    'npm procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    'update2latest': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    'write to stderr': _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+    'git procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'npm procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'update2latest': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'write to stderr': _et.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
 
 }
 
 const execute_and_write_errors_to_stderr_and_set_exit_code_to_1 = (
-    procedure: _easync.Unguaranteed_Procedure_Promise<string>,
-    p_write_to_stderr: _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
-): _easync.Unguaranteed_Procedure_Promise<_eb.Error> => {
+    procedure: _et.Unguaranteed_Procedure_Promise<string>,
+    p_write_to_stderr: _et.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+): _et.Unguaranteed_Procedure_Promise<_eb.Error> => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             procedure.__start(
@@ -51,7 +51,7 @@ const execute_and_write_errors_to_stderr_and_set_exit_code_to_1 = (
 }
 
 
-export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
     $p, $r,
 ) => {
     return execute_and_write_errors_to_stderr_and_set_exit_code_to_1(

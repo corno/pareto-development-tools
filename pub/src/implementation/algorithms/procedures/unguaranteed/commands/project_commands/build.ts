@@ -18,12 +18,12 @@ import { $$ as op_join } from "pareto-standard-operations/dist/implementation/al
 
 export type Resources = {
     'procedures': {
-        'tsc': _easync.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
-        'write to stderr': _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+        'tsc': _et.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
+        'write to stderr': _et.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
     $p, $r,
 ) => {
     return _easync.__create_unguaranteed_procedure({

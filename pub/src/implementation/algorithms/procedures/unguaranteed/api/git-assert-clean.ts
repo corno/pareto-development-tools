@@ -22,14 +22,14 @@ export type Error =
 
 export type Resources = {
     'queries': {
-        'git': _easync.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
     }
     'procedures': {
-        'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<Parameters, Error, Resources> = (
     $p, $r,
 ) => {
     return _easync.__create_unguaranteed_procedure({

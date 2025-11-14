@@ -21,13 +21,13 @@ import * as t_build_and_test_to_text from "../../../../transformers/build_and_te
 
 export type Resources = {
     'procedures': {
-        'tsc': _easync.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
-        'write to stderr': _easync.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
-        'node': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'tsc': _et.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
+        'write to stderr': _et.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+        'node': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
     $p, $r,
 ) => {
     return _easync.__create_unguaranteed_procedure({

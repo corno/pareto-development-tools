@@ -16,11 +16,11 @@ export type Parameters = {
 
 export type Resources = {
     'procedures': {
-        'tsc': _easync.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
+        'tsc': _et.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure<Parameters, d_tsc.Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<Parameters, d_tsc.Error, Resources> = (
     $p, $r,
 ) => {
     return $r.procedures.tsc(

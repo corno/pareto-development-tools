@@ -22,10 +22,10 @@ export type Error =
 // | ['could not push', d_eqe.Error]
 
 export type Resources = {
-    'npm procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'npm procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
 }
 
-export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<Parameters, Error, Resources> = (
     $p, $r,
 ) => {
     return $r['npm procedure'](

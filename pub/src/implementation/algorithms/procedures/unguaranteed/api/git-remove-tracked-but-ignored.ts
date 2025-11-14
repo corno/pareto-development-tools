@@ -14,7 +14,7 @@ import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 
-export const $$: _easync.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
+export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
     $p, $r,
 ) => {
     return pu_three_steps(

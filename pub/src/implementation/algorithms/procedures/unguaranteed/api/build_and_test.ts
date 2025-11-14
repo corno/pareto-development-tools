@@ -10,12 +10,13 @@ import * as d from "../../../../../interface/temp/build_and_test"
 import { $$ as pu_build } from "./build"
 import { $$ as pu_two_steps } from "../../../../../temp/two_steps"
 
-export const $$: _easync.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
+export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
     $p, $r
 ) => {
     return _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             pu_two_steps(
+                // Step 1: clean the /dest directory?
                 pu_build(
                     {
                         'path': $p.path,

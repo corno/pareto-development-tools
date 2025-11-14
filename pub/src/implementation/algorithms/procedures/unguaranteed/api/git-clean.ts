@@ -17,10 +17,10 @@ export type Error =
     | ['unexpected error', d_epe.Error]
 
 export type Resources = {
-    'git procedure': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+    'git procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
 }
 
-export const $$: _easync.Unguaranteed_Procedure<Parameters, Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<Parameters, Error, Resources> = (
     $p, $r,
 ) => {
     return $r['git procedure'](

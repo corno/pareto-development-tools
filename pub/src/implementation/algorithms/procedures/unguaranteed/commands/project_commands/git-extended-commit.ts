@@ -7,7 +7,7 @@ import * as _ea from 'exupery-core-alg'
 
 import { $$ as p_api_git_commit } from "../../api/git-extended-commit"
 
-import { $$ as op_remove_first } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/list/remove_first_element"
+import { $$ as op_remove_first } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/list/pop_first_element"
 
 import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
@@ -19,7 +19,7 @@ import * as t_git_extended_commit_to_text from "../../../../transformers/git_ext
 const log_and_exit = (
     on_exception: ($: _eb.Error) => void,
     message: _et.Array<string>,
-    p_log_error: _easync.Guaranteed_Procedure<d_log.Parameters, null>
+    p_log_error: _et.Guaranteed_Procedure<d_log.Parameters, null>
 ): () => void => {
     return () => {
         p_log_error(
@@ -43,15 +43,15 @@ import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_
 
 export type Resources = {
     'queries': {
-        'git': _easync.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
     }
     'procedures': {
-        'git': _easync.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'log': _easync.Guaranteed_Procedure<d_log.Parameters, null>
+        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'log': _et.Guaranteed_Procedure<d_log.Parameters, null>
     }
 }
 
-export const $$: _easync.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
+export const $$: _et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
     $p, $r
 ) => {
     return _easync.__create_unguaranteed_procedure({
