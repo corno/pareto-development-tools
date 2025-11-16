@@ -22,14 +22,13 @@ import { $$ as p_command_project } from "./commands/project"
 const log_and_exit = (
     on_exception: ($: _eb.Error) => void,
     message: _et.Array<string>,
-    p_log_error: _et.Guaranteed_Procedure<d_log.Parameters, null>
+    p_log_error: _et.Guaranteed_Procedure_Primed_With_Resources<d_log.Parameters>
 ): () => void => {
     return () => {
         p_log_error(
             {
                 'lines': message
             },
-            null,
         ).__start(
             () => {
                 on_exception({
@@ -42,25 +41,25 @@ const log_and_exit = (
 
 export type Resources = {
     'queries': {
-        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
-        'read directory': _et.Unguaranteed_Query<d_read_directory.Parameters, d_read_directory.Result, d_read_directory.Error, null>
+        'git': _et.Unguaranteed_Query_Primed_With_Resources<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
+        'read directory': _et.Unguaranteed_Query_Primed_With_Resources<d_read_directory.Parameters, d_read_directory.Result, d_read_directory.Error>
     },
     'procedures': {
-        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'log': _et.Guaranteed_Procedure<d_log.Parameters, null>
-        'node': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'npm': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'tsc': _et.Unguaranteed_Procedure<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error, null>
-        'update2latest': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'write to stderr': _et.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+        'git': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'log': _et.Guaranteed_Procedure_Primed_With_Resources<d_log.Parameters>
+        'node': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'npm': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'tsc': _et.Unguaranteed_Procedure_Primed_With_Resources<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error>
+        'update2latest': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'write to stderr': _et.Guaranteed_Procedure_Primed_With_Resources<d_write_to_stderr.Parameters>
 
     }
 }
 
 export const $$: _et.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, Resources> = (
-    $p, $r,
+    $r,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
+    return ($p) => _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             const commands: _et.Dictionary<_et.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, Resources>> = _ea.dictionary_literal({
                 'assert-clean': p_command_assert_clean,
@@ -71,11 +70,10 @@ export const $$: _et.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, Resources
                     const rest = $.rest
                     commands.__get_entry($.element).transform(
                         ($) => {
-                            $(
+                            $($r)(
                                 {
                                     'arguments': rest
                                 },
-                                $r,
                             ).__start(
                                 on_success,
                                 on_exception,

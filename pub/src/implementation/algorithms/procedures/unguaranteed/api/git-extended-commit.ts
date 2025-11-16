@@ -8,25 +8,24 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../../../../interface/temp/git_extended_commit"
 
 import { $$ as qu_git_is_clean } from "../../../queries/unguaranteed/git_is_clean"
-import { $$ as qu_transform } from "../../../../../temp/transform_query"
+import { $$ as qu_transform } from "../../../../../temp/query/transform_query"
 
-import { $$ as pu_conditional_async } from "../../../../../temp/conditional_async"
-import { $$ as pu_conditional_sync } from "../../../../../temp/conditional_sync"
-import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
+import { $$ as pu_conditional_async } from "../../../../../temp/procedure/conditional_async"
+import { $$ as pu_conditional_sync } from "../../../../../temp/procedure/conditional_sync"
+import { $$ as pu_three_steps } from "../../../../../temp/procedure/three_steps"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 
 export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
-    $p, $r
+    $r
 ) => {
-    return pu_conditional_async(
+    return ($p) => pu_conditional_async(
         qu_transform(
-            qu_git_is_clean(
+            qu_git_is_clean($r)(
                 {
                     'path': $p.path
                 },
-                $r,
             ),
             ($) => !$
         ),
@@ -49,7 +48,6 @@ export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> 
                             ])
                         ])),
                     },
-                    null,
                 )
             ),
             $r.procedures.git(
@@ -69,7 +67,6 @@ export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> 
                         ])
                     ])),
                 },
-                null,
             ),
             pu_conditional_sync(
                 $p['push after commit'],
@@ -88,7 +85,6 @@ export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> 
                             ])
                         ]))
                     },
-                    null,
                 )
             )
         ),

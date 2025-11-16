@@ -7,23 +7,12 @@ import * as _ea from 'exupery-core-alg'
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+import * as d from "../../../../../interface/temp/git_clean"
 
-export type Parameters = {
-    'path': _et.Optional_Value<string>,
-}
-
-export type Error =
-    | ['unexpected error', d_epe.Error]
-
-export type Resources = {
-    'git procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-}
-
-export const $$: _et.Unguaranteed_Procedure<Parameters, Error, Resources> = (
-    $p, $r,
+export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
+    $r,
 ) => {
-    return $r['git procedure'](
+    return ($p) => $r.procedures['git'](
         {
             'args': op_flatten(_ea.array_literal([
                 $p.path.transform(
@@ -42,6 +31,5 @@ export const $$: _et.Unguaranteed_Procedure<Parameters, Error, Resources> = (
                 ])
             ])),
         },
-        null,
     ).map_error(($) => ['unexpected error', $])
 }

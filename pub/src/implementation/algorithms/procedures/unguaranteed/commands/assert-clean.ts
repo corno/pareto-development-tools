@@ -16,11 +16,11 @@ import * as d_log from "exupery-resources/dist/interface/generated/pareto/schema
 
 export type Resources = {
     'queries': {
-        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+        'git': _et.Unguaranteed_Query_Primed_With_Resources<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
     }
     'procedures': {
-        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'log': _et.Guaranteed_Procedure<d_log.Parameters, null>
+        'git': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'log': _et.Guaranteed_Procedure_Primed_With_Resources<d_log.Parameters>
     }
 }
 
@@ -29,14 +29,13 @@ export type Resources = {
 const log_and_exit = (
     on_exception: ($: _eb.Error) => void,
     message: _et.Array<string>,
-    p_log_error: _et.Guaranteed_Procedure<d_log.Parameters, null>
+    p_log_error: _et.Guaranteed_Procedure_Primed_With_Resources<d_log.Parameters>
 ): () => void => {
     return () => {
         p_log_error(
             {
                 'lines': message
             },
-            null,
         ).__start(
             () => {
                 on_exception({
@@ -47,18 +46,17 @@ const log_and_exit = (
     }
 }
 export const $$: _et.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, Resources> = (
-    $p, $r
+    $r
 ) => {
-    return _easync.__create_unguaranteed_procedure({
+    return ($p) => _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
 
             op_remove_first($p.arguments).transform(
                 ($) => {
-                    op_api_assert_clean(
+                    op_api_assert_clean($r)(
                         {
                             'path': _ea.set($.element),
                         },
-                        $r,
                     ).__start(
                         on_success,
                         () => ({

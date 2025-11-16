@@ -14,6 +14,6 @@ export type Error =
 
 export type Resources = {
     'procedures': {
-        'tsc': _et.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
+        'tsc': _et.Unguaranteed_Procedure_Primed_With_Resources<d_espe.Parameters, d_espe.Error>
     }
 }

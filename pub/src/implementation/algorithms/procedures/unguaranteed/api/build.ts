@@ -9,26 +9,24 @@ import * as d from "../../../../../interface/temp/build"
 
 import { $$ as pu_tsc } from "./tsc"
 
-import { $$ as pu_two_steps } from "../../../../../temp/two_steps"
+import { $$ as pu_two_steps } from "../../../../../temp/procedure/two_steps"
 
 
 export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
-    $p, $r
+    $r
 ) => {
-    return _easync.__create_unguaranteed_procedure({
+    return ($p) => _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             pu_two_steps(
-                pu_tsc(
+                pu_tsc($r)(
                     {
                         'path': _ea.set($p.path + `/pub`),
                     },
-                    $r,
                 ),
-                pu_tsc(
+                pu_tsc($r)(
                     {
                         'path': _ea.set($p.path + `/test`),
                     },
-                    $r,
                 ),
             ).__start(
                 on_success,

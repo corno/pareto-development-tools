@@ -13,9 +13,9 @@ import * as d from "../../../../interface/temp/git_is_clean"
 
 
 export const $$: _et.Unguaranteed_Query<d.Parameters, d.Result, d.Error, d.Resources> = (
-    $p, $r,
+    $r,
 ) => {
-    return _easync.__create_unguaranteed_query({
+    return ($p) => _easync.__create_unguaranteed_query({
         'execute': (on_success, on_exception) => {
             $r.queries.git(
                 {
@@ -33,7 +33,6 @@ export const $$: _et.Unguaranteed_Query<d.Parameters, d.Result, d.Error, d.Resou
                         ])
                     ])),
                 },
-                null,
             ).__start(
                 ($) => {
                     on_success($.stdout === ``)
@@ -41,11 +40,10 @@ export const $$: _et.Unguaranteed_Query<d.Parameters, d.Result, d.Error, d.Resou
                 ($) => {
                     const err = $
 
-                    qu_is_inside_work_tree(
+                    qu_is_inside_work_tree($r)(
                         {
                             'path': $p.path
                         },
-                        $r,
                     ).__start(
                         ($) => {
                             if (!$) {

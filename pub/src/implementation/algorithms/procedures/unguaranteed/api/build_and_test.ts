@@ -8,20 +8,19 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../../../../interface/temp/build_and_test"
 
 import { $$ as pu_build } from "./build"
-import { $$ as pu_two_steps } from "../../../../../temp/two_steps"
+import { $$ as pu_two_steps } from "../../../../../temp/procedure/two_steps"
 
 export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
-    $p, $r
+    $r
 ) => {
-    return _easync.__create_unguaranteed_procedure({
+    return ($p) => _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             pu_two_steps(
                 // Step 1: clean the /dest directory?
-                pu_build(
+                pu_build($r)(
                     {
                         'path': $p.path,
                     },
-                    $r,
                 ),
                 $r.procedures.node(
                     {
@@ -29,7 +28,6 @@ export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> 
                             $p.path + `/test/dist/bin/test.js`,
                         ])
                     },
-                    null,
                 ),
             ).__start(
                 on_success,

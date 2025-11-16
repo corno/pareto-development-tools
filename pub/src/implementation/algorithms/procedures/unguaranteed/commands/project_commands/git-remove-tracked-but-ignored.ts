@@ -11,7 +11,7 @@ import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schema
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 
 import { Project_Parameters } from "../../../../../../interface/project_command"
-import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
+import { $$ as do_procedure_dict } from "../../../../../../temp/procedure/do_unguaranteed_procedure_dictionary"
 
 import * as t_git_extended_commit_to_text from "../../../../transformers/git_extended_commit/text"
 import * as t_eqe_to_text from "../../../../transformers/execute_query_executable/text"
@@ -20,25 +20,24 @@ import * as t_git_remove_tracked_but_ignored_to_text from "../../../../transform
 
 export type Resources = {
     'queries': {
-        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+        'git': _et.Unguaranteed_Query_Primed_With_Resources<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
     }
     'procedures': {
-        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'git': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
     }
 }
 
 export const $$: _et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
-    $p, $r,
+    $r,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
+    return ($p) => _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             do_procedure_dict(
                 $p.packages.map(($, key) => {
-                    return p_api_git_remove_tracked_but_ignored(
+                    return p_api_git_remove_tracked_but_ignored($r)(
                         {
                             'path': _ea.set(key),
                         },
-                        $r,
                     )
                 }),
             ).__start(
@@ -47,7 +46,7 @@ export const $$: _et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resou
                     on_success()
                 },
                 ($) => {
-                    
+
 
                     $.map(($, key) => {
                         _ed.log_debug_message(`${key}: ${t_git_remove_tracked_but_ignored_to_text.Error($)}`, () => { })

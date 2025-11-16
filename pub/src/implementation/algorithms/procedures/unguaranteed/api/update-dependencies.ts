@@ -7,56 +7,31 @@ import * as _ea from 'exupery-core-alg'
 
 import { $$ as pu_update_typescript_dependencies } from "./update-typescript-dependencies"
 
-import { $$ as pu_two_steps } from "../../../../../temp/two_steps"
+import { $$ as pu_two_steps } from "../../../../../temp/procedure/two_steps"
 
-import * as d_utd from "./update-typescript-dependencies"
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+import * as d from "../../../../../interface/temp/update_dependencies"
 
-export type Parameters = {
-    'path': string,
-}
-
-export type Error =
-    | ['error building pub', d_utd.Error]
-    | ['error building test', d_utd.Error]
-
-export type Resources = {
-    'git procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    'npm procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    'update2latest': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-}
-
-export const $$: _et.Unguaranteed_Procedure<Parameters, Error, Resources> = (
-    $p, $r,
+export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
+    $r,
 ) => {
-    return pu_two_steps(
-        pu_update_typescript_dependencies(
+    return ($p) => pu_two_steps(
+        pu_update_typescript_dependencies($r)(
             {
                 'path': `${$p.path}/pub`,
-            },
-            {
-                'git procedure': $r['git procedure'],
-                'npm procedure': $r['npm procedure'],
-                'update2latest': $r.update2latest,
-            },
+            }
         ),
-        pu_update_typescript_dependencies(
+        pu_update_typescript_dependencies($r)(
             {
                 'path': `${$p.path}/test`,
-            },
-            {
-                'git procedure': $r['git procedure'],
-                'npm procedure': $r['npm procedure'],
-                'update2latest': $r.update2latest,
-            },
+            }
         ),
     ).map_error(($) => _ea.cc($, ($) => {
         switch ($[0]) {
             case 'step1': return _ea.ss($, ($) => {
-                return ['error building pub', $]
+                return ['error updating pub', $]
             })
             case 'step2': return _ea.ss($, ($) => {
-                return ['error building test', $]
+                return ['error updating test', $]
             })
             default: return _ea.au($[0])
         }

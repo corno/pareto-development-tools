@@ -19,14 +19,13 @@ import * as t_git_extended_commit_to_text from "../../../../transformers/git_ext
 const log_and_exit = (
     on_exception: ($: _eb.Error) => void,
     message: _et.Array<string>,
-    p_log_error: _et.Guaranteed_Procedure<d_log.Parameters, null>
+    p_log_error: _et.Guaranteed_Procedure_Primed_With_Resources<d_log.Parameters>
 ): () => void => {
     return () => {
         p_log_error(
             {
                 'lines': message
             },
-            null,
         ).__start(
             () => {
                 on_exception({
@@ -38,37 +37,36 @@ const log_and_exit = (
 }
 
 import { Project_Parameters } from "../../../../../../interface/project_command"
-import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
+import { $$ as do_procedure_dict } from "../../../../../../temp/procedure/do_unguaranteed_procedure_dictionary"
 
 
 export type Resources = {
     'queries': {
-        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+        'git': _et.Unguaranteed_Query_Primed_With_Resources<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
     }
     'procedures': {
-        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'log': _et.Guaranteed_Procedure<d_log.Parameters, null>
+        'git': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'log': _et.Guaranteed_Procedure_Primed_With_Resources<d_log.Parameters>
     }
 }
 
 export const $$: _et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
-    $p, $r
+    $r
 ) => {
-    return _easync.__create_unguaranteed_procedure({
+    return ($p) => _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             op_remove_first($p.arguments).transform(
                 ($) => {
                     const commit_message = $.element
                     do_procedure_dict(
                         $p.packages.map(($, key) => {
-                            return p_api_git_commit(
+                            return p_api_git_commit($r)(
                                 {
                                     'path': _ea.set(key),
                                     'commit message': commit_message,
                                     'stage all changes': true,
                                     'push after commit': true,
                                 },
-                                $r,
                             )
                         }),
                     ).__start(

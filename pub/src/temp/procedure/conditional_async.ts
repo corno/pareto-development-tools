@@ -2,7 +2,7 @@ import * as _et from 'exupery-core-types'
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 
-import { $$ as do_query_dictionary } from "./do_unguaranteed_query_dictionary"
+import { $$ as do_query_dictionary } from "../query/do_unguaranteed_query_dictionary"
 
 import { $$ as op_dictionary_is_empty } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/dictionary/is_empty"
 import { $$ as op_filter_dictionary } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/dictionary/filter"

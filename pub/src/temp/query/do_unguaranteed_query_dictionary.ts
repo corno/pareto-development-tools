@@ -5,14 +5,12 @@ import * as _ed from 'exupery-core-dev'
 import * as _eb from 'exupery-core-bin'
 import * as _ea from 'exupery-core-alg'
 
-import { $$ as op_dictionary_size } from "./dictionary_size"
-
 export const $$ = <Result, Error>(
     $: _et.Dictionary<_easync.Basic_Unguaranteed_Query_Promise<Result, Error>>,
 ): _et.Unguaranteed_Query_Promise<_et.Dictionary<Result>, _et.Dictionary<Error>> => {
     return _easync.__create_unguaranteed_query({
         'execute': (on_success, on_exception) => {
-            let count_down = op_dictionary_size($)
+            let count_down = $.__get_number_of_entries()
             let has_errors = false
 
             const errors: { [key: string]: Error } = {}

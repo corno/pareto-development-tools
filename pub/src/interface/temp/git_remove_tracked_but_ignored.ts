@@ -18,9 +18,9 @@ export type Error =
 
 export type Resources = {
     'queries': {
-        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+        'git': _et.Unguaranteed_Query_Primed_With_Resources<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
     }
     'procedures': {
-        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'git': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
     }
 }

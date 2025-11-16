@@ -10,78 +10,71 @@ _eb.run_unguaranteed_main_procedure<d_bin.Resources>(
     ($rr) => {
         return {
             'queries': {
-                'git': ($p, $r) => {
+                'git': ($p) => {
                     return $rr.queries['execute any query executable'](
                         {
                             'program': `git`,
                             'args': $p.args,
                         },
-                        null
                     )
                 },
-                'read directory': ($p, $r) => {
-                    return $rr.queries['read directory']($p, null)
+                'read directory': ($p) => {
+                    return $rr.queries['read directory']($p)
                 },
             },
             'procedures': {
-                'git': ($p, $r) => {
+                'git': ($p) => {
                     return $rr.procedures['execute any procedure executable'](
                         {
                             'program': `git`,
                             'args': $p.args,
                         },
-                        null
                     )
                 },
-                'log': ($p, $r) => {
+                'log': ($p) => {
                     return $rr.procedures.log(
                         $p,
-                        null
                     )
                 },
-                'npm': ($p, $r) => {
+                'npm': ($p) => {
                     return $rr.procedures['execute any procedure executable'](
                         {
                             'program': `npm`,
                             'args': $p.args,
                         },
-                        null
                     )
                 },
-                'node': ($p, $r) => {
+                'node': ($p) => {
                     return $rr.procedures['execute any procedure executable'](
                         {
                             'program': `node`,
                             'args': $p.args,
                         },
-                        null
                     )
                 },
-                'tsc': ($p, $r) => {
+                'tsc': ($p) => {
                     return $rr.procedures['execute any smelly procedure executable'](
                         {
                             'program': `tsc`,
                             'args': $p.args,
                         },
-                        null
                     )
                 },
-                'update2latest': ($p, $r) => {
+                'update2latest': ($p) => {
                     return $rr.procedures['execute any procedure executable'](
                         {
                             'program': `update2latest`,
                             'args': $p.args,
                         },
-                        null
                     )
                 },
-                'write to stderr': ($p, $r) => {
-                    return $rr.procedures['write to stderr']($p, null)
+                'write to stderr': ($p) => {
+                    return $rr.procedures['write to stderr']($p)
                 },
             },
         }
     },
-    ($p, $r) => {
-        return p_bin($p, $r)
+    ($p) => {
+        return p_bin($p)
     }
 )

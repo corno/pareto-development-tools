@@ -9,58 +9,30 @@ import { $$ as pu_git_clean } from "./git-clean"
 import { $$ as pu_update2latest } from "./update2latest"
 import { $$ as pu_npm } from "./npm"
 
-import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
+import { $$ as pu_three_steps } from "../../../../../temp/procedure/three_steps"
 
-import * as d_npm from "./npm"
-import * as d_update_dependencies from "./update2latest"
-import * as d_gc from "./git-clean"
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+import * as d from "../../../../../interface/temp/update_typescript_dependencies"
 
-export type Parameters = {
-    'path': string,
-}
-
-export type Error =
-    | ['could not clean', d_gc.Error]
-    | ['could not update to latest', d_update_dependencies.Error]
-    | ['could not install', d_npm.Error]
-
-export type Resources = {
-    'git procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    'npm procedure': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-    'update2latest': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-}
-
-export const $$: _et.Unguaranteed_Procedure<Parameters, Error, Resources> = (
-    $p, $r,
+export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
+    $r,
 ) => {
-    return pu_three_steps(
-        pu_git_clean(
+    return ($p) => pu_three_steps(
+        pu_git_clean($r)(
             {
                 'path': _ea.set($p.path),
-            },
-            {
-                'git procedure': $r['git procedure'],
-            },
+            }
         ),
-        pu_update2latest(
+        pu_update2latest($r)(
             {
                 'path': $p.path,
                 'verbose': false,
                 'what': ['dependencies', null],
             },
-            {
-                'update2latest': $r['update2latest']
-            },
         ),
-        pu_npm(
+        pu_npm($r)(
             {
                 'path': _ea.set($p.path),
                 'operation': ['install', null],
-            },
-            {
-            
-                'npm procedure': $r['npm procedure']
             },
         ),
     ).map_error(($) => {

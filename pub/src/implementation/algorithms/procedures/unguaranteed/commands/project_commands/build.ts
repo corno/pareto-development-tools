@@ -11,30 +11,29 @@ import * as d_write_to_stderr from "exupery-resources/dist/interface/generated/p
 import { Project_Parameters } from "../../../../../../interface/project_command"
 
 import { $$ as p_api_build } from "../../api/build"
-import { $$ as do_procedure_dict } from "../../../../../../temp/do_unguaranteed_procedure_dictionary"
+import { $$ as do_procedure_dict } from "../../../../../../temp/procedure/do_unguaranteed_procedure_dictionary"
 import { $$ as op_dictionary_to_list } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/dictionary/to_list_sorted_by_insertion"
 import { $$ as op_join } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/text/join_list_of_texts"
 
 
 export type Resources = {
     'procedures': {
-        'tsc': _et.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
-        'write to stderr': _et.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+        'tsc': _et.Unguaranteed_Procedure_Primed_With_Resources<d_espe.Parameters, d_espe.Error>
+        'write to stderr': _et.Guaranteed_Procedure_Primed_With_Resources<d_write_to_stderr.Parameters>
     }
 }
 
 export const $$: _et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resources> = (
-    $p, $r,
+    $r,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
+    return ($p) => _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             do_procedure_dict(
                 $p.packages.map(($, key) => {
-                    return p_api_build(
+                    return p_api_build($r)(
                         {
                             'path': key,
                         },
-                        $r,
                     )
                 }),
             ).__start(
@@ -74,7 +73,7 @@ export const $$: _et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Resou
 
                         ).map(($) => $.value)
                     )
-                    $r.procedures['write to stderr'](data, null).__start(
+                    $r.procedures['write to stderr'](data).__start(
                         () => {
                             on_exception({
                                 'exit code': 1,

@@ -22,23 +22,22 @@ export type Error =
 
 export type Resources = {
     'queries': {
-        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+        'git': _et.Unguaranteed_Query_Primed_With_Resources<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
     }
     'procedures': {
-        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
+        'git': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
     }
 }
 
 export const $$: _et.Unguaranteed_Procedure<Parameters, Error, Resources> = (
-    $p, $r,
+    $r,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
+    return ($p) => _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
-            q_is_git_clean(
+            q_is_git_clean($r)(
                 {
                     'path': $p.path,
                 },
-                $r,
             ).__start(
                 ($) => {
                     if ($) {

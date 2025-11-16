@@ -16,33 +16,33 @@ import { Project_Parameters } from "../../../../../interface/project_command"
 
 export type Resources = {
     'queries': {
-        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
-        'read directory': _et.Unguaranteed_Query<d_read_directory.Parameters, d_read_directory.Result, d_read_directory.Error, null>
+        'git': _et.Unguaranteed_Query_Primed_With_Resources<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
+        'read directory': _et.Unguaranteed_Query_Primed_With_Resources<d_read_directory.Parameters, d_read_directory.Result, d_read_directory.Error>
     },
     'procedures': {
-        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'log': _et.Guaranteed_Procedure<d_log.Parameters, null>
-        'node': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'npm': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'tsc': _et.Unguaranteed_Procedure<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error, null>
-        'update2latest': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'write to stderr': _et.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+        'git': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'log': _et.Guaranteed_Procedure_Primed_With_Resources<d_log.Parameters>
+        'node': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'npm': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'tsc': _et.Unguaranteed_Procedure_Primed_With_Resources<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error>
+        'update2latest': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'write to stderr': _et.Guaranteed_Procedure_Primed_With_Resources<d_write_to_stderr.Parameters>
 
     }
 }
 
 export type Command_Resources = {
     'queries': {
-        'git': _et.Unguaranteed_Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error, null>
+        'git': _et.Unguaranteed_Query_Primed_With_Resources<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
     },
     'procedures': {
-        'git': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'log': _et.Guaranteed_Procedure<d_log.Parameters, null>
-        'node': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'npm': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'tsc': _et.Unguaranteed_Procedure<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error, null>
-        'update2latest': _et.Unguaranteed_Procedure<d_epe.Parameters, d_epe.Error, null>
-        'write to stderr': _et.Guaranteed_Procedure<d_write_to_stderr.Parameters, null>
+        'git': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'log': _et.Guaranteed_Procedure_Primed_With_Resources<d_log.Parameters>
+        'node': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'npm': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'tsc': _et.Unguaranteed_Procedure_Primed_With_Resources<d_e_smelly_pe.Parameters, d_e_smelly_pe.Error>
+        'update2latest': _et.Unguaranteed_Procedure_Primed_With_Resources<d_epe.Parameters, d_epe.Error>
+        'write to stderr': _et.Guaranteed_Procedure_Primed_With_Resources<d_write_to_stderr.Parameters>
 
     }
 }
@@ -62,14 +62,13 @@ import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation
 const log_and_exit = (
     on_exception: ($: _eb.Error) => void,
     message: _et.Array<string>,
-    p_log_error: _et.Guaranteed_Procedure<d_log.Parameters, null>
+    p_log_error: _et.Guaranteed_Procedure_Primed_With_Resources<d_log.Parameters>
 ): () => void => {
     return () => {
         p_log_error(
             {
                 'lines': message
             },
-            null,
         ).__start(
             () => {
                 on_exception({
@@ -81,46 +80,38 @@ const log_and_exit = (
 }
 
 export const $$: _et.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, Resources> = (
-    $p, $r,
+    $r,
 ) => {
-    return _easync.__create_unguaranteed_procedure({
+    return ($p) => _easync.__create_unguaranteed_procedure({
         'execute': (on_success, on_exception) => {
             const commands: _et.Dictionary<_et.Unguaranteed_Procedure<Project_Parameters, _eb.Error, Command_Resources>> = _ea.dictionary_literal({
                 'assert-clean': p_command_assert_clean,
                 'git-commit': p_command_git_commit,
                 'git-remove-tracked-but-ignored': p_command_git_remove_tracked_but_ignored,
-                'build': ($p, $r) => {
+                'build': ($r) => ($p) => {
                     return _easync.__create_unguaranteed_procedure({
-                        'execute': (on_success, on_error) => p_command_build(
+                        'execute': (on_success, on_error) => p_command_build($r)(
                             $p,
-                            $r,
                         ).__start(
                             on_success,
                             on_error,
                         )
                     })
                 },
-                'build-and-test': ($p, $r) => {
+                'build-and-test': ($r) => ($p) => {
                     return _easync.__create_unguaranteed_procedure({
-                        'execute': (on_success, on_error) => p_command_build_and_test(
+                        'execute': (on_success, on_error) => p_command_build_and_test($r)(
                             $p,
-                            $r,
                         ).__start(
                             on_success,
                             on_error,
                         )
                     })
                 },
-                'update-dependencies': ($p, $r) => {
+                'update-dependencies': ($r) => ($p) => {
                     return _easync.__create_unguaranteed_procedure({
-                        'execute': (on_success, on_error) => p_update_dependencies(
+                        'execute': (on_success, on_error) => p_update_dependencies($r)(
                             $p,
-                            {
-                                'git procedure': $r.procedures['git'],
-                                'npm procedure': $r.procedures['npm'],
-                                'update2latest': $r.procedures.update2latest,
-                                'write to stderr': $r.procedures['write to stderr']
-                            }
                         ).__start(
                             on_success,
                             on_error,
@@ -145,16 +136,14 @@ export const $$: _et.Unguaranteed_Procedure<_eb.Parameters, _eb.Error, Resources
                                             },
                                             'prepend results with path': true,
                                         },
-                                        null,
                                     ).__start(
                                         ($) => {
 
-                                            command(
+                                            command($r)(
                                                 {
                                                     'packages': $.map(($) => null),
                                                     'arguments': rest_of_the_arguments
                                                 },
-                                                $r,
                                             ).__start(
                                                 on_success,
                                                 on_exception,

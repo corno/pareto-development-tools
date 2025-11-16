@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "exupery-core-async": "^0.3.6",
-    "exupery-core-bin": "^0.3.11",
+    "exupery-core-async": "^0.3.7",
+    "exupery-core-bin": "^0.3.12",
     "exupery-core-dev": "^0.3.1",
     "exupery-resources": "^0.3.6",
     "pareto-standard-operations": "^0.3.7"

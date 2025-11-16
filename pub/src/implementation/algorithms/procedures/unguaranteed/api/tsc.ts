@@ -16,14 +16,14 @@ export type Parameters = {
 
 export type Resources = {
     'procedures': {
-        'tsc': _et.Unguaranteed_Procedure<d_espe.Parameters, d_espe.Error, null>
+        'tsc': _et.Unguaranteed_Procedure_Primed_With_Resources<d_espe.Parameters, d_espe.Error>
     }
 }
 
 export const $$: _et.Unguaranteed_Procedure<Parameters, d_tsc.Error, Resources> = (
-    $p, $r,
+    $r,
 ) => {
-    return $r.procedures.tsc(
+    return ($p) => $r.procedures.tsc(
         {
             'args': op_flatten(_ea.array_literal([
                 $p.path.transform(
@@ -38,6 +38,5 @@ export const $$: _et.Unguaranteed_Procedure<Parameters, d_tsc.Error, Resources> 
                 ]),
             ])),
         },
-        null,
     ).map_error(($) => ['error while running tsc', $])
 }

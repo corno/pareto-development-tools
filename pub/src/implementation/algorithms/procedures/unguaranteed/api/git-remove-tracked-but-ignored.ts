@@ -9,20 +9,19 @@ import * as d from "../../../../../interface/temp/git_remove_tracked_but_ignored
 
 import { $$ as pu_assert_git_is_clean } from "./git-assert-clean"
 
-import { $$ as pu_three_steps } from "../../../../../temp/three_steps"
+import { $$ as pu_three_steps } from "../../../../../temp/procedure/three_steps"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 
 export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> = (
-    $p, $r,
+    $r,
 ) => {
-    return pu_three_steps(
-        pu_assert_git_is_clean(
+    return ($p) => pu_three_steps(
+        pu_assert_git_is_clean($r)(
             {
                 'path': $p.path,
             },
-            $r,
         ),
         $r.procedures.git(
             {
@@ -42,7 +41,6 @@ export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> 
                     ])
                 ]))
             },
-            null,
         ),
         $r.procedures.git(
             {
@@ -60,7 +58,6 @@ export const $$: _et.Unguaranteed_Procedure<d.Parameters, d.Error, d.Resources> 
                     ])
                 ]))
             },
-            null,
         ),
     ).map_error(($) => _ea.cc($, ($) => {
         switch ($[0]) {

@@ -14,9 +14,9 @@ import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation
 
 
 export const $$: _et.Unguaranteed_Query<d.Parameters, d.Result, d.Error, d.Resources> = (
-    $p, $r,
+ $r,
 ) => {
-    return _easync.__create_unguaranteed_query({
+    return ($p) => _easync.__create_unguaranteed_query({
         'execute': (on_success, on_exception) => {
             $r.queries.git(
                 {
@@ -34,7 +34,6 @@ export const $$: _et.Unguaranteed_Query<d.Parameters, d.Result, d.Error, d.Resou
                         ])
                     ])),
                 },
-                null,
             ).__start(
                 ($) => {
                     if ($.stdout === `true`) {
