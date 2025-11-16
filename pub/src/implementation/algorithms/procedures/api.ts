@@ -34,37 +34,37 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                             case 'assert clean': return _ea.ss($, ($) => $r.commands['git assert clean'].execute.direct(
                                 ($): d.Project_Package_Error => ['git assert clean', $],
                                 {
-                                    'path': _ea.set(path_to_project + `/packages/` + key)
+                                    'path': _ea.set(key)
                                 },
                             ))
                             case 'build and test': return _ea.ss($, ($) => $r.commands['build and test'].execute.direct(
                                 ($): d.Project_Package_Error => ['build and test', $],
                                 {
-                                    'path': path_to_project + `/packages/` + key
+                                    'path': key
                                 },
                             ))
                             case 'build': return _ea.ss($, ($) => $r.commands['build'].execute.direct(
                                 ($): d.Project_Package_Error => ['build', $],
                                 {
-                                    'path': path_to_project + `/packages/` + key
+                                    'path': key
                                 },
                             ))
                             case 'git remove tracked but ignored': return _ea.ss($, ($) => $r.commands['git remove tracked but ignored'].execute.direct(
                                 ($): d.Project_Package_Error => ['git remove tracked but ignored', $],
                                 {
-                                    'path': _ea.set(path_to_project + `/packages/` + key)
+                                    'path': _ea.set(key)
                                 },
                             ))
                             case 'update dependencies': return _ea.ss($, ($) => $r.commands['update dependencies'].execute.direct(
                                 ($): d.Project_Package_Error => ['update dependencies', $],
                                 {
-                                    'path': path_to_project + `/packages/` + key
+                                    'path': key
                                 },
                             ))
                             case 'git commit': return _ea.ss($, ($) => $r.commands['git extended commit'].execute.direct(
                                 ($): d.Project_Package_Error => ['git commit', $],
                                 {
-                                    'path': _ea.set(path_to_project + `/packages/` + key),
+                                    'path': _ea.set(key),
                                     'instruction': $
                                 },
                             ))

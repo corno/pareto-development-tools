@@ -8,7 +8,7 @@ export type Error = _et.Transformer_Without_Parameters<d_in.Error, d_out.Block_P
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-import * as t_epe_to_fountain_pen from "../../temp_exupery_resources/execute_procedure_executable/fountain_pen"
+import * as t_espe_to_fountain_pen from "../../temp_exupery_resources/execute_smelly_procedure_executable/fountain_pen"
 
 
 export const Error: Error = ($) => {
@@ -16,7 +16,7 @@ export const Error: Error = ($) => {
         switch ($[0]) {
             case 'error while running tsc': return _ea.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while running tsc: `),
-                t_epe_to_fountain_pen.Error($)
+                //t_espe_to_fountain_pen.Error($)
             ]))
             default: return _ea.au($[0])
         }

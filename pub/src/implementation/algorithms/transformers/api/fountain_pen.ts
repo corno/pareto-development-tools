@@ -22,7 +22,7 @@ export const Error: Error = ($) => _ea.cc($, ($) => {
     switch ($[0]) {
         case 'project': return _ea.ss($, ($) => _ea.cc($, ($) => {
             switch ($[0]) {
-                case 'packages': return _ea.ss($, ($) => sh.b.sub($.deprecated_to_array(() => 0).map(($) => sh.b.sub([
+                case 'packages': return _ea.ss($, ($) => sh.b.indent($.deprecated_to_array(() => 0).map(($) => sh.g.nested_block([
                     sh.b.snippet(`package '${$.key}': `),
                     _ea.cc($.value, ($) => {
                         switch ($[0]) {
