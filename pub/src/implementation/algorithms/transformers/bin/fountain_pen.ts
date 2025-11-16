@@ -1,0 +1,27 @@
+import * as _ea from 'exupery-core-alg'
+import * as _et from 'exupery-core-types'
+
+import * as d_in from "../../../../interface/temp/procedures/bin"
+import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
+
+export type Parse_Error = _et.Transformer_Without_Parameters<d_in.Parse_Error, d_out.Block_Part>
+
+import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+
+export const Parse_Error: Parse_Error = ($) => _ea.cc($, ($) => {
+    switch ($[0]) {
+        case 'expected one of': return _ea.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`expected one of: `),
+            sh.b.sub($.deprecated_to_array(() => 1).map(($) => sh.b.sub([
+                sh.b.snippet(` `),
+                sh.b.snippet($.key)
+            ])) )
+
+        ]))
+        case 'expected a text': return _ea.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`expected a text: `),
+            sh.b.snippet($['description'])
+        ]))
+        default: return _ea.au($[0])
+    }
+})
