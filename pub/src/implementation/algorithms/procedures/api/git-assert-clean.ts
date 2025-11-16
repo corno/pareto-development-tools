@@ -9,7 +9,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             {
                 'path': $p.path,
             }
-        ).transform_error<d.Error>(
+        ).transform_error_temp<d.Error>(
             ($) => ['unexpected error', $]
         ),
         ['working directory is not clean', null]

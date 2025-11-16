@@ -29,7 +29,7 @@ import { $$ as p_npm } from "./implementation/algorithms/procedures/api/npm"
 const create_eqe = (
     program: string,
     $r: _eb.Available_Standard_Resources,
-): _et.Query<d_epe.Parameters, d_eqe.Result, d_epe.Error> => {
+): _et.Data_Preparer<d_epe.Parameters, d_eqe.Result, d_epe.Error> => {
     return _easync.__create_query(($p) => {
         return $r.queries['execute any query executable'](
             {

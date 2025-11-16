@@ -26,7 +26,7 @@ export type Instruction = {
 
 export type Resources = {
     'queries': {
-        'git is clean': _et.Query<d_gic.Parameters, d_gic.Result, d_gic.Error>
+        'git is clean': _et.Data_Preparer<d_gic.Parameters, d_gic.Result, d_gic.Error>
     }
     'commands': {
         'git': _et.Command<d_epe.Parameters, d_epe.Error>

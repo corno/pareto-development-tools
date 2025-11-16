@@ -12,10 +12,10 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             {
                 'path': $p.path
             },
-        ).transform_result(
-            ($) => !$
-        ).transform_error(
+        ).transform_error_temp(
             ($): d.Error => ['asserting git not clean', $]
+        ).transform(
+            ($) => !$
         ),
         _easync.p.sequence([
             _easync.p.conditional.direct(

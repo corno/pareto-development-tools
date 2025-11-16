@@ -36,7 +36,7 @@ export type Project_Instruction =
 
 export type Resources = {
     'queries': {
-        'read directory': _et.Query<d_read_directory.Parameters, d_read_directory.Result, d_read_directory.Error>
+        'read directory': _et.Data_Preparer<d_read_directory.Parameters, d_read_directory.Result, d_read_directory.Error>
     },
     'commands': {
         // 'git': _et.Command<d_epe.Parameters, d_epe.Error>

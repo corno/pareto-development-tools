@@ -13,7 +13,7 @@ import * as exceptional_fp from "pareto-fountain-pen/dist/exceptional/serialize/
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => $r.commands.api.execute.refiner(
+    ($r, $p) => $r.commands.api.execute.prepare(
         ($): d.Error => {
             //FIXME: do this properly
             _ed.log_debug_message(
@@ -32,7 +32,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 'exit code': 0
             })
         },
-        r_instruction.Command($p.arguments).transform_error(
+        r_instruction.Command($p.arguments).transform_error_temp(
             ($): d.Error => {
                 //FIXME: do this properly
                 _ed.log_debug_message(

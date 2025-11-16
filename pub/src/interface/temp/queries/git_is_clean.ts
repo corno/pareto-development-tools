@@ -16,8 +16,8 @@ export type Error =
     | ['unknown issue', d_iwt.Error]
 
 export type Resources = {
-    'is inside git work tree': _et.Query<d_iwt.Parameters, d_iwt.Result, d_iwt.Error>
-    'git': _et.Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
+    'is inside git work tree': _et.Data_Preparer<d_iwt.Parameters, d_iwt.Result, d_iwt.Error>
+    'git': _et.Data_Preparer<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
 }
 
 export type Query = _et.Query_Procedure<Parameters, Result, Error, Resources>

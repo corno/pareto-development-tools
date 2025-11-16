@@ -19,7 +19,7 @@ export type Error =
 
 export type Resources = {
     'queries': {
-        'git': _et.Query<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
+        'git': _et.Data_Preparer<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
     }
     'commands': {
         'git': _et.Command<d_epe.Parameters, d_epe.Error>

@@ -23,14 +23,14 @@ export const $$: d.Query = _easync.create_query_procedure(
                 ])
             ])),
         },
-    ).transform_result<boolean>(
+    ).transform<boolean>(
         ($) => $.stdout === ``
-    ).rework_error_with_new_query(
+    ).rework_error_temp(
         ($current) => $r['is inside git work tree'](
             {
                 'path': $p.path
             },
-        ).transform_result<d.Error>(
+        ).transform<d.Error>(
             ($) => {
                 return $
                     ? ['could not determine git status', $current]

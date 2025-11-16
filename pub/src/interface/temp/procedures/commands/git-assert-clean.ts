@@ -15,7 +15,7 @@ export type Error =
 
 export type Resources = {
     'queries': {
-        'is git clean': _et.Query<d_is_git_clean.Parameters, d_is_git_clean.Result, d_is_git_clean.Error>
+        'is git clean': _et.Data_Preparer<d_is_git_clean.Parameters, d_is_git_clean.Result, d_is_git_clean.Error>
     }
     'commands': {
         'git': _et.Command<d_epe.Parameters, d_epe.Error>

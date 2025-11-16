@@ -26,7 +26,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                             },
                             'prepend results with path': true,
                         },
-                    ).transform_error(
+                    ).transform_error_temp(
                         ($): d.Error => ['project', ['could not read packages directory', $]],
                     ),
                     ($x, key): _et.Command_Promise<d.Project_Package_Error> => _ea.cc($.instruction, ($) => {
