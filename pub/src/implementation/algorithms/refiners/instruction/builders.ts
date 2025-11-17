@@ -1,7 +1,7 @@
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../../../interface/temp/procedures/api"
-import * as d_error from "../../../../interface/temp/procedures/bin"
+import * as d from "../../../../interface/temp/procedures/commands/api"
+import * as d_error from "../../../../interface/temp/procedures/commands/bin"
 
 import * as core from "./core"
 

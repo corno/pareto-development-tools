@@ -1,7 +1,7 @@
 import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 
-import * as d from "../../../../interface/temp/procedures/api"
+import * as d from "../../../../interface/temp/procedures/commands/api"
 
 import * as core from "./core"
 

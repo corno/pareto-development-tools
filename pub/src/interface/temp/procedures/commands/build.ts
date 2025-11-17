@@ -1,6 +1,5 @@
 import * as _et from 'exupery-core-types'
 
-import * as d_espe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
 import * as d_tsc from "./tsc"
 
 export type Parameters = {

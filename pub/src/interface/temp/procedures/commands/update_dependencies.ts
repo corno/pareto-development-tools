@@ -1,6 +1,6 @@
 import * as _et from 'exupery-core-types'
 
-import * as d_utd from "./update_typescript_dependencies"
+import * as d_utd from "./clean_and_update_dependencies"
 
 
 export type Parameters = {
