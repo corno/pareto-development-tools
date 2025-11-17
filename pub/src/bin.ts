@@ -167,6 +167,9 @@ _eb.run_main_procedure(
                 'tar': create_epe(`tar`, $r),
                 'make directory': $r.commands['make directory'],
             },
+            'queries': {
+                'read file': $r.queries['read file'],
+            }
         })
 
         return p_bin({

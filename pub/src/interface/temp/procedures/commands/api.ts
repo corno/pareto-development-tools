@@ -22,8 +22,7 @@ export type Command =
         'path to package': string
     }]
     | ['setup-comparison', {
-        'path to local package': _et.Optional_Value<string>
-        'path to output directory': string
+        'path to package': string
     }]
 
 export type Project = {

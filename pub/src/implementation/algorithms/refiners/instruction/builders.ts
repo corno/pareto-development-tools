@@ -70,13 +70,9 @@ export const Command = (
                     }]
                 case 'setup-comparison':
                     return ['setup-comparison', {
-                        'path to output directory': iterator['consume current']().transform(
+                        'path to package': iterator['consume current']().transform(
                             ($) => $,
-                            () => abort(['expected a text', { 'description': "path to output directory" }])
-                        ),
-                        'path to local package': iterator['consume current']().transform(
-                            ($) => _ea.set($),
-                            () => _ea.not_set()
+                            () => abort(['expected a text', { 'description': "path to package" }])
                         ),
                     }]
                 default:

@@ -12,8 +12,8 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             case 'setup-comparison': return _ea.ss($, ($) => $r.commands['setup comparison against published'].execute.direct(
                 ($): d.Error => ['setup comparison', $],
                 {
-                    'path to local package': $['path to local package'],
-                    'path to output directory': $['path to output directory'],
+                    'path to local package': _ea.set($['path to package'] + `/pub`),
+                    'path to output directory': $['path to package'] + `/temp`,
                 },
             ))
             case 'assert-clean': return _ea.ss($, ($) => $r.commands['git assert clean'].execute.direct(

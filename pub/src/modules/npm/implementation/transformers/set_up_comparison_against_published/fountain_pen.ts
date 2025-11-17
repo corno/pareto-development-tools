@@ -10,6 +10,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 import * as t_epe_to_fountain_pen from "../../../../../temp_exupery_resources/transformers/execute_procedure_executable/fountain_pen"
 import * as t_make_directory_to_fountain_pen from "../../../../../temp_exupery_resources/transformers/make_directory/fountain_pen"
+import * as t_read_file_to_fountain_pen from "../../../../../temp_exupery_resources/transformers/read_file/fountain_pen"
 
 
 export const Error: Error = ($) => {
@@ -26,6 +27,14 @@ export const Error: Error = ($) => {
             case 'error while creating directory': return _ea.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while creating directory: `),
                 t_make_directory_to_fountain_pen.Error($)
+            ]))
+            case 'error while reading package.json': return _ea.ss($, ($) => sh.b.sub([
+                sh.b.snippet(`error while reading package.json: `),
+                t_read_file_to_fountain_pen.Error($)
+            ]))
+            case 'error while parsing package.json': return _ea.ss($, ($) => sh.b.sub([
+                sh.b.snippet(`error while parsing package.json: `),
+                sh.b.snippet($)
             ]))
             default: return _ea.au($[0])
         }
