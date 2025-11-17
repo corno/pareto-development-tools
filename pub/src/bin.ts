@@ -169,6 +169,7 @@ _eb.run_main_procedure(
             },
             'queries': {
                 'read file': $r.queries['read file'],
+                'npm': create_eqe(`npm`, $r),
             }
         })
 
