@@ -18,6 +18,7 @@ import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pe
 import * as t_build_to_fountain_pen from "../build/fountain_pen"
 import * as t_update_dependencies from "../update_dependencies/fountain_pen"
 import * as t_read_directory_to_fountain_pen from "../../../../temp_exupery_resources/transformers/read_directory/fountain_pen"
+import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/transformers/set_up_comparison_against_published/fountain_pen"
 
 export const Error: Error = ($) => _ea.cc($, ($) => {
     switch ($[0]) {
@@ -44,6 +45,7 @@ export const Error: Error = ($) => _ea.cc($, ($) => {
                 default: return _ea.au($[0])
             }
         }))
+        case 'setup comparison': return _ea.ss($, ($): d_out.Block_Part => t_set_up_comparison_against_published.Error($))
         case 'git assert clean': return _ea.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
         default: return _ea.au($[0])
     }

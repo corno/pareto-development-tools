@@ -68,16 +68,29 @@ export const Command = (
                             () => abort(['expected a text', { 'description': "path to package" }])
                         )
                     }]
+                case 'setup-comparison':
+                    return ['setup-comparison', {
+                        'path to output directory': iterator['consume current']().transform(
+                            ($) => $,
+                            () => abort(['expected a text', { 'description': "path to output directory" }])
+                        ),
+                        'path to local package': iterator['consume current']().transform(
+                            ($) => _ea.set($),
+                            () => _ea.not_set()
+                        ),
+                    }]
                 default:
                     return abort(['expected one of', _ea.dictionary_literal({
                         'project': null,
                         'assert-clean': null,
+                        'setup-comparison': null,
                     })])
             }
         },
         () => abort(['expected one of', _ea.dictionary_literal({
             'project': null,
             'assert-clean': null,
+            'setup-comparison': null,
         })])
     )
 }

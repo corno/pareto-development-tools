@@ -25,6 +25,7 @@ import { $$ as p_update_typescript_dependencies } from "./implementation/algorit
 import { $$ as p_git_clean } from "./modules/git/implementation/commands/clean"
 import { $$ as p_update2latest } from "./modules/npm/implementation/commands/update2latest"
 import { $$ as p_npm } from "./modules/npm/implementation/commands/npm"
+import { $$ as p_set_up_comparison_against_published } from "./modules/npm/implementation/commands/set_up_comparison_against_published"
 
 const create_eqe = (
     program: string,
@@ -160,6 +161,14 @@ _eb.run_main_procedure(
             },
         })
 
+        const set_up_comparison_against_published = p_set_up_comparison_against_published({
+            'commands': {
+                'npm': create_epe(`npm`, $r),
+                'tar': create_epe(`tar`, $r),
+                'make directory': $r.commands['make directory'],
+            },
+        })
+
         return p_bin({
             'commands': {
                 'api': p_api({
@@ -173,6 +182,7 @@ _eb.run_main_procedure(
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
                         'update dependencies': update_dependencies,
                         'git extended commit': git_extended_commit,
+                        'setup comparison against published': set_up_comparison_against_published,
                     },
                 }),
             },

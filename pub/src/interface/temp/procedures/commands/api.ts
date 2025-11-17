@@ -14,11 +14,16 @@ import * as d_build from "./build"
 import * as d_update_dependencies from "./update_dependencies"
 import * as d_git_remove_tracked_but_ignored from "../../../../modules/git/interface/remove_tracked_but_ignored"
 import * as d_git_extended_commit from "../../../../modules/git/interface/extended_commit"
+import * as d_set_up_comparison_against_published from "../../../../modules/npm/interface/set_up_comparison_against_published"
 
 export type Command =
     | ['project', Project]
     | ['assert-clean', {
         'path to package': string
+    }]
+    | ['setup-comparison', {
+        'path to local package': _et.Optional_Value<string>
+        'path to output directory': string
     }]
 
 export type Project = {
@@ -45,12 +50,14 @@ export type Resources = {
         'git extended commit': _et.Command<d_git_extended_commit.Parameters, d_git_extended_commit.Error>
         'git remove tracked but ignored': _et.Command<d_git_remove_tracked_but_ignored.Parameters, d_git_remove_tracked_but_ignored.Error>
         'update dependencies': _et.Command<d_update_dependencies.Parameters, d_update_dependencies.Error>
+        'setup comparison against published': _et.Command<d_set_up_comparison_against_published.Parameters, d_set_up_comparison_against_published.Error>
     }
 }
 
 export type Error =
     | ['project', Project_Error]
     | ['git assert clean', d_assert_clean.Error]
+    | ['setup comparison', d_set_up_comparison_against_published.Error]
 
 export type Project_Error =
     | ['could not read packages directory', d_read_directory.Error]

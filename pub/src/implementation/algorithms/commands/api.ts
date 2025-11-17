@@ -9,6 +9,13 @@ import * as r_instruction from "../refiners/instruction/refiners"
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($r, $p) => _ea.cc($p, ($) => {
         switch ($[0]) {
+            case 'setup-comparison': return _ea.ss($, ($) => $r.commands['setup comparison against published'].execute.direct(
+                ($): d.Error => ['setup comparison', $],
+                {
+                    'path to local package': $['path to local package'],
+                    'path to output directory': $['path to output directory'],
+                },
+            ))
             case 'assert-clean': return _ea.ss($, ($) => $r.commands['git assert clean'].execute.direct(
                 ($): d.Error => ['git assert clean', $],
                 {
