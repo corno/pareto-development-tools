@@ -17,7 +17,7 @@ import * as t_git_remove_tracked_but_ignored from "../../../../modules/git/imple
 import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pen"
 import * as t_build_to_fountain_pen from "../build/fountain_pen"
 import * as t_update_dependencies from "../update_dependencies/fountain_pen"
-import * as t_read_directory_to_fountain_pen from "../../../../temp_exupery_resources/transformers/read_directory/fountain_pen"
+import * as t_read_directory_to_fountain_pen from "exupery-resources/dist/implementation/transformers/read_directory/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/transformers/set_up_comparison_against_published/fountain_pen"
 
 export const Error: Error = ($) => _ea.cc($, ($) => {

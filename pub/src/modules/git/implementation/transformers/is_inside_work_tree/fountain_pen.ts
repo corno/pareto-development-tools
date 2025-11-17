@@ -8,7 +8,7 @@ export type Error = _et.Transformer_Without_Parameters<d_in.Error, d_out.Block_P
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-import * as t_eqe_to_fountain_pen from "../../../../../temp_exupery_resources/transformers/execute_query_executable/fountain_pen"
+import * as t_eqe_to_fountain_pen from "exupery-resources/dist/implementation/transformers/execute_query_executable/fountain_pen"
 
 export const Error: Error = ($) => _ea.cc($, ($) => {
     switch ($[0]) {

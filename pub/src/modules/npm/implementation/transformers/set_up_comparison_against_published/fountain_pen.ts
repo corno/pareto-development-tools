@@ -8,16 +8,20 @@ export type Error = _et.Transformer_Without_Parameters<d_in.Error, d_out.Block_P
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-import * as t_epe_to_fountain_pen from "../../../../../temp_exupery_resources/transformers/execute_procedure_executable/fountain_pen"
-import * as t_make_directory_to_fountain_pen from "../../../../../temp_exupery_resources/transformers/make_directory/fountain_pen"
-import * as t_read_file_to_fountain_pen from "../../../../../temp_exupery_resources/transformers/read_file/fountain_pen"
+import * as t_epe_to_fountain_pen from "exupery-resources/dist/implementation/transformers/execute_procedure_executable/fountain_pen"
+import * as t_make_directory_to_fountain_pen from "exupery-resources/dist/implementation/transformers/make_directory/fountain_pen"
+import * as t_read_file_to_fountain_pen from "exupery-resources/dist/implementation/transformers/read_file/fountain_pen"
 
 
 export const Error: Error = ($) => {
     return _ea.cc($, ($): d_out.Block_Part => {
         switch ($[0]) {
-            case 'error while running npm': return _ea.ss($, ($) => sh.b.sub([
-                sh.b.snippet(`error while running npm: `),
+            case 'error while running npm command': return _ea.ss($, ($) => sh.b.sub([
+                sh.b.snippet(`error while running npm command: `),
+                t_epe_to_fountain_pen.Error($)
+            ]))
+            case 'error while running npm query': return _ea.ss($, ($) => sh.b.sub([
+                sh.b.snippet(`error while running npm query: `),
                 t_epe_to_fountain_pen.Error($)
             ]))
             case 'error while running tar': return _ea.ss($, ($) => sh.b.sub([
