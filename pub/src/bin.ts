@@ -30,7 +30,7 @@ import { $$ as p_set_up_comparison_against_published } from "./modules/npm/imple
 const create_eqe = (
     program: string,
     $r: _eb.Available_Standard_Resources,
-): _et.Data_Preparer<d_epe.Parameters, d_eqe.Result, d_epe.Error> => {
+): _et.Stager<d_eqe.Result, d_epe.Error, d_epe.Parameters> => {
     return _easync.__create_query(($p) => {
         return $r.queries['execute any query executable'](
             {
@@ -44,14 +44,14 @@ const create_eqe = (
 const create_epe = (
     program: string,
     $r: _eb.Available_Standard_Resources,
-): _et.Command<d_epe.Parameters, d_epe.Error> => {
-    return _easync.__create_command(($p) => {
-        return $r.commands['execute any procedure executable'].execute.direct(
-            ($) => $,
+): _et.Command<d_epe.Error, d_epe.Parameters> => {
+    return _easync.__create_resource_command(($p) => {
+        return $r.commands['execute any procedure executable'].execute(
             {
                 'program': program,
                 'args': $p.args,
             },
+            ($) => $,
         )
     })
 }
@@ -59,14 +59,14 @@ const create_epe = (
 const create_espe = (
     program: string,
     $r: _eb.Available_Standard_Resources,
-): _et.Command<d_espe.Parameters, d_espe.Error> => {
-    return _easync.__create_command(($p) => {
-        return $r.commands['execute any smelly procedure executable'].execute.direct(
-            ($) => $,
+): _et.Command<d_espe.Error, d_espe.Parameters> => {
+    return _easync.__create_resource_command(($p) => {
+        return $r.commands['execute any smelly procedure executable'].execute(
             {
                 'program': program,
                 'args': $p.args,
             },
+            ($) => $,
         )
     })
 }
@@ -81,105 +81,109 @@ _eb.run_main_procedure(
             }),
         })
 
-        const assert_git_is_clean = p_git_assert_clean({
-            'queries': {
+        const assert_git_is_clean = p_git_assert_clean(
+            {
+                'git': create_epe(`git`, $r),
+            },
+            {
                 'is git clean': is_git_clean,
             },
-            'commands': {
-                'git': create_epe(`git`, $r),
-            },
-        })
+        )
 
-        const tsc = p_tsc({
-            'commands': {
+        const tsc = p_tsc(
+            {
                 'tsc': create_espe(`tsc`, $r),
-            }
-        })
+            },
+            null,
+        )
 
-        const build = p_build({
-            'commands': {
+        const build = p_build(
+            {
                 'tsc': tsc,
             },
-        })
+            null,
+        )
 
-        const git_clean = p_git_clean({
-            'commands': {
+        const git_clean = p_git_clean(
+            {
                 'git': create_epe(`git`, $r),
-            }
-        })
+            },
+            null,
+        )
 
-        const build_and_test = p_build_and_test({
-            'commands': {
+        const build_and_test = p_build_and_test(
+            {
                 'build': build,
                 'node': create_epe(`node`, $r),
             },
-        })
+            null,
+        )
 
-        const update2latest = p_update2latest({
-            'commands': {
+        const update2latest = p_update2latest(
+            {
                 'update2latest': create_epe(`update2latest`, $r),
             },
-        })
+            null,
+        )
 
-        const npm = p_npm({
-            'commands': {
+        const npm = p_npm(
+            {
                 'npm': create_epe(`npm`, $r),
             },
-        })
+            null,
+        )
 
-        const update_typescript_dependencies = p_update_typescript_dependencies({
-            'commands': {
+        const update_typescript_dependencies = p_update_typescript_dependencies(
+            {
                 'git clean': git_clean,
                 'update2latest': update2latest,
                 'npm': npm,
             },
-        })
+            null,
+        )
 
-        const update_dependencies = p_update_dependencies({
-            'commands': {
+        const update_dependencies = p_update_dependencies(
+            {
                 'update typescript dependencies': update_typescript_dependencies,
             },
-        })
+            null,
+        )
 
-        const git_remove_tracked_but_ignored = p_git_remove_tracked_but_ignored({
-            'queries': {
-                'git': create_eqe(`git`, $r),
-            },
-            'commands': {
+        const git_remove_tracked_but_ignored = p_git_remove_tracked_but_ignored(
+            {
                 'git': create_epe(`git`, $r),
                 'assert git is clean': assert_git_is_clean,
-
             },
-        })
-
-        const git_extended_commit = p_git_extended_commit({
-            'queries': {
-                'git is clean': is_git_clean,
+            {
+                'git': create_eqe(`git`, $r),
             },
-            'commands': {
+        )
+
+        const git_extended_commit = p_git_extended_commit(
+            {
                 'git': create_epe(`git`, $r),
             },
-        })
+            {
+                'git is clean': is_git_clean,
+            },
+        )
 
-        const set_up_comparison_against_published = p_set_up_comparison_against_published({
-            'commands': {
+        const set_up_comparison_against_published = p_set_up_comparison_against_published(
+            {
                 'npm': create_epe(`npm`, $r),
                 'tar': create_epe(`tar`, $r),
                 'make directory': $r.commands['make directory'],
             },
-            'queries': {
+            {
                 'read file': $r.queries['read file'],
                 'npm': create_eqe(`npm`, $r),
-            }
-        })
+            },
+        )
 
-        return p_bin({
-            'commands': {
-                'api': p_api({
-                    'queries': {
-                        'read directory': $r.queries['read directory']
-                    },
-                    'commands': {
+        return p_bin(
+            {
+                'api': p_api(
+                    {
                         'git assert clean': assert_git_is_clean,
                         'build and test': build_and_test,
                         'build': build,
@@ -188,8 +192,12 @@ _eb.run_main_procedure(
                         'git extended commit': git_extended_commit,
                         'setup comparison against published': set_up_comparison_against_published,
                     },
-                }),
+                    {
+                        'read directory': $r.queries['read directory']
+                    },
+                ),
             },
-        })
+            null,
+        )
     }
 )

@@ -9,13 +9,13 @@ import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation
 
 
 const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Outcome, Target_Error>(
-    result: _et.Data_Preparation_Result<Preparation_Result, Preparation_Error>,
+    result: _et.Staging_Result<Preparation_Result, Preparation_Error>,
     handlers: {
-        success: (result: Preparation_Result) => _et.Data_Preparation_Result<Target_Outcome, Target_Error>,
-        error: (error: Preparation_Error) => _et.Data_Preparation_Result<Target_Outcome, Target_Error>,
+        success: (result: Preparation_Result) => _et.Staging_Result<Target_Outcome, Target_Error>,
+        error: (error: Preparation_Error) => _et.Staging_Result<Target_Outcome, Target_Error>,
     },
-): _et.Data_Preparation_Result<Target_Outcome, Target_Error> => {
-    return _ei.__create_data_preparation_result<Target_Outcome, Target_Error>((onResult, onError) => {
+): _et.Staging_Result<Target_Outcome, Target_Error> => {
+    return _ei.__create_staging_result<Target_Outcome, Target_Error>((onResult, onError) => {
         result.__extract_data(
             (r) => {
                 handlers.success(r).__extract_data(onResult, onError)
@@ -28,19 +28,19 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
 
 }
 
-export const $$: d.Query = _easync.create_query_procedure(($r, $p) => {
+export const $$: d.Query = _easync.create_query_procedure(($p, $r) => {
     return temp_observe_behavior(
         $r.git(
             {
-                'args': op_flatten(_ea.array_literal([
+                'args': op_flatten(_ea.list_literal([
                     $p.path.transform(
-                        ($) => _ea.array_literal([
+                        ($) => _ea.list_literal([
                             `-C`,
                             $,
                         ]),
-                        () => _ea.array_literal([])
+                        () => _ea.list_literal([])
                     ),
-                    _ea.array_literal([
+                    _ea.list_literal([
                         `rev-parse`,
                         `--is-inside-work-tree`,
                     ])

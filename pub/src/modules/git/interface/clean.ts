@@ -9,10 +9,10 @@ export type Parameters = {
 export type Error =
     | ['unexpected error', d_epe.Error]
 
-export type Resources = {
-    'commands': {
-        'git': _et.Command<d_epe.Parameters, d_epe.Error>
-    }
+export type Variable_Resources = null
+
+export type Command_Resources = {
+        'git': _et.Command<d_epe.Error, d_epe.Parameters>
 }
 
-export type Procedure =  _et.Command_Procedure<Parameters, Error, Resources>
+export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>

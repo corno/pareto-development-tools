@@ -12,11 +12,12 @@ export type Error =
     | ['error testing', d_epe.Error]
 
 
-export type Resources = {
-    'commands': {
-        'build': _et.Command<d_build.Parameters, d_build.Error>
-        'node': _et.Command<d_epe.Parameters, d_epe.Error>
-    }
+export type Query_Resources = null
+
+
+export type Command_Resources = {
+    'build': _et.Command<d_build.Error, d_build.Parameters>
+    'node': _et.Command<d_epe.Error, d_epe.Parameters>
 }
 
-export type Procedure =  _et.Command_Procedure<Parameters, Error, Resources>
+export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>

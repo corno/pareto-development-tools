@@ -38,19 +38,18 @@ export type Project_Instruction =
     | ['git remove tracked but ignored', null]
     | ['update dependencies', null]
 
-export type Resources = {
-    'queries': {
-        'read directory': _et.Data_Preparer<d_read_directory.Parameters, d_read_directory.Result, d_read_directory.Error>
-    },
-    'commands': {
-        'build and test': _et.Command<d_build_and_test.Parameters, d_build_and_test.Error>
-        'build': _et.Command<d_build.Parameters, d_build.Error>
-        'git assert clean': _et.Command<d_assert_clean.Parameters, d_assert_clean.Error>
-        'git extended commit': _et.Command<d_git_extended_commit.Parameters, d_git_extended_commit.Error>
-        'git remove tracked but ignored': _et.Command<d_git_remove_tracked_but_ignored.Parameters, d_git_remove_tracked_but_ignored.Error>
-        'update dependencies': _et.Command<d_update_dependencies.Parameters, d_update_dependencies.Error>
-        'setup comparison against published': _et.Command<d_set_up_comparison_against_published.Parameters, d_set_up_comparison_against_published.Error>
-    }
+export type Query_Resources = {
+    'read directory': _et.Stager<d_read_directory.Result, d_read_directory.Error, d_read_directory.Parameters>
+}
+
+export type Command_Resources = {
+    'build and test': _et.Command<d_build_and_test.Error, d_build_and_test.Parameters>
+    'build': _et.Command<d_build.Error, d_build.Parameters>
+    'git assert clean': _et.Command<d_assert_clean.Error, d_assert_clean.Parameters>
+    'git extended commit': _et.Command<d_git_extended_commit.Error, d_git_extended_commit.Parameters>
+    'git remove tracked but ignored': _et.Command<d_git_remove_tracked_but_ignored.Error, d_git_remove_tracked_but_ignored.Parameters>
+    'update dependencies': _et.Command<d_update_dependencies.Error, d_update_dependencies.Parameters>
+    'setup comparison against published': _et.Command<d_set_up_comparison_against_published.Error, d_set_up_comparison_against_published.Parameters>
 }
 
 export type Error =
@@ -72,4 +71,4 @@ export type Project_Package_Error =
 
 export type Parameters = Command
 
-export type Procedure = _et.Command_Procedure<Parameters, Error, Resources>
+export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>

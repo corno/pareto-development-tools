@@ -4,8 +4,8 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../interface/assert-clean"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => _easync.p.assert.query(
-        $r.queries['is git clean'](
+    ($p, $cr, $qr) => _easync.p.assert.query(
+        $qr['is git clean'](
             {
                 'path': $p.path,
             }

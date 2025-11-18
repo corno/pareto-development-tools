@@ -24,13 +24,12 @@ export type Instruction = {
 
 }
 
-export type Resources = {
-    'queries': {
-        'git is clean': _et.Data_Preparer<d_gic.Parameters, d_gic.Result, d_gic.Error>
-    }
-    'commands': {
-        'git': _et.Command<d_epe.Parameters, d_epe.Error>
-    }
+export type Variable_Resources = {
+    'git is clean': _et.Stager<d_gic.Result, d_gic.Error, d_gic.Parameters>
 }
 
-export type Procedure =  _et.Command_Procedure<Parameters, Error, Resources>
+export type Command_Resources = {
+    'git': _et.Command<d_epe.Error, d_epe.Parameters>
+}
+
+export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>

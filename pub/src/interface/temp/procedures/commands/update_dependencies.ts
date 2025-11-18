@@ -11,10 +11,10 @@ export type Error =
     | ['error updating pub', d_utd.Error]
     | ['error updating test', d_utd.Error]
 
-export type Resources = {
-    'commands': {
-        'update typescript dependencies': _et.Command<d_utd.Parameters, d_utd.Error>
-    }
+export type Variable_Resources = null
+
+export type Command_Resources = {
+        'update typescript dependencies': _et.Command<d_utd.Error, d_utd.Parameters>
 }
 
-export type Procedure =  _et.Command_Procedure<Parameters, Error, Resources>
+export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>

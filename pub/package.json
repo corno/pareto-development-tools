@@ -2,13 +2,13 @@
   "name": "pareto-development-tools",
   "version": "0.0.1",
   "dependencies": {
-    "astn": "^0.113.2",
-    "exupery-core-async": "^0.3.47",
-    "exupery-core-bin": "^0.3.26",
-    "exupery-core-dev": "^0.3.1",
-    "exupery-core-rawdata": "^0.2.0",
-    "exupery-resources": "^0.3.7",
-    "pareto-fountain-pen": "^0.3.8",
-    "pareto-standard-operations": "^0.3.7"
+    "astn": "^0.113.4",
+    "exupery-core-async": "^0.3.59",
+    "exupery-core-bin": "^0.3.29",
+    "exupery-core-dev": "^0.3.2",
+    "exupery-core-rawdata": "^0.2.1",
+    "exupery-resources": "^0.3.14",
+    "pareto-fountain-pen": "^0.3.11",
+    "pareto-standard-operations": "^0.3.9"
   }
 }

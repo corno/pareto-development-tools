@@ -15,12 +15,12 @@ export type Error =
     | ['could not update to latest', d_update2latest.Error]
     | ['could not install', d_npm.Error]
 
-export type Resources = {
-    'commands': {
-        'git clean': _et.Command<d_gc.Parameters, d_gc.Error>
-        'update2latest': _et.Command<d_update2latest.Parameters, d_update2latest.Error>
-        'npm': _et.Command<d_npm.Parameters, d_npm.Error>
-    }
+export type Variable_Resources = null
+
+export type Command_Resources = {
+        'git clean': _et.Command<d_gc.Error, d_gc.Parameters>
+        'update2latest': _et.Command<d_update2latest.Error, d_update2latest.Parameters>
+        'npm': _et.Command<d_npm.Error, d_npm.Parameters>
 }
 
-export type Procedure =  _et.Command_Procedure<Parameters, Error, Resources>
+export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>

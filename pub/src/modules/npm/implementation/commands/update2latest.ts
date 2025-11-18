@@ -6,28 +6,28 @@ import * as d from "../../interface/update2latest"
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => $r.commands.update2latest.execute.direct(
-        ($) => ['error while running update2latest', $],
+    ($p, $cr) => $cr.update2latest.execute(
         {
-            'args': op_flatten(_ea.array_literal([
-                _ea.array_literal([
+            'args': op_flatten(_ea.list_literal([
+                _ea.list_literal([
                     $p.path,
                 ]),
                 _ea.cc($p.what, ($) => {
                     // _ed.log_debug_message(`Updating ${$p.path} to latest`, () => {})
                     switch ($[0]) {
                         case 'dependencies': return _ea.ss($, ($) => {
-                            return _ea.array_literal([`dependencies`])
+                            return _ea.list_literal([`dependencies`])
                         })
                         case 'dev-dependencies': return _ea.ss($, ($) => {
-                            return _ea.array_literal([`devDependencies`])
+                            return _ea.list_literal([`devDependencies`])
                         })
                         default: return _ea.au($[0])
                     }
                 }),
-                // $p.verbose ? _ea.array_literal([`verbose`]) : _ea.array_literal([]),
-                _ea.array_literal([`verbose`])
+                // $p.verbose ? _ea.list_literal([`verbose`]) : _ea.list_literal([]),
+                _ea.list_literal([`verbose`])
             ])),
         },
+        ($) => ['error while running update2latest', $],
     )
 )

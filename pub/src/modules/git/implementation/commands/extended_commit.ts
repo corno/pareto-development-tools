@@ -7,8 +7,8 @@ import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation
 
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => _easync.p.conditional.query(
-        $r.queries['git is clean'](
+    ($p, $cr, $qr) => _easync.p.conditional.query(
+        $qr['git is clean'](
             {
                 'path': $p.path
             },
@@ -20,62 +20,62 @@ export const $$: d.Procedure = _easync.create_command_procedure(
         _easync.p.sequence([
             _easync.p.conditional.direct(
                 $p.instruction['stage all changes'],
-                $r.commands.git.execute.direct(
-                    ($): d.Error => ['could not stage', $],
+                $cr.git.execute(
                     {
-                        'args': op_flatten(_ea.array_literal([
+                        'args': op_flatten(_ea.list_literal([
                             $p.path.transform(
-                                ($) => _ea.array_literal([
+                                ($) => _ea.list_literal([
                                     `-C`,
                                     $,
                                 ]),
-                                () => _ea.array_literal([])
+                                () => _ea.list_literal([])
                             ),
-                            _ea.array_literal([
+                            _ea.list_literal([
                                 `add`,
                                 `--all`,
                             ])
                         ])),
                     },
+                    ($): d.Error => ['could not stage', $],
                 )
             ),
-            $r.commands.git.execute.direct(
-                ($): d.Error => ['could not commit', $],
+            $cr.git.execute(
                 {
-                    'args': op_flatten(_ea.array_literal([
+                    'args': op_flatten(_ea.list_literal([
                         $p.path.transform(
-                            ($) => _ea.array_literal([
+                            ($) => _ea.list_literal([
                                 `-C`,
                                 $,
                             ]),
-                            () => _ea.array_literal([])
+                            () => _ea.list_literal([])
                         ),
-                        _ea.array_literal([
+                        _ea.list_literal([
                             `commit`,
                             `-m`,
                             $p.instruction['commit message'],
                         ])
                     ])),
                 },
+                ($): d.Error => ['could not commit', $],
             ),
             _easync.p.conditional.direct(
                 $p.instruction['push after commit'],
-                $r.commands.git.execute.direct(
-                    ($): d.Error => ['could not push', $],
+                $cr.git.execute(
                     {
-                        'args': op_flatten(_ea.array_literal([
+                        'args': op_flatten(_ea.list_literal([
                             $p.path.transform(
-                                ($) => _ea.array_literal([
+                                ($) => _ea.list_literal([
                                     `-C`,
                                     $,
                                 ]),
-                                () => _ea.array_literal([])
+                                () => _ea.list_literal([])
                             ),
-                            _ea.array_literal([
+                            _ea.list_literal([
                                 `push`,
                             ])
                         ]))
                     },
+                    ($): d.Error => ['could not push', $],
                 )
             )
         ]),

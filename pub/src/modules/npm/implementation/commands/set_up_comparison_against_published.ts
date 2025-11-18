@@ -1,6 +1,7 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 import * as _ed from 'exupery-core-dev'
+import * as _et from 'exupery-core-types'
 
 import * as d from "../../interface/set_up_comparison_against_published"
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
@@ -8,8 +9,12 @@ import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schema
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 import { $ as parse_npm_package } from "../../../../implementation/algorithms/refiners/npm_package/temp"
 
+export type Variables = {
+    'version': string
+}
+
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => {
+    ($p, $cr, $qr) => {
         // Determine package.json path - it will be in the pub subdirectory
         const package_json_path = $p['path to local package'].transform(
             ($) => `${$}/package.json`,
@@ -24,111 +29,112 @@ export const $$: d.Procedure = _easync.create_command_procedure(
 
         return _easync.p.sequence<d.Error>([
             // Create main output directory
-            $r.commands['make directory'].execute.direct(
-                ($) => ['error while creating directory', $],
+            $cr['make directory'].execute(
                 {
                     'path': $p['path to output directory'],
                     'escape spaces in path': true,
-                }
+                },
+                ($) => ['error while creating directory', $],
             ),
 
             // Create local package using npm pack (if local package path provided)
-            $r.commands['npm'].execute.direct(
-                ($) => ['error while running npm command', $],
+            $cr['npm'].execute(
                 {
-                    'args': op_flatten(_ea.array_literal([
+                    'args': op_flatten(_ea.list_literal([
                         $p['path to local package'].transform(
-                            ($) => _ea.array_literal([
+                            ($) => _ea.list_literal([
                                 `--prefix`,
                                 $,
                             ]),
-                            () => _ea.array_literal([])
+                            () => _ea.list_literal([])
                         ),
-                        _ea.array_literal([
+                        _ea.list_literal([
                             `pack`,
                             `--pack-destination`,
                             $p['path to output directory'],
                         ])
                     ])),
-                }
+                },
+                ($) => ['error while running npm command', $],
             ),
 
             // Create local subdirectory
-            $r.commands['make directory'].execute.direct(
-                ($) => ['error while creating directory', $],
+            $cr['make directory'].execute(
                 {
                     'path': `${$p['path to output directory']}/local`,
                     'escape spaces in path': true,
-                }
+                },
+                ($) => ['error while creating directory', $],
             ),
 
             // Extract local package into local subdirectory using dynamic filename
-            $r.commands['tar'].execute.direct(
-                ($) => ['error while running tar', $],
+            $cr['tar'].execute(
                 {
-                    'args': _ea.array_literal([
+                    'args': _ea.list_literal([
                         `-xzf`,
                         `${$p['path to output directory']}/${filename}`,
                         `-C`,
                         `${$p['path to output directory']}/local`,
                         `--strip-components=1`,
                     ]),
-                }
+                },
+                ($) => ['error while running tar', $],
             ),
 
             // Download published package using dynamic package name and version
-            $r.commands['make directory'].execute.direct(
-                ($) => ['error while creating directory', $],
+            $cr['make directory'].execute(
                 {
                     'path': `${$p['path to output directory']}/temp_npm`,
                     'escape spaces in path': true,
-                }
+                },
+                ($) => ['error while creating directory', $],
             ),
 
-            $r.commands['npm'].execute.direct(
-                ($) => ['error while running npm command', $],
+            $cr['npm'].execute(
                 {
-                    'args': _ea.array_literal([
+                    'args': _ea.list_literal([
                         `pack`,
                         `${package_info.name}@${package_info.version}`,
                         `--pack-destination`,
                         `${$p['path to output directory']}/temp_npm`,
                     ])
-                }
+                },
+                ($) => ['error while running npm command', $],
             ),
 
             // Create published subdirectory
-            $r.commands['make directory'].execute.direct(
-                ($) => ['error while creating directory', $],
+            $cr['make directory'].execute(
                 {
                     'path': `${$p['path to output directory']}/published`,
                     'escape spaces in path': true,
-                }
+                },
+                ($) => ['error while creating directory', $],
             ),
 
-            // Extract published package into published subdirectory
-            $r.commands['tar'].execute.prepare<d.Error>(
-                ($): d.Error => ['error while running tar', $],
-                $r.queries.npm(
+            _easync.p.prepare_data<d.Error, string>(
+                $qr.npm(
                     {
-                        'args': _ea.array_literal([
+                        'args': _ea.list_literal([
                             `view`,
                             package_info.name,
                             `version`,
                         ]),
                     },
-                ).transform(
-                    ($): d_epe.Parameters => ({
-                        'args': _ea.array_literal([
+                ).transform(($) => $.stdout).transform_error_temp(($): d.Error => ['error while running npm query', $]),
+                // Extract published package into published subdirectory
+                ($v) => $cr['tar'].execute<d.Error>(
+                    {
+                        'args': _ea.list_literal([
                             `-xzf`,
-                            `${$p['path to output directory']}/temp_npm/${package_info.name}-${$}.tgz`,
+                            `${$p['path to output directory']}/temp_npm/${package_info.name}-${$v}.tgz`,
                             `-C`,
                             `${$p['path to output directory']}/published`,
                             `--strip-components=1`,
                         ])
-                    })
-                ).transform_error_temp(($): d.Error => ['error while running npm query', $])
-            )
+                    },
+                    ($): d.Error => ['error while running tar', $],
+                )
+            ),
         ])
     }
 )

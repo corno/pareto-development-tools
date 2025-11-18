@@ -18,7 +18,7 @@ export type Abort<Error> = (error: Error) => never
 
 export const create_refinement_context = <Result, Error, State>(
     callback: (abort: Abort<Error>) => Result,
-): _et.Data_Preparation_Result<Result, Error> => {
+): _et.Staging_Result<Result, Error> => {
     try {
         return _ea.data_processing.successful(callback(
             (error) => {
@@ -35,7 +35,7 @@ export const create_refinement_context = <Result, Error, State>(
 }
 
 
-export const create_array_iterator = <Element>($: _et.Array<Element>): Iterator<Element, number> => {
+export const create_array_iterator = <Element>($: _et.List<Element>): Iterator<Element, number> => {
     const length = $.__get_number_of_elements()
     let position = 0
     return {
@@ -57,8 +57,8 @@ export const create_array_iterator = <Element>($: _et.Array<Element>): Iterator<
 
 export const create_array_refiner = <Type, Error, Iterator_Element>(
     builder: (abort: Abort<Error>, iterator: Iterator<Iterator_Element, number>) => Type
-): _et.Data_Preparer<_et.Array<Iterator_Element>, Type, Error> => {
-    return ($: _et.Array<Iterator_Element>) => {
+): _et.Stager<Type, Error, _et.List<Iterator_Element>> => {
+    return ($: _et.List<Iterator_Element>) => {
         const iter = create_array_iterator($)
         return create_refinement_context<Type, Error, Iterator<Iterator_Element, number>>(
             (abort) => {

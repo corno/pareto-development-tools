@@ -6,26 +6,31 @@ import * as d from "../../../interface/temp/procedures/commands/api"
 
 import * as r_instruction from "../refiners/instruction/refiners"
 
+
+export type Variables = {
+    'file content': string
+}
+
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => _ea.cc($p, ($) => {
+    ($p, $cr, $qr) => _ea.cc($p, ($) => {
         switch ($[0]) {
-            case 'setup-comparison': return _ea.ss($, ($) => $r.commands['setup comparison against published'].execute.direct(
-                ($): d.Error => ['setup comparison', $],
+            case 'setup-comparison': return _ea.ss($, ($) => $cr['setup comparison against published'].execute(
                 {
                     'path to local package': _ea.set($['path to package'] + `/pub`),
                     'path to output directory': $['path to package'] + `/temp`,
                 },
+                ($): d.Error => ['setup comparison', $],
             ))
-            case 'assert-clean': return _ea.ss($, ($) => $r.commands['git assert clean'].execute.direct(
-                ($): d.Error => ['git assert clean', $],
+            case 'assert-clean': return _ea.ss($, ($) => $cr['git assert clean'].execute(
                 {
                     'path': _ea.set($['path to package'])
                 },
+                ($): d.Error => ['git assert clean', $],
             ))
             case 'project': return _ea.ss($, ($) => {
                 const path_to_project = $['path to project']
                 return _easync.p.dictionary.parallel.query(
-                    $r.queries['read directory'](
+                    $qr['read directory'](
                         {
                             'path': {
                                 'escape spaces in path': true,
@@ -38,42 +43,42 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     ),
                     ($x, key): _et.Command_Promise<d.Project_Package_Error> => _ea.cc($.instruction, ($) => {
                         switch ($[0]) {
-                            case 'assert clean': return _ea.ss($, ($) => $r.commands['git assert clean'].execute.direct(
+                            case 'assert clean': return _ea.ss($, ($) => $cr['git assert clean'].execute(
+                                {
+                                    'path': _ea.set(key)
+                                },
                                 ($): d.Project_Package_Error => ['git assert clean', $],
-                                {
-                                    'path': _ea.set(key)
-                                },
                             ))
-                            case 'build and test': return _ea.ss($, ($) => $r.commands['build and test'].execute.direct(
+                            case 'build and test': return _ea.ss($, ($) => $cr['build and test'].execute(
+                                {
+                                    'path': key
+                                },
                                 ($): d.Project_Package_Error => ['build and test', $],
+                            ))
+                            case 'build': return _ea.ss($, ($) => $cr['build'].execute(
                                 {
                                     'path': key
                                 },
-                            ))
-                            case 'build': return _ea.ss($, ($) => $r.commands['build'].execute.direct(
                                 ($): d.Project_Package_Error => ['build', $],
-                                {
-                                    'path': key
-                                },
                             ))
-                            case 'git remove tracked but ignored': return _ea.ss($, ($) => $r.commands['git remove tracked but ignored'].execute.direct(
-                                ($): d.Project_Package_Error => ['git remove tracked but ignored', $],
+                            case 'git remove tracked but ignored': return _ea.ss($, ($) => $cr['git remove tracked but ignored'].execute(
                                 {
                                     'path': _ea.set(key)
                                 },
+                                ($): d.Project_Package_Error => ['git remove tracked but ignored', $],
                             ))
-                            case 'update dependencies': return _ea.ss($, ($) => $r.commands['update dependencies'].execute.direct(
-                                ($): d.Project_Package_Error => ['update dependencies', $],
+                            case 'update dependencies': return _ea.ss($, ($) => $cr['update dependencies'].execute(
                                 {
                                     'path': key
                                 },
+                                ($): d.Project_Package_Error => ['update dependencies', $],
                             ))
-                            case 'git commit': return _ea.ss($, ($) => $r.commands['git extended commit'].execute.direct(
-                                ($): d.Project_Package_Error => ['git commit', $],
+                            case 'git commit': return _ea.ss($, ($) => $cr['git extended commit'].execute(
                                 {
                                     'path': _ea.set(key),
                                     'instruction': $
                                 },
+                                ($): d.Project_Package_Error => ['git commit', $],
                             ))
                             default: return _ea.au($[0])
                         }

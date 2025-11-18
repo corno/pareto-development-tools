@@ -12,26 +12,9 @@ import * as exceptional_fp from "pareto-fountain-pen/dist/exceptional/serialize/
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
+
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => $r.commands.api.execute.prepare(
-        ($): d.Error => {
-            //FIXME: do this properly
-            _ed.log_debug_message(
-                exceptional_fp.Group(
-                    sh.group([sh.g.nested_block([
-                        t_api_to_fountain_pen.Error($)
-                    ])]),
-                    {
-                        'indentation': `    `,
-                        'newline': `\n`,
-                    }
-                ),
-                () => { }
-            )
-            return ({
-                'exit code': 0
-            })
-        },
+    ($p, $cr) => _easync.p.prepare_data(
         r_instruction.Command($p.arguments).transform_error_temp(
             ($): d.Error => {
                 //FIXME: do this properly
@@ -52,5 +35,26 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 }
             }
         ),
+        ($v) => $cr.api.execute(
+            $v,
+            ($): d.Error => {
+                //FIXME: do this properly
+                _ed.log_debug_message(
+                    exceptional_fp.Group(
+                        sh.group([sh.g.nested_block([
+                            t_api_to_fountain_pen.Error($)
+                        ])]),
+                        {
+                            'indentation': `    `,
+                            'newline': `\n`,
+                        }
+                    ),
+                    () => { }
+                )
+                return ({
+                    'exit code': 0
+                })
+            },
+        )
     )
 )

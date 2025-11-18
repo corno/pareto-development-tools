@@ -7,17 +7,17 @@ import * as d from "../../../../interface/temp/queries/git_is_clean"
 
 
 export const $$: d.Query = _easync.create_query_procedure(
-    ($r, $p) => $r.git(
+    ($p, $qr) => $qr.git(
         {
-            'args': op_flatten(_ea.array_literal([
+            'args': op_flatten(_ea.list_literal([
                 $p.path.transform(
-                    ($) => _ea.array_literal([
+                    ($) => _ea.list_literal([
                         `-C`,
                         $,
                     ]),
-                    () => _ea.array_literal([])
+                    () => _ea.list_literal([])
                 ),
-                _ea.array_literal([
+                _ea.list_literal([
                     `status`,
                     `--porcelain`,
                 ])
@@ -26,7 +26,7 @@ export const $$: d.Query = _easync.create_query_procedure(
     ).transform<boolean>(
         ($) => $.stdout === ``
     ).rework_error_temp(
-        ($current) => $r['is inside git work tree'](
+        ($current) => $qr['is inside git work tree'](
             {
                 'path': $p.path
             },

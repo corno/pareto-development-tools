@@ -6,8 +6,11 @@ import * as d from "../../interface/remove_tracked_but_ignored"
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => _easync.p.sequence([
-        $r.commands['assert git is clean'].execute.direct(
+    ($p, $cr) => _easync.p.sequence([
+        $cr['assert git is clean'].execute(
+            {
+                'path': $p.path,
+            },
             ($): d.Error => _ea.cc($, ($) => {
                 switch ($[0]) {
                     case 'working directory is not clean': return _ea.ss($, ($): d.Error => ['not clean', null])
@@ -15,22 +18,18 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     default: return _ea.au($[0])
                 }
             }),
-            {
-                'path': $p.path,
-            },
         ),
-        $r.commands.git.execute.direct(
-            ($) => ['could not remove', $],
+        $cr.git.execute(
             {
-                'args': op_flatten(_ea.array_literal([
+                'args': op_flatten(_ea.list_literal([
                     $p.path.transform(
-                        ($) => _ea.array_literal([
+                        ($) => _ea.list_literal([
                             `-C`,
                             $,
                         ]),
-                        () => _ea.array_literal([])
+                        () => _ea.list_literal([])
                     ),
-                    _ea.array_literal([
+                    _ea.list_literal([
                         `rm`,
                         `-r`,
                         `--cached`,
@@ -38,24 +37,25 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     ])
                 ]))
             },
+            ($) => ['could not remove', $],
         ),
-        $r.commands.git.execute.direct(
-            ($) => ['could not add', $],
+        $cr.git.execute(
             {
-                'args': op_flatten(_ea.array_literal([
+                'args': op_flatten(_ea.list_literal([
                     $p.path.transform(
-                        ($) => _ea.array_literal([
+                        ($) => _ea.list_literal([
                             `-C`,
                             $,
                         ]),
-                        () => _ea.array_literal([])
+                        () => _ea.list_literal([])
                     ),
-                    _ea.array_literal([
+                    _ea.list_literal([
                         `add`,
                         `--all`,
                     ])
                 ]))
             },
+            ($) => ['could not add', $],
         ),
     ])
 )

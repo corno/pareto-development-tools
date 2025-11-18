@@ -4,18 +4,18 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../../interface/temp/procedures/commands/build"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => _easync.p.sequence([
-        $r.commands.tsc.execute.direct(
-            ($): d.Error => ['error building pub', $],
+    ($p, $cr) => _easync.p.sequence([
+        $cr.tsc.execute(
             {
                 'path': _ea.set($p.path + `/pub`),
             },
+            ($): d.Error => ['error building pub', $],
         ),
-        $r.commands.tsc.execute.direct(
-            ($): d.Error => ['error building test', $],
+        $cr.tsc.execute(
             {
                 'path': _ea.set($p.path + `/test`),
             },
+            ($): d.Error => ['error building test', $],
         )
     ])
 )

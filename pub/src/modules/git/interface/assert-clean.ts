@@ -13,13 +13,12 @@ export type Error =
     | ['unexpected error', d_gic.Error]
     | ['working directory is not clean', null]
 
-export type Resources = {
-    'queries': {
-        'is git clean': _et.Data_Preparer<d_is_git_clean.Parameters, d_is_git_clean.Result, d_is_git_clean.Error>
-    }
-    'commands': {
-        'git': _et.Command<d_epe.Parameters, d_epe.Error>
-    }
+export type Variable_Resources = {
+    'is git clean': _et.Stager<d_is_git_clean.Result, d_is_git_clean.Error, d_is_git_clean.Parameters>
 }
 
-export type Procedure = _et.Command_Procedure<Parameters, Error, Resources>
+export type Command_Resources = {
+    'git': _et.Command<d_epe.Error, d_epe.Parameters>
+}
+
+export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>

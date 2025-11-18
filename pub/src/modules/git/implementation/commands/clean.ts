@@ -6,18 +6,17 @@ import * as d from "../../interface/clean"
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($r, $p) => $r.commands.git.execute.direct(
-        ($) => ['unexpected error', $],
+    ($p, $cr) => $cr.git.execute(
         {
-            'args': op_flatten(_ea.array_literal([
+            'args': op_flatten(_ea.list_literal([
                 $p.path.transform(
-                    ($) => _ea.array_literal([
+                    ($) => _ea.list_literal([
                         `-C`,
                         $,
                     ]),
-                    () => _ea.array_literal([])
+                    () => _ea.list_literal([])
                 ),
-                _ea.array_literal([
+                _ea.list_literal([
                     `clean`,
                     `--force`,
                     `-d`, // remove whole directories
@@ -26,5 +25,6 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 ])
             ])),
         },
+        ($) => ['unexpected error', $],
     )
 )

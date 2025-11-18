@@ -17,14 +17,13 @@ export type Error =
     | ['could not add', d_eqe.Error]
     | ['unexpected error', d_gic.Error]
 
-export type Resources = {
-    'queries': {
-        'git': _et.Data_Preparer<d_eqe.Parameters, d_eqe.Result, d_eqe.Error>
-    }
-    'commands': {
-        'git': _et.Command<d_epe.Parameters, d_epe.Error>
-        'assert git is clean': _et.Command<d_gac.Parameters, d_gac.Error>
-    }
+export type Variable_Resources = {
+    'git': _et.Stager<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
 }
 
-export type Procedure =  _et.Command_Procedure<Parameters, Error, Resources>
+export type Command_Resources = {
+    'git': _et.Command<d_epe.Error, d_epe.Parameters>
+    'assert git is clean': _et.Command<d_gac.Error, d_gac.Parameters>
+}
+
+export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>
