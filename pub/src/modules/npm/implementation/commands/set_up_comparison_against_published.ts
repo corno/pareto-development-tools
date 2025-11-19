@@ -7,7 +7,7 @@ import * as d from "../../interface/set_up_comparison_against_published"
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
-import { $ as parse_npm_package } from "../../../../implementation/algorithms/refiners/npm_package/temp"
+import { $ as parse_npm_package } from "../refiners/npm_package/temp"
 
 export type Variables = {
     'version': string
