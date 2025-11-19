@@ -46,6 +46,7 @@ export const $$: d.Query = _easync.create_query_procedure(($p, $r) => {
                     ])
                 ])),
             },
+            ($) => $
         ),
         {
             success: ($) => {

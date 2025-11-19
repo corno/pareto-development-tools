@@ -18,7 +18,7 @@ export type Error =
 
 
 export type Resources = {
-    'git': _et.Stager<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
+    'git': _et.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
 }
 
 export type Query = _et.Query_Procedure<Result, Error, Parameters, Resources>

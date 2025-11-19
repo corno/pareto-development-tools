@@ -9,9 +9,8 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             $qr['is git clean'](
                 {
                     'path': $p.path,
-                }
-            ).transform_error_temp<d.Error>(
-                ($) => ['unexpected error', $]
+                },
+                ($): d.Error => ['unexpected error', $]
             ),
             ['working directory is not clean', null]
         )

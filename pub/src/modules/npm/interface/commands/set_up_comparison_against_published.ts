@@ -19,8 +19,8 @@ export type Error =
     | readonly ['error while parsing package.json', string]
 
 export type Query_Resources = {
-    'read file': _et.Stager<d_read_file.Result, d_read_file.Error, d_read_file.Parameters>
-    'npm': _et.Stager<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
+    'read file': _et.Query<d_read_file.Result, d_read_file.Error, d_read_file.Parameters>
+    'npm': _et.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
 }
 
 export type Command_Resources = {

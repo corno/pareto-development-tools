@@ -16,8 +16,8 @@ export type Error =
     | ['unknown issue', d_iwt.Error]
 
 export type Resources = {
-    'is inside git work tree': _et.Stager<d_iwt.Result, d_iwt.Error, d_iwt.Parameters>
-    'git': _et.Stager<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
+    'is inside git work tree': _et.Query<d_iwt.Result, d_iwt.Error, d_iwt.Parameters>
+    'git': _et.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
 }
 
 export type Query = _et.Query_Procedure<Result, Error, Parameters, Resources>

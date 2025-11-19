@@ -13,13 +13,12 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 {
                     'path': $p.path
                 },
-            ).transform_error_temp(
-                ($): d.Error => ['asserting git not clean', $]
+                 ($): d.Error => ['asserting git not clean', $],
             ).transform(
                 ($) => !$
             ),
             _easync.p.sequence([
-                _easync.p.conditional(
+                _easync.p.if_(
                     $p.instruction['stage all changes'],
                     [
                         $cr.git.execute(
@@ -61,7 +60,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
-                _easync.p.conditional(
+                _easync.p.if_(
                     $p.instruction['push after commit'],
                     [
                         $cr.git.execute(

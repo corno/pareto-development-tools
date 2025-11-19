@@ -30,15 +30,18 @@ import { $$ as p_set_up_comparison_against_published } from "./modules/npm/imple
 const create_eqe = (
     program: string,
     $r: _eb.Available_Standard_Resources,
-): _et.Stager<d_eqe.Result, d_epe.Error, d_epe.Parameters> => {
-    return _easync.__create_query(($p) => {
-        return $r.queries['execute any query executable'](
-            {
-                'program': program,
-                'args': $p.args,
-            },
-        )
-    })
+): _et.Query<d_eqe.Result, d_epe.Error, d_epe.Parameters> => {
+    return _easync.__create_query(
+        ($p) => {
+            return $r.queries['execute any query executable'](
+                {
+                    'program': program,
+                    'args': $p.args,
+                },
+                ($) => $,
+            )
+        }
+    )
 }
 
 const create_epe = (

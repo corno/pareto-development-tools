@@ -32,7 +32,7 @@ export type Project_Instruction =
     | ['update dependencies', null]
 
 export type Query_Resources = {
-    'read directory': _et.Stager<d_read_directory.Result, d_read_directory.Error, d_read_directory.Parameters>
+    'read directory': _et.Query<d_read_directory.Result, d_read_directory.Error, d_read_directory.Parameters>
 }
 
 export type Command_Resources = {

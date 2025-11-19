@@ -120,7 +120,8 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                             `version`,
                         ]),
                     },
-                ).transform(($) => $.stdout).transform_error_temp(($): d.Error => ['error while running npm query', $]),
+                    ($): d.Error => ['error while running npm query', $]
+                ).transform(($) => $.stdout),
                 // Extract published package into published subdirectory
                 ($v) => [
                     $cr['tar'].execute<d.Error>(

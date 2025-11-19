@@ -6,7 +6,7 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/sche
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export type Error = _et.Transformer_Without_Parameters<d_out.Block_Part, d_in.Error>
+export type Error = _et.Transformer<d_out.Block_Part, d_in.Error>
 
 import * as t_utd_to_fountain_pen from "../clean_and_update_dependencies/fountain_pen"
 

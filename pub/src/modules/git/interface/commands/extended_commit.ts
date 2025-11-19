@@ -25,7 +25,7 @@ export type Instruction = {
 }
 
 export type Query_Resources = {
-    'git is clean': _et.Stager<d_gic.Result, d_gic.Error, d_gic.Parameters>
+    'git is clean': _et.Query<d_gic.Result, d_gic.Error, d_gic.Parameters>
 }
 
 export type Command_Resources = {

@@ -18,7 +18,7 @@ export type Error =
     | ['unexpected error', d_gic.Error]
 
 export type Query_Resources = {
-    'git': _et.Stager<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
+    'git': _et.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
 }
 
 export type Command_Resources = {

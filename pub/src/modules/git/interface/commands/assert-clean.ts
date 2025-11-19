@@ -14,7 +14,7 @@ export type Error =
     | ['working directory is not clean', null]
 
 export type Query_Resources = {
-    'is git clean': _et.Stager<d_is_git_clean.Result, d_is_git_clean.Error, d_is_git_clean.Parameters>
+    'is git clean': _et.Query<d_is_git_clean.Result, d_is_git_clean.Error, d_is_git_clean.Parameters>
 }
 
 export type Command_Resources = {

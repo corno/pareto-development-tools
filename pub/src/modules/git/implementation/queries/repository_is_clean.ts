@@ -23,6 +23,7 @@ export const $$: d.Query = _easync.create_query_procedure(
                 ])
             ])),
         },
+        ($) => $,
     ).transform<boolean>(
         ($) => $.stdout === ``
     ).rework_error_temp(
@@ -30,6 +31,7 @@ export const $$: d.Query = _easync.create_query_procedure(
             {
                 'path': $p.path
             },
+            ($) => $
         ).transform<d.Error>(
             ($) => {
                 return $
