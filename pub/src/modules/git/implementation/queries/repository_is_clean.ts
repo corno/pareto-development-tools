@@ -3,7 +3,7 @@ import * as _ea from 'exupery-core-alg'
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
-import * as d from "../../../../interface/queries/git_is_clean"
+import * as d from "../../interface/queries/git_is_clean"
 
 
 export const $$: d.Query = _easync.create_query_procedure(

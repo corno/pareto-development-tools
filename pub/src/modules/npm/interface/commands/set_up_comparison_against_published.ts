@@ -18,7 +18,7 @@ export type Error =
     | readonly ['error while reading package.json', d_read_file.Error]
     | readonly ['error while parsing package.json', string]
 
-export type Variable_Resources = {
+export type Query_Resources = {
     'read file': _et.Stager<d_read_file.Result, d_read_file.Error, d_read_file.Parameters>
     'npm': _et.Stager<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
 }
@@ -29,4 +29,4 @@ export type Command_Resources = {
     'make directory': _et.Command<d_make_directory.Error, d_make_directory.Parameters>
 }
 
-export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>
+export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>

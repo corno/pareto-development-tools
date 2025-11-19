@@ -1,7 +1,7 @@
 import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 
-import * as d_in from "../../../interface/npm"
+import * as d_in from "../../../interface/commands/npm"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
 
 export type Error = _et.Transformer_Without_Parameters<d_out.Block_Part, d_in.Error>

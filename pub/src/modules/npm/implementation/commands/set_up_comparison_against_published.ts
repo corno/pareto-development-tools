@@ -3,7 +3,7 @@ import * as _ea from 'exupery-core-alg'
 import * as _ed from 'exupery-core-dev'
 import * as _et from 'exupery-core-types'
 
-import * as d from "../../interface/set_up_comparison_against_published"
+import * as d from "../../interface/commands/set_up_comparison_against_published"
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
@@ -27,7 +27,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
         const package_info = parse_npm_package(''); // Get hardcoded values from temp function
         const filename = `${package_info.name}-${package_info.version}.tgz`;
 
-        return _easync.p.sequence<d.Error>([
+        return [
             // Create main output directory
             $cr['make directory'].execute(
                 {
@@ -111,7 +111,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 ($) => ['error while creating directory', $],
             ),
 
-            _easync.p.prepare_data<d.Error, string>(
+            _easync.p.stage<d.Error, string>(
                 $qr.npm(
                     {
                         'args': _ea.list_literal([
@@ -122,19 +122,21 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     },
                 ).transform(($) => $.stdout).transform_error_temp(($): d.Error => ['error while running npm query', $]),
                 // Extract published package into published subdirectory
-                ($v) => $cr['tar'].execute<d.Error>(
-                    {
-                        'args': _ea.list_literal([
-                            `-xzf`,
-                            `${$p['path to output directory']}/temp_npm/${package_info.name}-${$v}.tgz`,
-                            `-C`,
-                            `${$p['path to output directory']}/published`,
-                            `--strip-components=1`,
-                        ])
-                    },
-                    ($): d.Error => ['error while running tar', $],
-                )
+                ($v) => [
+                    $cr['tar'].execute<d.Error>(
+                        {
+                            'args': _ea.list_literal([
+                                `-xzf`,
+                                `${$p['path to output directory']}/temp_npm/${package_info.name}-${$v}.tgz`,
+                                `-C`,
+                                `${$p['path to output directory']}/published`,
+                                `--strip-components=1`,
+                            ])
+                        },
+                        ($): d.Error => ['error while running tar', $],
+                    )
+                ]
             ),
-        ])
+        ]
     }
 )

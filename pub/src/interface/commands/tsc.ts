@@ -13,10 +13,10 @@ export type Parameters = {
     'path': _et.Optional_Value<string>,
 }
 
-export type Variable_Resources = null
+export type Query_Resources = null
 
 export type Command_Resources = {
     'tsc': _et.Command<d_espe.Error, d_espe.Parameters>
 }
 
-export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>
+export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>

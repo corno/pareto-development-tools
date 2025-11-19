@@ -4,7 +4,7 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../interface/commands/build"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($p, $cr) => _easync.p.sequence([
+    ($p, $cr) => [
         $cr.tsc.execute(
             {
                 'path': _ea.set($p.path + `/pub`),
@@ -17,5 +17,5 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             },
             ($): d.Error => ['error building test', $],
         )
-    ])
+    ]
 )

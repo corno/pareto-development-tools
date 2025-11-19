@@ -14,7 +14,7 @@ export type Parse_Error =
 
 export type Error = d_main.Error
 
-export type Variable_Resources = null
+export type Query_Resources = null
 
 export type Command_Resources = {
         'api': _et.Command<d_api.Error, d_api.Parameters>
@@ -22,4 +22,4 @@ export type Command_Resources = {
 }
 
 
-export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>
+export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>

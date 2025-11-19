@@ -6,21 +6,25 @@ import * as d from "../../interface/commands/tsc"
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($p, $cr) => $cr.tsc.execute(
-        {
-            'args': op_flatten(_ea.list_literal([
-                $p.path.transform(
-                    ($) => _ea.list_literal([
-                        `--project`,
-                        $,
+
+    // tsc
+    ($p, $cr) => [
+        $cr.tsc.execute(
+            {
+                'args': op_flatten(_ea.list_literal([
+                    $p.path.transform(
+                        ($) => _ea.list_literal([
+                            `--project`,
+                            $,
+                        ]),
+                        () => _ea.list_literal([])
+                    ),
+                    _ea.list_literal([
+                        `--pretty`,
                     ]),
-                    () => _ea.list_literal([])
-                ),
-                _ea.list_literal([
-                    `--pretty`,
-                ]),
-            ])),
-        },
-        ($) => ['error while running tsc', $],
-    )
+                ])),
+            },
+            ($) => ['error while running tsc', $],
+        )
+    ]
 )

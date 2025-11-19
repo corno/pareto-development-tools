@@ -3,7 +3,7 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../../interface/commands/api"
 import * as d_error from "../../../interface/commands/bin"
 
-import * as core from "./core"
+import * as core from "../../temp_core"
 
 export const Command = (
     abort: core.Abort<d_error.Parse_Error>,

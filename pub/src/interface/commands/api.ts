@@ -1,13 +1,13 @@
 import * as _et from 'exupery-core-types'
 
 import * as d_read_directory from "exupery-resources/dist/interface/generated/pareto/schemas/read_directory/data_types/source"
-import * as d_assert_clean from "../../modules/git/interface/assert-clean"
+import * as d_assert_clean from "../../modules/git/interface/commands/assert-clean"
 import * as d_build_and_test from "./build_and_test"
 import * as d_build from "./build"
 import * as d_update_dependencies from "./update_dependencies"
-import * as d_git_remove_tracked_but_ignored from "../../modules/git/interface/remove_tracked_but_ignored"
-import * as d_git_extended_commit from "../../modules/git/interface/extended_commit"
-import * as d_set_up_comparison_against_published from "../../modules/npm/interface/set_up_comparison_against_published"
+import * as d_git_remove_tracked_but_ignored from "../../modules/git/interface/commands/remove_tracked_but_ignored"
+import * as d_git_extended_commit from "../../modules/git/interface/commands/extended_commit"
+import * as d_set_up_comparison_against_published from "../../modules/npm/interface/commands/set_up_comparison_against_published"
 
 export type Command =
     | ['project', Project]

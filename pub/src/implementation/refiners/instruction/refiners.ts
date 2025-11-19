@@ -3,7 +3,7 @@ import * as _et from 'exupery-core-types'
 
 import * as d from "../../../interface/commands/api"
 
-import * as core from "./core"
+import * as core from "../../temp_core"
 
 import * as builders from "./builders"
 

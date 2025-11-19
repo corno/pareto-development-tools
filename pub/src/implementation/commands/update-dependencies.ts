@@ -4,18 +4,22 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../interface/commands/update_dependencies"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($p, $cr) => _easync.p.sequence<d.Error>([
+    ($p, $cr) => [
+
+        // update dependencies of pub
         $cr['update typescript dependencies'].execute(
             {
                 'path': `${$p.path}/pub`,
             },
-            ($) => ['error updating pub', $],
+            ($): d.Error => ['error updating pub', $],
         ),
+
+        // update dependencies of test
         $cr['update typescript dependencies'].execute(
             {
                 'path': `${$p.path}/test`,
             },
             ($) => ['error updating test', $],
         ),
-    ])
+    ]
 )

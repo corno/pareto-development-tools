@@ -1,12 +1,12 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../interface/remove_tracked_but_ignored"
+import * as d from "../../interface/commands/remove_tracked_but_ignored"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($p, $cr) => _easync.p.sequence([
+    ($p, $cr) => [
         $cr['assert git is clean'].execute(
             {
                 'path': $p.path,
@@ -57,5 +57,5 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             },
             ($) => ['could not add', $],
         ),
-    ])
+    ]
 )

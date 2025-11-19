@@ -14,10 +14,10 @@ export type Error =
 // | ['could not commit', d_eqe.Error]
 // | ['could not push', d_eqe.Error]
 
-export type Variable_Resources = null
+export type Query_Resources = null
 
 export type Command_Resources = {
     'npm': _et.Command<d_epe.Error, d_epe.Parameters>
 }
 
-export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Variable_Resources>
+export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>

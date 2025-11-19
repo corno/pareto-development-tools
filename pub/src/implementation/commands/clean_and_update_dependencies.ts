@@ -4,13 +4,17 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../interface/commands/clean_and_update_dependencies"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
-    ($p, $cr) => _easync.p.sequence([
+    ($p, $cr) =>[
+
+        // clean
         $cr['git clean'].execute(
             {
                 'path': _ea.set($p.path),
             },
             ($): d.Error => ['could not clean', $],
         ),
+
+        // update dependencies
         $cr['update2latest'].execute(
             {
                 'path': $p.path,
@@ -19,6 +23,8 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             },
             ($) => ['could not update to latest', $],
         ),
+
+        // install updated dependencies
         $cr['npm'].execute(
             {
                 'path': _ea.set($p.path),
@@ -26,5 +32,5 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             },
             ($) => ['could not install', $],
         ),
-    ])
+    ]
 )
