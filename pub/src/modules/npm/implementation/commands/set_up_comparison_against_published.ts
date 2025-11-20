@@ -111,7 +111,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 ($) => ['error while creating directory', $],
             ),
 
-            _easync.p.stage<d.Error, string>(
+            _easync.p.stage_without_error_transformation<d.Error, string>(
                 $qr.npm(
                     {
                         'args': _ea.list_literal([

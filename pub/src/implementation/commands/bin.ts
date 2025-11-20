@@ -15,7 +15,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr) => [
-        _easync.p.stage(
+        _easync.p.stage_without_error_transformation(
 
             // parse command line instruction
             r_instruction.Command($p.arguments).transform_error_temp(
