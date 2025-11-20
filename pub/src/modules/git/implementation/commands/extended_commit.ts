@@ -14,7 +14,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     'path': $p.path
                 },
                  ($): d.Error => ['asserting git not clean', $],
-            ).transform(
+            ).transform_result(
                 ($) => !$
             ),
             _easync.p.sequence([

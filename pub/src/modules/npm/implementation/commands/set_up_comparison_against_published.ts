@@ -111,7 +111,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 ($) => ['error while creating directory', $],
             ),
 
-            _easync.p.stage_without_error_transformation<d.Error, string>(
+            _easync.p.query_without_error_transformation<d.Error, string>(
                 $qr.npm(
                     {
                         'args': _ea.list_literal([
@@ -121,7 +121,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                         ]),
                     },
                     ($): d.Error => ['error while running npm query', $]
-                ).transform(($) => $.stdout),
+                ).transform_result(($) => $.stdout),
                 // Extract published package into published subdirectory
                 ($v) => [
                     $cr['tar'].execute<d.Error>(

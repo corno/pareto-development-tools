@@ -24,7 +24,7 @@ export const $$: d.Query = _easync.create_query_procedure(
             ])),
         },
         ($) => $,
-    ).transform<boolean>(
+    ).transform_result<boolean>(
         ($) => $.stdout === ``
     ).rework_error_temp(
         ($current) => $qr['is inside git work tree'](
@@ -32,7 +32,7 @@ export const $$: d.Query = _easync.create_query_procedure(
                 'path': $p.path
             },
             ($) => $
-        ).transform<d.Error>(
+        ).transform_result<d.Error>(
             ($) => {
                 return $
                     ? ['could not determine git status', $current]
