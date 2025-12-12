@@ -125,7 +125,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                         $cr['tar'].execute(
                             {
                                 'args': _ea.list_literal([
-                                    `-xzf`,
+                                    `-xzmf`,
                                     `${$p['path to temp directory']}/${filename}`,
                                     `-C`,
                                     `${$p['path to output local directory']}`,
@@ -181,7 +181,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                 $cr['tar'].execute<d.Error>(
                                     {
                                         'args': _ea.list_literal([
-                                            `-xzf`,
+                                            `-xzmf`,
                                             `${$p['path to temp directory']}/npm/${package_info.name}-${$v}.tgz`,
                                             `-C`,
                                             `${$p['path to output published directory']}`,
