@@ -13,7 +13,7 @@ export type Parameters = {
 export type Error =
     | ['could not clean', d_gc.Error]
     | ['could not update to latest', d_update2latest.Error]
-    | ['could not install', d_npm.Error]
+    | ['could not install dependencies', d_npm.Error]
 
 export type Query_Resources = null
 

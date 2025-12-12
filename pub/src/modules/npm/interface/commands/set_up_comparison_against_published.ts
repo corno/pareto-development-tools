@@ -6,8 +6,10 @@ import * as d_make_directory from "exupery-resources/dist/interface/generated/pa
 import * as d_read_file from "exupery-resources/dist/interface/generated/pareto/schemas/read_file/data_types/source"
 
 export type Parameters = {
-    'path to local package': _et.Optional_Value<string>,
-    'path to output directory': string,
+    'path to local package': string,
+    'path to temp directory': string,
+    'path to output published directory': string,
+    'path to output local directory': string,
 }
 
 export type Error =

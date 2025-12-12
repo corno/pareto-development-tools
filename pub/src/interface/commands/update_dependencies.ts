@@ -14,7 +14,7 @@ export type Error =
 export type Query_Resources = null
 
 export type Command_Resources = {
-        'update typescript dependencies': _et.Command<d_utd.Error, d_utd.Parameters>
+        'clean and update dependencies': _et.Command<d_utd.Error, d_utd.Parameters>
 }
 
 export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>

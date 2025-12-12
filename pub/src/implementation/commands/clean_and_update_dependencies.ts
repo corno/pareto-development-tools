@@ -24,13 +24,13 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             ($) => ['could not update to latest', $],
         ),
 
-        // install updated dependencies
+        // install/update updated dependencies
         $cr['npm'].execute(
             {
                 'path': _ea.set($p.path),
                 'operation': ['update', null], // 'install' does not update the indirect dependencies
             },
-            ($) => ['could not install', $],
+            ($) => ['could not install dependencies', $],
         ),
     ]
 )

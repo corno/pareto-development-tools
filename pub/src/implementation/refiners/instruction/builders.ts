@@ -10,7 +10,7 @@ export const Command = (
     iterator: core.Iterator<string, number>,
 ): d.Command => {
     return iterator['consume current']().transform(
-        ($) => {
+        ($): d.Command => {
             switch ($) {
                 case 'project':
                     return ['project', {
@@ -28,7 +28,7 @@ export const Command = (
                                     case 'build':
                                         return ['build', null]
                                     case 'git-commit':
-                                        return ['git commit', {
+                                        return ['git extended commit', {
                                             'commit message': iterator['consume current']().transform(
                                                 ($) => $,
                                                 () => abort(['expected a text', { 'description': "commit message" }])
@@ -38,38 +38,40 @@ export const Command = (
                                         }]
                                     case 'git-remove-tracked-but-ignored':
                                         return ['git remove tracked but ignored', null]
+                                    case 'set-up-comparison':
+                                        return ['set up comparison', null]
                                     case 'update-dependencies':
                                         return ['update dependencies', null]
                                     default:
                                         return abort(['expected one of', _ea.dictionary_literal({
-                                            'assert clean': null,
-                                            'build and test': null,
+                                            'assert-clean': null,
+                                            'build-and-test': null,
                                             'build': null,
-                                            'git commit': null,
-                                            'git remove tracked but ignored': null,
-                                            'update dependencies': null,
+                                            'git-commit': null,
+                                            'git-remove-tracked-but-ignored': null,
+                                            'update-dependencies': null,
                                         })])
                                 }
                             },
                             () => abort(['expected one of', _ea.dictionary_literal({
-                                'assert clean': null,
-                                'build and test': null,
+                                'assert-clean': null,
+                                'build-and-test': null,
                                 'build': null,
-                                'git commit': null,
-                                'git remove tracked but ignored': null,
-                                'update dependencies': null,
+                                'git-commit': null,
+                                'git-remove-tracked-but-ignored': null,
+                                'update-dependencies': null,
                             })])
                         )
                     }]
                 case 'assert-clean':
-                    return ['assert-clean', {
+                    return ['assert clean', {
                         'path to package': iterator['consume current']().transform(
                             ($) => $,
                             () => abort(['expected a text', { 'description': "path to package" }])
                         )
                     }]
                 case 'set-up-comparison':
-                    return ['set-up-comparison', {
+                    return ['set up comparison', {
                         'path to package': iterator['consume current']().transform(
                             ($) => $,
                             () => abort(['expected a text', { 'description': "path to package" }])

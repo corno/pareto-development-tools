@@ -4,7 +4,6 @@ import * as _eb from 'exupery-core-bin'
 import * as _easync from 'exupery-core-async'
 import * as _et from 'exupery-core-types'
 
-import * as d_main from "exupery-resources/dist/interface/temp_main"
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 import * as d_espe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
 import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
@@ -145,9 +144,9 @@ _eb.run_main_procedure(
             null,
         )
 
-        const update_dependencies = p_update_dependencies(
+        const clean_and_update_dependencies = p_update_dependencies(
             {
-                'update typescript dependencies': update_typescript_dependencies,
+                'clean and update dependencies': update_typescript_dependencies,
             },
             null,
         )
@@ -191,7 +190,7 @@ _eb.run_main_procedure(
                         'build and test': build_and_test,
                         'build': build,
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
-                        'update dependencies': update_dependencies,
+                        'update dependencies': clean_and_update_dependencies,
                         'git extended commit': git_extended_commit,
                         'set up comparison against published': set_up_comparison_against_published,
                     },

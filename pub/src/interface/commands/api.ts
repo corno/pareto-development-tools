@@ -10,11 +10,23 @@ import * as d_git_extended_commit from "../../modules/git/interface/commands/ext
 import * as d_set_up_comparison_against_published from "../../modules/npm/interface/commands/set_up_comparison_against_published"
 
 export type Command =
+    /**
+     * run a command on a whole project (multiple packages)
+     */
     | ['project', Project]
-    | ['assert-clean', {
+
+    /**
+     * asserts that the git working tree is clean for 1 specified package
+     */
+    | ['assert clean', {
         'path to package': string
     }]
-    | ['set-up-comparison', {
+
+    /**
+     * sets up 2 directories in /temp of the package dir; one of the local package and one of the published package
+     * these directories can be diffed to determine what changes have not been published yet
+     */
+    | ['set up comparison', {
         'path to package': string
     }]
 
@@ -24,11 +36,42 @@ export type Project = {
 }
 
 export type Project_Instruction =
+
+    /**
+     * verifies that the git working tree is clean, raises an error if not
+     */
     | ['assert clean', null]
+
+    /**
+     * builds all packages and runs their tests
+     */
     | ['build and test', null]
+
     | ['build', null]
-    | ['git commit', d_git_extended_commit.Instruction]
+
+    /**
+     * stages all changes, makes a commit with the given message, and pushes the commit
+     */
+    | ['git extended commit', d_git_extended_commit.Instruction]
+
+    /**
+     * executes     `git rm -r --cached .`
+     * followed by  `git add --all`
+     */
     | ['git remove tracked but ignored', null]
+
+    /**
+     * sets up 2 directories in /temp of the package dir; one of the local package and one of the published package
+     * these directories can be diffed to determine what changes have not been published yet
+     */
+    | ['set up comparison', null]
+
+    /**
+     * for both the pub and test packages;
+     * first runs  git clean
+     * then        update2latest
+     * then        npm install
+     */
     | ['update dependencies', null]
 
 export type Query_Resources = {
@@ -61,6 +104,8 @@ export type Project_Package_Error =
     | ['git commit', d_git_extended_commit.Error]
     | ['git remove tracked but ignored', d_git_remove_tracked_but_ignored.Error]
     | ['update dependencies', d_update_dependencies.Error]
+    | ['set up comparison', d_set_up_comparison_against_published.Error]
+
 
 export type Parameters = Command
 

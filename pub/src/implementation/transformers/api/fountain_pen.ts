@@ -33,6 +33,7 @@ export const Error: Error = ($) => _ea.cc($, ($) => {
                             case 'git assert clean': return _ea.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
                             case 'git commit': return _ea.ss($, ($) => t_git_extended_commit_to_fountain_pen.Error($))
                             case 'git remove tracked but ignored': return _ea.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
+                            case 'set up comparison': return _ea.ss($, ($) => t_set_up_comparison_against_published.Error($))
                             case 'update dependencies': return _ea.ss($, ($) => t_update_dependencies.Error($))
                             default: return _ea.au($[0])
                         }

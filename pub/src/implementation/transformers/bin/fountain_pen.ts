@@ -12,10 +12,13 @@ export const Parse_Error: Parse_Error = ($) => _ea.cc($, ($) => {
     switch ($[0]) {
         case 'expected one of': return _ea.ss($, ($) => sh.b.sub([
             sh.b.snippet(`expected one of: `),
-            sh.b.sub($.deprecated_to_array(() => 1).map(($) => sh.b.sub([
-                sh.b.snippet(` `),
-                sh.b.snippet($.key)
-            ])) )
+            sh.b.indent([
+                sh.g.sub(
+                    $.deprecated_to_array(() => 1).map(($) => sh.g.nested_block([
+                        sh.b.snippet($.key)
+                    ]))
+                )
+            ]),
 
         ]))
         case 'expected a text': return _ea.ss($, ($) => sh.b.sub([

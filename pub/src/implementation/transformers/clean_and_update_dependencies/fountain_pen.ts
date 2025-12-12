@@ -23,8 +23,8 @@ export const Error: Error = ($) => {
                 sh.b.snippet(`could not update to latest typescript dependencies: `),
                 t_u2l_to_fountain_pen.Error($)
             ]))
-            case 'could not install': return _ea.ss($, ($) => sh.b.sub([
-                sh.b.snippet(`could not install typescript dependencies: `),
+            case 'could not install dependencies': return _ea.ss($, ($) => sh.b.sub([
+                sh.b.snippet(`could not install dependencies typescript dependencies: `),
                 t_npm_to_fountain_pen.Error($)
             ]))
             default: return _ea.au($[0])

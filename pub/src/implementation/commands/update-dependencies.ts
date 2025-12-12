@@ -7,7 +7,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr) => [
 
         // update dependencies of pub
-        $cr['update typescript dependencies'].execute(
+        $cr['clean and update dependencies'].execute(
             {
                 'path': `${$p.path}/pub`,
             },
@@ -15,7 +15,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
         ),
 
         // update dependencies of test
-        $cr['update typescript dependencies'].execute(
+        $cr['clean and update dependencies'].execute(
             {
                 'path': `${$p.path}/test`,
             },
