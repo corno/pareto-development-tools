@@ -68,8 +68,8 @@ export const Command = (
                             () => abort(['expected a text', { 'description': "path to package" }])
                         )
                     }]
-                case 'setup-comparison':
-                    return ['setup-comparison', {
+                case 'set-up-comparison':
+                    return ['set-up-comparison', {
                         'path to package': iterator['consume current']().transform(
                             ($) => $,
                             () => abort(['expected a text', { 'description': "path to package" }])
@@ -79,14 +79,14 @@ export const Command = (
                     return abort(['expected one of', _ea.dictionary_literal({
                         'project': null,
                         'assert-clean': null,
-                        'setup-comparison': null,
+                        'set-up-comparison': null,
                     })])
             }
         },
         () => abort(['expected one of', _ea.dictionary_literal({
             'project': null,
             'assert-clean': null,
-            'setup-comparison': null,
+            'set-up-comparison': null,
         })])
     )
 }

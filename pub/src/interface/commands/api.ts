@@ -14,7 +14,7 @@ export type Command =
     | ['assert-clean', {
         'path to package': string
     }]
-    | ['setup-comparison', {
+    | ['set-up-comparison', {
         'path to package': string
     }]
 
@@ -42,13 +42,13 @@ export type Command_Resources = {
     'git extended commit': _et.Command<d_git_extended_commit.Error, d_git_extended_commit.Parameters>
     'git remove tracked but ignored': _et.Command<d_git_remove_tracked_but_ignored.Error, d_git_remove_tracked_but_ignored.Parameters>
     'update dependencies': _et.Command<d_update_dependencies.Error, d_update_dependencies.Parameters>
-    'setup comparison against published': _et.Command<d_set_up_comparison_against_published.Error, d_set_up_comparison_against_published.Parameters>
+    'set up comparison against published': _et.Command<d_set_up_comparison_against_published.Error, d_set_up_comparison_against_published.Parameters>
 }
 
 export type Error =
     | ['project', Project_Error]
     | ['git assert clean', d_assert_clean.Error]
-    | ['setup comparison', d_set_up_comparison_against_published.Error]
+    | ['set up comparison', d_set_up_comparison_against_published.Error]
 
 export type Project_Error =
     | ['could not read packages directory', d_read_directory.Error]

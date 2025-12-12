@@ -9,9 +9,9 @@ import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schema
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 import { $ as parse_npm_package } from "../refiners/npm_package/temp"
 
-export type Variables = {
-    'version': string
-}
+// export type Variables = {
+//     'version': string
+// }
 
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr, $qr) => {

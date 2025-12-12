@@ -45,7 +45,7 @@ export const Error: Error = ($) => _ea.cc($, ($) => {
                 default: return _ea.au($[0])
             }
         }))
-        case 'setup comparison': return _ea.ss($, ($): d_out.Block_Part => t_set_up_comparison_against_published.Error($))
+        case 'set up comparison': return _ea.ss($, ($): d_out.Block_Part => t_set_up_comparison_against_published.Error($))
         case 'git assert clean': return _ea.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
         default: return _ea.au($[0])
     }

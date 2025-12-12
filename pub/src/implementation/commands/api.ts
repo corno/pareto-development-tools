@@ -4,23 +4,23 @@ import * as _et from 'exupery-core-types'
 
 import * as d from "../../interface/commands/api"
 
-import * as r_instruction from "../refiners/instruction/refiners"
+// import * as r_instruction from "../refiners/instruction/refiners"
 
 
-export type Variables = {
-    'file content': string
-}
+// export type Variables = {
+//     'file content': string
+// }
 
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr, $qr) => _ea.cc($p, ($) => {
         switch ($[0]) {
-            case 'setup-comparison': return _ea.ss($, ($) => [
-                $cr['setup comparison against published'].execute(
+            case 'set-up-comparison': return _ea.ss($, ($) => [
+                $cr['set up comparison against published'].execute(
                     {
                         'path to local package': _ea.set($['path to package'] + `/pub`),
                         'path to output directory': $['path to package'] + `/temp`,
                     },
-                    ($): d.Error => ['setup comparison', $],
+                    ($): d.Error => ['set up comparison', $],
                 )
             ])
             case 'assert-clean': return _ea.ss($, ($) => [

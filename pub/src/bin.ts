@@ -193,7 +193,7 @@ _eb.run_main_procedure(
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
                         'update dependencies': update_dependencies,
                         'git extended commit': git_extended_commit,
-                        'setup comparison against published': set_up_comparison_against_published,
+                        'set up comparison against published': set_up_comparison_against_published,
                     },
                     {
                         'read directory': $r.queries['read directory']
