@@ -19,6 +19,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             {
                 'args': _ea.list_literal([
                     $p.path + `/test/dist/bin/test.js`,
+                    $p.path + `/testdata`,
                 ])
             },
             ($): d.Error => ['error testing', $],

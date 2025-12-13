@@ -1,6 +1,11 @@
 {
   "name": "pareto-development-tools",
   "version": "0.1.0",
+  "main": "./dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "astn": "^0.113.8",
     "exupery-core-async": "^0.3.74",
@@ -9,6 +14,6 @@
     "exupery-core-rawdata": "^0.2.1",
     "exupery-resources": "^0.3.17",
     "pareto-fountain-pen": "^0.3.13",
-    "pareto-standard-operations": "^0.3.11"
+    "pareto-standard-operations": "^0.3.13"
   }
 }
