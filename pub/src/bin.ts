@@ -102,6 +102,7 @@ _eb.run_main_procedure(
         const build = p_build(
             {
                 'tsc': tsc,
+                'remove': $r.commands.remove
             },
             null,
         )
