@@ -28,7 +28,7 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
 
 }
 
-export const $$: d.Query = _easync.create_query_procedure(($p, $r) => {
+export const $$: d.Query = _easync.create_query_function(($p, $r) => {
     return temp_observe_behavior(
         $r.git(
             {

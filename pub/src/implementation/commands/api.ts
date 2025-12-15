@@ -1,8 +1,15 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
+import * as _ed from 'exupery-core-dev'
 
 import * as d from "../../interface/commands/api"
+import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
+import { extend_path, create_node_path } from "exupery-resources/dist/implementation/transformers/path/path"
+
+import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
+
+import * as temp_r_node_path from "exupery-resources/dist/implementation/refiners/node_path/text"
 
 // import * as r_instruction from "../refiners/instruction/refiners"
 
@@ -10,6 +17,18 @@ import * as d from "../../interface/commands/api"
 // export type Variables = {
 //     'file content': string
 // }
+
+const node_path_to_context_path = ($: d_path.Node_Path): d_path.Context_Path => {
+    return {
+        'start': $.context.start,
+        'subpath': _ea.build_list(($i) => {
+            $.context.subpath.__for_each(($) => {
+                $i['add element']($)
+            })
+            $i['add element']($.node)
+        }),
+    }
+}
 
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr, $qr) => _ea.cc($p, ($) => {
@@ -30,12 +49,17 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                             {
                                 'path': {
                                     'escape spaces in path': true,
-                                    'path': `${$['path to project']}/packages`,
+                                    'path': `${t_path_to_text.Context_Path($['path to project'])}/packages`,
                                 },
                             },
                             ($): d.Error => ['project', ['could not read packages directory', $]],
                         ),
                         ($x, key): _et.Command_Promise<d.Project_Package_Error>[] => _ea.cc($.instruction, ($) => {
+                            const concatenated_path = node_path_to_context_path( temp_r_node_path.Node_Path(
+                                $x['concatenated path'],
+                                { 'pedantic': true },
+                                ($) => _ea.deprecated_panic(`invalid path`)
+                            ))
                             switch ($[0]) {
                                 case 'assert clean': return _ea.ss($, ($) => [
                                     $cr['git assert clean'].execute(
@@ -81,10 +105,10 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                 case 'set up comparison': return _ea.ss($, ($): _et.Command_Promise<d.Project_Package_Error>[] => [
                                     $cr['set up comparison against published'].execute(
                                         {
-                                            'path to local package': $x['concatenated path'] + `/pub`,
-                                            'path to output local directory': path_to_project + `/temp/local/` + key,
-                                            'path to output published directory': path_to_project + `/temp/published/` + key,
-                                            'path to temp directory': path_to_project + `/temp/temp/` + key,
+                                            'path to local package': extend_path(concatenated_path, _ea.list_literal([`pub`])),
+                                            'path to output local directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `local`])), key),
+                                            'path to output published directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `published`])), key),
+                                            'path to temp directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `temp`])), key),
                                         },
                                         ($): d.Project_Package_Error => ['set up comparison', $],
                                     )
@@ -107,10 +131,10 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             case 'set up comparison': return _ea.ss($, ($) => [
                 $cr['set up comparison against published'].execute(
                     {
-                        'path to local package': $['path to package'] + `/pub`,
-                        'path to output local directory': $['path to package'] + `/temp/local`,
-                        'path to output published directory': $['path to package'] + `/temp/published`,
-                        'path to temp directory': $['path to package'] + `/temp/temp`,
+                        'path to local package': extend_path($['path to package'], _ea.list_literal(['pub'])),
+                        'path to output local directory': create_node_path(extend_path($['path to package'], _ea.list_literal([`temp`, ])), `local`),
+                        'path to output published directory': create_node_path(extend_path($['path to package'], _ea.list_literal([`temp`, ])), `published`),
+                        'path to temp directory': create_node_path(extend_path($['path to package'], _ea.list_literal([`temp`, ])), `temp`),
                     },
                     ($): d.Error => ['set up comparison', $],
                 )

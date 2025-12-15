@@ -6,7 +6,7 @@ import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation
 import * as d from "../../interface/queries/git_is_clean"
 
 
-export const $$: d.Query = _easync.create_query_procedure(
+export const $$: d.Query = _easync.create_query_function(
     ($p, $qr) => $qr.git(
         {
             'args': op_flatten(_ea.list_literal([

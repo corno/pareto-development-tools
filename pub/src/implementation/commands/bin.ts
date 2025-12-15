@@ -18,7 +18,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
         _easync.p.refine_without_error_transformation(
 
             // parse command line instruction
-            r_instruction.Command($p.arguments).transform_error_temp(
+            r_instruction.Command($p.arguments).deprecated_transform_error(
                 ($): d.Error => {
                     //FIXME: do this properly
                     _ed.log_debug_message(

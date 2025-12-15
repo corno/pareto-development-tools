@@ -3,6 +3,8 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../../interface/commands/api"
 import * as d_error from "../../../interface/commands/bin"
 
+import * as r_context_path from "exupery-resources/dist/implementation/refiners/context_path/text"
+
 import * as core from "../../temp_core"
 
 export const Command = (
@@ -15,7 +17,9 @@ export const Command = (
                 case 'project':
                     return ['project', {
                         'path to project': iterator['consume current']().transform(
-                            ($) => $,
+                            ($) => r_context_path.Context_Path(
+                                $,
+                            ),
                             () => abort(['expected a text', { 'description': "path to project" }])
                         ),
                         'instruction': iterator['consume current']().transform(
@@ -73,7 +77,10 @@ export const Command = (
                 case 'set-up-comparison':
                     return ['set up comparison', {
                         'path to package': iterator['consume current']().transform(
-                            ($) => $,
+                            ($) => r_context_path.Context_Path(
+
+                                $,
+                            ),
                             () => abort(['expected a text', { 'description': "path to package" }])
                         ),
                     }]

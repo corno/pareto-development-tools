@@ -8,6 +8,7 @@ import * as d_update_dependencies from "./update_dependencies"
 import * as d_git_remove_tracked_but_ignored from "../../modules/git/interface/commands/remove_tracked_but_ignored"
 import * as d_git_extended_commit from "../../modules/git/interface/commands/extended_commit"
 import * as d_set_up_comparison_against_published from "../../modules/npm/interface/commands/set_up_comparison_against_published"
+import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/source"
 
 export type Command =
     /**
@@ -27,11 +28,11 @@ export type Command =
      * these directories can be diffed to determine what changes have not been published yet
      */
     | ['set up comparison', {
-        'path to package': string
+        'path to package': d_path.Context_Path
     }]
 
 export type Project = {
-    'path to project': string
+    'path to project': d_path.Context_Path
     'instruction': Project_Instruction
 }
 

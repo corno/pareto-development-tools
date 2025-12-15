@@ -4,17 +4,18 @@ import * as _ed from 'exupery-core-dev'
 import * as _et from 'exupery-core-types'
 
 import * as d from "../../interface/commands/set_up_comparison_against_published"
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 
 import * as d_npm_package from "../refiners/npm_package/temp"
+import { extend_path, create_node_path } from "exupery-resources/dist/implementation/transformers/path/path"
 
 
 // import { $$ as op_trim } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/text/trim"
-import { $$ as op_from_character_list } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/text/from_character_list"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
 import { $$ as r_parse_npm_package } from "../refiners/npm_package/temp"
+import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
+
 
 const remove_n_characters_from_end = ($: string, n: number): string => {
 
@@ -40,8 +41,7 @@ const remove_n_characters_from_end = ($: string, n: number): string => {
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr, $qr) => {
         // Determine package.json path - it will be in the pub subdirectory
-        const package_json_path = `${$p['path to local package']}/package.json`
-
+        const package_json_path = `${t_path_to_text.Context_Path($p['path to local package'])}/package.json`
         // Since we need to execute a complex sequence based on the package.json data,
         // we'll have to use the sequence approach directly with hardcoded values for now
         // TODO: Implement dynamic package.json reading pattern
@@ -103,9 +103,9 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                 'args': op_flatten(_ea.list_literal([
                                     _ea.list_literal([
                                         `pack`,
-                                        $p['path to local package'],
+                                        t_path_to_text.Context_Path($p['path to local package']),
                                         `--pack-destination`,
-                                        $p['path to temp directory'],
+                                        t_path_to_text.Context_Path($p['path to temp directory'].context) + `/${$p['path to temp directory'].node}`,
                                     ])
                                 ])),
                             },
@@ -115,7 +115,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                         // Create local subdirectory
                         $cr['make directory'].execute(
                             {
-                                'path': `${$p['path to output local directory']}`,
+                                'path': $p['path to output local directory'],
                                 'escape spaces in path': true,
                             },
                             ($) => ['error while creating directory', $],
@@ -126,9 +126,9 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                             {
                                 'args': _ea.list_literal([
                                     `-xzmf`,
-                                    `${$p['path to temp directory']}/${filename}`,
+                                    `${t_path_to_text.Context_Path($p['path to temp directory'].context)}/${$p['path to temp directory'].node}/${filename}`,
                                     `-C`,
-                                    `${$p['path to output local directory']}`,
+                                    `${t_path_to_text.Context_Path($p['path to output local directory'].context)}/${$p['path to output local directory'].node}`,
                                     `--strip-components=1`,
                                 ]),
                             },
@@ -138,7 +138,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                         // Download published package using dynamic package name and version
                         $cr['make directory'].execute(
                             {
-                                'path': `${$p['path to temp directory']}/npm`,
+                                'path': create_node_path(extend_path($p['path to temp directory'].context, _ea.list_literal([$p['path to temp directory'].node])), `npm`),
                                 'escape spaces in path': true,
                             },
                             ($) => ['error while creating directory', $],
@@ -150,7 +150,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                     `pack`,
                                     `${package_info.name}@${package_info.version}`,
                                     `--pack-destination`,
-                                    `${$p['path to temp directory']}/npm`,
+                                    `${t_path_to_text.Context_Path($p['path to temp directory'].context)}/${$p['path to temp directory'].node}/npm`,
                                 ])
                             },
                             ($) => ['error while running npm command', $],
@@ -159,7 +159,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                         // Create published subdirectory
                         $cr['make directory'].execute(
                             {
-                                'path': `${$p['path to output published directory']}`,
+                                'path': $p['path to output published directory'],
                                 'escape spaces in path': true,
                             },
                             ($) => ['error while creating directory', $],
@@ -182,9 +182,9 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                     {
                                         'args': _ea.list_literal([
                                             `-xzmf`,
-                                            `${$p['path to temp directory']}/npm/${package_info.name}-${$v}.tgz`,
+                                            `${t_path_to_text.Context_Path($p['path to temp directory'].context)}/${$p['path to temp directory'].node}/npm/${package_info.name}-${$v}.tgz`,
                                             `-C`,
-                                            `${$p['path to output published directory']}`,
+                                            `${t_path_to_text.Context_Path($p['path to output published directory'].context)}/${$p['path to output published directory'].node}`,
                                             `--strip-components=1`,
                                         ])
                                     },

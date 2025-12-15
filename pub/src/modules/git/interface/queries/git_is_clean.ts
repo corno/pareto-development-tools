@@ -20,4 +20,4 @@ export type Resources = {
     'git': _et.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters>
 }
 
-export type Query = _et.Query_Procedure<Result, Error, Parameters, Resources>
+export type Query = _et.Query_Function<Result, Error, Parameters, Resources>
