@@ -11,6 +11,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 import * as t_epe_to_fountain_pen from "exupery-resources/dist/implementation/transformers/execute_procedure_executable/fountain_pen"
 import * as t_make_directory_to_fountain_pen from "exupery-resources/dist/implementation/transformers/make_directory/fountain_pen"
 import * as t_read_file_to_fountain_pen from "exupery-resources/dist/implementation/transformers/read_file/fountain_pen"
+import * as t_remove_to_fountain_pen from "exupery-resources/dist/implementation/transformers/remove/fountain_pen"
 
 
 export const Error: Error = ($) => {
@@ -18,27 +19,59 @@ export const Error: Error = ($) => {
         switch ($[0]) {
             case 'error while running npm command': return _ea.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while running npm command: `),
-                t_epe_to_fountain_pen.Error($)
+                sh.b.indent([
+                    sh.g.nested_block([
+                        t_epe_to_fountain_pen.Error($)
+                    ])
+                ]),
             ]))
             case 'error while running npm query': return _ea.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while running npm query: `),
-                t_epe_to_fountain_pen.Error($)
+                sh.b.indent([
+                    sh.g.nested_block([
+                        t_epe_to_fountain_pen.Error($)
+                    ])
+                ]),
             ]))
             case 'error while running tar': return _ea.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while running tar: `),
-                t_epe_to_fountain_pen.Error($)
+                sh.b.indent([
+                    sh.g.nested_block([
+                        t_epe_to_fountain_pen.Error($)
+                    ])
+                ]),
             ]))
             case 'error while creating directory': return _ea.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while creating directory: `),
-                t_make_directory_to_fountain_pen.Error($)
+                sh.b.indent([
+                    sh.g.nested_block([
+                        t_make_directory_to_fountain_pen.Error($)
+                    ])
+                ]),
+            ]))
+            case 'error while removing directory': return _ea.ss($, ($) => sh.b.sub([
+                sh.b.snippet(`error while removing directory: `),
+                sh.b.indent([
+                    sh.g.nested_block([
+                        t_remove_to_fountain_pen.Error($)
+                    ])
+                ]),
             ]))
             case 'error while reading package.json': return _ea.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while reading package.json: `),
-                t_read_file_to_fountain_pen.Error($)
+                sh.b.indent([
+                    sh.g.nested_block([
+                        t_read_file_to_fountain_pen.Error($)
+                    ])
+                ]),
             ]))
             case 'error while parsing package.json': return _ea.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while parsing package.json: `),
-                sh.b.snippet($)
+                sh.b.indent([
+                    sh.g.nested_block([
+                        sh.b.snippet($)
+                    ])
+                ]),
             ]))
             default: return _ea.au($[0])
         }

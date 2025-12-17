@@ -17,9 +17,7 @@ export const Command = (
                 case 'project':
                     return ['project', {
                         'path to project': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path(
-                                $,
-                            ),
+                            ($) => r_context_path.Context_Path($),
                             () => abort(['expected a text', { 'description': "path to project" }])
                         ),
                         'instruction': iterator['consume current']().transform(
@@ -77,10 +75,7 @@ export const Command = (
                 case 'set-up-comparison':
                     return ['set up comparison', {
                         'path to package': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path(
-
-                                $,
-                            ),
+                            ($) => r_context_path.Context_Path($),
                             () => abort(['expected a text', { 'description': "path to package" }])
                         ),
                     }]

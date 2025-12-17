@@ -176,6 +176,7 @@ _eb.run_main_procedure(
                 'npm': create_epe(`npm`, $r),
                 'tar': create_epe(`tar`, $r),
                 'make directory': $r.commands['make directory'],
+                'remove': $r.commands.remove,
             },
             {
                 'read file': $r.queries['read file'],

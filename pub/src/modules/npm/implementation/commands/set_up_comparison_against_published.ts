@@ -15,7 +15,8 @@ import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation
 
 import { $$ as r_parse_npm_package } from "../refiners/npm_package/temp"
 import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
-
+import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/path/path"
+import * as r_context_path from "exupery-resources/dist/implementation/refiners/context_path/text"
 
 const remove_n_characters_from_end = ($: string, n: number): string => {
 
@@ -38,20 +39,14 @@ const remove_n_characters_from_end = ($: string, n: number): string => {
 //     'version': string
 // }
 
-export const $$: d.Procedure = _easync.create_command_procedure(
+export const $$: d.Signature = _easync.create_command_procedure(
     ($p, $cr, $qr) => {
-        // Determine package.json path - it will be in the pub subdirectory
-        const package_json_path = `${t_path_to_text.Context_Path($p['path to local package'])}/package.json`
-        // Since we need to execute a complex sequence based on the package.json data,
-        // we'll have to use the sequence approach directly with hardcoded values for now
-        // TODO: Implement dynamic package.json reading pattern
-
 
         return [
             _easync.p.query_without_error_transformation<d.Error, d_npm_package.NPM_Package>(
                 $qr['read file'](
                     {
-                        'path': package_json_path,
+                        'path': t_path_to_path.create_node_path($p['path to local package'], `package.json`),
                         'escape spaces in path': true,
                     },
                     ($): d.Error => ['error while reading package.json', $],
@@ -71,6 +66,28 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     const package_info = $v
                     const filename = `${$v.name}-${$v.version}.tgz`;
                     return [
+
+                        $cr['remove'].execute(
+                            {
+                                'path': {
+                                    'escape spaces in path': true,
+                                    'path': $p['path to output published directory']
+                                },
+                                'error if not exists': false,
+                            },
+                            ($) => ['error while removing directory', $],
+                        ),
+
+                        $cr['remove'].execute(
+                            {
+                                'path': {
+                                    'escape spaces in path': true,
+                                    'path': $p['path to output local directory']
+                                },
+                                'error if not exists': false,
+                            },
+                            ($) => ['error while removing directory', $],
+                        ),
 
                         // Create main output directory
                         $cr['make directory'].execute(
@@ -105,7 +122,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                         `pack`,
                                         t_path_to_text.Context_Path($p['path to local package']),
                                         `--pack-destination`,
-                                        t_path_to_text.Context_Path($p['path to temp directory'].context) + `/${$p['path to temp directory'].node}`,
+                                        t_path_to_text.Node_Path($p['path to temp directory']),
                                     ])
                                 ])),
                             },
@@ -126,9 +143,9 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                             {
                                 'args': _ea.list_literal([
                                     `-xzmf`,
-                                    `${t_path_to_text.Context_Path($p['path to temp directory'].context)}/${$p['path to temp directory'].node}/${filename}`,
+                                    `${t_path_to_text.Node_Path($p['path to temp directory'])}/${filename}`,
                                     `-C`,
-                                    `${t_path_to_text.Context_Path($p['path to output local directory'].context)}/${$p['path to output local directory'].node}`,
+                                    t_path_to_text.Node_Path($p['path to output local directory']),
                                     `--strip-components=1`,
                                 ]),
                             },
@@ -150,7 +167,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                     `pack`,
                                     `${package_info.name}@${package_info.version}`,
                                     `--pack-destination`,
-                                    `${t_path_to_text.Context_Path($p['path to temp directory'].context)}/${$p['path to temp directory'].node}/npm`,
+                                    `${t_path_to_text.Node_Path($p['path to temp directory'])}/npm`,
                                 ])
                             },
                             ($) => ['error while running npm command', $],
@@ -182,9 +199,9 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                     {
                                         'args': _ea.list_literal([
                                             `-xzmf`,
-                                            `${t_path_to_text.Context_Path($p['path to temp directory'].context)}/${$p['path to temp directory'].node}/npm/${package_info.name}-${$v}.tgz`,
+                                            `${t_path_to_text.Node_Path($p['path to temp directory'])}/npm/${package_info.name}-${$v}.tgz`,
                                             `-C`,
-                                            `${t_path_to_text.Context_Path($p['path to output published directory'].context)}/${$p['path to output published directory'].node}`,
+                                            `${t_path_to_text.Node_Path($p['path to output published directory'])}`,
                                             `--strip-components=1`,
                                         ])
                                     },
