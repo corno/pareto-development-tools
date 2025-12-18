@@ -51,15 +51,14 @@ export const $$: d.Signature = _easync.create_command_procedure(
                     },
                     ($): d.Error => ['error while reading package.json', $],
                 ).refine(
-                    ($) => _ea.create_refinement_context<d_npm_package.NPM_Package, d_npm_package.NPM_Package_Parse_Error, d.Error>(
-                        ($) => ['error while parsing package.json', "HMMM"],
+                    ($) => _ea.create_refinement_context<d_npm_package.NPM_Package, d_npm_package.NPM_Package_Parse_Error>(
                         (abort) => r_parse_npm_package(
                             $,
                             abort,
                         )
                     ),
                     ($): d.Error => {
-                        return $
+                        return ['error while parsing package.json', "HMMM"]
                     }
                 ),
                 ($v) => {
