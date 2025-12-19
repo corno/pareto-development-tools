@@ -10,20 +10,14 @@ export const $$: d.Signature = _easync.create_command_procedure(
     ($p, $cr) => [
         $cr.remove.execute(
             {
-                'path': {
-                    'path': t_path_to_path.create_node_path(r_context_path.Context_Path($p.path + `/pub`), `dist`),
-                    'escape spaces in path': true,
-                },
+                'path': t_path_to_path.create_node_path(r_context_path.Context_Path($p.path + `/pub`), `dist`),
                 'error if not exists': false,
             },
             ($): d.Error => ['error removing pub dist dir', $],
         ),
         $cr.remove.execute(
             {
-                'path': {
-                    'path': t_path_to_path.create_node_path(r_context_path.Context_Path($p.path + `/test`), `dist`),
-                    'escape spaces in path': true,
-                },
+                'path': t_path_to_path.create_node_path(r_context_path.Context_Path($p.path + `/test`), `dist`),
                 'error if not exists': false,
             },
             ($): d.Error => ['error removing test dist dir', $],

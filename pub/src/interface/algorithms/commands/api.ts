@@ -5,6 +5,7 @@ import * as d_assert_clean from "../../../modules/git/interface/algorithms/comma
 import * as d_build_and_test from "./build_and_test"
 import * as d_build from "./build"
 import * as d_dependency_graph from "./dependency_graph"
+import * as d_line_count from "./line_count"
 import * as d_update_dependencies from "./update_dependencies"
 import * as d_git_remove_tracked_but_ignored from "../../../modules/git/interface/algorithms/commands/remove_tracked_but_ignored"
 import * as d_git_extended_commit from "../../../modules/git/interface/algorithms/commands/extended_commit"
@@ -34,6 +35,11 @@ export type Command =
 
 
     | ['dependency graph', {
+        'path to project': d_path.Context_Path
+    }]
+
+
+    | ['line count', {
         'path to project': d_path.Context_Path
     }]
 
@@ -89,6 +95,7 @@ export type Command_Resources = {
     'build and test': _et.Command<d_build_and_test.Error, d_build_and_test.Parameters>
     'build': _et.Command<d_build.Error, d_build.Parameters>
     'dependency graph': _et.Command<d_dependency_graph.Error, d_dependency_graph.Parameters>
+    'line count': _et.Command<d_line_count.Error, d_line_count.Parameters>
     'git assert clean': _et.Command<d_assert_clean.Error, d_assert_clean.Parameters>
     'git extended commit': _et.Command<d_git_extended_commit.Error, d_git_extended_commit.Parameters>
     'git remove tracked but ignored': _et.Command<d_git_remove_tracked_but_ignored.Error, d_git_remove_tracked_but_ignored.Parameters>
@@ -101,6 +108,7 @@ export type Error =
     | ['git assert clean', d_assert_clean.Error]
     | ['set up comparison', d_set_up_comparison_against_published.Error]
     | ['dependency graph', d_dependency_graph.Error]
+    | ['line count', d_line_count.Error]
 
 export type Project_Error =
     | ['could not read packages directory', d_read_directory.Error]

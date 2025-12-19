@@ -45,10 +45,7 @@ export const $$: d.Signature = _easync.create_command_procedure(
         return [
             _easync.p.query_without_error_transformation<d.Error, d_npm_package.NPM_Package>(
                 $qr['read file'](
-                    {
-                        'path': t_path_to_path.create_node_path($p['path to local package'], `package.json`),
-                        'escape spaces in path': true,
-                    },
+                    t_path_to_path.create_node_path($p['path to local package'], `package.json`),
                     ($): d.Error => ['error while reading package.json', $],
                 ).refine(
                     ($) => _ea.create_refinement_context<d_npm_package.NPM_Package, d_npm_package.NPM_Package_Parse_Error>(
@@ -68,10 +65,7 @@ export const $$: d.Signature = _easync.create_command_procedure(
 
                         $cr['remove'].execute(
                             {
-                                'path': {
-                                    'escape spaces in path': true,
-                                    'path': $p['path to output published directory']
-                                },
+                                'path': $p['path to output published directory'],
                                 'error if not exists': false,
                             },
                             ($) => ['error while removing directory', $],
@@ -79,10 +73,7 @@ export const $$: d.Signature = _easync.create_command_procedure(
 
                         $cr['remove'].execute(
                             {
-                                'path': {
-                                    'escape spaces in path': true,
-                                    'path': $p['path to output local directory']
-                                },
+                                'path': $p['path to output local directory'],
                                 'error if not exists': false,
                             },
                             ($) => ['error while removing directory', $],
@@ -90,26 +81,17 @@ export const $$: d.Signature = _easync.create_command_procedure(
 
                         // Create main output directory
                         $cr['make directory'].execute(
-                            {
-                                'path': $p['path to output published directory'],
-                                'escape spaces in path': true,
-                            },
+                            $p['path to output published directory'],
                             ($) => ['error while creating directory', $],
                         ),
                         // Create main output directory
                         $cr['make directory'].execute(
-                            {
-                                'path': $p['path to output local directory'],
-                                'escape spaces in path': true,
-                            },
+                            $p['path to output local directory'],
                             ($) => ['error while creating directory', $],
                         ),
                         // Create main output directory
                         $cr['make directory'].execute(
-                            {
-                                'path': $p['path to temp directory'],
-                                'escape spaces in path': true,
-                            },
+                            $p['path to temp directory'],
                             ($) => ['error while creating directory', $],
                         ),
 
@@ -130,10 +112,7 @@ export const $$: d.Signature = _easync.create_command_procedure(
 
                         // Create local subdirectory
                         $cr['make directory'].execute(
-                            {
-                                'path': $p['path to output local directory'],
-                                'escape spaces in path': true,
-                            },
+                            $p['path to output local directory'],
                             ($) => ['error while creating directory', $],
                         ),
 
@@ -153,10 +132,7 @@ export const $$: d.Signature = _easync.create_command_procedure(
 
                         // Download published package using dynamic package name and version
                         $cr['make directory'].execute(
-                            {
-                                'path': create_node_path(extend_path($p['path to temp directory'].context, _ea.list_literal([$p['path to temp directory'].node])), `npm`),
-                                'escape spaces in path': true,
-                            },
+                            create_node_path(extend_path($p['path to temp directory'].context, _ea.list_literal([$p['path to temp directory'].node])), `npm`),
                             ($) => ['error while creating directory', $],
                         ),
 
@@ -174,10 +150,7 @@ export const $$: d.Signature = _easync.create_command_procedure(
 
                         // Create published subdirectory
                         $cr['make directory'].execute(
-                            {
-                                'path': $p['path to output published directory'],
-                                'escape spaces in path': true,
-                            },
+                            $p['path to output published directory'],
                             ($) => ['error while creating directory', $],
                         ),
 

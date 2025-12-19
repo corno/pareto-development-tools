@@ -14,27 +14,21 @@ import { $$ as r_parse_npm_package } from "../../modules/npm/implementation/refi
 export const $$: inf.Signature = _easync.create_query_function(
     ($p, $r) => $r['read directory'](
         {
-            'path': {
-                'path': t_path_to_path.create_node_path($p['path'], `packages`),
-                'escape spaces in path': true,
-            },
+            'path': t_path_to_path.create_node_path($p['path'], `packages`),
         },
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(
         ($) => {
             return _easync.q.dictionary.parallel(
-                $.map(($, key) => {
+                $.map(($) => {
                     const path = $.path
                     return _ea.cc($['node type'], ($): _et.Query_Result<d_npm.NPM_Package, d.Package_Error> => {
                         switch ($[0]) {
                             case 'file': return _ea.ss($, ($): _et.Query_Result<d_npm.NPM_Package, d.Package_Error> => _easync.q.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                            case 'other': return _ea.ss($, ($): _et.Query_Result<d_npm.NPM_Package, d.Package_Error> => _easync.q.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
                             case 'directory': return _ea.ss($, ($): _et.Query_Result<d_npm.NPM_Package, d.Package_Error> => {
                                 return $r['read file'](
-                                    {
-
-                                        'path': t_path_to_path.create_node_path(t_path_to_path.extend_path(t_path_to_path.node_path_to_context_path(path), _ea.list_literal([`pub`])), `package.json`),
-                                        'escape spaces in path': true,
-                                    },
+                                    t_path_to_path.create_node_path(t_path_to_path.extend_path(t_path_to_path.node_path_to_context_path(path), _ea.list_literal([`pub`])), `package.json`),
                                     ($): d.Package_Error => ['no package.json file', null],
                                 ).refine(
                                     ($) => _ea.create_refinement_context<d_npm.NPM_Package, d_npm.NPM_Package_Parse_Error>(

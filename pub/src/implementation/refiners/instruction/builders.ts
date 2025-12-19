@@ -83,6 +83,13 @@ export const Command = (
                             () => abort(['expected a text', { 'description': "path to project" }])
                         )
                     }]
+                case 'line-count':
+                    return ['line count', {
+                        'path to project': iterator['consume current']().transform(
+                            ($) => r_context_path.Context_Path($),
+                            () => abort(['expected a text', { 'description': "path to project" }])
+                        )
+                    }]
                 case 'set-up-comparison':
                     return ['set up comparison', {
                         'path to package': iterator['consume current']().transform(

@@ -18,6 +18,7 @@ import { $$ as p_git_assert_clean } from "./modules/git/implementation/commands/
 import { $$ as p_build_and_test } from "./implementation/commands/build_and_test"
 import { $$ as p_build } from "./implementation/commands/build"
 import { $$ as p_dependency_graph } from "./implementation/commands/dependency_graph"
+import { $$ as p_line_count } from "./implementation/commands/line_count"
 import { $$ as p_git_remove_tracked_but_ignored } from "./modules/git/implementation/commands/remove-tracked-but-ignored"
 import { $$ as p_update_dependencies } from "./implementation/commands/update-dependencies"
 import { $$ as p_git_extended_commit } from "./modules/git/implementation/commands/extended_commit"
@@ -214,6 +215,15 @@ _eb.run_main_procedure(
                         'build and test': build_and_test,
                         'build': build,
                         'dependency graph': dependency_graph,
+                        'line count': p_line_count(
+                            {
+                                'log': $r.commands.log,
+                            },
+                            {
+                                'read directory': $r.queries['read directory'],
+                                'read file': $r.queries['read file'],
+                            },
+                        ),
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
                         'update dependencies': clean_and_update_dependencies,
                         'git extended commit': git_extended_commit,

@@ -7,10 +7,8 @@ import * as d from "../../interface/algorithms/commands/api"
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 import { extend_path, create_node_path, node_path_to_context_path } from "exupery-resources/dist/implementation/transformers/path/path"
 
-import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/path/path"
 
-import * as temp_r_node_path from "exupery-resources/dist/implementation/refiners/node_path/text"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr, $qr) => _ea.cc($p, ($) => {
@@ -29,17 +27,14 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     _easync.p.dictionary.deprecated_parallel.query(
                         $qr['read directory'](
                             {
-                                'path': {
-                                    'escape spaces in path': true,
-                                    'path': t_path_to_path.create_node_path(
-                                        path_to_project,
-                                        `packages`
-                                    )
-                                },
+                                'path': t_path_to_path.create_node_path(
+                                    path_to_project,
+                                    `packages`
+                                )
                             },
                             ($): d.Error => ['project', ['could not read packages directory', $]],
                         ),
-                        ($x, key): _et.Command_Promise<d.Project_Package_Error>[] => _ea.cc($.instruction, ($) => {
+                        ($x, key_spaces_not_escaped): _et.Command_Promise<d.Project_Package_Error>[] => _ea.cc($.instruction, ($) => {
                             const concatenated_path = $x.path
                             const context_path = t_path_to_path.node_path_to_context_path(concatenated_path)
                             switch ($[0]) {
@@ -88,9 +83,9 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                     $cr['set up comparison against published'].execute(
                                         {
                                             'path to local package': extend_path(t_path_to_path.node_path_to_context_path(concatenated_path), _ea.list_literal([`pub`])),
-                                            'path to output local directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `local`])), key),
-                                            'path to output published directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `published`])), key),
-                                            'path to temp directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `temp`])), key),
+                                            'path to output local directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `local`])), key_spaces_not_escaped),
+                                            'path to output published directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `published`])), key_spaces_not_escaped),
+                                            'path to temp directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `temp`])), key_spaces_not_escaped),
                                         },
                                         ($): d.Project_Package_Error => ['set up comparison', $],
                                     )
@@ -127,6 +122,14 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                         'path': $['path to project']
                     },
                     ($): d.Error => ['dependency graph', $],
+                )
+            ])
+            case 'line count': return _ea.ss($, ($) => [
+                $cr['line count'].execute(
+                    {
+                        'path': $['path to project']
+                    },
+                    ($): d.Error => ['line count', $],
                 )
             ])
             default: return _ea.au($[0])

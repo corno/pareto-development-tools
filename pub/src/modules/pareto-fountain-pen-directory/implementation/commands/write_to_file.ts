@@ -28,18 +28,12 @@ export const $$: _et.Command_Procedure<D.File_Error, D.File_Parameters, Command_
     ($p, $cr) => [
         _easync.p.sequence<D.File_Error>([
             $cr['make directory'].execute(
-                {
-                    'path': $p['directory path'],
-                    'escape spaces in path': true,
-                },
+                $p['directory path'],
                 ($) => ['make directory', $],
             ),
             $cr['write file'].execute(
                 {
-                    'path': {
-                        'path': t_path_to_path.create_node_path(t_path_to_path.node_path_to_context_path($p['directory path']), $p.filename),
-                        'escape spaces in path': true,
-                    },
+                    'path': t_path_to_path.create_node_path(t_path_to_path.node_path_to_context_path($p['directory path']), $p.filename),
                     'data': op_join_list_of_texts(
                         t_block_2_lines.Group($p.group, { 'indentation': $p.indentation }).map(($) => $ + $p.newline),
                     ),

@@ -31,10 +31,7 @@ export const $$: _et.Command_Procedure<D.Directory_Error, D.Directory_Parameters
                 [
                     $cr.remove.execute(
                         {
-                            'path': {
-                                'path': $p.path,
-                                'escape spaces in path': true,
-                            },
+                            'path': $p.path,
                             'error if not exists': false
                         },
                         ($) => ['remove', $],
