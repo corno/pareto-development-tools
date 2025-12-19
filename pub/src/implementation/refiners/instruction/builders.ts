@@ -1,11 +1,13 @@
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../../interface/commands/api"
-import * as d_error from "../../../interface/commands/bin"
+import * as d from "../../../interface/algorithms/commands/api"
+import * as d_error from "../../../interface/algorithms/commands/bin"
 
 import * as r_context_path from "exupery-resources/dist/implementation/refiners/context_path/text"
 
 import * as core from "../../temp_core"
+
+import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
 
 export const Command = (
     abort: core.Abort<d_error.Parse_Error>,
@@ -49,6 +51,7 @@ export const Command = (
                                             'assert-clean': null,
                                             'build-and-test': null,
                                             'build': null,
+                                            'dependency-graph': null,
                                             'git-commit': null,
                                             'git-remove-tracked-but-ignored': null,
                                             'update-dependencies': null,
@@ -59,6 +62,7 @@ export const Command = (
                                 'assert-clean': null,
                                 'build-and-test': null,
                                 'build': null,
+                                'dependency-graph': null,
                                 'git-commit': null,
                                 'git-remove-tracked-but-ignored': null,
                                 'update-dependencies': null,
@@ -68,8 +72,15 @@ export const Command = (
                 case 'assert-clean':
                     return ['assert clean', {
                         'path to package': iterator['consume current']().transform(
-                            ($) => $,
+                            ($) => r_context_path.Context_Path($),
                             () => abort(['expected a text', { 'description': "path to package" }])
+                        )
+                    }]
+                case 'dependency-graph':
+                    return ['dependency graph', {
+                        'path to project': iterator['consume current']().transform(
+                            ($) => r_context_path.Context_Path($),
+                            () => abort(['expected a text', { 'description': "path to project" }])
                         )
                     }]
                 case 'set-up-comparison':

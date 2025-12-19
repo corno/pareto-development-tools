@@ -4,6 +4,7 @@ import * as _easync from 'exupery-core-async'
 import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
 import * as d_gic from "../queries/git_is_clean"
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
 export type Error =
     | ['asserting git not clean', d_gic.Error]
@@ -13,7 +14,7 @@ export type Error =
 
 
 export type Parameters = {
-    'path': _et.Optional_Value<string>,
+    'path': _et.Optional_Value<d_path.Context_Path>,
     'instruction': Instruction,
 }
 

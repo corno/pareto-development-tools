@@ -3,7 +3,7 @@ import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 import * as _ed from 'exupery-core-dev'
 
-import * as d from "../../interface/commands/api"
+import * as d from "../../interface/algorithms/commands/api"
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 import { extend_path, create_node_path, node_path_to_context_path } from "exupery-resources/dist/implementation/transformers/path/path"
 
@@ -40,13 +40,13 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                             ($): d.Error => ['project', ['could not read packages directory', $]],
                         ),
                         ($x, key): _et.Command_Promise<d.Project_Package_Error>[] => _ea.cc($.instruction, ($) => {
-                            const concatenated_path = create_node_path($x['context directory'], key)
-                            const concatenated_path_as_text = t_path_to_text.Node_Path(concatenated_path)
+                            const concatenated_path = $x.path
+                            const context_path = t_path_to_path.node_path_to_context_path(concatenated_path)
                             switch ($[0]) {
                                 case 'assert clean': return _ea.ss($, ($) => [
                                     $cr['git assert clean'].execute(
                                         {
-                                            'path': _ea.set(concatenated_path_as_text)
+                                            'path': _ea.set(context_path)
                                         },
                                         ($): d.Project_Package_Error => ['git assert clean', $],
                                     )
@@ -54,7 +54,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                 case 'build': return _ea.ss($, ($) => [
                                     $cr['build'].execute(
                                         {
-                                            'path': concatenated_path_as_text
+                                            'path': concatenated_path
                                         },
                                         ($): d.Project_Package_Error => ['build', $],
                                     )
@@ -62,7 +62,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                 case 'build and test': return _ea.ss($, ($) => [
                                     $cr['build and test'].execute(
                                         {
-                                            'path': concatenated_path_as_text
+                                            'path': concatenated_path
                                         },
                                         ($): d.Project_Package_Error => ['build and test', $],
                                     )
@@ -70,7 +70,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                 case 'git extended commit': return _ea.ss($, ($) => [
                                     $cr['git extended commit'].execute(
                                         {
-                                            'path': _ea.set(concatenated_path_as_text),
+                                            'path': _ea.set(context_path),
                                             'instruction': $
                                         },
                                         ($): d.Project_Package_Error => ['git commit', $],
@@ -79,7 +79,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                 case 'git remove tracked but ignored': return _ea.ss($, ($) => [
                                     $cr['git remove tracked but ignored'].execute(
                                         {
-                                            'path': _ea.set(concatenated_path_as_text)
+                                            'path': _ea.set(context_path)
                                         },
                                         ($): d.Project_Package_Error => ['git remove tracked but ignored', $],
                                     )
@@ -98,7 +98,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                 case 'update dependencies': return _ea.ss($, ($) => [
                                     $cr['update dependencies'].execute(
                                         {
-                                            'path': concatenated_path_as_text
+                                            'path': concatenated_path
                                         },
                                         ($): d.Project_Package_Error => ['update dependencies', $],
                                     )
@@ -119,6 +119,14 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                         'path to temp directory': create_node_path(extend_path($['path to package'], _ea.list_literal([`temp`,])), `temp`),
                     },
                     ($): d.Error => ['set up comparison', $],
+                )
+            ])
+            case 'dependency graph': return _ea.ss($, ($) => [
+                $cr['dependency graph'].execute(
+                    {
+                        'path': $['path to project']
+                    },
+                    ($): d.Error => ['dependency graph', $],
                 )
             ])
             default: return _ea.au($[0])

@@ -3,7 +3,7 @@ import * as _ea from 'exupery-core-alg'
 import * as _ed from 'exupery-core-dev'
 import * as _et from 'exupery-core-types'
 
-import * as d from "../../interface/commands/set_up_comparison_against_published"
+import * as d from "../../interface/algorithms/commands/set_up_comparison_against_published"
 
 import * as d_npm_package from "../refiners/npm_package/temp"
 import { extend_path, create_node_path } from "exupery-resources/dist/implementation/transformers/path/path"

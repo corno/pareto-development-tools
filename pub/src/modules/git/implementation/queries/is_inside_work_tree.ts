@@ -3,10 +3,11 @@ import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 import * as _ei from 'exupery-core-internals'
 
-import * as d from "../../interface/queries/git_is_inside_work_tree"
+import * as d from "../../interface/algorithms/queries/git_is_inside_work_tree"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
 
+import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
 
 const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Outcome, Target_Error>(
     result: _et.Query_Result<Preparation_Result, Preparation_Error>,
@@ -36,7 +37,7 @@ export const $$: d.Query = _easync.create_query_function(($p, $r) => {
                     $p.path.transform(
                         ($) => _ea.list_literal([
                             `-C`,
-                            $,
+                            t_path_to_text.Context_Path($),
                         ]),
                         () => _ea.list_literal([])
                     ),

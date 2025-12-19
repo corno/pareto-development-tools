@@ -1,7 +1,7 @@
 import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 
-import * as d_in from "../../../interface/commands/update2latest"
+import * as d_in from "../../../interface/algorithms/commands/update2latest"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
 
 export type Error = _et.Transformer<d_out.Block_Part, d_in.Error>

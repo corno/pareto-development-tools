@@ -1,13 +1,13 @@
 import * as _et from 'exupery-core-types'
 
-import * as d_update2latest from "../../modules/npm/interface/commands/update2latest"
+import * as d_update2latest from "../../../modules/npm/interface/algorithms/commands/update2latest"
 
-import * as d_gc from "../../modules/git/interface/commands/clean"
-import * as d_npm from "../../modules/npm/interface/commands/npm"
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+import * as d_gc from "../../../modules/git/interface/algorithms/commands/clean"
+import * as d_npm from "../../../modules/npm/interface/algorithms/commands/npm"
+import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
 export type Parameters = {
-    'path': string,
+    'path': d_path.Node_Path,
 }
 
 export type Error =

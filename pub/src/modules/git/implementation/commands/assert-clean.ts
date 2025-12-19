@@ -1,7 +1,7 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../interface/commands/assert-clean"
+import * as d from "../../interface/algorithms/commands/assert-clean"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr, $qr) => [

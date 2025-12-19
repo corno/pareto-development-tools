@@ -10,12 +10,14 @@ import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schema
 
 import { $$ as q_is_git_clean } from "./modules/git/implementation/queries/repository_is_clean"
 import { $$ as q_git_is_inside_work_tree } from "./modules/git/implementation/queries/is_inside_work_tree"
+import { $$ as q_package_dependencies } from "./implementation/queries/package_dependencies"
 
 import { $$ as p_bin } from "./implementation/commands/bin"
 import { $$ as p_api } from "./implementation/commands/api"
 import { $$ as p_git_assert_clean } from "./modules/git/implementation/commands/assert-clean"
 import { $$ as p_build_and_test } from "./implementation/commands/build_and_test"
 import { $$ as p_build } from "./implementation/commands/build"
+import { $$ as p_dependency_graph } from "./implementation/commands/dependency_graph"
 import { $$ as p_git_remove_tracked_but_ignored } from "./modules/git/implementation/commands/remove-tracked-but-ignored"
 import { $$ as p_update_dependencies } from "./implementation/commands/update-dependencies"
 import { $$ as p_git_extended_commit } from "./modules/git/implementation/commands/extended_commit"
@@ -25,6 +27,7 @@ import { $$ as p_git_clean } from "./modules/git/implementation/commands/clean"
 import { $$ as p_update2latest } from "./modules/npm/implementation/commands/update2latest"
 import { $$ as p_npm } from "./modules/npm/implementation/commands/npm"
 import { $$ as p_set_up_comparison_against_published } from "./modules/npm/implementation/commands/set_up_comparison_against_published"
+import { $$ as p_fp_log } from "./modules/pareto-fountain-pen-directory/implementation/commands/console_log"
 
 const create_eqe = (
     program: string,
@@ -105,6 +108,25 @@ _eb.run_main_procedure(
                 'remove': $r.commands.remove
             },
             null,
+        )
+
+        const dependency_graph = p_dependency_graph(
+            {
+                'log': p_fp_log(
+                    {
+                        'log': $r.commands.log,
+                    },
+                    null,
+                ),
+            },
+            {
+                'package dependencies': q_package_dependencies(
+                    {
+                        'read directory': $r.queries['read directory'],
+                        'read file': $r.queries['read file'],
+                    },
+                ),
+            },
         )
 
         const git_clean = p_git_clean(
@@ -191,6 +213,7 @@ _eb.run_main_procedure(
                         'git assert clean': assert_git_is_clean,
                         'build and test': build_and_test,
                         'build': build,
+                        'dependency graph': dependency_graph,
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
                         'update dependencies': clean_and_update_dependencies,
                         'git extended commit': git_extended_commit,
