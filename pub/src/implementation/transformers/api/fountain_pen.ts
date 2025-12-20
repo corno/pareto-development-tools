@@ -17,7 +17,7 @@ import * as t_git_remove_tracked_but_ignored from "../../../modules/git/implemen
 import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pen"
 import * as t_build_to_fountain_pen from "../build/fountain_pen"
 import * as t_dependency_graph_to_fountain_pen from "../dependency_graph/fountain_pen"
-import * as t_line_count_to_fountain_pen from "../line_count/fountain_pen"
+import * as t_line_count_to_fountain_pen from "../directory_analysis/fountain_pen"
 import * as t_update_dependencies from "../update_dependencies/fountain_pen"
 import * as t_read_directory_to_fountain_pen from "exupery-resources/dist/implementation/transformers/read_directory/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../modules/npm/implementation/transformers/set_up_comparison_against_published/fountain_pen"
