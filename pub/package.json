@@ -14,7 +14,7 @@
     "exupery-core-rawdata": "^0.2.1",
     "exupery-resources": "^0.3.38",
     "pareto-fountain-pen": "^0.3.13",
-    "pareto-graphviz": "^0.1.5",
+    "pareto-graphviz": "^0.1.6",
     "pareto-standard-operations": "^0.3.16"
   }
 }
