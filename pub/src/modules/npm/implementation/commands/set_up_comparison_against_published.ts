@@ -6,7 +6,6 @@ import * as _et from 'exupery-core-types'
 import * as d from "../../interface/algorithms/commands/set_up_comparison_against_published"
 
 import * as d_npm_package from "../refiners/npm_package/temp"
-import { extend_path, create_node_path } from "exupery-resources/dist/implementation/transformers/path/path"
 
 
 // import { $$ as op_trim } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/text/trim"
@@ -132,7 +131,7 @@ export const $$: d.Signature = _easync.create_command_procedure(
 
                         // Download published package using dynamic package name and version
                         $cr['make directory'].execute(
-                            create_node_path(extend_path($p['path to temp directory'].context, _ea.list_literal([$p['path to temp directory'].node])), `npm`),
+                            t_path_to_path.extend_node_path($p['path to temp directory'], { 'addition': `npm` }),
                             ($) => ['error while creating directory', $],
                         ),
 

@@ -28,7 +28,7 @@ export const $$: inf.Signature = _easync.create_query_function(
                             case 'other': return _ea.ss($, ($): _et.Query_Result<d_npm.NPM_Package, d.Package_Error> => _easync.q.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
                             case 'directory': return _ea.ss($, ($): _et.Query_Result<d_npm.NPM_Package, d.Package_Error> => {
                                 return $r['read file'](
-                                    t_path_to_path.create_node_path(t_path_to_path.extend_path(t_path_to_path.node_path_to_context_path(path), _ea.list_literal([`pub`])), `package.json`),
+                                    t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` }),
                                     ($): d.Package_Error => ['no package.json file', null],
                                 ).refine(
                                     ($) => _ea.create_refinement_context<d_npm.NPM_Package, d_npm.NPM_Package_Parse_Error>(

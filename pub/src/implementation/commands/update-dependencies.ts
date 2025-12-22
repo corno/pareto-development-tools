@@ -11,7 +11,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
         // update dependencies of pub
         $cr['clean and update dependencies'].execute(
             {
-                'path': t_path_to_path.create_node_path(t_path_to_path.node_path_to_context_path($p.path), `pub`),
+                'path': t_path_to_path.extend_node_path($p.path, { 'addition': `pub`}),
             },
             ($): d.Error => ['error updating pub', $],
         ),
@@ -19,7 +19,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
         // update dependencies of test
         $cr['clean and update dependencies'].execute(
             {
-                'path': t_path_to_path.create_node_path(t_path_to_path.node_path_to_context_path($p.path), `test`),
+                'path': t_path_to_path.extend_node_path($p.path, { 'addition': `test`}),
             },
             ($) => ['error updating test', $],
         ),

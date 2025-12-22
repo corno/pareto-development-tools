@@ -24,13 +24,13 @@ export const $$: d.Signature = _easync.create_command_procedure(
         ),
         $cr.tsc.execute(
             {
-                'path': _ea.set(t_path_to_path.create_node_path(t_path_to_path.node_path_to_context_path($p.path), `pub`)),
+                'path': _ea.set(t_path_to_path.extend_node_path($p.path, { 'addition': `pub`})),
             },
             ($): d.Error => ['error building pub', $],
         ),
         $cr.tsc.execute(
             {
-                'path': _ea.set(t_path_to_path.create_node_path(t_path_to_path.node_path_to_context_path($p.path), `test`)),
+                'path': _ea.set(t_path_to_path.extend_node_path($p.path, { 'addition': `test`})),
             },
             ($): d.Error => ['error building test', $],
         )

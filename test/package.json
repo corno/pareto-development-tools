@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "exupery-core-bin": "^0.3.40",
-    "exupery-core-dev": "^0.3.2"
+    "exupery-core-bin": "^0.3.41",
+    "exupery-core-dev": "^0.3.3"
   }
 }

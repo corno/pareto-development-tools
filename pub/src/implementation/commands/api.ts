@@ -5,7 +5,6 @@ import * as _ed from 'exupery-core-dev'
 
 import * as d from "../../interface/algorithms/commands/api"
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
-import { extend_path, create_node_path, node_path_to_context_path } from "exupery-resources/dist/implementation/transformers/path/path"
 
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/path/path"
 
@@ -36,7 +35,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                         ),
                         ($x, key_spaces_not_escaped): _et.Command_Promise<d.Project_Package_Error>[] => _ea.cc($.instruction, ($) => {
                             const concatenated_path = $x.path
-                            const context_path = t_path_to_path.node_path_to_context_path(concatenated_path)
+                            const context_path = t_path_to_path.deprecated_node_path_to_context_path(concatenated_path)
                             switch ($[0]) {
                                 case 'assert clean': return _ea.ss($, ($) => [
                                     $cr['git assert clean'].execute(
@@ -82,10 +81,10 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                 case 'set up comparison': return _ea.ss($, ($): _et.Command_Promise<d.Project_Package_Error>[] => [
                                     $cr['set up comparison against published'].execute(
                                         {
-                                            'path to local package': extend_path(t_path_to_path.node_path_to_context_path(concatenated_path), _ea.list_literal([`pub`])),
-                                            'path to output local directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `local`])), key_spaces_not_escaped),
-                                            'path to output published directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `published`])), key_spaces_not_escaped),
-                                            'path to temp directory': create_node_path(extend_path(path_to_project, _ea.list_literal([`temp`, `temp`])), key_spaces_not_escaped),
+                                            'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': _ea.list_literal([`pub`]) }),
+                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_project, { 'addition': _ea.list_literal([`temp`, `local`]) }), key_spaces_not_escaped),
+                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_project, { 'addition': _ea.list_literal([`temp`, `published`]) }), key_spaces_not_escaped),
+                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_project, { 'addition': _ea.list_literal([`temp`, `temp`]) }), key_spaces_not_escaped),
                                         },
                                         ($): d.Project_Package_Error => ['set up comparison', $],
                                     )
@@ -108,10 +107,10 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             case 'set up comparison': return _ea.ss($, ($) => [
                 $cr['set up comparison against published'].execute(
                     {
-                        'path to local package': extend_path($['path to package'], _ea.list_literal(['pub'])),
-                        'path to output local directory': create_node_path(extend_path($['path to package'], _ea.list_literal([`temp`,])), `local`),
-                        'path to output published directory': create_node_path(extend_path($['path to package'], _ea.list_literal([`temp`,])), `published`),
-                        'path to temp directory': create_node_path(extend_path($['path to package'], _ea.list_literal([`temp`,])), `temp`),
+                        'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal(['pub']) }),
+                        'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal([`temp`]) }), `local`),
+                        'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal([`temp`]) }), `published`),
+                        'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal([`temp`]) }), `temp`),
                     },
                     ($): d.Error => ['set up comparison', $],
                 )
