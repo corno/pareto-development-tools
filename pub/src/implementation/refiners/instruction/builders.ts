@@ -16,6 +16,27 @@ export const Command = (
     return iterator['consume current']().transform(
         ($): d.Command => {
             switch ($) {
+                case 'analyze-file-structure':
+                    return ['analyze file structure', {
+                        'path to project': iterator['consume current']().transform(
+                            ($) => r_context_path.Context_Path($),
+                            () => abort(['expected a text', { 'description': "path to project" }])
+                        )
+                    }]
+                case 'assert-clean':
+                    return ['assert clean', {
+                        'path to package': iterator['consume current']().transform(
+                            ($) => r_context_path.Context_Path($),
+                            () => abort(['expected a text', { 'description': "path to package" }])
+                        )
+                    }]
+                case 'dependency-graph':
+                    return ['dependency graph', {
+                        'path to project': iterator['consume current']().transform(
+                            ($) => r_context_path.Context_Path($),
+                            () => abort(['expected a text', { 'description': "path to project" }])
+                        )
+                    }]
                 case 'project':
                     return ['project', {
                         'path to project': iterator['consume current']().transform(
@@ -69,27 +90,6 @@ export const Command = (
                             })])
                         )
                     }]
-                case 'assert-clean':
-                    return ['assert clean', {
-                        'path to package': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path($),
-                            () => abort(['expected a text', { 'description': "path to package" }])
-                        )
-                    }]
-                case 'dependency-graph':
-                    return ['dependency graph', {
-                        'path to project': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path($),
-                            () => abort(['expected a text', { 'description': "path to project" }])
-                        )
-                    }]
-                case 'line-count':
-                    return ['line count', {
-                        'path to project': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path($),
-                            () => abort(['expected a text', { 'description': "path to project" }])
-                        )
-                    }]
                 case 'set-up-comparison':
                     return ['set up comparison', {
                         'path to package': iterator['consume current']().transform(
@@ -99,8 +99,10 @@ export const Command = (
                     }]
                 default:
                     return abort(['expected one of', _ea.dictionary_literal({
-                        'project': null,
+                        'analyze-file-structure': null,
                         'assert-clean': null,
+                        'dependency-graph': null,
+                        'project': null,
                         'set-up-comparison': null,
                     })])
             }
@@ -109,6 +111,8 @@ export const Command = (
             'project': null,
             'assert-clean': null,
             'set-up-comparison': null,
+            'dependency-graph': null,
+            'analyze-file-structure': null,
         })])
     )
 }

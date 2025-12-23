@@ -12,12 +12,28 @@ import * as t_path_to_path from "exupery-resources/dist/implementation/transform
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr, $qr) => _ea.cc($p, ($) => {
         switch ($[0]) {
+            case 'analyze file structure': return _ea.ss($, ($) => [
+                $cr['analyze file structure'].execute(
+                    {
+                        'path': $['path to project']
+                    },
+                    ($): d.Error => ['analyze file structure', $],
+                )
+            ])
             case 'assert clean': return _ea.ss($, ($) => [
                 $cr['git assert clean'].execute(
                     {
                         'path': _ea.set($['path to package'])
                     },
                     ($): d.Error => ['git assert clean', $],
+                )
+            ])
+            case 'dependency graph': return _ea.ss($, ($) => [
+                $cr['dependency graph'].execute(
+                    {
+                        'path': $['path to project']
+                    },
+                    ($): d.Error => ['dependency graph', $],
                 )
             ])
             case 'project': return _ea.ss($, ($) => {
@@ -113,22 +129,6 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                         'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal([`temp`]) }), `temp`),
                     },
                     ($): d.Error => ['set up comparison', $],
-                )
-            ])
-            case 'dependency graph': return _ea.ss($, ($) => [
-                $cr['dependency graph'].execute(
-                    {
-                        'path': $['path to project']
-                    },
-                    ($): d.Error => ['dependency graph', $],
-                )
-            ])
-            case 'line count': return _ea.ss($, ($) => [
-                $cr['line count'].execute(
-                    {
-                        'path': $['path to project']
-                    },
-                    ($): d.Error => ['line count', $],
                 )
             ])
             default: return _ea.au($[0])

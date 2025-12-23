@@ -4,7 +4,7 @@ import * as d_log from "exupery-resources/dist/interface/generated/pareto/schema
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 import * as d_read_directory from "exupery-resources/dist/interface/generated/pareto/schemas/read_directory/data_types/source"
 import * as d_read_file from "exupery-resources/dist/interface/generated/pareto/schemas/read_file/data_types/source"
-import * as d_directory_content from "exupery-resources/dist/interface/algorithms/queries/directory_content"
+import * as d_directory_content from "exupery-resources/dist/interface/algorithms/queries/read_directory_content"
 
 export type Parameters = {
     'path': d_path.Context_Path,

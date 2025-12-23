@@ -24,6 +24,9 @@ import * as t_set_up_comparison_against_published from "../../../modules/npm/imp
 
 export const Error: Error = ($) => _ea.cc($, ($) => {
     switch ($[0]) {
+        case 'analyze file structure': return _ea.ss($, ($) => t_line_count_to_fountain_pen.Error($))
+        case 'dependency graph': return _ea.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
+        case 'git assert clean': return _ea.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
         case 'project': return _ea.ss($, ($) => _ea.cc($, ($) => {
             switch ($[0]) {
                 case 'packages': return _ea.ss($, ($) => sh.b.indent($.deprecated_to_array(() => 0).map(($) => sh.g.nested_block([
@@ -48,10 +51,7 @@ export const Error: Error = ($) => _ea.cc($, ($) => {
                 default: return _ea.au($[0])
             }
         }))
-        case 'dependency graph': return _ea.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
-        case 'line count': return _ea.ss($, ($) => t_line_count_to_fountain_pen.Error($))
         case 'set up comparison': return _ea.ss($, ($): d_out.Block_Part => t_set_up_comparison_against_published.Error($))
-        case 'git assert clean': return _ea.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
         default: return _ea.au($[0])
     }
 })
