@@ -8,9 +8,9 @@ import * as d from "../../interface/algorithms/commands/set_up_comparison_agains
 import * as d_npm_package from "../refiners/npm_package/temp"
 
 
-// import { $$ as op_trim } from "pareto-standard-operations/dist/implementation/algorithms/operations/impure/text/trim"
+// import { $$ as op_trim } from "pareto-standard-operations/dist/implementation/operations/impure/text/trim"
 
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
+import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 
 import { $$ as r_parse_npm_package } from "../refiners/npm_package/temp"
 import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
@@ -46,7 +46,7 @@ export const $$: d.Signature = _easync.create_command_procedure(
                 $qr['read file'](
                     t_path_to_path.create_node_path($p['path to local package'], `package.json`),
                     ($): d.Error => ['error while reading package.json', $],
-                ).refine(
+                ).deprecated_refine_old(
                     ($) => _ea.create_refinement_context<d_npm_package.NPM_Package, d_npm_package.NPM_Package_Parse_Error>(
                         (abort) => r_parse_npm_package(
                             $,

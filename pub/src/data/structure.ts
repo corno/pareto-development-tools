@@ -33,17 +33,7 @@ const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boo
 
 const $_interface: d_structure.Directory.SG.group.D = directory_group({
     "generated": directory_generated(true),
-
-    "algorithms": directory_group({
-        "operations": directory_group({
-            "pure": directory_wildcards(1, false, ["ts"], false),
-            "impure": directory_wildcards(1, false, ["ts"], false),
-        }),
-        "transformers": directory_wildcards(1, true, ["ts"], false),
-        "transformations": directory_wildcards(1, true, ["ts"], false),
-        "queries": directory_wildcards(0, false, ["ts"], false),
-        "commands": directory_wildcards(0, false, ["ts"], false),
-    }),
+    "signatures.ts": file_manual(),
 })
 
 const $_implementation: d_structure.Directory.SG.group.D = directory_group({
@@ -56,24 +46,24 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
         "impure": directory_wildcards(1, false, ["ts"], false),
     }),
     "transformers": directory_group({
-        "schemas": directory_wildcards(1, true, ["ts"], false),
-        "primitives": directory_wildcards(0, true, ["ts"], false),
+        "schemas": directory_wildcards(1, false, ["ts"], false),
+        "primitives": directory_wildcards(1, false, ["ts"], false),
     }),
     "productions": directory_group({
-        "schemas": directory_wildcards(1, true, ["ts"], false),
-        "primitives": directory_wildcards(0, true, ["ts"], false),
+        "schemas": directory_wildcards(1, false, ["ts"], false),
+        "primitives": directory_wildcards(1, false, ["ts"], false),
     }),
     "refiners": directory_group({
-        "schemas": directory_wildcards(1, true, ["ts"], false),
-        "primitives": directory_wildcards(0, true, ["ts"], false),
+        "schemas": directory_wildcards(1, false, ["ts"], false),
+        "primitives": directory_wildcards(1, false, ["ts"], false),
     }),
     "serializers": directory_group({
-        "schemas": directory_wildcards(1, true, ["ts"], false),
-        "primitives": directory_wildcards(0, true, ["ts"], false),
+        "schemas": directory_wildcards(1, false, ["ts"], false),
+        "primitives": directory_wildcards(1, false, ["ts"], false),
     }),
     "deserializers": directory_group({
-        "schemas": directory_wildcards(1, true, ["ts"], false),
-        "primitives": directory_wildcards(0, true, ["ts"], false),
+        "schemas": directory_wildcards(1, false, ["ts"], false),
+        "primitives": directory_wildcards(1, false, ["ts"], false),
     }),
     "queries": directory_wildcards(0, false, ["ts"], false),
     "commands": directory_wildcards(0, false, ["ts"], false),

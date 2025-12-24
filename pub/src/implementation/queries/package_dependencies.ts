@@ -30,7 +30,7 @@ export const $$: inf.Signature = _easync.create_query_function(
                                 return $r['read file'](
                                     t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` }),
                                     ($): d.Package_Error => ['no package.json file', null],
-                                ).refine(
+                                ).deprecated_refine_old(
                                     ($) => _ea.create_refinement_context<d_npm.NPM_Package, d_npm.NPM_Package_Parse_Error>(
                                         (abort) => r_parse_npm_package(
                                             $,

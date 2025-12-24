@@ -5,10 +5,10 @@ import * as _ea from 'exupery-core-alg'
 import * as d_in from "../../../interface/algorithms/queries/package_dependencies"
 import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/graphviz/data_types/target"
 
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
-import { $$ as op_filter } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/filter"
+import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
+import { $$ as op_filter } from "pareto-standard-operations/dist/implementation/operations/pure/list/filter"
 
-export type Result = _et.Transformer_New<d_in.Result, d_out.Graph>
+export type Result = _et.Transformer<d_in.Result, d_out.Graph>
 
 export const Result: Result = ($) => {
     return {

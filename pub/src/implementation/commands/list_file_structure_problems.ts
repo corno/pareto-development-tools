@@ -11,8 +11,8 @@ import * as t_path_to_path from "exupery-resources/dist/implementation/transform
 import * as t_line_count_to_line_count from "../transformers/directory_content/directory_analysis"
 import { $$ as q_directory_content } from "exupery-resources/dist/implementation/queries/directory_content"
 
-import { $$ as op_flatten_list } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/flatten"
-import { $$ as op_filter } from "pareto-standard-operations/dist/implementation/algorithms/operations/pure/list/filter"
+import { $$ as op_flatten_list } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
+import { $$ as op_filter } from "pareto-standard-operations/dist/implementation/operations/pure/list/filter"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
