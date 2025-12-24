@@ -35,7 +35,7 @@ const $_interface: d_structure.Directory.SG.group.D = directory_group({
     "generated": directory_generated(true),
     "resources.ts": file_manual(),
     "signatures.ts": file_manual(),
-    "to_be_generated": directory_wildcards(0, false, ["ts"], false),
+    "to_be_generated": directory_wildcards(0, false, ["ts"], true),
 
 })
 
@@ -49,7 +49,7 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
         "impure": directory_wildcards(1, false, ["ts"], false),
     }),
     "transformers": directory_group({
-        "schemas": directory_wildcards(1, false, ["ts"], false),
+        "schemas": directory_wildcards(1, true, ["ts"], false),
         "primitives": directory_wildcards(1, false, ["ts"], false),
     }),
     "productions": directory_group({
@@ -70,7 +70,7 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
     }),
     "queries": directory_wildcards(0, false, ["ts"], false),
     "commands": directory_wildcards(0, false, ["ts"], false),
-            "temp": directory_wildcards(0, false, ["ts"], false),
+    "temp": directory_wildcards(1, false, ["ts"], true),
 
 })
 
@@ -87,17 +87,18 @@ export const $$: d_structure.Directory = ['group', d<d_structure.Directory.SG.gr
         "package-lock.json": file_generated(true),
         "package.json": file_manual(),
         "src": directory_group({
-            "interface": $_interface,
-            "implementation": $_implementation,
-
             "bin": directory_wildcards(0, false, ["ts"], false),
+            "data": directory_wildcards(0, true, ["ts"], false),
+
             "globals.ts": file_generated(true),
+            "implementation": $_implementation,
+            "interface": $_interface,
             "index.ts": file_generated(true),
-            "shorthands": directory_wildcards(0, false, ["ts"], false),
             "modules": directory_dictionary(dgroup({
                 "interface": $_interface,
                 "implementation": $_implementation,
-            }))
+            })),
+            "shorthands": directory_wildcards(0, false, ["ts"], false),
         }),
         "tsconfig.json": file_generated(true)
     }),
