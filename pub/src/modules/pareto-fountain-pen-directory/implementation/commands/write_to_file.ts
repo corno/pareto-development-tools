@@ -3,7 +3,7 @@ import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 import * as _easync from 'exupery-core-async'
 
-import * as t_block_2_lines from "pareto-fountain-pen/dist/implementation/algorithms/transformations/block/lines"
+import * as t_block_2_lines from "pareto-fountain-pen/dist/implementation/transformers/schemas/block/lines"
 
 import * as D from "../../interface/temp_types"
 import * as d_make_directory from "exupery-resources/dist/interface/generated/pareto/schemas/make_directory/data_types/source"

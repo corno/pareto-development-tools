@@ -8,7 +8,7 @@ import * as r_instruction from "../refiners/instruction/refiners"
 
 import * as t_api_to_fountain_pen from "../transformers/api/fountain_pen"
 import * as t_bin_to_fountain_pen from "../transformers/parse/fountain_pen"
-import * as exceptional_fp from "pareto-fountain-pen/dist/exceptional/serialize/block"
+import * as exceptional_fp from "pareto-fountain-pen/dist/implementation/serializers/block"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 

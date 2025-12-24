@@ -3,7 +3,7 @@ import * as _easync from 'exupery-core-async'
 
 import * as _in from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
 
-import * as t_block_to_lines from "pareto-fountain-pen/dist/implementation/algorithms/transformations/block/lines"
+import * as t_block_to_lines from "pareto-fountain-pen/dist/implementation/transformers/schemas/block/lines"
 
 // import { Signature } from "../../../interface/algorithms/procedures/guaranteed/console_log"
 
