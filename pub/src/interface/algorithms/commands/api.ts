@@ -134,4 +134,4 @@ export type Project_Package_Error =
 
 export type Parameters = Command
 
-export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>
+export type Procedure = _et.Command_Procedure<_et.Command<Error, Parameters>, Command_Resources, Query_Resources>

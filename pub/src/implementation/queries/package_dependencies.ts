@@ -8,7 +8,7 @@ import * as d_npm from "../../modules/npm/implementation/refiners/npm_package/te
 
 import * as inf from "../../interface/algorithms/queries/package_dependencies"
 
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/path/path"
+import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 import { $$ as r_parse_npm_package } from "../../modules/npm/implementation/refiners/npm_package/temp"
 
 export const $$: inf.Signature = _easync.create_query_function(

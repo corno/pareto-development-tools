@@ -12,7 +12,7 @@ import * as D from "../../interface/temp_types"
 import { $$ as p_write_to_node } from "./write_to_node"
 // import { Signature } from "../../../interface/algorithms/procedures/unguaranteed/write_to_directory"
 
-import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
+import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 
 export type Query_Resources = null
@@ -23,7 +23,7 @@ export type Command_Resources = {
     'write file': _et.Command<d_write_file.Error, d_write_file.Parameters>
 }
 
-export const $$: _et.Command_Procedure<D.Directory_Error, D.Directory_Parameters, Command_Resources, Query_Resources> = _easync.create_command_procedure(
+export const $$: _et.Command_Procedure<_et.Command<D.Directory_Error, D.Directory_Parameters>, Command_Resources, Query_Resources> = _easync.create_command_procedure(
     ($p, $cr) => [
         _easync.p.sequence<D.Directory_Error>([
             _easync.p.if_(

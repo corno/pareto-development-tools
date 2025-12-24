@@ -11,10 +11,10 @@ import * as d_write_file from "exupery-resources/dist/interface/generated/pareto
 
 import { $$ as op_join_list_of_texts } from "pareto-standard-operations/dist/implementation/operations/pure/text/join_list_of_texts"
 
-import * as r_path from "exupery-resources/dist/implementation/transformers/path/text"
+import * as r_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/path/path"
+import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 
 export type Query_Resources = null
 
@@ -24,7 +24,7 @@ export type Command_Resources = {
 }
 
 
-export const $$: _et.Command_Procedure<D.File_Error, D.File_Parameters, Command_Resources, Query_Resources> = _easync.create_command_procedure(
+export const $$: _et.Command_Procedure<_et.Command<D.File_Error, D.File_Parameters>, Command_Resources, Query_Resources> = _easync.create_command_procedure(
     ($p, $cr) => [
         _easync.p.sequence<D.File_Error>([
             $cr['make directory'].execute(

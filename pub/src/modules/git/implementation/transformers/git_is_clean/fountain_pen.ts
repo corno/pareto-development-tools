@@ -8,7 +8,7 @@ export type Error = _et.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-import * as t_eqe_to_fountain_pen from "exupery-resources/dist/implementation/transformers/execute_query_executable/fountain_pen"
+import * as t_eqe_to_fountain_pen from "exupery-resources/dist/implementation/transformers/schemas/execute_query_executable/fountain_pen"
 import * as t_is_inside_work_tree_to_fountain_pen from "../is_inside_work_tree/fountain_pen"
 
 export const Error: Error = ($) => _ea.cc($, ($): d_out.Block_Part => {

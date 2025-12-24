@@ -6,7 +6,7 @@ import * as _ed from 'exupery-core-dev'
 import * as d from "../../interface/algorithms/commands/api"
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/path/path"
+import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 
 
 export const $$: d.Procedure = _easync.create_command_procedure(

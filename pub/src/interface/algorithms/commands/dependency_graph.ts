@@ -21,4 +21,4 @@ export type Command_Resources = {
     'log': _et.Command<null, d_log.Parameters>
 }
 
-export type Signature = _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>
+export type Signature = _et.Command_Procedure<_et.Command<Error, Parameters>, Command_Resources, Query_Resources>

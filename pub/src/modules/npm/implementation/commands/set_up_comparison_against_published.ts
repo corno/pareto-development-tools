@@ -13,9 +13,9 @@ import * as d_npm_package from "../refiners/npm_package/temp"
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 
 import { $$ as r_parse_npm_package } from "../refiners/npm_package/temp"
-import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/path/path"
-import * as r_context_path from "exupery-resources/dist/implementation/refiners/context_path/text"
+import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
+import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
+import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
 
 const remove_n_characters_from_end = ($: string, n: number): string => {
 
@@ -100,9 +100,9 @@ export const $$: d.Signature = _easync.create_command_procedure(
                                 'args': op_flatten(_ea.list_literal([
                                     _ea.list_literal([
                                         `pack`,
-                                        t_path_to_text.Context_Path($p['path to local package']),
+                                        s_path.Context_Path($p['path to local package']),
                                         `--pack-destination`,
-                                        t_path_to_text.Node_Path($p['path to temp directory']),
+                                        s_path.Node_Path($p['path to temp directory']),
                                     ])
                                 ])),
                             },
@@ -120,9 +120,9 @@ export const $$: d.Signature = _easync.create_command_procedure(
                             {
                                 'args': _ea.list_literal([
                                     `-xzmf`,
-                                    `${t_path_to_text.Node_Path($p['path to temp directory'])}/${filename}`,
+                                    `${s_path.Node_Path($p['path to temp directory'])}/${filename}`,
                                     `-C`,
-                                    t_path_to_text.Node_Path($p['path to output local directory']),
+                                    s_path.Node_Path($p['path to output local directory']),
                                     `--strip-components=1`,
                                 ]),
                             },
@@ -141,7 +141,7 @@ export const $$: d.Signature = _easync.create_command_procedure(
                                     `pack`,
                                     `${package_info.name}@${package_info.version}`,
                                     `--pack-destination`,
-                                    `${t_path_to_text.Node_Path($p['path to temp directory'])}/npm`,
+                                    `${s_path.Node_Path($p['path to temp directory'])}/npm`,
                                 ])
                             },
                             ($) => ['error while running npm command', $],
@@ -170,9 +170,9 @@ export const $$: d.Signature = _easync.create_command_procedure(
                                     {
                                         'args': _ea.list_literal([
                                             `-xzmf`,
-                                            `${t_path_to_text.Node_Path($p['path to temp directory'])}/npm/${package_info.name}-${$v}.tgz`,
+                                            `${s_path.Node_Path($p['path to temp directory'])}/npm/${package_info.name}-${$v}.tgz`,
                                             `-C`,
-                                            `${t_path_to_text.Node_Path($p['path to output published directory'])}`,
+                                            `${s_path.Node_Path($p['path to output published directory'])}`,
                                             `--strip-components=1`,
                                         ])
                                     },

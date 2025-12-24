@@ -21,7 +21,7 @@ export type Command_Resources = {
     'log': _et.Command<null, d_log.Parameters>
 }
 
-export const $$: _et.Command_Procedure<null, Parameters, Command_Resources, Query_Resources> = _easync.create_command_procedure(
+export const $$: _et.Command_Procedure<_et.Command<null, Parameters>, Command_Resources, Query_Resources> = _easync.create_command_procedure(
     ($p, $cr) => [
         $cr['log'].execute(
             {

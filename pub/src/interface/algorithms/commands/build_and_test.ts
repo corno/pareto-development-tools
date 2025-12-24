@@ -21,4 +21,4 @@ export type Command_Resources = {
     'node': _et.Command<d_epe.Error, d_epe.Parameters>
 }
 
-export type Procedure = _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>
+export type Procedure = _et.Command_Procedure<_et.Command<Error, Parameters>, Command_Resources, Query_Resources>

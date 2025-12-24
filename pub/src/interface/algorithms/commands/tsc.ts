@@ -20,4 +20,4 @@ export type Command_Resources = {
     'tsc': _et.Command<d_espe.Error, d_espe.Parameters>
 }
 
-export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>
+export type Procedure =  _et.Command_Procedure<_et.Command<Error, Parameters>, Command_Resources, Query_Resources>

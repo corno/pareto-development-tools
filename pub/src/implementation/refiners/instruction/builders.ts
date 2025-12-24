@@ -3,11 +3,11 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../../interface/algorithms/commands/api"
 import * as d_error from "../../../interface/algorithms/commands/parse"
 
-import * as r_context_path from "exupery-resources/dist/implementation/refiners/context_path/text"
+import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
 
 import * as core from "../../temp_core"
 
-import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
+import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 export const Command = (
     abort: core.Abort<d_error.Error>,
@@ -19,35 +19,35 @@ export const Command = (
                 case 'analyze-file-structure':
                     return ['analyze file structure', {
                         'path to project': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path($),
+                            ($) => ds_context_path.Context_Path($),
                             () => abort(['expected a text', { 'description': "path to project" }])
                         )
                     }]
                 case 'assert-clean':
                     return ['assert clean', {
                         'path to package': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path($),
+                            ($) => ds_context_path.Context_Path($),
                             () => abort(['expected a text', { 'description': "path to package" }])
                         )
                     }]
                 case 'dependency-graph':
                     return ['dependency graph', {
                         'path to project': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path($),
+                            ($) => ds_context_path.Context_Path($),
                             () => abort(['expected a text', { 'description': "path to project" }])
                         )
                     }]
                 case 'list-file-structure-problems':
                     return ['list file structure problems', {
                         'path to project': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path($),
+                            ($) => ds_context_path.Context_Path($),
                             () => abort(['expected a text', { 'description': "path to project" }])
                         )
                     }]
                 case 'project':
                     return ['project', {
                         'path to project': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path($),
+                            ($) => ds_context_path.Context_Path($),
                             () => abort(['expected a text', { 'description': "path to project" }])
                         ),
                         'instruction': iterator['consume current']().transform(
@@ -100,7 +100,7 @@ export const Command = (
                 case 'set-up-comparison':
                     return ['set up comparison', {
                         'path to package': iterator['consume current']().transform(
-                            ($) => r_context_path.Context_Path($),
+                            ($) => ds_context_path.Context_Path($),
                             () => abort(['expected a text', { 'description': "path to package" }])
                         ),
                     }]

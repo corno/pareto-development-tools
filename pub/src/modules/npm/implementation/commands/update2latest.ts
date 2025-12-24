@@ -4,7 +4,7 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../interface/algorithms/commands/update2latest"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
-import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
+import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 export const $$: d.Procedure = _easync.create_command_procedure(
     ($p, $cr) => [
@@ -12,7 +12,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
             {
                 'args': op_flatten(_ea.list_literal([
                     _ea.list_literal([
-                        t_path_to_text.Node_Path($p.path),
+                        s_path.Node_Path($p.path),
                     ]),
                     _ea.cc($p.what, ($) => {
                         // _ed.log_debug_message(`Updating ${$p.path} to latest`, () => {})

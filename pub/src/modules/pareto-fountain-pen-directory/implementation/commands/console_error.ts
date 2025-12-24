@@ -22,7 +22,7 @@ export type Command_Resources = {
     'log error': _et.Command<null, d_log_error.Parameters>
 }
 
-export const $$: _et.Command_Procedure<null, Parameters, Command_Resources, Query_Resources> = _easync.create_command_procedure(
+export const $$: _et.Command_Procedure<_et.Command<null, Parameters>, Command_Resources, Query_Resources> = _easync.create_command_procedure(
     ($p, $cr) => [
         $cr['log error'].execute(
             {

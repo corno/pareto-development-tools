@@ -33,7 +33,10 @@ const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boo
 
 const $_interface: d_structure.Directory.SG.group.D = directory_group({
     "generated": directory_generated(true),
+    "resources.ts": file_manual(),
     "signatures.ts": file_manual(),
+    "to_be_generated": directory_wildcards(0, false, ["ts"], false),
+
 })
 
 const $_implementation: d_structure.Directory.SG.group.D = directory_group({
@@ -58,15 +61,17 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
         "primitives": directory_wildcards(1, false, ["ts"], false),
     }),
     "serializers": directory_group({
-        "schemas": directory_wildcards(1, false, ["ts"], false),
+        "schemas": directory_wildcards(0, false, ["ts"], false),
         "primitives": directory_wildcards(1, false, ["ts"], false),
     }),
     "deserializers": directory_group({
-        "schemas": directory_wildcards(1, false, ["ts"], false),
+        "schemas": directory_wildcards(0, false, ["ts"], false),
         "primitives": directory_wildcards(1, false, ["ts"], false),
     }),
     "queries": directory_wildcards(0, false, ["ts"], false),
     "commands": directory_wildcards(0, false, ["ts"], false),
+            "temp": directory_wildcards(0, false, ["ts"], false),
+
 })
 
 export const $$: d_structure.Directory = ['group', d<d_structure.Directory.SG.group.D>({
@@ -86,11 +91,9 @@ export const $$: d_structure.Directory = ['group', d<d_structure.Directory.SG.gr
             "implementation": $_implementation,
 
             "bin": directory_wildcards(0, false, ["ts"], false),
-            "exceptional": directory_wildcards(0, true, ["ts"], false),
             "globals.ts": file_generated(true),
             "index.ts": file_generated(true),
             "shorthands": directory_wildcards(0, false, ["ts"], false),
-            "temp": directory_wildcards(0, true, ["ts"], false),
             "modules": directory_dictionary(dgroup({
                 "interface": $_interface,
                 "implementation": $_implementation,

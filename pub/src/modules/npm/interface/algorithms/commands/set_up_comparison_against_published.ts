@@ -35,4 +35,4 @@ export type Command_Resources = {
     'remove' : _et.Command<d_remove.Error, d_remove.Parameters>
 }
 
-export type Signature = _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>
+export type Signature = _et.Command_Procedure<_et.Command<Error, Parameters>, Command_Resources, Query_Resources>

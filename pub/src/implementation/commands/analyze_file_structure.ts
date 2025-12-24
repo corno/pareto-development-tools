@@ -7,9 +7,9 @@ import { $$ as x_structure } from "../../data/structure"
 import * as d from "../../interface/algorithms/commands/analyze_file_structure"
 import * as d_directory_content from "exupery-resources/dist/interface/to_be_generated/directory_content"
 
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/path/path"
+import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 import * as t_line_count_to_line_count from "../transformers/directory_content/directory_analysis"
-import { $$ as q_directory_content } from "exupery-resources/dist/implementation/queries/directory_content"
+import { $$ as q_directory_content } from "exupery-resources/dist/implementation/queries/read_directory_content"
 
 import { $$ as op_flatten_list } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 

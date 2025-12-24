@@ -8,8 +8,8 @@ export type Error = _et.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-import * as t_package_dependencies_to_fountain_pen from "exupery-resources/dist/implementation/transformers/directory_content/fountain_pen"
-import * as t_read_directory_to_fountain_pen from "exupery-resources/dist/implementation/transformers/read_directory/fountain_pen"
+import * as t_package_dependencies_to_fountain_pen from "exupery-resources/dist/implementation/transformers/schemas/directory_content/fountain_pen"
+import * as t_read_directory_to_fountain_pen from "exupery-resources/dist/implementation/transformers/schemas/read_directory/fountain_pen"
 
 export const Error: Error = ($) => _ea.cc($, ($) => {
     switch ($[0]) {

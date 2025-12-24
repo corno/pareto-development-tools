@@ -18,4 +18,4 @@ export type Command_Resources = {
         'clean and update dependencies': _et.Command<d_utd.Error, d_utd.Parameters>
 }
 
-export type Procedure =  _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>
+export type Procedure =  _et.Command_Procedure<_et.Command<Error, Parameters>, Command_Resources, Query_Resources>

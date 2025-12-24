@@ -4,7 +4,7 @@ import * as _ea from 'exupery-core-alg'
 import * as d from "../../interface/algorithms/commands/extended_commit"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
-import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
+import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 
 export const $$: d.Procedure = _easync.create_command_procedure(
@@ -28,7 +28,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                     $p.path.transform(
                                         ($) => _ea.list_literal([
                                             `-C`,
-                                            t_path_to_text.Context_Path($),
+                                            s_path.Context_Path($),
                                         ]),
                                         () => _ea.list_literal([])
                                     ),
@@ -48,7 +48,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                             $p.path.transform(
                                 ($) => _ea.list_literal([
                                     `-C`,
-                                    t_path_to_text.Context_Path($),
+                                    s_path.Context_Path($),
                                 ]),
                                 () => _ea.list_literal([])
                             ),
@@ -70,7 +70,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                     $p.path.transform(
                                         ($) => _ea.list_literal([
                                             `-C`,
-                                            t_path_to_text.Context_Path($),
+                                            s_path.Context_Path($),
                                         ]),
                                         () => _ea.list_literal([])
                                     ),
