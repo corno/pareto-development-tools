@@ -9,17 +9,28 @@ export type Parameters = {
 }
 
 export type Error =
-    | ['error building pub', d_tsc.Error]
-    | ['error building test', d_tsc.Error]
-    | ['error removing pub dist dir', d_remove.Error]
-    | ['error removing test dist dir', d_remove.Error]
-
+    | ['error building pub', {
+        'path': string
+        'error': d_tsc.Error
+    }]
+    | ['error building test', {
+        'path': string
+        'error': d_tsc.Error
+    }]
+    | ['error removing pub dist dir', {
+        'path': string
+        'error': d_remove.Error
+    }]
+    | ['error removing test dist dir', {
+        'path': string
+        'error': d_remove.Error
+    }]
 
 export type Query_Resources = null
 
 export type Command_Resources = {
-        'tsc': _et.Command<d_tsc.Error, d_tsc.Parameters>
-        'remove': _et.Command<d_remove.Error, d_remove.Parameters>
+    'tsc': _et.Command<d_tsc.Error, d_tsc.Parameters>
+    'remove': _et.Command<d_remove.Error, d_remove.Parameters>
 }
 
-export type Signature =  _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>
+export type Signature = _et.Command_Procedure<Error, Parameters, Command_Resources, Query_Resources>

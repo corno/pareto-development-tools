@@ -4,7 +4,7 @@ import * as _et from 'exupery-core-types'
 import * as d_in from "../../../interface/algorithms/commands/api"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
 
-export type Error = _et.Transformer_New<d_in.Error, d_out.Block_Part>
+export type Signature = _et.Transformer_New<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
@@ -22,7 +22,7 @@ import * as t_update_dependencies from "../update_dependencies/fountain_pen"
 import * as t_read_directory_to_fountain_pen from "exupery-resources/dist/implementation/transformers/read_directory/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../modules/npm/implementation/transformers/set_up_comparison_against_published/fountain_pen"
 
-export const Error: Error = ($) => _ea.cc($, ($) => {
+export const Error: Signature = ($) => _ea.cc($, ($) => {
     switch ($[0]) {
         case 'analyze file structure': return _ea.ss($, ($) => t_line_count_to_fountain_pen.Error($))
         case 'dependency graph': return _ea.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))

@@ -14,37 +14,44 @@ import * as t_remove_to_fountain_pen from "exupery-resources/dist/implementation
 export const Error: Error = ($) => _ea.cc($, ($) => {
     switch ($[0]) {
         case 'error building pub': return _ea.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not build pub: `),
+            sh.b.snippet(`could not build pub: (`),
+            sh.b.snippet($.path),
+            sh.b.snippet(`/pub)`),
             sh.b.indent([
                 sh.g.nested_block([
-                    t_tsc_to_fountain_pen.Error($)
+                    t_tsc_to_fountain_pen.Error($.error)
                 ])
             ])
         ]))
         case 'error building test': return _ea.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not build test: `),
+            sh.b.snippet(`could not build test: (`),
+            sh.b.snippet($.path),
+            sh.b.snippet(`/test)`),
             sh.b.indent([
                 sh.g.nested_block([
-                    t_tsc_to_fountain_pen.Error($)
+                    t_tsc_to_fountain_pen.Error($.error)
                 ])
             ])
         ]))
         case 'error removing pub dist dir': return _ea.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not remove pub dist dir: `),
+            sh.b.snippet(`could not remove pub dist dir: (`),
+            sh.b.snippet($.path),
+            sh.b.snippet(`/pub)`),
 
             sh.b.indent([
                 sh.g.nested_block([
-                    t_remove_to_fountain_pen.Error($)
+                    t_remove_to_fountain_pen.Error($.error)
                 ])
             ])
 
         ]))
         case 'error removing test dist dir': return _ea.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not remove test dist dir: `),
-
+            sh.b.snippet(`could not remove test dist dir: (`),
+            sh.b.snippet($.path),
+            sh.b.snippet(`/test)`),
             sh.b.indent([
                 sh.g.nested_block([
-                    t_remove_to_fountain_pen.Error($)
+                    t_remove_to_fountain_pen.Error($.error)
                 ])
             ])
         ]))
