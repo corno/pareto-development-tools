@@ -7,7 +7,7 @@ import * as d from "../../interface/algorithms/commands/bin"
 import * as r_instruction from "../refiners/instruction/refiners"
 
 import * as t_api_to_fountain_pen from "../transformers/api/fountain_pen"
-import * as t_bin_to_fountain_pen from "../transformers/bin/fountain_pen"
+import * as t_bin_to_fountain_pen from "../transformers/parse/fountain_pen"
 import * as exceptional_fp from "pareto-fountain-pen/dist/exceptional/serialize/block"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
@@ -24,7 +24,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     _ed.log_debug_message(
                         exceptional_fp.Group(
                             sh.group([sh.g.nested_block([
-                                t_bin_to_fountain_pen.Parse_Error($)
+                                t_bin_to_fountain_pen.Error($)
                             ])]),
                             {
                                 'indentation': `    `,

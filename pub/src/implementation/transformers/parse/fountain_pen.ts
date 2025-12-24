@@ -1,14 +1,14 @@
 import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 
-import * as d_in from "../../../interface/algorithms/commands/bin"
+import * as d_in from "../../../interface/algorithms/commands/parse"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
 
-export type Parse_Error = _et.Transformer<d_out.Block_Part, d_in.Parse_Error>
+export type Error = _et.Transformer_New<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const Parse_Error: Parse_Error = ($) => _ea.cc($, ($) => {
+export const Error: Error = ($) => _ea.cc($, ($) => {
     switch ($[0]) {
         case 'expected one of': return _ea.ss($, ($) => sh.b.sub([
             sh.b.snippet(`expected one of: `),

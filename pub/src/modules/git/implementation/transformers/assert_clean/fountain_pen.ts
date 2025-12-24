@@ -8,7 +8,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 import * as t_git_is_clean_to_fountain_pen from "../../../../../modules/git/implementation/transformers/is_clean/fountain_pen"
 
-export type Error = _et.Transformer<d_out.Block_Part, d_in.Error>
+export type Error = _et.Transformer_New<d_in.Error, d_out.Block_Part>
 
 export const Error: Error = ($) => _ea.cc($, ($) => {
     switch ($[0]) {

@@ -4,7 +4,7 @@ import * as _et from 'exupery-core-types'
 import * as d_in from "../../../interface/algorithms/queries/git_is_inside_work_tree"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
 
-export type Error = _et.Transformer<d_out.Block_Part, d_in.Error>
+export type Error = _et.Transformer_New<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 

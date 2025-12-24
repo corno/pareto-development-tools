@@ -76,7 +76,6 @@ export const $$: d_structure.Directory = ['group', d<d_structure.Directory.SG.gr
     ".gitignore": file_manual(),
     "data": directory_freeform(),
     "documentation": directory_freeform(),
-    "temp": directory_ignore(),
     "LICENSE": file_manual(),
     "out": directory_generated(false),
     "pub": directory_group({
@@ -102,6 +101,7 @@ export const $$: d_structure.Directory = ['group', d<d_structure.Directory.SG.gr
         "tsconfig.json": file_generated(true)
     }),
     "README.md": file_manual(),
+    "temp": directory_ignore(),
     "test": directory_group({
         "dist": directory_generated(false),
         "node_modules": directory_ignore(),
@@ -115,4 +115,5 @@ export const $$: d_structure.Directory = ['group', d<d_structure.Directory.SG.gr
         }),
         "tsconfig.json": file_generated(true)
     }),
+    "testdata": directory_freeform(),
 })]

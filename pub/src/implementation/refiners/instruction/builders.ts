@@ -1,7 +1,7 @@
 import * as _ea from 'exupery-core-alg'
 
 import * as d from "../../../interface/algorithms/commands/api"
-import * as d_error from "../../../interface/algorithms/commands/bin"
+import * as d_error from "../../../interface/algorithms/commands/parse"
 
 import * as r_context_path from "exupery-resources/dist/implementation/refiners/context_path/text"
 
@@ -10,7 +10,7 @@ import * as core from "../../temp_core"
 import * as t_path_to_text from "exupery-resources/dist/implementation/transformers/path/text"
 
 export const Command = (
-    abort: core.Abort<d_error.Parse_Error>,
+    abort: core.Abort<d_error.Error>,
     iterator: core.Iterator<string, number>,
 ): d.Command => {
     return iterator['consume current']().transform(
