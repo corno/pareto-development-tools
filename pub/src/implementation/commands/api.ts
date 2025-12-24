@@ -36,6 +36,14 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                     ($): d.Error => ['dependency graph', $],
                 )
             ])
+            case 'list file structure problems': return _ea.ss($, ($) => [
+                $cr['list file structure problems'].execute(
+                    {
+                        'path': $['path to project']
+                    },
+                    ($): d.Error => ['analyze file structure', $],
+                )
+            ])
             case 'project': return _ea.ss($, ($) => {
                 const path_to_project = $['path to project']
                 return [

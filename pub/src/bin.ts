@@ -13,6 +13,7 @@ import { $$ as q_git_is_inside_work_tree } from "./modules/git/implementation/qu
 import { $$ as q_package_dependencies } from "./implementation/queries/package_dependencies"
 
 import { $$ as p_analyze_file_structure } from "./implementation/commands/analyze_file_structure"
+import { $$ as p_list_file_structure_problems } from "./implementation/commands/list_file_structure_problems"
 import { $$ as p_api } from "./implementation/commands/api"
 import { $$ as p_bin } from "./implementation/commands/bin"
 import { $$ as p_build } from "./implementation/commands/build"
@@ -216,6 +217,15 @@ _eb.run_main_procedure(
                         'build': build,
                         'dependency graph': dependency_graph,
                         'analyze file structure': p_analyze_file_structure(
+                            {
+                                'log': $r.commands.log,
+                            },
+                            {
+                                'read directory': $r.queries['read directory'],
+                                'read file': $r.queries['read file'],
+                            },
+                        ),
+                        'list file structure problems': p_list_file_structure_problems(
                             {
                                 'log': $r.commands.log,
                             },

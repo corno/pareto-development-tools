@@ -37,6 +37,13 @@ export const Command = (
                             () => abort(['expected a text', { 'description': "path to project" }])
                         )
                     }]
+                case 'list-file-structure-problems':
+                    return ['list file structure problems', {
+                        'path to project': iterator['consume current']().transform(
+                            ($) => r_context_path.Context_Path($),
+                            () => abort(['expected a text', { 'description': "path to project" }])
+                        )
+                    }]
                 case 'project':
                     return ['project', {
                         'path to project': iterator['consume current']().transform(

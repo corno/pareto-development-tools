@@ -2,6 +2,7 @@ import * as _et from 'exupery-core-types'
 
 
 import * as d_analyze_file_structure from "./analyze_file_structure"
+import * as d_list_file_structure_problems from "./analyze_file_structure"
 import * as d_assert_clean from "../../../modules/git/interface/algorithms/commands/assert-clean"
 import * as d_build from "./build"
 import * as d_build_and_test from "./build_and_test"
@@ -41,6 +42,11 @@ export type Command =
 
 
     | ['analyze file structure', {
+        'path to project': d_path.Context_Path
+    }]
+
+
+    | ['list file structure problems', {
         'path to project': d_path.Context_Path
     }]
 
@@ -97,6 +103,7 @@ export type Command_Resources = {
     'build': _et.Command<d_build.Error, d_build.Parameters>
     'dependency graph': _et.Command<d_dependency_graph.Error, d_dependency_graph.Parameters>
     'analyze file structure': _et.Command<d_analyze_file_structure.Error, d_analyze_file_structure.Parameters>
+    'list file structure problems': _et.Command<d_list_file_structure_problems.Error, d_list_file_structure_problems.Parameters>
     'git assert clean': _et.Command<d_assert_clean.Error, d_assert_clean.Parameters>
     'git extended commit': _et.Command<d_git_extended_commit.Error, d_git_extended_commit.Parameters>
     'git remove tracked but ignored': _et.Command<d_git_remove_tracked_but_ignored.Error, d_git_remove_tracked_but_ignored.Parameters>
