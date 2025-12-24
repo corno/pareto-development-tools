@@ -11,7 +11,6 @@
     "exupery-core-async": "^0.3.75",
     "exupery-core-bin": "^0.3.41",
     "exupery-core-dev": "^0.3.3",
-    "exupery-core-rawdata": "^0.2.1",
     "exupery-resources": "^0.3.41",
     "pareto-fountain-pen": "^0.3.14",
     "pareto-graphviz": "^0.1.6",
