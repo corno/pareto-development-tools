@@ -2,7 +2,7 @@ import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 
 import * as d_in from "exupery-resources/dist/interface/to_be_generated/directory_content"
-import * as d_out from "../../../../interface/temp_directory_analysis"
+import * as d_out from "../../../../interface/to_be_generated/temp_directory_analysis"
 import * as d_structure from "../../../../interface/generated/pareto/schemas/structure/data_types/target"
 
 const line_count = ($: string): number => {

@@ -7,11 +7,11 @@ import * as signatures from "../../interface/signatures"
 
 //data types
 import * as d from "../../interface/to_be_generated/set_up_comparison_against_published"
-import * as d_npm_package from "../refiners/npm_package/temp"
+import * as d_npm_package from "../refiners/schemas/npm_package/temp"
 
 //dependencies
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
-import { $$ as r_parse_npm_package } from "../refiners/npm_package/temp"
+import { $$ as r_parse_npm_package } from "../refiners/schemas/npm_package/temp"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 // import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"

@@ -1,7 +1,7 @@
 import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 
-import * as d from "../../../interface/generated/pareto/core/astn_source"
+import * as d from "../../../../interface/generated/pareto/core/astn_source"
 
 export type NPM_Package = {
     'name': string
@@ -27,7 +27,7 @@ export type NPM_Package_Parse_Error =
     ]
 
 
-import * as r_parse from "../../generated/pareto/generic/parse/parse"
+import * as r_parse from "../../../generated/pareto/generic/parse/parse"
 
 type Error_Expect_Object =
     | ['not an object', null]

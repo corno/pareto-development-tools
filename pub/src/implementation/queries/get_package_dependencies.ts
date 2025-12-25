@@ -7,11 +7,11 @@ import * as signatures from "../../interface/signatures"
 
 //data types
 import * as d from "../../interface/to_be_generated/get_package_dependencies"
-import * as d_npm from "../../modules/npm/implementation/refiners/npm_package/temp"
+import * as d_npm from "../../modules/npm/implementation/refiners/schemas/npm_package/temp"
 
 //dependencies
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
-import { $$ as r_parse_npm_package } from "../../modules/npm/implementation/refiners/npm_package/temp"
+import { $$ as r_parse_npm_package } from "../../modules/npm/implementation/refiners/schemas/npm_package/temp"
 
 export const $$: signatures.queries.get_package_dependencies = _easync.create_query_function(
     ($p, $r) => $r['read directory'](

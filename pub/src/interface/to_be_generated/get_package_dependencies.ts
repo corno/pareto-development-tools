@@ -4,7 +4,7 @@ import * as _easync from 'exupery-core-async'
 import * as d_read_directory from "exupery-resources/dist/interface/generated/pareto/schemas/read_directory/data_types/source"
 import * as d_read_file from "exupery-resources/dist/interface/generated/pareto/schemas/read_file/data_types/source"
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/source"
-import * as d_npm from "../../modules/npm/implementation/refiners/npm_package/temp"
+import * as d_npm from "../../modules/npm/implementation/refiners/schemas/npm_package/temp"
 
 
 export type Parameters = {
