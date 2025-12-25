@@ -3,13 +3,17 @@ import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 import * as _ed from 'exupery-core-dev'
 
-import * as d from "../../interface/algorithms/commands/api"
+import * as signatures from "../../interface/signatures"
+
+//data types
+import * as d from "../../interface/to_be_generated/api"
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
+//dependencies
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 
 
-export const $$: d.Procedure = _easync.create_command_procedure(
+export const $$: signatures.commands.api = _easync.create_command_procedure(
     ($p, $cr, $qr) => _ea.cc($p, ($) => {
         switch ($[0]) {
             case 'analyze file structure': return _ea.ss($, ($) => [
@@ -21,7 +25,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 )
             ])
             case 'assert clean': return _ea.ss($, ($) => [
-                $cr['git assert clean'].execute(
+                $cr['git assert is clean'].execute(
                     {
                         'path': _ea.set($['path to package'])
                     },
@@ -29,7 +33,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 )
             ])
             case 'dependency graph': return _ea.ss($, ($) => [
-                $cr['dependency graph'].execute(
+                $cr['create dependency graph'].execute(
                     {
                         'path': $['path to project']
                     },
@@ -62,7 +66,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                             const context_path = t_path_to_path.deprecated_node_path_to_context_path(concatenated_path)
                             switch ($[0]) {
                                 case 'assert clean': return _ea.ss($, ($) => [
-                                    $cr['git assert clean'].execute(
+                                    $cr['git assert is clean'].execute(
                                         {
                                             'path': _ea.set(context_path)
                                         },
@@ -103,7 +107,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                                     )
                                 ])
                                 case 'set up comparison': return _ea.ss($, ($): _et.Command_Promise<d.Project_Package_Error>[] => [
-                                    $cr['set up comparison against published'].execute(
+                                    $cr['npm set up comparison against published'].execute(
                                         {
                                             'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': _ea.list_literal([`pub`]) }),
                                             'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_project, { 'addition': _ea.list_literal([`temp`, `local`]) }), key_spaces_not_escaped),
@@ -129,7 +133,7 @@ export const $$: d.Procedure = _easync.create_command_procedure(
                 ]
             })
             case 'set up comparison': return _ea.ss($, ($) => [
-                $cr['set up comparison against published'].execute(
+                $cr['npm set up comparison against published'].execute(
                     {
                         'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal(['pub']) }),
                         'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal([`temp`]) }), `local`),

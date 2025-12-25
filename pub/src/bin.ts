@@ -8,19 +8,19 @@ import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schema
 import * as d_espe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
 import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
 
-import { $$ as q_is_git_clean } from "./modules/git/implementation/queries/repository_is_clean"
+import { $$ as q_git_is_repository_clean } from "./modules/git/implementation/queries/is_repository_clean"
 import { $$ as q_git_is_inside_work_tree } from "./modules/git/implementation/queries/is_inside_work_tree"
-import { $$ as q_package_dependencies } from "./implementation/queries/package_dependencies"
+import { $$ as q_package_dependencies } from "./implementation/queries/get_package_dependencies"
 
 import { $$ as p_analyze_file_structure } from "./implementation/commands/analyze_file_structure"
 import { $$ as p_list_file_structure_problems } from "./implementation/commands/list_file_structure_problems"
 import { $$ as p_api } from "./implementation/commands/api"
-import { $$ as p_bin } from "./implementation/commands/bin"
+import { $$ as p_bin } from "./implementation/commands/main"
 import { $$ as p_build } from "./implementation/commands/build"
 import { $$ as p_build_and_test } from "./implementation/commands/build_and_test"
-import { $$ as p_dependency_graph } from "./implementation/commands/dependency_graph"
+import { $$ as p_dependency_graph } from "./implementation/commands/create_dependency_graph"
 import { $$ as p_fp_log } from "./modules/pareto-fountain-pen-directory/implementation/commands/console_log"
-import { $$ as p_git_assert_clean } from "./modules/git/implementation/commands/assert-clean"
+import { $$ as p_git_assert_clean } from "./modules/git/implementation/commands/assert_is_clean"
 import { $$ as p_git_clean } from "./modules/git/implementation/commands/clean"
 import { $$ as p_git_extended_commit } from "./modules/git/implementation/commands/extended_commit"
 import { $$ as p_git_remove_tracked_but_ignored } from "./modules/git/implementation/commands/remove-tracked-but-ignored"
@@ -81,19 +81,19 @@ const create_espe = (
 _eb.run_main_procedure(
     ($r) => {
 
-        const is_git_clean = q_is_git_clean({
+        const git_is_repository_clean = q_git_is_repository_clean({
             'git': create_eqe(`git`, $r),
             'is inside git work tree': q_git_is_inside_work_tree({
                 'git': create_eqe(`git`, $r),
             }),
         })
 
-        const assert_git_is_clean = p_git_assert_clean(
+        const git_assert_is_clean = p_git_assert_clean(
             {
                 'git': create_epe(`git`, $r),
             },
             {
-                'is git clean': is_git_clean,
+                'is repository clean': git_is_repository_clean,
             },
         )
 
@@ -179,7 +179,7 @@ _eb.run_main_procedure(
         const git_remove_tracked_but_ignored = p_git_remove_tracked_but_ignored(
             {
                 'git': create_epe(`git`, $r),
-                'assert git is clean': assert_git_is_clean,
+                'assert is clean': git_assert_is_clean,
             },
             {
                 'git': create_eqe(`git`, $r),
@@ -191,7 +191,7 @@ _eb.run_main_procedure(
                 'git': create_epe(`git`, $r),
             },
             {
-                'git is clean': is_git_clean,
+                'git is repository clean': git_is_repository_clean,
             },
         )
 
@@ -212,10 +212,10 @@ _eb.run_main_procedure(
             {
                 'api': p_api(
                     {
-                        'git assert clean': assert_git_is_clean,
+                        'git assert is clean': git_assert_is_clean,
                         'build and test': build_and_test,
                         'build': build,
-                        'dependency graph': dependency_graph,
+                        'create dependency graph': dependency_graph,
                         'analyze file structure': p_analyze_file_structure(
                             {
                                 'log': $r.commands.log,
@@ -237,7 +237,7 @@ _eb.run_main_procedure(
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
                         'update dependencies': clean_and_update_dependencies,
                         'git extended commit': git_extended_commit,
-                        'set up comparison against published': set_up_comparison_against_published,
+                        'npm set up comparison against published': set_up_comparison_against_published,
                     },
                     {
                         'read directory': $r.queries['read directory']

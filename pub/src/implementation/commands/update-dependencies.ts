@@ -1,11 +1,15 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../interface/algorithms/commands/update_dependencies"
+import * as signatures from "../../interface/signatures"
 
+//data types
+import * as d from "../../interface/to_be_generated/update_dependencies"
+
+//dependencies
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 
-export const $$: d.Procedure = _easync.create_command_procedure(
+export const $$: signatures.commands.update_dependencies = _easync.create_command_procedure(
     ($p, $cr) => [
 
         // update dependencies of pub

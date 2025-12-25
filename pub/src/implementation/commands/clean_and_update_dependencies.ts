@@ -1,9 +1,12 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../interface/algorithms/commands/clean_and_update_dependencies"
+import * as signatures from "../../interface/signatures"
 
-export const $$: d.Procedure = _easync.create_command_procedure(
+//data types
+import * as d from "../../interface/to_be_generated/clean_and_update_dependencies"
+
+export const $$: signatures.commands.clean_and_update_dependencies = _easync.create_command_procedure(
     ($p, $cr) =>[
 
         // clean

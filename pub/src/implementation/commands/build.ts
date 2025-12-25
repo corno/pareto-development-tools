@@ -1,13 +1,17 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../interface/algorithms/commands/build"
+import * as signatures from "../../interface/signatures"
 
+//data types
+import * as d from "../../interface/to_be_generated/build"
+
+//dependencies
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
 
-export const $$: d.Signature = _easync.create_command_procedure(
+export const $$: signatures.commands.build = _easync.create_command_procedure(
     ($p, $cr) => [
         $cr.remove.execute(
             {

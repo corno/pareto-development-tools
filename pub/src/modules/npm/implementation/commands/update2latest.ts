@@ -1,12 +1,13 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../interface/algorithms/commands/update2latest"
+import * as signatures from "../../interface/signatures"
 
+//dependencies
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
-export const $$: d.Procedure = _easync.create_command_procedure(
+export const $$: signatures.commands.update2latest = _easync.create_command_procedure(
     ($p, $cr) => [
         $cr.update2latest.execute(
             {

@@ -35,6 +35,9 @@ const $_interface: d_structure.Directory.SG.group.D = directory_group({
     "generated": directory_generated(true),
     "resources.ts": file_manual(),
     "signatures.ts": file_manual(),
+    "signatures": directory_group({
+        "transformers": directory_wildcards(1, false, ["ts"], false),
+    }),
     "to_be_generated": directory_wildcards(0, false, ["ts"], true),
 
 })
@@ -45,8 +48,14 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
     //these are now doubly defined as both exist. I don't know yet which one is preferred
 
     "operations": directory_group({
-        "pure": directory_wildcards(1, false, ["ts"], false),
-        "impure": directory_wildcards(1, false, ["ts"], false),
+        "pure": directory_group({
+            "dictionary": directory_wildcards(0, false, ["ts"], false),
+            "list": directory_wildcards(0, false, ["ts"], false),
+        }),
+        "impure": directory_group({
+            "dictionary": directory_wildcards(0, false, ["ts"], false),
+            "list": directory_wildcards(0, false, ["ts"], false),
+        }),
     }),
     "transformers": directory_group({
         "schemas": directory_wildcards(1, true, ["ts"], false),
@@ -54,23 +63,43 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
     }),
     "productions": directory_group({
         "schemas": directory_wildcards(1, false, ["ts"], false),
-        "primitives": directory_wildcards(1, false, ["ts"], false),
+        "primitives": directory_group({
+            "text": directory_wildcards(0, false, ["ts"], false),
+            "integer": directory_wildcards(0, false, ["ts"], false),
+            "boolean": directory_wildcards(0, false, ["ts"], false),
+            "approximate_number": directory_wildcards(0, false, ["ts"], false),
+        }),
     }),
     "refiners": directory_group({
         "schemas": directory_wildcards(1, false, ["ts"], false),
-        "primitives": directory_wildcards(1, false, ["ts"], false),
+        "primitives": directory_group({
+            "text": directory_wildcards(0, false, ["ts"], false),
+            "integer": directory_wildcards(0, false, ["ts"], false),
+            "boolean": directory_wildcards(0, false, ["ts"], false),
+            "approximate_number": directory_wildcards(0, false, ["ts"], false),
+        }),
     }),
     "serializers": directory_group({
         "schemas": directory_wildcards(0, false, ["ts"], false),
-        "primitives": directory_wildcards(1, false, ["ts"], false),
+        "primitives": directory_group({
+            "text": directory_wildcards(0, false, ["ts"], false),
+            "integer": directory_wildcards(0, false, ["ts"], false),
+            "boolean": directory_wildcards(0, false, ["ts"], false),
+            "approximate_number": directory_wildcards(0, false, ["ts"], false),
+        }),
     }),
     "deserializers": directory_group({
         "schemas": directory_wildcards(0, false, ["ts"], false),
-        "primitives": directory_wildcards(1, false, ["ts"], false),
+        "primitives": directory_group({
+            "text": directory_wildcards(0, false, ["ts"], false),
+            "integer": directory_wildcards(0, false, ["ts"], false),
+            "boolean": directory_wildcards(0, false, ["ts"], false),
+            "approximate_number": directory_wildcards(0, false, ["ts"], false),
+        }),
     }),
     "queries": directory_wildcards(0, false, ["ts"], false),
     "commands": directory_wildcards(0, false, ["ts"], false),
-    "temp": directory_wildcards(1, false, ["ts"], true),
+    "temp": directory_wildcards(0, true, ["ts"], true),
 
 })
 

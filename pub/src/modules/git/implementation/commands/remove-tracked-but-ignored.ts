@@ -1,14 +1,18 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../interface/algorithms/commands/remove_tracked_but_ignored"
+import * as signatures from "../../interface/signatures"
 
+//data types
+import * as d from "../../interface/to_be_generated/remove_tracked_but_ignored"
+
+//dependencies
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
-export const $$: d.Procedure = _easync.create_command_procedure(
+export const $$: signatures.commands.remove_tracked_but_ignored = _easync.create_command_procedure(
     ($p, $cr) => [
-        $cr['assert git is clean'].execute(
+        $cr['assert is clean'].execute(
             {
                 'path': $p.path,
             },

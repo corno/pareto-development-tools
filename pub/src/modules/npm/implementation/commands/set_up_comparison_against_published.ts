@@ -3,19 +3,18 @@ import * as _ea from 'exupery-core-alg'
 import * as _ed from 'exupery-core-dev'
 import * as _et from 'exupery-core-types'
 
-import * as d from "../../interface/algorithms/commands/set_up_comparison_against_published"
+import * as signatures from "../../interface/signatures"
 
+//data types
+import * as d from "../../interface/to_be_generated/set_up_comparison_against_published"
 import * as d_npm_package from "../refiners/npm_package/temp"
 
-
-// import { $$ as op_trim } from "pareto-standard-operations/dist/implementation/operations/impure/text/trim"
-
+//dependencies
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
-
 import { $$ as r_parse_npm_package } from "../refiners/npm_package/temp"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
-import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
+// import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
 
 const remove_n_characters_from_end = ($: string, n: number): string => {
 
@@ -34,11 +33,7 @@ const remove_n_characters_from_end = ($: string, n: number): string => {
     })
 }
 
-// export type Variables = {
-//     'version': string
-// }
-
-export const $$: d.Signature = _easync.create_command_procedure(
+export const $$: signatures.commands.set_up_comparison_against_published = _easync.create_command_procedure(
     ($p, $cr, $qr) => {
 
         return [

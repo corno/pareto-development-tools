@@ -2,13 +2,15 @@ import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 
+import * as signatures from "../../interface/signatures"
+
 import { $$ as x_structure } from "../../data/structure"
 
-import * as d from "../../interface/algorithms/commands/analyze_file_structure"
+import * as d from "../../interface/to_be_generated/analyze_file_structure"
 import * as d_directory_content from "exupery-resources/dist/interface/to_be_generated/directory_content"
 
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
-import * as t_line_count_to_line_count from "../transformers/directory_content/directory_analysis"
+import * as t_line_count_to_line_count from "../transformers/schemas/directory_content/directory_analysis"
 import { $$ as q_directory_content } from "exupery-resources/dist/implementation/queries/read_directory_content"
 
 import { $$ as op_flatten_list } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
@@ -16,7 +18,7 @@ import { $$ as op_filter } from "pareto-standard-operations/dist/implementation/
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const $$: d.Signature = _easync.create_command_procedure(
+export const $$: signatures.commands.list_file_structure_problems = _easync.create_command_procedure(
     ($p, $cr, $q) => [
 
         _easync.p.query_without_error_transformation(

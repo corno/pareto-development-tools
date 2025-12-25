@@ -1,13 +1,16 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../interface/algorithms/commands/tsc"
+import * as signatures from "../../interface/signatures"
 
+
+import * as d from "../../interface/to_be_generated/tsc"
+
+//dependencies
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
-
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
-export const $$: d.Procedure = _easync.create_command_procedure(
+export const $$: signatures.commands.tsc = _easync.create_command_procedure(
 
     // tsc
     ($p, $cr) => [

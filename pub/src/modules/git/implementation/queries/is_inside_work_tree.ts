@@ -3,7 +3,7 @@ import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 import * as _ei from 'exupery-core-internals'
 
-import * as d from "../../interface/algorithms/queries/git_is_inside_work_tree"
+import * as d from "../../interface/to_be_generated/is_inside_git_work_tree"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 

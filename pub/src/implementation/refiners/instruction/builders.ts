@@ -1,7 +1,7 @@
 import * as _ea from 'exupery-core-alg'
 
-import * as d from "../../../interface/algorithms/commands/api"
-import * as d_error from "../../../interface/algorithms/commands/parse"
+import * as d from "../../../interface/to_be_generated/api"
+import * as d_error from "../../../interface/to_be_generated/parse"
 
 import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
 
@@ -12,9 +12,9 @@ import * as s_path from "exupery-resources/dist/implementation/serializers/schem
 export const Command = (
     abort: core.Abort<d_error.Error>,
     iterator: core.Iterator<string, number>,
-): d.Command => {
+): d.Parameters => {
     return iterator['consume current']().transform(
-        ($): d.Command => {
+        ($): d.Parameters => {
             switch ($) {
                 case 'analyze-file-structure':
                     return ['analyze file structure', {
