@@ -6,14 +6,12 @@ import * as _easync from 'exupery-core-async'
 import * as signatures from "../../interface/signatures"
 
 //data types
-import * as d_in from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/source"
-import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 import * as d_write_to_file from "../../interface/to_be_generated/write_to_file"
 
 //dependencies
 
 import * as t_block_2_lines from "pareto-fountain-pen/dist/implementation/transformers/schemas/block/lines"
-import { $$ as op_join_list_of_texts } from "pareto-standard-operations/dist/implementation/operations/pure/text/join_list_of_texts"
+import { $$ as op_join_list_of_texts } from "pareto-standard-operations/dist/implementation/serializers/schemas/list_of_texts"
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 
 export const $$: signatures.commands.write_to_file = _easync.create_command_procedure(

@@ -11,7 +11,7 @@ import * as d from "exupery-resources/dist/interface/to_be_generated/temp_main"
 import * as r_instruction from "../refiners/instruction/refiners"
 import * as t_api_to_fountain_pen from "../transformers/schemas/api/fountain_pen"
 import * as t_bin_to_fountain_pen from "../transformers/schemas/parse/fountain_pen"
-import * as s_fp_block from "pareto-fountain-pen/dist/implementation/serializers/block"
+import * as s_fp_block from "pareto-fountain-pen/dist/implementation/serializers/schemas/block"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
