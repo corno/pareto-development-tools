@@ -12,24 +12,24 @@ import { $$ as q_git_is_repository_clean } from "./modules/git/implementation/qu
 import { $$ as q_git_is_inside_work_tree } from "./modules/git/implementation/queries/is_inside_work_tree"
 import { $$ as q_package_dependencies } from "./implementation/queries/get_package_dependencies"
 
-import { $$ as p_analyze_file_structure } from "./implementation/commands/analyze_file_structure"
-import { $$ as p_list_file_structure_problems } from "./implementation/commands/list_file_structure_problems"
-import { $$ as p_api } from "./implementation/commands/api"
-import { $$ as p_bin } from "./implementation/commands/main"
-import { $$ as p_build } from "./implementation/commands/build"
-import { $$ as p_build_and_test } from "./implementation/commands/build_and_test"
-import { $$ as p_dependency_graph } from "./implementation/commands/create_dependency_graph"
-import { $$ as p_fp_log } from "./modules/pareto-fountain-pen-directory/implementation/commands/console_log"
-import { $$ as p_git_assert_clean } from "./modules/git/implementation/commands/assert_is_clean"
-import { $$ as p_git_clean } from "./modules/git/implementation/commands/clean"
-import { $$ as p_git_extended_commit } from "./modules/git/implementation/commands/extended_commit"
-import { $$ as p_git_remove_tracked_but_ignored } from "./modules/git/implementation/commands/remove-tracked-but-ignored"
-import { $$ as p_npm } from "./modules/npm/implementation/commands/npm"
-import { $$ as p_set_up_comparison_against_published } from "./modules/npm/implementation/commands/set_up_comparison_against_published"
-import { $$ as p_tsc } from "./implementation/commands/tsc"
-import { $$ as p_update_dependencies } from "./implementation/commands/update-dependencies"
-import { $$ as p_update_typescript_dependencies } from "./implementation/commands/clean_and_update_dependencies"
-import { $$ as p_update2latest } from "./modules/npm/implementation/commands/update2latest"
+import { $$ as c_analyze_file_structure } from "./implementation/commands/analyze_file_structure"
+import { $$ as c_list_file_structure_problems } from "./implementation/commands/list_file_structure_problems"
+import { $$ as c_api } from "./implementation/commands/api"
+import { $$ as c_bin } from "./implementation/commands/main"
+import { $$ as c_build } from "./implementation/commands/build"
+import { $$ as c_build_and_test } from "./implementation/commands/build_and_test"
+import { $$ as c_dependency_graph } from "./implementation/commands/create_dependency_graph"
+import { $$ as c_fp_log } from "./modules/pareto-fountain-pen-directory/implementation/commands/console_log"
+import { $$ as c_git_assert_clean } from "./modules/git/implementation/commands/assert_is_clean"
+import { $$ as c_git_clean } from "./modules/git/implementation/commands/clean"
+import { $$ as c_git_extended_commit } from "./modules/git/implementation/commands/extended_commit"
+import { $$ as c_git_remove_tracked_but_ignored } from "./modules/git/implementation/commands/remove-tracked-but-ignored"
+import { $$ as c_npm } from "./modules/npm/implementation/commands/npm"
+import { $$ as c_set_up_comparison_against_published } from "./modules/npm/implementation/commands/set_up_comparison_against_published"
+import { $$ as c_tsc } from "./implementation/commands/tsc"
+import { $$ as c_update_dependencies } from "./implementation/commands/update-dependencies"
+import { $$ as c_update_typescript_dependencies } from "./implementation/commands/clean_and_update_dependencies"
+import { $$ as c_update2latest } from "./modules/npm/implementation/commands/update2latest"
 
 const create_eqe = (
     program: string,
@@ -88,7 +88,7 @@ _eb.run_main_procedure(
             }),
         })
 
-        const git_assert_is_clean = p_git_assert_clean(
+        const git_assert_is_clean = c_git_assert_clean(
             {
                 'git': create_epe(`git`, $r),
             },
@@ -97,14 +97,14 @@ _eb.run_main_procedure(
             },
         )
 
-        const tsc = p_tsc(
+        const tsc = c_tsc(
             {
                 'tsc': create_espe(`tsc`, $r),
             },
             null,
         )
 
-        const build = p_build(
+        const build = c_build(
             {
                 'tsc': tsc,
                 'remove': $r.commands.remove
@@ -112,9 +112,9 @@ _eb.run_main_procedure(
             null,
         )
 
-        const dependency_graph = p_dependency_graph(
+        const dependency_graph = c_dependency_graph(
             {
-                'log': p_fp_log(
+                'log': c_fp_log(
                     {
                         'log': $r.commands.log,
                     },
@@ -131,14 +131,14 @@ _eb.run_main_procedure(
             },
         )
 
-        const git_clean = p_git_clean(
+        const git_clean = c_git_clean(
             {
                 'git': create_epe(`git`, $r),
             },
             null,
         )
 
-        const build_and_test = p_build_and_test(
+        const build_and_test = c_build_and_test(
             {
                 'build': build,
                 'node': create_epe(`node`, $r),
@@ -146,21 +146,21 @@ _eb.run_main_procedure(
             null,
         )
 
-        const update2latest = p_update2latest(
+        const update2latest = c_update2latest(
             {
                 'update2latest': create_epe(`update2latest`, $r),
             },
             null,
         )
 
-        const npm = p_npm(
+        const npm = c_npm(
             {
                 'npm': create_epe(`npm`, $r),
             },
             null,
         )
 
-        const update_typescript_dependencies = p_update_typescript_dependencies(
+        const update_typescript_dependencies = c_update_typescript_dependencies(
             {
                 'git clean': git_clean,
                 'update2latest': update2latest,
@@ -169,14 +169,14 @@ _eb.run_main_procedure(
             null,
         )
 
-        const clean_and_update_dependencies = p_update_dependencies(
+        const clean_and_update_dependencies = c_update_dependencies(
             {
                 'clean and update dependencies': update_typescript_dependencies,
             },
             null,
         )
 
-        const git_remove_tracked_but_ignored = p_git_remove_tracked_but_ignored(
+        const git_remove_tracked_but_ignored = c_git_remove_tracked_but_ignored(
             {
                 'git': create_epe(`git`, $r),
                 'assert is clean': git_assert_is_clean,
@@ -186,7 +186,7 @@ _eb.run_main_procedure(
             },
         )
 
-        const git_extended_commit = p_git_extended_commit(
+        const git_extended_commit = c_git_extended_commit(
             {
                 'git': create_epe(`git`, $r),
             },
@@ -195,7 +195,7 @@ _eb.run_main_procedure(
             },
         )
 
-        const set_up_comparison_against_published = p_set_up_comparison_against_published(
+        const set_up_comparison_against_published = c_set_up_comparison_against_published(
             {
                 'npm': create_epe(`npm`, $r),
                 'tar': create_epe(`tar`, $r),
@@ -208,15 +208,15 @@ _eb.run_main_procedure(
             },
         )
 
-        return p_bin(
+        return c_bin(
             {
-                'api': p_api(
+                'api': c_api(
                     {
                         'git assert is clean': git_assert_is_clean,
                         'build and test': build_and_test,
                         'build': build,
                         'create dependency graph': dependency_graph,
-                        'analyze file structure': p_analyze_file_structure(
+                        'analyze file structure': c_analyze_file_structure(
                             {
                                 'log': $r.commands.log,
                             },
@@ -225,7 +225,7 @@ _eb.run_main_procedure(
                                 'read file': $r.queries['read file'],
                             },
                         ),
-                        'list file structure problems': p_list_file_structure_problems(
+                        'list file structure problems': c_list_file_structure_problems(
                             {
                                 'log': $r.commands.log,
                             },

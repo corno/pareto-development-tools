@@ -3,10 +3,13 @@ import * as _ea from 'exupery-core-alg'
 import * as _et from 'exupery-core-types'
 import * as _ei from 'exupery-core-internals'
 
-import * as d from "../../interface/to_be_generated/is_inside_git_work_tree"
+import * as signatures from "../../interface/signatures"
 
+//data types
+import * as d from "../../interface/to_be_generated/is_inside_work_tree"
+
+//dependencies
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
-
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Outcome, Target_Error>(
@@ -29,7 +32,7 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
 
 }
 
-export const $$: d.Query = _easync.create_query_function(($p, $r) => {
+export const $$: signatures.queries.is_inside_work_tree = _easync.create_query_function(($p, $r) => {
     return temp_observe_behavior(
         $r.git(
             {

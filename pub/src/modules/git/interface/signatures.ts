@@ -48,10 +48,17 @@ export namespace commands {
 
 export namespace queries {
 
+    export type is_inside_work_tree = _et.Query_Function<
+        resources.queries.is_inside_work_tree,
+        {
+            'git': resources_exupery.queries.execute_query_executable
+        }
+    >
+
     export type is_repository_clean = _et.Query_Function<
         resources.queries.is_repository_clean,
         {
-            'is inside git work tree': resources.queries.is_inside_git_work_tree
+            'is inside git work tree': resources.queries.is_inside_work_tree
             'git': resources_exupery.queries.execute_query_executable
         }
     >

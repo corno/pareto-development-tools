@@ -2,7 +2,7 @@ import * as _et from 'exupery-core-types'
 
 import * as d_assert_is_clean from "./to_be_generated/assert_is_clean"
 import * as d_is_repository_clean from "./to_be_generated/is_repository_clean"
-import * as d_is_inside_git_work_tree from "./to_be_generated/is_inside_git_work_tree"
+import * as d_is_inside_work_tree from "./to_be_generated/is_inside_work_tree"
 import * as d_clean from "./to_be_generated/clean"
 import * as d_extended_commit from "./to_be_generated/extended_commit"
 import * as d_remove_tracked_but_ignored from "./to_be_generated/remove_tracked_but_ignored"
@@ -19,6 +19,6 @@ export namespace commands {
 export namespace queries {
 
     export type is_repository_clean = _et.Query<d_is_repository_clean.Result, d_is_repository_clean.Error, d_is_repository_clean.Parameters>
-    export type is_inside_git_work_tree = _et.Query<d_is_inside_git_work_tree.Result, d_is_inside_git_work_tree.Error, d_is_inside_git_work_tree.Parameters>
+    export type is_inside_work_tree = _et.Query<d_is_inside_work_tree.Result, d_is_inside_work_tree.Error, d_is_inside_work_tree.Parameters>
 
 }
