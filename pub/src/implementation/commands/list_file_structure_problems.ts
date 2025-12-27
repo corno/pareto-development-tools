@@ -14,7 +14,6 @@ import * as t_line_count_to_line_count from "../transformers/schemas/directory_c
 import { $$ as q_directory_content } from "exupery-resources/dist/implementation/queries/read_directory_content"
 
 import { $$ as op_flatten_list } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
-import { $$ as op_filter } from "pareto-standard-operations/dist/implementation/operations/pure/list/filter"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
@@ -58,16 +57,16 @@ export const $$: signatures.commands.list_file_structure_problems = _easync.crea
                         'lines': op_flatten_list<string>(
                                 $v.to_list(($, key): _et.List<string> => {
                                     const package_name = key
-                                    return op_filter(t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
+                                    return t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
                                         $,
                                         {
                                             'expected structure': x_structure,
                                             'structure path': ``
                                         }
 
-                                    ))).map(($) => {
+                                    )).filter(($) => {
                                         const current = $
-                                        return $.analysis['unexpected path tail'].map(() => $)
+                                        return $['unexpected path tail'].map(() => $)
                                     })).map(($) => `./packages/${package_name}${$['path']}`)
                                 })
                             )

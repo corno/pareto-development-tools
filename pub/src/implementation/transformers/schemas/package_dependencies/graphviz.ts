@@ -6,7 +6,6 @@ import * as d_in from "../../../../interface/to_be_generated/get_package_depende
 import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/graphviz/data_types/target"
 
 import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
-import { $$ as op_filter } from "pareto-standard-operations/dist/implementation/operations/pure/list/filter"
 
 export type Result = _et.Transformer<d_in.Result, d_out.Graph>
 
@@ -16,7 +15,7 @@ export const Result: Result = ($) => {
         'edges': op_flatten($.packages.to_list(($, key) => {
             const from = key
             return $.dependencies.transform(
-                ($) => op_filter($.to_list(($, key) => {
+                ($) => $.filter<{ 'from': string, 'to': string}>(($, key) => {
                     if (key === "exupery-core-types" || key === "exupery-core-alg" || key === "exupery-core-dev" || key === "exupery-core-data" || key === "exupery-core-async" || key === "exupery-core-bin") {
                         return _ea.not_set()
                     }
@@ -24,7 +23,7 @@ export const Result: Result = ($) => {
                         'from': from,
                         'to': key,
                     }))
-                })),
+                }).to_list($ => $),
                 () => _ea.list_literal([])
             )
         }))
