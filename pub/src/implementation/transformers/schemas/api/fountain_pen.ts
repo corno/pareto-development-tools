@@ -29,9 +29,9 @@ export const Error: Signature = ($) => _ea.cc($, ($) => {
         case 'git assert clean': return _ea.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
         case 'project': return _ea.ss($, ($) => _ea.cc($, ($) => {
             switch ($[0]) {
-                case 'packages': return _ea.ss($, ($) => sh.b.indent($.deprecated_to_array(() => 0).map(($) => sh.g.nested_block([
-                    sh.b.snippet(`package '${$.key}': `),
-                    _ea.cc($.value, ($) => {
+                case 'packages': return _ea.ss($, ($) => sh.b.indent($.to_list(($, key) => sh.g.nested_block([
+                    sh.b.snippet(`package '${key}': `),
+                    _ea.cc($, ($) => {
                         switch ($[0]) {
                             case 'build and test': return _ea.ss($, ($) => t_build_and_test_to_fountain_pen.Error($))
                             case 'build': return _ea.ss($, ($) => t_build_to_fountain_pen.Error($))

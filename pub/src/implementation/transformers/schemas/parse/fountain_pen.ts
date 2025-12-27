@@ -14,8 +14,8 @@ export const Error: Error = ($) => _ea.cc($, ($) => {
             sh.b.snippet(`expected one of: `),
             sh.b.indent([
                 sh.g.sub(
-                    $.deprecated_to_array(() => 1).map(($) => sh.g.nested_block([
-                        sh.b.snippet($.key)
+                    $.to_list(($, key) => sh.g.nested_block([
+                        sh.b.snippet(key)
                     ]))
                 )
             ]),

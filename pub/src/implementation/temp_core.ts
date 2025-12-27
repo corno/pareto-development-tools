@@ -37,7 +37,7 @@ export const create_refinement_context = <Result, Error, State>(
 
 
 export const create_array_iterator = <Element>($: _et.List<Element>): Iterator<Element, number> => {
-    const length = $.__get_number_of_elements()
+    const length = $.get_number_of_elements()
     let position = 0
     return {
         'consume current': () => {

@@ -13,10 +13,10 @@ export const Error: Error = ($) => _ea.cc($, ($) => {
         case 'directory content processing': return _ea.ss($, ($) => sh.b.sub([
             sh.b.snippet(`directory content processing: `),
             sh.b.indent([
-                sh.g.sub($.deprecated_to_array(() => 0).map(($) => sh.g.nested_block([
-                    sh.b.snippet($.key),
+                sh.g.sub($.to_list(($, key) => sh.g.nested_block([
+                    sh.b.snippet(key),
                     sh.b.snippet(": "),
-                    _ea.cc($.value, ($) => {
+                    _ea.cc($, ($) => {
                         switch ($[0]) {
                             case 'not a directory': return _ea.ss($, ($) => sh.b.sub([
                                 sh.b.snippet(`not a directory`),

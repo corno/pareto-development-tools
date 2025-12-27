@@ -59,10 +59,10 @@ export const $$: signatures.commands.analyze_file_structure = _easync.create_com
                                 `package,filepath,structure path,classification,extension,unexpected,line count`,
                             ]),
                             op_flatten_list<string>(
-                                $v.deprecated_to_array(() => 1).map(($): _et.List<string> => {
-                                    const package_name = $.key
+                                $v.to_list(($, key): _et.List<string> => {
+                                    const package_name = key
                                     return t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
-                                        $.value,
+                                        $,
                                         {
                                             'expected structure': x_structure,
                                             'structure path': ``

@@ -24,9 +24,9 @@ export const Error: Error = ($) => _ea.cc($, ($) => {
         case 'directory content processing': return _ea.ss($, ($) => sh.b.sub([
             sh.b.snippet(`directory content processing: `),
             sh.b.indent([
-                sh.g.sub($.deprecated_to_array(() => 0).map(($) => sh.g.nested_block([
-                    sh.b.snippet(`${$.key}: `),
-                    _ea.cc($.value, ($) => {
+                sh.g.sub($.to_list(($, key) => sh.g.nested_block([
+                    sh.b.snippet(`${key}: `),
+                    _ea.cc($, ($) => {
                         switch ($[0]) {
                             case 'not a directory': return _ea.ss($, ($) =>sh.b.snippet(`not a directory`))
                             case 'directory content': return _ea.ss($, ($) => t_package_dependencies_to_fountain_pen.Error($))

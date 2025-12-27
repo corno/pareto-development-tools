@@ -76,7 +76,7 @@ const expect_text = ($: d._T_Value, abort: (error: ['not a text', null]) => neve
 }
 
 const expect_property = ($: Object, key: string, abort: (error: ['missing property', string]) => never): d._T_Value => {
-    return $.__get_entry(key).transform(
+    return $.get_entry(key).transform(
         ($) => $,
         () => abort(['missing property', key]),
     )
@@ -98,7 +98,7 @@ export const $$ = ($: string, abort: (error: NPM_Package_Parse_Error) => never):
             return {
                 'name': name,
                 'version': version,
-                'dependencies': root.__get_entry('dependencies').map(
+                'dependencies': root.get_entry('dependencies').map(
                     ($) => expect_object($, (error) => abort(['dependencies', ['not an object', null]])).map(($, key) => expect_text($, (error) => abort(['dependencies', ['not a text', key]]))
                 ))
             }

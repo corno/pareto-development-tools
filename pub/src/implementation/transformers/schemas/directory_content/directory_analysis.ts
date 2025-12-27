@@ -136,7 +136,7 @@ export namespace defined {
                                 }
                             })
                         }
-                        return expected.__get_entry(key).transform(
+                        return expected.get_entry(key).transform(
                             ($) => NodeX(
                                 node,
                                 {
@@ -384,10 +384,8 @@ export const dict_to_list = ($: d_out.Flattened_Directory_With_Line_Counts): _et
     'path': string,
     'analysis': d_out.File_Analysis,
 }> => {
-    return $.deprecated_to_array(() => 1).map(
-        ($) => ({
-            'path': $.key,
-            'analysis': $.value,
-        }),
-    )
+    return $.to_list(($, key) => ({
+        'path': key,
+        'analysis': $,
+    }))
 }

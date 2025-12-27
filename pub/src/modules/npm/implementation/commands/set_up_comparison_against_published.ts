@@ -19,7 +19,7 @@ import * as t_path_to_path from "exupery-resources/dist/implementation/transform
 const remove_n_characters_from_end = ($: string, n: number): string => {
 
     const chars = _ea.text_to_character_list($)
-    const length = chars.__get_number_of_elements()
+    const length = chars.get_number_of_elements()
     const new_length = length - n
     let index = -1
 
