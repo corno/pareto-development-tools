@@ -7,7 +7,6 @@ import * as signatures from "../../interface/signatures"
 import * as d from "../../interface/to_be_generated/remove_tracked_but_ignored"
 
 //dependencies
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 export const $$: signatures.commands.remove_tracked_but_ignored = _easync.create_command_procedure(
@@ -26,7 +25,7 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _easync.create
         ),
         $cr.git.execute(
             {
-                'args': op_flatten(_ea.list_literal([
+                'args': _ea.list_literal([
                     $p.path.transform(
                         ($) => _ea.list_literal([
                             `-C`,
@@ -40,13 +39,13 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _easync.create
                         `--cached`,
                         `.`
                     ])
-                ]))
+                ]).flatten(($) => $),
             },
             ($) => ['could not remove', $],
         ),
         $cr.git.execute(
             {
-                'args': op_flatten(_ea.list_literal([
+                'args': _ea.list_literal([
                     $p.path.transform(
                         ($) => _ea.list_literal([
                             `-C`,
@@ -58,7 +57,7 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _easync.create
                         `add`,
                         `--all`,
                     ])
-                ]))
+                ]).flatten(($) => $),
             },
             ($) => ['could not add', $],
         ),

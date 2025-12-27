@@ -15,7 +15,6 @@ import * as d_directory_content from "exupery-resources/dist/interface/to_be_gen
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 import * as t_line_count_to_line_count from "../transformers/schemas/directory_content/directory_analysis"
 import { $$ as q_directory_content } from "exupery-resources/dist/implementation/queries/read_directory_content"
-import { $$ as op_flatten_list } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 
 export const $$: signatures.commands.analyze_file_structure = _easync.create_command_procedure(
     ($p, $cr, $q) => [
@@ -54,55 +53,54 @@ export const $$: signatures.commands.analyze_file_structure = _easync.create_com
             ($v) => [
                 $cr.log.execute(
                     {
-                        'lines': op_flatten_list(_ea.list_literal([
+                        'lines': _ea.list_literal([
                             _ea.list_literal([
                                 `package,filepath,structure path,classification,extension,unexpected,line count`,
                             ]),
-                            op_flatten_list<string>(
-                                $v.to_list(($, key): _et.List<string> => {
-                                    const package_name = key
-                                    return t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
-                                        $,
-                                        {
-                                            'expected structure': x_structure,
-                                            'structure path': ``
-                                        }
 
-                                    ))).map(($) => `${package_name
-                                        },${$['path']
-                                        },${$.analysis.structure.path
-                                        },${_ea.cc($.analysis.structure.classification, ($) => {
-                                            switch ($[0]) {
-                                                case 'directory': return _ea.ss($, ($) => `directory ` + _ea.cc($, ($) => {
-                                                    switch ($[0]) {
-                                                        case 'ignored': return _ea.ss($, ($) => `ignored`)
-                                                        case 'generated': return _ea.ss($, ($) => `generated`)
-                                                        case 'wildcards': return _ea.ss($, ($) => `wildcards`)
-                                                        case 'dictionary': return _ea.ss($, ($) => `dictionary`)
-                                                        case 'group': return _ea.ss($, ($) => `group`)
-                                                        case 'freeform': return _ea.ss($, ($) => `freeform`)
-                                                        default: return _ea.au($[0])
-                                                    }
-                                                }))
-                                                case 'file': return _ea.ss($, ($) => `file ` + _ea.cc($, ($) => {
-                                                    switch ($[0]) {
-                                                        case 'generated':  return _ea.ss($, ($) => `generated`)
-                                                        case 'manual': return _ea.ss($, ($) => `manual`)
-                                                        default: return _ea.au($[0])
-                                                    }
-                                                }))
-                                            }
-                                        })
-                                        },${$.analysis.extension.transform(($) => $, () => ``)
-                                        },${$.analysis['unexpected path tail'].transform(
-                                            ($) => $,
-                                            () => ``
-                                        )
-                                        },${$.analysis['line count']
-                                        }`)
-                                })
-                            )
-                        ]))
+                            $v.to_list(($, key): _et.List<string> => {
+                                const package_name = key
+                                return t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
+                                    $,
+                                    {
+                                        'expected structure': x_structure,
+                                        'structure path': ``
+                                    }
+
+                                ))).map(($) => `${package_name
+                                    },${$['path']
+                                    },${$.analysis.structure.path
+                                    },${_ea.cc($.analysis.structure.classification, ($) => {
+                                        switch ($[0]) {
+                                            case 'directory': return _ea.ss($, ($) => `directory ` + _ea.cc($, ($) => {
+                                                switch ($[0]) {
+                                                    case 'ignored': return _ea.ss($, ($) => `ignored`)
+                                                    case 'generated': return _ea.ss($, ($) => `generated`)
+                                                    case 'wildcards': return _ea.ss($, ($) => `wildcards`)
+                                                    case 'dictionary': return _ea.ss($, ($) => `dictionary`)
+                                                    case 'group': return _ea.ss($, ($) => `group`)
+                                                    case 'freeform': return _ea.ss($, ($) => `freeform`)
+                                                    default: return _ea.au($[0])
+                                                }
+                                            }))
+                                            case 'file': return _ea.ss($, ($) => `file ` + _ea.cc($, ($) => {
+                                                switch ($[0]) {
+                                                    case 'generated': return _ea.ss($, ($) => `generated`)
+                                                    case 'manual': return _ea.ss($, ($) => `manual`)
+                                                    default: return _ea.au($[0])
+                                                }
+                                            }))
+                                        }
+                                    })
+                                    },${$.analysis.extension.transform(($) => $, () => ``)
+                                    },${$.analysis['unexpected path tail'].transform(
+                                        ($) => $,
+                                        () => ``
+                                    )
+                                    },${$.analysis['line count']
+                                    }`)
+                            }).flatten(($) => $)
+                        ]).flatten(($) => $)
                     },
                     ($): d.Error => ['log', $],
                 )

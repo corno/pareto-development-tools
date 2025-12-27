@@ -66,14 +66,17 @@ export const process_group = <Mapped_Value>(
             case 'indexed collection': return _ea.ss($, ($) => _ea.cc($, ($) => {
                 switch ($[0]) {
                     case 'verbose group': return _ea.ss($, ($) => {
-                        return $p.properties(_ea.deprecated_build_dictionary(($i) => {
-                            $.entries.__for_each(($) => {
-                                $i['add entry']($.key.value, $.value.transform(
-                                    ($) => $.value,
-                                    () => _ea.deprecated_panic(`no value for property: ${$.key.value}`)
-                                ))
-                            })
-                        }))
+                        return $p.properties(_ea.build_dictionary(
+                            ($i) => {
+                                $.entries.__for_each(($) => {
+                                    $i['add entry']($.key.value, $.value.transform(
+                                        ($) => $.value,
+                                        () => _ea.deprecated_panic(`no value for property: ${$.key.value}`)
+                                    ))
+                                })
+                            },
+                            () => _ea.deprecated_panic(`duplicates in dictionary`)
+                        ))
                     })
                     default: return _ea.deprecated_panic(`Unexpected type for group: ${$[0]}`)
                 }
@@ -112,18 +115,21 @@ export const process_unresolved_dictionary = <Mapped_Value>(
                                 'start': $["{"].range.start,
                                 'end': $["}"].range.end,
                             },
-                            'dictionary': _ea.deprecated_build_dictionary(($i) => {
-                                $.entries.__for_each(($) => {
-                                    const key_location = $.key.range
-                                    $i['add entry']($.key.value, $.value.transform(
-                                        ($) => ({
-                                            'location': key_location,
-                                            'entry': $p.value($.value),
-                                        }),
-                                        () => _ea.deprecated_panic(`no value for property: ${$.key.value}`)
-                                    ))
-                                })
-                            })
+                            'dictionary': _ea.build_dictionary(
+                                ($i) => {
+                                    $.entries.__for_each(($) => {
+                                        const key_location = $.key.range
+                                        $i['add entry']($.key.value, $.value.transform(
+                                            ($) => ({
+                                                'location': key_location,
+                                                'entry': $p.value($.value),
+                                            }),
+                                            () => _ea.deprecated_panic(`no value for property: ${$.key.value}`)
+                                        ))
+                                    })
+                                },
+                                () => _ea.deprecated_panic(`duplicates in dictionary`)
+                            )
                         }
                     })
                     default: return _ea.deprecated_panic(`Unexpected type for dictionary: ${$[0]}`)
@@ -145,14 +151,17 @@ export const process_unconstrained_dictionary = <Mapped_Value>(
             case 'indexed collection': return _ea.ss($, ($) => _ea.cc($, ($) => {
                 switch ($[0]) {
                     case 'dictionary': return _ea.ss($, ($) => {
-                        return _ea.deprecated_build_dictionary(($i) => {
-                            $.entries.__for_each(($) => {
-                                $i['add entry']($.key.value, $.value.transform(
-                                    ($) => $p.value($.value),
-                                    () => _ea.deprecated_panic(`no value for property: ${$.key.value}`)
-                                ))
-                            })
-                        })
+                        return _ea.build_dictionary(
+                            ($i) => {
+                                $.entries.__for_each(($) => {
+                                    $i['add entry']($.key.value, $.value.transform(
+                                        ($) => $p.value($.value),
+                                        () => _ea.deprecated_panic(`no value for property: ${$.key.value}`)
+                                    ))
+                                })
+                            },
+                            () => _ea.deprecated_panic(`duplicates in dictionary`)
+                        )
                     })
                     default: return _ea.deprecated_panic(`Unexpected type for dictionary: ${$[0]}`)
                 }

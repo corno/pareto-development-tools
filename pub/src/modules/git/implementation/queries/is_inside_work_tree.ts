@@ -9,7 +9,6 @@ import * as signatures from "../../interface/signatures"
 import * as d from "../../interface/to_be_generated/is_inside_work_tree"
 
 //dependencies
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Outcome, Target_Error>(
@@ -36,7 +35,7 @@ export const $$: signatures.queries.is_inside_work_tree = _easync.create_query_f
     return temp_observe_behavior(
         $r.git(
             {
-                'args': op_flatten(_ea.list_literal([
+                'args': _ea.list_literal<_et.List<string>>([
                     $p.path.transform(
                         ($) => _ea.list_literal([
                             `-C`,
@@ -48,7 +47,7 @@ export const $$: signatures.queries.is_inside_work_tree = _easync.create_query_f
                         `rev-parse`,
                         `--is-inside-work-tree`,
                     ])
-                ])),
+                ]).flatten(($) => $),
             },
             ($) => $
         ),

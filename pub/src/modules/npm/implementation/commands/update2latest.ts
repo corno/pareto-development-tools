@@ -1,17 +1,17 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
+import * as _et from 'exupery-core-types'
 
 import * as signatures from "../../interface/signatures"
 
 //dependencies
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 export const $$: signatures.commands.update2latest = _easync.create_command_procedure(
     ($p, $cr) => [
         $cr.update2latest.execute(
             {
-                'args': op_flatten(_ea.list_literal([
+                'args': _ea.list_literal<_et.List<string>>([
                     _ea.list_literal([
                         s_path.Node_Path($p.path),
                     ]),
@@ -29,7 +29,7 @@ export const $$: signatures.commands.update2latest = _easync.create_command_proc
                     }),
                     // $p.verbose ? _ea.list_literal([`verbose`]) : _ea.list_literal([]),
                     _ea.list_literal([`verbose`])
-                ])),
+                ]).flatten(($) => $),
             },
             ($) => ['error while running update2latest', $],
         )

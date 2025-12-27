@@ -10,7 +10,6 @@ import * as d from "../../interface/to_be_generated/set_up_comparison_against_pu
 import * as d_npm_package from "../refiners/schemas/npm_package/temp"
 
 //dependencies
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import { $$ as r_parse_npm_package } from "../refiners/schemas/npm_package/temp"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
@@ -92,14 +91,14 @@ export const $$: signatures.commands.set_up_comparison_against_published = _easy
                         // Create local package using npm pack (if local package path provided)
                         $cr['npm'].execute(
                             {
-                                'args': op_flatten(_ea.list_literal([
+                                'args': _ea.list_literal([
                                     _ea.list_literal([
                                         `pack`,
                                         s_path.Context_Path($p['path to local package']),
                                         `--pack-destination`,
                                         s_path.Node_Path($p['path to temp directory']),
                                     ])
-                                ])),
+                                ]).flatten(($) => $),
                             },
                             ($) => ['error while running npm command', $],
                         ),

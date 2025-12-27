@@ -7,7 +7,6 @@ import * as signatures from "../../interface/signatures"
 import * as d from "../../interface/to_be_generated/tsc"
 
 //dependencies
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 export const $$: signatures.commands.tsc = _easync.create_command_procedure(
@@ -16,7 +15,7 @@ export const $$: signatures.commands.tsc = _easync.create_command_procedure(
     ($p, $cr) => [
         $cr.tsc.execute(
             {
-                'args': op_flatten(_ea.list_literal([
+                'args': _ea.list_literal([
                     $p.path.transform(
                         ($) => _ea.list_literal([
                             `--project`,
@@ -27,7 +26,7 @@ export const $$: signatures.commands.tsc = _easync.create_command_procedure(
                     _ea.list_literal([
                         `--pretty`,
                     ]),
-                ])),
+                ]).flatten(($) => $),
             },
             ($) => ['error while running tsc', $],
         )

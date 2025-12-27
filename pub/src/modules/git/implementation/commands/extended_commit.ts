@@ -7,7 +7,6 @@ import * as signatures from "../../interface/signatures"
 import * as d from "../../interface/to_be_generated/extended_commit"
 
 //dependencies
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 
@@ -28,7 +27,7 @@ export const $$: signatures.commands.extended_commit = _easync.create_command_pr
                     [
                         $cr.git.execute(
                             {
-                                'args': op_flatten(_ea.list_literal([
+                                'args': _ea.list_literal([
                                     $p.path.transform(
                                         ($) => _ea.list_literal([
                                             `-C`,
@@ -40,7 +39,7 @@ export const $$: signatures.commands.extended_commit = _easync.create_command_pr
                                         `add`,
                                         `--all`,
                                     ])
-                                ])),
+                                ]).flatten(($) => $),
                             },
                             ($): d.Error => ['could not stage', $],
                         )
@@ -48,7 +47,7 @@ export const $$: signatures.commands.extended_commit = _easync.create_command_pr
                 ),
                 $cr.git.execute(
                     {
-                        'args': op_flatten(_ea.list_literal([
+                        'args': _ea.list_literal([
                             $p.path.transform(
                                 ($) => _ea.list_literal([
                                     `-C`,
@@ -61,7 +60,7 @@ export const $$: signatures.commands.extended_commit = _easync.create_command_pr
                                 `-m`,
                                 $p.instruction['commit message'],
                             ])
-                        ])),
+                        ]).flatten(($) => $),
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
@@ -70,7 +69,7 @@ export const $$: signatures.commands.extended_commit = _easync.create_command_pr
                     [
                         $cr.git.execute(
                             {
-                                'args': op_flatten(_ea.list_literal([
+                                'args': _ea.list_literal([
                                     $p.path.transform(
                                         ($) => _ea.list_literal([
                                             `-C`,
@@ -81,7 +80,7 @@ export const $$: signatures.commands.extended_commit = _easync.create_command_pr
                                     _ea.list_literal([
                                         `push`,
                                     ])
-                                ]))
+                                ]).flatten(($) => $),
                             },
                             ($): d.Error => ['could not push', $],
                         )

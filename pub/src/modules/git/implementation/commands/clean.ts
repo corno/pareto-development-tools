@@ -7,14 +7,13 @@ import * as signatures from "../../interface/signatures"
 import * as d from "../../interface/to_be_generated/clean"
 
 //dependencies
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 export const $$: signatures.commands.clean = _easync.create_command_procedure(
     ($p, $cr) => [
         $cr.git.execute(
             {
-                'args': op_flatten(_ea.list_literal([
+                'args': _ea.list_literal([
                     $p.path.transform(
                         ($) => _ea.list_literal([
                             `-C`,
@@ -29,7 +28,7 @@ export const $$: signatures.commands.clean = _easync.create_command_procedure(
                         `-X`, // remove only ignored files (not the capital X as opposed to -x which removes all untracked files, including unignored ones)
 
                     ])
-                ])),
+                ]).flatten(($) => $),
             },
             ($) => ['unexpected error', $],
         )

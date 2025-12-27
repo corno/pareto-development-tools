@@ -5,14 +5,12 @@ import * as _ea from 'exupery-core-alg'
 import * as d_in from "../../../../interface/to_be_generated/get_package_dependencies"
 import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/graphviz/data_types/target"
 
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
-
 export type Result = _et.Transformer<d_in.Result, d_out.Graph>
 
 export const Result: Result = ($) => {
     return {
         'nodes': $.packages.map(($) => null),
-        'edges': op_flatten($.packages.to_list(($, key) => {
+        'edges': $.packages.to_list(($, key) => {
             const from = key
             return $.dependencies.transform(
                 ($) => $.filter<{ 'from': string, 'to': string}>(($, key) => {
@@ -26,6 +24,6 @@ export const Result: Result = ($) => {
                 }).to_list($ => $),
                 () => _ea.list_literal([])
             )
-        }))
+        }).flatten(($) => $),
     }
 }

@@ -1,17 +1,17 @@
 import * as _easync from 'exupery-core-async'
 import * as _ea from 'exupery-core-alg'
+import * as _et from 'exupery-core-types'
 
 import * as signatures from "../../interface/signatures"
 
 //dependencies
-import { $$ as op_flatten } from "pareto-standard-operations/dist/implementation/operations/pure/list/flatten"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 export const $$: signatures.commands.npm = _easync.create_command_procedure(
     ($p, $cr) => [
         $cr['npm'].execute(
             {
-                'args': op_flatten(_ea.list_literal([
+                'args': _ea.list_literal<_et.List<string>>([
                     $p.path.transform(
                         ($) => _ea.list_literal([
                             `--prefix`,
@@ -34,7 +34,7 @@ export const $$: signatures.commands.npm = _easync.create_command_procedure(
                             default: return _ea.au($[0])
                         }
                     })
-                ])),
+                ]).flatten(($) => $),
             },
             ($) => ['error while running npm', $],
         )
