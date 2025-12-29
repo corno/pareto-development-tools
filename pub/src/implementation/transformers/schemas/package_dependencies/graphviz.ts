@@ -23,7 +23,7 @@ export const Result: Result = ($) => {
                         || key === "pareto-core-data"
                         || key === "pareto-core-command"
                         || key === "pareto-core-query"
-                        || key === "pareto-core-bin"
+                        || key === "pareto-host-nodejs"
                     ) {
                         return _pt.not_set()
                     }
