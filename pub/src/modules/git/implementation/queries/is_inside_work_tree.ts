@@ -1,7 +1,6 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
-import * as _et from 'exupery-core-types'
-import * as _ei from 'exupery-core-internals'
+import * as _pq from 'pareto-core-query'
+import * as _pt from 'pareto-core-transformer'
+import * as _pi from 'pareto-core-interface'
 
 import * as signatures from "../../interface/signatures"
 
@@ -12,13 +11,13 @@ import * as d from "../../interface/to_be_generated/is_inside_work_tree"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Outcome, Target_Error>(
-    result: _et.Query_Result<Preparation_Result, Preparation_Error>,
+    result: _pi.Query_Result<Preparation_Result, Preparation_Error>,
     handlers: {
-        success: (result: Preparation_Result) => _et.Query_Result<Target_Outcome, Target_Error>,
-        error: (error: Preparation_Error) => _et.Query_Result<Target_Outcome, Target_Error>,
+        success: (result: Preparation_Result) => _pi.Query_Result<Target_Outcome, Target_Error>,
+        error: (error: Preparation_Error) => _pi.Query_Result<Target_Outcome, Target_Error>,
     },
-): _et.Query_Result<Target_Outcome, Target_Error> => {
-    return _ei.__create_query_result<Target_Outcome, Target_Error>((onResult, onError) => {
+): _pi.Query_Result<Target_Outcome, Target_Error> => {
+    return _pq.__create_query_result<Target_Outcome, Target_Error>((onResult, onError) => {
         result.__extract_data(
             (r) => {
                 handlers.success(r).__extract_data(onResult, onError)
@@ -31,19 +30,19 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
 
 }
 
-export const $$: signatures.queries.is_inside_work_tree = _easync.create_query_function(($p, $r) => {
+export const $$: signatures.queries.is_inside_work_tree = _pq.create_query_function(($p, $r) => {
     return temp_observe_behavior(
         $r.git(
             {
-                'args': _ea.list_literal<_et.List<string>>([
+                'args': _pt.list_literal<_pi.List<string>>([
                     $p.path.transform(
-                        ($) => _ea.list_literal([
+                        ($) => _pt.list_literal([
                             `-C`,
                             s_path.Context_Path($),
                         ]),
-                        () => _ea.list_literal([])
+                        () => _pt.list_literal([])
                     ),
-                    _ea.list_literal([
+                    _pt.list_literal([
                         `rev-parse`,
                         `--is-inside-work-tree`,
                     ])
@@ -54,36 +53,36 @@ export const $$: signatures.queries.is_inside_work_tree = _easync.create_query_f
         {
             success: ($) => {
                 if ($.stdout === `true`) {
-                    return _ei.__create_query_result((onResult, onError) => {
+                    return _pq.__create_query_result((onResult, onError) => {
                         onResult(true)
                     })
                 } else {
-                    return _ei.__create_query_result<boolean, d.Error>((onResult, onError) => {
+                    return _pq.__create_query_result<boolean, d.Error>((onResult, onError) => {
                         onResult(false)
                     })
                 }
             },
-            error: ($) => _ea.cc($, ($) => {
+            error: ($) => _pt.cc($, ($) => {
                 switch ($[0]) {
-                    case 'failed to spawn': return _ea.ss($, ($) => {
-                        return _ei.__create_query_result<boolean, d.Error>((on_succes, on_error) => {
+                    case 'failed to spawn': return _pt.ss($, ($) => {
+                        return _pq.__create_query_result<boolean, d.Error>((on_succes, on_error) => {
                             on_error(['could not run git command', {
                             'message': $.message
                         }])
                         })
                     })
-                    case 'non zero exit code': return _ea.ss($, ($) => {
+                    case 'non zero exit code': return _pt.ss($, ($) => {
                         if ($['exit code'].transform(($) => $ === 128, () => false)) {
-                            return _ei.__create_query_result((onResult, onError) => {
+                            return _pq.__create_query_result((onResult, onError) => {
                                 onResult(false)
                             })
                         } else {
-                            return _ei.__create_query_result<boolean, d.Error>((on_succes, on_error) => {
+                            return _pq.__create_query_result<boolean, d.Error>((on_succes, on_error) => {
                                 on_error(['unexpected output', $.stderr])
                             })
                         }
                     })
-                    default: return _ea.au($[0])
+                    default: return _pt.au($[0])
                 }
             })
         }

@@ -1,18 +1,18 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
+import * as _pc from 'pareto-core-command'
+import * as _pt from 'pareto-core-transformer'
 
 import * as signatures from "../../interface/signatures"
 
 //data types
 import * as d from "../../interface/to_be_generated/clean_and_update_dependencies"
 
-export const $$: signatures.commands.clean_and_update_dependencies = _easync.create_command_procedure(
+export const $$: signatures.commands.clean_and_update_dependencies = _pc.create_command_procedure(
     ($p, $cr) =>[
 
         // clean
         $cr['git clean'].execute(
             {
-                'path': _ea.set($p.path),
+                'path': _pt.set($p.path),
             },
             ($): d.Error => ['could not clean', $],
         ),
@@ -30,7 +30,7 @@ export const $$: signatures.commands.clean_and_update_dependencies = _easync.cre
         // install/update updated dependencies
         $cr['npm'].execute(
             {
-                'path': _ea.set($p.path),
+                'path': _pt.set($p.path),
                 'operation': ['update', null], // 'install' does not update the indirect dependencies
             },
             ($) => ['could not install dependencies', $],

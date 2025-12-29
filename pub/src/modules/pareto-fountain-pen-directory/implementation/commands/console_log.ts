@@ -1,12 +1,12 @@
-import * as _et from 'exupery-core-types'
-import * as _easync from 'exupery-core-async'
+import * as _pi from 'pareto-core-interface'
+import * as _pc from 'pareto-core-command'
 
 import * as signatures from "../../interface/signatures"
 
 //dependencies
 import * as t_block_to_lines from "pareto-fountain-pen/dist/implementation/transformers/schemas/block/lines"
 
-export const $$: signatures.commands.console_log = _easync.create_command_procedure(
+export const $$: signatures.commands.console_log = _pc.create_command_procedure(
     ($p, $cr) => [
         $cr['log'].execute(
             {

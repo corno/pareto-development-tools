@@ -1,11 +1,11 @@
 
-import * as _et from 'exupery-core-types'
-import * as _ea from 'exupery-core-alg'
+import * as _pi from 'pareto-core-interface'
+import * as _pt from 'pareto-core-transformer'
 
 import * as d_in from "../../../../interface/to_be_generated/get_package_dependencies"
 import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/graphviz/data_types/target"
 
-export type Result = _et.Transformer<d_in.Result, d_out.Graph>
+export type Result = _pi.Transformer<d_in.Result, d_out.Graph>
 
 export const Result: Result = ($) => {
     return {
@@ -13,16 +13,26 @@ export const Result: Result = ($) => {
         'edges': $.packages.to_list(($, key) => {
             const from = key
             return $.dependencies.transform(
-                ($) => $.filter<{ 'from': string, 'to': string}>(($, key) => {
-                    if (key === "exupery-core-types" || key === "exupery-core-alg" || key === "exupery-core-dev" || key === "exupery-core-data" || key === "exupery-core-async" || key === "exupery-core-bin") {
-                        return _ea.not_set()
+                ($) => $.filter<{ 'from': string, 'to': string }>(($, key) => {
+                    if (key === "pareto-core-interface"
+                        || key === "pareto-core-transformer"
+                        || key === "pareto-core-refiner"
+                        || key === "pareto-core-serializer"
+                        || key === "pareto-core-deserializer"
+                        || key === "pareto-core-shorthands"
+                        || key === "pareto-core-data"
+                        || key === "pareto-core-command"
+                        || key === "pareto-core-query"
+                        || key === "pareto-core-bin"
+                    ) {
+                        return _pt.not_set()
                     }
-                    return _ea.set(({
+                    return _pt.set(({
                         'from': from,
                         'to': key,
                     }))
                 }).to_list($ => $),
-                () => _ea.list_literal([])
+                () => _pt.list_literal([])
             )
         }).flatten(($) => $),
     }

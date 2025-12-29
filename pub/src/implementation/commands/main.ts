@@ -1,6 +1,6 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
-import * as _ed from 'exupery-core-dev'
+import * as _pc from 'pareto-core-command'
+import * as _pt from 'pareto-core-transformer'
+import * as _ed from 'pareto-core-dev'
 
 import * as signatures from "../../interface/signatures"
 
@@ -16,9 +16,9 @@ import * as s_fp_block from "pareto-fountain-pen/dist/implementation/serializers
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 
-export const $$: signatures.commands.main = _easync.create_command_procedure(
+export const $$: signatures.commands.main = _pc.create_command_procedure(
     ($p, $cr) => [
-        _easync.p.refine_without_error_transformation(
+        _pc.refine_without_error_transformation(
 
             // parse command line instruction
             r_instruction.Command($p.arguments).deprecated_transform_error(

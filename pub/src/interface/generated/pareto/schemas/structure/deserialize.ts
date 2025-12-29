@@ -1,4 +1,4 @@
-import * as _et from 'exupery-core-types'
+import * as _et from 'pareto-core-interface'
 
 import * as _i_out from "./data_types/target"
 import * as _i_vd from "./value_deserializers"

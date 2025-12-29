@@ -1,8 +1,9 @@
 #!/usr/bin/env -S node --enable-source-maps
 
-import * as _eb from 'exupery-core-bin'
-import * as _easync from 'exupery-core-async'
-import * as _et from 'exupery-core-types'
+import * as _pn from 'pareto-host-nodejs'
+import * as _pi from 'pareto-core-interface'
+import * as _pq from 'pareto-core-query'
+import * as _pc from 'pareto-core-command'
 
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 import * as d_espe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
@@ -33,9 +34,9 @@ import { $$ as c_update2latest } from "./modules/npm/implementation/commands/upd
 
 const create_eqe = (
     program: string,
-    $r: _eb.Available_Standard_Resources,
-): _et.Query<d_eqe.Result, d_epe.Error, d_epe.Parameters> => {
-    return _easync.__create_query(
+    $r: _pn.Available_Standard_Resources,
+): _pi.Query<d_eqe.Result, d_epe.Error, d_epe.Parameters> => {
+    return _pq.__create_query(
         ($p) => {
             return $r.queries['execute any query executable'](
                 {
@@ -50,9 +51,9 @@ const create_eqe = (
 
 const create_epe = (
     program: string,
-    $r: _eb.Available_Standard_Resources,
-): _et.Command<d_epe.Error, d_epe.Parameters> => {
-    return _easync.__create_resource_command(($p) => {
+    $r: _pn.Available_Standard_Resources,
+): _pi.Command<d_epe.Error, d_epe.Parameters> => {
+    return _pc.__create_resource_command(($p) => {
         return $r.commands['execute any procedure executable'].execute(
             {
                 'program': program,
@@ -65,9 +66,9 @@ const create_epe = (
 
 const create_espe = (
     program: string,
-    $r: _eb.Available_Standard_Resources,
-): _et.Command<d_espe.Error, d_espe.Parameters> => {
-    return _easync.__create_resource_command(($p) => {
+    $r: _pn.Available_Standard_Resources,
+): _pi.Command<d_espe.Error, d_espe.Parameters> => {
+    return _pc.__create_resource_command(($p) => {
         return $r.commands['execute any smelly procedure executable'].execute(
             {
                 'program': program,
@@ -78,7 +79,7 @@ const create_espe = (
     })
 }
 
-_eb.run_main_procedure(
+_pn.run_main_procedure(
     ($r) => {
 
         const git_is_repository_clean = q_git_is_repository_clean({

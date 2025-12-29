@@ -1,5 +1,5 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
+import * as _pc from 'pareto-core-command'
+import * as _pt from 'pareto-core-transformer'
 
 import * as signatures from "../../interface/signatures"
 
@@ -11,7 +11,7 @@ import * as t_path_to_path from "exupery-resources/dist/implementation/transform
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
 
-export const $$: signatures.commands.build = _easync.create_command_procedure(
+export const $$: signatures.commands.build = _pc.create_command_procedure(
     ($p, $cr) => [
         $cr.remove.execute(
             {
@@ -29,7 +29,7 @@ export const $$: signatures.commands.build = _easync.create_command_procedure(
         ),
         $cr.tsc.execute(
             {
-                'path': _ea.set(t_path_to_path.extend_node_path($p.path, { 'addition': `pub`})),
+                'path': _pt.set(t_path_to_path.extend_node_path($p.path, { 'addition': `pub`})),
             },
             ($): d.Error => ['error building pub', {
                 'path': s_path.Node_Path($p.path),
@@ -38,7 +38,7 @@ export const $$: signatures.commands.build = _easync.create_command_procedure(
         ),
         $cr.tsc.execute(
             {
-                'path': _ea.set(t_path_to_path.extend_node_path($p.path, { 'addition': `test`})),
+                'path': _pt.set(t_path_to_path.extend_node_path($p.path, { 'addition': `test`})),
             },
             ($): d.Error => ['error building test', {
                 'path': s_path.Node_Path($p.path),

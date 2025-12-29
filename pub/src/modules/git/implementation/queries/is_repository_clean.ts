@@ -1,6 +1,6 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
-import * as _et from 'exupery-core-types'
+import * as _pq from 'pareto-core-query'
+import * as _pt from 'pareto-core-transformer'
+import * as _pi from 'pareto-core-interface'
 
 import * as signatures from "../../interface/signatures"
 
@@ -11,18 +11,18 @@ import * as d from "../../interface/to_be_generated/is_repository_clean"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 // import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 
-export const $$: signatures.queries.is_repository_clean = _easync.create_query_function(
+export const $$: signatures.queries.is_repository_clean = _pq.create_query_function(
     ($p, $qr) => $qr.git(
         {
-            'args': _ea.list_literal<_et.List<string>>([
+            'args': _pt.list_literal<_pi.List<string>>([
                 $p.path.transform(
-                    ($) => _ea.list_literal([
+                    ($) => _pt.list_literal([
                         `-C`,
                         s_path.Context_Path($),
                     ]),
-                    () => _ea.list_literal([])
+                    () => _pt.list_literal([])
                 ),
-                _ea.list_literal([
+                _pt.list_literal([
                     `status`,
                     `--porcelain`,
                 ])

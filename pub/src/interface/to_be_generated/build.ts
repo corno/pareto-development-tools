@@ -1,4 +1,4 @@
-import * as _et from 'exupery-core-types'
+import * as _pi from 'pareto-core-interface'
 
 import * as d_tsc from "./tsc"
 import * as d_remove from "exupery-resources/dist/interface/generated/pareto/schemas/remove/data_types/source"

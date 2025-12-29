@@ -1,37 +1,37 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
-import * as _et from 'exupery-core-types'
+import * as _pc from 'pareto-core-command'
+import * as _pt from 'pareto-core-transformer'
+import * as _pi from 'pareto-core-interface'
 
 import * as signatures from "../../interface/signatures"
 
 //dependencies
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
-export const $$: signatures.commands.npm = _easync.create_command_procedure(
+export const $$: signatures.commands.npm = _pc.create_command_procedure(
     ($p, $cr) => [
         $cr['npm'].execute(
             {
-                'args': _ea.list_literal<_et.List<string>>([
+                'args': _pt.list_literal<_pi.List<string>>([
                     $p.path.transform(
-                        ($) => _ea.list_literal([
+                        ($) => _pt.list_literal([
                             `--prefix`,
                             s_path.Node_Path($),
                         ]),
-                        () => _ea.list_literal([])
+                        () => _pt.list_literal([])
                     ),
-                    _ea.cc($p.operation, ($) => {
+                    _pt.cc($p.operation, ($) => {
                         switch ($[0]) {
-                            case 'update': return _ea.ss($, ($) => {
-                                return _ea.list_literal([
+                            case 'update': return _pt.ss($, ($) => {
+                                return _pt.list_literal([
                                     `update`,
                                 ])
                             })
-                            case 'install': return _ea.ss($, ($) => {
-                                return _ea.list_literal([
+                            case 'install': return _pt.ss($, ($) => {
+                                return _pt.list_literal([
                                     `install`,
                                 ])
                             })
-                            default: return _ea.au($[0])
+                            default: return _pt.au($[0])
                         }
                     })
                 ]).flatten(($) => $),

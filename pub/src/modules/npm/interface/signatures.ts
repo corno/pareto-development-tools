@@ -1,11 +1,11 @@
-import * as _et from 'exupery-core-types'
+import * as _pi from 'pareto-core-interface'
 
 import * as resources from "./resources"
 import * as resources_exupery from "exupery-resources/dist/interface/resources"
 
 export namespace commands {
 
-    export type npm = _et.Command_Procedure<
+    export type npm = _pi.Command_Procedure<
         resources.commands.npm,
         {
             'npm': resources_exupery.commands.execute_command_executable
@@ -13,7 +13,7 @@ export namespace commands {
         null
     >
 
-    export type set_up_comparison_against_published = _et.Command_Procedure<
+    export type set_up_comparison_against_published = _pi.Command_Procedure<
         resources.commands.set_up_comparison_against_published,
         {
             'npm': resources_exupery.commands.execute_command_executable
@@ -27,7 +27,7 @@ export namespace commands {
         }
     >
 
-    export type update2latest = _et.Command_Procedure<
+    export type update2latest = _pi.Command_Procedure<
         resources.commands.update2latest,
         {
             'update2latest': resources_exupery.commands.execute_command_executable

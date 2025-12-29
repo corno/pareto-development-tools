@@ -1,5 +1,5 @@
-import * as _ea from 'exupery-core-alg'
-import * as _et from 'exupery-core-types'
+import * as _pt from 'pareto-core-transformer'
+import * as _pi from 'pareto-core-interface'
 
 import * as d from "../../../interface/to_be_generated/api"
 

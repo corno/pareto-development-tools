@@ -1,4 +1,4 @@
-import * as _et from 'exupery-core-types'
+import * as _pi from 'pareto-core-interface'
 
 import * as d_update2latest from "../../modules/npm/interface/to_be_generated/update2latest"
 

@@ -1,4 +1,4 @@
-import * as _et from 'exupery-core-types'
+import * as _pi from 'pareto-core-interface'
 
 import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
 import * as d_build from "./build"

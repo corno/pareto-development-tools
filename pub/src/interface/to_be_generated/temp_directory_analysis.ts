@@ -1,9 +1,8 @@
-import * as _et from 'exupery-core-types'
-import * as _easync from 'exupery-core-async'
+import * as _pi from 'pareto-core-interface'
 
 export type Directory =
     | ['ignored', null]
-    | ['dictionary', _et.Dictionary<Node>]
+    | ['dictionary', _pi.Dictionary<Node>]
     | ['expected a file', null]
 
 
@@ -30,8 +29,8 @@ export type File_Classification =
 
 export type File_Analysis = {
     'structure': Structure_Analysis,
-    'extension': _et.Optional_Value<string>,
-    'unexpected path tail': _et.Optional_Value<string>,
+    'extension': _pi.Optional_Value<string>,
+    'unexpected path tail': _pi.Optional_Value<string>,
     'line count': number,
 }
 
@@ -40,4 +39,4 @@ export type Structure_Analysis = {
     'classification': Classification
 }
 
-export type Flattened_Directory_With_Line_Counts = _et.Dictionary<File_Analysis>
+export type Flattened_Directory_With_Line_Counts = _pi.Dictionary<File_Analysis>

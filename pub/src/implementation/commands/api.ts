@@ -1,7 +1,7 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
-import * as _et from 'exupery-core-types'
-import * as _ed from 'exupery-core-dev'
+import * as _pc from 'pareto-core-command'
+import * as _pt from 'pareto-core-transformer'
+import * as _pi from 'pareto-core-interface'
+import * as _ed from 'pareto-core-dev'
 
 import * as signatures from "../../interface/signatures"
 
@@ -13,10 +13,10 @@ import * as d_path from "exupery-resources/dist/interface/generated/pareto/schem
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 
 
-export const $$: signatures.commands.api = _easync.create_command_procedure(
-    ($p, $cr, $qr) => _ea.cc($p, ($) => {
+export const $$: signatures.commands.api = _pc.create_command_procedure(
+    ($p, $cr, $qr) => _pt.cc($p, ($) => {
         switch ($[0]) {
-            case 'analyze file structure': return _ea.ss($, ($) => [
+            case 'analyze file structure': return _pt.ss($, ($) => [
                 $cr['analyze file structure'].execute(
                     {
                         'path': $['path to project']
@@ -24,15 +24,15 @@ export const $$: signatures.commands.api = _easync.create_command_procedure(
                     ($): d.Error => ['analyze file structure', $],
                 )
             ])
-            case 'assert clean': return _ea.ss($, ($) => [
+            case 'assert clean': return _pt.ss($, ($) => [
                 $cr['git assert is clean'].execute(
                     {
-                        'path': _ea.set($['path to package'])
+                        'path': _pt.set($['path to package'])
                     },
                     ($): d.Error => ['git assert clean', $],
                 )
             ])
-            case 'dependency graph': return _ea.ss($, ($) => [
+            case 'dependency graph': return _pt.ss($, ($) => [
                 $cr['create dependency graph'].execute(
                     {
                         'path': $['path to project']
@@ -40,7 +40,7 @@ export const $$: signatures.commands.api = _easync.create_command_procedure(
                     ($): d.Error => ['dependency graph', $],
                 )
             ])
-            case 'list file structure problems': return _ea.ss($, ($) => [
+            case 'list file structure problems': return _pt.ss($, ($) => [
                 $cr['list file structure problems'].execute(
                     {
                         'path': $['path to project']
@@ -48,10 +48,11 @@ export const $$: signatures.commands.api = _easync.create_command_procedure(
                     ($): d.Error => ['analyze file structure', $],
                 )
             ])
-            case 'project': return _ea.ss($, ($) => {
+            case 'project': return _pt.ss($, ($) => {
                 const path_to_project = $['path to project']
+                const path_to_temp = t_path_to_path.extend_context_path($['path to project'], { 'addition': `temp` })
                 return [
-                    _easync.p.dictionary.deprecated_parallel.query(
+                    _pc.dictionary.deprecated_parallel.query(
                         $qr['read directory'](
                             {
                                 'path': t_path_to_path.create_node_path(
@@ -61,19 +62,19 @@ export const $$: signatures.commands.api = _easync.create_command_procedure(
                             },
                             ($): d.Error => ['project', ['could not read packages directory', $]],
                         ),
-                        ($x, key_spaces_not_escaped): _et.Command_Promise<d.Project_Package_Error>[] => _ea.cc($.instruction, ($) => {
+                        ($x, key_spaces_not_escaped): _pi.Command_Promise<d.Project_Package_Error>[] => _pt.cc($.instruction, ($) => {
                             const concatenated_path = $x.path
                             const context_path = t_path_to_path.deprecated_node_path_to_context_path(concatenated_path)
                             switch ($[0]) {
-                                case 'assert clean': return _ea.ss($, ($) => [
+                                case 'assert clean': return _pt.ss($, ($) => [
                                     $cr['git assert is clean'].execute(
                                         {
-                                            'path': _ea.set(context_path)
+                                            'path': _pt.set(context_path)
                                         },
                                         ($): d.Project_Package_Error => ['git assert clean', $],
                                     )
                                 ])
-                                case 'build': return _ea.ss($, ($) => [
+                                case 'build': return _pt.ss($, ($) => [
                                     $cr['build'].execute(
                                         {
                                             'path': concatenated_path
@@ -81,7 +82,7 @@ export const $$: signatures.commands.api = _easync.create_command_procedure(
                                         ($): d.Project_Package_Error => ['build', $],
                                     )
                                 ])
-                                case 'build and test': return _ea.ss($, ($) => [
+                                case 'build and test': return _pt.ss($, ($) => [
                                     $cr['build and test'].execute(
                                         {
                                             'path': concatenated_path
@@ -89,35 +90,35 @@ export const $$: signatures.commands.api = _easync.create_command_procedure(
                                         ($): d.Project_Package_Error => ['build and test', $],
                                     )
                                 ])
-                                case 'git extended commit': return _ea.ss($, ($) => [
+                                case 'git extended commit': return _pt.ss($, ($) => [
                                     $cr['git extended commit'].execute(
                                         {
-                                            'path': _ea.set(context_path),
+                                            'path': _pt.set(context_path),
                                             'instruction': $
                                         },
                                         ($): d.Project_Package_Error => ['git commit', $],
                                     )
                                 ])
-                                case 'git remove tracked but ignored': return _ea.ss($, ($) => [
+                                case 'git remove tracked but ignored': return _pt.ss($, ($) => [
                                     $cr['git remove tracked but ignored'].execute(
                                         {
-                                            'path': _ea.set(context_path)
+                                            'path': _pt.set(context_path)
                                         },
                                         ($): d.Project_Package_Error => ['git remove tracked but ignored', $],
                                     )
                                 ])
-                                case 'set up comparison': return _ea.ss($, ($): _et.Command_Promise<d.Project_Package_Error>[] => [
+                                case 'set up comparison': return _pt.ss($, ($): _pi.Command_Promise<d.Project_Package_Error>[] => [
                                     $cr['npm set up comparison against published'].execute(
                                         {
-                                            'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': _ea.list_literal([`pub`]) }),
-                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_project, { 'addition': _ea.list_literal([`temp`, `local`]) }), key_spaces_not_escaped),
-                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_project, { 'addition': _ea.list_literal([`temp`, `published`]) }), key_spaces_not_escaped),
-                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_project, { 'addition': _ea.list_literal([`temp`, `temp`]) }), key_spaces_not_escaped),
+                                            'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': `pub` }),
+                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `local` }), key_spaces_not_escaped),
+                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `published` }), key_spaces_not_escaped),
+                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `temp` }), key_spaces_not_escaped),
                                         },
                                         ($): d.Project_Package_Error => ['set up comparison', $],
                                     )
                                 ])
-                                case 'update dependencies': return _ea.ss($, ($) => [
+                                case 'update dependencies': return _pt.ss($, ($) => [
                                     $cr['update dependencies'].execute(
                                         {
                                             'path': concatenated_path
@@ -125,25 +126,29 @@ export const $$: signatures.commands.api = _easync.create_command_procedure(
                                         ($): d.Project_Package_Error => ['update dependencies', $],
                                     )
                                 ])
-                                default: return _ea.au($[0])
+                                default: return _pt.au($[0])
                             }
                         }),
                         ($) => ['project', ['packages', $]]
                     )
                 ]
             })
-            case 'set up comparison': return _ea.ss($, ($) => [
-                $cr['npm set up comparison against published'].execute(
-                    {
-                        'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal(['pub']) }),
-                        'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal([`temp`]) }), `local`),
-                        'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal([`temp`]) }), `published`),
-                        'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path($['path to package'], { 'addition': _ea.list_literal([`temp`]) }), `temp`),
-                    },
-                    ($): d.Error => ['set up comparison', $],
-                )
-            ])
-            default: return _ea.au($[0])
+            case 'set up comparison': return _pt.ss($, ($) => {
+                const path_to_temp = t_path_to_path.extend_context_path($['path to package'], { 'addition': `temp` })
+
+                return [
+                    $cr['npm set up comparison against published'].execute(
+                        {
+                            'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': `pub` }),
+                            'path to output local directory': t_path_to_path.create_node_path(path_to_temp, `local`),
+                            'path to output published directory': t_path_to_path.create_node_path(path_to_temp, `published`),
+                            'path to temp directory': t_path_to_path.create_node_path(path_to_temp, `temp`),
+                        },
+                        ($): d.Error => ['set up comparison', $],
+                    )
+                ]
+            })
+            default: return _pt.au($[0])
         }
     })
 )

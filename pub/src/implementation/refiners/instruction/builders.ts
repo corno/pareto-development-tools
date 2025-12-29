@@ -1,4 +1,4 @@
-import * as _ea from 'exupery-core-alg'
+import * as _pt from 'pareto-core-transformer'
 
 import * as d from "../../../interface/to_be_generated/api"
 import * as d_error from "../../../interface/to_be_generated/parse"
@@ -75,7 +75,7 @@ export const Command = (
                                     case 'update-dependencies':
                                         return ['update dependencies', null]
                                     default:
-                                        return abort(['expected one of', _ea.dictionary_literal({
+                                        return abort(['expected one of', _pt.dictionary_literal({
                                             'assert-clean': null,
                                             'build-and-test': null,
                                             'build': null,
@@ -86,7 +86,7 @@ export const Command = (
                                         })])
                                 }
                             },
-                            () => abort(['expected one of', _ea.dictionary_literal({
+                            () => abort(['expected one of', _pt.dictionary_literal({
                                 'assert-clean': null,
                                 'build-and-test': null,
                                 'build': null,
@@ -105,7 +105,7 @@ export const Command = (
                         ),
                     }]
                 default:
-                    return abort(['expected one of', _ea.dictionary_literal({
+                    return abort(['expected one of', _pt.dictionary_literal({
                         'analyze-file-structure': null,
                         'assert-clean': null,
                         'dependency-graph': null,
@@ -114,7 +114,7 @@ export const Command = (
                     })])
             }
         },
-        () => abort(['expected one of', _ea.dictionary_literal({
+        () => abort(['expected one of', _pt.dictionary_literal({
             'project': null,
             'assert-clean': null,
             'set-up-comparison': null,

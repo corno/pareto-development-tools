@@ -1,7 +1,7 @@
 
-import * as _ea from 'exupery-core-alg'
-import * as _et from 'exupery-core-types'
-import * as _easync from 'exupery-core-async'
+import * as _pt from 'pareto-core-transformer'
+import * as _pi from 'pareto-core-interface'
+import * as _pc from 'pareto-core-command'
 
 import * as signatures from "../../interface/signatures"
 
@@ -14,9 +14,9 @@ import * as t_block_2_lines from "pareto-fountain-pen/dist/implementation/transf
 import { $$ as s_list_of_texts } from "pareto-standard-operations/dist/implementation/serializers/schemas/list_of_texts"
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 
-export const $$: signatures.commands.write_to_file = _easync.create_command_procedure(
+export const $$: signatures.commands.write_to_file = _pc.create_command_procedure(
     ($p, $cr) => [
-        _easync.p.sequence<d_write_to_file.Error>([
+        _pc.sequence<d_write_to_file.Error>([
             $cr['make directory'].execute(
                 $p['directory path'],
                 ($) => ['make directory', $],

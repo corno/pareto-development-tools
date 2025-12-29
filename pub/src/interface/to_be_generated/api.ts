@@ -1,4 +1,4 @@
-import * as _et from 'exupery-core-types'
+import * as _pi from 'pareto-core-interface'
 
 
 import * as d_analyze_file_structure from "./analyze_file_structure"
@@ -103,7 +103,7 @@ export type Error =
 
 export type Project_Error =
     | ['could not read packages directory', d_read_directory.Error]
-    | ['packages', _et.Dictionary<Project_Package_Error>]
+    | ['packages', _pi.Dictionary<Project_Package_Error>]
 
 export type Project_Package_Error =
     | ['build and test', d_build_and_test.Error]

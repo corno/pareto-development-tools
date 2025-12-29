@@ -1,4 +1,4 @@
-import * as _et from 'exupery-core-types'
+import * as _pi from 'pareto-core-interface'
 
 import * as d_log from "exupery-resources/dist/interface/generated/pareto/schemas/log/data_types/source"
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
@@ -10,7 +10,7 @@ export type Parameters = {
     'path': d_path.Context_Path,
 }
 
-export type Packages = _et.Dictionary<d_directory_content.Result>
+export type Packages = _pi.Dictionary<d_directory_content.Result>
 
 export type Package_Error =
     | ['not a directory', null]
@@ -18,5 +18,5 @@ export type Package_Error =
 
 export type Error =
     | ['read directory', d_read_directory.Error]
-    | ['directory content processing', _et.Dictionary<Package_Error>]
+    | ['directory content processing', _pi.Dictionary<Package_Error>]
     | ['log', null]

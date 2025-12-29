@@ -1,7 +1,7 @@
-import * as _et from 'exupery-core-types'
+import * as _pi from 'pareto-core-interface'
 
 export type Error =
-    | ['expected one of', _et.Dictionary<null>]
+    | ['expected one of', _pi.Dictionary<null>]
     | ['expected a text', {
         'description': string
     }]

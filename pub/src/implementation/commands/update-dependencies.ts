@@ -1,5 +1,5 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
+import * as _pc from 'pareto-core-command'
+import * as _pt from 'pareto-core-transformer'
 
 import * as signatures from "../../interface/signatures"
 
@@ -9,7 +9,7 @@ import * as d from "../../interface/to_be_generated/update_dependencies"
 //dependencies
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 
-export const $$: signatures.commands.update_dependencies = _easync.create_command_procedure(
+export const $$: signatures.commands.update_dependencies = _pc.create_command_procedure(
     ($p, $cr) => [
 
         // update dependencies of pub

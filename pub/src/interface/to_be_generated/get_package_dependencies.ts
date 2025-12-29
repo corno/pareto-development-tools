@@ -1,5 +1,4 @@
-import * as _et from 'exupery-core-types'
-import * as _easync from 'exupery-core-async'
+import * as _pi from 'pareto-core-interface'
 
 import * as d_read_directory from "exupery-resources/dist/interface/generated/pareto/schemas/read_directory/data_types/source"
 import * as d_read_file from "exupery-resources/dist/interface/generated/pareto/schemas/read_file/data_types/source"
@@ -12,7 +11,7 @@ export type Parameters = {
 }
 
 export type Result = {
-    'packages': _et.Dictionary<d_npm.NPM_Package>
+    'packages': _pi.Dictionary<d_npm.NPM_Package>
 }
 
 export type Package_Error =
@@ -22,4 +21,4 @@ export type Package_Error =
 
 export type Error =
     | ['read directory', d_read_directory.Error]
-    | ['directory content processing', _et.Dictionary<Package_Error>]
+    | ['directory content processing', _pi.Dictionary<Package_Error>]

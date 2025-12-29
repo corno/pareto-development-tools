@@ -1,4 +1,4 @@
-import * as _et from 'exupery-core-types'
+import * as _pi from 'pareto-core-interface'
 
 import * as resources from "./resources"
 import * as resources_exupery from "exupery-resources/dist/interface/resources"
@@ -8,7 +8,7 @@ import * as resources_fp from "../modules/pareto-fountain-pen-directory/interfac
 
 export namespace queries {
 
-    export type get_package_dependencies = _et.Query_Function<
+    export type get_package_dependencies = _pi.Query_Function<
         resources.queries.get_package_dependencies,
         {
             'read directory': resources_exupery.queries.read_directory,
@@ -21,7 +21,7 @@ export namespace queries {
 
 export namespace commands {
 
-    export type analyze_file_structure = _et.Command_Procedure<
+    export type analyze_file_structure = _pi.Command_Procedure<
         resources.commands.analyze_file_structure,
         {
             'log': resources_exupery.commands.log
@@ -33,7 +33,7 @@ export namespace commands {
         }
     >
 
-    export type api = _et.Command_Procedure<
+    export type api = _pi.Command_Procedure<
         resources.commands.api,
         {
             'analyze file structure': resources.commands.analyze_file_structure
@@ -52,7 +52,7 @@ export namespace commands {
         }
     >
 
-    export type build = _et.Command_Procedure<
+    export type build = _pi.Command_Procedure<
         resources.commands.build,
         {
             'tsc': resources.commands.tsc
@@ -61,7 +61,7 @@ export namespace commands {
         null
     >
 
-    export type build_and_test = _et.Command_Procedure<
+    export type build_and_test = _pi.Command_Procedure<
         resources.commands.build_and_test,
         {
             'build': resources.commands.build
@@ -70,7 +70,7 @@ export namespace commands {
         null
     >
 
-    export type clean_and_update_dependencies = _et.Command_Procedure<
+    export type clean_and_update_dependencies = _pi.Command_Procedure<
         resources.commands.clean_and_update_dependencies, {
             'git clean': resources_git.commands.clean
             'update2latest': resources_npm.commands.update2latest
@@ -79,7 +79,7 @@ export namespace commands {
         null
     >
 
-    export type create_dependency_graph = _et.Command_Procedure<
+    export type create_dependency_graph = _pi.Command_Procedure<
         resources.commands.create_dependency_graph,
         {
             'log': resources_fp.commands.console_log
@@ -89,7 +89,7 @@ export namespace commands {
         }
     >
 
-    export type list_file_structure_problems = _et.Command_Procedure<
+    export type list_file_structure_problems = _pi.Command_Procedure<
         resources.commands.analyze_file_structure,
         {
             'log': resources_exupery.commands.log
@@ -100,7 +100,7 @@ export namespace commands {
         }
     >
 
-    export type main = _et.Command_Procedure<
+    export type main = _pi.Command_Procedure<
         resources_exupery.commands.main,
         {
             'api': resources.commands.api
@@ -108,7 +108,7 @@ export namespace commands {
         null
     >
 
-    export type tsc = _et.Command_Procedure<
+    export type tsc = _pi.Command_Procedure<
             resources.commands.tsc,
             {
                 'tsc': resources_exupery.commands.execute_smelly_command_executable
@@ -116,7 +116,7 @@ export namespace commands {
             null
         >
 
-    export type update_dependencies = _et.Command_Procedure<
+    export type update_dependencies = _pi.Command_Procedure<
         resources.commands.update_dependencies,
         {
             'clean and update dependencies': resources.commands.clean_and_update_dependencies

@@ -1,12 +1,11 @@
-import * as _edata from 'exupery-core-data'
-import { d } from 'exupery-core-data'
+import * as _psh from 'pareto-core-shorthands/dist/unconstrained'
 
 import {
     Raw_Or_Normal_Dictionary,
     Raw_Or_Normal_List,
     wrap_dictionary,
     wrap_list,
-} from 'exupery-core-data/dist/shorthands/unconstrained'
+} from 'pareto-core-shorthands/dist/unconstrained'
 
 
 import * as d_structure from "../interface/generated/pareto/schemas/structure/data_types/source"
@@ -103,7 +102,7 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
 
 })
 
-export const $$: d_structure.Directory = ['group', d<d_structure.Directory.SG.group.D>({
+export const $$: d_structure.Directory = ['group', _psh.wrap_dictionary<d_structure.Directory.SG.group.D>({
     ".git": directory_ignore(),
     ".gitignore": file_manual(),
     "data": directory_freeform(),

@@ -1,5 +1,5 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
+import * as _pc from 'pareto-core-command'
+import * as _pt from 'pareto-core-transformer'
 
 import * as signatures from "../../interface/signatures"
 
@@ -10,10 +10,10 @@ import * as d from "../../interface/to_be_generated/create_dependency_graph"
 import * as t_package_dependencies_to_graphviz from "../transformers/schemas/package_dependencies/graphviz"
 import * as t_graphviz_to_fountain_pen from "pareto-graphviz/dist/implementation/transformers/schemas/graphviz/fountain_pen"
 
-export const $$: signatures.commands.create_dependency_graph = _easync.create_command_procedure(
+export const $$: signatures.commands.create_dependency_graph = _pc.create_command_procedure(
     ($p, $cr, $q) => [
 
-        _easync.p.query_without_error_transformation(
+        _pc.query_without_error_transformation(
             $q['package dependencies'](
                 {
                     'path': $p.path,

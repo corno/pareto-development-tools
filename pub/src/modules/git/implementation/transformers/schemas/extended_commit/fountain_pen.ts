@@ -1,34 +1,34 @@
-import * as _ea from 'exupery-core-alg'
-import * as _et from 'exupery-core-types'
+import * as _pt from 'pareto-core-transformer'
+import * as _pi from 'pareto-core-interface'
 
 import * as d_in from "../../../../interface/to_be_generated/extended_commit"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export type Error = _et.Transformer<d_in.Error, d_out.Block_Part>
+export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as t_eqe_to_fountain_pen from "exupery-resources/dist/implementation/transformers/schemas/execute_query_executable/fountain_pen"
 import * as t_git_is_clean_to_fountain_pen from "../is_repository_clean/fountain_pen"
 
-export const Error: Error = ($) => _ea.cc($, ($): d_out.Block_Part => {
+export const Error: Error = ($) => _pt.cc($, ($): d_out.Block_Part => {
     switch ($[0]) {
-        case 'asserting git not clean': return _ea.ss($, ($) => sh.b.sub([
+        case 'asserting git not clean': return _pt.ss($, ($) => sh.b.sub([
             sh.b.snippet(`error while asserting git is not clean: `),
             t_git_is_clean_to_fountain_pen.Error($)
         ]))
-        case 'could not stage': return _ea.ss($, ($) => sh.b.sub([
+        case 'could not stage': return _pt.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not stage: `),
             t_eqe_to_fountain_pen.Error($)
         ]))
-        case 'could not commit': return _ea.ss($, ($) => sh.b.sub([
+        case 'could not commit': return _pt.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not commit: `),
             t_eqe_to_fountain_pen.Error($)
         ]))
-        case 'could not push': return _ea.ss($, ($) => sh.b.sub([
+        case 'could not push': return _pt.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not push: `),
             t_eqe_to_fountain_pen.Error($)
         ]))
-        default: return _ea.au($[0])
+        default: return _pt.au($[0])
     }
 })

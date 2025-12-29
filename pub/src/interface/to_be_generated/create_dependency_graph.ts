@@ -1,4 +1,4 @@
-import * as _et from 'exupery-core-types'
+import * as _pi from 'pareto-core-interface'
 
 import * as d_log from "../../modules/pareto-fountain-pen-directory/implementation/commands/console_log"
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"

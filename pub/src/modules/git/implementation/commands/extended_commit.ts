@@ -1,5 +1,5 @@
-import * as _easync from 'exupery-core-async'
-import * as _ea from 'exupery-core-alg'
+import * as _pc from 'pareto-core-command'
+import * as _pt from 'pareto-core-transformer'
 
 import * as signatures from "../../interface/signatures"
 
@@ -10,9 +10,9 @@ import * as d from "../../interface/to_be_generated/extended_commit"
 import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
 
 
-export const $$: signatures.commands.extended_commit = _easync.create_command_procedure(
+export const $$: signatures.commands.extended_commit = _pc.create_command_procedure(
     ($p, $cr, $qr) => [
-        _easync.p.deprecated_conditional.query(
+        _pc.deprecated_conditional.query(
             $qr['git is repository clean'](
                 {
                     'path': $p.path
@@ -21,21 +21,21 @@ export const $$: signatures.commands.extended_commit = _easync.create_command_pr
             ).transform_result(
                 ($) => !$
             ),
-            _easync.p.sequence([
-                _easync.p.if_(
+            _pc.sequence([
+                _pc.if_(
                     $p.instruction['stage all changes'],
                     [
                         $cr.git.execute(
                             {
-                                'args': _ea.list_literal([
+                                'args': _pt.list_literal([
                                     $p.path.transform(
-                                        ($) => _ea.list_literal([
+                                        ($) => _pt.list_literal([
                                             `-C`,
                                             s_path.Context_Path($),
                                         ]),
-                                        () => _ea.list_literal([])
+                                        () => _pt.list_literal([])
                                     ),
-                                    _ea.list_literal([
+                                    _pt.list_literal([
                                         `add`,
                                         `--all`,
                                     ])
@@ -47,15 +47,15 @@ export const $$: signatures.commands.extended_commit = _easync.create_command_pr
                 ),
                 $cr.git.execute(
                     {
-                        'args': _ea.list_literal([
+                        'args': _pt.list_literal([
                             $p.path.transform(
-                                ($) => _ea.list_literal([
+                                ($) => _pt.list_literal([
                                     `-C`,
                                     s_path.Context_Path($),
                                 ]),
-                                () => _ea.list_literal([])
+                                () => _pt.list_literal([])
                             ),
-                            _ea.list_literal([
+                            _pt.list_literal([
                                 `commit`,
                                 `-m`,
                                 $p.instruction['commit message'],
@@ -64,20 +64,20 @@ export const $$: signatures.commands.extended_commit = _easync.create_command_pr
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
-                _easync.p.if_(
+                _pc.if_(
                     $p.instruction['push after commit'],
                     [
                         $cr.git.execute(
                             {
-                                'args': _ea.list_literal([
+                                'args': _pt.list_literal([
                                     $p.path.transform(
-                                        ($) => _ea.list_literal([
+                                        ($) => _pt.list_literal([
                                             `-C`,
                                             s_path.Context_Path($),
                                         ]),
-                                        () => _ea.list_literal([])
+                                        () => _pt.list_literal([])
                                     ),
-                                    _ea.list_literal([
+                                    _pt.list_literal([
                                         `push`,
                                     ])
                                 ]).flatten(($) => $),

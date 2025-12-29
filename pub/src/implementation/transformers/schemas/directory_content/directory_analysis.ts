@@ -1,5 +1,7 @@
-import * as _ea from 'exupery-core-alg'
-import * as _et from 'exupery-core-types'
+import * as _pt from 'pareto-core-transformer'
+import * as _pi from 'pareto-core-interface'
+import * as _pds from 'pareto-core-deserializer'
+import * as _pinternals from 'pareto-core-internals'
 
 import * as d_in from "exupery-resources/dist/interface/to_be_generated/directory_content"
 import * as d_out from "../../../../interface/to_be_generated/temp_directory_analysis"
@@ -7,7 +9,7 @@ import * as d_structure from "../../../../interface/generated/pareto/schemas/str
 
 const line_count = ($: string): number => {
     let lineCount = 0
-    _ea.text_to_character_list($).__for_each(($) => {
+    _pds.text_to_character_list($).__for_each(($) => {
         if ($ === 10) { //newline character
             lineCount++
         }
@@ -15,8 +17,8 @@ const line_count = ($: string): number => {
     return lineCount + 1 //add one for the last line if it doesn't end with a newline
 }
 
-const extension = ($: string): _et.Optional_Value<string> => {
-    const characters = _ea.text_to_character_list($)
+const extension = ($: string): _pi.Optional_Value<string> => {
+    const characters = _pds.text_to_character_list($)
 
     let first_period_index: null | number = null
     let current_index = 0
@@ -27,11 +29,11 @@ const extension = ($: string): _et.Optional_Value<string> => {
         current_index++
     })
     if (first_period_index === null) {
-        return _ea.not_set()
+        return _pt.not_set()
     } else {
         const fpi: number = first_period_index
         current_index = 0
-        return _ea.set(_ea.build_text(($i) => {
+        return _pt.set(_pds.build_text(($i) => {
             characters.__for_each(($) => {
                 if (current_index > fpi) {
                     $i['add character']($)
@@ -54,10 +56,10 @@ export namespace defined {
         //both found and expected are directories
 
         const dir = $
-        return _ea.cc($p['expected structure'], ($): d_out.Directory => {
+        return _pt.cc($p['expected structure'], ($): d_out.Directory => {
             switch ($[0]) {
 
-                case 'group': return _ea.ss($, ($) => {
+                case 'group': return _pt.ss($, ($) => {
                     const expected = $
                     return ['dictionary', dir.map(($, key) => {
                         const node = $
@@ -69,70 +71,70 @@ export namespace defined {
                                 'structure path': string,
                             }
                         ): d_out.Node => {
-                            return _ea.cc($, ($): d_out.Node => {
+                            return _pt.cc($, ($): d_out.Node => {
                                 switch ($[0]) {
-                                    case 'file': return _ea.ss($, ($): d_out.Node => ['file', ({
+                                    case 'file': return _pt.ss($, ($): d_out.Node => ['file', ({
                                         'structure': {
                                             'path': $p['structure path'],
-                                            'classification': _ea.cc($p['expected structure'], ($): d_out.Classification => {
+                                            'classification': _pt.cc($p['expected structure'], ($): d_out.Classification => {
                                                 switch ($[0]) {
-                                                    case 'file': return _ea.ss($, ($) => _ea.cc($, ($) => {
+                                                    case 'file': return _pt.ss($, ($) => _pt.cc($, ($) => {
                                                         switch ($[0]) {
-                                                            case 'generated': return _ea.ss($, ($) => ['file', ['generated', null]])
-                                                            case 'manual': return _ea.ss($, ($) => ['file', ['manual', null]])
-                                                            default: return _ea.au($[0])
+                                                            case 'generated': return _pt.ss($, ($) => ['file', ['generated', null]])
+                                                            case 'manual': return _pt.ss($, ($) => ['file', ['manual', null]])
+                                                            default: return _pt.au($[0])
                                                         }
                                                     }))
-                                                    case 'directory': return _ea.ss($, ($) => ['directory', _ea.cc($, ($): d_out.Directory_Classification => {
+                                                    case 'directory': return _pt.ss($, ($) => ['directory', _pt.cc($, ($): d_out.Directory_Classification => {
                                                         switch ($[0]) {
-                                                            case 'wildcards': return _ea.ss($, ($) => ['wildcards', null])
-                                                            case 'freeform': return _ea.ss($, ($) => ['freeform', null])
-                                                            case 'ignore': return _ea.ss($, ($) => ['ignored', null])
-                                                            case 'generated': return _ea.ss($, ($) => ['generated', null])
-                                                            case 'dictionary': return _ea.ss($, ($) => ['dictionary', null])
-                                                            case 'group': return _ea.ss($, ($) => ['group', null])
-                                                            default: return _ea.au($[0])
+                                                            case 'wildcards': return _pt.ss($, ($) => ['wildcards', null])
+                                                            case 'freeform': return _pt.ss($, ($) => ['freeform', null])
+                                                            case 'ignore': return _pt.ss($, ($) => ['ignored', null])
+                                                            case 'generated': return _pt.ss($, ($) => ['generated', null])
+                                                            case 'dictionary': return _pt.ss($, ($) => ['dictionary', null])
+                                                            case 'group': return _pt.ss($, ($) => ['group', null])
+                                                            default: return _pt.au($[0])
                                                         }
                                                     })])
-                                                    default: return _ea.au($[0])
+                                                    default: return _pt.au($[0])
                                                 }
                                             })
                                         },
                                         'extension': extension($p['name']),
                                         'line count': line_count($),
-                                        'unexpected path tail': _ea.cc($p['expected structure'], ($) => {
+                                        'unexpected path tail': _pt.cc($p['expected structure'], ($) => {
                                             switch ($[0]) {
-                                                case 'file': return _ea.ss($, ($) => _ea.cc($, ($) => {
+                                                case 'file': return _pt.ss($, ($) => _pt.cc($, ($) => {
                                                     switch ($[0]) {
-                                                        case 'generated': return _ea.ss($, ($) => _ea.not_set())
-                                                        case 'manual': return _ea.ss($, ($) => _ea.not_set())
-                                                        default: return _ea.au($[0])
+                                                        case 'generated': return _pt.ss($, ($) => _pt.not_set())
+                                                        case 'manual': return _pt.ss($, ($) => _pt.not_set())
+                                                        default: return _pt.au($[0])
                                                     }
                                                 }))
-                                                case 'directory': return _ea.ss($, ($) => _ea.set($p.name))
-                                                default: return _ea.au($[0])
+                                                case 'directory': return _pt.ss($, ($) => _pt.set($p.name))
+                                                default: return _pt.au($[0])
                                             }
                                         })
                                     })])
-                                    case 'directory': return _ea.ss($, ($): d_out.Node => {
+                                    case 'directory': return _pt.ss($, ($): d_out.Node => {
                                         //found a directory in the filesystem, check expected structure
                                         const dir = $
-                                        return ['directory', _ea.cc($p['expected structure'], ($): d_out.Directory => {
+                                        return ['directory', _pt.cc($p['expected structure'], ($): d_out.Directory => {
                                             switch ($[0]) {
-                                                case 'file': return _ea.ss($, ($) => ['expected a file', null])
-                                                case 'directory': return _ea.ss($, ($) => Directory(
+                                                case 'file': return _pt.ss($, ($) => ['expected a file', null])
+                                                case 'directory': return _pt.ss($, ($) => Directory(
                                                     dir,
                                                     {
                                                         'expected structure': $,
                                                         'structure path': $p['structure path'],
                                                     }
                                                 ))
-                                                default: return _ea.au($[0])
+                                                default: return _pt.au($[0])
                                             }
                                         })]
                                     })
-                                    case 'other': return _ea.ss($, ($) => ['other', null])
-                                    default: return _ea.au($[0])
+                                    case 'other': return _pt.ss($, ($) => ['other', null])
+                                    default: return _pt.au($[0])
                                 }
                             })
                         }
@@ -153,24 +155,24 @@ export namespace defined {
                                         'classification': ['directory', ['group', null]],
                                         'path': $p['structure path'],
                                     },
-                                    'unexpected path tail': _ea.set(`/${key}`),
+                                    'unexpected path tail': _pt.set(`/${key}`),
                                 }
                             )
                         )
                     })]
                 })
-                case 'ignore': return _ea.ss($, ($) => ['ignored', null])
-                case 'generated': return _ea.ss($, ($) => undefined.Directory(
+                case 'ignore': return _pt.ss($, ($) => ['ignored', null])
+                case 'generated': return _pt.ss($, ($) => undefined.Directory(
                     dir,
                     {
                         'structure': {
                             'classification': ['directory', ['generated', null]],
                             'path': $p['structure path'],
                         },
-                        'unexpected path tail': _ea.not_set(),
+                        'unexpected path tail': _pt.not_set(),
                     }
                 ))
-                case 'wildcards': return _ea.ss($, ($) => wildcard.Directory(
+                case 'wildcards': return _pt.ss($, ($) => wildcard.Directory(
                     dir,
                     {
                         'wildcard': $,
@@ -179,47 +181,47 @@ export namespace defined {
                         'number of directories encountered': 0,
                     }
                 ))
-                case 'freeform': return _ea.ss($, ($) => undefined.Directory(
+                case 'freeform': return _pt.ss($, ($) => undefined.Directory(
                     dir,
                     {
                         'structure': {
                             'classification': ['directory', ['freeform', null]],
                             'path': $p['structure path'],
                         },
-                        'unexpected path tail': _ea.not_set(),
+                        'unexpected path tail': _pt.not_set(),
                     }
                 ))
-                case 'dictionary': return _ea.ss($, ($) => {
+                case 'dictionary': return _pt.ss($, ($) => {
                     //expecting a dictionary of directories
                     const struct = $
 
                     return ['dictionary', dir.map(($, key): d_out.Node => {
                         const node = $
-                        return _ea.cc($, ($): d_out.Node => {
+                        return _pt.cc($, ($): d_out.Node => {
                             switch ($[0]) {
-                                case 'directory': return _ea.ss($, ($) => ['directory', Directory(
+                                case 'directory': return _pt.ss($, ($) => ['directory', Directory(
                                     $,
                                     {
                                         'expected structure': struct,
                                         'structure path': `${$p['structure path']}/*`,
                                     }
                                 )])
-                                case 'other': return _ea.ss($, ($) => ['other', null])
-                                case 'file': return _ea.ss($, ($): d_out.Node => ['file', {
+                                case 'other': return _pt.ss($, ($) => ['other', null])
+                                case 'file': return _pt.ss($, ($): d_out.Node => ['file', {
                                     'structure': {
                                         'path': `${$p['structure path']}/*`,
                                         'classification': ['directory', ['dictionary', null]],
                                     },
                                     'extension': extension(key),
                                     'line count': line_count($),
-                                    'unexpected path tail': _ea.set(`/${key}`),
+                                    'unexpected path tail': _pt.set(`/${key}`),
                                 }])
-                                default: return _ea.au($[0])
+                                default: return _pt.au($[0])
                             }
                         })
                     })]
                 })
-                default: return _ea.au($[0])
+                default: return _pt.au($[0])
             }
         })
     }
@@ -232,7 +234,7 @@ export namespace undefined {
         $: d_in.Directory,
         $p: {
             'structure': d_out.Structure_Analysis,
-            'unexpected path tail': _et.Optional_Value<string>,
+            'unexpected path tail': _pi.Optional_Value<string>,
         }
     ): d_out.Directory => {
         return ['dictionary', $.map(($, key) => Node(
@@ -250,18 +252,18 @@ export namespace undefined {
         $p: {
             'structure': d_out.Structure_Analysis,
             'name': string,
-            'unexpected path tail': _et.Optional_Value<string>,
+            'unexpected path tail': _pi.Optional_Value<string>,
         }
     ): d_out.Node => {
-        return _ea.cc($, ($): d_out.Node => {
+        return _pt.cc($, ($): d_out.Node => {
             switch ($[0]) {
-                case 'file': return _ea.ss($, ($): d_out.Node => ['file', {
+                case 'file': return _pt.ss($, ($): d_out.Node => ['file', {
                     'unexpected path tail': $p['unexpected path tail'],
                     'structure': $p['structure'],
                     'extension': extension($p['name']),
                     'line count': line_count($),
                 }])
-                case 'directory': return _ea.ss($, ($) => {
+                case 'directory': return _pt.ss($, ($) => {
                     const dir = $
                     return ['directory', Directory(
                         $,
@@ -271,8 +273,8 @@ export namespace undefined {
                         }
                     )]
                 })
-                case 'other': return _ea.ss($, ($) => ['other', null])
-                default: return _ea.au($[0])
+                case 'other': return _pt.ss($, ($) => ['other', null])
+                default: return _pt.au($[0])
             }
         })
     }
@@ -292,23 +294,23 @@ export namespace wildcard {
     ): d_out.Directory => {
         return ['dictionary', $.map(($, key) => {
             const tail = $p.tail + `/${key}`
-            return _ea.cc($, ($): d_out.Node => {
+            return _pt.cc($, ($): d_out.Node => {
                 switch ($[0]) {
-                    case 'other': return _ea.ss($, ($) => ['other', null])
-                    case 'file': return _ea.ss($, ($): d_out.Node => ['file', {
+                    case 'other': return _pt.ss($, ($) => ['other', null])
+                    case 'file': return _pt.ss($, ($): d_out.Node => ['file', {
                         'structure': {
                             'path': $p['structure path'],
                             'classification': ['directory', ['wildcards', null]],
                         },
                         'extension': extension(key),
-                        'unexpected path tail': _ea.block(() => {
+                        'unexpected path tail': _pinternals.block(() => {
                             if ($p['number of directories encountered'] < $p['wildcard']['required directories']) {
                                 //files are not allowed yet, haven't descended through enough required directories
-                                return _ea.set(tail)
+                                return _pt.set(tail)
                             }
                             if (!$p.wildcard['additional directories allowed'] && $p['number of directories encountered'] > $p['wildcard']['required directories']) {
                                 //additional directories are not allowed and we've gone too deep
-                                return _ea.set(tail)
+                                return _pt.set(tail)
                             }
                             const possible_file_extension = extension(key)
                             let extension_matched = false
@@ -322,13 +324,13 @@ export namespace wildcard {
 
                             })
                             return extension_matched
-                                ? _ea.not_set()
-                                : _ea.set(tail)
+                                ? _pt.not_set()
+                                : _pt.set(tail)
 
                         }),
                         'line count': line_count($),
                     }])
-                    case 'directory': return ['directory', _ea.ss($, ($) => {
+                    case 'directory': return ['directory', _pt.ss($, ($) => {
                         return Directory(
                             $,
                             {
@@ -339,7 +341,7 @@ export namespace wildcard {
                             }
                         )
                     })]
-                    default: return _ea.au($[0])
+                    default: return _pt.au($[0])
                 }
             })
         })]
@@ -353,34 +355,34 @@ export namespace wildcard {
 export const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {
     const temp: { [key: string]: d_out.File_Analysis } = {}
     const x = ($: d_out.Directory, path: string): void => {
-        _ea.cc($, ($) => {
+        _pt.cc($, ($) => {
             switch ($[0]) {
-                case 'expected a file': return _ea.ss($, ($) => { })
-                case 'ignored': return _ea.ss($, ($) => { })
-                case 'dictionary': return _ea.ss($, ($) => {
+                case 'expected a file': return _pt.ss($, ($) => { })
+                case 'ignored': return _pt.ss($, ($) => { })
+                case 'dictionary': return _pt.ss($, ($) => {
                     $.map(($, key) => {
 
-                        _ea.cc($, ($) => {
+                        _pt.cc($, ($) => {
                             switch ($[0]) {
                                 case 'other': return //do nothing, ignore other filesystem nodes for now
-                                case 'file': return _ea.ss($, ($) => temp[`${path}/${key}`] = $)
-                                case 'directory': return _ea.ss($, ($) => x($, `${path}/${key}`))
-                                default: return _ea.au($[0])
+                                case 'file': return _pt.ss($, ($) => temp[`${path}/${key}`] = $)
+                                case 'directory': return _pt.ss($, ($) => x($, `${path}/${key}`))
+                                default: return _pt.au($[0])
                             }
                         })
                     })
                 })
-                default: return _ea.au($[0])
+                default: return _pt.au($[0])
             }
         })
 
     }
     x($, ``)
-    return _ea.dictionary_literal(temp)
+    return _pt.dictionary_literal(temp)
 }
 
 
-export const dict_to_list = ($: d_out.Flattened_Directory_With_Line_Counts): _et.List<{
+export const dict_to_list = ($: d_out.Flattened_Directory_With_Line_Counts): _pi.List<{
     'path': string,
     'analysis': d_out.File_Analysis,
 }> => {
