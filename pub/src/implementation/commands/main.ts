@@ -21,8 +21,9 @@ export const $$: signatures.commands.main = _pc.create_command_procedure(
         _pc.refine_without_error_transformation(
 
             // parse command line instruction
-            r_instruction.Command($p.arguments).deprecated_transform_error(
-                ($): d.Error => {
+            (abort) => r_instruction.Command(
+                $p,
+                ($) => {
                     //FIXME: do this properly
                     _pdev.log_debug_message(
                         s_fp_block.Group(
@@ -36,9 +37,9 @@ export const $$: signatures.commands.main = _pc.create_command_procedure(
                         ),
                         () => { }
                     )
-                    return {
+                    return abort({
                         'exit code': 1
-                    }
+                    })
                 }
             ),
 

@@ -69,7 +69,8 @@ export const Error: Error = ($) => {
                 sh.b.snippet(`error while parsing package.json: `),
                 sh.b.indent([
                     sh.g.nested_block([
-                        sh.b.snippet($)
+                        //FIXME
+                        // sh.b.snippet($)
                     ])
                 ]),
             ]))

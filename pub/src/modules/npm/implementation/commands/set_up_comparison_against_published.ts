@@ -42,16 +42,12 @@ export const $$: signatures.commands.set_up_comparison_against_published = _pc.c
                 $qr['read file'](
                     t_path_to_path.create_node_path($p['path to local package'], `package.json`),
                     ($): d.Error => ['error while reading package.json', $],
-                ).deprecated_refine_old(
-                    ($) => _pinternals.deprecated_create_refinement_context<d_npm_package.NPM_Package, d_npm_package.NPM_Package_Parse_Error>(
-                        (abort) => r_parse_npm_package(
-                            $,
-                            abort,
-                        )
+                ).refine_without_error_transformation(
+                    ($, abort) => r_parse_npm_package(
+                        $,
+                        ($) => abort(['error while parsing package.json', $]),
                     ),
-                    ($): d.Error => {
-                        return ['error while parsing package.json', "HMMM"]
-                    }
+
                 ),
                 ($v) => {
                     const package_info = $v

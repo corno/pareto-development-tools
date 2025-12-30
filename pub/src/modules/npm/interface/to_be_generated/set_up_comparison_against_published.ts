@@ -6,6 +6,7 @@ import * as d_make_directory from "exupery-resources/dist/interface/generated/pa
 import * as d_remove from "exupery-resources/dist/interface/generated/pareto/schemas/remove/data_types/source"
 import * as d_read_file from "exupery-resources/dist/interface/generated/pareto/schemas/read_file/data_types/source"
 import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/source"
+import * as d_npm_package from "../../implementation/refiners/schemas/npm_package/temp"
 
 export type Parameters = {
     'path to local package': d_path.Context_Path,
@@ -21,4 +22,4 @@ export type Error =
     | readonly ['error while creating directory', d_make_directory.Error]
     | readonly ['error while removing directory', d_remove.Error]
     | readonly ['error while reading package.json', d_read_file.Error]
-    | readonly ['error while parsing package.json', string]
+    | readonly ['error while parsing package.json', d_npm_package.NPM_Package_Parse_Error]

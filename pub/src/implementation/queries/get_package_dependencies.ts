@@ -26,22 +26,17 @@ export const $$: signatures.queries.get_package_dependencies = _pq.create_query_
                     const path = $.path
                     return _pt.cc($['node type'], ($): _pi.Query_Result<d_npm.NPM_Package, d.Package_Error> => {
                         switch ($[0]) {
-                            case 'file': return _pt.ss($, ($) => _pq.raise_error(['not a directory', null]))
-                            case 'other': return _pt.ss($, ($) => _pq.raise_error(['not a directory', null]))
+                            case 'file': return _pt.ss($, ($) => _pq.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                            case 'other': return _pt.ss($, ($) => _pq.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
                             case 'directory': return _pt.ss($, ($) => {
                                 return $r['read file'](
                                     t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` }),
                                     ($): d.Package_Error => ['no package.json file', null],
-                                ).deprecated_refine_old(
-                                    ($) => _pinternals.deprecated_create_refinement_context<d_npm.NPM_Package, d_npm.NPM_Package_Parse_Error>(
-                                        (abort) => r_parse_npm_package(
-                                            $,
-                                            abort,
-                                        )
-                                    ),
-                                    ($) => {
-                                        return ['parse error', $]
-                                    }
+                                ).refine_without_error_transformation(
+                                    ($, abort) => r_parse_npm_package(
+                                        $,
+                                        ($) => abort(['parse error', $]),
+                                    )
                                 )
 
                             })
