@@ -9,6 +9,7 @@ export type Error =
     | ['write file', d_write_file.Error]
 
 export type Parameters = {
+    'escape spaces in path': boolean
     'group': d_fp_block.Group,
     'directory path': d_path.Node_Path
     'filename': string

@@ -14,6 +14,7 @@ export type Error__nodes =
     | ['file', d_write_to_file.Error]
 
 export type Parameters = {
+    'escape spaces in path': boolean
     'path': d_path.Node_Path
     'directory': d_fp_block.Directory,
     'indentation': string
