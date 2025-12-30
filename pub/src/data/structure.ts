@@ -44,7 +44,35 @@ const $_interface: d_structure.Directory.SG.group.D = directory_group({
 const $_implementation: d_structure.Directory.SG.group.D = directory_group({
     "generated": directory_generated(true),
 
-    //these are now doubly defined as both exist. I don't know yet which one is preferred
+    "manual": directory_group({
+        "schemas": directory_dictionary(dgroup({
+            "transformers": directory_wildcards(0, false, ["ts"], false),
+            "serializers.ts": file_manual(),
+            "deserializers.ts": file_manual(),
+            "refiners": directory_wildcards(0, false, ["ts"], false),
+            "productions": directory_wildcards(0, false, ["ts"], false),
+        })),
+        "primitives": directory_group({
+            "text": directory_group({
+                "serializers": directory_wildcards(0, false, ["ts"], false),
+                "deserializers": directory_wildcards(0, false, ["ts"], false),
+            }),
+            "integer": directory_group({
+                "serializers": directory_wildcards(0, false, ["ts"], false),
+                "deserializers": directory_wildcards(0, false, ["ts"], false),
+            }),
+            "boolean": directory_group({
+                "serializers": directory_wildcards(0, false, ["ts"], false),
+                "deserializers": directory_wildcards(0, false, ["ts"], false),
+            }),
+            "approximate_number": directory_group({
+                "serializers": directory_wildcards(0, false, ["ts"], false),
+                "deserializers": directory_wildcards(0, false, ["ts"], false),
+            }),
+        }),
+        "queries": directory_wildcards(0, false, ["ts"], false),
+        "commands": directory_wildcards(0, false, ["ts"], false),
+    }),
 
     "operations": directory_group({
         "pure": directory_group({
@@ -56,48 +84,6 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
             "list": directory_wildcards(0, false, ["ts"], false),
         }),
     }),
-    "transformers": directory_group({
-        "schemas": directory_wildcards(1, true, ["ts"], false),
-        "primitives": directory_wildcards(1, false, ["ts"], false),
-    }),
-    "productions": directory_group({
-        "schemas": directory_wildcards(1, false, ["ts"], false),
-        "primitives": directory_group({
-            "text": directory_wildcards(0, false, ["ts"], false),
-            "integer": directory_wildcards(0, false, ["ts"], false),
-            "boolean": directory_wildcards(0, false, ["ts"], false),
-            "approximate_number": directory_wildcards(0, false, ["ts"], false),
-        }),
-    }),
-    "refiners": directory_group({
-        "schemas": directory_wildcards(1, false, ["ts"], false),
-        "primitives": directory_group({
-            "text": directory_wildcards(0, false, ["ts"], false),
-            "integer": directory_wildcards(0, false, ["ts"], false),
-            "boolean": directory_wildcards(0, false, ["ts"], false),
-            "approximate_number": directory_wildcards(0, false, ["ts"], false),
-        }),
-    }),
-    "serializers": directory_group({
-        "schemas": directory_wildcards(0, false, ["ts"], false),
-        "primitives": directory_group({
-            "text": directory_wildcards(0, false, ["ts"], false),
-            "integer": directory_wildcards(0, false, ["ts"], false),
-            "boolean": directory_wildcards(0, false, ["ts"], false),
-            "approximate_number": directory_wildcards(0, false, ["ts"], false),
-        }),
-    }),
-    "deserializers": directory_group({
-        "schemas": directory_wildcards(0, false, ["ts"], false),
-        "primitives": directory_group({
-            "text": directory_wildcards(0, false, ["ts"], false),
-            "integer": directory_wildcards(0, false, ["ts"], false),
-            "boolean": directory_wildcards(0, false, ["ts"], false),
-            "approximate_number": directory_wildcards(0, false, ["ts"], false),
-        }),
-    }),
-    "queries": directory_wildcards(0, false, ["ts"], false),
-    "commands": directory_wildcards(0, false, ["ts"], false),
     "temp": directory_wildcards(0, true, ["ts"], true),
 
 })
