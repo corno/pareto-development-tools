@@ -26,6 +26,10 @@ export const Error: Error = ($) => _pt.cc($, ($): d_out.Block_Part => {
             sh.b.snippet(`could not add tracked but ignored files: `),
             t_eqe_to_fountain_pen.Error($)
         ]))
+        case 'could not clean': return _pt.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`could not clean tracked but ignored files: `),
+            t_eqe_to_fountain_pen.Error($)
+        ]))
         default: return _pt.au($[0])
     }
 })

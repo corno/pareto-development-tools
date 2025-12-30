@@ -61,5 +61,23 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _pc.create_com
             },
             ($) => ['could not add', $],
         ),
+        $cr.git.execute(
+            {
+                'args': _pt.list_literal([
+                    $p.path.transform(
+                        ($) => _pt.list_literal([
+                            `-C`,
+                            s_path.Context_Path($),
+                        ]),
+                        () => _pt.list_literal([])
+                    ),
+                    _pt.list_literal([
+                        `clean`,
+                        `-fd`,
+                    ])
+                ]).flatten(($) => $),
+            },
+            ($) => ['could not clean', $],
+        ),
     ]
 )

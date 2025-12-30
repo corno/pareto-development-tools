@@ -15,4 +15,5 @@ export type Error =
     | ['not clean', null]
     | ['could not remove', d_eqe.Error]
     | ['could not add', d_eqe.Error]
+    | ['could not clean', d_eqe.Error]
     | ['unexpected error', d_gic.Error]
