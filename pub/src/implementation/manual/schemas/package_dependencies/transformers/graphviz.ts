@@ -1,0 +1,39 @@
+
+import * as _pi from 'pareto-core-interface'
+import * as _pt from 'pareto-core-transformer'
+
+import * as d_in from "../../../../../interface/to_be_generated/get_package_dependencies"
+import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/graphviz/data_types/target"
+
+export type Result = _pi.Transformer<d_in.Result, d_out.Graph>
+
+export const Result: Result = ($) => {
+    return {
+        'nodes': $.packages.map(($) => null),
+        'edges': $.packages.to_list(($, key) => {
+            const from = key
+            return $.dependencies.transform(
+                ($) => $.filter<{ 'from': string, 'to': string }>(($, key) => {
+                    if (key === "pareto-core-interface"
+                        || key === "pareto-core-transformer"
+                        || key === "pareto-core-refiner"
+                        || key === "pareto-core-serializer"
+                        || key === "pareto-core-deserializer"
+                        || key === "pareto-core-shorthands"
+                        || key === "pareto-core-data"
+                        || key === "pareto-core-command"
+                        || key === "pareto-core-query"
+                        || key === "pareto-host-nodejs"
+                    ) {
+                        return _pt.not_set()
+                    }
+                    return _pt.set(({
+                        'from': from,
+                        'to': key,
+                    }))
+                }).to_list($ => $),
+                () => _pt.list_literal([])
+            )
+        }).flatten(($) => $),
+    }
+}
