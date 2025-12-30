@@ -114,17 +114,19 @@ export const Command = (
                         'analyze-file-structure': null,
                         'assert-clean': null,
                         'dependency-graph': null,
+                        'list-file-structure-problems': null,
                         'project': null,
                         'set-up-comparison': null,
                     })])
             }
         },
         () => abort(['expected one of', _pt.dictionary_literal({
-            'project': null,
-            'assert-clean': null,
-            'set-up-comparison': null,
-            'dependency-graph': null,
             'analyze-file-structure': null,
+            'assert-clean': null,
+            'dependency-graph': null,
+            'list-file-structure-problems': null,
+            'project': null,
+            'set-up-comparison': null,
         })])
     )
 }
