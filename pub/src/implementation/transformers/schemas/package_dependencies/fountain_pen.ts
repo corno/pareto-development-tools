@@ -3,12 +3,14 @@ import * as _pi from 'pareto-core-interface'
 
 import * as d_in from "../../../../interface/to_be_generated/get_package_dependencies"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
+export namespace signatures {
+    export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
+}
 
-export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
-
+//shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const Error: Error = ($) => _pt.cc($, ($) => {
+export const Error: signatures.Error = ($) => _pt.cc($, ($) => {
     switch ($[0]) {
         case 'directory content processing': return _pt.ss($, ($) => sh.b.sub([
             sh.b.snippet(`directory content processing: `),
@@ -40,7 +42,6 @@ export const Error: Error = ($) => _pt.cc($, ($) => {
         ]))
         case 'read directory': return _pt.ss($, ($) => sh.b.sub([
             sh.b.snippet(`read directory: `),
-
         ]))
         default: return _pt.au($[0])
     }

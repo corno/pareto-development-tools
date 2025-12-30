@@ -26,9 +26,9 @@ export const $$: signatures.queries.get_package_dependencies = _pq.create_query_
                     const path = $.path
                     return _pt.cc($['node type'], ($): _pi.Query_Result<d_npm.NPM_Package, d.Package_Error> => {
                         switch ($[0]) {
-                            case 'file': return _pt.ss($, ($): _pi.Query_Result<d_npm.NPM_Package, d.Package_Error> => _pq.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
-                            case 'other': return _pt.ss($, ($): _pi.Query_Result<d_npm.NPM_Package, d.Package_Error> => _pq.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
-                            case 'directory': return _pt.ss($, ($): _pi.Query_Result<d_npm.NPM_Package, d.Package_Error> => {
+                            case 'file': return _pt.ss($, ($) => _pq.raise_error(['not a directory', null]))
+                            case 'other': return _pt.ss($, ($) => _pq.raise_error(['not a directory', null]))
+                            case 'directory': return _pt.ss($, ($) => {
                                 return $r['read file'](
                                     t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` }),
                                     ($): d.Package_Error => ['no package.json file', null],
@@ -39,7 +39,7 @@ export const $$: signatures.queries.get_package_dependencies = _pq.create_query_
                                             abort,
                                         )
                                     ),
-                                    ($): d.Package_Error => {
+                                    ($) => {
                                         return ['parse error', $]
                                     }
                                 )
@@ -51,7 +51,7 @@ export const $$: signatures.queries.get_package_dependencies = _pq.create_query_
                 }),
                 ($): d.Error => ['directory content processing', $],
             ).transform_result(
-                ($): d.Result => {
+                ($) => {
                     return {
                         'packages': $,
                     }

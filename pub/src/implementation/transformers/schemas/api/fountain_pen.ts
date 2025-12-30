@@ -4,12 +4,14 @@ import * as _pi from 'pareto-core-interface'
 import * as d_in from "../../../../interface/to_be_generated/api"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
 
-export type Signature = _pi.Transformer<d_in.Error, d_out.Block_Part>
+export namespace signatures {
+    export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
+}
 
+//shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-// import * as t_assert_clean_to_fountain_pen from "./commands/assert_clean/text"
-
+//dependencies
 import * as t_git_extended_commit_to_fountain_pen from "../../../../modules/git/implementation/transformers/schemas/extended_commit/fountain_pen"
 import * as t_git_assert_clean_to_fountain_pen from "../../../../modules/git/implementation/transformers/schemas/assert_is_clean/fountain_pen"
 import * as t_git_remove_tracked_but_ignored from "../../../../modules/git/implementation/transformers/schemas/remove_tracked_but_ignored/fountain_pen"
@@ -22,7 +24,7 @@ import * as t_update_dependencies from "../update_dependencies/fountain_pen"
 import * as t_read_directory_to_fountain_pen from "exupery-resources/dist/implementation/transformers/schemas/read_directory/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/transformers/schemas/set_up_comparison_against_published/fountain_pen"
 
-export const Error: Signature = ($) => _pt.cc($, ($) => {
+export const Error: signatures.Error = ($) => _pt.cc($, ($) => {
     switch ($[0]) {
         case 'analyze file structure': return _pt.ss($, ($) => t_line_count_to_fountain_pen.Error($))
         case 'dependency graph': return _pt.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
