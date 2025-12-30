@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import * as _ed from 'pareto-core-dev'
+import * as _pdev from 'pareto-core-dev'
 
-_ed.log_debug_message("TEST NOT IMPLEMENTED YET", () => {})
+_pdev.log_debug_message("TEST NOT IMPLEMENTED YET", () => {})

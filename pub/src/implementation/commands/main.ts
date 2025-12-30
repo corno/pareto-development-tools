@@ -1,6 +1,6 @@
 import * as _pc from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
-import * as _ed from 'pareto-core-dev'
+import * as _pdev from 'pareto-core-dev'
 
 import * as signatures from "../../interface/signatures"
 
@@ -24,7 +24,7 @@ export const $$: signatures.commands.main = _pc.create_command_procedure(
             r_instruction.Command($p.arguments).deprecated_transform_error(
                 ($): d.Error => {
                     //FIXME: do this properly
-                    _ed.log_debug_message(
+                    _pdev.log_debug_message(
                         s_fp_block.Group(
                             sh.group([sh.g.nested_block([
                                 t_bin_to_fountain_pen.Error($)
@@ -48,7 +48,7 @@ export const $$: signatures.commands.main = _pc.create_command_procedure(
                     $v,
                     ($): d.Error => {
                         //FIXME: do this properly
-                        _ed.log_debug_message(
+                        _pdev.log_debug_message(
                             s_fp_block.Group(
                                 sh.group([sh.g.nested_block([
                                     t_api_to_fountain_pen.Error($)

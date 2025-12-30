@@ -1,6 +1,5 @@
 import * as _pc from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
-import * as _ed from 'pareto-core-dev'
 import * as _pi from 'pareto-core-interface'
 import * as _pds from 'pareto-core-deserializer'
 import * as _pinternals from 'pareto-core-internals'
