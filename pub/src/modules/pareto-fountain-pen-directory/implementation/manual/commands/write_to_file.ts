@@ -9,8 +9,8 @@ import * as signatures from "../../../interface/signatures"
 import * as d_write_to_file from "../../../interface/to_be_generated/write_to_file"
 
 //dependencies
-import * as t_block_2_lines from "pareto-fountain-pen/dist/implementation/transformers/schemas/block/lines"
-import { $$ as s_list_of_texts } from "pareto-standard-operations/dist/implementation/serializers/schemas/list_of_texts"
+import * as t_block_2_lines from "pareto-fountain-pen/dist/implementation/manual/schemas/block/transformers/lines"
+import { $$ as s_list_of_texts } from "pareto-standard-operations/dist/implementation/temp_serializers/schemas/list_of_texts"
 import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
 import { replace_space_in_context_path } from "../schemas/path/transformers/path"
 

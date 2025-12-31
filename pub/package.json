@@ -7,10 +7,10 @@
     "dist"
   ],
   "dependencies": {
-    "astn": "^0.113.18",
-    "pareto-fountain-pen": "^0.3.22",
-    "pareto-graphviz": "^0.1.11",
-    "pareto-resources": "^0.1.0",
-    "pareto-standard-operations": "^0.3.30"
+    "astn": "^0.113.19",
+    "pareto-fountain-pen": "^0.3.23",
+    "pareto-graphviz": "^0.1.12",
+    "pareto-resources": "^0.1.1",
+    "pareto-standard-operations": "^0.3.32"
   }
 }
