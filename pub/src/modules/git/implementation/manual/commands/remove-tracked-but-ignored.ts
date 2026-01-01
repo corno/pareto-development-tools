@@ -1,4 +1,4 @@
-import * as _pc from 'pareto-core-command'
+import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
 
 import * as signatures from "../../../interface/signatures"
@@ -9,7 +9,7 @@ import * as d from "../../../interface/to_be_generated/remove_tracked_but_ignore
 //dependencies
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
-export const $$: signatures.commands.remove_tracked_but_ignored = _pc.create_command_procedure(
+export const $$: signatures.commands.remove_tracked_but_ignored = _p.create_command_procedure(
     ($p, $cr) => [
         $cr['assert is clean'].execute(
             {

@@ -1,4 +1,4 @@
-import * as _pc from 'pareto-core-command'
+import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 import * as _pds from 'pareto-core-deserializer'
@@ -34,11 +34,11 @@ const remove_n_characters_from_end = ($: string, n: number): string => {
     })
 }
 
-export const $$: signatures.commands.set_up_comparison_against_published = _pc.create_command_procedure(
+export const $$: signatures.commands.set_up_comparison_against_published = _p.create_command_procedure(
     ($p, $cr, $qr) => {
 
         return [
-            _pc.query_without_error_transformation<d.Error, d_npm_package.NPM_Package>(
+            _p.query_without_error_transformation<d.Error, d_npm_package.NPM_Package>(
                 $qr['read file'](
                     t_path_to_path.create_node_path($p['path to local package'], `package.json`),
                     ($): d.Error => ['error while reading package.json', $],
@@ -145,7 +145,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _pc.c
                             ($) => ['error while creating directory', $],
                         ),
 
-                        _pc.query_without_error_transformation<d.Error, string>(
+                        _p.query_without_error_transformation<d.Error, string>(
                             $qr.npm(
                                 {
                                     'args': _pt.list_literal([

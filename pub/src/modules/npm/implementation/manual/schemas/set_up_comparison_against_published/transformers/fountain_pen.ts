@@ -1,4 +1,4 @@
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/set_up_comparison_against_published"
@@ -15,9 +15,9 @@ import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/
 
 
 export const Error: Error = ($) => {
-    return _pt.cc($, ($): d_out.Block_Part => {
+    return _p.cc($, ($): d_out.Block_Part => {
         switch ($[0]) {
-            case 'error while running npm command': return _pt.ss($, ($) => sh.b.sub([
+            case 'error while running npm command': return _p.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while running npm command: `),
                 sh.b.indent([
                     sh.g.nested_block([
@@ -25,7 +25,7 @@ export const Error: Error = ($) => {
                     ])
                 ]),
             ]))
-            case 'error while running npm query': return _pt.ss($, ($) => sh.b.sub([
+            case 'error while running npm query': return _p.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while running npm query: `),
                 sh.b.indent([
                     sh.g.nested_block([
@@ -33,7 +33,7 @@ export const Error: Error = ($) => {
                     ])
                 ]),
             ]))
-            case 'error while running tar': return _pt.ss($, ($) => sh.b.sub([
+            case 'error while running tar': return _p.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while running tar: `),
                 sh.b.indent([
                     sh.g.nested_block([
@@ -41,7 +41,7 @@ export const Error: Error = ($) => {
                     ])
                 ]),
             ]))
-            case 'error while creating directory': return _pt.ss($, ($) => sh.b.sub([
+            case 'error while creating directory': return _p.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while creating directory: `),
                 sh.b.indent([
                     sh.g.nested_block([
@@ -49,7 +49,7 @@ export const Error: Error = ($) => {
                     ])
                 ]),
             ]))
-            case 'error while removing directory': return _pt.ss($, ($) => sh.b.sub([
+            case 'error while removing directory': return _p.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while removing directory: `),
                 sh.b.indent([
                     sh.g.nested_block([
@@ -57,7 +57,7 @@ export const Error: Error = ($) => {
                     ])
                 ]),
             ]))
-            case 'error while reading package.json': return _pt.ss($, ($) => sh.b.sub([
+            case 'error while reading package.json': return _p.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while reading package.json: `),
                 sh.b.indent([
                     sh.g.nested_block([
@@ -65,7 +65,7 @@ export const Error: Error = ($) => {
                     ])
                 ]),
             ]))
-            case 'error while parsing package.json': return _pt.ss($, ($) => sh.b.sub([
+            case 'error while parsing package.json': return _p.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while parsing package.json: `),
                 sh.b.indent([
                     sh.g.nested_block([
@@ -74,7 +74,7 @@ export const Error: Error = ($) => {
                     ])
                 ]),
             ]))
-            default: return _pt.au($[0])
+            default: return _p.au($[0])
         }
     })
 }

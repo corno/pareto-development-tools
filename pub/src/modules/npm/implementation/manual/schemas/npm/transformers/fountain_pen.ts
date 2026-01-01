@@ -1,4 +1,4 @@
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/npm"
@@ -12,13 +12,13 @@ import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/man
 
 
 export const Error: Error = ($) => {
-    return _pt.cc($, ($): d_out.Block_Part => {
+    return _p.cc($, ($): d_out.Block_Part => {
         switch ($[0]) {
-            case 'error while running npm': return _pt.ss($, ($) => sh.b.sub([
+            case 'error while running npm': return _p.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while running npm: `),
                 t_epe_to_fountain_pen.Error($)
             ]))
-            default: return _pt.au($[0])
+            default: return _p.au($[0])
         }
     })
 }

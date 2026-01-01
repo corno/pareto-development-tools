@@ -1,4 +1,4 @@
-import * as _pc from 'pareto-core-command'
+import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 import * as _pq from 'pareto-core-query'
@@ -15,10 +15,10 @@ import * as t_line_count_to_line_count from "../schemas/directory_content/transf
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
 
 
-export const $$: signatures.commands.list_file_structure_problems = _pc.create_command_procedure(
+export const $$: signatures.commands.list_file_structure_problems = _p.create_command_procedure(
     ($p, $cr, $q) => [
 
-        _pc.query_without_error_transformation(
+        _p.query_without_error_transformation(
             $q['read directory'](
                 {
                     'path': t_path_to_path.create_node_path($p['path'], `packages`),

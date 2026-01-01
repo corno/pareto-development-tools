@@ -1,4 +1,4 @@
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/api"
@@ -24,36 +24,36 @@ import * as t_update_dependencies from "../../update_dependencies/transformers/f
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory/transformers/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../../../modules/npm/implementation/manual/schemas/set_up_comparison_against_published/transformers/fountain_pen"
 
-export const Error: signatures.Error = ($) => _pt.cc($, ($) => {
+export const Error: signatures.Error = ($) => _p.cc($, ($) => {
     switch ($[0]) {
-        case 'analyze file structure': return _pt.ss($, ($) => t_line_count_to_fountain_pen.Error($))
-        case 'dependency graph': return _pt.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
-        case 'git assert clean': return _pt.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
-        case 'project': return _pt.ss($, ($) => _pt.cc($, ($) => {
+        case 'analyze file structure': return _p.ss($, ($) => t_line_count_to_fountain_pen.Error($))
+        case 'dependency graph': return _p.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
+        case 'git assert clean': return _p.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
+        case 'project': return _p.ss($, ($) => _p.cc($, ($) => {
             switch ($[0]) {
-                case 'packages': return _pt.ss($, ($) => sh.b.indent($.to_list(($, key) => sh.g.nested_block([
+                case 'packages': return _p.ss($, ($) => sh.b.indent($.to_list(($, key) => sh.g.nested_block([
                     sh.b.snippet(`package '${key}': `),
-                    _pt.cc($, ($) => {
+                    _p.cc($, ($) => {
                         switch ($[0]) {
-                            case 'build and test': return _pt.ss($, ($) => t_build_and_test_to_fountain_pen.Error($))
-                            case 'build': return _pt.ss($, ($) => t_build_to_fountain_pen.Error($))
-                            case 'git assert clean': return _pt.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
-                            case 'git commit': return _pt.ss($, ($) => t_git_extended_commit_to_fountain_pen.Error($))
-                            case 'git remove tracked but ignored': return _pt.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
-                            case 'set up comparison': return _pt.ss($, ($) => t_set_up_comparison_against_published.Error($))
-                            case 'update dependencies': return _pt.ss($, ($) => t_update_dependencies.Error($))
-                            default: return _pt.au($[0])
+                            case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($))
+                            case 'build': return _p.ss($, ($) => t_build_to_fountain_pen.Error($))
+                            case 'git assert clean': return _p.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
+                            case 'git commit': return _p.ss($, ($) => t_git_extended_commit_to_fountain_pen.Error($))
+                            case 'git remove tracked but ignored': return _p.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
+                            case 'set up comparison': return _p.ss($, ($) => t_set_up_comparison_against_published.Error($))
+                            case 'update dependencies': return _p.ss($, ($) => t_update_dependencies.Error($))
+                            default: return _p.au($[0])
                         }
                     })
                 ]))))
-                case 'could not read packages directory': return _pt.ss($, ($) => sh.b.sub([
+                case 'could not read packages directory': return _p.ss($, ($) => sh.b.sub([
                     sh.b.snippet(`could not read packages directory: `),
                     t_read_directory_to_fountain_pen.Error($)
                 ]))
-                default: return _pt.au($[0])
+                default: return _p.au($[0])
             }
         }))
-        case 'set up comparison': return _pt.ss($, ($): d_out.Block_Part => t_set_up_comparison_against_published.Error($))
-        default: return _pt.au($[0])
+        case 'set up comparison': return _p.ss($, ($): d_out.Block_Part => t_set_up_comparison_against_published.Error($))
+        default: return _p.au($[0])
     }
 })

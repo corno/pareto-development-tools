@@ -1,6 +1,6 @@
 
 import * as _pi from 'pareto-core-interface'
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core-transformer'
 
 import * as d_in from "../../../../../interface/to_be_generated/get_package_dependencies"
 import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/graphviz/data_types/target"
@@ -25,14 +25,14 @@ export const Result: Result = ($) => {
                         || key === "pareto-core-query"
                         || key === "pareto-host-nodejs"
                     ) {
-                        return _pt.not_set()
+                        return _p.not_set()
                     }
-                    return _pt.set(({
+                    return _p.set(({
                         'from': from,
                         'to': key,
                     }))
                 }).to_list($ => $),
-                () => _pt.list_literal([])
+                () => _p.list_literal([])
             )
         }).flatten(($) => $),
     }

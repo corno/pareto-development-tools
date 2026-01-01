@@ -1,4 +1,4 @@
-import * as _pc from 'pareto-core-command'
+import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
@@ -7,7 +7,7 @@ import * as signatures from "../../../interface/signatures"
 //dependencies
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
-export const $$: signatures.commands.npm = _pc.create_command_procedure(
+export const $$: signatures.commands.npm = _p.create_command_procedure(
     ($p, $cr) => [
         $cr['npm'].execute(
             {

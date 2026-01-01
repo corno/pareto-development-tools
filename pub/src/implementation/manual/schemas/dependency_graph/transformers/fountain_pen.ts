@@ -1,4 +1,4 @@
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/create_dependency_graph"
@@ -10,9 +10,9 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 import * as t_package_dependencies_to_fountain_pen from "../../package_dependencies/transformers/fountain_pen"
 
-export const Error: Error = ($) => _pt.cc($, ($) => {
+export const Error: Error = ($) => _p.cc($, ($) => {
     switch ($[0]) {
-        case 'log': return _pt.ss($, ($) => sh.b.sub([
+        case 'log': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`log: `),
             sh.b.indent([
                 sh.g.nested_block([
@@ -20,7 +20,7 @@ export const Error: Error = ($) => _pt.cc($, ($) => {
                 ])
             ])
         ]))
-        case 'package dependencies': return _pt.ss($, ($) => sh.b.sub([
+        case 'package dependencies': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`package dependencies: `),
             sh.b.indent([
                 sh.g.nested_block([
@@ -28,6 +28,6 @@ export const Error: Error = ($) => _pt.cc($, ($) => {
                 ])
             ])
         ]))
-        default: return _pt.au($[0])
+        default: return _p.au($[0])
     }
 })

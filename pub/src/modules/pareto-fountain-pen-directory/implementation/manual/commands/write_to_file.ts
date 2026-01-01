@@ -1,7 +1,7 @@
 
 import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
-import * as _pc from 'pareto-core-command'
+import * as _p from 'pareto-core-command'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -14,9 +14,9 @@ import { $$ as s_list_of_texts } from "pareto-standard-operations/dist/implement
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import { replace_space_in_context_path } from "../schemas/path/transformers/path"
 
-export const $$: signatures.commands.write_to_file = _pc.create_command_procedure(
+export const $$: signatures.commands.write_to_file = _p.create_command_procedure(
     ($p, $cr) => [
-        _pc.sequence<d_write_to_file.Error>([
+        _p.sequence<d_write_to_file.Error>([
             $cr['make directory'].execute(
                 $p['directory path'],
                 ($) => ['make directory', $],

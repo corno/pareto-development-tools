@@ -1,4 +1,4 @@
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/build_and_test"
@@ -11,13 +11,13 @@ import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/man
 
 export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
-export const Error: Error = ($) => _pt.cc($, ($) => {
+export const Error: Error = ($) => _p.cc($, ($) => {
     switch ($[0]) {
-        case 'error building': return _pt.ss($, ($) => t_build_to_fountain_pen.Error($))
-        case 'error testing': return _pt.ss($, ($) => sh.b.sub([
+        case 'error building': return _p.ss($, ($) => t_build_to_fountain_pen.Error($))
+        case 'error testing': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`error while testing:`),
             t_epe_to_fountain_pen.Error($),
         ]))
-        default: return _pt.au($[0])
+        default: return _p.au($[0])
     }
 })

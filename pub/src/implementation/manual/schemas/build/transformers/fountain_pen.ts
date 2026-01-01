@@ -1,4 +1,4 @@
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/build"
@@ -13,9 +13,9 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 import * as t_tsc_to_fountain_pen from "../../tsc/transformers/fountain_pen"
 import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/remove/transformers/fountain_pen"
 
-export const Error: signatures.Error = ($) => _pt.cc($, ($) => {
+export const Error: signatures.Error = ($) => _p.cc($, ($) => {
     switch ($[0]) {
-        case 'error building pub': return _pt.ss($, ($) => sh.b.sub([
+        case 'error building pub': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not build pub: (`),
             sh.b.snippet($.path),
             sh.b.snippet(`/pub)`),
@@ -25,7 +25,7 @@ export const Error: signatures.Error = ($) => _pt.cc($, ($) => {
                 ])
             ])
         ]))
-        case 'error building test': return _pt.ss($, ($) => sh.b.sub([
+        case 'error building test': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not build test: (`),
             sh.b.snippet($.path),
             sh.b.snippet(`/test)`),
@@ -35,7 +35,7 @@ export const Error: signatures.Error = ($) => _pt.cc($, ($) => {
                 ])
             ])
         ]))
-        case 'error removing pub dist dir': return _pt.ss($, ($) => sh.b.sub([
+        case 'error removing pub dist dir': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not remove pub dist dir: (`),
             sh.b.snippet($.path),
             sh.b.snippet(`/pub)`),
@@ -47,7 +47,7 @@ export const Error: signatures.Error = ($) => _pt.cc($, ($) => {
             ])
 
         ]))
-        case 'error removing test dist dir': return _pt.ss($, ($) => sh.b.sub([
+        case 'error removing test dist dir': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not remove test dist dir: (`),
             sh.b.snippet($.path),
             sh.b.snippet(`/test)`),
@@ -57,6 +57,6 @@ export const Error: signatures.Error = ($) => _pt.cc($, ($) => {
                 ])
             ])
         ]))
-        default: return _pt.au($[0])
+        default: return _p.au($[0])
     }
 })

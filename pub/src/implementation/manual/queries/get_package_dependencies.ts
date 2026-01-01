@@ -1,4 +1,4 @@
-import * as _pq from 'pareto-core-query'
+import * as _p from 'pareto-core-query'
 import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 import * as _pinternals from 'pareto-core-internals'
@@ -13,7 +13,7 @@ import * as d_npm from "../../../modules/npm/implementation/manual/schemas/npm_p
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/schemas/npm_package/refiners/temp"
 
-export const $$: signatures.queries.get_package_dependencies = _pq.create_query_function(
+export const $$: signatures.queries.get_package_dependencies = _p.create_query_function(
     ($p, $r) => $r['read directory'](
         {
             'path': t_path_to_path.create_node_path($p['path'], `packages`),
@@ -21,13 +21,13 @@ export const $$: signatures.queries.get_package_dependencies = _pq.create_query_
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(
         ($) => {
-            return _pq.dictionary.parallel(
+            return _p.dictionary.parallel(
                 $.map(($) => {
                     const path = $.path
                     return _pt.cc($['node type'], ($): _pi.Query_Result<d_npm.NPM_Package, d.Package_Error> => {
                         switch ($[0]) {
-                            case 'file': return _pt.ss($, ($) => _pq.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
-                            case 'other': return _pt.ss($, ($) => _pq.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                            case 'file': return _pt.ss($, ($) => _p.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                            case 'other': return _pt.ss($, ($) => _p.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
                             case 'directory': return _pt.ss($, ($) => {
                                 return $r['read file'](
                                     t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` }),

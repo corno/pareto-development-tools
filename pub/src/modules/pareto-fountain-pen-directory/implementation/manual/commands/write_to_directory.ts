@@ -1,7 +1,7 @@
 
 import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
-import * as _pc from 'pareto-core-command'
+import * as _p from 'pareto-core-command'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -13,10 +13,10 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 import { replace_space_in_context_path } from "../schemas/path/transformers/path"
 
 
-export const $$: signatures.commands.write_to_directory = _pc.create_command_procedure(
+export const $$: signatures.commands.write_to_directory = _p.create_command_procedure(
     ($p, $cr, $qr) => [
-        _pc.sequence<d_write_to_directory.Error>([
-            _pc.if_(
+        _p.sequence<d_write_to_directory.Error>([
+            _p.if_(
                 $p['remove before creating'],
                 [
                     $cr.remove.execute(
@@ -30,7 +30,7 @@ export const $$: signatures.commands.write_to_directory = _pc.create_command_pro
                     )
                 ]
             ),
-            _pc.dictionary.parallel(
+            _p.dictionary.parallel(
                 $p.directory,
                 ($, key) => [
                     _pt.cc($, ($): _pi.Command_Promise<d_write_to_directory.Error__nodes> => {

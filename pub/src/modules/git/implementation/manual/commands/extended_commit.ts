@@ -1,4 +1,4 @@
-import * as _pc from 'pareto-core-command'
+import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
 
 import * as signatures from "../../../interface/signatures"
@@ -10,9 +10,9 @@ import * as d from "../../../interface/to_be_generated/extended_commit"
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
 
-export const $$: signatures.commands.extended_commit = _pc.create_command_procedure(
+export const $$: signatures.commands.extended_commit = _p.create_command_procedure(
     ($p, $cr, $qr) => [
-        _pc.deprecated_conditional.query(
+        _p.deprecated_conditional.query(
             $qr['git is repository clean'](
                 {
                     'path': $p.path
@@ -21,8 +21,8 @@ export const $$: signatures.commands.extended_commit = _pc.create_command_proced
             ).transform_result(
                 ($) => !$
             ),
-            _pc.sequence([
-                _pc.if_(
+            _p.sequence([
+                _p.if_(
                     $p.instruction['stage all changes'],
                     [
                         $cr.git.execute(
@@ -64,7 +64,7 @@ export const $$: signatures.commands.extended_commit = _pc.create_command_proced
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
-                _pc.if_(
+                _p.if_(
                     $p.instruction['push after commit'],
                     [
                         $cr.git.execute(

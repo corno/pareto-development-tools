@@ -1,4 +1,4 @@
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/analyze_file_structure"
@@ -11,9 +11,9 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 import * as t_package_dependencies_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/directory_content/transformers/fountain_pen"
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory/transformers/fountain_pen"
 
-export const Error: Error = ($) => _pt.cc($, ($) => {
+export const Error: Error = ($) => _p.cc($, ($) => {
     switch ($[0]) {
-        case 'log': return _pt.ss($, ($) => sh.b.sub([
+        case 'log': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`log: `),
             sh.b.indent([
                 sh.g.nested_block([
@@ -21,25 +21,25 @@ export const Error: Error = ($) => _pt.cc($, ($) => {
                 ])
             ])
         ]))
-        case 'directory content processing': return _pt.ss($, ($) => sh.b.sub([
+        case 'directory content processing': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`directory content processing: `),
             sh.b.indent([
                 sh.g.sub($.to_list(($, key) => sh.g.nested_block([
                     sh.b.snippet(`${key}: `),
-                    _pt.cc($, ($) => {
+                    _p.cc($, ($) => {
                         switch ($[0]) {
-                            case 'not a directory': return _pt.ss($, ($) =>sh.b.snippet(`not a directory`))
-                            case 'directory content': return _pt.ss($, ($) => t_package_dependencies_to_fountain_pen.Error($))
-                            default: return _pt.au($[0])
+                            case 'not a directory': return _p.ss($, ($) =>sh.b.snippet(`not a directory`))
+                            case 'directory content': return _p.ss($, ($) => t_package_dependencies_to_fountain_pen.Error($))
+                            default: return _p.au($[0])
                         }
                     })
 
                 ])))
             ])
         ]))
-        case 'read directory': return _pt.ss($, ($) => sh.b.sub([
+        case 'read directory': return _p.ss($, ($) => sh.b.sub([
             t_read_directory_to_fountain_pen.Error($)
         ]))
-        default: return _pt.au($[0])
+        default: return _p.au($[0])
     }
 })

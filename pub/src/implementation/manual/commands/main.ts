@@ -1,4 +1,4 @@
-import * as _pc from 'pareto-core-command'
+import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
 import * as _pdev from 'pareto-core-dev'
 
@@ -16,9 +16,9 @@ import * as s_fp_block from "pareto-fountain-pen/dist/implementation/manual/sche
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 
-export const $$: signatures.commands.main = _pc.create_command_procedure(
+export const $$: signatures.commands.main = _p.create_command_procedure(
     ($p, $cr) => [
-        _pc.refine_without_error_transformation(
+        _p.refine_without_error_transformation(
 
             // parse command line instruction
             (abort) => r_instruction.Command(

@@ -1,4 +1,4 @@
-import * as _pc from 'pareto-core-command'
+import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
@@ -12,7 +12,7 @@ import * as d_path from "pareto-resources/dist/interface/generated/pareto/schema
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
 
-export const $$: signatures.commands.api = _pc.create_command_procedure(
+export const $$: signatures.commands.api = _p.create_command_procedure(
     ($p, $cr, $qr) => _pt.cc($p, ($) => {
         switch ($[0]) {
             case 'analyze file structure': return _pt.ss($, ($) => [
@@ -57,7 +57,7 @@ export const $$: signatures.commands.api = _pc.create_command_procedure(
                     { 'addition': `comparison` }
                 )
                 return [
-                    _pc.dictionary.deprecated_parallel.query(
+                    _p.dictionary.deprecated_parallel.query(
                         $qr['read directory'](
                             {
                                 'path': t_path_to_path.create_node_path(

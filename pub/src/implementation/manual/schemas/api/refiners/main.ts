@@ -1,4 +1,4 @@
-import * as _pr from 'pareto-core-refiner'
+import * as _p from 'pareto-core-refiner'
 import * as _pi from 'pareto-core-interface'
 
 import * as d_result from "../../../../../interface/to_be_generated/api"
@@ -10,7 +10,7 @@ import * as builders from "../productions/text"
 
 export const Command: _pi.Refiner<d_result.Parameters, d_error.Error, d_input.Parameters> = ($, abort) => {
     return builders.Command(
-        _pr.create_iterator($.arguments),
+        _p.create_iterator($.arguments),
         abort,
     )
 }
