@@ -5,9 +5,9 @@ import * as _pi from 'pareto-core-interface'
 import * as _pq from 'pareto-core-query'
 import * as _pc from 'pareto-core-command'
 
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
-import * as d_espe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
-import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
+import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+import * as d_espe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
+import * as d_eqe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
 
 import { $$ as q_git_is_repository_clean } from "./modules/git/implementation/manual/queries/is_repository_clean"
 import { $$ as q_git_is_inside_work_tree } from "./modules/git/implementation/manual/queries/is_inside_work_tree"

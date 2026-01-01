@@ -7,7 +7,7 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/update_dependencies"
 
 //dependencies
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
 export const $$: signatures.commands.update_dependencies = _pc.create_command_procedure(
     ($p, $cr) => [

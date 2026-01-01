@@ -8,7 +8,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
-import * as t_eqe_to_fountain_pen from "exupery-resources/dist/implementation/transformers/schemas/execute_query_executable/fountain_pen"
+import * as t_eqe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_query_executable/transformers/fountain_pen"
 import * as t_git_is_clean_to_fountain_pen from "../../is_repository_clean/transformers/fountain_pen"
 
 export const Error: Error = ($) => _pt.cc($, ($): d_out.Block_Part => {

@@ -5,7 +5,7 @@ import * as _pdev from 'pareto-core-dev'
 import * as signatures from "../../../interface/signatures"
 
 //data types
-import * as d from "exupery-resources/dist/interface/to_be_generated/temp_main"
+import * as d from "pareto-resources/dist/interface/to_be_generated/temp_main"
 
 //dependencies
 import * as r_instruction from "../schemas/api/refiners/main"

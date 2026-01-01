@@ -8,7 +8,7 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-import * as t_epe_to_fountain_pen from "exupery-resources/dist/implementation/transformers/schemas/execute_procedure_executable/fountain_pen"
+import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_command_executable/transformers/fountain_pen"
 
 
 export const Error: Error = ($) => {

@@ -10,12 +10,12 @@ import { $$ as x_structure } from "../../../data/structure"
 
 //data types
 import * as d from "../../../interface/to_be_generated/analyze_file_structure"
-import * as d_directory_content from "exupery-resources/dist/interface/to_be_generated/directory_content"
+import * as d_directory_content from "pareto-resources/dist/interface/to_be_generated/directory_content"
 
 //dependencies
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import * as t_line_count_to_line_count from "../schemas/directory_content/transformers/directory_analysis"
-import { $$ as q_directory_content } from "exupery-resources/dist/implementation/queries/read_directory_content"
+import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
 
 export const $$: signatures.commands.analyze_file_structure = _pc.create_command_procedure(
     ($p, $cr, $q) => [

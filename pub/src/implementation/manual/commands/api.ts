@@ -6,10 +6,10 @@ import * as signatures from "../../../interface/signatures"
 
 //data types
 import * as d from "../../../interface/to_be_generated/api"
-import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
 //dependencies
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
 
 export const $$: signatures.commands.api = _pc.create_command_procedure(
@@ -49,7 +49,13 @@ export const $$: signatures.commands.api = _pc.create_command_procedure(
             ])
             case 'project': return _pt.ss($, ($) => {
                 const path_to_project = $['path to project']
-                const path_to_temp = t_path_to_path.extend_context_path($['path to project'], { 'addition': `temp` })
+                const path_to_temp = t_path_to_path.extend_context_path(
+                    t_path_to_path.extend_context_path(
+                        $['path to project'],
+                        { 'addition': `temp` }
+                    ),
+                    { 'addition': `comparison` }
+                )
                 return [
                     _pc.dictionary.deprecated_parallel.query(
                         $qr['read directory'](

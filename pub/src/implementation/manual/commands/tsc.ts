@@ -7,7 +7,7 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/tsc"
 
 //dependencies
-import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
+import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
 export const $$: signatures.commands.tsc = _pc.create_command_procedure(
 

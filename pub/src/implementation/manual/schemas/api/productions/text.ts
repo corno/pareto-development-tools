@@ -4,9 +4,9 @@ import * as _pi from 'pareto-core-interface'
 import * as d from "../../../../../interface/to_be_generated/api"
 import * as d_error from "../../../../../interface/to_be_generated/parse"
 
-import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
+import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
 
-import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
+import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
 const consume_current = <T>(iterator: _pi.Iterator<T>): _pi.Optional_Value<T> => {
     const current = iterator['get current']()

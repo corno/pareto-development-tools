@@ -4,7 +4,7 @@ import * as d_update2latest from "../../modules/npm/interface/to_be_generated/up
 
 import * as d_gc from "../../modules/git/interface/to_be_generated/clean"
 import * as d_npm from "../../modules/npm/interface/to_be_generated/npm"
-import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
 export type Parameters = {
     'path': d_path.Node_Path,

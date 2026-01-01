@@ -7,9 +7,9 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/build"
 
 //dependencies
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
-import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
-import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
+import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
 
 export const $$: signatures.commands.build = _pc.create_command_procedure(
     ($p, $cr) => [

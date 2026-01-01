@@ -6,7 +6,7 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/sche
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-import * as t_epe_to_fountain_pen from "exupery-resources/dist/implementation/transformers/schemas/execute_procedure_executable/fountain_pen"
+import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_command_executable/transformers/fountain_pen"
 
 export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 

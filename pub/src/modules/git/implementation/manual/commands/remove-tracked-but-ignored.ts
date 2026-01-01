@@ -7,7 +7,7 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/remove_tracked_but_ignored"
 
 //dependencies
-import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
+import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
 export const $$: signatures.commands.remove_tracked_but_ignored = _pc.create_command_procedure(
     ($p, $cr) => [

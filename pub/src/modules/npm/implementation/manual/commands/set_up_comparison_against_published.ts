@@ -13,9 +13,9 @@ import * as d_npm_package from "../schemas/npm_package/refiners/temp"
 
 //dependencies
 import { $$ as r_parse_npm_package } from "../schemas/npm_package/refiners/temp"
-import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
-// import * as ds_context_path from "exupery-resources/dist/implementation/deserializers/schemas/context_path"
+import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
+// import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
 
 const remove_n_characters_from_end = ($: string, n: number): string => {
 

@@ -11,7 +11,7 @@ export namespace signatures {
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 import * as t_tsc_to_fountain_pen from "../../tsc/transformers/fountain_pen"
-import * as t_remove_to_fountain_pen from "exupery-resources/dist/implementation/transformers/schemas/remove/fountain_pen"
+import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/remove/transformers/fountain_pen"
 
 export const Error: signatures.Error = ($) => _pt.cc($, ($) => {
     switch ($[0]) {

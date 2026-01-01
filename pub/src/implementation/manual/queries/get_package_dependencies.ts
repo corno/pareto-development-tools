@@ -10,7 +10,7 @@ import * as d from "../../../interface/to_be_generated/get_package_dependencies"
 import * as d_npm from "../../../modules/npm/implementation/manual/schemas/npm_package/refiners/temp"
 
 //dependencies
-import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/schemas/npm_package/refiners/temp"
 
 export const $$: signatures.queries.get_package_dependencies = _pq.create_query_function(

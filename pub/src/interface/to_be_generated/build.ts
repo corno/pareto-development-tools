@@ -1,8 +1,8 @@
 import * as _pi from 'pareto-core-interface'
 
 import * as d_tsc from "./tsc"
-import * as d_remove from "exupery-resources/dist/interface/generated/pareto/schemas/remove/data_types/source"
-import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
+import * as d_remove from "pareto-resources/dist/interface/generated/pareto/schemas/remove/data_types/source"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
 export type Parameters = {
     'path': d_path.Node_Path,

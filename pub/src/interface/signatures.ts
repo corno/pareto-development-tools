@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core-interface'
 
 import * as resources from "./resources"
-import * as resources_exupery from "exupery-resources/dist/interface/resources"
+import * as resources_exupery from "pareto-resources/dist/interface/resources"
 import * as resources_git from "../modules/git/interface/resources"
 import * as resources_npm from "../modules/npm/interface/resources"
 import * as resources_fp from "../modules/pareto-fountain-pen-directory/interface/resources"

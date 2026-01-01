@@ -5,7 +5,7 @@ import * as _pi from 'pareto-core-interface'
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
-import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
+import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
 export const $$: signatures.commands.npm = _pc.create_command_procedure(
     ($p, $cr) => [

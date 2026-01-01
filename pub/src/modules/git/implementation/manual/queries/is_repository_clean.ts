@@ -8,8 +8,8 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/is_repository_clean"
 
 //dependencies
-import * as s_path from "exupery-resources/dist/implementation/serializers/schemas/path"
-// import * as t_path_to_path from "exupery-resources/dist/implementation/transformers/schemas/path/path"
+import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+// import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
 export const $$: signatures.queries.is_repository_clean = _pq.create_query_function(
     ($p, $qr) => $qr.git(

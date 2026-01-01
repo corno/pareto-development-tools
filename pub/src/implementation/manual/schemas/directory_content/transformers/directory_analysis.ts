@@ -3,7 +3,7 @@ import * as _pi from 'pareto-core-interface'
 import * as _pds from 'pareto-core-deserializer'
 import * as _pinternals from 'pareto-core-internals'
 
-import * as d_in from "exupery-resources/dist/interface/to_be_generated/directory_content"
+import * as d_in from "pareto-resources/dist/interface/to_be_generated/directory_content"
 import * as d_out from "../../../../../interface/to_be_generated/temp_directory_analysis"
 import * as d_structure from "../../../../../interface/generated/pareto/schemas/structure/data_types/target"
 

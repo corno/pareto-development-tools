@@ -1,11 +1,11 @@
 import * as _pi from 'pareto-core-interface'
 
-import * as d_epe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
-import * as d_eqe from "exupery-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
-import * as d_make_directory from "exupery-resources/dist/interface/generated/pareto/schemas/make_directory/data_types/source"
-import * as d_remove from "exupery-resources/dist/interface/generated/pareto/schemas/remove/data_types/source"
-import * as d_read_file from "exupery-resources/dist/interface/generated/pareto/schemas/read_file/data_types/source"
-import * as d_path from "exupery-resources/dist/interface/generated/pareto/schemas/path/data_types/source"
+import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+import * as d_eqe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
+import * as d_make_directory from "pareto-resources/dist/interface/generated/pareto/schemas/make_directory/data_types/source"
+import * as d_remove from "pareto-resources/dist/interface/generated/pareto/schemas/remove/data_types/source"
+import * as d_read_file from "pareto-resources/dist/interface/generated/pareto/schemas/read_file/data_types/source"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/source"
 import * as d_npm_package from "../../implementation/manual/schemas/npm_package/refiners/temp"
 
 export type Parameters = {
