@@ -6,7 +6,7 @@ import * as signatures from "../../../interface/signatures"
 //dependencies
 import * as t_block_to_lines from "pareto-fountain-pen/dist/implementation/manual/schemas/block/transformers/lines"
 
-export const $$: signatures.commands.console_log = _p.create_command_procedure(
+export const $$: signatures.commands.console_log = _p.command_procedure(
     ($p, $cr) => [
         $cr['log'].execute(
             {

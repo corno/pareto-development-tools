@@ -34,7 +34,7 @@ const remove_n_characters_from_end = ($: string, n: number): string => {
     })
 }
 
-export const $$: signatures.commands.set_up_comparison_against_published = _p.create_command_procedure(
+export const $$: signatures.commands.set_up_comparison_against_published = _p.command_procedure(
     ($p, $cr, $qr) => {
 
         return [

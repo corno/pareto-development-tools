@@ -10,7 +10,7 @@ import * as d from "../../../interface/to_be_generated/extended_commit"
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
 
-export const $$: signatures.commands.extended_commit = _p.create_command_procedure(
+export const $$: signatures.commands.extended_commit = _p.command_procedure(
     ($p, $cr, $qr) => [
         _p.if_.query(
             $qr['git is repository clean'](

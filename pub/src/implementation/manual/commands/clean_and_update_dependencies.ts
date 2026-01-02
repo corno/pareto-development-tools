@@ -6,7 +6,7 @@ import * as signatures from "../../../interface/signatures"
 //data types
 import * as d from "../../../interface/to_be_generated/clean_and_update_dependencies"
 
-export const $$: signatures.commands.clean_and_update_dependencies = _p.create_command_procedure(
+export const $$: signatures.commands.clean_and_update_dependencies = _p.command_procedure(
     ($p, $cr) =>[
 
         // clean

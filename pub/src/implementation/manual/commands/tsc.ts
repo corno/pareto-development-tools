@@ -9,7 +9,7 @@ import * as d from "../../../interface/to_be_generated/tsc"
 //dependencies
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
-export const $$: signatures.commands.tsc = _p.create_command_procedure(
+export const $$: signatures.commands.tsc = _p.command_procedure(
 
     // tsc
     ($p, $cr) => [

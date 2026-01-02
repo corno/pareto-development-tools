@@ -16,7 +16,7 @@ import * as s_fp_block from "pareto-fountain-pen/dist/implementation/manual/sche
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 
-export const $$: signatures.commands.main = _p.create_command_procedure(
+export const $$: signatures.commands.main = _p.command_procedure(
     ($p, $cr) => [
         _p.refine_without_error_transformation(
 

@@ -17,7 +17,7 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
         error: (error: Preparation_Error) => _pi.Query_Result<Target_Outcome, Target_Error>,
     },
 ): _pi.Query_Result<Target_Outcome, Target_Error> => {
-    return _p.__create_query_result<Target_Outcome, Target_Error>((onResult, onError) => {
+    return _p.__query_result<Target_Outcome, Target_Error>((onResult, onError) => {
         result.__extract_data(
             (r) => {
                 handlers.success(r).__extract_data(onResult, onError)
@@ -30,7 +30,7 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
 
 }
 
-export const $$: signatures.queries.is_inside_work_tree = _p.create_query_function(($p, $r) => {
+export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p, $r) => {
     return temp_observe_behavior(
         $r.git(
             {
@@ -53,11 +53,11 @@ export const $$: signatures.queries.is_inside_work_tree = _p.create_query_functi
         {
             success: ($) => {
                 if ($.stdout === `true`) {
-                    return _p.__create_query_result((onResult, onError) => {
+                    return _p.__query_result((onResult, onError) => {
                         onResult(true)
                     })
                 } else {
-                    return _p.__create_query_result<boolean, d.Error>((onResult, onError) => {
+                    return _p.__query_result<boolean, d.Error>((onResult, onError) => {
                         onResult(false)
                     })
                 }
@@ -65,7 +65,7 @@ export const $$: signatures.queries.is_inside_work_tree = _p.create_query_functi
             error: ($) => _pt.cc($, ($) => {
                 switch ($[0]) {
                     case 'failed to spawn': return _pt.ss($, ($) => {
-                        return _p.__create_query_result<boolean, d.Error>((on_succes, on_error) => {
+                        return _p.__query_result<boolean, d.Error>((on_succes, on_error) => {
                             on_error(['could not run git command', {
                             'message': $.message
                         }])
@@ -73,11 +73,11 @@ export const $$: signatures.queries.is_inside_work_tree = _p.create_query_functi
                     })
                     case 'non zero exit code': return _pt.ss($, ($) => {
                         if ($['exit code'].transform(($) => $ === 128, () => false)) {
-                            return _p.__create_query_result((onResult, onError) => {
+                            return _p.__query_result((onResult, onError) => {
                                 onResult(false)
                             })
                         } else {
-                            return _p.__create_query_result<boolean, d.Error>((on_succes, on_error) => {
+                            return _p.__query_result<boolean, d.Error>((on_succes, on_error) => {
                                 on_error(['unexpected output', $.stderr])
                             })
                         }

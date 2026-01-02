@@ -17,7 +17,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 import * as t_line_count_to_line_count from "../schemas/directory_content/transformers/directory_analysis"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
 
-export const $$: signatures.commands.analyze_file_structure = _p.create_command_procedure(
+export const $$: signatures.commands.analyze_file_structure = _p.command_procedure(
     ($p, $cr, $q) => [
 
         _p.query_without_error_transformation(
@@ -33,8 +33,8 @@ export const $$: signatures.commands.analyze_file_structure = _p.create_command_
                             const path = $.path
                             return _pt.cc($['node type'], ($) => {
                                 switch ($[0]) {
-                                    case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.raise_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                                    case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.raise_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                                    case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                                    case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
                                     case 'directory': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                                         return q_directory_content($q)(
                                             {

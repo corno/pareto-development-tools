@@ -9,7 +9,7 @@ import * as d from "../../../interface/to_be_generated/build_and_test"
 //dependencies
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
-export const $$: signatures.commands.build_and_test = _p.create_command_procedure(
+export const $$: signatures.commands.build_and_test = _p.command_procedure(
     ($p, $cr) => [
 
         // build

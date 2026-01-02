@@ -14,7 +14,7 @@ import { $$ as s_list_of_texts } from "pareto-standard-operations/dist/implement
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import { replace_space_in_context_path } from "../schemas/path/transformers/path"
 
-export const $$: signatures.commands.write_to_file = _p.create_command_procedure(
+export const $$: signatures.commands.write_to_file = _p.command_procedure(
     ($p, $cr) => [
         $cr['make directory'].execute(
             $p['directory path'],

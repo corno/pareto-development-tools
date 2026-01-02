@@ -36,7 +36,7 @@ const create_eqe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
 ): _pi.Query<d_eqe.Result, d_epe.Error, d_epe.Parameters> => {
-    return _pq.__create_query(
+    return _pq.__query(
         ($p) => {
             return $r.queries['execute any query executable'](
                 {
@@ -53,7 +53,7 @@ const create_epe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
 ): _pi.Command<d_epe.Error, d_epe.Parameters> => {
-    return _pc.__create_resource_command(($p) => {
+    return _pc.__command(($p) => {
         return $r.commands['execute any procedure executable'].execute(
             {
                 'program': program,
@@ -68,7 +68,7 @@ const create_espe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
 ): _pi.Command<d_espe.Error, d_espe.Parameters> => {
-    return _pc.__create_resource_command(($p) => {
+    return _pc.__command(($p) => {
         return $r.commands['execute any smelly procedure executable'].execute(
             {
                 'program': program,

@@ -9,7 +9,7 @@ import * as d from "../../../interface/to_be_generated/clean"
 //dependencies
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
-export const $$: signatures.commands.clean = _p.create_command_procedure(
+export const $$: signatures.commands.clean = _p.command_procedure(
     ($p, $cr) => [
         $cr.git.execute(
             {

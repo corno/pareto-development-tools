@@ -7,7 +7,7 @@ import * as signatures from "../../../interface/signatures"
 //dependencies
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
-export const $$: signatures.commands.update2latest = _p.create_command_procedure(
+export const $$: signatures.commands.update2latest = _p.command_procedure(
     ($p, $cr) => [
         $cr.update2latest.execute(
             {

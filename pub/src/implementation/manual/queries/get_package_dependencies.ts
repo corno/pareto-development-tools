@@ -13,7 +13,7 @@ import * as d_npm from "../../../modules/npm/implementation/manual/schemas/npm_p
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/schemas/npm_package/refiners/temp"
 
-export const $$: signatures.queries.get_package_dependencies = _p.create_query_function(
+export const $$: signatures.queries.get_package_dependencies = _p.query_function(
     ($p, $r) => $r['read directory'](
         {
             'path': t_path_to_path.create_node_path($p['path'], `packages`),
@@ -26,8 +26,8 @@ export const $$: signatures.queries.get_package_dependencies = _p.create_query_f
                     const path = $.path
                     return _pt.cc($['node type'], ($): _pi.Query_Result<d_npm.NPM_Package, d.Package_Error> => {
                         switch ($[0]) {
-                            case 'file': return _pt.ss($, ($) => _p.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
-                            case 'other': return _pt.ss($, ($) => _p.raise_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                            case 'file': return _pt.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                            case 'other': return _pt.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
                             case 'directory': return _pt.ss($, ($) => {
                                 return $r['read file'](
                                     t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` }),

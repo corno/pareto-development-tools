@@ -11,7 +11,7 @@ import * as d from "../../../interface/to_be_generated/is_repository_clean"
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 // import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
-export const $$: signatures.queries.is_repository_clean = _p.create_query_function(
+export const $$: signatures.queries.is_repository_clean = _p.query_function(
     ($p, $qr) => $qr.git(
         {
             'args': _pt.list_literal<_pi.List<string>>([

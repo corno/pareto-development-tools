@@ -12,7 +12,7 @@ import * as d_path from "pareto-resources/dist/interface/generated/pareto/schema
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
 
-export const $$: signatures.commands.api = _p.create_command_procedure(
+export const $$: signatures.commands.api = _p.command_procedure(
     ($p, $cr, $qr) => _pt.cc($p, ($) => {
         switch ($[0]) {
             case 'analyze file structure': return _pt.ss($, ($) => [

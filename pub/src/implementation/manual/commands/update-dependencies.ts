@@ -9,7 +9,7 @@ import * as d from "../../../interface/to_be_generated/update_dependencies"
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
-export const $$: signatures.commands.update_dependencies = _p.create_command_procedure(
+export const $$: signatures.commands.update_dependencies = _p.command_procedure(
     ($p, $cr) => [
 
         // update dependencies of pub

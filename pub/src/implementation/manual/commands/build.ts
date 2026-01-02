@@ -11,7 +11,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
 
-export const $$: signatures.commands.build = _p.create_command_procedure(
+export const $$: signatures.commands.build = _p.command_procedure(
     ($p, $cr) => [
         $cr.remove.execute(
             {

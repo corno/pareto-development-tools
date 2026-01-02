@@ -9,7 +9,7 @@ import * as d from "../../../interface/to_be_generated/remove_tracked_but_ignore
 //dependencies
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
-export const $$: signatures.commands.remove_tracked_but_ignored = _p.create_command_procedure(
+export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_procedure(
     ($p, $cr) => [
         $cr['assert is clean'].execute(
             {

@@ -13,7 +13,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 import { replace_space_in_context_path } from "../schemas/path/transformers/path"
 
 
-export const $$: signatures.commands.write_to_directory = _p.create_command_procedure(
+export const $$: signatures.commands.write_to_directory = _p.command_procedure(
     ($p, $cr, $qr) => [
         _p.if_.direct(
             $p['remove before creating'],
