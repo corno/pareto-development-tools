@@ -1,0 +1,116 @@
+(
+    'operations': {
+    }
+    'schema tree': | 'set' {
+        `structure`: | 'schema' (
+            'complexity': | 'unconstrained' ~
+            'globals': (
+                'complexity': | 'unconstrained' ~
+                'number types': {
+                    `Position`: (
+                        'precision': | 'exact' (
+                            'decimal separator offset': ~
+                            'type': | 'natural' ~
+                        )
+                    )
+                }
+                'text types': {
+                    `Text Value`: (
+                        'type': | 'single line' ~
+                    )
+                }
+            )
+            'imports': {
+            }
+            'types': {
+                `Directory`: (
+                    'node': | 'state group' {
+                        `dictionary`: (
+                            'description': ~
+                            'node': | 'component' | 'internal cyclic' `Directory`
+                        )
+                        `group`: (
+                            'description': ~
+                            'node': | 'dictionary' (
+                                'node': | 'state group' {
+                                    `directory`: (
+                                        'description': ~
+                                        'node': | 'component' | 'internal cyclic' `Directory`
+                                    )
+                                    `file`: (
+                                        'description': ~
+                                        'node': | 'state group' {
+                                            `manual`: (
+                                                'description': ~
+                                                'node': | 'nothing' ~
+                                            )
+                                            `generated`: (
+                                                'description': ~
+                                                'node': | 'group' {
+                                                    `commit to git`: (
+                                                        'description': ~
+                                                        'node': | 'boolean' ~
+                                                    )
+                                                }
+                                            )
+                                        }
+                                    )
+                                }
+                                'ordered': `false`
+                            )
+                        )
+                        `wildcards`: (
+                            'description': ~
+                            'node': | 'group' {
+                                `required directories`: (
+                                    'description': ~
+                                    'node': | 'number' | 'local' (
+                                        'precision': | 'exact' (
+                                            'decimal separator offset': ~
+                                            'type': | 'natural' ~
+                                        )
+                                    )
+                                )
+                                `additional directories allowed`: (
+                                    'description': ~
+                                    'node': | 'boolean' ~
+                                )
+                                `extensions`: (
+                                    'description': ~
+                                    'node': | 'list' (
+                                        'node': | 'text' | 'local' (
+                                            'type': | 'single line' ~
+                                        )
+                                    )
+                                )
+                                `warn`: (
+                                    'description': ~
+                                    'node': | 'boolean' ~
+                                )
+                            }
+                        )
+                        `freeform`: (
+                            'description': ~
+                            'node': | 'nothing' ~
+                        )
+                        `ignore`: (
+                            'description': ~
+                            'node': | 'nothing' ~
+                        )
+                        `generated`: (
+                            'description': ~
+                            'node': | 'group' {
+                                `commit to git`: (
+                                    'description': ~
+                                    'node': | 'boolean' ~
+                                )
+                            }
+                        )
+                    }
+                    'type parameters': {
+                    }
+                )
+            }
+        )
+    }
+)
