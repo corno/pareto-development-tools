@@ -16,25 +16,23 @@ import { replace_space_in_context_path } from "../schemas/path/transformers/path
 
 export const $$: signatures.commands.write_to_file = _p.create_command_procedure(
     ($p, $cr) => [
-        _p.sequence<d_write_to_file.Error>([
-            $cr['make directory'].execute(
-                $p['directory path'],
-                ($) => ['make directory', $],
-            ),
-            $cr['write file'].execute(
-                {
-                    'path': _pt.cc(
-                        t_path_to_path.extend_node_path($p['directory path'], { 'addition': $p.filename }),
-                        ($) => $p['escape spaces in path']
-                            ? replace_space_in_context_path($)
-                            : $,
-                    ),
-                    'data': s_list_of_texts(
-                        t_block_2_lines.Group($p.group, { 'indentation': $p.indentation }).map(($) => $ + $p.newline),
-                    ),
-                },
-                ($) => ['write file', $],
-            )
-        ])
+        $cr['make directory'].execute(
+            $p['directory path'],
+            ($): d_write_to_file.Error => ['make directory', $],
+        ),
+        $cr['write file'].execute(
+            {
+                'path': _pt.cc(
+                    t_path_to_path.extend_node_path($p['directory path'], { 'addition': $p.filename }),
+                    ($) => $p['escape spaces in path']
+                        ? replace_space_in_context_path($)
+                        : $,
+                ),
+                'data': s_list_of_texts(
+                    t_block_2_lines.Group($p.group, { 'indentation': $p.indentation }).map(($) => $ + $p.newline),
+                ),
+            },
+            ($) => ['write file', $],
+        )
     ]
 )

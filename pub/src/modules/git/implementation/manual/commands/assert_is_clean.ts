@@ -8,7 +8,7 @@ import * as d from "../../../interface/to_be_generated/assert_is_clean"
 
 export const $$: signatures.commands.assert_is_clean = _p.create_command_procedure(
     ($p, $cr, $qr) => [
-        _p.deprecated_assert.query(
+        _p.assert.query(
             $qr['is repository clean'](
                 {
                     'path': $p.path,

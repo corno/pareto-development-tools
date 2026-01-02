@@ -12,7 +12,7 @@ import * as s_path from "pareto-resources/dist/implementation/manual/schemas/pat
 
 export const $$: signatures.commands.extended_commit = _p.create_command_procedure(
     ($p, $cr, $qr) => [
-        _p.deprecated_conditional.query(
+        _p.if_.query(
             $qr['git is repository clean'](
                 {
                     'path': $p.path
@@ -21,8 +21,8 @@ export const $$: signatures.commands.extended_commit = _p.create_command_procedu
             ).transform_result(
                 ($) => !$
             ),
-            _p.sequence([
-                _p.if_(
+            [
+                _p.if_.direct(
                     $p.instruction['stage all changes'],
                     [
                         $cr.git.execute(
@@ -64,7 +64,7 @@ export const $$: signatures.commands.extended_commit = _p.create_command_procedu
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
-                _p.if_(
+                _p.if_.direct(
                     $p.instruction['push after commit'],
                     [
                         $cr.git.execute(
@@ -86,7 +86,7 @@ export const $$: signatures.commands.extended_commit = _p.create_command_procedu
                         )
                     ]
                 )
-            ]),
+            ],
         )
     ]
 )
