@@ -1,7 +1,5 @@
 import * as _p from 'pareto-core-query'
-import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
-import * as _pinternals from 'pareto-core-internals'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -21,14 +19,14 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(
         ($) => {
-            return _p.dictionary.parallel(
+            return _p.dictionary.parallel<d_npm.NPM_Package, d.Error, d.Package_Error>(
                 $.map(($) => {
                     const path = $.path
-                    return _pt.cc($['node type'], ($): _pi.Query_Result<d_npm.NPM_Package, d.Package_Error> => {
+                    return _p.cc($['node type'], ($) => {
                         switch ($[0]) {
-                            case 'file': return _pt.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
-                            case 'other': return _pt.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
-                            case 'directory': return _pt.ss($, ($) => {
+                            case 'file': return _p.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                            case 'other': return _p.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                            case 'directory': return _p.ss($, ($) => {
                                 return $r['read file'](
                                     t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` }),
                                     ($): d.Package_Error => ['no package.json file', null],
@@ -40,7 +38,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                                 )
 
                             })
-                            default: return _pt.au($[0])
+                            default: return _p.au($[0])
                         }
                     })
                 }),

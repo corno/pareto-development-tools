@@ -1,4 +1,4 @@
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core-refiner'
 import * as _pi from 'pareto-core-interface'
 
 //data types
@@ -52,15 +52,15 @@ const expect_object = ($: d._T_Value, abort: (error: Error_Expect_Object) => nev
                 )
             }
         })
-        return _pt.dictionary_literal(temp)
+        return _p.dictionary_literal(temp)
     }
-    return _pt.cc($, ($) => {
+    return _p.cc($, ($) => {
         switch ($[0]) {
-            case 'indexed collection': return _pt.ss($, ($) => _pt.cc($, ($) => {
+            case 'indexed collection': return _p.ss($, ($) => _p.cc($, ($) => {
                 switch ($[0]) {
-                    case 'dictionary': return _pt.ss($, ($) => expect_unique_identifiers($.entries, abort))
-                    case 'verbose group': return _pt.ss($, ($) => expect_unique_identifiers($.entries, abort))
-                    default: return _pt.au($[0])
+                    case 'dictionary': return _p.ss($, ($) => expect_unique_identifiers($.entries, abort))
+                    case 'verbose group': return _p.ss($, ($) => expect_unique_identifiers($.entries, abort))
+                    default: return _p.au($[0])
                 }
             }))
             default: return abort(['not an object', null])
@@ -69,9 +69,9 @@ const expect_object = ($: d._T_Value, abort: (error: Error_Expect_Object) => nev
 }
 
 const expect_text = ($: d._T_Value, abort: (error: ['not a text', null]) => never): string => {
-    return _pt.cc($, ($) => {
+    return _p.cc($, ($) => {
         switch ($[0]) {
-            case 'string': return _pt.ss($, ($) => $.value)
+            case 'string': return _p.ss($, ($) => $.value)
             default: return abort(['not a text', null])
         }
     })

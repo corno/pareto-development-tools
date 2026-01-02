@@ -1,5 +1,4 @@
 import * as _p from 'pareto-core-query'
-import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
 import * as signatures from "../../../interface/signatures"
@@ -14,15 +13,15 @@ import * as s_path from "pareto-resources/dist/implementation/manual/schemas/pat
 export const $$: signatures.queries.is_repository_clean = _p.query_function(
     ($p, $qr) => $qr.git(
         {
-            'args': _pt.list_literal<_pi.List<string>>([
+            'args': _p.list_literal<_pi.List<string>>([
                 $p.path.transform(
-                    ($) => _pt.list_literal([
+                    ($) => _p.list_literal([
                         `-C`,
                         s_path.Context_Path($),
                     ]),
-                    () => _pt.list_literal([])
+                    () => _p.list_literal([])
                 ),
-                _pt.list_literal([
+                _p.list_literal([
                     `status`,
                     `--porcelain`,
                 ])

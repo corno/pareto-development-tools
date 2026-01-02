@@ -1,5 +1,4 @@
 import * as _p from 'pareto-core-query'
-import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
 import * as signatures from "../../../interface/signatures"
@@ -34,15 +33,15 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
     return temp_observe_behavior(
         $r.git(
             {
-                'args': _pt.list_literal<_pi.List<string>>([
+                'args': _p.list_literal<_pi.List<string>>([
                     $p.path.transform(
-                        ($) => _pt.list_literal([
+                        ($) => _p.list_literal([
                             `-C`,
                             s_path.Context_Path($),
                         ]),
-                        () => _pt.list_literal([])
+                        () => _p.list_literal([])
                     ),
-                    _pt.list_literal([
+                    _p.list_literal([
                         `rev-parse`,
                         `--is-inside-work-tree`,
                     ])
@@ -62,16 +61,16 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
                     })
                 }
             },
-            error: ($) => _pt.cc($, ($) => {
+            error: ($) => _p.cc($, ($) => {
                 switch ($[0]) {
-                    case 'failed to spawn': return _pt.ss($, ($) => {
+                    case 'failed to spawn': return _p.ss($, ($) => {
                         return _p.__query_result<boolean, d.Error>((on_succes, on_error) => {
                             on_error(['could not run git command', {
                             'message': $.message
                         }])
                         })
                     })
-                    case 'non zero exit code': return _pt.ss($, ($) => {
+                    case 'non zero exit code': return _p.ss($, ($) => {
                         if ($['exit code'].transform(($) => $ === 128, () => false)) {
                             return _p.__query_result((onResult, onError) => {
                                 onResult(false)
@@ -82,7 +81,7 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
                             })
                         }
                     })
-                    default: return _pt.au($[0])
+                    default: return _p.au($[0])
                 }
             })
         }
