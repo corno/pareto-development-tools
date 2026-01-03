@@ -13,7 +13,7 @@ import * as t_graphviz_to_fountain_pen from "pareto-graphviz/dist/implementation
 export const $$: signatures.commands.create_dependency_graph = _p.command_procedure(
     ($p, $cr, $q) => [
 
-        _p.query_without_error_transformation(
+        _p.query(
             $q['package dependencies'](
                 {
                     'path': $p.path,
@@ -24,6 +24,7 @@ export const $$: signatures.commands.create_dependency_graph = _p.command_proced
             ).transform_result(
                 ($) => t_graphviz_to_fountain_pen.Graph($)
             ),
+            ($) => $,
             ($v) => [
                 $cr.log.execute(
                     {

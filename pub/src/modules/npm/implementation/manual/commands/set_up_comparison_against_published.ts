@@ -38,16 +38,14 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
     ($p, $cr, $qr) => {
 
         return [
-            _p.query_without_error_transformation<d.Error, d_npm_package.NPM_Package>(
+            _p.query(
                 $qr['read file'](
                     t_path_to_path.create_node_path($p['path to local package'], `package.json`),
                     ($): d.Error => ['error while reading package.json', $],
-                ).refine_without_error_transformation(
-                    ($, abort) => r_parse_npm_package(
-                        $,
-                        ($) => abort(['error while parsing package.json', $]),
-                    ),
-
+                ),
+                ($, abort) => r_parse_npm_package(
+                    $,
+                    ($) => abort(['error while parsing package.json', $]),
                 ),
                 ($v) => {
                     const package_info = $v
@@ -145,7 +143,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                             ($) => ['error while creating directory', $],
                         ),
 
-                        _p.query_without_error_transformation<d.Error, string>(
+                        _p.query(
                             $qr.npm(
                                 {
                                     'args': _pt.list.literal([
@@ -157,6 +155,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                                 ($): d.Error => ['error while running npm query', $]
                             ).transform_result(($) => remove_n_characters_from_end($.stdout, 1)),
                             // Extract published package into published subdirectory
+                            ($) => $,
                             ($v) => [
                                 $cr['tar'].execute<d.Error>(
                                     {
