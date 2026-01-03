@@ -70,74 +70,72 @@ export namespace defined {
                                 'expected structure': d_structure.Directory.SG.group.D,
                                 'structure path': string,
                             }
-                        ): d_out.Node => {
-                            return _p.cc($, ($): d_out.Node => {
-                                switch ($[0]) {
-                                    case 'file': return _p.ss($, ($): d_out.Node => ['file', ({
-                                        'structure': {
-                                            'path': $p['structure path'],
-                                            'classification': _p.cc($p['expected structure'], ($): d_out.Classification => {
-                                                switch ($[0]) {
-                                                    case 'file': return _p.ss($, ($) => _p.cc($, ($) => {
-                                                        switch ($[0]) {
-                                                            case 'generated': return _p.ss($, ($) => ['file', ['generated', null]])
-                                                            case 'manual': return _p.ss($, ($) => ['file', ['manual', null]])
-                                                            default: return _p.au($[0])
-                                                        }
-                                                    }))
-                                                    case 'directory': return _p.ss($, ($) => ['directory', _p.cc($, ($): d_out.Directory_Classification => {
-                                                        switch ($[0]) {
-                                                            case 'wildcards': return _p.ss($, ($) => ['wildcards', null])
-                                                            case 'freeform': return _p.ss($, ($) => ['freeform', null])
-                                                            case 'ignore': return _p.ss($, ($) => ['ignored', null])
-                                                            case 'generated': return _p.ss($, ($) => ['generated', null])
-                                                            case 'dictionary': return _p.ss($, ($) => ['dictionary', null])
-                                                            case 'group': return _p.ss($, ($) => ['group', null])
-                                                            default: return _p.au($[0])
-                                                        }
-                                                    })])
-                                                    default: return _p.au($[0])
-                                                }
-                                            })
-                                        },
-                                        'extension': extension($p['name']),
-                                        'line count': line_count($),
-                                        'unexpected path tail': _p.cc($p['expected structure'], ($) => {
+                        ): d_out.Node => _p.cc($, ($): d_out.Node => {
+                            switch ($[0]) {
+                                case 'file': return _p.ss($, ($): d_out.Node => ['file', ({
+                                    'structure': {
+                                        'path': $p['structure path'],
+                                        'classification': _p.cc($p['expected structure'], ($): d_out.Classification => {
                                             switch ($[0]) {
                                                 case 'file': return _p.ss($, ($) => _p.cc($, ($) => {
                                                     switch ($[0]) {
-                                                        case 'generated': return _p.ss($, ($) => _p.optional.not_set())
-                                                        case 'manual': return _p.ss($, ($) => _p.optional.not_set())
+                                                        case 'generated': return _p.ss($, ($) => ['file', ['generated', null]])
+                                                        case 'manual': return _p.ss($, ($) => ['file', ['manual', null]])
                                                         default: return _p.au($[0])
                                                     }
                                                 }))
-                                                case 'directory': return _p.ss($, ($) => _p.optional.set($p.name))
+                                                case 'directory': return _p.ss($, ($) => ['directory', _p.cc($, ($): d_out.Directory_Classification => {
+                                                    switch ($[0]) {
+                                                        case 'wildcards': return _p.ss($, ($) => ['wildcards', null])
+                                                        case 'freeform': return _p.ss($, ($) => ['freeform', null])
+                                                        case 'ignore': return _p.ss($, ($) => ['ignored', null])
+                                                        case 'generated': return _p.ss($, ($) => ['generated', null])
+                                                        case 'dictionary': return _p.ss($, ($) => ['dictionary', null])
+                                                        case 'group': return _p.ss($, ($) => ['group', null])
+                                                        default: return _p.au($[0])
+                                                    }
+                                                })])
                                                 default: return _p.au($[0])
                                             }
                                         })
-                                    })])
-                                    case 'directory': return _p.ss($, ($): d_out.Node => {
-                                        //found a directory in the filesystem, check expected structure
-                                        const dir = $
-                                        return ['directory', _p.cc($p['expected structure'], ($): d_out.Directory => {
-                                            switch ($[0]) {
-                                                case 'file': return _p.ss($, ($) => ['expected a file', null])
-                                                case 'directory': return _p.ss($, ($) => Directory(
-                                                    dir,
-                                                    {
-                                                        'expected structure': $,
-                                                        'structure path': $p['structure path'],
-                                                    }
-                                                ))
-                                                default: return _p.au($[0])
-                                            }
-                                        })]
+                                    },
+                                    'extension': extension($p['name']),
+                                    'line count': line_count($),
+                                    'unexpected path tail': _p.cc($p['expected structure'], ($) => {
+                                        switch ($[0]) {
+                                            case 'file': return _p.ss($, ($) => _p.cc($, ($) => {
+                                                switch ($[0]) {
+                                                    case 'generated': return _p.ss($, ($) => _p.optional.not_set())
+                                                    case 'manual': return _p.ss($, ($) => _p.optional.not_set())
+                                                    default: return _p.au($[0])
+                                                }
+                                            }))
+                                            case 'directory': return _p.ss($, ($) => _p.optional.set($p.name))
+                                            default: return _p.au($[0])
+                                        }
                                     })
-                                    case 'other': return _p.ss($, ($) => ['other', null])
-                                    default: return _p.au($[0])
-                                }
-                            })
-                        }
+                                })])
+                                case 'directory': return _p.ss($, ($): d_out.Node => {
+                                    //found a directory in the filesystem, check expected structure
+                                    const dir = $
+                                    return ['directory', _p.cc($p['expected structure'], ($): d_out.Directory => {
+                                        switch ($[0]) {
+                                            case 'file': return _p.ss($, ($) => ['expected a file', null])
+                                            case 'directory': return _p.ss($, ($) => Directory(
+                                                dir,
+                                                {
+                                                    'expected structure': $,
+                                                    'structure path': $p['structure path'],
+                                                }
+                                            ))
+                                            default: return _p.au($[0])
+                                        }
+                                    })]
+                                })
+                                case 'other': return _p.ss($, ($) => ['other', null])
+                                default: return _p.au($[0])
+                            }
+                        })
                         return expected.get_possible_entry(key).transform(
                             ($) => NodeX(
                                 node,
@@ -195,31 +193,28 @@ export namespace defined {
                     //expecting a dictionary of directories
                     const struct = $
 
-                    return ['dictionary', dir.map(($, key): d_out.Node => {
-                        const node = $
-                        return _p.cc($, ($): d_out.Node => {
-                            switch ($[0]) {
-                                case 'directory': return _p.ss($, ($) => ['directory', Directory(
-                                    $,
-                                    {
-                                        'expected structure': struct,
-                                        'structure path': `${$p['structure path']}/*`,
-                                    }
-                                )])
-                                case 'other': return _p.ss($, ($) => ['other', null])
-                                case 'file': return _p.ss($, ($): d_out.Node => ['file', {
-                                    'structure': {
-                                        'path': `${$p['structure path']}/*`,
-                                        'classification': ['directory', ['dictionary', null]],
-                                    },
-                                    'extension': extension(key),
-                                    'line count': line_count($),
-                                    'unexpected path tail': _p.optional.set(`/${key}`),
-                                }])
-                                default: return _p.au($[0])
-                            }
-                        })
-                    })]
+                    return ['dictionary', dir.map(($, key): d_out.Node => _p.cc($, ($): d_out.Node => {
+                        switch ($[0]) {
+                            case 'directory': return _p.ss($, ($) => ['directory', Directory(
+                                $,
+                                {
+                                    'expected structure': struct,
+                                    'structure path': `${$p['structure path']}/*`,
+                                }
+                            )])
+                            case 'other': return _p.ss($, ($) => ['other', null])
+                            case 'file': return _p.ss($, ($): d_out.Node => ['file', {
+                                'structure': {
+                                    'path': `${$p['structure path']}/*`,
+                                    'classification': ['directory', ['dictionary', null]],
+                                },
+                                'extension': extension(key),
+                                'line count': line_count($),
+                                'unexpected path tail': _p.optional.set(`/${key}`),
+                            }])
+                            default: return _p.au($[0])
+                        }
+                    }))]
                 })
                 default: return _p.au($[0])
             }

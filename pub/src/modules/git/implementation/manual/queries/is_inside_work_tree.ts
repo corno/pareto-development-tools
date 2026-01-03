@@ -50,26 +50,20 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
             ($) => $
         ),
         {
-            success: ($) => {
-                if ($.stdout === `true`) {
-                    return _p.__query_result((onResult, onError) => {
-                        onResult(true)
-                    })
-                } else {
-                    return _p.__query_result<boolean, d.Error>((onResult, onError) => {
-                        onResult(false)
-                    })
-                }
-            },
+            success: ($) => $.stdout === `true`
+                ? _p.__query_result((onResult, onError) => {
+                    onResult(true)
+                })
+                : _p.__query_result<boolean, d.Error>((onResult, onError) => {
+                    onResult(false)
+                }),
             error: ($) => _p.cc($, ($) => {
                 switch ($[0]) {
-                    case 'failed to spawn': return _p.ss($, ($) => {
-                        return _p.__query_result<boolean, d.Error>((on_succes, on_error) => {
+                    case 'failed to spawn': return _p.ss($, ($) => _p.__query_result<boolean, d.Error>((on_succes, on_error) => {
                             on_error(['could not run git command', {
-                            'message': $.message
-                        }])
-                        })
-                    })
+                                'message': $.message
+                            }])
+                        }))
                     case 'non zero exit code': return _p.ss($, ($) => {
                         if ($['exit code'].transform(($) => $ === 128, () => false)) {
                             return _p.__query_result((onResult, onError) => {

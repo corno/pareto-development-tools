@@ -27,29 +27,25 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                 },
                 ($): d.Error => ['read directory', $],
             ).query_without_error_transformation(
-                ($) => {
-                    return _pq.dictionaryx.parallel(
-                        $.map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
-                            const path = $.path
-                            return _pt.cc($['node type'], ($) => {
-                                switch ($[0]) {
-                                    case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                                    case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                                    case 'directory': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
-                                        return q_directory_content($q)(
-                                            {
-                                                'path': path,
-                                            },
-                                            ($): d.Package_Error => ['directory content', $],
-                                        )
-                                    })
-                                    default: return _pt.au($[0])
-                                }
-                            })
-                        }),
-                        ($): d.Error => ['directory content processing', $],
-                    )
-                }
+                ($) => _pq.dictionaryx.parallel(
+                    $.map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
+                        const path = $.path
+                        return _pt.cc($['node type'], ($) => {
+                            switch ($[0]) {
+                                case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                                case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                                case 'directory': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content($q)(
+                                    {
+                                        'path': path,
+                                    },
+                                    ($): d.Package_Error => ['directory content', $],
+                                ))
+                                default: return _pt.au($[0])
+                            }
+                        })
+                    }),
+                    ($): d.Error => ['directory content processing', $],
+                )
             ),
             ($v) => [
                 $cr.log.execute(

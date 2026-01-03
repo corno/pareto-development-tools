@@ -21,16 +21,12 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                     ),
                     _pt.cc($p.operation, ($) => {
                         switch ($[0]) {
-                            case 'update': return _pt.ss($, ($) => {
-                                return _pt.list.literal([
-                                    `update`,
-                                ])
-                            })
-                            case 'install': return _pt.ss($, ($) => {
-                                return _pt.list.literal([
-                                    `install`,
-                                ])
-                            })
+                            case 'update': return _pt.ss($, ($) => _pt.list.literal([
+                                `update`,
+                            ]))
+                            case 'install': return _pt.ss($, ($) => _pt.list.literal([
+                                `install`,
+                            ]))
                             default: return _pt.au($[0])
                         }
                     })

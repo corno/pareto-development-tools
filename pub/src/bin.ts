@@ -35,49 +35,41 @@ import { $$ as c_update2latest } from "./modules/npm/implementation/manual/comma
 const create_eqe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
-): _pi.Query<d_eqe.Result, d_epe.Error, d_epe.Parameters> => {
-    return _pq.__query(
-        ($p) => {
-            return $r.queries['execute any query executable'](
-                {
-                    'program': program,
-                    'args': $p.args,
-                },
-                ($) => $,
-            )
-        }
-    )
-}
+): _pi.Query<d_eqe.Result, d_epe.Error, d_epe.Parameters> => _pq.__query(
+    ($p) => {
+        return $r.queries['execute any query executable'](
+            {
+                'program': program,
+                'args': $p.args,
+            },
+            ($) => $,
+        )
+    }
+)
 
 const create_epe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
-): _pi.Command<d_epe.Error, d_epe.Parameters> => {
-    return _pc.__command(($p) => {
-        return $r.commands['execute any procedure executable'].execute(
-            {
-                'program': program,
-                'args': $p.args,
-            },
-            ($) => $,
-        )
-    })
-}
+): _pi.Command<d_epe.Error, d_epe.Parameters> => _pc.__command(
+    ($p) => $r.commands['execute any procedure executable'].execute(
+        {
+            'program': program,
+            'args': $p.args,
+        },
+        ($) => $,
+    )
+)
 
 const create_espe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
-): _pi.Command<d_espe.Error, d_espe.Parameters> => {
-    return _pc.__command(($p) => {
-        return $r.commands['execute any smelly procedure executable'].execute(
-            {
-                'program': program,
-                'args': $p.args,
-            },
-            ($) => $,
-        )
-    })
-}
+): _pi.Command<d_espe.Error, d_espe.Parameters> => _pc.__command(($p) => $r.commands['execute any smelly procedure executable'].execute(
+    {
+        'program': program,
+        'args': $p.args,
+    },
+    ($) => $,
+))
 
 _pn.run_main_procedure(
     ($r) => {
