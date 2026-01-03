@@ -65,8 +65,9 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                                         }
 
                                     )).filter(($) => {
-                                        const current = $
-                                        return $['unexpected path tail'].map(() => $)
+                                        return $['unexpected path tail'].is_set()
+                                            ? _p.optional.set($)
+                                            : _p.optional.not_set()
                                     })).map(($) => `./packages/${package_name}${$['path']}`)
                                 }).flatten(($) => $)
                             },

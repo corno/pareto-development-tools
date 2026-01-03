@@ -137,21 +137,23 @@ export const $$: signatures.commands.api = _p.command_procedure(
                     )
                 ]
             })
-            case 'set up comparison': return _p.ss($, ($) => {
-                const path_to_temp = t_path_to_path.extend_context_path($['path to package'], { 'addition': `temp` })
-
-                return [
+            case 'set up comparison': return _p.ss($, ($) => _p.cc(
+                {
+                    'path to temp': t_path_to_path.extend_context_path($['path to package'], { 'addition': `temp` }),
+                    'path to package': $['path to package'],
+                },
+                ($) => [
                     $cr['npm set up comparison against published'].execute(
                         {
                             'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': `pub` }),
-                            'path to output local directory': t_path_to_path.create_node_path(path_to_temp, `local`),
-                            'path to output published directory': t_path_to_path.create_node_path(path_to_temp, `published`),
-                            'path to temp directory': t_path_to_path.create_node_path(path_to_temp, `temp`),
+                            'path to output local directory': t_path_to_path.create_node_path($['path to temp'], `local`),
+                            'path to output published directory': t_path_to_path.create_node_path($['path to temp'], `published`),
+                            'path to temp directory': t_path_to_path.create_node_path($['path to temp'], `temp`),
                         },
                         ($): d.Error => ['set up comparison', $],
                     )
                 ]
-            })
+            ))
             default: return _p.au($[0])
         }
     })

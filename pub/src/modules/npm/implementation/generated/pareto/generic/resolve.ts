@@ -311,7 +311,12 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
 
     const finished: { [key: string]: TResolved } = {}
 
-    const ordered_list = _ea.list.build<_et.Deprecated_Key_Value_Pair<TResolved>>(($i) => {
+    type Key_Value_Pair<T> = {
+        'key': string,
+        'value': T
+    }
+
+    const ordered_list = _ea.list.build<Key_Value_Pair<TResolved>>(($i) => {
 
         const source_dictionary = $
 
