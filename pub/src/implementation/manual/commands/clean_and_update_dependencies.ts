@@ -1,5 +1,4 @@
 import * as _p from 'pareto-core-command'
-import * as _pt from 'pareto-core-transformer'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -12,7 +11,7 @@ export const $$: signatures.commands.clean_and_update_dependencies = _p.command_
         // clean
         $cr['git clean'].execute(
             {
-                'path': _pt.set($p.path),
+                'path': _p.optional.set($p.path),
             },
             ($): d.Error => ['could not clean', $],
         ),
@@ -30,7 +29,7 @@ export const $$: signatures.commands.clean_and_update_dependencies = _p.command_
         // install/update updated dependencies
         $cr['npm'].execute(
             {
-                'path': _pt.set($p.path),
+                'path': _p.optional.set($p.path),
                 'operation': ['update', null], // 'install' does not update the indirect dependencies
             },
             ($) => ['could not install dependencies', $],

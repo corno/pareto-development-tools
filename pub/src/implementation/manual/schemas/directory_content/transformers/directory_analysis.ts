@@ -9,7 +9,7 @@ import * as d_structure from "../../../../../interface/generated/pareto/schemas/
 
 const line_count = ($: string): number => {
     let lineCount = 0
-    _pds.text_to_character_list($).__for_each(($) => {
+    _pds.list.from_text($, ($) => $).__for_each(($) => {
         if ($ === 10) { //newline character
             lineCount++
         }
@@ -18,7 +18,7 @@ const line_count = ($: string): number => {
 }
 
 const extension = ($: string): _pi.Optional_Value<string> => {
-    const characters = _pds.text_to_character_list($)
+    const characters = _pds.list.from_text($, ($) => $)
 
     let first_period_index: null | number = null
     let current_index = 0
@@ -29,11 +29,11 @@ const extension = ($: string): _pi.Optional_Value<string> => {
         current_index++
     })
     if (first_period_index === null) {
-        return _p.not_set()
+        return _p.optional.not_set()
     } else {
         const fpi: number = first_period_index
         current_index = 0
-        return _p.set(_pds.build_text(($i) => {
+        return _p.optional.set(_pds.text.build(($i) => {
             characters.__for_each(($) => {
                 if (current_index > fpi) {
                     $i['add character']($)
@@ -106,12 +106,12 @@ export namespace defined {
                                             switch ($[0]) {
                                                 case 'file': return _p.ss($, ($) => _p.cc($, ($) => {
                                                     switch ($[0]) {
-                                                        case 'generated': return _p.ss($, ($) => _p.not_set())
-                                                        case 'manual': return _p.ss($, ($) => _p.not_set())
+                                                        case 'generated': return _p.ss($, ($) => _p.optional.not_set())
+                                                        case 'manual': return _p.ss($, ($) => _p.optional.not_set())
                                                         default: return _p.au($[0])
                                                     }
                                                 }))
-                                                case 'directory': return _p.ss($, ($) => _p.set($p.name))
+                                                case 'directory': return _p.ss($, ($) => _p.optional.set($p.name))
                                                 default: return _p.au($[0])
                                             }
                                         })
@@ -138,7 +138,7 @@ export namespace defined {
                                 }
                             })
                         }
-                        return expected.get_entry(key).transform(
+                        return expected.get_possible_entry(key).transform(
                             ($) => NodeX(
                                 node,
                                 {
@@ -155,7 +155,7 @@ export namespace defined {
                                         'classification': ['directory', ['group', null]],
                                         'path': $p['structure path'],
                                     },
-                                    'unexpected path tail': _p.set(`/${key}`),
+                                    'unexpected path tail': _p.optional.set(`/${key}`),
                                 }
                             )
                         )
@@ -169,7 +169,7 @@ export namespace defined {
                             'classification': ['directory', ['generated', null]],
                             'path': $p['structure path'],
                         },
-                        'unexpected path tail': _p.not_set(),
+                        'unexpected path tail': _p.optional.not_set(),
                     }
                 ))
                 case 'wildcards': return _p.ss($, ($) => wildcard.Directory(
@@ -188,7 +188,7 @@ export namespace defined {
                             'classification': ['directory', ['freeform', null]],
                             'path': $p['structure path'],
                         },
-                        'unexpected path tail': _p.not_set(),
+                        'unexpected path tail': _p.optional.not_set(),
                     }
                 ))
                 case 'dictionary': return _p.ss($, ($) => {
@@ -214,7 +214,7 @@ export namespace defined {
                                     },
                                     'extension': extension(key),
                                     'line count': line_count($),
-                                    'unexpected path tail': _p.set(`/${key}`),
+                                    'unexpected path tail': _p.optional.set(`/${key}`),
                                 }])
                                 default: return _p.au($[0])
                             }
@@ -306,11 +306,11 @@ export namespace wildcard {
                         'unexpected path tail': _pinternals.block(() => {
                             if ($p['number of directories encountered'] < $p['wildcard']['required directories']) {
                                 //files are not allowed yet, haven't descended through enough required directories
-                                return _p.set(tail)
+                                return _p.optional.set(tail)
                             }
                             if (!$p.wildcard['additional directories allowed'] && $p['number of directories encountered'] > $p['wildcard']['required directories']) {
                                 //additional directories are not allowed and we've gone too deep
-                                return _p.set(tail)
+                                return _p.optional.set(tail)
                             }
                             const possible_file_extension = extension(key)
                             let extension_matched = false
@@ -324,8 +324,8 @@ export namespace wildcard {
 
                             })
                             return extension_matched
-                                ? _p.not_set()
-                                : _p.set(tail)
+                                ? _p.optional.not_set()
+                                : _p.optional.set(tail)
 
                         }),
                         'line count': line_count($),
@@ -378,7 +378,7 @@ export const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_L
 
     }
     x($, ``)
-    return _p.dictionary_literal(temp)
+    return _p.dictionary.literal(temp)
 }
 
 

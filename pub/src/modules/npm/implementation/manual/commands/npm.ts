@@ -11,23 +11,23 @@ export const $$: signatures.commands.npm = _p.command_procedure(
     ($p, $cr) => [
         $cr['npm'].execute(
             {
-                'args': _pt.list_literal<_pi.List<string>>([
+                'args': _pt.list.literal<_pi.List<string>>([
                     $p.path.transform(
-                        ($) => _pt.list_literal([
+                        ($) => _pt.list.literal([
                             `--prefix`,
                             s_path.Node_Path($),
                         ]),
-                        () => _pt.list_literal([])
+                        () => _pt.list.literal([])
                     ),
                     _pt.cc($p.operation, ($) => {
                         switch ($[0]) {
                             case 'update': return _pt.ss($, ($) => {
-                                return _pt.list_literal([
+                                return _pt.list.literal([
                                     `update`,
                                 ])
                             })
                             case 'install': return _pt.ss($, ($) => {
-                                return _pt.list_literal([
+                                return _pt.list.literal([
                                     `install`,
                                 ])
                             })

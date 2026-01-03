@@ -10,18 +10,15 @@ export const process_unconstrained_state_group = <Mapped_Value>(
     $p: {
         'states': _et.Dictionary<($: t._T_Value) => Mapped_Value>,
     }
-
 ): Mapped_Value => {
     return _ea.cc($, ($) => {
         switch ($[0]) {
             case 'tagged value': return _ea.ss($, ($) => {
                 const data = $.value
                 return $p.states.get_entry(
-                    $.state.value
-                ).transform(
-                    ($) => $(data),
+                    $.state.value,
                     () => _ea.fixme_abort(`Unexpected state: ${$.state.value}`)
-                )
+                )(data)
             })
             default: return _ea.fixme_abort(`Unexpected type for state group: ${$[0]}`)
         }
@@ -42,11 +39,9 @@ export const process_unresolved_state_group = <Mapped_Value>(
                 return {
                     'location': $["|"].range,
                     'state group': $p.states.get_entry(
-                        $.state.value
-                    ).transform(
-                        ($) => $(data),
+                        $.state.value,
                         () => _ea.fixme_abort(`Unexpected state: ${$.state.value}`)
-                    )
+                    )(data)
                 }
             })
             default: return _ea.fixme_abort(`Unexpected type for state group: ${$[0]}`)
@@ -66,7 +61,7 @@ export const process_group = <Mapped_Value>(
             case 'indexed collection': return _ea.ss($, ($) => _ea.cc($, ($) => {
                 switch ($[0]) {
                     case 'verbose group': return _ea.ss($, ($) => {
-                        return $p.properties(_ea.build_dictionary(
+                        return $p.properties(_ea.dictionary.build(
                             ($i) => {
                                 $.entries.__for_each(($) => {
                                     $i['add entry']($.key.value, $.value.transform(
@@ -91,10 +86,9 @@ export const get_entry = (
     $p: {
         'key': string,
     }
-
 ): t._T_Value => {
-    return $.get_entry($p.key).transform(
-        ($) => $,
+    return $.get_entry(
+        $p.key,
         () => _ea.fixme_abort(`no such entry: ${$p.key}`)
     )
 }
@@ -115,7 +109,7 @@ export const process_unresolved_dictionary = <Mapped_Value>(
                                 'start': $["{"].range.start,
                                 'end': $["}"].range.end,
                             },
-                            'dictionary': _ea.build_dictionary(
+                            'dictionary': _ea.dictionary.build(
                                 ($i) => {
                                     $.entries.__for_each(($) => {
                                         const key_location = $.key.range
@@ -151,7 +145,7 @@ export const process_unconstrained_dictionary = <Mapped_Value>(
             case 'indexed collection': return _ea.ss($, ($) => _ea.cc($, ($) => {
                 switch ($[0]) {
                     case 'dictionary': return _ea.ss($, ($) => {
-                        return _ea.build_dictionary(
+                        return _ea.dictionary.build(
                             ($i) => {
                                 $.entries.__for_each(($) => {
                                     $i['add entry']($.key.value, $.value.transform(
@@ -274,8 +268,8 @@ export const process_optional = <Mapped_Value>(
 ): _et.Optional_Value<Mapped_Value> => {
     return _ea.cc($, ($) => {
         switch ($[0]) {
-            case 'not set': return _ea.ss($, ($) => _ea.not_set())
-            case 'set optional value': return _ea.ss($, ($) => _ea.set($p.value($.value)))
+            case 'not set': return _ea.ss($, ($) => _ea.optional.not_set())
+            case 'set optional value': return _ea.ss($, ($) => _ea.optional.set($p.value($.value)))
             default: return _ea.fixme_abort(`Unexpected type for nothing: ${$[0]}`)
 
         }

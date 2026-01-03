@@ -15,15 +15,15 @@ export const $$: signatures.commands.tsc = _p.command_procedure(
     ($p, $cr) => [
         $cr.tsc.execute(
             {
-                'args': _pt.list_literal([
+                'args': _pt.list.literal([
                     $p.path.transform(
-                        ($) => _pt.list_literal([
+                        ($) => _pt.list.literal([
                             `--project`,
                             s_path.Node_Path($),
                         ]),
-                        () => _pt.list_literal([])
+                        () => _pt.list.literal([])
                     ),
-                    _pt.list_literal([
+                    _pt.list.literal([
                         `--pretty`,
                     ]),
                 ]).flatten(($) => $),

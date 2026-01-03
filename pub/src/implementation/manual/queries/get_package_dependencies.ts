@@ -19,7 +19,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(
         ($) => {
-            return _p.dictionary.parallel<d_npm.NPM_Package, d.Error, d.Package_Error>(
+            return _p.dictionaryx.parallel<d_npm.NPM_Package, d.Error, d.Package_Error>(
                 $.map(($) => {
                     const path = $.path
                     return _p.cc($['node type'], ($) => {

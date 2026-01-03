@@ -28,7 +28,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                 ($): d.Error => ['read directory', $],
             ).query_without_error_transformation(
                 ($) => {
-                    return _pq.dictionary.parallel(
+                    return _pq.dictionaryx.parallel(
                         $.map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                             const path = $.path
                             return _pt.cc($['node type'], ($) => {
@@ -54,8 +54,8 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
             ($v) => [
                 $cr.log.execute(
                     {
-                        'lines': _pt.list_literal([
-                            _pt.list_literal([
+                        'lines': _pt.list.literal([
+                            _pt.list.literal([
                                 `package,filepath,structure path,classification,extension,unexpected,line count`,
                             ]),
 

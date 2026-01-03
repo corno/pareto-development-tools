@@ -25,15 +25,15 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
         ),
         $cr.git.execute(
             {
-                'args': _pt.list_literal([
+                'args': _pt.list.literal([
                     $p.path.transform(
-                        ($) => _pt.list_literal([
+                        ($) => _pt.list.literal([
                             `-C`,
                             s_path.Context_Path($),
                         ]),
-                        () => _pt.list_literal([])
+                        () => _pt.list.literal([])
                     ),
-                    _pt.list_literal([
+                    _pt.list.literal([
                         `rm`,
                         `-r`,
                         `--cached`,
@@ -45,15 +45,15 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
         ),
         $cr.git.execute(
             {
-                'args': _pt.list_literal([
+                'args': _pt.list.literal([
                     $p.path.transform(
-                        ($) => _pt.list_literal([
+                        ($) => _pt.list.literal([
                             `-C`,
                             s_path.Context_Path($),
                         ]),
-                        () => _pt.list_literal([])
+                        () => _pt.list.literal([])
                     ),
-                    _pt.list_literal([
+                    _pt.list.literal([
                         `add`,
                         `--all`,
                     ])
@@ -63,15 +63,15 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
         ),
         $cr.git.execute(
             {
-                'args': _pt.list_literal([
+                'args': _pt.list.literal([
                     $p.path.transform(
-                        ($) => _pt.list_literal([
+                        ($) => _pt.list.literal([
                             `-C`,
                             s_path.Context_Path($),
                         ]),
-                        () => _pt.list_literal([])
+                        () => _pt.list.literal([])
                     ),
-                    _pt.list_literal([
+                    _pt.list.literal([
                         `clean`,
                         `-fd`,
                     ])

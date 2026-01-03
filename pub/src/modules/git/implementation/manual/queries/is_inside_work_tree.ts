@@ -33,15 +33,15 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
     return temp_observe_behavior(
         $r.git(
             {
-                'args': _p.list_literal<_pi.List<string>>([
+                'args': _p.list.literal<_pi.List<string>>([
                     $p.path.transform(
-                        ($) => _p.list_literal([
+                        ($) => _p.list.literal([
                             `-C`,
                             s_path.Context_Path($),
                         ]),
-                        () => _p.list_literal([])
+                        () => _p.list.literal([])
                     ),
-                    _p.list_literal([
+                    _p.list.literal([
                         `rev-parse`,
                         `--is-inside-work-tree`,
                     ])

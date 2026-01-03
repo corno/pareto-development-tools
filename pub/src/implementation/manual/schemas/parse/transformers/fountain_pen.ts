@@ -25,6 +25,7 @@ export const Error: Error = ($) => _p.cc($, ($) => {
             sh.b.snippet(`expected a text: `),
             sh.b.snippet($['description'])
         ]))
+        case 'too many arguments': return _p.ss($, ($) => sh.b.snippet(`too many arguments`))
         default: return _p.au($[0])
     }
 })

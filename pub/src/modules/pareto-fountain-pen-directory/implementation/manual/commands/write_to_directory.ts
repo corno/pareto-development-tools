@@ -1,7 +1,7 @@
 
+import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
-import * as _p from 'pareto-core-command'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -29,7 +29,7 @@ export const $$: signatures.commands.write_to_directory = _p.command_procedure(
                 )
             ]
         ),
-        _p.dictionary.parallel(
+        _p.dictionaryx.parallel(
             $p.directory,
             ($, key) => [
                 _pt.cc($, ($): _pi.Command_Promise<d_write_to_directory.Error__nodes> => {

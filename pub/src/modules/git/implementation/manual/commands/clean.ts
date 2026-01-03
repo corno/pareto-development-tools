@@ -13,15 +13,15 @@ export const $$: signatures.commands.clean = _p.command_procedure(
     ($p, $cr) => [
         $cr.git.execute(
             {
-                'args': _pt.list_literal([
+                'args': _pt.list.literal([
                     $p.path.transform(
-                        ($) => _pt.list_literal([
+                        ($) => _pt.list.literal([
                             `-C`,
                             s_path.Node_Path($),
                         ]),
-                        () => _pt.list_literal([])
+                        () => _pt.list.literal([])
                     ),
-                    _pt.list_literal([
+                    _pt.list.literal([
                         `clean`,
                         `--force`,
                         `-d`, // remove whole directories

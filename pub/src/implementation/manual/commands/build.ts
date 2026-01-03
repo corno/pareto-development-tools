@@ -1,5 +1,4 @@
 import * as _p from 'pareto-core-command'
-import * as _pt from 'pareto-core-transformer'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -29,7 +28,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
         ),
         $cr.tsc.execute(
             {
-                'path': _pt.set(t_path_to_path.extend_node_path($p.path, { 'addition': `pub`})),
+                'path': _p.optional.set(t_path_to_path.extend_node_path($p.path, { 'addition': `pub`})),
             },
             ($): d.Error => ['error building pub', {
                 'path': s_path.Node_Path($p.path),
@@ -38,7 +37,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
         ),
         $cr.tsc.execute(
             {
-                'path': _pt.set(t_path_to_path.extend_node_path($p.path, { 'addition': `test`})),
+                'path': _p.optional.set(t_path_to_path.extend_node_path($p.path, { 'addition': `test`})),
             },
             ($): d.Error => ['error building test', {
                 'path': s_path.Node_Path($p.path),

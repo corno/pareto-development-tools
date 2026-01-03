@@ -27,15 +27,15 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                     [
                         $cr.git.execute(
                             {
-                                'args': _pt.list_literal([
+                                'args': _pt.list.literal([
                                     $p.path.transform(
-                                        ($) => _pt.list_literal([
+                                        ($) => _pt.list.literal([
                                             `-C`,
                                             s_path.Context_Path($),
                                         ]),
-                                        () => _pt.list_literal([])
+                                        () => _pt.list.literal([])
                                     ),
-                                    _pt.list_literal([
+                                    _pt.list.literal([
                                         `add`,
                                         `--all`,
                                     ])
@@ -47,15 +47,15 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                 ),
                 $cr.git.execute(
                     {
-                        'args': _pt.list_literal([
+                        'args': _pt.list.literal([
                             $p.path.transform(
-                                ($) => _pt.list_literal([
+                                ($) => _pt.list.literal([
                                     `-C`,
                                     s_path.Context_Path($),
                                 ]),
-                                () => _pt.list_literal([])
+                                () => _pt.list.literal([])
                             ),
-                            _pt.list_literal([
+                            _pt.list.literal([
                                 `commit`,
                                 `-m`,
                                 $p.instruction['commit message'],
@@ -69,15 +69,15 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                     [
                         $cr.git.execute(
                             {
-                                'args': _pt.list_literal([
+                                'args': _pt.list.literal([
                                     $p.path.transform(
-                                        ($) => _pt.list_literal([
+                                        ($) => _pt.list.literal([
                                             `-C`,
                                             s_path.Context_Path($),
                                         ]),
-                                        () => _pt.list_literal([])
+                                        () => _pt.list.literal([])
                                     ),
-                                    _pt.list_literal([
+                                    _pt.list.literal([
                                         `push`,
                                     ])
                                 ]).flatten(($) => $),

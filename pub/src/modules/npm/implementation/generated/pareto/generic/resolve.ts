@@ -5,14 +5,14 @@ import * as _et from 'pareto-core-interface'
 import * as unresolved$ from "../../../../interface/generated/pareto/core/unresolved"
 import * as resolved$ from "../../../../interface/generated/pareto/core/resolved"
 
-import * as i from "../../../../interface/generated/pareto/core/resolve"
+import * as i from 'pareto-core-refiner/dist/resolve'
 
 export type Acyclic_Entry_Reference<T_Dictionary_Entry> = {
     readonly 'entry': T_Dictionary_Entry
     readonly 'key': string
 }
 export type Parameters<Source, V, L> = {
-    'location 2 string': i.Location_to_String<Source>
+    'location 2 string': i._T_Location_2_String<Source>
     'parameters': {
         'lookups': L,
         'values': V
@@ -57,14 +57,14 @@ export type Resolve_Error_Type =
         'index': number,
     }]
 
-export const abort = <Source>(location: Source, type: Resolve_Error_Type, location_to_string: i.Location_to_String<Source>): never => {
+export const abort = <Source>(location: Source, type: Resolve_Error_Type, location_to_string: i._T_Location_2_String<Source>): never => {
     return _ea.fixme_abort(
         _ea.cc(type, ($) => {
             switch ($[0]) {
                 case 'no such entry': return _ea.ss($, ($) => `no such entry: '${$['key']}'`)
                 case 'missing denseness entry': return _ea.ss($, ($) => `missing denseness entry: '${$['key']}'`)
                 case 'circular dependency': return _ea.ss($, ($) => {
-                    const keys = _ps.build_text(($i) => {
+                    const keys = _ps.text.build(($i) => {
                         $['keys'].__for_each(($) => {
                             $i['add snippet'](` '${$}', `)
                         })
@@ -84,21 +84,21 @@ export const abort = <Source>(location: Source, type: Resolve_Error_Type, locati
 export const dictionary_to_lookup = <T>(
     $: _et.Dictionary<T>,
     $p: null,
-): i.Acyclic_Lookup<T> => {
-    return _ea.set($.map(($) => (['resolved', $])))
+): i._T_Acyclic_Lookup<T> => {
+    return _ea.optional.set($.map(($) => (['resolved', $])))
 }
 
 export const get_possibly_circular_dependent_sibling_entry = <Source, T>(
-    $: i.Cyclic_Lookup<T>,
+    $: i._T_Cyclic_Lookup<T>,
     $p: {
         'reference': unresolved$.Reference_To_Circular_Dependent_Sibling<Source, T>,
-        'location 2 string': i.Location_to_String<Source>
+        'location 2 string': i._T_Location_2_String<Source>
     },
 ): resolved$.Reference_To_Circular_Dependent_Sibling<Source, T> => {
     return $.transform(
         ($) => ({
             'key': $p.reference.key,
-            'entry': $.get_entry($p.reference.key).transform(
+            'entry': $.get_possible_entry($p.reference.key).transform(
                 ($) => $,
                 () => abort($p.reference.location, ['no such entry', { 'key': $p.reference.key }], $p['location 2 string']),
             )
@@ -108,7 +108,7 @@ export const get_possibly_circular_dependent_sibling_entry = <Source, T>(
 }
 
 export const push_stack = <T>($: _et.List<T>, $p: { 'element': T }): _et.List<T> => {
-    return _ea.build_list<T>(($i) => {
+    return _ea.list.build<T>(($i) => {
         $i['add list']($)
         $i['add element']($p['element'])
     })
@@ -116,21 +116,21 @@ export const push_stack = <T>($: _et.List<T>, $p: { 'element': T }): _et.List<T>
 
 
 export const get_entry_from_stack = <Source, T>(
-    $: i.Lookup_Stack<T>,
+    $: i._T_Lookup_Stack<T>,
     $p: {
         'reference': unresolved$.Reference_To_Stacked_Dictionary_Entry<Source, T>,
-        'location 2 string': i.Location_to_String<Source>
+        'location 2 string': i._T_Location_2_String<Source>
     },
 ): resolved$.Reference_To_Stacked_Dictionary_Entry<Source, T> => {
     const ref = $p.reference
     const get_entry_from_stack = (
         up_steps_taken: number
     ): resolved$.Reference_To_Stacked_Dictionary_Entry<Source, T> => {
-        return $.__get_element_at($.get_number_of_elements() - 1 - up_steps_taken).transform(
+        return $.__get_possible_element_at($.get_number_of_elements() - 1 - up_steps_taken).transform(
             ($): resolved$.Reference_To_Stacked_Dictionary_Entry<Source, T> => {
                 return $.transform(
                     ($) => {
-                        return $.get_entry(ref.key).transform(
+                        return $.get_possible_entry(ref.key).transform(
                             ($) => _ea.cc($, ($) => {
                                 switch ($[0]) {
                                     case 'error': return _ea.ss($, ($) => get_entry_from_stack(up_steps_taken += 1))
@@ -156,16 +156,16 @@ export const get_entry_from_stack = <Source, T>(
 }
 
 export const get_entry = <Source, T>(
-    $: i.Acyclic_Lookup<T>,
+    $: i._T_Acyclic_Lookup<T>,
     $p: {
         'reference': unresolved$.Reference_To_Normal_Dictionary_Entry<Source, T>,
-        'location 2 string': i.Location_to_String<Source>
+        'location 2 string': i._T_Location_2_String<Source>
     },
 ): resolved$.Reference_To_Normal_Dictionary_Entry<Source, T> => {
     return $.transform(
         ($) => ({
             'key': $p.reference.key,
-            'entry': $.get_entry($p.reference.key).transform(
+            'entry': $.get_possible_entry($p.reference.key).transform(
                 ($) => _ea.cc($, ($) => {
                     switch ($[0]) {
                         case 'error': return _ea.ss($, ($) => _ea.cc($, ($) => {
@@ -197,14 +197,14 @@ export const resolve_path = <Source, Unresolved_Element, Resolved_Element, Seed>
     },
 ): Path<Source, Resolved_Element, Seed> => {
     let current: Path<Source, Resolved_Element, Seed> = {
-        'list': _ea.list_literal([]),
+        'list': _ea.list.literal([]),
         'result': {
             'data': $p.seed,
         },
     }
     $.list.__for_each(($) => {
         const result = $p.map($.element, current.result.data)
-        const data = _ea.build_list<Resolved_Element>(($i) => {
+        const data = _ea.list.build<Resolved_Element>(($i) => {
             current.list.__for_each(($) => {
                 $i['add element']($)
             })
@@ -224,7 +224,7 @@ export const resolve_dictionary = <Source, TUnresolved, TResolved>(
     $: unresolved$.Dictionary<Source, TUnresolved>,
     $p: {
         'map': ($: Key_Value_Location_Triplet<Source, TUnresolved>, $l: {
-            'possibly circular dependent siblings': i.Cyclic_Lookup<TResolved>
+            'possibly circular dependent siblings': i._T_Cyclic_Lookup<TResolved>
         }) => TResolved,
         'location 2 string': ($: Source) => string
     }
@@ -238,7 +238,7 @@ export const resolve_dense_dictionary = <Source, TUnresolved, TResolved, TBenchm
     $p: {
         'denseness benchmark': _et.Dictionary<TBenchmark>
         'map': ($: Key_Value_Location_Triplet<Source, TUnresolved>, $l: {
-            'possibly circular dependent siblings': i.Cyclic_Lookup<TResolved>
+            'possibly circular dependent siblings': i._T_Cyclic_Lookup<TResolved>
         }) => TResolved,
         'location 2 string': ($: Source) => string
     }
@@ -251,8 +251,8 @@ export const resolve_dense_ordered_dictionary = <Source, TUnresolved, TResolved,
     $p: {
         'denseness benchmark': _et.Dictionary<TBenchmark>
         'map': ($: Key_Value_Location_Triplet<Source, TUnresolved>, $l: {
-            'possibly circular dependent siblings': i.Cyclic_Lookup<TResolved>
-            'not circular dependent siblings': i.Acyclic_Lookup<TResolved>
+            'possibly circular dependent siblings': i._T_Cyclic_Lookup<TResolved>
+            'not circular dependent siblings': i._T_Acyclic_Lookup<TResolved>
         }) => TResolved,
         'location 2 string': ($: Source) => string
     }
@@ -264,11 +264,11 @@ export const resolve_dense_ordered_dictionary = <Source, TUnresolved, TResolved,
             benchmark: _et.Dictionary<TBenchmark>,
             focus: _et.Dictionary<TResolved>,
             location: Source,
-            location_to_string: i.Location_to_String<Source>,
+            location_to_string: i._T_Location_2_String<Source>,
         ) => {
             benchmark.map(($, key) => {
                 const benchmark = $
-                focus.get_entry(key).transform(
+                focus.get_possible_entry(key).transform(
                     ($) => {
                     },
                     () => {
@@ -293,8 +293,8 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
     $: unresolved$.Dictionary<Source, TUnresolved>,
     $p: {
         'map': ($: Key_Value_Location_Triplet<Source, TUnresolved>, $l: {
-            'possibly circular dependent siblings': i.Cyclic_Lookup<TResolved>
-            'not circular dependent siblings': i.Acyclic_Lookup<TResolved>
+            'possibly circular dependent siblings': i._T_Cyclic_Lookup<TResolved>
+            'not circular dependent siblings': i._T_Acyclic_Lookup<TResolved>
         }) => TResolved,
         'location 2 string': ($: Source) => string
     }
@@ -311,7 +311,7 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
 
     const finished: { [key: string]: TResolved } = {}
 
-    const ordered_list = _ea.build_list<_et.Deprecated_Key_Value_Pair<TResolved>>(($i) => {
+    const ordered_list = _ea.list.build<_et.Deprecated_Key_Value_Pair<TResolved>>(($i) => {
 
         const source_dictionary = $
 
@@ -329,10 +329,10 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
                 'value': $,
                 'location': location,
             }, {
-                'possibly circular dependent siblings': _ea.set({
-                    get_entry(key) {
+                'possibly circular dependent siblings': _ea.optional.set({
+                    get_possible_entry(key) {
                         //does the entry exist?
-                        return source_dictionary.dictionary.get_entry(key).map(($) => {
+                        return source_dictionary.dictionary.get_possible_entry(key).map(($) => {
                             //yes, it exists in the source dictionary
                             if (all_siblings_subscribed_entries[key] === undefined) {
                                 all_siblings_subscribed_entries[key] = { 'entry': null }
@@ -351,21 +351,21 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
                     },
 
                 }),
-                'not circular dependent siblings': _ea.set({
-                    get_entry(key): _et.Optional_Value<i.Non_Circular_Result<TResolved>> {
+                'not circular dependent siblings': _ea.optional.set({
+                    get_possible_entry(key) {
                         const status = status_dictionary[key]
                         if (status === undefined) {
-                            return source_dictionary.dictionary.get_entry(key).transform(
-                                ($) => _ea.set(['resolved', process_entry($.entry, $.location, key)]),
+                            return source_dictionary.dictionary.get_possible_entry(key).transform(
+                                ($) => _ea.optional.set(['resolved', process_entry($.entry, $.location, key)]),
                                 () => {
-                                    return _ea.not_set()
+                                    return _ea.optional.not_set()
                                     // throw new ResolveError("")
                                 }
                             )
                         } else {
                             const get_keys_of_entries_being_processed = () => {
-                                return _ea.build_list<string>(($i) => {
-                                    _ea.dictionary_literal(status_dictionary).map(($, key) => {
+                                return _ea.list.build<string>(($i) => {
+                                    _ea.dictionary.literal(status_dictionary).map(($, key) => {
                                         if ($[0] === 'processing') {
                                             $i['add element'](key)
                                         }
@@ -383,7 +383,7 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
 
 
 
-                                            return _ea.set(['error', ['circular', get_keys_of_entries_being_processed()]])
+                                            return _ea.optional.set(['error', ['circular', get_keys_of_entries_being_processed()]])
                                             //return notSet()
                                         })
                                     case 'processing':
@@ -399,10 +399,10 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
                                             //$se.onError(`the following entries are referencing each other: ${keys.join(", ")}`)
                                         }
                                         status_dictionary[key_of_entry_being_processed] = ['failed', null]
-                                        return _ea.set(['error', ['circular', get_keys_of_entries_being_processed()]])
+                                        return _ea.optional.set(['error', ['circular', get_keys_of_entries_being_processed()]])
 
                                     case 'success':
-                                        return _ea.set(['resolved', s[1]])
+                                        return _ea.optional.set(['resolved', s[1]])
                                     default: return _ea.au(s[0])
                                 }
                             })
@@ -424,7 +424,7 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
                 process_entry($.entry, $.location, key)
             }
         })
-        _ea.dictionary_literal(all_siblings_subscribed_entries).map(($, key) => {
+        _ea.dictionary.literal(all_siblings_subscribed_entries).map(($, key) => {
             if (finished[key] === undefined) {
                 _ea.fixme_abort(`implementation error: entry not resolved: ${key}`)
             }
@@ -432,7 +432,7 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
         })
     })
     return {
-        'dictionary': _ea.dictionary_literal(finished),
+        'dictionary': _ea.dictionary.literal(finished),
         'ordered list': ordered_list,
     }
 }

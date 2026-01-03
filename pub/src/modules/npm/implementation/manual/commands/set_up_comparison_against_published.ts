@@ -19,12 +19,12 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 
 const remove_n_characters_from_end = ($: string, n: number): string => {
 
-    const chars = _pds.text_to_character_list($)
+    const chars = _pds.list.from_text($, ($) => $)
     const length = chars.get_number_of_elements()
     const new_length = length - n
     let index = -1
 
-    return _pds.build_text(($i) => {
+    return _pds.text.build(($i) => {
         chars.__for_each(($) => {
             index += 1
             if (index < new_length) {
@@ -89,8 +89,8 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                         // Create local package using npm pack (if local package path provided)
                         $cr['npm'].execute(
                             {
-                                'args': _pt.list_literal([
-                                    _pt.list_literal([
+                                'args': _pt.list.literal([
+                                    _pt.list.literal([
                                         `pack`,
                                         s_path.Context_Path($p['path to local package']),
                                         `--pack-destination`,
@@ -110,7 +110,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                         // Extract local package into local subdirectory using dynamic filename
                         $cr['tar'].execute(
                             {
-                                'args': _pt.list_literal([
+                                'args': _pt.list.literal([
                                     `-xzmf`,
                                     `${s_path.Node_Path($p['path to temp directory'])}/${filename}`,
                                     `-C`,
@@ -129,7 +129,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
 
                         $cr['npm'].execute(
                             {
-                                'args': _pt.list_literal([
+                                'args': _pt.list.literal([
                                     `pack`,
                                     `${package_info.name}@${package_info.version}`,
                                     `--pack-destination`,
@@ -148,7 +148,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                         _p.query_without_error_transformation<d.Error, string>(
                             $qr.npm(
                                 {
-                                    'args': _pt.list_literal([
+                                    'args': _pt.list.literal([
                                         `view`,
                                         package_info.name,
                                         `version`,
@@ -160,7 +160,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                             ($v) => [
                                 $cr['tar'].execute<d.Error>(
                                     {
-                                        'args': _pt.list_literal([
+                                        'args': _pt.list.literal([
                                             `-xzmf`,
                                             `${s_path.Node_Path($p['path to temp directory'])}/npm/${package_info.name}-${$v}.tgz`,
                                             `-C`,

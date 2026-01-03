@@ -25,14 +25,14 @@ export const Result: Result = ($) => {
                         || key === "pareto-core-query"
                         || key === "pareto-host-nodejs"
                     ) {
-                        return _p.not_set()
+                        return _p.optional.not_set()
                     }
-                    return _p.set(({
+                    return _p.optional.set(({
                         'from': from,
                         'to': key,
                     }))
                 }).to_list($ => $),
-                () => _p.list_literal([])
+                () => _p.list.literal([])
             )
         }).flatten(($) => $),
     }

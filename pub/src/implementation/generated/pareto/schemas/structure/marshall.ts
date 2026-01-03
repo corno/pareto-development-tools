@@ -39,7 +39,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.cc
                                 }))
                                 case 'generated': return _pa.ss($, ($) => ({
                                     'state': "generated",
-                                    'value': ['verbose group', _pa.dictionary_literal({
+                                    'value': ['verbose group', _pa.dictionary.literal({
                                         'commit to git': _pa.cc($['commit to git'], ($) => ['text', ({
                                             'delimiter': ['backtick', null],
                                             'value': $p['value serializers']['boolean'](
@@ -59,7 +59,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.cc
         }))
         case 'wildcards': return _pa.ss($, ($) => ({
             'state': "wildcards",
-            'value': ['verbose group', _pa.dictionary_literal({
+            'value': ['verbose group', _pa.dictionary.literal({
                 'required directories': _pa.cc($['required directories'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['default number'](
@@ -97,7 +97,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.cc
         }))
         case 'generated': return _pa.ss($, ($) => ({
             'state': "generated",
-            'value': ['verbose group', _pa.dictionary_literal({
+            'value': ['verbose group', _pa.dictionary.literal({
                 'commit to git': _pa.cc($['commit to git'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['boolean'](

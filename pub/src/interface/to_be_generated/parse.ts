@@ -5,3 +5,4 @@ export type Error =
     | ['expected a text', {
         'description': string
     }]
+    | ['too many arguments', null]

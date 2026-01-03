@@ -52,7 +52,7 @@ const expect_object = ($: d._T_Value, abort: (error: Error_Expect_Object) => nev
                 )
             }
         })
-        return _p.dictionary_literal(temp)
+        return _p.dictionary.literal(temp)
     }
     return _p.cc($, ($) => {
         switch ($[0]) {
@@ -78,10 +78,7 @@ const expect_text = ($: d._T_Value, abort: (error: ['not a text', null]) => neve
 }
 
 const expect_property = ($: Object, key: string, abort: (error: ['missing property', string]) => never): d._T_Value => {
-    return $.get_entry(key).transform(
-        ($) => $,
-        () => abort(['missing property', key]),
-    )
+    return $.get_entry(key, () => abort(['missing property', key]))
 }
 
 export const $$: _pi.Deserializer<NPM_Package, NPM_Package_Parse_Error> = ($, abort) => {
@@ -101,8 +98,16 @@ export const $$: _pi.Deserializer<NPM_Package, NPM_Package_Parse_Error> = ($, ab
     return {
         'name': name,
         'version': version,
-        'dependencies': root.get_entry('dependencies').map(
-            ($) => expect_object($, (error) => abort(['dependencies', ['not an object', null]])).map(($, key) => expect_text($, (error) => abort(['dependencies', ['not a text', key]]))
-            ))
+        'dependencies': root.get_possible_entry('dependencies').map(
+            ($) => expect_object(
+                $,
+                (error) => abort(['dependencies', ['not an object', null]])
+            ).map(
+                ($, key) => expect_text(
+                    $,
+                    (error) => abort(['dependencies', ['not a text', key]])
+                )
+            )
+        )
     }
 }

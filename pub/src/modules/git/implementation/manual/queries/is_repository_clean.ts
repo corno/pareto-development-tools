@@ -13,15 +13,15 @@ import * as s_path from "pareto-resources/dist/implementation/manual/schemas/pat
 export const $$: signatures.queries.is_repository_clean = _p.query_function(
     ($p, $qr) => $qr.git(
         {
-            'args': _p.list_literal<_pi.List<string>>([
+            'args': _p.list.literal<_pi.List<string>>([
                 $p.path.transform(
-                    ($) => _p.list_literal([
+                    ($) => _p.list.literal([
                         `-C`,
                         s_path.Context_Path($),
                     ]),
-                    () => _p.list_literal([])
+                    () => _p.list.literal([])
                 ),
-                _p.list_literal([
+                _p.list.literal([
                     `status`,
                     `--porcelain`,
                 ])

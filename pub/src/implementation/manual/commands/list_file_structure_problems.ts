@@ -26,7 +26,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                 ($): d.Error => ['read directory', $],
             ).query_without_error_transformation(
                 ($) => {
-                    return _pq.dictionary.parallel(
+                    return _pq.dictionaryx.parallel(
                         $.map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                             const path = $.path
                             return _pt.cc($['node type'], ($) => {

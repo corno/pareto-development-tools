@@ -9,8 +9,12 @@ import * as builders from "../productions/text"
 
 
 export const Command: _pi.Refiner<d_result.Parameters, d_error.Error, d_input.Parameters> = ($, abort) => {
-    return builders.Command(
-        _p.create_iterator($.arguments),
-        abort,
+    return _p.iterate_fully(
+        $.arguments,
+        ($iter) => builders.Command(
+            $iter,
+            abort,
+        ),
+        ($) => abort(['too many arguments', null]),
     )
 }

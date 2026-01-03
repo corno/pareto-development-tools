@@ -62,26 +62,25 @@ export const throw_unexpected_token = (
 export type ASTN_Token_Iterator = si.Token_Iterator<d_parse_result.Expected, _source._T_Annotated_Token>
 
 export const create_astn_token_iterator = (
-    $: _source._T_Tokenizer_Result.tokens, 
+    $: _source._T_Tokenizer_Result.tokens,
     end: si.Location,
     abort: ($: My_Parse_Error) => never,
 ): ASTN_Token_Iterator => {
     let position = 0
     return {
         'get required token': (pet) => {
-            return $.__get_element_at(position).transform(
-                ($) => $,
-                () => throw_parse_error(
-                    {
+            return $.__get_element_at(
+                position,
+                () => abort({
+                    'type': {
                         'expected': pet,
                         'cause': ['missing token', null]
                     },
-                    {
+                    'range': {
                         'start': end,
                         'end': end,
                     },
-                    abort,
-                )
+                })
             )
         },
         'consume token': () => {
