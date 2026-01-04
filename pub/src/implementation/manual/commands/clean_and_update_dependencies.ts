@@ -5,15 +5,26 @@ import * as signatures from "../../../interface/signatures"
 //data types
 import * as d from "../../../interface/to_be_generated/clean_and_update_dependencies"
 
+//dependencies
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
+
 export const $$: signatures.commands.clean_and_update_dependencies = _p.command_procedure(
-    ($p, $cr) =>[
+    ($p, $cr) => [
 
         // clean
-        $cr['git clean'].execute(
+        $cr['remove'].execute(
             {
-                'path': _p.optional.set($p.path),
+                'path': t_path_to_path.extend_node_path($p.path, { 'addition': "node_modules" }),
+                'error if not exists': false,
             },
-            ($): d.Error => ['could not clean', $],
+            ($): d.Error => ['could not remove node_modules', $],
+        ),
+        $cr['remove'].execute(
+            {
+                'path': t_path_to_path.extend_node_path($p.path, { 'addition': "package-lock.json" }),
+                'error if not exists': false,
+            },
+            ($): d.Error => ['could not remove package-lock.json', $],
         ),
 
         // update dependencies

@@ -28,4 +28,5 @@ export namespace commands {
     export type create_dependency_graph = _pi.Command<d_create_dependency_graph.Error, d_create_dependency_graph.Parameters>
     export type tsc = _pi.Command<d_tsc.Error, d_tsc.Parameters>
     export type update_dependencies = _pi.Command<d_update_dependencies.Error, d_update_dependencies.Parameters>
+    
 }

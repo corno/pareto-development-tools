@@ -155,7 +155,7 @@ _pn.run_main_procedure(
 
         const update_typescript_dependencies = c_update_typescript_dependencies(
             {
-                'git clean': git_clean,
+                'remove': $r.commands.remove,
                 'update2latest': update2latest,
                 'npm': npm,
             },

@@ -72,7 +72,7 @@ export namespace commands {
 
     export type clean_and_update_dependencies = _pi.Command_Procedure<
         resources.commands.clean_and_update_dependencies, {
-            'git clean': resources_git.commands.clean
+            'remove': resources_exupery.commands.remove
             'update2latest': resources_npm.commands.update2latest
             'npm': resources_npm.commands.npm
         },
