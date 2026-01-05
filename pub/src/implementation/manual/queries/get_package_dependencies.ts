@@ -18,38 +18,31 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
         },
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(
-        ($) => {
-            return _p.dictionaryx.parallel<d_npm.NPM_Package, d.Error, d.Package_Error>(
-                $.map(($) => {
-                    const path = $.path
-                    return _p.cc($['node type'], ($) => {
-                        switch ($[0]) {
-                            case 'file': return _p.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
-                            case 'other': return _p.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
-                            case 'directory': return _p.ss($, ($) => {
-                                return $r['read file'](
-                                    t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` }),
-                                    ($): d.Package_Error => ['no package.json file', null],
-                                ).refine_without_error_transformation(
-                                    ($, abort) => r_parse_npm_package(
-                                        $,
-                                        ($) => abort(['parse error', $]),
-                                    )
-                                )
-
-                            })
-                            default: return _p.au($[0])
-                        }
-                    })
-                }),
-                ($): d.Error => ['directory content processing', $],
-            ).transform_result(
-                ($) => {
-                    return {
-                        'packages': $,
+        ($) => _p.dictionaryx.parallel<d_npm.NPM_Package, d.Error, d.Package_Error>(
+            $.map(($) => {
+                const path = $.path
+                return _p.cc($['node type'], ($) => {
+                    switch ($[0]) {
+                        case 'file': return _p.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                        case 'other': return _p.ss($, ($) => _p.direct_error<d_npm.NPM_Package, d.Package_Error>(['not a directory', null]))
+                        case 'directory': return _p.ss($, ($) => $r['read file'](
+                            t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` }),
+                            ($): d.Package_Error => ['no package.json file', null],
+                        ).refine_without_error_transformation(
+                            ($, abort) => r_parse_npm_package(
+                                $,
+                                ($) => abort(['parse error', $]),
+                            )
+                        ))
+                        default: return _p.au($[0])
                     }
-                }
-            )
-        }
+                })
+            }),
+            ($): d.Error => ['directory content processing', $],
+        ).transform_result(
+            ($) => ({
+                'packages': $,
+            })
+        )
     )
 )

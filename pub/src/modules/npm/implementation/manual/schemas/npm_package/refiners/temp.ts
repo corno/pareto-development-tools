@@ -68,18 +68,14 @@ const expect_object = ($: d._T_Value, abort: (error: Error_Expect_Object) => nev
     })
 }
 
-const expect_text = ($: d._T_Value, abort: (error: ['not a text', null]) => never): string => {
-    return _p.cc($, ($) => {
-        switch ($[0]) {
-            case 'string': return _p.ss($, ($) => $.value)
-            default: return abort(['not a text', null])
-        }
-    })
-}
+const expect_text = ($: d._T_Value, abort: (error: ['not a text', null]) => never): string => _p.cc($, ($) => {
+    switch ($[0]) {
+        case 'string': return _p.ss($, ($) => $.value)
+        default: return abort(['not a text', null])
+    }
+})
 
-const expect_property = ($: Object, key: string, abort: (error: ['missing property', string]) => never): d._T_Value => {
-    return $.get_entry(key, () => abort(['missing property', key]))
-}
+const expect_property = ($: Object, key: string, abort: (error: ['missing property', string]) => never): d._T_Value => $.get_entry(key, () => abort(['missing property', key]))
 
 export const $$: _pi.Deserializer<NPM_Package, NPM_Package_Parse_Error> = ($, abort) => {
     const x = r_parse.parse(

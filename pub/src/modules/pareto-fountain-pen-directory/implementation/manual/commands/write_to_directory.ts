@@ -35,36 +35,30 @@ export const $$: signatures.commands.write_to_directory = _p.command_procedure(
                 _pt.cc($, ($): _pi.Command_Promise<d_write_to_directory.Error__nodes> => {
                     const node_path = t_path_to_path.extend_node_path($p.path, { 'addition': key })
                     switch ($[0]) {
-                        case 'file':
-                            return _pt.ss($, ($) => {
-                                return $cr['write to_file'].execute(
-                                    {
-                                        'escape spaces in path': $p['escape spaces in path'],
-                                        'group': $,
-                                        'directory path': $p.path,
-                                        'filename': key,
-                                        'indentation': $p.indentation,
-                                        'newline': $p.newline
-                                    },
-                                    ($): d_write_to_directory.Error__nodes => ['file', $],
-                                )
-                            })
-                        case 'directory':
-                            return _pt.ss($, ($) => {
-                                return $$($cr, $qr).execute(
-                                    {
-                                        'escape spaces in path': $p['escape spaces in path'],
-                                        'directory': $,
-                                        'path': $p['escape spaces in path']
-                                            ? replace_space_in_context_path(node_path)
-                                            : node_path,
-                                        'indentation': $p.indentation,
-                                        'newline': $p.newline,
-                                        'remove before creating': false,
-                                    },
-                                    ($): d_write_to_directory.Error__nodes => ['directory', $],
-                                )
-                            })
+                        case 'file': return _pt.ss($, ($) => $cr['write to_file'].execute(
+                            {
+                                'escape spaces in path': $p['escape spaces in path'],
+                                'group': $,
+                                'directory path': $p.path,
+                                'filename': key,
+                                'indentation': $p.indentation,
+                                'newline': $p.newline
+                            },
+                            ($): d_write_to_directory.Error__nodes => ['file', $],
+                        ))
+                        case 'directory': return _pt.ss($, ($) => $$($cr, $qr).execute(
+                            {
+                                'escape spaces in path': $p['escape spaces in path'],
+                                'directory': $,
+                                'path': $p['escape spaces in path']
+                                    ? replace_space_in_context_path(node_path)
+                                    : node_path,
+                                'indentation': $p.indentation,
+                                'newline': $p.newline,
+                                'remove before creating': false,
+                            },
+                            ($): d_write_to_directory.Error__nodes => ['directory', $],
+                        ))
                         default: return _pt.au($[0])
                     }
                 }),

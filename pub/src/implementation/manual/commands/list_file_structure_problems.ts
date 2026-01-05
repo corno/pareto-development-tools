@@ -35,14 +35,12 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                                 switch ($[0]) {
                                     case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
                                     case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                                    case 'directory': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
-                                        return q_directory_content($q)(
-                                            {
-                                                'path': path,
-                                            },
-                                            ($): d.Package_Error => ['directory content', $],
-                                        )
-                                    })
+                                    case 'directory': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content($q)(
+                                        {
+                                            'path': path,
+                                        },
+                                        ($): d.Package_Error => ['directory content', $],
+                                    ))
                                     default: return _pt.au($[0])
                                 }
                             })
@@ -64,11 +62,9 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                                             'structure path': ``
                                         }
 
-                                    )).filter(($) => {
-                                        return $['unexpected path tail'].is_set()
-                                            ? _p.optional.set($)
-                                            : _p.optional.not_set()
-                                    })).map(($) => `./packages/${package_name}${$['path']}`)
+                                    )).filter(($) => $['unexpected path tail'].is_set()
+                                        ? _p.optional.set($)
+                                        : _p.optional.not_set())).map(($) => `./packages/${package_name}${$['path']}`)
                                 }).flatten(($) => $)
                             },
                             ($): d.Error => ['log', $],
