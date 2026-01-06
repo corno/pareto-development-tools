@@ -12,7 +12,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 
 
 export const $$: signatures.commands.api = _p.command_procedure(
-    ($p, $cr, $qr) => _p.cc($p, ($) => {
+    ($p, $cr, $qr) => _p.sg($p, ($) => {
         switch ($[0]) {
             case 'analyze file structure': return _p.ss($, ($) => [
                 $cr['analyze file structure'].execute(
@@ -66,7 +66,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                             },
                             ($): d.Error => ['project', ['could not read packages directory', $]],
                         ),
-                        ($x, key_spaces_not_escaped): _pi.Command_Promise<d.Project_Package_Error>[] => _p.cc($.instruction, ($) => {
+                        ($x, key_spaces_not_escaped): _pi.Command_Promise<d.Project_Package_Error>[] => _p.sg($.instruction, ($) => {
                             const concatenated_path = $x.path
                             const context_path = t_path_to_path.deprecated_node_path_to_context_path(concatenated_path)
                             switch ($[0]) {
@@ -137,7 +137,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                     )
                 ]
             })
-            case 'set up comparison': return _p.ss($, ($) => _p.cc(
+            case 'set up comparison': return _p.ss($, ($) => _p.deprecated_cc(
                 {
                     'path to temp': t_path_to_path.extend_context_path($['path to package'], { 'addition': `temp` }),
                     'path to package': $['path to package'],

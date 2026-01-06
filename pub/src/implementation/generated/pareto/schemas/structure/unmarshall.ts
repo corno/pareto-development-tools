@@ -42,7 +42,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                                                 $,
                                                 {
                                                     'properties': ($) => ({
-                                                        'commit to git': _pa.cc(_i_generic.get_entry(
+                                                        'commit to git': _pa.sg(_i_generic.__get_entry(
                                                             $,
                                                             {
                                                                 'key': "commit to git",
@@ -68,7 +68,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                 $,
                 {
                     'properties': ($) => ({
-                        'required directories': _pa.cc(_i_generic.get_entry(
+                        'required directories': _pa.sg(_i_generic.__get_entry(
                             $,
                             {
                                 'key': "required directories",
@@ -79,7 +79,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                                 'deserializer': $p['value deserializers']['default number'],
                             }
                         )),
-                        'additional directories allowed': _pa.cc(_i_generic.get_entry(
+                        'additional directories allowed': _pa.sg(_i_generic.__get_entry(
                             $,
                             {
                                 'key': "additional directories allowed",
@@ -90,7 +90,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                                 'deserializer': $p['value deserializers']['boolean'],
                             }
                         )),
-                        'extensions': _pa.cc(_i_generic.get_entry(
+                        'extensions': _pa.sg(_i_generic.__get_entry(
                             $,
                             {
                                 'key': "extensions",
@@ -104,7 +104,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                                 ),
                             }
                         )),
-                        'warn': _pa.cc(_i_generic.get_entry(
+                        'warn': _pa.sg(_i_generic.__get_entry(
                             $,
                             {
                                 'key': "warn",
@@ -130,7 +130,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                 $,
                 {
                     'properties': ($) => ({
-                        'commit to git': _pa.cc(_i_generic.get_entry(
+                        'commit to git': _pa.sg(_i_generic.__get_entry(
                             $,
                             {
                                 'key': "commit to git",

@@ -10,15 +10,15 @@ export namespace signatures {
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const Error: signatures.Error = ($) => _p.cc($, ($) => {
+export const Error: signatures.Error = ($) => _p.sg($, ($) => {
     switch ($[0]) {
         case 'directory content processing': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`directory content processing: `),
             sh.b.indent([
-                sh.g.sub($.to_list(($, key) => sh.g.nested_block([
+                sh.g.sub(_p.list.from_dictionary($, ($, key) => sh.g.nested_block([
                     sh.b.snippet(key),
                     sh.b.snippet(": "),
-                    _p.cc($, ($) => {
+                    _p.sg($, ($) => {
                         switch ($[0]) {
                             case 'not a directory': return _p.ss($, ($) => sh.b.sub([
                                 sh.b.snippet(`not a directory`),

@@ -11,7 +11,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
     ($p, $cr) => [
         $cr['npm'].execute(
             {
-                'args': _pt.list.literal<_pi.List<string>>([
+                'args': _pt.list.nested_literal([
                     $p.path.transform(
                         ($) => _pt.list.literal([
                             `--prefix`,
@@ -19,7 +19,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                         ]),
                         () => _pt.list.literal([])
                     ),
-                    _pt.cc($p.operation, ($) => {
+                    _pt.sg($p.operation, ($) => {
                         switch ($[0]) {
                             case 'update': return _pt.ss($, ($) => _pt.list.literal([
                                 `update`,
@@ -30,7 +30,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                             default: return _pt.au($[0])
                         }
                     })
-                ]).flatten(($) => $),
+                ]),
             },
             ($) => ['error while running npm', $],
         )

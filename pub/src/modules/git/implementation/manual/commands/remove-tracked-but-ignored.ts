@@ -15,7 +15,7 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
             {
                 'path': $p.path,
             },
-            ($): d.Error => _pt.cc($, ($) => {
+            ($): d.Error => _pt.sg($, ($) => {
                 switch ($[0]) {
                     case 'working directory is not clean': return _pt.ss($, ($): d.Error => ['not clean', null])
                     case 'unexpected error': return _pt.ss($, ($): d.Error => ['unexpected error', $])
@@ -25,7 +25,7 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
         ),
         $cr.git.execute(
             {
-                'args': _pt.list.literal([
+                'args': _pt.list.nested_literal([
                     $p.path.transform(
                         ($) => _pt.list.literal([
                             `-C`,
@@ -39,13 +39,13 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
                         `--cached`,
                         `.`
                     ])
-                ]).flatten(($) => $),
+                ]),
             },
             ($) => ['could not remove', $],
         ),
         $cr.git.execute(
             {
-                'args': _pt.list.literal([
+                'args': _pt.list.nested_literal([
                     $p.path.transform(
                         ($) => _pt.list.literal([
                             `-C`,
@@ -57,13 +57,13 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
                         `add`,
                         `--all`,
                     ])
-                ]).flatten(($) => $),
+                ]),
             },
             ($) => ['could not add', $],
         ),
         $cr.git.execute(
             {
-                'args': _pt.list.literal([
+                'args': _pt.list.nested_literal([
                     $p.path.transform(
                         ($) => _pt.list.literal([
                             `-C`,
@@ -75,7 +75,7 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
                         `clean`,
                         `-fd`,
                     ])
-                ]).flatten(($) => $),
+                ]),
             },
             ($) => ['could not clean', $],
         ),

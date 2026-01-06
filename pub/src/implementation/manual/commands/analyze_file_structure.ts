@@ -33,7 +33,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                     _pq.dictionaryx.parallel(
                         $v.map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                             const path = $.path
-                            return _pt.cc($['node type'], ($) => {
+                            return _pt.sg($['node type'], ($) => {
                                 switch ($[0]) {
                                     case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
                                     case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
@@ -53,54 +53,58 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                     ($v) => [
                         $cr.log.execute(
                             {
-                                'lines': _pt.list.literal([
+                                'lines': _pt.list.nested_literal([
                                     _pt.list.literal([
                                         `package,filepath,structure path,classification,extension,unexpected,line count`,
                                     ]),
 
-                                    $v.to_list(($, key): _pi.List<string> => {
-                                        const package_name = key
-                                        return t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
-                                            $,
-                                            {
-                                                'expected structure': x_structure,
-                                                'structure path': ``
-                                            }
-
-                                        ))).map(($) => `${package_name
-                                            },${$['path']
-                                            },${$.analysis.structure.path
-                                            },${_pt.cc($.analysis.structure.classification, ($) => {
-                                                switch ($[0]) {
-                                                    case 'directory': return _pt.ss($, ($) => `directory ` + _pt.cc($, ($) => {
-                                                        switch ($[0]) {
-                                                            case 'ignored': return _pt.ss($, ($) => `ignored`)
-                                                            case 'generated': return _pt.ss($, ($) => `generated`)
-                                                            case 'wildcards': return _pt.ss($, ($) => `wildcards`)
-                                                            case 'dictionary': return _pt.ss($, ($) => `dictionary`)
-                                                            case 'group': return _pt.ss($, ($) => `group`)
-                                                            case 'freeform': return _pt.ss($, ($) => `freeform`)
-                                                            default: return _pt.au($[0])
-                                                        }
-                                                    }))
-                                                    case 'file': return _pt.ss($, ($) => `file ` + _pt.cc($, ($) => {
-                                                        switch ($[0]) {
-                                                            case 'generated': return _pt.ss($, ($) => `generated`)
-                                                            case 'manual': return _pt.ss($, ($) => `manual`)
-                                                            default: return _pt.au($[0])
-                                                        }
-                                                    }))
+                                    _pt.list.flatten(
+                                        _pt.list.from_dictionary($v, ($, key): _pi.List<string> => {
+                                            const package_name = key
+                                            return t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
+                                                $,
+                                                {
+                                                    'expected structure': x_structure,
+                                                    'structure path': ``
                                                 }
-                                            })
-                                            },${$.analysis.extension.transform(($) => $, () => ``)
-                                            },${$.analysis['unexpected path tail'].transform(
-                                                ($) => $,
-                                                () => ``
-                                            )
-                                            },${$.analysis['line count']
-                                            }`)
-                                    }).flatten(($) => $)
-                                ]).flatten(($) => $)
+
+                                            ))).map(($) => `${package_name
+                                                },${$['path']
+                                                },${$.analysis.structure.path
+                                                },${_pt.sg($.analysis.structure.classification, ($) => {
+                                                    switch ($[0]) {
+                                                        case 'directory': return _pt.ss($, ($) => `directory ` + _pt.sg($, ($) => {
+                                                            switch ($[0]) {
+                                                                case 'ignored': return _pt.ss($, ($) => `ignored`)
+                                                                case 'generated': return _pt.ss($, ($) => `generated`)
+                                                                case 'wildcards': return _pt.ss($, ($) => `wildcards`)
+                                                                case 'dictionary': return _pt.ss($, ($) => `dictionary`)
+                                                                case 'group': return _pt.ss($, ($) => `group`)
+                                                                case 'freeform': return _pt.ss($, ($) => `freeform`)
+                                                                default: return _pt.au($[0])
+                                                            }
+                                                        }))
+                                                        case 'file': return _pt.ss($, ($) => `file ` + _pt.sg($, ($) => {
+                                                            switch ($[0]) {
+                                                                case 'generated': return _pt.ss($, ($) => `generated`)
+                                                                case 'manual': return _pt.ss($, ($) => `manual`)
+                                                                default: return _pt.au($[0])
+                                                            }
+                                                        }))
+                                                    }
+                                                })
+                                                },${$.analysis.extension.transform(($) => $, () => ``)
+                                                },${$.analysis['unexpected path tail'].transform(
+                                                    ($) => $,
+                                                    () => ``
+                                                )
+                                                },${$.analysis['line count']
+                                                }`)
+                                        }),
+                                        ($) => $
+                                    )
+
+                                ])
                             },
                             ($): d.Error => ['log', $],
                         )

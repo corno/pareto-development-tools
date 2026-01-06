@@ -11,8 +11,9 @@ import * as s_path from "pareto-resources/dist/implementation/manual/schemas/pat
 export const Command = (
     iterator: _pi.Iterator<string>,
     abort: _pi.Abort<d_error.Error>,
-): d.Parameters => _p.cc(
+): d.Parameters => _p.deprecated_cc(
     iterator.consume(
+        ($) => $,
         () => abort(['expected one of', _p.dictionary.literal({
             'analyze-file-structure': null,
             'assert-clean': null,
@@ -26,30 +27,36 @@ export const Command = (
         switch ($) {
             case 'analyze-file-structure': return ['analyze file structure', {
                 'path to project': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
                     () => abort(['expected a text', { 'description': "path to project" }])
                 ))
             }]
             case 'assert-clean': return ['assert clean', {
                 'path to package': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
                 ))
             }]
             case 'dependency-graph': return ['dependency graph', {
                 'path to project': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
                     () => abort(['expected a text', { 'description': "path to project" }])
                 ))
             }]
             case 'list-file-structure-problems': return ['list file structure problems', {
                 'path to project': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
                     () => abort(['expected a text', { 'description': "path to project" }])
                 ))
             }]
             case 'project': return ['project', {
                 'path to project': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
                     () => abort(['expected a text', { 'description': "path to project" }])
                 )),
-                'instruction': _p.cc(
+                'instruction': _p.deprecated_cc(
                     iterator.consume(
+                        ($) => $,
                         () => abort(['expected one of', _p.dictionary.literal({
                             'assert-clean': null,
                             'build-and-test': null,
@@ -67,6 +74,7 @@ export const Command = (
                             case 'build': return ['build', null]
                             case 'git-commit': return ['git extended commit', {
                                 'commit message': iterator.consume(
+                                    ($) => $,
                                     () => abort(['expected a text', { 'description': "commit message" }])
                                 ),
                                 'stage all changes': true,
@@ -91,6 +99,7 @@ export const Command = (
             }]
             case 'set-up-comparison': return ['set up comparison', {
                 'path to package': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
                 ))
             }]

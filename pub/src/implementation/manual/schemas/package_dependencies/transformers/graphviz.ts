@@ -10,30 +10,40 @@ export type Result = _pi.Transformer<d_in.Result, d_out.Graph>
 export const Result: Result = ($) => {
     return {
         'nodes': $.packages.map(($) => null),
-        'edges': $.packages.to_list(($, key) => {
-            const from = key
-            return $.dependencies.transform(
-                ($) => $.filter<{ 'from': string, 'to': string }>(($, key) => {
-                    if (key === "pareto-core-interface"
-                        || key === "pareto-core-transformer"
-                        || key === "pareto-core-refiner"
-                        || key === "pareto-core-serializer"
-                        || key === "pareto-core-deserializer"
-                        || key === "pareto-core-shorthands"
-                        || key === "pareto-core-data"
-                        || key === "pareto-core-command"
-                        || key === "pareto-core-query"
-                        || key === "pareto-host-nodejs"
-                    ) {
-                        return _p.optional.not_set()
-                    }
-                    return _p.optional.set(({
-                        'from': from,
-                        'to': key,
-                    }))
-                }).to_list($ => $),
-                () => _p.list.literal([])
-            )
-        }).flatten(($) => $),
+        'edges': _p.list.flatten(
+            _p.list.from_dictionary(
+                $.packages,
+                ($, key) => {
+                    const from = key
+                    return $.dependencies.transform(
+                        ($) => _p.list.from_dictionary(
+                            _p.dictionary.filter(
+                                $,
+                                ($, key) => {
+                                    if (key === "pareto-core-interface"
+                                        || key === "pareto-core-transformer"
+                                        || key === "pareto-core-refiner"
+                                        || key === "pareto-core-serializer"
+                                        || key === "pareto-core-deserializer"
+                                        || key === "pareto-core-shorthands"
+                                        || key === "pareto-core-data"
+                                        || key === "pareto-core-command"
+                                        || key === "pareto-core-query"
+                                        || key === "pareto-host-nodejs"
+                                    ) {
+                                        return _p.optional.not_set<d_out.Graph.edges.L>()
+                                    }
+                                    return _p.optional.set(({
+                                        'from': from,
+                                        'to': key,
+                                    }))
+                                }
+                            ),
+                            ($) => $,
+                        ),
+                        () => _p.list.literal([])
+                    )
+                }),
+            ($) => $),
     }
 }

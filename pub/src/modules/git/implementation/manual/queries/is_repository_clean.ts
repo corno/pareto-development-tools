@@ -13,7 +13,7 @@ import * as s_path from "pareto-resources/dist/implementation/manual/schemas/pat
 export const $$: signatures.queries.is_repository_clean = _p.query_function(
     ($p, $qr) => $qr.git(
         {
-            'args': _p.list.literal<_pi.List<string>>([
+            'args': _p.list.nested_literal([
                 $p.path.transform(
                     ($) => _p.list.literal([
                         `-C`,
@@ -25,7 +25,7 @@ export const $$: signatures.queries.is_repository_clean = _p.query_function(
                     `status`,
                     `--porcelain`,
                 ])
-            ]).flatten(($) => $),
+            ]),
         },
         ($) => $,
     ).transform_result<boolean>(

@@ -27,7 +27,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                     [
                         $cr.git.execute(
                             {
-                                'args': _pt.list.literal([
+                                'args': _pt.list.nested_literal([
                                     $p.path.transform(
                                         ($) => _pt.list.literal([
                                             `-C`,
@@ -39,7 +39,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                         `add`,
                                         `--all`,
                                     ])
-                                ]).flatten(($) => $),
+                                ]),
                             },
                             ($): d.Error => ['could not stage', $],
                         )
@@ -47,7 +47,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                 ),
                 $cr.git.execute(
                     {
-                        'args': _pt.list.literal([
+                        'args': _pt.list.nested_literal([
                             $p.path.transform(
                                 ($) => _pt.list.literal([
                                     `-C`,
@@ -60,7 +60,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                 `-m`,
                                 $p.instruction['commit message'],
                             ])
-                        ]).flatten(($) => $),
+                        ]),
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
@@ -69,7 +69,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                     [
                         $cr.git.execute(
                             {
-                                'args': _pt.list.literal([
+                                'args': _pt.list.nested_literal([
                                     $p.path.transform(
                                         ($) => _pt.list.literal([
                                             `-C`,
@@ -80,7 +80,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                     _pt.list.literal([
                                         `push`,
                                     ])
-                                ]).flatten(($) => $),
+                                ]),
                             },
                             ($): d.Error => ['could not push', $],
                         )

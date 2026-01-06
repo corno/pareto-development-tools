@@ -8,7 +8,7 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const Error: Error = ($) => _p.cc($, ($): d_out.Block_Part => {
+export const Error: Error = ($) => _p.sg($, ($): d_out.Block_Part => {
     switch ($[0]) {
         case 'error while running tsc': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`error while running tsc: `),

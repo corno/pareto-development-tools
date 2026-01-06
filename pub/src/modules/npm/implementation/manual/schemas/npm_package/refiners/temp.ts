@@ -35,7 +35,7 @@ type Error_Expect_Object =
 type Object = _pi.Dictionary<d._T_Value>
 
 //dependencies
-import * as r_parse from "../../../../generated/pareto/generic/parse/parse"
+import * as ds_astn_source from "astn-sealed/dist/implementation/schemas/astn_source/deserializers"
 
 
 const expect_object = ($: d._T_Value, abort: (error: Error_Expect_Object) => never): Object => {
@@ -54,9 +54,9 @@ const expect_object = ($: d._T_Value, abort: (error: Error_Expect_Object) => nev
         })
         return _p.dictionary.literal(temp)
     }
-    return _p.cc($, ($) => {
+    return _p.sg($, ($) => {
         switch ($[0]) {
-            case 'indexed collection': return _p.ss($, ($) => _p.cc($, ($) => {
+            case 'indexed collection': return _p.ss($, ($) => _p.sg($, ($) => {
                 switch ($[0]) {
                     case 'dictionary': return _p.ss($, ($) => expect_unique_identifiers($.entries, abort))
                     case 'verbose group': return _p.ss($, ($) => expect_unique_identifiers($.entries, abort))
@@ -68,22 +68,23 @@ const expect_object = ($: d._T_Value, abort: (error: Error_Expect_Object) => nev
     })
 }
 
-const expect_text = ($: d._T_Value, abort: (error: ['not a text', null]) => never): string => _p.cc($, ($) => {
+const expect_text = ($: d._T_Value, abort: (error: ['not a text', null]) => never): string => _p.sg($, ($) => {
     switch ($[0]) {
         case 'string': return _p.ss($, ($) => $.value)
         default: return abort(['not a text', null])
     }
 })
 
-const expect_property = ($: Object, key: string, abort: (error: ['missing property', string]) => never): d._T_Value => $.get_entry(key, () => abort(['missing property', key]))
+const expect_property = ($: Object, key: string, abort: (error: ['missing property', string]) => never): d._T_Value => $.__get_entry(key, () => abort(['missing property', key]))
 
-export const $$: _pi.Deserializer<NPM_Package, NPM_Package_Parse_Error> = ($, abort) => {
-    const x = r_parse.parse(
+export const $$: _pi.Deserializer_With_Parameters<NPM_Package, NPM_Package_Parse_Error, { 'uri': string }> = ($, abort, $p) => {
+    const x = ds_astn_source.Document(
         $,
+        () => abort(['invalid ASTN', null]),
         {
             'tab size': 4,
+            'uri': $p.uri
         },
-        () => abort(['invalid ASTN', null])
     )
 
     const root = expect_object(x.content, (error) => abort(['missing root object', null]))
@@ -94,7 +95,7 @@ export const $$: _pi.Deserializer<NPM_Package, NPM_Package_Parse_Error> = ($, ab
     return {
         'name': name,
         'version': version,
-        'dependencies': root.get_possible_entry('dependencies').map(
+        'dependencies': root.__get_possible_entry('dependencies').map(
             ($) => expect_object(
                 $,
                 (error) => abort(['dependencies', ['not an object', null]])

@@ -1,7 +1,6 @@
 import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 import * as _pds from 'pareto-core-deserializer'
-import * as _pinternals from 'pareto-core-internals'
 
 import * as d_in from "pareto-resources/dist/interface/to_be_generated/directory_content"
 import * as d_out from "../../../../../interface/to_be_generated/temp_directory_analysis"
@@ -33,7 +32,7 @@ const extension = ($: string): _pi.Optional_Value<string> => {
     } else {
         const fpi: number = first_period_index
         current_index = 0
-        return _p.optional.set(_pds.text.build(($i) => {
+        return _p.optional.set(_pds.text.deprecated_build(($i) => {
             characters.__for_each(($) => {
                 if (current_index > fpi) {
                     $i['add character']($)
@@ -56,7 +55,7 @@ export namespace defined {
         //both found and expected are directories
 
         const dir = $
-        return _p.cc($p['expected structure'], ($): d_out.Directory => {
+        return _p.sg($p['expected structure'], ($): d_out.Directory => {
             switch ($[0]) {
 
                 case 'group': return _p.ss($, ($) => {
@@ -70,21 +69,21 @@ export namespace defined {
                                 'expected structure': d_structure.Directory.SG.group.D,
                                 'structure path': string,
                             }
-                        ): d_out.Node => _p.cc($, ($): d_out.Node => {
+                        ): d_out.Node => _p.sg($, ($): d_out.Node => {
                             switch ($[0]) {
                                 case 'file': return _p.ss($, ($): d_out.Node => ['file', ({
                                     'structure': {
                                         'path': $p['structure path'],
-                                        'classification': _p.cc($p['expected structure'], ($): d_out.Classification => {
+                                        'classification': _p.sg($p['expected structure'], ($): d_out.Classification => {
                                             switch ($[0]) {
-                                                case 'file': return _p.ss($, ($) => _p.cc($, ($) => {
+                                                case 'file': return _p.ss($, ($) => _p.sg($, ($) => {
                                                     switch ($[0]) {
                                                         case 'generated': return _p.ss($, ($) => ['file', ['generated', null]])
                                                         case 'manual': return _p.ss($, ($) => ['file', ['manual', null]])
                                                         default: return _p.au($[0])
                                                     }
                                                 }))
-                                                case 'directory': return _p.ss($, ($) => ['directory', _p.cc($, ($): d_out.Directory_Classification => {
+                                                case 'directory': return _p.ss($, ($) => ['directory', _p.sg($, ($): d_out.Directory_Classification => {
                                                     switch ($[0]) {
                                                         case 'wildcards': return _p.ss($, ($) => ['wildcards', null])
                                                         case 'freeform': return _p.ss($, ($) => ['freeform', null])
@@ -101,9 +100,9 @@ export namespace defined {
                                     },
                                     'extension': extension($p['name']),
                                     'line count': line_count($),
-                                    'unexpected path tail': _p.cc($p['expected structure'], ($) => {
+                                    'unexpected path tail': _p.sg($p['expected structure'], ($) => {
                                         switch ($[0]) {
-                                            case 'file': return _p.ss($, ($) => _p.cc($, ($) => {
+                                            case 'file': return _p.ss($, ($) => _p.sg($, ($) => {
                                                 switch ($[0]) {
                                                     case 'generated': return _p.ss($, ($) => _p.optional.not_set())
                                                     case 'manual': return _p.ss($, ($) => _p.optional.not_set())
@@ -118,7 +117,7 @@ export namespace defined {
                                 case 'directory': return _p.ss($, ($): d_out.Node => {
                                     //found a directory in the filesystem, check expected structure
                                     const dir = $
-                                    return ['directory', _p.cc($p['expected structure'], ($): d_out.Directory => {
+                                    return ['directory', _p.sg($p['expected structure'], ($): d_out.Directory => {
                                         switch ($[0]) {
                                             case 'file': return _p.ss($, ($) => ['expected a file', null])
                                             case 'directory': return _p.ss($, ($) => Directory(
@@ -136,7 +135,7 @@ export namespace defined {
                                 default: return _p.au($[0])
                             }
                         })
-                        return expected.get_possible_entry(key).transform(
+                        return expected.__get_possible_entry(key).transform(
                             ($) => NodeX(
                                 node,
                                 {
@@ -193,7 +192,7 @@ export namespace defined {
                     //expecting a dictionary of directories
                     const struct = $
 
-                    return ['dictionary', dir.map(($, key): d_out.Node => _p.cc($, ($): d_out.Node => {
+                    return ['dictionary', dir.map(($, key): d_out.Node => _p.sg($, ($): d_out.Node => {
                         switch ($[0]) {
                             case 'directory': return _p.ss($, ($) => ['directory', Directory(
                                 $,
@@ -250,7 +249,7 @@ export namespace undefined {
             'unexpected path tail': _pi.Optional_Value<string>,
         }
     ): d_out.Node => {
-        return _p.cc($, ($): d_out.Node => {
+        return _p.sg($, ($): d_out.Node => {
             switch ($[0]) {
                 case 'file': return _p.ss($, ($): d_out.Node => ['file', {
                     'unexpected path tail': $p['unexpected path tail'],
@@ -289,7 +288,7 @@ export namespace wildcard {
     ): d_out.Directory => {
         return ['dictionary', $.map(($, key) => {
             const tail = $p.tail + `/${key}`
-            return _p.cc($, ($): d_out.Node => {
+            return _p.sg($, ($): d_out.Node => {
                 switch ($[0]) {
                     case 'other': return _p.ss($, ($) => ['other', null])
                     case 'file': return _p.ss($, ($): d_out.Node => ['file', {
@@ -298,7 +297,7 @@ export namespace wildcard {
                             'classification': ['directory', ['wildcards', null]],
                         },
                         'extension': extension(key),
-                        'unexpected path tail': _pinternals.block(() => {
+                        'unexpected path tail': _p.optional.block(() => {
                             if ($p['number of directories encountered'] < $p['wildcard']['required directories']) {
                                 //files are not allowed yet, haven't descended through enough required directories
                                 return _p.optional.set(tail)
@@ -350,14 +349,14 @@ export namespace wildcard {
 export const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {
     const temp: { [key: string]: d_out.File_Analysis } = {}
     const x = ($: d_out.Directory, path: string): void => {
-        _p.cc($, ($) => {
+        _p.sg($, ($) => {
             switch ($[0]) {
                 case 'expected a file': return _p.ss($, ($) => { })
                 case 'ignored': return _p.ss($, ($) => { })
                 case 'dictionary': return _p.ss($, ($) => {
                     $.map(($, key) => {
 
-                        _p.cc($, ($) => {
+                        _p.sg($, ($) => {
                             switch ($[0]) {
                                 case 'other': return //do nothing, ignore other filesystem nodes for now
                                 case 'file': return _p.ss($, ($) => temp[`${path}/${key}`] = $)
@@ -381,7 +380,8 @@ export const dict_to_list = ($: d_out.Flattened_Directory_With_Line_Counts): _pi
     'path': string,
     'analysis': d_out.File_Analysis,
 }> => {
-    return $.to_list(($, key) => ({
+    
+    return _p.list.from_dictionary($, ($, key) => ({
         'path': key,
         'analysis': $,
     }))

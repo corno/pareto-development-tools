@@ -15,7 +15,7 @@ export const $$: signatures.commands.tsc = _p.command_procedure(
     ($p, $cr) => [
         $cr.tsc.execute(
             {
-                'args': _pt.list.literal([
+                'args': _pt.list.nested_literal([
                     $p.path.transform(
                         ($) => _pt.list.literal([
                             `--project`,
@@ -26,7 +26,7 @@ export const $$: signatures.commands.tsc = _p.command_procedure(
                     _pt.list.literal([
                         `--pretty`,
                     ]),
-                ]).flatten(($) => $),
+                ]),
             },
             ($) => ['error while running tsc', $],
         )

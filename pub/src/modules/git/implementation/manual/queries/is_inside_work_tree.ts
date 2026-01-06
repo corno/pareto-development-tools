@@ -29,7 +29,7 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
 export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p, $r) => temp_observe_behavior(
     $r.git(
         {
-            'args': _p.list.literal<_pi.List<string>>([
+            'args': _p.list.nested_literal([
                 $p.path.transform(
                     ($) => _p.list.literal([
                         `-C`,
@@ -41,7 +41,7 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
                     `rev-parse`,
                     `--is-inside-work-tree`,
                 ])
-            ]).flatten(($) => $),
+            ]),
         },
         ($) => $
     ),
@@ -53,7 +53,7 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
             : _p.__query_result<boolean, d.Error>((onResult, onError) => {
                 onResult(false)
             }),
-        error: ($) => _p.cc($, ($) => {
+        error: ($) => _p.sg($, ($) => {
             switch ($[0]) {
                 case 'failed to spawn': return _p.ss($, ($) => _p.__query_result<boolean, d.Error>((on_succes, on_error) => {
                     on_error(['could not run git command', {

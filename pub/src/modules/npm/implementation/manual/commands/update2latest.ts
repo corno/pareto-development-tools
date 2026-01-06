@@ -11,11 +11,11 @@ export const $$: signatures.commands.update2latest = _p.command_procedure(
     ($p, $cr) => [
         $cr.update2latest.execute(
             {
-                'args': _pt.list.literal<_pi.List<string>>([
+                'args': _pt.list.nested_literal([
                     _pt.list.literal([
                         s_path.Node_Path($p.path),
                     ]),
-                    _pt.cc($p.what, ($) => {
+                    _pt.sg($p.what, ($) => {
                         // _pdev.log_debug_message(`Updating ${$p.path} to latest`, () => {})
                         switch ($[0]) {
                             case 'dependencies': return _pt.ss($, ($) => {
@@ -29,7 +29,7 @@ export const $$: signatures.commands.update2latest = _p.command_procedure(
                     }),
                     // $p.verbose ? _pt.list.literal([`verbose`]) : _pt.list.literal([]),
                     _pt.list.literal([`verbose`])
-                ]).flatten(($) => $),
+                ]),
             },
             ($) => ['error while running update2latest', $],
         )

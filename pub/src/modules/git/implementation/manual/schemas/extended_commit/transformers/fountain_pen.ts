@@ -11,7 +11,7 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 import * as t_eqe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_query_executable/transformers/fountain_pen"
 import * as t_git_is_clean_to_fountain_pen from "../../is_repository_clean/transformers/fountain_pen"
 
-export const Error: Error = ($) => _p.cc($, ($): d_out.Block_Part => {
+export const Error: Error = ($) => _p.sg($, ($): d_out.Block_Part => {
     switch ($[0]) {
         case 'asserting git not clean': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`error while asserting git is not clean: `),

@@ -11,7 +11,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 import * as t_eqe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_query_executable/transformers/fountain_pen"
 import * as t_is_inside_work_tree_to_fountain_pen from "../../is_inside_work_tree/transformers/fountain_pen"
 
-export const Error: Error = ($) => _p.cc($, ($): d_out.Block_Part => {
+export const Error: Error = ($) => _p.sg($, ($): d_out.Block_Part => {
     switch ($[0]) {
         case 'not a git repository': return _p.ss($, ($) => sh.b.snippet(`not a git repository`))
         case 'could not determine git status': return _p.ss($, ($) => sh.b.sub([

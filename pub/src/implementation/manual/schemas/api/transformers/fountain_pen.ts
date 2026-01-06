@@ -24,16 +24,16 @@ import * as t_update_dependencies from "../../update_dependencies/transformers/f
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory/transformers/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../../../modules/npm/implementation/manual/schemas/set_up_comparison_against_published/transformers/fountain_pen"
 
-export const Error: signatures.Error = ($) => _p.cc($, ($) => {
+export const Error: signatures.Error = ($) => _p.sg($, ($) => {
     switch ($[0]) {
         case 'analyze file structure': return _p.ss($, ($) => t_line_count_to_fountain_pen.Error($))
         case 'dependency graph': return _p.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
         case 'git assert clean': return _p.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
-        case 'project': return _p.ss($, ($) => _p.cc($, ($) => {
+        case 'project': return _p.ss($, ($) => _p.sg($, ($) => {
             switch ($[0]) {
-                case 'packages': return _p.ss($, ($) => sh.b.indent($.to_list(($, key) => sh.g.nested_block([
+                case 'packages': return _p.ss($, ($) => sh.b.indent(_p.list.from_dictionary($, ($, key) => sh.g.nested_block([
                     sh.b.snippet(`package '${key}': `),
-                    _p.cc($, ($) => {
+                    _p.sg($, ($) => {
                         switch ($[0]) {
                             case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($))
                             case 'build': return _p.ss($, ($) => t_build_to_fountain_pen.Error($))

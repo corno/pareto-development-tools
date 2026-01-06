@@ -8,13 +8,13 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const Error: Error = ($) => _p.cc($, ($) => {
+export const Error: Error = ($) => _p.sg($, ($) => {
     switch ($[0]) {
         case 'expected one of': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`expected one of: `),
             sh.b.indent([
                 sh.g.sub(
-                    $.to_list(($, key) => sh.g.nested_block([
+                    _p.list.from_dictionary($, ($, key) => sh.g.nested_block([
                         sh.b.snippet(key)
                     ]))
                 )

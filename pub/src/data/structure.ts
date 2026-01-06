@@ -1,11 +1,4 @@
-import * as _psh from 'pareto-core-shorthands/dist/unconstrained'
-
-import {
-    Raw_Or_Normal_Dictionary,
-    Raw_Or_Normal_List,
-    wrap_dictionary,
-    wrap_list,
-} from 'pareto-core-shorthands/dist/unconstrained'
+import * as _p from 'pareto-core-shorthands/dist/unconstrained'
 
 
 import * as d_structure from "../interface/generated/pareto/schemas/structure/data_types/source"
@@ -17,16 +10,16 @@ const file_generated = (commitToGit: boolean): d_structure.Directory.SG.group.D 
 
 const directory_ignore = (): d_structure.Directory.SG.group.D => ['directory', ['ignore', null]]
 const directory_freeform = (): d_structure.Directory.SG.group.D => ['directory', ['freeform', null]]
-const directory_group = (nodes: Raw_Or_Normal_Dictionary<d_structure.Directory.SG.group.D>): d_structure.Directory.SG.group.D => ['directory', ['group', wrap_dictionary(nodes)]]
-const dgroup = (nodes: Raw_Or_Normal_Dictionary<d_structure.Directory.SG.group.D>): d_structure.Directory => ['group', wrap_dictionary(nodes)]
+const directory_group = (nodes: _p.Raw_Or_Normal_Dictionary<d_structure.Directory.SG.group.D>): d_structure.Directory.SG.group.D => ['directory', ['group', _p.dictionary.literal(nodes)]]
+const dgroup = (nodes: _p.Raw_Or_Normal_Dictionary<d_structure.Directory.SG.group.D>): d_structure.Directory => ['group', _p.dictionary.literal(nodes)]
 const directory_dictionary = ($: d_structure.Directory): d_structure.Directory.SG.group.D => ['directory', ['dictionary', $]]
 const directory_generated = (commitToGit: boolean): d_structure.Directory.SG.group.D => ['directory', ['generated', {
     'commit to git': commitToGit,
 }]]
-const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boolean, extensions: Raw_Or_Normal_List<string>, warn: boolean): d_structure.Directory.SG.group.D => ['directory', ['wildcards', {
+const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boolean, extensions: _p.Raw_Or_Normal_List<string>, warn: boolean): d_structure.Directory.SG.group.D => ['directory', ['wildcards', {
     'required directories': required_dirs,
     'additional directories allowed': additional_dirs_allowed,
-    'extensions': wrap_list<string>(extensions),
+    'extensions': _p.list.literal<string>(extensions),
     'warn': warn,
 }]]
 
@@ -88,7 +81,7 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
 
 })
 
-export const $$: d_structure.Directory = ['group', _psh.wrap_dictionary<d_structure.Directory.SG.group.D>({
+export const $$: d_structure.Directory = ['group', _p.dictionary.literal<d_structure.Directory.SG.group.D>({
     ".git": directory_ignore(),
     ".gitignore": file_manual(),
     "data": directory_freeform(),

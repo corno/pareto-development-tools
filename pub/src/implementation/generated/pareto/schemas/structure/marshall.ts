@@ -5,7 +5,7 @@ import * as _i_signatures from "../../../../../interface/generated/pareto/schema
 import * as _i_out from "../../../../../interface/generated/pareto/core/astn_target"
 
 
-export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.cc($, ($): _i_out._T_Value.SG.state => {
+export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.sg($, ($): _i_out._T_Value.SG.state => {
     switch ($[0]) {
         case 'dictionary': return _pa.ss($, ($) => ({
             'state': "dictionary",
@@ -18,7 +18,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.cc
         }))
         case 'group': return _pa.ss($, ($) => ({
             'state': "group",
-            'value': ['dictionary', $.map(($) => ['state', _pa.cc($, ($): _i_out._T_Value.SG.state => {
+            'value': ['dictionary', $.map(($) => ['state', _pa.sg($, ($): _i_out._T_Value.SG.state => {
                 switch ($[0]) {
                     case 'directory': return _pa.ss($, ($) => ({
                         'state': "directory",
@@ -31,7 +31,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.cc
                     }))
                     case 'file': return _pa.ss($, ($) => ({
                         'state': "file",
-                        'value': ['state', _pa.cc($, ($): _i_out._T_Value.SG.state => {
+                        'value': ['state', _pa.sg($, ($): _i_out._T_Value.SG.state => {
                             switch ($[0]) {
                                 case 'manual': return _pa.ss($, ($) => ({
                                     'state': "manual",
@@ -40,7 +40,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.cc
                                 case 'generated': return _pa.ss($, ($) => ({
                                     'state': "generated",
                                     'value': ['verbose group', _pa.dictionary.literal({
-                                        'commit to git': _pa.cc($['commit to git'], ($) => ['text', ({
+                                        'commit to git': _pa.deprecated_cc($['commit to git'], ($) => ['text', ({
                                             'delimiter': ['backtick', null],
                                             'value': $p['value serializers']['boolean'](
                                                 $,
@@ -60,25 +60,25 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.cc
         case 'wildcards': return _pa.ss($, ($) => ({
             'state': "wildcards",
             'value': ['verbose group', _pa.dictionary.literal({
-                'required directories': _pa.cc($['required directories'], ($) => ['text', ({
+                'required directories': _pa.deprecated_cc($['required directories'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['default number'](
                         $,
                         null
                     ),
                 })]),
-                'additional directories allowed': _pa.cc($['additional directories allowed'], ($) => ['text', ({
+                'additional directories allowed': _pa.deprecated_cc($['additional directories allowed'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['boolean'](
                         $,
                         null
                     ),
                 })]),
-                'extensions': _pa.cc($['extensions'], ($) => ['list', $.map(($) => ['text', ({
+                'extensions': _pa.deprecated_cc($['extensions'], ($) => ['list', $.map(($) => ['text', ({
                     'delimiter': ['quote', null],
                     'value': $,
                 })])]),
-                'warn': _pa.cc($['warn'], ($) => ['text', ({
+                'warn': _pa.deprecated_cc($['warn'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['boolean'](
                         $,
@@ -98,7 +98,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.cc
         case 'generated': return _pa.ss($, ($) => ({
             'state': "generated",
             'value': ['verbose group', _pa.dictionary.literal({
-                'commit to git': _pa.cc($['commit to git'], ($) => ['text', ({
+                'commit to git': _pa.deprecated_cc($['commit to git'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['boolean'](
                         $,

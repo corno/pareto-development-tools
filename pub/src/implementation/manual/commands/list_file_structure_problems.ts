@@ -31,7 +31,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                     _pq.dictionaryx.parallel(
                         $v.map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                             const path = $.path
-                            return _pt.cc($['node type'], ($) => {
+                            return _pt.sg($['node type'], ($) => {
                                 switch ($[0]) {
                                     case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
                                     case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
@@ -53,19 +53,25 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
 
                         $cr.log.execute(
                             {
-                                'lines': $v.to_list(($, key) => {
-                                    const package_name = key
-                                    return t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
-                                        $,
-                                        {
-                                            'expected structure': x_structure,
-                                            'structure path': ``
-                                        }
+                                'lines': _pt.list.flatten(
+                                    _pt.list.from_dictionary($v, ($, key) => {
+                                        const package_name = key
+                                        return t_line_count_to_line_count.dict_to_list(
+                                            _pt.dictionary.filter(
+                                                t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
+                                                    $,
+                                                    {
+                                                        'expected structure': x_structure,
+                                                        'structure path': ``
+                                                    }
 
-                                    )).filter(($) => $['unexpected path tail'].is_set()
-                                        ? _p.optional.set($)
-                                        : _p.optional.not_set())).map(($) => `./packages/${package_name}${$['path']}`)
-                                }).flatten(($) => $)
+                                                )),
+                                                ($) => $['unexpected path tail'].is_set()
+                                                    ? _p.optional.set($)
+                                                    : _p.optional.not_set())).map(($) => `./packages/${package_name}${$['path']}`)
+                                    }),
+                                    ($) => $,
+                                )
                             },
                             ($): d.Error => ['log', $],
                         )

@@ -8,11 +8,13 @@ import * as d_input from "pareto-resources/dist/interface/to_be_generated/temp_m
 import * as builders from "../productions/text"
 
 
-export const Command: _pi.Refiner<d_result.Parameters, d_error.Error, d_input.Parameters> = ($, abort) => _p.iterate_fully(
+export const Command: _pi.Refiner<d_result.Parameters, d_error.Error, d_input.Parameters> = ($, abort) => _p.iterate(
     $.arguments,
-    ($iter) => builders.Command(
-        $iter,
-        abort,
-    ),
-    ($) => abort(['too many arguments', null]),
+    ($iter) => $iter['assert finished'](
+        () => builders.Command(
+            $iter,
+            abort,
+        ),
+        ($) => abort(['too many arguments', null]),
+    )
 )

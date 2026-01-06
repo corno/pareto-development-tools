@@ -12,11 +12,11 @@ export const process_unconstrained_state_group = <Mapped_Value>(
     }
 
 ): Mapped_Value => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'tagged value': return _ea.ss($, ($) => {
                 const data = $.value
-                return $p.states.get_possible_entry(
+                return $p.states.__get_possible_entry(
                     $.state.value
                 ).transform(
                     ($) => $(data),
@@ -35,13 +35,13 @@ export const process_unresolved_state_group = <Mapped_Value>(
     }
 
 ): unresolved.State_Group<t._T_Range, Mapped_Value> => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'tagged value': return _ea.ss($, ($) => {
                 const data = $.value
                 return {
                     'location': $["|"].range,
-                    'state group': $p.states.get_possible_entry(
+                    'state group': $p.states.__get_possible_entry(
                         $.state.value
                     ).transform(
                         ($) => $(data),
@@ -61,12 +61,12 @@ export const process_group = <Mapped_Value>(
     }
 
 ): Mapped_Value => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
-            case 'indexed collection': return _ea.ss($, ($) => _ea.cc($, ($) => {
+            case 'indexed collection': return _ea.ss($, ($) => _ea.sg($, ($) => {
                 switch ($[0]) {
                     case 'verbose group': return _ea.ss($, ($) => {
-                        return $p.properties(_ea.dictionary.build(
+                        return $p.properties(_ea.deprecated_build_dictionary(
                             ($i) => {
                                 $.entries.__for_each(($) => {
                                     $i['add entry']($.key.value, $.value.transform(
@@ -75,7 +75,7 @@ export const process_group = <Mapped_Value>(
                                     ))
                                 })
                             },
-                            () => _ea.fixme_abort(`duplicates in dictionary`)
+                            // () => _ea.fixme_abort(`duplicates in dictionary`)
                         ))
                     })
                     default: return _ea.fixme_abort(`Unexpected type for group: ${$[0]}`)
@@ -93,7 +93,7 @@ export const get_entry = (
     }
 
 ): t._T_Value => {
-    return $.get_possible_entry($p.key).transform(
+    return $.__get_possible_entry($p.key).transform(
         ($) => $,
         () => _ea.fixme_abort(`no such entry: ${$p.key}`)
     )
@@ -105,9 +105,9 @@ export const process_unresolved_dictionary = <Mapped_Value>(
         'value': ($: t._T_Value) => Mapped_Value
     }
 ): unresolved.Dictionary<t._T_Range, Mapped_Value> => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
-            case 'indexed collection': return _ea.ss($, ($) => _ea.cc($, ($) => {
+            case 'indexed collection': return _ea.ss($, ($) => _ea.sg($, ($) => {
                 switch ($[0]) {
                     case 'dictionary': return _ea.ss($, ($) => {
                         return {
@@ -115,7 +115,7 @@ export const process_unresolved_dictionary = <Mapped_Value>(
                                 'start': $["{"].range.start,
                                 'end': $["}"].range.end,
                             },
-                            'dictionary': _ea.dictionary.build(
+                            'dictionary': _ea.deprecated_build_dictionary(
                                 ($i) => {
                                     $.entries.__for_each(($) => {
                                         const key_location = $.key.range
@@ -128,7 +128,7 @@ export const process_unresolved_dictionary = <Mapped_Value>(
                                         ))
                                     })
                                 },
-                                () => _ea.fixme_abort(`duplicates in dictionary`)
+                                // () => _ea.fixme_abort(`duplicates in dictionary`)
                             )
                         }
                     })
@@ -146,12 +146,12 @@ export const process_unconstrained_dictionary = <Mapped_Value>(
         'value': ($: t._T_Value) => Mapped_Value
     }
 ): unconstrained.Dictionary<null, Mapped_Value> => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
-            case 'indexed collection': return _ea.ss($, ($) => _ea.cc($, ($) => {
+            case 'indexed collection': return _ea.ss($, ($) => _ea.sg($, ($) => {
                 switch ($[0]) {
                     case 'dictionary': return _ea.ss($, ($) => {
-                        return _ea.dictionary.build(
+                        return _ea.deprecated_build_dictionary(
                             ($i) => {
                                 $.entries.__for_each(($) => {
                                     $i['add entry']($.key.value, $.value.transform(
@@ -160,7 +160,7 @@ export const process_unconstrained_dictionary = <Mapped_Value>(
                                     ))
                                 })
                             },
-                            () => _ea.fixme_abort(`duplicates in dictionary`)
+                            // () => _ea.fixme_abort(`duplicates in dictionary`)
                         )
                     })
                     default: return _ea.fixme_abort(`Unexpected type for dictionary: ${$[0]}`)
@@ -178,7 +178,7 @@ export const process_number = (
         'deserializer': ($: string, $p: null) => number
     }
 ): number => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'string': return _ea.ss($, ($) => $p.deserializer($.value, null))
             default: return _ea.fixme_abort(`Unexpected type for number: ${$[0]}`)
@@ -194,7 +194,7 @@ export const process_boolean = (
     }
 
 ): boolean => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'string': return _ea.ss($, ($) => $p.deserializer($.value, null))
             default: return _ea.fixme_abort(`Unexpected type for boolean: ${$[0]}`)
@@ -207,7 +207,7 @@ export const process_text = (
     $p: null
 
 ): string => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'string': return _ea.ss($, ($) => $.value)
             default: return _ea.fixme_abort(`Unexpected type for text: ${$[0]}`)
@@ -221,9 +221,9 @@ export const process_unresolved_list = <Mapped_Value>(
         'value': ($: t._T_Value) => Mapped_Value
     }
 ): unresolved.List<t._T_Range, Mapped_Value> => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
-            case 'ordered collection': return _ea.ss($, ($) => _ea.cc($, ($) => {
+            case 'ordered collection': return _ea.ss($, ($) => _ea.sg($, ($) => {
                 switch ($[0]) {
                     case 'list': return _ea.ss($, ($) => {
                         const temp = $["["]
@@ -250,9 +250,9 @@ export const process_unconstrained_list = <Mapped_Value>(
     }
 
 ): unconstrained.List<null, Mapped_Value> => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
-            case 'ordered collection': return _ea.ss($, ($) => _ea.cc($, ($) => {
+            case 'ordered collection': return _ea.ss($, ($) => _ea.sg($, ($) => {
                 switch ($[0]) {
                     case 'list': return _ea.ss($, ($) => {
                         return $["elements"].map(($) => $p.value($.value))
@@ -272,7 +272,7 @@ export const process_optional = <Mapped_Value>(
     }
 
 ): _et.Optional_Value<Mapped_Value> => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'not set': return _ea.ss($, ($) => _ea.optional.not_set())
             case 'set optional value': return _ea.ss($, ($) => _ea.optional.set($p.value($.value)))
@@ -286,7 +286,7 @@ export const process_nothing = (
     $: t._T_Value,
     $p: null
 ): null => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'not set': return _ea.ss($, ($) => null)
             default: return _ea.fixme_abort(`Unexpected type for nothing: ${$[0]}`)
@@ -299,7 +299,7 @@ export const process_selected_reference = <Mapped_Value>(
     $: t._T_Value,
     $p: null
 ): unresolved.Reference_To_Normal_Dictionary_Entry<t._T_Range, Mapped_Value> => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'string': return _ea.ss($, ($) => ({
                 'key': $.value,
@@ -314,7 +314,7 @@ export const process_stack_reference = <Mapped_Value>(
     $: t._T_Value,
     $p: null
 ): unresolved.Reference_To_Stacked_Dictionary_Entry<t._T_Range, Mapped_Value> => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'string': return _ea.ss($, ($) => ({
                 'key': $.value,
@@ -329,7 +329,7 @@ export const process_derived_reference = (
     $: t._T_Value,
     $p: null
 ): null => {
-    return _ea.cc($, ($) => {
+    return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'not set': return _ea.ss($, ($) => null)
             default: return _ea.fixme_abort(`Unexpected type for derived reference: ${$[0]}`)

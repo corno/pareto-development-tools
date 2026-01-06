@@ -8,10 +8,11 @@
   ],
   "dependencies": {
     "astn": "^0.113.20",
-    "pareto-fountain-pen": "^0.3.24",
+    "astn-sealed": "^0.1.1",
+    "pareto-fountain-pen": "^0.3.28",
     "pareto-graphviz": "^0.1.12",
-    "pareto-host-nodejs": "^0.1.4",
-    "pareto-resources": "^0.1.6",
-    "pareto-standard-operations": "^0.3.35"
+    "pareto-host-nodejs": "^0.1.5",
+    "pareto-resources": "^0.1.7",
+    "pareto-standard-operations": "^0.3.36"
   }
 }

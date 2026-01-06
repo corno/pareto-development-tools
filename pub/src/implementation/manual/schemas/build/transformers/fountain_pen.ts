@@ -13,7 +13,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 import * as t_tsc_to_fountain_pen from "../../tsc/transformers/fountain_pen"
 import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/remove/transformers/fountain_pen"
 
-export const Error: signatures.Error = ($) => _p.cc($, ($) => {
+export const Error: signatures.Error = ($) => _p.sg($, ($) => {
     switch ($[0]) {
         case 'error building pub': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not build pub: (`),

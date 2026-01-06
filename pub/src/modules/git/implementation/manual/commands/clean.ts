@@ -13,7 +13,7 @@ export const $$: signatures.commands.clean = _p.command_procedure(
     ($p, $cr) => [
         $cr.git.execute(
             {
-                'args': _pt.list.literal([
+                'args': _pt.list.nested_literal([
                     $p.path.transform(
                         ($) => _pt.list.literal([
                             `-C`,
@@ -28,7 +28,7 @@ export const $$: signatures.commands.clean = _p.command_procedure(
                         `-X`, // remove only ignored files (not the capital X as opposed to -x which removes all untracked files, including unignored ones)
 
                     ])
-                ]).flatten(($) => $),
+                ]),
             },
             ($) => ['unexpected error', $],
         )
