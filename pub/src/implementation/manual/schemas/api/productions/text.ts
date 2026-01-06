@@ -6,23 +6,9 @@ import * as d_error from "../../../../../interface/to_be_generated/parse"
 
 import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
 
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+type signature = _pi.Production<d.Parameters, d_error.Error, string>
 
-export const Command = (
-    iterator: _pi.Iterator<string>,
-    abort: _pi.Abort<d_error.Error>,
-): d.Parameters => _p.deprecated_cc(
-    iterator.consume(
-        ($) => $,
-        () => abort(['expected one of', _p.dictionary.literal({
-            'analyze-file-structure': null,
-            'assert-clean': null,
-            'dependency-graph': null,
-            'list-file-structure-problems': null,
-            'project': null,
-            'set-up-comparison': null,
-        })])
-    ),
+export const Command: signature = (iterator, abort) => iterator.consume(
     ($) => {
         switch ($) {
             case 'analyze-file-structure': return ['analyze file structure', {
@@ -54,20 +40,8 @@ export const Command = (
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to project" }])
                 )),
-                'instruction': _p.deprecated_cc(
-                    iterator.consume(
-                        ($) => $,
-                        () => abort(['expected one of', _p.dictionary.literal({
-                            'assert-clean': null,
-                            'build-and-test': null,
-                            'build': null,
-                            'dependency-graph': null,
-                            'git-commit': null,
-                            'git-remove-tracked-but-ignored': null,
-                            'update-dependencies': null,
-                        })])
-                    ),
-                    ($): d.Project_Instruction => {
+                'instruction': iterator.consume(
+                    ($) => {
                         switch ($) {
                             case 'assert-clean': return ['assert clean', null]
                             case 'build-and-test': return ['build and test', null]
@@ -93,7 +67,16 @@ export const Command = (
                                 'update-dependencies': null,
                             })])
                         }
-                    }
+                    },
+                    () => abort(['expected one of', _p.dictionary.literal({
+                        'assert-clean': null,
+                        'build-and-test': null,
+                        'build': null,
+                        'dependency-graph': null,
+                        'git-commit': null,
+                        'git-remove-tracked-but-ignored': null,
+                        'update-dependencies': null,
+                    })])
                 )
 
             }]
@@ -112,5 +95,13 @@ export const Command = (
                 'set-up-comparison': null,
             })])
         }
-    }
+    },
+    () => abort(['expected one of', _p.dictionary.literal({
+        'analyze-file-structure': null,
+        'assert-clean': null,
+        'dependency-graph': null,
+        'list-file-structure-problems': null,
+        'project': null,
+        'set-up-comparison': null,
+    })])
 )
