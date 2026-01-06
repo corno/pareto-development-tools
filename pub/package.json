@@ -12,7 +12,7 @@
     "pareto-fountain-pen": "^0.3.28",
     "pareto-graphviz": "^0.1.12",
     "pareto-host-nodejs": "^0.1.5",
-    "pareto-resources": "^0.1.7",
+    "pareto-resources": "^0.1.8",
     "pareto-standard-operations": "^0.3.36"
   }
 }
