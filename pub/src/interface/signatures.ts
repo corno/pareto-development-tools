@@ -46,7 +46,7 @@ export namespace commands {
             'list file structure problems': resources.commands.analyze_file_structure
             'npm set up comparison against published': resources_npm.commands.set_up_comparison_against_published
             'publish': resources.commands.publish
-            'update dependencies': resources.commands.update_dependencies
+            'update package dependencies': resources.commands.update_package_dependencies
         },
         {
             'read directory': resources_exupery.queries.read_directory
@@ -71,8 +71,8 @@ export namespace commands {
         null
     >
 
-    export type clean_and_update_dependencies = _pi.Command_Procedure<
-        resources.commands.clean_and_update_dependencies, {
+    export type update_npm_package_dependencies = _pi.Command_Procedure<
+        resources.commands.update_npm_package_dependencies, {
             'remove': resources_exupery.commands.remove
             'update2latest': resources_npm.commands.update2latest
             'npm': resources_npm.commands.npm
@@ -121,14 +121,17 @@ export namespace commands {
         resources.commands.publish,
         {
             'git push': resources_git.commands.push
+            'git assert is clean': resources_git.commands.assert_is_clean
+            'git make pristine': resources_git.commands.make_pristine
+            'update package dependencies': resources.commands.update_package_dependencies
         },
         null
     >
 
-    export type update_dependencies = _pi.Command_Procedure<
-        resources.commands.update_dependencies,
+    export type update_package_dependencies = _pi.Command_Procedure<
+        resources.commands.update_package_dependencies,
         {
-            'clean and update dependencies': resources.commands.clean_and_update_dependencies
+            'npm update package dependencies': resources.commands.update_npm_package_dependencies
         },
         null
     >

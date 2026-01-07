@@ -13,7 +13,7 @@ import * as d_path from "pareto-resources/dist/interface/generated/pareto/schema
 import * as d_publish from "./publish"
 import * as d_read_directory from "pareto-resources/dist/interface/generated/pareto/schemas/read_directory/data_types/source"
 import * as d_set_up_comparison_against_published from "../../modules/npm/interface/to_be_generated/set_up_comparison_against_published"
-import * as d_update_dependencies from "./update_dependencies"
+import * as d_update_dependencies from "./update_package_dependencies"
 
 export type Parameters =
     /**
@@ -87,7 +87,7 @@ export type Project_Instruction =
      * then        update2latest
      * then        npm install
      */
-    | ['update dependencies', null]
+    | ['update package dependencies', null]
 
 export type Error =
     | ['analyze file structure', d_analyze_file_structure.Error]

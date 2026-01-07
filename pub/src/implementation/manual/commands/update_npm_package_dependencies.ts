@@ -3,25 +3,25 @@ import * as _p from 'pareto-core-command'
 import * as signatures from "../../../interface/signatures"
 
 //data types
-import * as d from "../../../interface/to_be_generated/clean_and_update_dependencies"
+import * as d from "../../../interface/to_be_generated/update_npm_package_dependencies"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
-export const $$: signatures.commands.clean_and_update_dependencies = _p.command_procedure(
+export const $$: signatures.commands.update_npm_package_dependencies = _p.command_procedure(
     ($p, $cr) => [
 
         // clean
         $cr['remove'].execute(
             {
-                'path': t_path_to_path.extend_node_path($p.path, { 'addition': "node_modules" }),
+                'path': t_path_to_path.create_node_path($p.path, "node_modules" ),
                 'error if not exists': false,
             },
             ($): d.Error => ['could not remove node_modules', $],
         ),
         $cr['remove'].execute(
             {
-                'path': t_path_to_path.extend_node_path($p.path, { 'addition': "package-lock.json" }),
+                'path': t_path_to_path.create_node_path($p.path, "package-lock.json" ),
                 'error if not exists': false,
             },
             ($): d.Error => ['could not remove package-lock.json', $],

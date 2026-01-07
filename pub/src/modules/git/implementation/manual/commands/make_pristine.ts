@@ -4,12 +4,12 @@ import * as _pt from 'pareto-core-transformer'
 import * as signatures from "../../../interface/signatures"
 
 //data types
-import * as d from "../../../interface/to_be_generated/clean"
+import * as d from "../../../interface/to_be_generated/make_pristine"
 
 //dependencies
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
-export const $$: signatures.commands.clean = _p.command_procedure(
+export const $$: signatures.commands.make_pristine = _p.command_procedure(
     ($p, $cr) => [
         $cr.git.execute(
             {

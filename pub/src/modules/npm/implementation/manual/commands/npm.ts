@@ -15,7 +15,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                     $p.path.transform(
                         ($) => _pt.list.literal([
                             `--prefix`,
-                            s_path.Node_Path($),
+                            s_path.Context_Path($),
                         ]),
                         () => _pt.list.literal([])
                     ),

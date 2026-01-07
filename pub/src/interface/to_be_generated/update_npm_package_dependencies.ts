@@ -7,7 +7,7 @@ import * as d_npm from "../../modules/npm/interface/to_be_generated/npm"
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
 export type Parameters = {
-    'path': d_path.Node_Path,
+    'path': d_path.Context_Path,
 }
 
 export type Error =

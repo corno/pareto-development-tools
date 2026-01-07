@@ -22,16 +22,16 @@ import { $$ as c_build_and_test } from "./implementation/manual/commands/build_a
 import { $$ as c_dependency_graph } from "./implementation/manual/commands/create_dependency_graph"
 import { $$ as c_fp_log } from "./modules/pareto-fountain-pen-directory/implementation/manual/commands/console_log"
 import { $$ as c_git_assert_clean } from "./modules/git/implementation/manual/commands/assert_is_clean"
-import { $$ as c_git_clean } from "./modules/git/implementation/manual/commands/clean"
+import { $$ as c_git_make_pristine } from "./modules/git/implementation/manual/commands/make_pristine"
 import { $$ as c_git_extended_commit } from "./modules/git/implementation/manual/commands/extended_commit"
 import { $$ as c_git_push } from "./modules/git/implementation/manual/commands/push"
-import { $$ as c_git_remove_tracked_but_ignored } from "./modules/git/implementation/manual/commands/remove-tracked-but-ignored"
+import { $$ as c_git_remove_tracked_but_ignored } from "./modules/git/implementation/manual/commands/remove_tracked_but_ignored"
 import { $$ as c_npm } from "./modules/npm/implementation/manual/commands/npm"
 import { $$ as c_publish } from "./implementation/manual/commands/publish"
 import { $$ as c_set_up_comparison_against_published } from "./modules/npm/implementation/manual/commands/set_up_comparison_against_published"
 import { $$ as c_tsc } from "./implementation/manual/commands/tsc"
-import { $$ as c_update_dependencies } from "./implementation/manual/commands/update-dependencies"
-import { $$ as c_update_typescript_dependencies } from "./implementation/manual/commands/clean_and_update_dependencies"
+import { $$ as c_update_package_dependencies } from "./implementation/manual/commands/update_package_dependencies"
+import { $$ as c_update_npm_package_dependencies } from "./implementation/manual/commands/update_npm_package_dependencies"
 import { $$ as c_update2latest } from "./modules/npm/implementation/manual/commands/update2latest"
 
 const create_eqe = (
@@ -126,7 +126,7 @@ _pn.run_main_procedure(
             },
         )
 
-        const git_clean = c_git_clean(
+        const git_make_pristine = c_git_make_pristine(
             {
                 'git': create_epe(`git`, $r),
             },
@@ -155,7 +155,7 @@ _pn.run_main_procedure(
             null,
         )
 
-        const update_typescript_dependencies = c_update_typescript_dependencies(
+        const update_npm_package_dependencies = c_update_npm_package_dependencies(
             {
                 'remove': $r.commands.remove,
                 'update2latest': update2latest,
@@ -164,9 +164,9 @@ _pn.run_main_procedure(
             null,
         )
 
-        const clean_and_update_dependencies = c_update_dependencies(
+        const update_package_dependencies = c_update_package_dependencies(
             {
-                'clean and update dependencies': update_typescript_dependencies,
+                'npm update package dependencies': update_npm_package_dependencies,
             },
             null,
         )
@@ -237,12 +237,15 @@ _pn.run_main_procedure(
                             },
                         ),
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
-                        'update dependencies': clean_and_update_dependencies,
+                        'update package dependencies': update_package_dependencies,
                         'git extended commit': git_extended_commit,
                         'npm set up comparison against published': set_up_comparison_against_published,
                         'publish': c_publish(
                             {
                                 'git push': git_push,
+                                'git assert is clean': git_assert_is_clean,
+                                'git make pristine': git_make_pristine,
+                                'update package dependencies': update_package_dependencies,
                             },
                             null,
                         ),

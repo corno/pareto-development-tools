@@ -114,10 +114,10 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                         ($): d.Project_Package_Error => ['set up comparison', $],
                                     )
                                 ])
-                                case 'update dependencies': return _p.ss($, ($) => [
-                                    $cr['update dependencies'].execute(
+                                case 'update package dependencies': return _p.ss($, ($) => [
+                                    $cr['update package dependencies'].execute(
                                         {
-                                            'path': concatenated_path
+                                            'path': context_path
                                         },
                                         ($): d.Project_Package_Error => ['update dependencies', $],
                                     )

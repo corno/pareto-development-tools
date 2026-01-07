@@ -4,7 +4,7 @@ import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
 export type Parameters = {
-    'path': _pi.Optional_Value<d_path.Node_Path>,
+    'path': _pi.Optional_Value<d_path.Context_Path>,
     'operation':
     | ['update', null]
     | ['install', null]

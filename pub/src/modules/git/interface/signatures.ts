@@ -15,8 +15,8 @@ export namespace commands {
         }
     >
 
-    export type clean = _pi.Command_Procedure<
-        resources.commands.clean,
+    export type make_pristine = _pi.Command_Procedure<
+        resources.commands.make_pristine,
         {
             'git': resources_exupery.commands.execute_command_executable
         },

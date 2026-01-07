@@ -56,7 +56,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                             }]
                             case 'git-remove-tracked-but-ignored': return ['git remove tracked but ignored', null]
                             case 'set-up-comparison': return ['set up comparison', null]
-                            case 'update-dependencies': return ['update dependencies', null]
+                            case 'update-dependencies': return ['update package dependencies', null]
                             default: return abort(['expected one of', _p.dictionary.literal({
                                 'assert-clean': null,
                                 'build-and-test': null,

@@ -13,7 +13,7 @@ export const $$: signatures.commands.update2latest = _p.command_procedure(
             {
                 'args': _pt.list.nested_literal([
                     _pt.list.literal([
-                        s_path.Node_Path($p.path),
+                        s_path.Context_Path($p.path),
                     ]),
                     _pt.sg($p.what, ($) => {
                         // _pdev.log_debug_message(`Updating ${$p.path} to latest`, () => {})
