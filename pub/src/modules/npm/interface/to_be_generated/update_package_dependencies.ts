@@ -1,9 +1,9 @@
 import * as _pi from 'pareto-core-interface'
 
-import * as d_update2latest from "../../modules/npm/interface/to_be_generated/update2latest"
+import * as d_update2latest from "./update2latest"
 
 import * as d_remove from "pareto-resources/dist/interface/generated/pareto/schemas/remove/data_types/target"
-import * as d_npm from "../../modules/npm/interface/to_be_generated/npm"
+import * as d_npm from "./npm"
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 
 export type Parameters = {

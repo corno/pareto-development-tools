@@ -13,6 +13,14 @@ export namespace commands {
         null
     >
 
+    export type npm_publish = _pi.Command_Procedure<
+        resources.commands.npm_publish,
+        {
+            'npm': resources_exupery.commands.execute_command_executable
+        },
+        null
+    >
+
     export type set_up_comparison_against_published = _pi.Command_Procedure<
         resources.commands.set_up_comparison_against_published,
         {
@@ -31,6 +39,15 @@ export namespace commands {
         resources.commands.update2latest,
         {
             'update2latest': resources_exupery.commands.execute_command_executable
+        },
+        null
+    >
+
+    export type update_package_dependencies = _pi.Command_Procedure<
+        resources.commands.update_package_dependencies, {
+            'remove': resources_exupery.commands.remove
+            'update2latest': resources.commands.update2latest
+            'npm': resources.commands.npm
         },
         null
     >

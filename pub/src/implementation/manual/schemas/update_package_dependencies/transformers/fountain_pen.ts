@@ -8,7 +8,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
-import * as t_utd_to_fountain_pen from "../../update_npm_package_dependencies/transformers/fountain_pen"
+import * as t_utd_to_fountain_pen from "../../../../../modules/npm/implementation/manual/schemas/update_package_dependencies/transformers/fountain_pen"
 
 export const Error: Error = ($) => _p.sg($, ($) => {
     switch ($[0]) {

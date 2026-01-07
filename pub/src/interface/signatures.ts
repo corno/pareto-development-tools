@@ -71,15 +71,6 @@ export namespace commands {
         null
     >
 
-    export type update_npm_package_dependencies = _pi.Command_Procedure<
-        resources.commands.update_npm_package_dependencies, {
-            'remove': resources_exupery.commands.remove
-            'update2latest': resources_npm.commands.update2latest
-            'npm': resources_npm.commands.npm
-        },
-        null
-    >
-
     export type create_dependency_graph = _pi.Command_Procedure<
         resources.commands.create_dependency_graph,
         {
@@ -124,6 +115,9 @@ export namespace commands {
             'git assert is clean': resources_git.commands.assert_is_clean
             'git make pristine': resources_git.commands.make_pristine
             'update package dependencies': resources.commands.update_package_dependencies
+            'build and test': resources.commands.build_and_test
+            'npm': resources_npm.commands.npm
+            'npm publish': resources_npm.commands.npm_publish
         },
         null
     >
@@ -131,7 +125,7 @@ export namespace commands {
     export type update_package_dependencies = _pi.Command_Procedure<
         resources.commands.update_package_dependencies,
         {
-            'npm update package dependencies': resources.commands.update_npm_package_dependencies
+            'npm update package dependencies': resources_npm.commands.update_package_dependencies
         },
         null
     >

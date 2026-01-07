@@ -9,7 +9,7 @@
   "dependencies": {
     "astn": "^0.113.21",
     "astn-sealed": "^0.1.1",
-    "pareto-fountain-pen": "^0.3.28",
+    "pareto-fountain-pen": "^0.3.29",
     "pareto-graphviz": "^0.1.12",
     "pareto-host-nodejs": "^0.1.5",
     "pareto-resources": "^0.1.9",

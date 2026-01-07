@@ -27,6 +27,16 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                             case 'install': return _pt.ss($, ($) => _pt.list.literal([
                                 `install`,
                             ]))
+                            case 'version': return _pt.ss($, ($) => _pt.list.literal([
+                                `version`,
+                                _p.sg($, ($) => {
+                                    switch ($[0]) {
+                                        case 'patch': return _p.ss($, ($) => `patch`)
+                                        case 'minor': return _p.ss($, ($) => `minor`)
+                                        default: return _p.au($[0])
+                                    }
+                                })
+                            ]))
                             default: return _pt.au($[0])
                         }
                     })

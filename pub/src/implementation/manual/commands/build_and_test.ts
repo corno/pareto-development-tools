@@ -24,8 +24,8 @@ export const $$: signatures.commands.build_and_test = _p.command_procedure(
         $cr.node.execute(
             {
                 'args': _pt.list.literal([
-                    s_path.Node_Path($p.path) + `/test/dist/bin/test.js`,
-                    s_path.Node_Path($p.path) + `/testdata`,
+                    s_path.Context_Path($p.path) + `/test/dist/bin/test.js`,
+                    s_path.Context_Path($p.path) + `/testdata`,
                 ])
             },
             ($): d.Error => ['error testing', $],

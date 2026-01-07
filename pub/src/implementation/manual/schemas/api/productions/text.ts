@@ -81,6 +81,10 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
             }]
             case 'publish': return ['publish', {
+                'path to package': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
+                    () => abort(['expected a text', { 'description': "path to package" }])
+                )),
                 'generation': iterator.consume(
                     ($) => {
                         switch ($) {
@@ -97,10 +101,10 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                         'minor': null,
                     })])
                 ),
-                'path to package': ds_context_path.Context_Path(iterator.consume(
+                'one time password': iterator.consume(
                     ($) => $,
-                    () => abort(['expected a text', { 'description': "path to package" }])
-                ))
+                    () => abort(['expected a text', { 'description': "one time password" }])
+                ),
             }]
             case 'set-up-comparison': return ['set up comparison', {
                 'path to package': ds_context_path.Context_Path(iterator.consume(

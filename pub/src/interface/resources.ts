@@ -4,7 +4,6 @@ import * as d_analyze_file_structure from "./to_be_generated/analyze_file_struct
 import * as d_api from "./to_be_generated/api"
 import * as d_build from "./to_be_generated/build"
 import * as d_build_and_test from "./to_be_generated/build_and_test"
-import * as d_update_npm_package_dependencies from "./to_be_generated/update_npm_package_dependencies"
 import * as d_create_dependency_graph from "./to_be_generated/create_dependency_graph"
 import * as d_get_package_dependencies from "./to_be_generated/get_package_dependencies"
 import * as d_publish from "./to_be_generated/publish"
@@ -25,7 +24,6 @@ export namespace commands {
     export type api = _pi.Command<d_api.Error, d_api.Parameters>
     export type build = _pi.Command<d_build.Error, d_build.Parameters>
     export type build_and_test = _pi.Command<d_build_and_test.Error, d_build_and_test.Parameters>
-    export type update_npm_package_dependencies = _pi.Command<d_update_npm_package_dependencies.Error, d_update_npm_package_dependencies.Parameters>
     export type create_dependency_graph = _pi.Command<d_create_dependency_graph.Error, d_create_dependency_graph.Parameters>
     export type publish = _pi.Command<d_publish.Error, d_publish.Parameters>
     export type tsc = _pi.Command<d_tsc.Error, d_tsc.Parameters>

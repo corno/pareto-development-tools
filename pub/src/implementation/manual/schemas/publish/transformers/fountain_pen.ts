@@ -13,6 +13,8 @@ import * as t_git_assert_is_clean_to_fountain_pen from "../../../../../modules/g
 import * as t_git_make_pristine_to_fountain_pen from "../../../../../modules/git/implementation/manual/schemas/make_pristine/transformers/fountain_pen"
 import * as t_clean_and_update_package_dependencies_to_fountain_pen from "../../update_package_dependencies/transformers/fountain_pen"
 import * as t_git_is_clean_to_fountain_pen from "../../../../../modules/git/implementation/manual/schemas/is_repository_clean/transformers/fountain_pen"
+import * as t_npm_to_fountain_pen from "../../../../../modules/npm/implementation/manual/schemas/npm/transformers/fountain_pen"
+import * as t_build_and_test_to_fountain_pen from "../../build_and_test/transformers/fountain_pen"
 
 export const Error: Error = ($) => _p.sg($, ($) => {
     switch ($[0]) {
@@ -34,6 +36,7 @@ export const Error: Error = ($) => _p.sg($, ($) => {
         case 'error while running update package dependencies': return _p.ss($, ($) => sh.b.sub([
             t_clean_and_update_package_dependencies_to_fountain_pen.Error($)
         ]))
+        case 'error while running build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($))
         case 'error while running git assert is clean after updating package dependencies': return _p.ss($, ($) => sh.b.sub([
             _p.sg($, ($) => {
                 switch ($[0]) {
@@ -42,6 +45,14 @@ export const Error: Error = ($) => _p.sg($, ($) => {
                     default: return _p.au($[0])
                 }
             })
+        ]))
+        case 'error while running npm version': return _p.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`could not increment version: `),
+            t_npm_to_fountain_pen.Error($)
+        ]))
+        case 'error while running npm publish': return _p.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`could not publish to npm: `),
+            t_npm_to_fountain_pen.Error($)
         ]))
 
         default: return _p.au($[0])

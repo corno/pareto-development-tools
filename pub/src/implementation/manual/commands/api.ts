@@ -73,7 +73,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 case 'build': return _p.ss($, ($) => [
                                     $cr['build'].execute(
                                         {
-                                            'path': concatenated_path
+                                            'path': context_path
                                         },
                                         ($): d.Project_Package_Error => ['build', $],
                                     )
@@ -81,7 +81,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 case 'build and test': return _p.ss($, ($) => [
                                     $cr['build and test'].execute(
                                         {
-                                            'path': concatenated_path
+                                            'path': context_path
                                         },
                                         ($): d.Project_Package_Error => ['build and test', $],
                                     )

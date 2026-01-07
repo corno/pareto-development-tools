@@ -3,12 +3,12 @@ import * as _p from 'pareto-core-command'
 import * as signatures from "../../../interface/signatures"
 
 //data types
-import * as d from "../../../interface/to_be_generated/update_npm_package_dependencies"
+import * as d from "../../../interface/to_be_generated/update_package_dependencies"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
-export const $$: signatures.commands.update_npm_package_dependencies = _p.command_procedure(
+export const $$: signatures.commands.update_package_dependencies = _p.command_procedure(
     ($p, $cr) => [
 
         // clean

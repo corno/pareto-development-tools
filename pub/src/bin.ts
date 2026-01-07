@@ -27,11 +27,12 @@ import { $$ as c_git_extended_commit } from "./modules/git/implementation/manual
 import { $$ as c_git_push } from "./modules/git/implementation/manual/commands/push"
 import { $$ as c_git_remove_tracked_but_ignored } from "./modules/git/implementation/manual/commands/remove_tracked_but_ignored"
 import { $$ as c_npm } from "./modules/npm/implementation/manual/commands/npm"
+import { $$ as c_npm_publish } from "./modules/npm/implementation/manual/commands/npm_publish"
 import { $$ as c_publish } from "./implementation/manual/commands/publish"
 import { $$ as c_set_up_comparison_against_published } from "./modules/npm/implementation/manual/commands/set_up_comparison_against_published"
 import { $$ as c_tsc } from "./implementation/manual/commands/tsc"
 import { $$ as c_update_package_dependencies } from "./implementation/manual/commands/update_package_dependencies"
-import { $$ as c_update_npm_package_dependencies } from "./implementation/manual/commands/update_npm_package_dependencies"
+import { $$ as c_npm_update_package_dependencies } from "./modules/npm/implementation/manual/commands/update_package_dependencies"
 import { $$ as c_update2latest } from "./modules/npm/implementation/manual/commands/update2latest"
 
 const create_eqe = (
@@ -155,7 +156,14 @@ _pn.run_main_procedure(
             null,
         )
 
-        const update_npm_package_dependencies = c_update_npm_package_dependencies(
+        const npm_publish = c_npm_publish(
+            {
+                'npm': create_epe(`npm`, $r),
+            },
+            null,
+        )
+
+        const npm_update_package_dependencies = c_npm_update_package_dependencies(
             {
                 'remove': $r.commands.remove,
                 'update2latest': update2latest,
@@ -166,7 +174,7 @@ _pn.run_main_procedure(
 
         const update_package_dependencies = c_update_package_dependencies(
             {
-                'npm update package dependencies': update_npm_package_dependencies,
+                'npm update package dependencies': npm_update_package_dependencies,
             },
             null,
         )
@@ -242,9 +250,12 @@ _pn.run_main_procedure(
                         'npm set up comparison against published': set_up_comparison_against_published,
                         'publish': c_publish(
                             {
+                                'build and test': build_and_test,
                                 'git push': git_push,
                                 'git assert is clean': git_assert_is_clean,
                                 'git make pristine': git_make_pristine,
+                                'npm': npm,
+                                'npm publish': npm_publish,
                                 'update package dependencies': update_package_dependencies,
                             },
                             null,
