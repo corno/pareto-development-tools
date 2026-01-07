@@ -13,6 +13,6 @@
     "pareto-graphviz": "^0.1.12",
     "pareto-host-nodejs": "^0.1.5",
     "pareto-resources": "^0.1.9",
-    "pareto-standard-operations": "^0.3.36"
+    "pareto-standard-operations": "^0.3.37"
   }
 }
