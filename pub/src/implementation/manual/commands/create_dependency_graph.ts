@@ -16,7 +16,7 @@ export const $$: signatures.commands.create_dependency_graph = _p.command_proced
         _p.query(
             $q['package dependencies'](
                 {
-                    'path': $p.path,
+                    'path': $p['path to project'],
                 },
                 ($): d.Error => ['package dependencies', $],
             ).transform_result(

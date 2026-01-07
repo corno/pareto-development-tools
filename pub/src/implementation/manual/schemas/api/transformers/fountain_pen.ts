@@ -20,6 +20,7 @@ import * as t_build_and_test_to_fountain_pen from "../../build_and_test/transfor
 import * as t_build_to_fountain_pen from "../../build/transformers/fountain_pen"
 import * as t_dependency_graph_to_fountain_pen from "../../dependency_graph/transformers/fountain_pen"
 import * as t_line_count_to_fountain_pen from "../../directory_analysis/transformers/fountain_pen"
+import * as t_publish from "../../publish/transformers/fountain_pen"
 import * as t_update_dependencies from "../../update_dependencies/transformers/fountain_pen"
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory/transformers/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../../../modules/npm/implementation/manual/schemas/set_up_comparison_against_published/transformers/fountain_pen"
@@ -53,6 +54,7 @@ export const Error: signatures.Error = ($) => _p.sg($, ($) => {
                 default: return _p.au($[0])
             }
         }))
+        case 'publish': return _p.ss($, ($): d_out.Block_Part => t_publish.Error($))
         case 'set up comparison': return _p.ss($, ($): d_out.Block_Part => t_set_up_comparison_against_published.Error($))
         default: return _p.au($[0])
     }

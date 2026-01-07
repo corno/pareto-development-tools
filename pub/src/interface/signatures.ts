@@ -45,6 +45,7 @@ export namespace commands {
             'git remove tracked but ignored': resources_git.commands.remove_tracked_but_ignored
             'list file structure problems': resources.commands.analyze_file_structure
             'npm set up comparison against published': resources_npm.commands.set_up_comparison_against_published
+            'publish': resources.commands.publish
             'update dependencies': resources.commands.update_dependencies
         },
         {
@@ -109,12 +110,20 @@ export namespace commands {
     >
 
     export type tsc = _pi.Command_Procedure<
-            resources.commands.tsc,
-            {
-                'tsc': resources_exupery.commands.execute_smelly_command_executable
-            },
-            null
-        >
+        resources.commands.tsc,
+        {
+            'tsc': resources_exupery.commands.execute_smelly_command_executable
+        },
+        null
+    >
+
+    export type publish = _pi.Command_Procedure<
+        resources.commands.publish,
+        {
+            'git push': resources_git.commands.push
+        },
+        null
+    >
 
     export type update_dependencies = _pi.Command_Procedure<
         resources.commands.update_dependencies,

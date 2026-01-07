@@ -33,6 +33,14 @@ export namespace commands {
         }
     >
 
+    export type push = _pi.Command_Procedure<
+        resources.commands.push,
+        {
+            'git': resources_exupery.commands.execute_command_executable
+        },
+        null
+    >
+
     export type remove_tracked_but_ignored = _pi.Command_Procedure<
         resources.commands.remove_tracked_but_ignored,
         {

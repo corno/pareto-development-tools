@@ -24,8 +24,10 @@ import { $$ as c_fp_log } from "./modules/pareto-fountain-pen-directory/implemen
 import { $$ as c_git_assert_clean } from "./modules/git/implementation/manual/commands/assert_is_clean"
 import { $$ as c_git_clean } from "./modules/git/implementation/manual/commands/clean"
 import { $$ as c_git_extended_commit } from "./modules/git/implementation/manual/commands/extended_commit"
+import { $$ as c_git_push } from "./modules/git/implementation/manual/commands/push"
 import { $$ as c_git_remove_tracked_but_ignored } from "./modules/git/implementation/manual/commands/remove-tracked-but-ignored"
 import { $$ as c_npm } from "./modules/npm/implementation/manual/commands/npm"
+import { $$ as c_publish } from "./implementation/manual/commands/publish"
 import { $$ as c_set_up_comparison_against_published } from "./modules/npm/implementation/manual/commands/set_up_comparison_against_published"
 import { $$ as c_tsc } from "./implementation/manual/commands/tsc"
 import { $$ as c_update_dependencies } from "./implementation/manual/commands/update-dependencies"
@@ -169,6 +171,13 @@ _pn.run_main_procedure(
             null,
         )
 
+        const git_push = c_git_push(
+            {
+                'git': create_epe(`git`, $r),
+            },
+            null,
+        )
+
         const git_remove_tracked_but_ignored = c_git_remove_tracked_but_ignored(
             {
                 'git': create_epe(`git`, $r),
@@ -231,6 +240,12 @@ _pn.run_main_procedure(
                         'update dependencies': clean_and_update_dependencies,
                         'git extended commit': git_extended_commit,
                         'npm set up comparison against published': set_up_comparison_against_published,
+                        'publish': c_publish(
+                            {
+                                'git push': git_push,
+                            },
+                            null,
+                        ),
                     },
                     {
                         'read directory': $r.queries['read directory']

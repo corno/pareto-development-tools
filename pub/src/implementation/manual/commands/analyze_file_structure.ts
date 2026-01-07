@@ -23,7 +23,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
         _p.query(
             $q['read directory'](
                 {
-                    'path': t_path_to_path.create_node_path($p['path'], `packages`),
+                    'path': t_path_to_path.create_node_path($p['path to project'], `packages`),
                 },
                 ($): d.Error => ['read directory', $],
             ),

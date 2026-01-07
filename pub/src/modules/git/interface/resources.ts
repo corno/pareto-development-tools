@@ -4,6 +4,7 @@ import * as d_assert_is_clean from "./to_be_generated/assert_is_clean"
 import * as d_is_repository_clean from "./to_be_generated/is_repository_clean"
 import * as d_is_inside_work_tree from "./to_be_generated/is_inside_work_tree"
 import * as d_clean from "./to_be_generated/clean"
+import * as d_push from "./to_be_generated/push"
 import * as d_extended_commit from "./to_be_generated/extended_commit"
 import * as d_remove_tracked_but_ignored from "./to_be_generated/remove_tracked_but_ignored"
 
@@ -12,6 +13,7 @@ export namespace commands {
     export type assert_is_clean = _pi.Command<d_assert_is_clean.Error, d_assert_is_clean.Parameters>
     export type clean = _pi.Command<d_clean.Error, d_clean.Parameters>
     export type extended_commit = _pi.Command<d_extended_commit.Error, d_extended_commit.Parameters>
+    export type push = _pi.Command<d_push.Error, d_push.Parameters>
     export type remove_tracked_but_ignored = _pi.Command<d_remove_tracked_but_ignored.Error, d_remove_tracked_but_ignored.Parameters>
 
 }

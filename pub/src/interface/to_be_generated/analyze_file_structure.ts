@@ -7,7 +7,7 @@ import * as d_read_file from "pareto-resources/dist/interface/generated/pareto/s
 import * as d_directory_content from "pareto-resources/dist/interface/to_be_generated/read_directory_content"
 
 export type Parameters = {
-    'path': d_path.Context_Path,
+    'path to project': d_path.Context_Path,
 }
 
 export type Packages = _pi.Dictionary<d_directory_content.Result>

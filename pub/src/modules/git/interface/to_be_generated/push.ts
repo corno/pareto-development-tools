@@ -8,4 +8,4 @@ export type Parameters = {
 }
 
 export type Error =
-    | ['unexpected error', d_epe.Error]
+    | ['could not push', d_epe.Error]

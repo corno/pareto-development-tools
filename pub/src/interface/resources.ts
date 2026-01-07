@@ -7,6 +7,7 @@ import * as d_build_and_test from "./to_be_generated/build_and_test"
 import * as d_clean_and_update_dependencies from "./to_be_generated/clean_and_update_dependencies"
 import * as d_create_dependency_graph from "./to_be_generated/create_dependency_graph"
 import * as d_get_package_dependencies from "./to_be_generated/get_package_dependencies"
+import * as d_publish from "./to_be_generated/publish"
 import * as d_tsc from "./to_be_generated/tsc"
 import * as d_update_dependencies from "./to_be_generated/update_dependencies"
 
@@ -26,6 +27,7 @@ export namespace commands {
     export type build_and_test = _pi.Command<d_build_and_test.Error, d_build_and_test.Parameters>
     export type clean_and_update_dependencies = _pi.Command<d_clean_and_update_dependencies.Error, d_clean_and_update_dependencies.Parameters>
     export type create_dependency_graph = _pi.Command<d_create_dependency_graph.Error, d_create_dependency_graph.Parameters>
+    export type publish = _pi.Command<d_publish.Error, d_publish.Parameters>
     export type tsc = _pi.Command<d_tsc.Error, d_tsc.Parameters>
     export type update_dependencies = _pi.Command<d_update_dependencies.Error, d_update_dependencies.Parameters>
     

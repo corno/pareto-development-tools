@@ -9,7 +9,7 @@ import * as ds_context_path from "pareto-resources/dist/implementation/manual/sc
 type signature = _pi.Production<d.Parameters, d_error.Error, string>
 
 export const Command: signature = (iterator, abort) => iterator.consume(
-    ($) => {
+    ($): d.Parameters => {
         switch ($) {
             case 'analyze-file-structure': return ['analyze file structure', {
                 'path to project': ds_context_path.Context_Path(iterator.consume(
@@ -18,10 +18,10 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                 ))
             }]
             case 'assert-clean': return ['assert clean', {
-                'path to package': ds_context_path.Context_Path(iterator.consume(
+                'path': _p.optional.set(ds_context_path.Context_Path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
-                ))
+                )))
             }]
             case 'dependency-graph': return ['dependency graph', {
                 'path to project': ds_context_path.Context_Path(iterator.consume(
@@ -80,6 +80,28 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                 )
 
             }]
+            case 'publish': return ['publish', {
+                'generation': iterator.consume(
+                    ($) => {
+                        switch ($) {
+                            case 'patch': return ['patch', null]
+                            case 'minor': return ['minor', null]
+                            default: return abort(['expected one of', _p.dictionary.literal({
+                                'patch': null,
+                                'minor': null,
+                            })])
+                        }
+                    },
+                    () => abort(['expected one of', _p.dictionary.literal({
+                        'patch': null,
+                        'minor': null,
+                    })])
+                ),
+                'path to package': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
+                    () => abort(['expected a text', { 'description': "path to package" }])
+                ))
+            }]
             case 'set-up-comparison': return ['set up comparison', {
                 'path to package': ds_context_path.Context_Path(iterator.consume(
                     ($) => $,
@@ -92,6 +114,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                 'dependency-graph': null,
                 'list-file-structure-problems': null,
                 'project': null,
+                'publish': null,
                 'set-up-comparison': null,
             })])
         }
@@ -102,6 +125,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
         'dependency-graph': null,
         'list-file-structure-problems': null,
         'project': null,
+        'publish': null,
         'set-up-comparison': null,
     })])
 )

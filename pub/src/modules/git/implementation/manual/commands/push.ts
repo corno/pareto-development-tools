@@ -4,12 +4,12 @@ import * as _pt from 'pareto-core-transformer'
 import * as signatures from "../../../interface/signatures"
 
 //data types
-import * as d from "../../../interface/to_be_generated/clean"
+import * as d from "../../../interface/to_be_generated/push"
 
 //dependencies
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 
-export const $$: signatures.commands.clean = _p.command_procedure(
+export const $$: signatures.commands.push = _p.command_procedure(
     ($p, $cr) => [
         $cr.git.execute(
             {
@@ -22,15 +22,11 @@ export const $$: signatures.commands.clean = _p.command_procedure(
                         () => _pt.list.literal([])
                     ),
                     _pt.list.literal([
-                        `clean`,
-                        `--force`,
-                        `-d`, // remove whole directories
-                        `-X`, // remove only ignored files (not the capital X as opposed to -x which removes all untracked files, including unignored ones)
-
+                        `push`,
                     ])
                 ]),
             },
-            ($) => ['unexpected error', $],
+            ($): d.Error => ['could not push', $],
         )
     ]
 )

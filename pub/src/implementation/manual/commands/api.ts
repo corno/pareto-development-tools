@@ -16,33 +16,25 @@ export const $$: signatures.commands.api = _p.command_procedure(
         switch ($[0]) {
             case 'analyze file structure': return _p.ss($, ($) => [
                 $cr['analyze file structure'].execute(
-                    {
-                        'path': $['path to project']
-                    },
+                    $,
                     ($): d.Error => ['analyze file structure', $],
                 )
             ])
             case 'assert clean': return _p.ss($, ($) => [
                 $cr['git assert is clean'].execute(
-                    {
-                        'path': _p.optional.set($['path to package'])
-                    },
+                    $,
                     ($): d.Error => ['git assert clean', $],
                 )
             ])
             case 'dependency graph': return _p.ss($, ($) => [
                 $cr['create dependency graph'].execute(
-                    {
-                        'path': $['path to project']
-                    },
+                    $,
                     ($): d.Error => ['dependency graph', $],
                 )
             ])
             case 'list file structure problems': return _p.ss($, ($) => [
                 $cr['list file structure problems'].execute(
-                    {
-                        'path': $['path to project']
-                    },
+                    $,
                     ($): d.Error => ['analyze file structure', $],
                 )
             ])
@@ -137,6 +129,12 @@ export const $$: signatures.commands.api = _p.command_procedure(
                     )
                 ]
             })
+            case 'publish': return _p.ss($, ($) => [
+                $cr['publish'].execute(
+                    $,
+                    ($): d.Error => ['publish', $],
+                )
+            ])
             case 'set up comparison': return _p.ss($, ($) => _p.deprecated_cc(
                 {
                     'path to temp': t_path_to_path.extend_context_path($['path to package'], { 'addition': `temp` }),

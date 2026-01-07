@@ -10,6 +10,7 @@ import * as d_dependency_graph from "./create_dependency_graph"
 import * as d_git_extended_commit from "../../modules/git/interface/to_be_generated/extended_commit"
 import * as d_git_remove_tracked_but_ignored from "../../modules/git/interface/to_be_generated/remove_tracked_but_ignored"
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/source"
+import * as d_publish from "./publish"
 import * as d_read_directory from "pareto-resources/dist/interface/generated/pareto/schemas/read_directory/data_types/source"
 import * as d_set_up_comparison_against_published from "../../modules/npm/interface/to_be_generated/set_up_comparison_against_published"
 import * as d_update_dependencies from "./update_dependencies"
@@ -23,9 +24,7 @@ export type Parameters =
     /**
      * asserts that the git working tree is clean for 1 specified package
      */
-    | ['assert clean', {
-        'path to package': d_path.Context_Path
-    }]
+    | ['assert clean', d_assert_clean.Parameters]
 
     /**
      * sets up 2 directories in /temp of the package dir; one of the local package and one of the published package
@@ -36,19 +35,15 @@ export type Parameters =
     }]
 
 
-    | ['dependency graph', {
-        'path to project': d_path.Context_Path
-    }]
+    | ['dependency graph', d_dependency_graph.Parameters]
 
 
-    | ['analyze file structure', {
-        'path to project': d_path.Context_Path
-    }]
+    | ['analyze file structure', d_analyze_file_structure.Parameters]
 
 
-    | ['list file structure problems', {
-        'path to project': d_path.Context_Path
-    }]
+    | ['list file structure problems', d_list_file_structure_problems.Parameters]
+
+    | ['publish', d_publish.Parameters]
 
 export type Project = {
     'path to project': d_path.Context_Path
@@ -99,6 +94,7 @@ export type Error =
     | ['dependency graph', d_dependency_graph.Error]
     | ['git assert clean', d_assert_clean.Error]
     | ['project', Project_Error]
+    | ['publish', d_publish.Error]
     | ['set up comparison', d_set_up_comparison_against_published.Error]
 
 export type Project_Error =

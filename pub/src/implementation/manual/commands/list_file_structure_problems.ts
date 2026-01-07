@@ -21,7 +21,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
         _p.query(
             $q['read directory'](
                 {
-                    'path': t_path_to_path.create_node_path($p['path'], `packages`),
+                    'path': t_path_to_path.create_node_path($p['path to project'], `packages`),
                 },
                 ($): d.Error => ['read directory', $],
             ),
