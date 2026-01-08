@@ -1,11 +1,12 @@
 import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
-import * as _pdev from 'pareto-core-dev'
 
 import * as signatures from "../../../interface/signatures"
 
 //data types
 import * as d from "pareto-resources/dist/interface/to_be_generated/temp_main"
+import * as d_parse from "../../../interface/to_be_generated/parse"
+import * as d_api from "../../../interface/to_be_generated/api"
 
 //dependencies
 import * as r_instruction from "../schemas/api/refiners/main"
@@ -16,57 +17,70 @@ import * as s_fp_block from "pareto-fountain-pen/dist/implementation/manual/sche
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 
+type My_Error =
+    | ['parse', d_parse.Error]
+    | ['api', d_api.Error]
+
 export const $$: signatures.commands.main = _p.command_procedure(
     ($p, $cr) => [
-        _p.refine_without_error_transformation(
+        _p.create_error_handling_context<d.Error, My_Error>(
+            [
+                _p.refine_without_error_transformation(
 
-            // parse command line instruction
-            (abort) => r_instruction.Command(
-                $p,
-                ($) => {
-                    //FIXME: do this properly
-                    _pdev.log_debug_message(
-                        s_fp_block.Group(
-                            sh.group([sh.g.nested_block([
-                                t_bin_to_fountain_pen.Error($)
-                            ])]),
-                            {
-                                'indentation': `    `,
-                                'newline': `\n`,
-                            }
-                        ),
-                        () => { }
-                    )
-                    return abort({
-                        'exit code': 1
-                    })
-                }
-            ),
+                    // parse command line instruction
+                    (abort) => r_instruction.Command(
+                        $p,
+                        ($) => abort(['parse', $]),
+                    ),
 
-            // execute API command
-            ($v) => [
-                $cr.api.execute(
-                    $v,
-                    ($): d.Error => {
-                        //FIXME: do this properly
-                        _pdev.log_debug_message(
-                            s_fp_block.Group(
-                                sh.group([sh.g.nested_block([
-                                    t_api_to_fountain_pen.Error($)
-                                ])]),
-                                {
-                                    'indentation': `    `,
-                                    'newline': `\n`,
-                                }
-                            ),
-                            () => { }
+                    // execute API command
+                    ($v) => [
+                        $cr.api.execute(
+                            $v,
+                            ($) => ['api', $],
                         )
-                        return ({
-                            'exit code': 0
-                        })
+                    ],
+                )
+
+            ],
+            ($) => [
+
+                $cr['log error'].execute(
+                    {
+                        'lines': _p.list.literal([
+                            _p.sg($, ($) => {
+                                switch ($[0]) {
+                                    case 'parse': return _p.ss($, ($) => s_fp_block.Group(
+                                        sh.group([sh.g.nested_block([
+                                            t_bin_to_fountain_pen.Error($)
+                                        ])]),
+                                        {
+                                            'indentation': `    `,
+                                            'newline': `\n`,
+                                        }
+                                    ))
+                                    case 'api': return _p.ss($, ($) => s_fp_block.Group(
+                                        sh.group([sh.g.nested_block([
+                                            t_api_to_fountain_pen.Error($)
+                                        ])]),
+                                        {
+                                            'indentation': `    `,
+                                            'newline': `\n`,
+                                        }
+                                    ))
+                                    default: return _p.au($[0])
+                                }
+                            })
+                        ])
                     },
+                    ($) => ({
+                        'exit code': 2
+                    })
                 )
             ],
-        )
+            ({
+                'exit code': 1,
+            })
+        ),
     ]
 )

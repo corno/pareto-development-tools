@@ -1,102 +1,74 @@
 #!/bin/bash
-# Bash completion script for pareto CLI
+# Bash completion script for pdt CLI
 #
 # To enable, add this to your ~/.bashrc:
 #   source /path/to/tools/completion/pareto-completion.bash
 
-_pareto_completions() {
+_pdt_completions() {
     local cur="${COMP_WORDS[COMP_CWORD]}"
     local prev="${COMP_WORDS[COMP_CWORD-1]}"
     
-    # List of currently available commands (only uncommented ones)
-            commands="build-and-test compare analyse cluster-analyse commit-and-push"
+    # List of currently available commands
+    local commands="analyze-file-structure assert-clean dependency-graph list-file-structure-problems project publish set-up-comparison"
     
-    # Analysis flags for analyse and cluster-analyse commands
-    local analyse_flags="--help -h --structural --pre-commit --pre-publish"
+    # Project sub-commands
+    local project_subcommands="assert-clean build-and-test build git-commit git-remove-tracked-but-ignored set-up-comparison update-dependencies"
     
-    # Commit and push flags
-    local commit_push_flags="--help -h --dry-run --no-push"
+    # Publish generation options
+    local publish_generations="patch minor"
     
-    # Build and test flags
-    local build_test_flags="--help -h --verbose -v --skip-tests"
-    
-    # If completing first argument after 'pareto'
+    # If completing first argument after 'pdt'
     if [ "$COMP_CWORD" -eq 1 ]; then
         COMPREPLY=($(compgen -W "${commands}" -- ${cur}))
         return 0
     fi
     
     # Command-specific completions
-    case "${prev}" in
-        build-and-test)
-            # Check if we're completing a flag
-            if [[ "${cur}" == -* ]]; then
-                COMPREPLY=($(compgen -W "${build_test_flags}" -- ${cur}))
-            else
-                # Complete directory path
+    case "${COMP_WORDS[1]}" in
+        analyze-file-structure|dependency-graph|list-file-structure-problems)
+            # These commands take a project path
+            if [ "$COMP_CWORD" -eq 2 ]; then
                 COMPREPLY=($(compgen -d -- ${cur}))
             fi
             return 0
             ;;
-        compare)
-            # These commands take a directory path as argument
-            COMPREPLY=($(compgen -d -- ${cur}))
-            return 0
-            ;;
-        commit-and-push)
-            # Check if we're completing a flag
-            if [[ "${cur}" == -* ]]; then
-                COMPREPLY=($(compgen -W "${commit_push_flags}" -- ${cur}))
-            else
-                # Complete directory path
+        assert-clean|set-up-comparison)
+            # These commands take an optional package path
+            if [ "$COMP_CWORD" -eq 2 ]; then
                 COMPREPLY=($(compgen -d -- ${cur}))
             fi
             return 0
             ;;
-        analyse|cluster-analyse)
-            # Check if we're completing a flag
-            if [[ "${cur}" == -* ]]; then
-                COMPREPLY=($(compgen -W "${analyse_flags}" -- ${cur}))
-            else
-                # Complete directory path
+        project)
+            if [ "$COMP_CWORD" -eq 2 ]; then
+                # Complete project path
                 COMPREPLY=($(compgen -d -- ${cur}))
+            elif [ "$COMP_CWORD" -eq 3 ]; then
+                # Complete project sub-command
+                COMPREPLY=($(compgen -W "${project_subcommands}" -- ${cur}))
+            elif [ "$COMP_CWORD" -eq 4 ] && [ "${COMP_WORDS[3]}" == "git-commit" ]; then
+                # For git-commit, expect a commit message (no completion)
+                COMPREPLY=()
+            fi
+            return 0
+            ;;
+        publish)
+            if [ "$COMP_CWORD" -eq 2 ]; then
+                # Complete package path
+                COMPREPLY=($(compgen -d -- ${cur}))
+            elif [ "$COMP_CWORD" -eq 3 ]; then
+                # Complete generation type
+                COMPREPLY=($(compgen -W "${publish_generations}" -- ${cur}))
+            elif [ "$COMP_CWORD" -eq 4 ]; then
+                # For one time password, no completion
+                COMPREPLY=()
             fi
             return 0
             ;;
     esac
     
-    # If previous argument was analyse or cluster-analyse, and current is a flag, 
-    # still allow directory completion for the path argument
-    if [[ "${COMP_WORDS[1]}" == "analyse" || "${COMP_WORDS[1]}" == "cluster-analyse" ]]; then
-        # Check if previous word was a flag
-        if [[ "${prev}" == "--structural" || "${prev}" == "--pre-commit" || "${prev}" == "--pre-publish" || "${prev}" == "--help" ]]; then
-            COMPREPLY=($(compgen -d -- ${cur}))
-            return 0
-        fi
-    fi
-    
-    # If previous argument was commit-and-push, and current is a flag,
-    # still allow directory completion for the path argument
-    if [[ "${COMP_WORDS[1]}" == "commit-and-push" ]]; then
-        # Check if previous word was a flag
-        if [[ "${prev}" == "--dry-run" || "${prev}" == "--no-push" || "${prev}" == "--help" ]]; then
-            COMPREPLY=($(compgen -d -- ${cur}))
-            return 0
-        fi
-    fi
-    
-    # If previous argument was build-and-test, and current is a flag,
-    # still allow directory completion for the path argument
-    if [[ "${COMP_WORDS[1]}" == "build-and-test" ]]; then
-        # Check if previous word was a flag
-        if [[ "${prev}" == "--verbose" || "${prev}" == "-v" || "${prev}" == "--skip-tests" || "${prev}" == "--help" ]]; then
-            COMPREPLY=($(compgen -d -- ${cur}))
-            return 0
-        fi
-    fi
-    
     # Default to no completion
     COMPREPLY=()
 }
 
-complete -F _pareto_completions pareto
+complete -F _pdt_completions pdt

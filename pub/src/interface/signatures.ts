@@ -96,6 +96,8 @@ export namespace commands {
         resources_exupery.commands.main,
         {
             'api': resources.commands.api
+            'log error': resources_exupery.commands.log_error
+
         },
         null
     >
