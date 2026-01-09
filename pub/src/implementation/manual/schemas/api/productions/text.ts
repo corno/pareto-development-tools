@@ -23,6 +23,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                     () => abort(['expected a text', { 'description': "path to package" }])
                 )))
             }]
+            case 'build-and-test': return ['build and test', {
+                'path': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
+                    () => abort(['expected a text', { 'description': "path to package" }])
+                ))
+            }]
             case 'dependency-graph': return ['dependency graph', {
                 'path to project': ds_context_path.Context_Path(iterator.consume(
                     ($) => $,

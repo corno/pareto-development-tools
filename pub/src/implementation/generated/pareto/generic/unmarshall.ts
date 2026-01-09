@@ -1,4 +1,4 @@
-import * as _et from 'pareto-core-interface'
+import * as _pi from 'pareto-core-interface'
 import * as _ea from 'pareto-core-refiner'
 
 import * as t from "../../../../interface/generated/pareto/core/astn_source"
@@ -8,7 +8,7 @@ import * as unresolved from "../../../../interface/generated/pareto/core/unresol
 export const process_unconstrained_state_group = <Mapped_Value>(
     $: t._T_Value,
     $p: {
-        'states': _et.Dictionary<($: t._T_Value) => Mapped_Value>,
+        'states': _pi.Dictionary<($: t._T_Value) => Mapped_Value>,
     }
 ): Mapped_Value => {
     return _ea.sg($, ($) => {
@@ -28,7 +28,7 @@ export const process_unconstrained_state_group = <Mapped_Value>(
 export const process_unresolved_state_group = <Mapped_Value>(
     $: t._T_Value,
     $p: {
-        'states': _et.Dictionary<($: t._T_Value) => Mapped_Value>,
+        'states': _pi.Dictionary<($: t._T_Value) => Mapped_Value>,
     }
 
 ): unresolved.State_Group<t._T_Range, Mapped_Value> => {
@@ -52,7 +52,7 @@ export const process_unresolved_state_group = <Mapped_Value>(
 export const process_group = <Mapped_Value>(
     $: t._T_Value,
     $p: {
-        'properties': ($: _et.Dictionary<t._T_Value>) => Mapped_Value,
+        'properties': ($: _pi.Dictionary<t._T_Value>) => Mapped_Value,
     }
 
 ): Mapped_Value => {
@@ -82,7 +82,7 @@ export const process_group = <Mapped_Value>(
 }
 
 export const __get_entry = (
-    $: _et.Dictionary<t._T_Value>,
+    $: _pi.Dictionary<t._T_Value>,
     $p: {
         'key': string,
     }
@@ -265,7 +265,7 @@ export const process_optional = <Mapped_Value>(
         'value': ($: t._T_Value) => Mapped_Value
     }
 
-): _et.Optional_Value<Mapped_Value> => {
+): _pi.Optional_Value<Mapped_Value> => {
     return _ea.sg($, ($) => {
         switch ($[0]) {
             case 'not set': return _ea.ss($, ($) => _ea.optional.not_set())

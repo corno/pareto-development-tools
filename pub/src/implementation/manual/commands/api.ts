@@ -26,6 +26,12 @@ export const $$: signatures.commands.api = _p.command_procedure(
                     ($): d.Error => ['git assert clean', $],
                 )
             ])
+            case 'build and test': return _p.ss($, ($) => [
+                $cr['build and test'].execute(
+                    $,
+                    ($): d.Error => ['build and test', $],
+                )
+            ])
             case 'dependency graph': return _p.ss($, ($) => [
                 $cr['create dependency graph'].execute(
                     $,

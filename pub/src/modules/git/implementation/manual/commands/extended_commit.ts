@@ -33,7 +33,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                             `-C`,
                                             s_path.Context_Path($),
                                         ]),
-                                        () => _pt.list.literal([])
+                                        () => undefined
                                     ),
                                     _pt.list.literal([
                                         `add`,
@@ -53,7 +53,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                     `-C`,
                                     s_path.Context_Path($),
                                 ]),
-                                () => _pt.list.literal([])
+                                () => undefined
                             ),
                             _pt.list.literal([
                                 `commit`,
@@ -75,7 +75,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                             `-C`,
                                             s_path.Context_Path($),
                                         ]),
-                                        () => _pt.list.literal([])
+                                        () => undefined
                                     ),
                                     _pt.list.literal([
                                         `push`,

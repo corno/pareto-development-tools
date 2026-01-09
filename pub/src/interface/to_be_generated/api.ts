@@ -26,6 +26,10 @@ export type Parameters =
      */
     | ['assert clean', d_assert_clean.Parameters]
 
+
+    | ['build and test', d_build_and_test.Parameters]
+
+
     /**
      * sets up 2 directories in /temp of the package dir; one of the local package and one of the published package
      * these directories can be diffed to determine what changes have not been published yet
@@ -91,6 +95,7 @@ export type Project_Instruction =
 
 export type Error =
     | ['analyze file structure', d_analyze_file_structure.Error]
+    | ['build and test', d_build_and_test.Error]
     | ['dependency graph', d_dependency_graph.Error]
     | ['git assert clean', d_assert_clean.Error]
     | ['project', Project_Error]
