@@ -1,6 +1,6 @@
 import * as _ea from 'pareto-core-refiner'
 import * as _ps from 'pareto-core-serializer'
-import * as _et from 'pareto-core-interface'
+import * as _pi from 'pareto-core-interface'
 
 import * as unresolved$ from "../../../../interface/generated/pareto/core/unresolved"
 import * as resolved$ from "../../../../interface/generated/pareto/core/resolved"
@@ -24,7 +24,7 @@ export type Key_Value_Location_Triplet<Source, T> = {
     'location': Source
 }
 export type Path<Source, Resolved_Element, Seed> = {
-    'list': _et.List<Resolved_Element>
+    'list': _pi.List<Resolved_Element>
     'result': {
         'data': Seed
     }
@@ -41,7 +41,7 @@ export type Resolve_Error<Source> = {
 
 export type Resolve_Error_Type =
     | ['circular dependency', {
-        'keys': _et.List<string>,
+        'keys': _pi.List<string>,
     }]
     | ['no such entry', {
         'key': string,
@@ -82,7 +82,7 @@ export const abort = <Source>(location: Source, type: Resolve_Error_Type, locati
 }
 
 export const dictionary_to_lookup = <T>(
-    $: _et.Dictionary<T>,
+    $: _pi.Dictionary<T>,
     $p: null,
 ): i._T_Acyclic_Lookup<T> => {
     return _ea.optional.set($.map(($) => (['resolved', $])))
@@ -107,7 +107,7 @@ export const get_possibly_circular_dependent_sibling_entry = <Source, T>(
     )
 }
 
-export const push_stack = <T>($: _et.List<T>, $p: { 'element': T }): _et.List<T> => {
+export const push_stack = <T>($: _pi.List<T>, $p: { 'element': T }): _pi.List<T> => {
     return _ea.list.deprecated_build<T>(($i) => {
         $i['add list']($)
         $i['add element']($p['element'])
@@ -236,7 +236,7 @@ export const resolve_dictionary = <Source, TUnresolved, TResolved>(
 export const resolve_dense_dictionary = <Source, TUnresolved, TResolved, TBenchmark>(
     $: unresolved$.Dictionary<Source, TUnresolved>,
     $p: {
-        'denseness benchmark': _et.Dictionary<TBenchmark>
+        'denseness benchmark': _pi.Dictionary<TBenchmark>
         'map': ($: Key_Value_Location_Triplet<Source, TUnresolved>, $l: {
             'possibly circular dependent siblings': i._T_Cyclic_Lookup<TResolved>
         }) => TResolved,
@@ -249,7 +249,7 @@ export const resolve_dense_dictionary = <Source, TUnresolved, TResolved, TBenchm
 export const resolve_dense_ordered_dictionary = <Source, TUnresolved, TResolved, TBenchmark>(
     $: unresolved$.Dictionary<Source, TUnresolved>,
     $p: {
-        'denseness benchmark': _et.Dictionary<TBenchmark>
+        'denseness benchmark': _pi.Dictionary<TBenchmark>
         'map': ($: Key_Value_Location_Triplet<Source, TUnresolved>, $l: {
             'possibly circular dependent siblings': i._T_Cyclic_Lookup<TResolved>
             'not circular dependent siblings': i._T_Acyclic_Lookup<TResolved>
@@ -261,8 +261,8 @@ export const resolve_dense_ordered_dictionary = <Source, TUnresolved, TResolved,
     const result = resolve_ordered_dictionary($, $p)
     $p['denseness benchmark'].map(($) => {
         const validate_denseness = (
-            benchmark: _et.Dictionary<TBenchmark>,
-            focus: _et.Dictionary<TResolved>,
+            benchmark: _pi.Dictionary<TBenchmark>,
+            focus: _pi.Dictionary<TResolved>,
             location: Source,
             location_to_string: i._T_Location_2_String<Source>,
         ) => {
