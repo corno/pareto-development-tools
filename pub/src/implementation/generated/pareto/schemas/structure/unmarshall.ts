@@ -1,5 +1,5 @@
-import * as _pa from 'pareto-core-refiner'
-import * as _pd from 'pareto-core-dev'
+import * as _p from 'pareto-core-refiner'
+import * as _pdev from 'pareto-core-dev'
 
 import * as _i_generic from "../../generic/unmarshall"
 import * as _i_signatures from "../../../../../interface/generated/pareto/schemas/structure/unmarshall"
@@ -10,7 +10,7 @@ import * as _i_out from "../../../../../interface/generated/pareto/schemas/struc
 export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.process_unconstrained_state_group(
     $,
     {
-        'states': _pa.dictionary.literal({
+        'states': _p.dictionary.literal({
             'dictionary': ($): _i_out._T_Directory.SG => ['dictionary', Directory(
                 $,
                 {
@@ -23,7 +23,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                     'value': ($) => _i_generic.process_unconstrained_state_group(
                         $,
                         {
-                            'states': _pa.dictionary.literal({
+                            'states': _p.dictionary.literal({
                                 'directory': ($): _i_out._T_Directory.SG.group.D.SG => ['directory', Directory(
                                     $,
                                     {
@@ -33,7 +33,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                                 'file': ($): _i_out._T_Directory.SG.group.D.SG => ['file', _i_generic.process_unconstrained_state_group(
                                     $,
                                     {
-                                        'states': _pa.dictionary.literal({
+                                        'states': _p.dictionary.literal({
                                             'manual': ($): _i_out._T_Directory.SG.group.D.SG.file.SG => ['manual', _i_generic.process_nothing(
                                                 $,
                                                 null
@@ -42,7 +42,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                                                 $,
                                                 {
                                                     'properties': ($) => ({
-                                                        'commit to git': _pa.sg(_i_generic.__get_entry(
+                                                        'commit to git': _p.deprecated_cc(_i_generic.get_entry(
                                                             $,
                                                             {
                                                                 'key': "commit to git",
@@ -68,7 +68,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                 $,
                 {
                     'properties': ($) => ({
-                        'required directories': _pa.sg(_i_generic.__get_entry(
+                        'required directories': _p.deprecated_cc(_i_generic.get_entry(
                             $,
                             {
                                 'key': "required directories",
@@ -79,7 +79,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                                 'deserializer': $p['value deserializers']['default number'],
                             }
                         )),
-                        'additional directories allowed': _pa.sg(_i_generic.__get_entry(
+                        'additional directories allowed': _p.deprecated_cc(_i_generic.get_entry(
                             $,
                             {
                                 'key': "additional directories allowed",
@@ -90,7 +90,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                                 'deserializer': $p['value deserializers']['boolean'],
                             }
                         )),
-                        'extensions': _pa.sg(_i_generic.__get_entry(
+                        'extensions': _p.deprecated_cc(_i_generic.get_entry(
                             $,
                             {
                                 'key': "extensions",
@@ -104,7 +104,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                                 ),
                             }
                         )),
-                        'warn': _pa.sg(_i_generic.__get_entry(
+                        'warn': _p.deprecated_cc(_i_generic.get_entry(
                             $,
                             {
                                 'key': "warn",
@@ -130,7 +130,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => _i_generic.proce
                 $,
                 {
                     'properties': ($) => ({
-                        'commit to git': _pa.sg(_i_generic.__get_entry(
+                        'commit to git': _p.deprecated_cc(_i_generic.get_entry(
                             $,
                             {
                                 'key': "commit to git",

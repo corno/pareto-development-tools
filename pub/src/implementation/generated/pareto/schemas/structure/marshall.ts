@@ -1,13 +1,13 @@
-import * as _pa from 'pareto-core-transformer'
-import * as _pd from 'pareto-core-dev'
+import * as _p from 'pareto-core-transformer'
+import * as _pdev from 'pareto-core-dev'
 
 import * as _i_signatures from "../../../../../interface/generated/pareto/schemas/structure/marshall"
 import * as _i_out from "../../../../../interface/generated/pareto/core/astn_target"
 
 
-export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.sg($, ($): _i_out._T_Value.SG.state => {
+export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _p.deprecated_cc($, ($): _i_out._T_Value.SG.state => {
     switch ($[0]) {
-        case 'dictionary': return _pa.ss($, ($) => ({
+        case 'dictionary': return _p.ss($, ($) => ({
             'state': "dictionary",
             'value': Directory(
                 $,
@@ -16,11 +16,11 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.sg
                 }
             ),
         }))
-        case 'group': return _pa.ss($, ($) => ({
+        case 'group': return _p.ss($, ($) => ({
             'state': "group",
-            'value': ['dictionary', $.map(($) => ['state', _pa.sg($, ($): _i_out._T_Value.SG.state => {
+            'value': ['dictionary', $.map(($) => ['state', _p.deprecated_cc($, ($): _i_out._T_Value.SG.state => {
                 switch ($[0]) {
-                    case 'directory': return _pa.ss($, ($) => ({
+                    case 'directory': return _p.ss($, ($) => ({
                         'state': "directory",
                         'value': Directory(
                             $,
@@ -29,18 +29,18 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.sg
                             }
                         ),
                     }))
-                    case 'file': return _pa.ss($, ($) => ({
+                    case 'file': return _p.ss($, ($) => ({
                         'state': "file",
-                        'value': ['state', _pa.sg($, ($): _i_out._T_Value.SG.state => {
+                        'value': ['state', _p.deprecated_cc($, ($): _i_out._T_Value.SG.state => {
                             switch ($[0]) {
-                                case 'manual': return _pa.ss($, ($) => ({
+                                case 'manual': return _p.ss($, ($) => ({
                                     'state': "manual",
                                     'value': ['nothing', null],
                                 }))
-                                case 'generated': return _pa.ss($, ($) => ({
+                                case 'generated': return _p.ss($, ($) => ({
                                     'state': "generated",
-                                    'value': ['verbose group', _pa.dictionary.literal({
-                                        'commit to git': _pa.deprecated_cc($['commit to git'], ($) => ['text', ({
+                                    'value': ['verbose group', _p.dictionary.literal({
+                                        'commit to git': _p.deprecated_cc($['commit to git'], ($) => ['text', ({
                                             'delimiter': ['backtick', null],
                                             'value': $p['value serializers']['boolean'](
                                                 $,
@@ -49,36 +49,36 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.sg
                                         })]),
                                     })],
                                 }))
-                                default: return _pa.au($[0])
+                                default: return _p.au($[0])
                             }
                         })],
                     }))
-                    default: return _pa.au($[0])
+                    default: return _p.au($[0])
                 }
             })])],
         }))
-        case 'wildcards': return _pa.ss($, ($) => ({
+        case 'wildcards': return _p.ss($, ($) => ({
             'state': "wildcards",
-            'value': ['verbose group', _pa.dictionary.literal({
-                'required directories': _pa.deprecated_cc($['required directories'], ($) => ['text', ({
+            'value': ['verbose group', _p.dictionary.literal({
+                'required directories': _p.deprecated_cc($['required directories'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['default number'](
                         $,
                         null
                     ),
                 })]),
-                'additional directories allowed': _pa.deprecated_cc($['additional directories allowed'], ($) => ['text', ({
+                'additional directories allowed': _p.deprecated_cc($['additional directories allowed'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['boolean'](
                         $,
                         null
                     ),
                 })]),
-                'extensions': _pa.deprecated_cc($['extensions'], ($) => ['list', $.map(($) => ['text', ({
+                'extensions': _p.deprecated_cc($['extensions'], ($) => ['list', $.map(($) => ['text', ({
                     'delimiter': ['quote', null],
                     'value': $,
                 })])]),
-                'warn': _pa.deprecated_cc($['warn'], ($) => ['text', ({
+                'warn': _p.deprecated_cc($['warn'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['boolean'](
                         $,
@@ -87,18 +87,18 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.sg
                 })]),
             })],
         }))
-        case 'freeform': return _pa.ss($, ($) => ({
+        case 'freeform': return _p.ss($, ($) => ({
             'state': "freeform",
             'value': ['nothing', null],
         }))
-        case 'ignore': return _pa.ss($, ($) => ({
+        case 'ignore': return _p.ss($, ($) => ({
             'state': "ignore",
             'value': ['nothing', null],
         }))
-        case 'generated': return _pa.ss($, ($) => ({
+        case 'generated': return _p.ss($, ($) => ({
             'state': "generated",
-            'value': ['verbose group', _pa.dictionary.literal({
-                'commit to git': _pa.deprecated_cc($['commit to git'], ($) => ['text', ({
+            'value': ['verbose group', _p.dictionary.literal({
+                'commit to git': _p.deprecated_cc($['commit to git'], ($) => ['text', ({
                     'delimiter': ['backtick', null],
                     'value': $p['value serializers']['boolean'](
                         $,
@@ -107,6 +107,6 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _pa.sg
                 })]),
             })],
         }))
-        default: return _pa.au($[0])
+        default: return _p.au($[0])
     }
 })]
