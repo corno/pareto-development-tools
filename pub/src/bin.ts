@@ -5,8 +5,8 @@ import * as _pi from 'pareto-core-interface'
 import * as _pq from 'pareto-core-query'
 import * as _pc from 'pareto-core-command'
 
-import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
-import * as d_espe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_smelly_procedure_executable/data_types/source"
+import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_command_executable/data_types/source"
+import * as d_espe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_smelly_command_executable/data_types/source"
 import * as d_eqe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
 
 import { $$ as q_git_is_repository_clean } from "./modules/git/implementation/manual/queries/is_repository_clean"
@@ -54,7 +54,7 @@ const create_epe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
 ): _pi.Command<d_epe.Error, d_epe.Parameters> => _pc.__command(
-    ($p) => $r.commands['execute any procedure executable'].execute(
+    ($p) => $r.commands['execute any command executable'].execute(
         {
             'program': program,
             'args': $p.args,
@@ -66,7 +66,7 @@ const create_epe = (
 const create_espe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
-): _pi.Command<d_espe.Error, d_espe.Parameters> => _pc.__command(($p) => $r.commands['execute any smelly procedure executable'].execute(
+): _pi.Command<d_espe.Error, d_espe.Parameters> => _pc.__command(($p) => $r.commands['execute any smelly command executable'].execute(
     {
         'program': program,
         'args': $p.args,

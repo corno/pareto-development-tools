@@ -8,7 +8,7 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-import * as t_package_dependencies_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/directory_content/transformers/fountain_pen"
+import * as t_read_directory_content_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory_content/transformers/fountain_pen"
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory/transformers/fountain_pen"
 
 export const Error: Error = ($) => _p.sg($, ($) => {
@@ -29,7 +29,7 @@ export const Error: Error = ($) => _p.sg($, ($) => {
                     _p.sg($, ($) => {
                         switch ($[0]) {
                             case 'not a directory': return _p.ss($, ($) =>sh.b.snippet(`not a directory`))
-                            case 'directory content': return _p.ss($, ($) => t_package_dependencies_to_fountain_pen.Error($))
+                            case 'directory content': return _p.ss($, ($) => t_read_directory_content_to_fountain_pen.Error($))
                             default: return _p.au($[0])
                         }
                     })

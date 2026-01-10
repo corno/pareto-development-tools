@@ -1,6 +1,6 @@
 import * as _pi from 'pareto-core-interface'
 
-import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_procedure_executable/data_types/source"
+import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_command_executable/data_types/source"
 import * as d_eqe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
 import * as d_make_directory from "pareto-resources/dist/interface/generated/pareto/schemas/make_directory/data_types/source"
 import * as d_remove from "pareto-resources/dist/interface/generated/pareto/schemas/remove/data_types/source"
