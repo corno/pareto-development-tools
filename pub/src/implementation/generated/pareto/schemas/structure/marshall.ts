@@ -18,7 +18,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _p.dep
         }))
         case 'group': return _p.ss($, ($) => ({
             'state': "group",
-            'value': ['dictionary', $.map(($) => ['state', _p.deprecated_cc($, ($): _i_out._T_Value.SG.state => {
+            'value': ['dictionary', $.__d_map(($) => ['state', _p.deprecated_cc($, ($): _i_out._T_Value.SG.state => {
                 switch ($[0]) {
                     case 'directory': return _p.ss($, ($) => ({
                         'state': "directory",

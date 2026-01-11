@@ -85,7 +85,7 @@ export const dictionary_to_lookup = <T>(
     $: _pi.Dictionary<T>,
     $p: null,
 ): i._T_Acyclic_Lookup<T> => {
-    return _ea.optional.set($.map(($) => (['resolved', $])))
+    return _ea.optional.set($.__d_map(($) => (['resolved', $])))
 }
 
 export const get_possibly_circular_dependent_sibling_entry = <Source, T>(
@@ -259,14 +259,14 @@ export const resolve_dense_ordered_dictionary = <Source, TUnresolved, TResolved,
 ): resolved$.Ordered_Dictionary<Source, TResolved> => {
     const location = $.location
     const result = resolve_ordered_dictionary($, $p)
-    $p['denseness benchmark'].map(($) => {
+    $p['denseness benchmark'].__d_map(($) => {
         const validate_denseness = (
             benchmark: _pi.Dictionary<TBenchmark>,
             focus: _pi.Dictionary<TResolved>,
             location: Source,
             location_to_string: i._T_Location_2_String<Source>,
         ) => {
-            benchmark.map(($, key) => {
+            benchmark.__d_map(($, key) => {
                 const benchmark = $
                 focus.__get_possible_entry(key).__decide(
                     ($) => {
@@ -370,7 +370,7 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
                         } else {
                             const get_keys_of_entries_being_processed = () => {
                                 return _ea.list.deprecated_build<string>(($i) => {
-                                    _ea.dictionary.literal(status_dictionary).map(($, key) => {
+                                    _ea.dictionary.literal(status_dictionary).__d_map(($, key) => {
                                         if ($[0] === 'processing') {
                                             $i['add element'](key)
                                         }
@@ -424,12 +424,12 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
             return entry
         }
 
-        $.dictionary.map(($, key) => {
+        $.dictionary.__d_map(($, key) => {
             if (status_dictionary[key] === undefined) {
                 process_entry($.entry, $.location, key)
             }
         })
-        _ea.dictionary.literal(all_siblings_subscribed_entries).map(($, key) => {
+        _ea.dictionary.literal(all_siblings_subscribed_entries).__d_map(($, key) => {
             if (finished[key] === undefined) {
                 _ea.fixme_abort(`implementation error: entry not resolved: ${key}`)
             }

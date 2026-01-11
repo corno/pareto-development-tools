@@ -99,7 +99,7 @@ export const $$: _pi.Deserializer_With_Parameters<NPM_Package, NPM_Package_Parse
             ($) => expect_object(
                 $,
                 (error) => abort(['dependencies', ['not an object', null]])
-            ).map(
+            ).__d_map(
                 ($, key) => expect_text(
                     $,
                     (error) => abort(['dependencies', ['not a text', key]])

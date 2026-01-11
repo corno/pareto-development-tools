@@ -31,7 +31,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
             ($v) => [
                 _p.query(
                     _pq.dictionaryx.parallel(
-                        $v.map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
+                        $v.__d_map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                             const path = $.path
                             return _pt.sg($['node type'], ($) => {
                                 switch ($[0]) {

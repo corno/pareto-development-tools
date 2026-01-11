@@ -29,7 +29,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
             ($v) => [
                 _p.query(
                     _pq.dictionaryx.parallel(
-                        $v.map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
+                        $v.__d_map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                             const path = $.path
                             return _pt.sg($['node type'], ($) => {
                                 switch ($[0]) {

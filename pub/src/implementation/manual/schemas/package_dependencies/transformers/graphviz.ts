@@ -9,7 +9,7 @@ export type Result = _pi.Transformer<d_in.Result, d_out.Graph>
 
 export const Result: Result = ($) => {
     return {
-        'nodes': $.packages.map(($) => null),
+        'nodes': $.packages.__d_map(($) => null),
         'edges': _p.list.flatten(
             _p.list.from_dictionary(
                 $.packages,

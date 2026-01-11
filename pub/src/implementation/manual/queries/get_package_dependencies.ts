@@ -20,7 +20,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(
         ($) => _p.dictionaryx.parallel<d_npm.NPM_Package, d.Error, d.Package_Error>(
-            $.map(($) => {
+            $.__d_map(($) => {
                 const path = $.path
                 const path_x = t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` })
                 return _p.sg($['node type'], ($) => {

@@ -60,7 +60,7 @@ export namespace defined {
 
                 case 'group': return _p.ss($, ($) => {
                     const expected = $
-                    return ['dictionary', dir.map(($, key) => {
+                    return ['dictionary', dir.__d_map(($, key) => {
                         const node = $
                         const NodeX = (
                             $: d_in.Node,
@@ -192,7 +192,7 @@ export namespace defined {
                     //expecting a dictionary of directories
                     const struct = $
 
-                    return ['dictionary', dir.map(($, key): d_out.Node => _p.sg($, ($): d_out.Node => {
+                    return ['dictionary', dir.__d_map(($, key): d_out.Node => _p.sg($, ($): d_out.Node => {
                         switch ($[0]) {
                             case 'directory': return _p.ss($, ($) => ['directory', Directory(
                                 $,
@@ -231,7 +231,7 @@ export namespace undefined {
             'unexpected path tail': _pi.Optional_Value<string>,
         }
     ): d_out.Directory => {
-        return ['dictionary', $.map(($, key) => Node(
+        return ['dictionary', $.__d_map(($, key) => Node(
             $,
             {
                 'name': key,
@@ -286,7 +286,7 @@ export namespace wildcard {
             'number of directories encountered': number,
         }
     ): d_out.Directory => {
-        return ['dictionary', $.map(($, key) => {
+        return ['dictionary', $.__d_map(($, key) => {
             const tail = $p.tail + `/${key}`
             return _p.sg($, ($): d_out.Node => {
                 switch ($[0]) {
@@ -354,7 +354,7 @@ export const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_L
                 case 'expected a file': return _p.ss($, ($) => { })
                 case 'ignored': return _p.ss($, ($) => { })
                 case 'dictionary': return _p.ss($, ($) => {
-                    $.map(($, key) => {
+                    $.__d_map(($, key) => {
 
                         _p.sg($, ($) => {
                             switch ($[0]) {
