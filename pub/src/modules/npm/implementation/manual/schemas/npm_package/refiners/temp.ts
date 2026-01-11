@@ -46,7 +46,7 @@ const expect_object = ($: d._T_Value, abort: (error: Error_Expect_Object) => nev
             if (temp[$.key.value] !== undefined) {
                 abort(['duplicate identifier', $.key.value])
             } else {
-                temp[$.key.value] = $.value.transform(
+                temp[$.key.value] = $.value.__decide(
                     ($) => $.value,
                     () => abort(['missing value', null]),
                 )
@@ -95,7 +95,7 @@ export const $$: _pi.Deserializer_With_Parameters<NPM_Package, NPM_Package_Parse
     return {
         'name': name,
         'version': version,
-        'dependencies': root.__get_possible_entry('dependencies').map(
+        'dependencies': root.__get_possible_entry('dependencies').__o_map(
             ($) => expect_object(
                 $,
                 (error) => abort(['dependencies', ['not an object', null]])

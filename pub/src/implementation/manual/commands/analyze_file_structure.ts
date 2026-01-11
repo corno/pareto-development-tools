@@ -93,8 +93,8 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                                                         }))
                                                     }
                                                 })
-                                                },${$.analysis.extension.transform(($) => $, () => ``)
-                                                },${$.analysis['unexpected path tail'].transform(
+                                                },${$.analysis.extension.__decide(($) => $, () => ``)
+                                                },${$.analysis['unexpected path tail'].__decide(
                                                     ($) => $,
                                                     () => ``
                                                 )

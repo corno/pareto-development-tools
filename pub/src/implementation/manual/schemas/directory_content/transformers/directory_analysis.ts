@@ -135,7 +135,7 @@ export namespace defined {
                                 default: return _p.au($[0])
                             }
                         })
-                        return expected.__get_possible_entry(key).transform(
+                        return expected.__get_possible_entry(key).__decide(
                             ($) => NodeX(
                                 node,
                                 {
@@ -236,7 +236,7 @@ export namespace undefined {
             {
                 'name': key,
                 'structure': $p.structure,
-                'unexpected path tail': $p['unexpected path tail'].map(($) => $ + `/${key}`),
+                'unexpected path tail': $p['unexpected path tail'].__o_map(($) => $ + `/${key}`),
             }
         ))]
     }
@@ -308,7 +308,7 @@ export namespace wildcard {
                             }
                             const possible_file_extension = extension(key)
                             let extension_matched = false
-                            possible_file_extension.map(($) => {
+                            possible_file_extension.__o_map(($) => {
                                 const file_extension = $
                                 $p['wildcard']['extensions'].__for_each(($) => {
                                     if ($ === file_extension) {

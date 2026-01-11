@@ -12,7 +12,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
         $cr['npm'].execute(
             {
                 'args': _pt.list.nested_literal([
-                    $p.path.transform(
+                    $p.path.__decide(
                         ($) => _pt.list.literal([
                             `--prefix`,
                             s_path.Context_Path($),

@@ -16,7 +16,7 @@ export const $$: signatures.commands.tsc = _p.command_procedure(
         $cr.tsc.execute(
             {
                 'args': _pt.list.nested_literal([
-                    $p.path.transform(
+                    $p.path.__decide(
                         ($) => _pt.list.literal([
                             `--project`,
                             s_path.Node_Path($),

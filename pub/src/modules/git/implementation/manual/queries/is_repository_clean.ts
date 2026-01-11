@@ -14,7 +14,7 @@ export const $$: signatures.queries.is_repository_clean = _p.query_function(
     ($p, $qr) => $qr.git(
         {
             'args': _p.list.nested_literal([
-                $p.path.transform(
+                $p.path.__decide(
                     ($) => _p.list.literal([
                         `-C`,
                         s_path.Context_Path($),

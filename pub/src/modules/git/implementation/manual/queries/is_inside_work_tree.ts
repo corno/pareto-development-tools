@@ -30,7 +30,7 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
     $r.git(
         {
             'args': _p.list.nested_literal([
-                $p.path.transform(
+                $p.path.__decide(
                     ($) => _p.list.literal([
                         `-C`,
                         s_path.Context_Path($),
@@ -60,7 +60,7 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
                         'message': $.message
                     }])
                 }))
-                case 'non zero exit code': return _p.ss($, ($) => $['exit code'].transform(($) => $ === 128, () => false)
+                case 'non zero exit code': return _p.ss($, ($) => $['exit code'].__decide(($) => $ === 128, () => false)
                     ? _p.__query_result((onResult, onError) => {
                         onResult(false)
                     })

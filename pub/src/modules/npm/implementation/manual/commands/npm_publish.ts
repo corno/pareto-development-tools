@@ -15,7 +15,7 @@ export const $$: signatures.commands.npm_publish = _p.command_procedure(
                     [
                         `publish`
                     ],
-                    $p.path.transform(
+                    $p.path.__decide(
                         ($) => _pt.list.literal([
                              s_path.Context_Path($),
                         ]),

@@ -15,7 +15,7 @@ export const Result: Result = ($) => {
                 $.packages,
                 ($, key) => {
                     const from = key
-                    return $.dependencies.transform(
+                    return $.dependencies.__decide(
                         ($) => _p.list.from_dictionary(
                             _p.dictionary.filter(
                                 $,

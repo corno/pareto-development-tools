@@ -26,7 +26,7 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
         $cr.git.execute(
             {
                 'args': _pt.list.nested_literal([
-                    $p.path.transform(
+                    $p.path.__decide(
                         ($) => _pt.list.literal([
                             `-C`,
                             s_path.Context_Path($),
@@ -46,7 +46,7 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
         $cr.git.execute(
             {
                 'args': _pt.list.nested_literal([
-                    $p.path.transform(
+                    $p.path.__decide(
                         ($) => _pt.list.literal([
                             `-C`,
                             s_path.Context_Path($),
@@ -64,7 +64,7 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
         $cr.git.execute(
             {
                 'args': _pt.list.nested_literal([
-                    $p.path.transform(
+                    $p.path.__decide(
                         ($) => _pt.list.literal([
                             `-C`,
                             s_path.Context_Path($),

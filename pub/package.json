@@ -11,8 +11,8 @@
     "astn-sealed": "^0.1.2",
     "pareto-fountain-pen": "^0.3.30",
     "pareto-graphviz": "^0.1.13",
-    "pareto-host-nodejs": "^0.1.6",
-    "pareto-resources": "^0.1.10",
+    "pareto-host-nodejs": "^0.1.7",
+    "pareto-resources": "^0.1.11",
     "pareto-standard-operations": "^0.3.39"
   },
   "bin": {

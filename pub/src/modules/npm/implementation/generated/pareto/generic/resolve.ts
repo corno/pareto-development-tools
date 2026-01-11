@@ -95,10 +95,10 @@ export const get_possibly_circular_dependent_sibling_entry = <Source, T>(
         'location 2 string': i._T_Location_2_String<Source>
     },
 ): resolved$.Reference_To_Circular_Dependent_Sibling<Source, T> => {
-    return $.transform(
+    return $.__decide(
         ($) => ({
             'key': $p.reference.key,
-            'entry': $.__get_possible_entry($p.reference.key).transform(
+            'entry': $.__get_possible_entry($p.reference.key).__decide(
                 ($) => $,
                 () => abort($p.reference.location, ['no such entry', { 'key': $p.reference.key }], $p['location 2 string']),
             )
@@ -126,11 +126,11 @@ export const get_entry_from_stack = <Source, T>(
     const get_entry_from_stack = (
         up_steps_taken: number
     ): resolved$.Reference_To_Stacked_Dictionary_Entry<Source, T> => {
-        return $.__get_possible_element_at($.__get_number_of_elements() - 1 - up_steps_taken).transform(
+        return $.__get_possible_element_at($.__get_number_of_elements() - 1 - up_steps_taken).__decide(
             ($): resolved$.Reference_To_Stacked_Dictionary_Entry<Source, T> => {
-                return $.transform(
+                return $.__decide(
                     ($) => {
-                        return $.__get_possible_entry(ref.key).transform(
+                        return $.__get_possible_entry(ref.key).__decide(
                             ($) => _ea.sg($, ($) => {
                                 switch ($[0]) {
                                     case 'error': return _ea.ss($, ($) => get_entry_from_stack(up_steps_taken += 1))
@@ -162,10 +162,10 @@ export const get_entry = <Source, T>(
         'location 2 string': i._T_Location_2_String<Source>
     },
 ): resolved$.Reference_To_Normal_Dictionary_Entry<Source, T> => {
-    return $.transform(
+    return $.__decide(
         ($) => ({
             'key': $p.reference.key,
-            'entry': $.__get_possible_entry($p.reference.key).transform(
+            'entry': $.__get_possible_entry($p.reference.key).__decide(
                 ($) => _ea.sg($, ($) => {
                     switch ($[0]) {
                         case 'error': return _ea.ss($, ($) => _ea.sg($, ($) => {
@@ -268,7 +268,7 @@ export const resolve_dense_ordered_dictionary = <Source, TUnresolved, TResolved,
         ) => {
             benchmark.map(($, key) => {
                 const benchmark = $
-                focus.__get_possible_entry(key).transform(
+                focus.__get_possible_entry(key).__decide(
                     ($) => {
                     },
                     () => {
@@ -337,7 +337,7 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
                 'possibly circular dependent siblings': _ea.optional.set({
                     __get_possible_entry(key) {
                         //does the entry exist?
-                        return source_dictionary.dictionary.__get_possible_entry(key).map(($) => {
+                        return source_dictionary.dictionary.__get_possible_entry(key).__o_map(($) => {
                             //yes, it exists in the source dictionary
                             if (all_siblings_subscribed_entries[key] === undefined) {
                                 all_siblings_subscribed_entries[key] = { 'entry': null }
@@ -360,7 +360,7 @@ export const resolve_ordered_dictionary = <Source, TUnresolved, TResolved>(
                     __get_possible_entry(key) {
                         const status = status_dictionary[key]
                         if (status === undefined) {
-                            return source_dictionary.dictionary.__get_possible_entry(key).transform(
+                            return source_dictionary.dictionary.__get_possible_entry(key).__decide(
                                 ($) => _ea.optional.set(['resolved', process_entry($.entry, $.location, key)]),
                                 () => {
                                     return _ea.optional.not_set()

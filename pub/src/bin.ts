@@ -74,7 +74,7 @@ const create_espe = (
     ($) => $,
 ))
 
-_pn.run_main_procedure(
+_pn.run_main_command(
     ($r) => {
 
         const git_is_repository_clean = q_git_is_repository_clean({
