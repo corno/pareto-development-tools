@@ -74,7 +74,7 @@ export const Directory: _i_signatures._T_Directory = ($, $p) => ['state', _p.dep
                         null
                     ),
                 })]),
-                'extensions': _p.deprecated_cc($['extensions'], ($) => ['list', $.map(($) => ['text', ({
+                'extensions': _p.deprecated_cc($['extensions'], ($) => ['list', $.__l_map(($) => ['text', ({
                     'delimiter': ['quote', null],
                     'value': $,
                 })])]),

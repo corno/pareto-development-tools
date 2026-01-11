@@ -29,7 +29,7 @@ export const $$: signatures.commands.write_to_file = _p.command_procedure(
                         : $,
                 ),
                 'data': s_list_of_texts(
-                    t_block_2_lines.Group($p.group, { 'indentation': $p.indentation }).map(($) => $ + $p.newline),
+                    t_block_2_lines.Group($p.group, { 'indentation': $p.indentation }).__l_map(($) => $ + $p.newline),
                 ),
             },
             ($) => ['write file', $],

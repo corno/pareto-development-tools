@@ -68,7 +68,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                                                 )),
                                                 ($) => $['unexpected path tail'].__is_set()
                                                     ? _p.optional.set($)
-                                                    : _p.optional.not_set())).map(($) => `./packages/${package_name}${$['path']}`)
+                                                    : _p.optional.not_set())).__l_map(($) => `./packages/${package_name}${$['path']}`)
                                     }),
                                     ($) => $,
                                 )

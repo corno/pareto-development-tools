@@ -68,7 +68,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                                                     'structure path': ``
                                                 }
 
-                                            ))).map(($) => `${package_name
+                                            ))).__l_map(($) => `${package_name
                                                 },${$['path']
                                                 },${$.analysis.structure.path
                                                 },${_pt.sg($.analysis.structure.classification, ($) => {

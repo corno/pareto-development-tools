@@ -21,7 +21,7 @@ export const replace_space_in_context_path = ($: d_path.Node_Path): d_path.Node_
     return {
         'context': {
             'start': $.context.start,
-            'subpath': $.context.subpath.map(($) => replace_space($)),
+            'subpath': $.context.subpath.__l_map(($) => replace_space($)),
         },
         'node': replace_space($.node)
     }
