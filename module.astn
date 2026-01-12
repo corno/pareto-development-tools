@@ -1,11 +1,15 @@
 (
-    'operations': {
-    }
     'schema tree': | 'set' {
         `structure`: | 'schema' (
-            'complexity': | 'unconstrained' ~
+            'imports': {
+            }
             'globals': (
                 'complexity': | 'unconstrained' ~
+                'text types': {
+                    `Text Value`: (
+                        'type': | 'single line' ~
+                    )
+                }
                 'number types': {
                     `Position`: (
                         'precision': | 'exact' (
@@ -14,16 +18,11 @@
                         )
                     )
                 }
-                'text types': {
-                    `Text Value`: (
-                        'type': | 'single line' ~
-                    )
-                }
             )
-            'imports': {
-            }
             'types': {
                 `Directory`: (
+                    'type parameters': {
+                    }
                     'node': | 'state group' {
                         `dictionary`: (
                             'description': ~
@@ -107,10 +106,11 @@
                             }
                         )
                     }
-                    'type parameters': {
-                    }
                 )
             }
+            'complexity': | 'unconstrained' ~
         )
+    }
+    'operations': {
     }
 )
