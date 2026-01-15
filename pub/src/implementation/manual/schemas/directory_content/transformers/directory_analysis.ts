@@ -4,7 +4,7 @@ import * as _pds from 'pareto-core-deserializer'
 
 import * as d_in from "pareto-resources/dist/interface/to_be_generated/directory_content"
 import * as d_out from "../../../../../interface/to_be_generated/temp_directory_analysis"
-import * as d_structure from "../../../../../interface/generated/pareto/schemas/structure/data_types/target"
+import * as d_structure from "../../../../../interface/generated/pareto/schemas/structure/data"
 
 const line_count = ($: string): number => {
     let lineCount = 0
@@ -66,7 +66,7 @@ export namespace defined {
                             $: d_in.Node,
                             $p: {
                                 'name': string,
-                                'expected structure': d_structure.Directory.SG.group.D,
+                                'expected structure': d_structure.Directory.group.D,
                                 'structure path': string,
                             }
                         ): d_out.Node => _p.sg($, ($): d_out.Node => {
@@ -280,7 +280,7 @@ export namespace wildcard {
     export const Directory = (
         $: d_in.Directory,
         $p: {
-            'wildcard': d_structure.Directory.SG.wildcards,
+            'wildcard': d_structure.Directory.wildcards,
             'structure path': string,
             'tail': string,
             'number of directories encountered': number,

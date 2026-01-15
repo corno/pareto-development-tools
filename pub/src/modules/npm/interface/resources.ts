@@ -1,6 +1,6 @@
 import * as _pi from 'pareto-core-interface'
 
-import * as d_npm from "./to_be_generated/npm"
+import * as d_npm from "./to_be_generated/npm_tool"
 import * as d_npm_publish from "./to_be_generated/npm_publish"
 import * as d_update2latest from "./to_be_generated/update2latest"
 import * as d_set_up_comparison_against_published from "./to_be_generated/set_up_comparison_against_published"

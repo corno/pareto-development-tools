@@ -6,7 +6,7 @@ import * as d_make_directory from "pareto-resources/dist/interface/generated/par
 import * as d_remove from "pareto-resources/dist/interface/generated/pareto/schemas/remove/data_types/source"
 import * as d_read_file from "pareto-resources/dist/interface/generated/pareto/schemas/read_file/data_types/source"
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/source"
-import * as d_npm_package from "../../implementation/manual/schemas/npm_package/refiners/temp"
+import * as d_deserialize_package_json from "./deserialize_package_json"
 
 export type Parameters = {
     'path to local package': d_path.Context_Path,
@@ -22,4 +22,4 @@ export type Error =
     | readonly ['error while creating directory', d_make_directory.Error]
     | readonly ['error while removing directory', d_remove.Error]
     | readonly ['error while reading package.json', d_read_file.Error]
-    | readonly ['error while parsing package.json', d_npm_package.NPM_Package_Parse_Error]
+    | readonly ['error while parsing package.json', d_deserialize_package_json.Error]

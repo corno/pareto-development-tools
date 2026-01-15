@@ -1,29 +1,29 @@
 import * as _p from 'pareto-core-shorthands/dist/unconstrained'
 
 
-import * as d_structure from "../interface/generated/pareto/schemas/structure/data_types/source"
+import * as d_structure from "../interface/generated/pareto/schemas/structure/data"
 
-const file_manual = (): d_structure.Directory.SG.group.D => ['file', ['manual', null]]
-const file_generated = (commitToGit: boolean): d_structure.Directory.SG.group.D => ['file', ['generated', {
+const file_manual = (): d_structure.Directory.group.D => ['file', ['manual', null]]
+const file_generated = (commitToGit: boolean): d_structure.Directory.group.D => ['file', ['generated', {
     'commit to git': commitToGit,
 }]]
 
-const directory_ignore = (): d_structure.Directory.SG.group.D => ['directory', ['ignore', null]]
-const directory_freeform = (): d_structure.Directory.SG.group.D => ['directory', ['freeform', null]]
-const directory_group = (nodes: _p.Raw_Or_Normal_Dictionary<d_structure.Directory.SG.group.D>): d_structure.Directory.SG.group.D => ['directory', ['group', _p.dictionary.literal(nodes)]]
-const dgroup = (nodes: _p.Raw_Or_Normal_Dictionary<d_structure.Directory.SG.group.D>): d_structure.Directory => ['group', _p.dictionary.literal(nodes)]
-const directory_dictionary = ($: d_structure.Directory): d_structure.Directory.SG.group.D => ['directory', ['dictionary', $]]
-const directory_generated = (commitToGit: boolean): d_structure.Directory.SG.group.D => ['directory', ['generated', {
+const directory_ignore = (): d_structure.Directory.group.D => ['directory', ['ignore', null]]
+const directory_freeform = (): d_structure.Directory.group.D => ['directory', ['freeform', null]]
+const directory_group = (nodes: _p.Raw_Or_Normal_Dictionary<d_structure.Directory.group.D>): d_structure.Directory.group.D => ['directory', ['group', _p.dictionary.literal(nodes)]]
+const dgroup = (nodes: _p.Raw_Or_Normal_Dictionary<d_structure.Directory.group.D>): d_structure.Directory => ['group', _p.dictionary.literal(nodes)]
+const directory_dictionary = ($: d_structure.Directory): d_structure.Directory.group.D => ['directory', ['dictionary', $]]
+const directory_generated = (commitToGit: boolean): d_structure.Directory.group.D => ['directory', ['generated', {
     'commit to git': commitToGit,
 }]]
-const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boolean, extensions: _p.Raw_Or_Normal_List<string>, warn: boolean): d_structure.Directory.SG.group.D => ['directory', ['wildcards', {
+const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boolean, extensions: _p.Raw_Or_Normal_List<string>, warn: boolean): d_structure.Directory.group.D => ['directory', ['wildcards', {
     'required directories': required_dirs,
     'additional directories allowed': additional_dirs_allowed,
     'extensions': _p.list.literal<string>(extensions),
     'warn': warn,
 }]]
 
-const $_interface: d_structure.Directory.SG.group.D = directory_group({
+const $_interface: d_structure.Directory.group.D = directory_group({
     "generated": directory_generated(true),
     "resources.ts": file_manual(),
     "signatures.ts": file_manual(),
@@ -34,7 +34,7 @@ const $_interface: d_structure.Directory.SG.group.D = directory_group({
 
 })
 
-const $_implementation: d_structure.Directory.SG.group.D = directory_group({
+const $_implementation: d_structure.Directory.group.D = directory_group({
     "generated": directory_generated(true),
 
     "manual": directory_group({
@@ -81,7 +81,7 @@ const $_implementation: d_structure.Directory.SG.group.D = directory_group({
 
 })
 
-export const $$: d_structure.Directory = ['group', _p.dictionary.literal<d_structure.Directory.SG.group.D>({
+export const $$: d_structure.Directory = ['group', _p.dictionary.literal<d_structure.Directory.group.D>({
     ".git": directory_ignore(),
     ".gitignore": file_manual(),
     "data": directory_freeform(),

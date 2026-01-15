@@ -1,7 +1,7 @@
 import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
-import * as d_in from "../../../../../interface/to_be_generated/npm"
+import * as d_in from "../../../../../interface/to_be_generated/npm_tool"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/target"
 
 export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
