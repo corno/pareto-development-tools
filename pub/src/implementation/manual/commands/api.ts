@@ -14,40 +14,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 export const $$: signatures.commands.api = _p.command_procedure(
     ($p, $cr, $qr) => _p.sg($p, ($) => {
         switch ($[0]) {
-            case 'analyze file structure': return _p.ss($, ($) => [
-                $cr['analyze file structure'].execute(
-                    $,
-                    ($): d.Error => ['analyze file structure', $],
-                )
-            ])
-            case 'assert clean': return _p.ss($, ($) => [
-                $cr['git assert is clean'].execute(
-                    $,
-                    ($): d.Error => ['git assert clean', $],
-                )
-            ])
-            case 'build and test': return _p.ss($, ($) => [
-                $cr['build and test'].execute(
-                    $,
-                    ($): d.Error => ['build and test', {
-                        'error': $,
-                        'concise': false,
-                    }],
-                )
-            ])
-            case 'dependency graph': return _p.ss($, ($) => [
-                $cr['create dependency graph'].execute(
-                    $,
-                    ($): d.Error => ['dependency graph', $],
-                )
-            ])
-            case 'list file structure problems': return _p.ss($, ($) => [
-                $cr['list file structure problems'].execute(
-                    $,
-                    ($): d.Error => ['analyze file structure', $],
-                )
-            ])
-            case 'project': return _p.ss($, ($) => {
+            case 'all packages': return _p.ss($, ($) => {
                 const path_to_project = $['path to project']
                 const path_to_temp = t_path_to_path.extend_context_path(
                     t_path_to_path.extend_context_path(
@@ -141,6 +108,50 @@ export const $$: signatures.commands.api = _p.command_procedure(
                     )
                 ]
             })
+            case 'package': return _p.ss($, ($) => _p.sg($.instruction, ($) => {
+                switch ($[0]) {
+                    case 'assert clean': return _p.ss($, ($) => [
+                        $cr['git assert is clean'].execute(
+                            $,
+                            ($): d.Error => ['git assert clean', $],
+                        )
+                    ])
+                    case 'build and test': return _p.ss($, ($) => [
+                        $cr['build and test'].execute(
+                            $,
+                            ($): d.Error => ['build and test', {
+                                'error': $,
+                                'concise': false,
+                            }],
+                        )
+                    ])
+                    default: return _p.au($[0])
+                }
+            }))
+            case 'project': return _p.ss($, ($) => _p.sg($.instruction, ($) => {
+                switch ($[0]) {
+                    case 'analyze file structure': return _p.ss($, ($) => [
+                        $cr['analyze file structure'].execute(
+                            $,
+                            ($): d.Error => ['analyze file structure', $],
+                        )
+                    ])
+                    case 'dependency graph': return _p.ss($, ($) => [
+                        $cr['create dependency graph'].execute(
+                            $,
+                            ($): d.Error => ['dependency graph', $],
+                        )
+                    ])
+                    case 'list file structure problems': return _p.ss($, ($) => [
+                        $cr['list file structure problems'].execute(
+                            $,
+                            ($): d.Error => ['analyze file structure', $],
+                        )
+                    ])
+
+                    default: return _p.au($[0])
+                }
+            }))
             case 'publish': return _p.ss($, ($) => [
                 $cr['publish'].execute(
                     $,

@@ -16,18 +16,10 @@ import * as d_set_up_comparison_against_published from "../../modules/npm/interf
 import * as d_update_dependencies from "./update_package_dependencies"
 
 export type Parameters =
-    /**
-     * run a command on a whole project (multiple packages)
-     */
+    | ['all packages', All_Packages]
+    | ['package', Package]
     | ['project', Project]
 
-    /**
-     * asserts that the git working tree is clean for 1 specified package
-     */
-    | ['assert clean', d_assert_clean.Parameters]
-
-
-    | ['build and test', d_build_and_test.Parameters]
 
 
     /**
@@ -37,7 +29,26 @@ export type Parameters =
     | ['set up comparison', {
         'path to package': d_path.Context_Path
     }]
+    | ['publish', d_publish.Parameters]
 
+export type All_Packages = {
+    'path to project': d_path.Context_Path
+    'instruction': All_Pacakges_Instruction
+}
+
+export type Package = {
+    'instruction':
+    /**
+     * asserts that the git working tree is clean for 1 specified package
+     */
+    | ['assert clean', d_assert_clean.Parameters]
+
+
+    | ['build and test', d_build_and_test.Parameters]
+}
+
+export type Project = {
+    'instruction': 
 
     | ['dependency graph', d_dependency_graph.Parameters]
 
@@ -46,15 +57,9 @@ export type Parameters =
 
 
     | ['list file structure problems', d_list_file_structure_problems.Parameters]
-
-    | ['publish', d_publish.Parameters]
-
-export type Project = {
-    'path to project': d_path.Context_Path
-    'instruction': Project_Instruction
 }
 
-export type Project_Instruction =
+export type All_Pacakges_Instruction =
 
     /**
      * verifies that the git working tree is clean, raises an error if not
