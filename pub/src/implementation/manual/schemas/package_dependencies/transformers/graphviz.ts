@@ -3,7 +3,7 @@ import * as _pi from 'pareto-core-interface'
 import * as _p from 'pareto-core-transformer'
 
 import * as d_in from "../../../../../interface/to_be_generated/get_package_dependencies"
-import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/graphviz/data_types/target"
+import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/graphviz/data"
 
 export type Result = _pi.Transformer<d_in.Result, d_out.Graph>
 

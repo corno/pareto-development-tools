@@ -5,7 +5,7 @@ import * as signatures from "../../../interface/signatures"
 
 //data types
 import * as d from "../../../interface/to_be_generated/api"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
@@ -29,7 +29,10 @@ export const $$: signatures.commands.api = _p.command_procedure(
             case 'build and test': return _p.ss($, ($) => [
                 $cr['build and test'].execute(
                     $,
-                    ($): d.Error => ['build and test', $],
+                    ($): d.Error => ['build and test', {
+                        'error': $,
+                        'concise': false,
+                    }],
                 )
             ])
             case 'dependency graph': return _p.ss($, ($) => [
@@ -79,17 +82,20 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 case 'build': return _p.ss($, ($) => [
                                     $cr['build'].execute(
                                         {
-                                            'path': context_path
+                                            'path': context_path,
                                         },
                                         ($): d.Project_Package_Error => ['build', $],
                                     )
                                 ])
-                                case 'build and test': return _p.ss($, ($) => [
+                                case 'build and test': return _p.ss($, ($x) => [
                                     $cr['build and test'].execute(
                                         {
-                                            'path': context_path
+                                            'path': context_path,
                                         },
-                                        ($): d.Project_Package_Error => ['build and test', $],
+                                        ($): d.Project_Package_Error => ['build and test', {
+                                            'error': $,
+                                            'concise': $x.concise
+                                        }],
                                     )
                                 ])
                                 case 'git extended commit': return _p.ss($, ($) => [

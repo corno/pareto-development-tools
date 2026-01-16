@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core-interface'
 
-import * as d_read_directory from "pareto-resources/dist/interface/generated/pareto/schemas/read_directory/data_types/source"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/source"
+import * as d_read_directory from "pareto-resources/dist/interface/generated/pareto/schemas/read_directory/data"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
 import * as d_deseralize_package_json from "../../modules/npm/interface/to_be_generated/deserialize_package_json"
 import * as d_npm_package from "../../modules/npm/interface/to_be_generated/npm_package"
 

@@ -36,7 +36,7 @@ export const Error: Error = ($) => _p.sg($, ($) => {
         case 'error while running update package dependencies': return _p.ss($, ($) => sh.b.sub([
             t_clean_and_update_package_dependencies_to_fountain_pen.Error($)
         ]))
-        case 'error while running build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($))
+        case 'error while running build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($, { 'concise': false }))
         case 'error while running git assert is clean after updating package dependencies': return _p.ss($, ($) => sh.b.sub([
             _p.sg($, ($) => {
                 switch ($[0]) {

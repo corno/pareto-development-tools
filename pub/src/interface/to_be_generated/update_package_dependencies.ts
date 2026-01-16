@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core-interface'
 
 import * as d_utd from "../../modules/npm/interface/to_be_generated/update_package_dependencies"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
 
 
 export type Parameters = {

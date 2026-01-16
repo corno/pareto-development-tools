@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core-interface'
 
-import * as d_espe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_smelly_command_executable/data_types/source"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
+import * as d_espe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_smelly_command_executable/data"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
 
 
 export type Error =

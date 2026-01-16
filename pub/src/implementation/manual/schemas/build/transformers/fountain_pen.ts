@@ -5,7 +5,7 @@ import * as d_in from "../../../../../interface/to_be_generated/build"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data"
 
 export namespace signatures {
-    export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
+    export type Error = _pi.Transformer_With_Parameters<d_in.Error, d_out.Block_Part, { 'concise': boolean }>
 }
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
@@ -13,28 +13,8 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 import * as t_tsc_to_fountain_pen from "../../tsc/transformers/fountain_pen"
 import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/remove/transformers/fountain_pen"
 
-export const Error: signatures.Error = ($) => _p.sg($, ($) => {
+export const Error: signatures.Error = ($, $p) => _p.sg($, ($) => {
     switch ($[0]) {
-        case 'error building pub': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not build pub: (`),
-            sh.b.snippet($.path),
-            sh.b.snippet(`/pub)`),
-            sh.b.indent([
-                sh.g.nested_block([
-                    t_tsc_to_fountain_pen.Error($.error)
-                ])
-            ])
-        ]))
-        case 'error building test': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not build test: (`),
-            sh.b.snippet($.path),
-            sh.b.snippet(`/test)`),
-            sh.b.indent([
-                sh.g.nested_block([
-                    t_tsc_to_fountain_pen.Error($.error)
-                ])
-            ])
-        ]))
         case 'error removing pub dist dir': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not remove pub dist dir: (`),
             sh.b.snippet($.path),
@@ -54,6 +34,26 @@ export const Error: signatures.Error = ($) => _p.sg($, ($) => {
             sh.b.indent([
                 sh.g.nested_block([
                     t_remove_to_fountain_pen.Error($.error)
+                ])
+            ])
+        ]))
+        case 'error building pub': return _p.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`could not build pub: (`),
+            sh.b.snippet($.path),
+            sh.b.snippet(`/pub)`),
+            sh.b.indent([
+                sh.g.nested_block([
+                    t_tsc_to_fountain_pen.Error($.error, $p)
+                ])
+            ])
+        ]))
+        case 'error building test': return _p.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`could not build test: (`),
+            sh.b.snippet($.path),
+            sh.b.snippet(`/test)`),
+            sh.b.indent([
+                sh.g.nested_block([
+                    t_tsc_to_fountain_pen.Error($.error, $p)
                 ])
             ])
         ]))

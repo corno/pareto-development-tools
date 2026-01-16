@@ -28,7 +28,7 @@ import * as t_set_up_comparison_against_published from "../../../../../modules/n
 export const Error: signatures.Error = ($) => _p.sg($, ($) => {
     switch ($[0]) {
         case 'analyze file structure': return _p.ss($, ($) => t_line_count_to_fountain_pen.Error($))
-        case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($))
+        case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
         case 'dependency graph': return _p.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
         case 'git assert clean': return _p.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
         case 'project': return _p.ss($, ($) => _p.sg($, ($) => {
@@ -37,8 +37,8 @@ export const Error: signatures.Error = ($) => _p.sg($, ($) => {
                     sh.b.snippet(`package '${key}': `),
                     _p.sg($, ($) => {
                         switch ($[0]) {
-                            case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($))
-                            case 'build': return _p.ss($, ($) => t_build_to_fountain_pen.Error($))
+                            case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
+                            case 'build': return _p.ss($, ($) => t_build_to_fountain_pen.Error($, { 'concise': false }))
                             case 'git assert clean': return _p.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
                             case 'git commit': return _p.ss($, ($) => t_git_extended_commit_to_fountain_pen.Error($))
                             case 'git remove tracked but ignored': return _p.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))

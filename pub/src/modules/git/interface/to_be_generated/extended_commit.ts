@@ -1,8 +1,8 @@
 import * as _pi from 'pareto-core-interface'
 
-import * as d_eqe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data_types/source"
+import * as d_eqe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data"
 import * as d_is_repository_clean from "./is_repository_clean"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
 
 export type Error =
     | ['asserting git not clean', d_is_repository_clean.Error]

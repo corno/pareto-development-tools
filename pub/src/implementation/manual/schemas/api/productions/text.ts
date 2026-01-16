@@ -50,7 +50,19 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                     ($) => {
                         switch ($) {
                             case 'assert-clean': return ['assert clean', null]
-                            case 'build-and-test': return ['build and test', null]
+                            case 'build-and-test': return ['build and test', {
+                                'concise': _p.deprecated_block(() => {
+                                    const value = iterator.look()
+                                    return value === null
+                                        ? false
+                                        : value[0] === "concise"
+                                            ? _p.deprecated_block(() => {
+                                                iterator.discard(() => null)
+                                                return true
+                                            })
+                                            : false
+                                }),
+                            }]
                             case 'build': return ['build', null]
                             case 'git-commit': return ['git extended commit', {
                                 'commit message': iterator.consume(
@@ -121,6 +133,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
             default: return abort(['expected one of', _p.dictionary.literal({
                 'analyze-file-structure': null,
                 'assert-clean': null,
+                'build-and-test': null,
                 'dependency-graph': null,
                 'list-file-structure-problems': null,
                 'project': null,
@@ -132,6 +145,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
     () => abort(['expected one of', _p.dictionary.literal({
         'analyze-file-structure': null,
         'assert-clean': null,
+        'build-and-test': null,
         'dependency-graph': null,
         'list-file-structure-problems': null,
         'project': null,

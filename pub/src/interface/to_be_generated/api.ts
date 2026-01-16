@@ -9,9 +9,9 @@ import * as d_build_and_test from "./build_and_test"
 import * as d_dependency_graph from "./create_dependency_graph"
 import * as d_git_extended_commit from "../../modules/git/interface/to_be_generated/extended_commit"
 import * as d_git_remove_tracked_but_ignored from "../../modules/git/interface/to_be_generated/remove_tracked_but_ignored"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/source"
+import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
 import * as d_publish from "./publish"
-import * as d_read_directory from "pareto-resources/dist/interface/generated/pareto/schemas/read_directory/data_types/source"
+import * as d_read_directory from "pareto-resources/dist/interface/generated/pareto/schemas/read_directory/data"
 import * as d_set_up_comparison_against_published from "../../modules/npm/interface/to_be_generated/set_up_comparison_against_published"
 import * as d_update_dependencies from "./update_package_dependencies"
 
@@ -64,7 +64,9 @@ export type Project_Instruction =
     /**
      * builds all packages and runs their tests
      */
-    | ['build and test', null]
+    | ['build and test', {
+        'concise': boolean
+    }]
 
     | ['build', null]
 
@@ -95,7 +97,10 @@ export type Project_Instruction =
 
 export type Error =
     | ['analyze file structure', d_analyze_file_structure.Error]
-    | ['build and test', d_build_and_test.Error]
+    | ['build and test', {
+        'error': d_build_and_test.Error,
+        'concise': boolean
+    }]
     | ['dependency graph', d_dependency_graph.Error]
     | ['git assert clean', d_assert_clean.Error]
     | ['project', Project_Error]
@@ -107,7 +112,10 @@ export type Project_Error =
     | ['packages', _pi.Dictionary<Project_Package_Error>]
 
 export type Project_Package_Error =
-    | ['build and test', d_build_and_test.Error]
+    | ['build and test', {
+        'error': d_build_and_test.Error,
+        'concise': boolean
+    }]
     | ['build', d_build.Error]
     | ['git assert clean', d_assert_clean.Error]
     | ['git commit', d_git_extended_commit.Error]
