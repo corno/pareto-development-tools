@@ -4,7 +4,7 @@ import * as _pi from 'pareto-core-interface'
 import * as d_in from "../../../../../interface/to_be_generated/tsc"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data"
 
-import * as t_espe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_command_executable/transformers/fountain_pen"
+import * as t_espe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_smelly_command_executable/transformers/fountain_pen"
 
 export type Error = _pi.Transformer_With_Parameters<d_in.Error, d_out.Block_Part, { 'concise': boolean }>
 
