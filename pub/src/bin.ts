@@ -38,7 +38,7 @@ import { $$ as c_update2latest } from "./modules/npm/implementation/manual/comma
 const create_eqe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
-): _pi.Query<d_eqe.Result, d_epe.Error, d_epe.Parameters> => _pq.__query(
+): _pi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => _pq.__query(
     ($p) => {
         return $r.queries['execute any query executable'](
             {

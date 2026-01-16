@@ -9,7 +9,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as t_git_is_clean_to_fountain_pen from "../../is_repository_clean/transformers/fountain_pen"
-import * as t_eqe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_query_executable/transformers/fountain_pen"
+import * as t_ece_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_command_executable/transformers/fountain_pen"
 
 export const Error: Error = ($) => _p.sg($, ($): d_out.Block_Part => {
     switch ($[0]) {
@@ -20,15 +20,15 @@ export const Error: Error = ($) => _p.sg($, ($): d_out.Block_Part => {
         ]))
         case 'could not remove': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not remove tracked but ignored files: `),
-            t_eqe_to_fountain_pen.Error($)
+            t_ece_to_fountain_pen.Error($)
         ]))
         case 'could not add': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not add tracked but ignored files: `),
-            t_eqe_to_fountain_pen.Error($)
+            t_ece_to_fountain_pen.Error($)
         ]))
         case 'could not clean': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not clean tracked but ignored files: `),
-            t_eqe_to_fountain_pen.Error($)
+            t_ece_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])
     }

@@ -9,6 +9,7 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_command_executable/transformers/fountain_pen"
+import * as t_eqe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_query_executable/transformers/fountain_pen"
 import * as t_make_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/make_directory/transformers/fountain_pen"
 import * as t_read_file_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_file/transformers/fountain_pen"
 import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/remove/transformers/fountain_pen"
@@ -29,7 +30,7 @@ export const Error: Error = ($) => {
                 sh.b.snippet(`error while running npm query: `),
                 sh.b.indent([
                     sh.g.nested_block([
-                        t_epe_to_fountain_pen.Error($)
+                        t_eqe_to_fountain_pen.Error($)
                     ])
                 ]),
             ]))
