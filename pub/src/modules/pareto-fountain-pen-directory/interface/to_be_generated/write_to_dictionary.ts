@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core-interface'
 
 import * as d_remove from "pareto-resources/dist/interface/generated/pareto/schemas/remove/data_types/target"
-import * as d_fp_block from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data_types/source"
+import * as d_fp_block from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data"
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data_types/target"
 import * as d_write_to_file from "./write_to_file"
 

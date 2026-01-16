@@ -25,11 +25,11 @@ export const Result: Result = ($) => {
                                         || key === "pareto-core-refiner"
                                         || key === "pareto-core-serializer"
                                         || key === "pareto-core-deserializer"
-                                        || key === "pareto-core-shorthands"
-                                        || key === "pareto-core-data"
                                         || key === "pareto-core-command"
                                         || key === "pareto-core-query"
-                                        || key === "pareto-host-nodejs"
+
+                                        || key === "pareto-core-shorthands"
+                                        //|| key === "pareto-host-nodejs"
                                     ) {
                                         return _p.optional.not_set<d_out.Graph.edges.L>()
                                     }
