@@ -122,7 +122,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                 'impact': _p.deprecated_block(() => {
                     const value = iterator.look()
                     if (value === null) {
-                        return ['dry run', null]
+                        return abort(['expected a text', { 'description': "'--dry-run' or a one time password" }])
                     } else {
                         switch (value[0]) {
                             case 'dry-run': {
