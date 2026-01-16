@@ -119,10 +119,25 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                         'minor': null,
                     })])
                 ),
-                'one time password': iterator.consume(
-                    ($) => $,
-                    () => abort(['expected a text', { 'description': "one time password" }])
-                ),
+                'impact': _p.deprecated_block(() => {
+                    const value = iterator.look()
+                    if (value === null) {
+                        return ['dry run', null]
+                    } else {
+                        switch (value[0]) {
+                            case 'dry-run': {
+                                iterator.discard(() => null)
+                                return ['dry run', null]
+                            }
+                            default: return ['actual publish', {
+                                'one time password': iterator.consume(
+                                    ($) => $,
+                                    () => abort(['expected a text', { 'description': "one time password" }])
+                                )
+                            }]
+                        }
+                    }
+                }),
             }]
             case 'set-up-comparison': return ['set up comparison', {
                 'path to package': ds_context_path.Context_Path(iterator.consume(

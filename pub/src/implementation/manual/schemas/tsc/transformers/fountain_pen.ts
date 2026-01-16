@@ -12,13 +12,14 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 export const Error: Error = ($, $p) => _p.sg($, ($): d_out.Block_Part => {
     switch ($[0]) {
-        case 'error while running tsc': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`error while running tsc: `),
-            $p.concise
-                ? sh.b.nothing()
-                : t_espe_to_fountain_pen.Error($),
-            //
-        ]))
+        case 'error while running tsc': return _p.ss($, ($) => $p.concise
+            ? sh.b.nothing()
+            : sh.b.sub([
+                sh.b.snippet(`error while running tsc: `),
+                t_espe_to_fountain_pen.Error($),
+                //
+            ])
+        )
         default: return _p.au($[0])
     }
 })

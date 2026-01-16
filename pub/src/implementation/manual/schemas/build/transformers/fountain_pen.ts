@@ -40,7 +40,7 @@ export const Error: signatures.Error = ($, $p) => _p.sg($, ($) => {
         case 'error building pub': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not build pub: (`),
             sh.b.snippet($.path),
-            sh.b.snippet(`/pub)`),
+            sh.b.snippet(`)`),
             sh.b.indent([
                 sh.g.nested_block([
                     t_tsc_to_fountain_pen.Error($.error, $p)
@@ -50,7 +50,7 @@ export const Error: signatures.Error = ($, $p) => _p.sg($, ($) => {
         case 'error building test': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not build test: (`),
             sh.b.snippet($.path),
-            sh.b.snippet(`/test)`),
+            sh.b.snippet(`)`),
             sh.b.indent([
                 sh.g.nested_block([
                     t_tsc_to_fountain_pen.Error($.error, $p)

@@ -66,7 +66,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
         $cr['npm publish'].execute(
             {
                 'path': _p.optional.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': `pub` })),
-                'one time password': $p['one time password'],
+                'impact': $p.impact,
             },
             ($) => ['error while running npm publish', $],
         ),

@@ -14,7 +14,11 @@ export type Parameters = {
     'generation':
     | ['minor', null]
     | ['patch', null]
-    'one time password': string
+    'impact':
+    |['dry run', null]
+    |['actual publish', {
+        'one time password': string
+    }]
 }
 
 export type Error =
