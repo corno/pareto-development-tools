@@ -69,61 +69,63 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
             }]
             case 'package': return ['package', {
+                'path': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
+                    () => abort(['expected a text', { 'description': "path to package" }])
+                )),
                 'instruction': iterator.consume(
                     ($) => {
                         switch ($) {
-                            case 'assert-clean': return ['assert clean', {
-                                'path': _p.optional.set(ds_context_path.Context_Path(iterator.consume(
+                            case 'assert-clean': return ['assert clean', null]
+                            case 'build-and-test': return ['build and test', null]
+                            case 'git-commit': return ['git extended commit', {
+                                'commit message': iterator.consume(
                                     ($) => $,
-                                    () => abort(['expected a text', { 'description': "path to package" }])
-                                )))
+                                    () => abort(['expected a text', { 'description': "commit message" }])
+                                ),
+                                'stage all changes': true,
+                                'push after commit': true,
                             }]
-                            case 'build-and-test': return ['build and test', {
-                                'path': ds_context_path.Context_Path(iterator.consume(
-                                    ($) => $,
-                                    () => abort(['expected a text', { 'description': "path to package" }])
-                                ))
-                            }]
+                            case 'update-dependencies': return ['update package dependencies', null]
                             default: return abort(['expected one of', _p.dictionary.literal({
-                                'tbd': null,
+                                'assert-clean': null,
+                                'build-and-test': null,
+                                'git-commit': null,
+                                'update-dependencies': null,
                             })])
                         }
                     },
                     () => abort(['expected one of', _p.dictionary.literal({
-                        'tbd': null,
+                        'assert-clean': null,
+                        'build-and-test': null,
+                        'git-commit': null,
+                        'update-dependencies': null,
                     })])
                 )
 
             }]
             case 'project': return ['project', {
+                'path': ds_context_path.Context_Path(iterator.consume(
+                    ($) => $,
+                    () => abort(['expected a text', { 'description': "path to package" }])
+                )),
                 'instruction': iterator.consume(
                     ($) => {
                         switch ($) {
-                            case 'analyze-file-structure': return ['analyze file structure', {
-                                'path to project': ds_context_path.Context_Path(iterator.consume(
-                                    ($) => $,
-                                    () => abort(['expected a text', { 'description': "path to project" }])
-                                ))
-                            }]
-                            case 'dependency-graph': return ['dependency graph', {
-                                'path to project': ds_context_path.Context_Path(iterator.consume(
-                                    ($) => $,
-                                    () => abort(['expected a text', { 'description': "path to project" }])
-                                ))
-                            }]
-                            case 'list-file-structure-problems': return ['list file structure problems', {
-                                'path to project': ds_context_path.Context_Path(iterator.consume(
-                                    ($) => $,
-                                    () => abort(['expected a text', { 'description': "path to project" }])
-                                ))
-                            }]
+                            case 'analyze-file-structure': return ['analyze file structure', null]
+                            case 'dependency-graph': return ['dependency graph', null]
+                            case 'list-file-structure-problems': return ['list file structure problems', null]
                             default: return abort(['expected one of', _p.dictionary.literal({
-                                'tbd': null,
+                                'analyze-file-structure': null,
+                                'dependency-graph': null,
+                                'list-file-structure-problems': null,
                             })])
                         }
                     },
                     () => abort(['expected one of', _p.dictionary.literal({
-                        'tbd': null,
+                        'analyze-file-structure': null,
+                        'dependency-graph': null,
+                        'list-file-structure-problems': null,
                     })])
                 )
 

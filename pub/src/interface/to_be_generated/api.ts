@@ -37,26 +37,31 @@ export type All_Packages = {
 }
 
 export type Package = {
+    'path': d_path.Context_Path
     'instruction':
     /**
      * asserts that the git working tree is clean for 1 specified package
      */
-    | ['assert clean', d_assert_clean.Parameters]
+    | ['assert clean', null]
 
 
-    | ['build and test', d_build_and_test.Parameters]
+    | ['build and test', null]
+    | ['git extended commit', d_git_extended_commit.Instruction]
+    | ['update package dependencies', null]
+
 }
 
 export type Project = {
-    'instruction': 
+    'path': d_path.Context_Path
+    'instruction':
 
-    | ['dependency graph', d_dependency_graph.Parameters]
-
-
-    | ['analyze file structure', d_analyze_file_structure.Parameters]
+    | ['dependency graph', null]
 
 
-    | ['list file structure problems', d_list_file_structure_problems.Parameters]
+    | ['analyze file structure', null]
+
+
+    | ['list file structure problems', null]
 }
 
 export type All_Pacakges_Instruction =
@@ -101,22 +106,31 @@ export type All_Pacakges_Instruction =
     | ['update package dependencies', null]
 
 export type Error =
+    | ['all', All_Error]
+    | ['package', Package_Error]
+
     | ['analyze file structure', d_analyze_file_structure.Error]
+    | ['dependency graph', d_dependency_graph.Error]
+
+    | ['set up comparison', d_set_up_comparison_against_published.Error]
+
+export type Project_Error = null
+
+export type Package_Error = 
     | ['build and test', {
         'error': d_build_and_test.Error,
         'concise': boolean
     }]
-    | ['dependency graph', d_dependency_graph.Error]
     | ['git assert clean', d_assert_clean.Error]
-    | ['project', Project_Error]
+    | ['git commit', d_git_extended_commit.Error]
     | ['publish', d_publish.Error]
-    | ['set up comparison', d_set_up_comparison_against_published.Error]
+    | ['update dependencies', d_update_dependencies.Error]
 
-export type Project_Error =
+export type All_Error =
     | ['could not read packages directory', d_read_directory.Error]
-    | ['packages', _pi.Dictionary<Project_Package_Error>]
+    | ['packages', _pi.Dictionary<All__Package_Error>]
 
-export type Project_Package_Error =
+export type All__Package_Error =
     | ['build and test', {
         'error': d_build_and_test.Error,
         'concise': boolean

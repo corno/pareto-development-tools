@@ -27,11 +27,20 @@ import * as t_set_up_comparison_against_published from "../../../../../modules/n
 
 export const Error: signatures.Error = ($) => _p.sg($, ($) => {
     switch ($[0]) {
+        case 'package': return _p.ss($, ($) => _p.sg($, ($) => {
+            switch ($[0]) {
+                case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
+                case 'publish': return _p.ss($, ($): d_out.Block_Part => t_publish.Error($))
+                case 'update dependencies': return _p.ss($, ($) => t_update_dependencies.Error($))
+                case 'git assert clean': return _p.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
+                case 'git commit': return _p.ss($, ($) => t_git_extended_commit_to_fountain_pen.Error($))
+
+                default: return _p.au($[0])
+            }
+        }))
         case 'analyze file structure': return _p.ss($, ($) => t_line_count_to_fountain_pen.Error($))
-        case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
         case 'dependency graph': return _p.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
-        case 'git assert clean': return _p.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
-        case 'project': return _p.ss($, ($) => _p.sg($, ($) => {
+        case 'all': return _p.ss($, ($) => _p.sg($, ($) => {
             switch ($[0]) {
                 case 'packages': return _p.ss($, ($) => sh.b.indent(_p.list.from_dictionary($, ($, key) => sh.g.nested_block([
                     sh.b.snippet(`package '${key}': `),
@@ -55,7 +64,6 @@ export const Error: signatures.Error = ($) => _p.sg($, ($) => {
                 default: return _p.au($[0])
             }
         }))
-        case 'publish': return _p.ss($, ($): d_out.Block_Part => t_publish.Error($))
         case 'set up comparison': return _p.ss($, ($): d_out.Block_Part => t_set_up_comparison_against_published.Error($))
         default: return _p.au($[0])
     }
