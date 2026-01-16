@@ -125,7 +125,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                         return abort(['expected a text', { 'description': "'--dry-run' or a one time password" }])
                     } else {
                         switch (value[0]) {
-                            case 'dry-run': {
+                            case '--dry-run': {
                                 iterator.discard(() => null)
                                 return ['dry run', null]
                             }
