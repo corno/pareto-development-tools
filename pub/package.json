@@ -11,8 +11,7 @@
     "pareto-fountain-pen": "^0.4.0",
     "pareto-graphviz": "^0.2.0",
     "pareto-host-nodejs": "^0.2.3",
-    "pareto-resources": "^0.2.7",
-    "pareto-standard-operations": "^0.4.0"
+    "pareto-resources": "^0.2.7"
   },
   "bin": {
     "pdt": "./dist/bin.js"
