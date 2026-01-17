@@ -8,6 +8,7 @@ import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/
 export type Result = _pi.Transformer<d_in.Result, d_out.Graph>
 
 export const Result: Result = ($) => {
+    const pacakges = $.packages
     return {
         'nodes': $.packages.__d_map(($) => null),
         'edges': _p.list.flatten(
@@ -36,6 +37,15 @@ export const Result: Result = ($) => {
                                     return _p.optional.set(({
                                         'from': from,
                                         'to': key,
+                                        // 'attributes': pacakges.__get_possible_entry(key).__decide(
+                                        //     ($) => _p.list.literal([]),
+                                        //     () => _p.list.literal([
+                                        //         {
+                                        //             'key': 'color',
+                                        //             'value': 'red',
+                                        //         }
+                                        //     ])
+                                        // ),
                                     }))
                                 }
                             ),

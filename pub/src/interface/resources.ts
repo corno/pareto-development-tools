@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core-interface'
 
 import * as d_analyze_file_structure from "./to_be_generated/analyze_file_structure"
-import * as d_api from "./to_be_generated/api"
+import * as d_api from "./to_be_generated/execute_command"
 import * as d_build from "./to_be_generated/build"
 import * as d_build_and_test from "./to_be_generated/build_and_test"
 import * as d_create_dependency_graph from "./to_be_generated/create_dependency_graph"

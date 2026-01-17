@@ -1,7 +1,7 @@
 import * as _p from 'pareto-core-refiner'
 import * as _pi from 'pareto-core-interface'
 
-import * as d from "../../../../../interface/to_be_generated/api"
+import * as d from "../../../../../interface/to_be_generated/execute_command"
 import * as d_error from "../../../../../interface/to_be_generated/parse"
 
 import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
@@ -49,9 +49,9 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                 'assert-clean': null,
                                 'build-and-test': null,
                                 'build': null,
-                                'dependency-graph': null,
                                 'git-commit': null,
                                 'git-remove-tracked-but-ignored': null,
+                                'set-up-comparison': null,
                                 'update-dependencies': null,
                             })])
                         }
@@ -60,9 +60,9 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                         'assert-clean': null,
                         'build-and-test': null,
                         'build': null,
-                        'dependency-graph': null,
                         'git-commit': null,
                         'git-remove-tracked-but-ignored': null,
+                        'set-up-comparison': null,
                         'update-dependencies': null,
                     })])
                 )
@@ -178,11 +178,8 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                 ))
             }]
             default: return abort(['expected one of', _p.dictionary.literal({
-                'analyze-file-structure': null,
-                'assert-clean': null,
-                'build-and-test': null,
-                'dependency-graph': null,
-                'list-file-structure-problems': null,
+                'all': null,
+                'package': null,
                 'project': null,
                 'publish': null,
                 'set-up-comparison': null,
@@ -190,11 +187,8 @@ export const Command: signature = (iterator, abort) => iterator.consume(
         }
     },
     () => abort(['expected one of', _p.dictionary.literal({
-        'analyze-file-structure': null,
-        'assert-clean': null,
-        'build-and-test': null,
-        'dependency-graph': null,
-        'list-file-structure-problems': null,
+        'all': null,
+        'package': null,
         'project': null,
         'publish': null,
         'set-up-comparison': null,

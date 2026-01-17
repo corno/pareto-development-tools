@@ -6,11 +6,11 @@ import * as signatures from "../../../interface/signatures"
 //data types
 import * as d from "pareto-resources/dist/interface/to_be_generated/temp_main"
 import * as d_parse from "../../../interface/to_be_generated/parse"
-import * as d_api from "../../../interface/to_be_generated/api"
+import * as d_api from "../../../interface/to_be_generated/execute_command"
 
 //dependencies
-import * as r_instruction from "../schemas/api/refiners/main"
-import * as t_api_to_fountain_pen from "../schemas/api/transformers/fountain_pen"
+import * as r_instruction from "../schemas/execute_command/refiners/main"
+import * as t_api_to_fountain_pen from "../schemas/execute_command/transformers/fountain_pen"
 import * as t_bin_to_fountain_pen from "../schemas/parse/transformers/fountain_pen"
 import * as s_fp_block from "pareto-fountain-pen/dist/implementation/manual/schemas/block/serializers"
 

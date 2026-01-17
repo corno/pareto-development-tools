@@ -4,7 +4,7 @@ import * as _pi from 'pareto-core-interface'
 import * as signatures from "../../../interface/signatures"
 
 //data types
-import * as d from "../../../interface/to_be_generated/api"
+import * as d from "../../../interface/to_be_generated/execute_command"
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
 
 //dependencies

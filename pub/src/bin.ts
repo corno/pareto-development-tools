@@ -15,7 +15,7 @@ import { $$ as q_package_dependencies } from "./implementation/manual/queries/ge
 
 import { $$ as c_analyze_file_structure } from "./implementation/manual/commands/analyze_file_structure"
 import { $$ as c_list_file_structure_problems } from "./implementation/manual/commands/list_file_structure_problems"
-import { $$ as c_api } from "./implementation/manual/commands/api"
+import { $$ as c_api } from "./implementation/manual/commands/execute_command"
 import { $$ as c_main } from "./implementation/manual/commands/main"
 import { $$ as c_build } from "./implementation/manual/commands/build"
 import { $$ as c_build_and_test } from "./implementation/manual/commands/build_and_test"

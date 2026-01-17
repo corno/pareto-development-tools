@@ -1,7 +1,7 @@
 import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 
-import * as d_in from "../../../../../interface/to_be_generated/api"
+import * as d_in from "../../../../../interface/to_be_generated/execute_command"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data"
 
 export namespace signatures {
@@ -18,8 +18,8 @@ import * as t_git_remove_tracked_but_ignored from "../../../../../modules/git/im
 
 import * as t_build_and_test_to_fountain_pen from "../../build_and_test/transformers/fountain_pen"
 import * as t_build_to_fountain_pen from "../../build/transformers/fountain_pen"
-import * as t_dependency_graph_to_fountain_pen from "../../dependency_graph/transformers/fountain_pen"
-import * as t_line_count_to_fountain_pen from "../../directory_analysis/transformers/fountain_pen"
+import * as t_dependency_graph_to_fountain_pen from "../../create_dependency_graph/transformers/fountain_pen"
+import * as t_line_count_to_fountain_pen from "../../analyze_file_structure/transformers/fountain_pen"
 import * as t_publish from "../../publish/transformers/fountain_pen"
 import * as t_update_dependencies from "../../update_package_dependencies/transformers/fountain_pen"
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory/transformers/fountain_pen"
