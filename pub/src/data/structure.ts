@@ -63,6 +63,8 @@ const $_implementation: d_structure.Directory.group.D = directory_group({
                 "deserializers": directory_wildcards(0, false, ["ts"], false),
             }),
         }),
+        "text_to_text": directory_wildcards(0, false, ["ts"], false),
+
         "queries": directory_wildcards(0, false, ["ts"], false),
         "commands": directory_wildcards(0, false, ["ts"], false),
     }),
