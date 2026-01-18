@@ -1,17 +1,18 @@
 {
   "name": "pareto-development-tools",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "main": "./dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],
   "dependencies": {
-    "astn-core": "^0.5.0",
-    "pareto-fountain-pen": "^0.4.0",
-    "pareto-graphviz": "^0.2.0",
+    "astn-core": "^0.5.2",
+    "pareto-core-deserializer": "^0.3.0",
+    "pareto-fountain-pen": "^0.4.1",
+    "pareto-graphviz": "^0.2.1",
     "pareto-host-nodejs": "^0.2.3",
-    "pareto-resources": "^0.2.7"
+    "pareto-resources": "^0.2.8"
   },
   "bin": {
     "pdt": "./dist/bin.js"
