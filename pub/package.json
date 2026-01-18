@@ -11,7 +11,7 @@
     "pareto-core-deserializer": "^0.3.0",
     "pareto-fountain-pen": "^0.4.1",
     "pareto-graphviz": "^0.2.1",
-    "pareto-host-nodejs": "^0.2.3",
+    "pareto-host-nodejs": "^0.2.4",
     "pareto-resources": "^0.2.8"
   },
   "bin": {
