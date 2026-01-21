@@ -11,7 +11,7 @@ export const $$: signatures.commands.npm_publish = _p.command_procedure(
     ($p, $cr) => [
         $cr['npm'].execute(
             {
-                'args': _pt.list.nested_literal([
+                'args': _pt.list.nested_literal_old([
                     [
                         `publish`
                     ],

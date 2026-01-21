@@ -11,7 +11,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
     ($p, $cr) => [
         $cr['npm'].execute(
             {
-                'args': _pt.list.nested_literal([
+                'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
                             `--prefix`,

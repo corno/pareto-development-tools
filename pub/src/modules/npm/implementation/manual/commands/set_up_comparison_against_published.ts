@@ -1,8 +1,9 @@
 import * as _p from 'pareto-core-command'
 import * as _pt from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
-import * as _pds from 'pareto-core-deserializer'
+import * as _ps from 'pareto-core-serializer'
 import * as _pq from 'pareto-core-query'
+import * as _pd from 'pareto-core-deserializer'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -18,12 +19,12 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 
 const remove_n_characters_from_end = ($: string, n: number): string => {
 
-    const chars = _pds.list.from_text($, ($) => $)
+    const chars = _pd.list.from_text($, ($) => $)
     const length = chars.__get_number_of_elements()
     const new_length = length - n
     let index = -1
 
-    return _pds.text.deprecated_build(($i) => {
+    return _ps.text.deprecated_build(($i) => {
         chars.__for_each(($) => {
             index += 1
             if (index < new_length) {
@@ -89,7 +90,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                         // Create local package using npm pack (if local package path provided)
                         $cr['npm'].execute(
                             {
-                                'args': _pt.list.nested_literal([
+                                'args': _pt.list.nested_literal_old([
                                     _pt.list.literal([
                                         `pack`,
                                         s_path.Context_Path($p['path to local package']),

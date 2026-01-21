@@ -11,7 +11,7 @@ export const $$: signatures.commands.update2latest = _p.command_procedure(
     ($p, $cr) => [
         $cr.update2latest.execute(
             {
-                'args': _pt.list.nested_literal([
+                'args': _pt.list.nested_literal_old([
                     _pt.list.literal([
                         s_path.Context_Path($p.path),
                     ]),

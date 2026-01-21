@@ -13,7 +13,7 @@ export const $$: signatures.commands.make_pristine = _p.command_procedure(
     ($p, $cr) => [
         $cr.git.execute(
             {
-                'args': _pt.list.nested_literal([
+                'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
                             `-C`,

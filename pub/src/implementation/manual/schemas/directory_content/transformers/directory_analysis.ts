@@ -1,6 +1,7 @@
 import * as _p from 'pareto-core-transformer'
 import * as _pi from 'pareto-core-interface'
 import * as _pds from 'pareto-core-deserializer'
+import * as _ps from 'pareto-core-serializer'
 
 import * as d_in from "pareto-resources/dist/interface/to_be_generated/directory_content"
 import * as d_out from "../../../../../interface/to_be_generated/directory_analysis"
@@ -32,7 +33,7 @@ const extension = ($: string): _pi.Optional_Value<string> => {
     } else {
         const fpi: number = first_period_index
         current_index = 0
-        return _p.optional.set(_pds.text.deprecated_build(($i) => {
+        return _p.optional.set(_ps.text.deprecated_build(($i) => {
             characters.__for_each(($) => {
                 if (current_index > fpi) {
                     $i['add character']($)

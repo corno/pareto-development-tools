@@ -1,10 +1,11 @@
 import * as _p from 'pareto-core-transformer'
 import * as _pds from 'pareto-core-deserializer'
+import * as _ps from 'pareto-core-serializer'
 
 
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
 
-const replace = ($: string, search: number, replace: number): string => _pds.text.deprecated_build(($i) => {
+const replace = ($: string, search: number, replace: number): string => _ps.text.deprecated_build(($i) => {
     _pds.list.from_text($, ($) => $).__for_each(($) => {
         if ($ === search) {
             $i['add character'](replace)

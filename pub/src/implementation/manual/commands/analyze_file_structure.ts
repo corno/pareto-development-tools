@@ -53,7 +53,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                     ($v) => [
                         $cr.log.execute(
                             {
-                                'lines': _pt.list.nested_literal([
+                                'lines': _pt.list.nested_literal_old([
                                     _pt.list.literal([
                                         `package,filepath,structure path,classification,extension,unexpected,line count`,
                                     ]),

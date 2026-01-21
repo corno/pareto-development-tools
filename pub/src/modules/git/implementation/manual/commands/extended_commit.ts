@@ -27,7 +27,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                     [
                         $cr.git.execute(
                             {
-                                'args': _pt.list.nested_literal([
+                                'args': _pt.list.nested_literal_old([
                                     $p.path.__decide(
                                         ($) => _pt.list.literal([
                                             `-C`,
@@ -47,7 +47,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                 ),
                 $cr.git.execute(
                     {
-                        'args': _pt.list.nested_literal([
+                        'args': _pt.list.nested_literal_old([
                             $p.path.__decide(
                                 ($) => _pt.list.literal([
                                     `-C`,
@@ -69,7 +69,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                     [
                         $cr.git.execute(
                             {
-                                'args': _pt.list.nested_literal([
+                                'args': _pt.list.nested_literal_old([
                                     $p.path.__decide(
                                         ($) => _pt.list.literal([
                                             `-C`,
