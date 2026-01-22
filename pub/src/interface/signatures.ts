@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core/dist/interface'
 
 import * as resources from "./resources"
-import * as resources_exupery from "pareto-resources/dist/interface/resources"
+import * as resources_pareto from "pareto-resources/dist/interface/resources"
 import * as resources_git from "../modules/git/interface/resources"
 import * as resources_npm from "../modules/npm/interface/resources"
 import * as resources_fp from "../modules/pareto-fountain-pen-directory/interface/resources"
@@ -11,8 +11,8 @@ export namespace queries {
     export type get_package_dependencies = _pi.Query_Function<
         resources.queries.get_package_dependencies,
         {
-            'read directory': resources_exupery.queries.read_directory,
-            'read file': resources_exupery.queries.read_file
+            'read directory': resources_pareto.queries.read_directory,
+            'read file': resources_pareto.queries.read_file
 
         }
     >
@@ -24,11 +24,11 @@ export namespace commands {
     export type analyze_file_structure = _pi.Command_Procedure<
         resources.commands.analyze_file_structure,
         {
-            'log': resources_exupery.commands.log
+            'log': resources_pareto.commands.log
         },
         {
-            'read directory': resources_exupery.queries.read_directory,
-            'read file': resources_exupery.queries.read_file
+            'read directory': resources_pareto.queries.read_directory,
+            'read file': resources_pareto.queries.read_file
 
         }
     >
@@ -49,7 +49,7 @@ export namespace commands {
             'update package dependencies': resources.commands.update_package_dependencies
         },
         {
-            'read directory': resources_exupery.queries.read_directory
+            'read directory': resources_pareto.queries.read_directory
         }
     >
 
@@ -57,7 +57,7 @@ export namespace commands {
         resources.commands.build,
         {
             'tsc': resources.commands.tsc
-            'remove': resources_exupery.commands.remove
+            'remove': resources_pareto.commands.remove
         },
         null
     >
@@ -66,7 +66,7 @@ export namespace commands {
         resources.commands.build_and_test,
         {
             'build': resources.commands.build
-            'node': resources_exupery.commands.execute_command_executable
+            'node': resources_pareto.commands.execute_command_executable
         },
         null
     >
@@ -84,19 +84,19 @@ export namespace commands {
     export type list_file_structure_problems = _pi.Command_Procedure<
         resources.commands.analyze_file_structure,
         {
-            'log': resources_exupery.commands.log
+            'log': resources_pareto.commands.log
         },
         {
-            'read directory': resources_exupery.queries.read_directory
-            'read file': resources_exupery.queries.read_file
+            'read directory': resources_pareto.queries.read_directory
+            'read file': resources_pareto.queries.read_file
         }
     >
 
     export type main = _pi.Command_Procedure<
-        resources_exupery.commands.main,
+        resources_pareto.commands.main,
         {
             'api': resources.commands.api
-            'log error': resources_exupery.commands.log_error
+            'log error': resources_pareto.commands.log_error
 
         },
         null
@@ -105,7 +105,7 @@ export namespace commands {
     export type tsc = _pi.Command_Procedure<
         resources.commands.tsc,
         {
-            'tsc': resources_exupery.commands.execute_smelly_command_executable
+            'tsc': resources_pareto.commands.execute_smelly_command_executable
         },
         null
     >
