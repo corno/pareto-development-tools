@@ -16,7 +16,7 @@ import { replace_space_in_context_path } from "../schemas/path/transformers/path
 
 const s_list_of_texts: _pi.Serializer<_pi.List<string>> = ($) => _p_ser.text.deprecated_build(($i) => {
     $.__for_each(($) => {
-        $i['add snippet']($)
+        $i.add_snippet($)
     })
 })
 

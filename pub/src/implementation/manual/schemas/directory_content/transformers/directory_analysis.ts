@@ -36,7 +36,7 @@ const extension = ($: string): _pi.Optional_Value<string> => {
         return _p.optional.set(_ps.text.deprecated_build(($i) => {
             characters.__for_each(($) => {
                 if (current_index > fpi) {
-                    $i['add character']($)
+                    $i.add_character($)
                 }
                 current_index++
             })

@@ -8,9 +8,9 @@ import * as d_path from "pareto-resources/dist/interface/generated/pareto/schema
 const replace = ($: string, search: number, replace: number): string => _ps.text.deprecated_build(($i) => {
     _pds.list.from_text($, ($) => $).__for_each(($) => {
         if ($ === search) {
-            $i['add character'](replace)
+            $i.add_character(replace)
         } else {
-            $i['add character']($)
+            $i.add_character($)
         }
     })
 })

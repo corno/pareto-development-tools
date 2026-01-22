@@ -10,7 +10,7 @@ import * as builders from "../productions/text"
 
 export const Command: _pi.Refiner<d_result.Parameters, d_error.Error, d_input.Parameters> = ($, abort) => _p.iterate(
     $.arguments,
-    ($iter) => $iter['assert finished'](
+    ($iter) => $iter.assert_finished(
         () => builders.Command(
             $iter,
             abort,

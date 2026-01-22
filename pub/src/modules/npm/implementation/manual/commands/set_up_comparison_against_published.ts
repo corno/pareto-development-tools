@@ -28,7 +28,7 @@ const remove_n_characters_from_end = ($: string, n: number): string => {
         chars.__for_each(($) => {
             index += 1
             if (index < new_length) {
-                $i['add character']($)
+                $i.add_character($)
             }
         })
     })
