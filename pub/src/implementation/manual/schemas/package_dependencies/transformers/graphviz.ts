@@ -21,14 +21,7 @@ export const Result: Result = ($) => {
                             _p.dictionary.filter(
                                 $,
                                 ($, key) => {
-                                    if (key === "pareto-core-interface"
-                                        || key === "pareto-core-transformer"
-                                        || key === "pareto-core-refiner"
-                                        || key === "pareto-core-serializer"
-                                        || key === "pareto-core-deserializer"
-                                        || key === "pareto-core-command"
-                                        || key === "pareto-core-query"
-
+                                    if (key === "pareto-core"
                                         || key === "pareto-core-shorthands"
                                         //|| key === "pareto-host-nodejs"
                                     ) {
