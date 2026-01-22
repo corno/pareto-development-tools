@@ -1,11 +1,11 @@
 import * as _pi from 'pareto-core/dist/interface'
 
-import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_command_executable/data"
-import * as d_eqe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data"
-import * as d_make_directory from "pareto-resources/dist/interface/generated/pareto/schemas/make_directory/data"
-import * as d_remove from "pareto-resources/dist/interface/generated/pareto/schemas/remove/data"
-import * as d_read_file from "pareto-resources/dist/interface/generated/pareto/schemas/read_file/data"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
+import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_command_executable/data"
+import * as d_eqe from "pareto-resources/dist/interface/generated/liana/schemas/execute_query_executable/data"
+import * as d_make_directory from "pareto-resources/dist/interface/generated/liana/schemas/make_directory/data"
+import * as d_remove from "pareto-resources/dist/interface/generated/liana/schemas/remove/data"
+import * as d_read_file from "pareto-resources/dist/interface/generated/liana/schemas/read_file/data"
+import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
 import * as d_deserialize_package_json from "./deserialize_package_json"
 
 export type Parameters = {

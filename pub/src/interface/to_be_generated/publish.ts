@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core/dist/interface'
 
-// import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_command_executable/data"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
+// import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_command_executable/data"
+import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
 import * as d_push from "../../modules/git/interface/to_be_generated/push"
 import * as d_git_aic from "../../modules/git/interface/to_be_generated/assert_is_clean"
 import * as d_git_make_pristine from "../../modules/git/interface/to_be_generated/make_pristine"

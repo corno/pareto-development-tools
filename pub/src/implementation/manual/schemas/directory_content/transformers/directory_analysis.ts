@@ -5,7 +5,7 @@ import * as _ps from 'pareto-core/dist/serializer'
 
 import * as d_in from "pareto-resources/dist/interface/to_be_generated/directory_content"
 import * as d_out from "../../../../../interface/to_be_generated/directory_analysis"
-import * as d_structure from "../../../../../interface/generated/pareto/schemas/structure/data"
+import * as d_structure from "../../../../../interface/generated/liana/schemas/structure/data"
 
 const line_count = ($: string): number => {
     let lineCount = 0

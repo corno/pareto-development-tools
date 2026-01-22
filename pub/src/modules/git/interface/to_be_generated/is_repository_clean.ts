@@ -1,8 +1,8 @@
 import * as _pi from 'pareto-core/dist/interface'
 
-import * as d_eqe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data"
+import * as d_eqe from "pareto-resources/dist/interface/generated/liana/schemas/execute_query_executable/data"
 import * as d_iwt from "./is_inside_work_tree"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
+import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
 
 export type Result = boolean
 

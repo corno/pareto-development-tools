@@ -1,8 +1,8 @@
 import * as _pi from 'pareto-core/dist/interface'
 
-import * as d_remove from "pareto-resources/dist/interface/generated/pareto/schemas/remove/data"
-import * as d_fp_block from "pareto-fountain-pen/dist/interface/generated/pareto/schemas/block/data"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
+import * as d_remove from "pareto-resources/dist/interface/generated/liana/schemas/remove/data"
+import * as d_fp_block from "pareto-fountain-pen/dist/interface/generated/liana/schemas/block/data"
+import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
 import * as d_write_to_file from "./write_to_file"
 
 export type Error =

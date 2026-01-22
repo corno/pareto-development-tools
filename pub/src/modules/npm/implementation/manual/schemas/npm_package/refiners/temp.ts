@@ -2,7 +2,7 @@ import * as _p from 'pareto-core/dist/refiner'
 import * as _pi from 'pareto-core/dist/interface'
 
 //data types
-import * as d from "astn-core/dist/interface/generated/pareto/schemas/parse_tree/data"
+import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
 import * as d_npm_package from "../../../../../interface/to_be_generated/npm_package"
 import * as d_deseralize_package_json from "../../../../../interface/to_be_generated/deserialize_package_json"
 

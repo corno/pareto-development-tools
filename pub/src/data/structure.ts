@@ -1,7 +1,7 @@
 import * as _p from 'pareto-core-shorthands/dist/unconstrained'
 
 
-import * as d_structure from "../interface/generated/pareto/schemas/structure/data"
+import * as d_structure from "../interface/generated/liana/schemas/structure/data"
 
 const file_manual = (): d_structure.Directory.group.D => ['file', ['manual', null]]
 const file_generated = (commitToGit: boolean): d_structure.Directory.group.D => ['file', ['generated', {

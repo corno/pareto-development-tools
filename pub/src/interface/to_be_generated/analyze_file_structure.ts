@@ -1,9 +1,9 @@
 import * as _pi from 'pareto-core/dist/interface'
 
-import * as d_log from "pareto-resources/dist/interface/generated/pareto/schemas/log/data"
-import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"
-import * as d_read_directory from "pareto-resources/dist/interface/generated/pareto/schemas/read_directory/data"
-import * as d_read_file from "pareto-resources/dist/interface/generated/pareto/schemas/read_file/data"
+import * as d_log from "pareto-resources/dist/interface/generated/liana/schemas/log/data"
+import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
+import * as d_read_directory from "pareto-resources/dist/interface/generated/liana/schemas/read_directory/data"
+import * as d_read_file from "pareto-resources/dist/interface/generated/liana/schemas/read_file/data"
 import * as d_directory_content from "pareto-resources/dist/interface/to_be_generated/read_directory_content"
 
 export type Parameters = {
