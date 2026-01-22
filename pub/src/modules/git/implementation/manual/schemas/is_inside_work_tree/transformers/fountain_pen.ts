@@ -14,11 +14,11 @@ export const Error: Error = ($) => _p.sg($, ($) => {
     switch ($[0]) {
         case 'could not run git command': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not run git command: `),
-            sh.b.snippet($.message)
+            sh.b.list($.message.lines.__l_map(($) => sh.b.snippet($)))
         ]))
         case 'unexpected output': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`unexpected output from git command: `),
-            sh.b.snippet($)
+            sh.b.list($.lines.__l_map(($) => sh.b.snippet($)))
         ]))
         default: return _p.au($[0])
     }

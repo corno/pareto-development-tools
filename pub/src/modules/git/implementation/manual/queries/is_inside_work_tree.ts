@@ -46,7 +46,7 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
         ($) => $
     ),
     {
-        success: ($) => $.stdout === `true`
+        success: ($) => $.stdout.raw === `true`
             ? _p.__query_result((onResult, onError) => {
                 onResult(true)
             })
