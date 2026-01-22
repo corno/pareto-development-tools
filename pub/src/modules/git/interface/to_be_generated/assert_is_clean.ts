@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core-interface'
+import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_is_repository_clean from "./is_repository_clean"
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"

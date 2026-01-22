@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core-interface'
+import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_console_error from "./to_be_generated/console_error"
 import * as d_console_log from "./to_be_generated/console_log"

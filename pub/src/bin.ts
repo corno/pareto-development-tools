@@ -1,9 +1,9 @@
 #!/usr/bin/env -S node --enable-source-maps
 
 import * as _pn from 'pareto-host-nodejs'
-import * as _pi from 'pareto-core-interface'
-import * as _pq from 'pareto-core-query'
-import * as _pc from 'pareto-core-command'
+import * as _pi from 'pareto-core/dist/interface'
+import * as _pq from 'pareto-core/dist/query'
+import * as _pc from 'pareto-core/dist/command'
 
 import * as d_epe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_command_executable/data"
 import * as d_espe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_smelly_command_executable/data"

@@ -1,5 +1,5 @@
-import * as _p from 'pareto-core-refiner'
-import * as _pi from 'pareto-core-interface'
+import * as _p from 'pareto-core/dist/refiner'
+import * as _pi from 'pareto-core/dist/interface'
 
 //data types
 import * as d from "astn-core/dist/interface/generated/pareto/schemas/parse_tree/data"

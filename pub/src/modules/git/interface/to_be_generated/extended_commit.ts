@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core-interface'
+import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_ece from "pareto-resources/dist/interface/generated/pareto/schemas/execute_command_executable/data"
 import * as d_eqe from "pareto-resources/dist/interface/generated/pareto/schemas/execute_query_executable/data"

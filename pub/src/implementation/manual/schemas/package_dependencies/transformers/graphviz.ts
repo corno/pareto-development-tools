@@ -1,6 +1,6 @@
 
-import * as _pi from 'pareto-core-interface'
-import * as _p from 'pareto-core-transformer'
+import * as _pi from 'pareto-core/dist/interface'
+import * as _p from 'pareto-core/dist/transformer'
 
 import * as d_in from "../../../../../interface/to_be_generated/get_package_dependencies"
 import * as d_out from "pareto-graphviz/dist/interface/generated/pareto/schemas/graphviz/data"

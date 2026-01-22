@@ -1,5 +1,5 @@
-import * as _p from 'pareto-core-command'
-import * as _pt from 'pareto-core-transformer'
+import * as _p from 'pareto-core/dist/command'
+import * as _pt from 'pareto-core/dist/transformer'
 
 import * as signatures from "../../../interface/signatures"
 

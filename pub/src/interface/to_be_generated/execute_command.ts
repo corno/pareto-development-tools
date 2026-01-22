@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core-interface'
+import * as _pi from 'pareto-core/dist/interface'
 
 
 import * as d_analyze_file_structure from "./analyze_file_structure"

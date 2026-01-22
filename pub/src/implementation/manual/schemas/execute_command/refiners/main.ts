@@ -1,5 +1,5 @@
-import * as _p from 'pareto-core-refiner'
-import * as _pi from 'pareto-core-interface'
+import * as _p from 'pareto-core/dist/refiner'
+import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_result from "../../../../../interface/to_be_generated/execute_command"
 import * as d_error from "../../../../../interface/to_be_generated/parse"

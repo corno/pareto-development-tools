@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core-interface'
+import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_npm from "./to_be_generated/npm_tool"
 import * as d_npm_publish from "./to_be_generated/npm_publish"

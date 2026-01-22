@@ -1,6 +1,6 @@
-import * as _p from 'pareto-core-transformer'
-import * as _pds from 'pareto-core-deserializer'
-import * as _ps from 'pareto-core-serializer'
+import * as _p from 'pareto-core/dist/transformer'
+import * as _pds from 'pareto-core/dist/deserializer'
+import * as _ps from 'pareto-core/dist/serializer'
 
 
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"

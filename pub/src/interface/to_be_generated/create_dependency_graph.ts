@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core-interface'
+import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_log from "../../modules/pareto-fountain-pen-directory/implementation/manual/commands/console_log"
 import * as d_path from "pareto-resources/dist/interface/generated/pareto/schemas/path/data"

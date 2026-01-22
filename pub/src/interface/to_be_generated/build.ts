@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core-interface'
+import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_tsc from "./tsc"
 import * as d_remove from "pareto-resources/dist/interface/generated/pareto/schemas/remove/data"

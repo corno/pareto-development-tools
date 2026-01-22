@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core-interface'
+import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_assert_is_clean from "./to_be_generated/assert_is_clean"
 import * as d_is_repository_clean from "./to_be_generated/is_repository_clean"
