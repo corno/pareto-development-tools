@@ -18,7 +18,7 @@ export namespace Directory_ {
 }
 
 export type Directory_ = (
-    $$_: Directory_.I,
+    context: Directory_.I,
 ) => Directory_.O
 
 export { 
