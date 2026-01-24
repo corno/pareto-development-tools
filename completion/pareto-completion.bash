@@ -15,7 +15,7 @@ _pdt_completions() {
     local all_subcommands="assert-clean build-and-test build git-commit git-remove-tracked-but-ignored set-up-comparison update-dependencies"
     
     # Package sub-commands
-    local package_subcommands="assert-clean build-and-test"
+    local package_subcommands="assert-clean build-and-test update-dependencies"
     
     # Project sub-commands
     local project_subcommands="analyze-file-structure dependency-graph list-file-structure-problems"
