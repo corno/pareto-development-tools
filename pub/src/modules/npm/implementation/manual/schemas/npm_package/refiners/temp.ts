@@ -34,12 +34,12 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
         })
         return _p.dictionary.literal(temp)
     }
-    return _p.sg($.type, ($) => {
+    return _p.decide.state($.type, ($) => {
         switch ($[0]) {
-            case 'concrete': return _p.ss($, ($) => _p.sg($, ($) => {
+            case 'concrete': return _p.ss($, ($) => _p.decide.state($, ($) => {
                 switch ($[0]) {
                     case 'dictionary': return _p.ss($, ($) => expect_unique_identifiers($.entries, abort))
-                    case 'group': return _p.ss($, ($) => _p.sg($, ($) => {
+                    case 'group': return _p.ss($, ($) => _p.decide.state($, ($) => {
                         switch ($[0]) {
                             case 'verbose': return _p.ss($, ($) => expect_unique_identifiers($.entries, abort))
                             default: return abort(['not an object', null])
@@ -53,9 +53,9 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
     })
 }
 
-const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never): string => _p.sg($.type, ($) => {
+const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never): string => _p.decide.state($.type, ($) => {
     switch ($[0]) {
-        case 'concrete': return _p.ss($, ($) => _p.sg($, ($) => {
+        case 'concrete': return _p.ss($, ($) => _p.decide.state($, ($) => {
             switch ($[0]) {
                 case 'text': return _p.ss($, ($) => $.value)
                 default: return abort(['not a text', null])

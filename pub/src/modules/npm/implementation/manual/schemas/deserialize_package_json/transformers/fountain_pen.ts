@@ -14,7 +14,7 @@ import * as t_read_file_to_fountain_pen from "pareto-resources/dist/implementati
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const Error: signatures.Error = ($) => _p.sg($, ($) => {
+export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'invalid ASTN': return _p.ss($, ($) => sh.b.snippet(`invalid JSON (or even ASTN)`))
         case 'missing root object': return _p.ss($, ($) => sh.b.snippet(`missing root object in package.json`))

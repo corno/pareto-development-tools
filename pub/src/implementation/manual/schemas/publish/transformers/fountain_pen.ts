@@ -16,13 +16,13 @@ import * as t_git_is_clean_to_fountain_pen from "../../../../../modules/git/impl
 import * as t_npm_to_fountain_pen from "../../../../../modules/npm/implementation/manual/schemas/npm/transformers/fountain_pen"
 import * as t_build_and_test_to_fountain_pen from "../../build_and_test/transformers/fountain_pen"
 
-export const Error: Error = ($) => _p.sg($, ($) => {
+export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'error while running git push': return _p.ss($, ($) => sh.b.sub([
             t_git_push_to_fountain_pen.Error($)
         ]))
         case 'error while running git assert is clean at the start': return _p.ss($, ($) => sh.b.sub([
-            _p.sg($, ($) => {
+            _p.decide.state($, ($) => {
                 switch ($[0]) {
                     case 'unexpected error': return _p.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
                     case 'working directory is not clean': return _p.ss($, ($) => sh.b.snippet(`working directory is not clean at the start`))
@@ -38,7 +38,7 @@ export const Error: Error = ($) => _p.sg($, ($) => {
         ]))
         case 'error while running build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($, { 'concise': false }))
         case 'error while running git assert is clean after updating package dependencies': return _p.ss($, ($) => sh.b.sub([
-            _p.sg($, ($) => {
+            _p.decide.state($, ($) => {
                 switch ($[0]) {
                     case 'unexpected error': return _p.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
                     case 'working directory is not clean': return _p.ss($, ($) => sh.b.snippet(`working directory is not clean after updating package dependencies`))

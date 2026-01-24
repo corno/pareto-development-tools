@@ -53,7 +53,7 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
             : _p.__query_result<boolean, d.Error>((onResult, onError) => {
                 onResult(false)
             }),
-        error: ($) => _p.sg($, ($) => {
+        error: ($) => _p.decide.state($, ($) => {
             switch ($[0]) {
                 case 'failed to spawn': return _p.ss($, ($) => _p.__query_result<boolean, d.Error>((on_succes, on_error) => {
                     on_error(['could not run git command', {

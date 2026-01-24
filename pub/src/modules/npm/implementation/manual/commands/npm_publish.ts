@@ -21,7 +21,7 @@ export const $$: signatures.commands.npm_publish = _p.command_procedure(
                         ]),
                         () => _pt.list.literal([])
                     ),
-                    _p.sg($p.impact, ($) => {
+                    _p.decide.state($p.impact, ($) => {
                         switch ($[0]) {
                             case 'dry run': return _p.ss($, ($) => [ `--dry-run` ])
                             case 'actual publish': return _p.ss($, ($) => [

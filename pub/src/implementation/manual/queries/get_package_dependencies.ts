@@ -23,7 +23,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
             $.__d_map(($) => {
                 const path = $.path
                 const path_x = t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` })
-                return _p.sg($['node type'], ($) => {
+                return _p.decide.state($['node type'], ($) => {
                     switch ($[0]) {
                         case 'file': return _p.ss($, ($) => _p.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
                         case 'other': return _p.ss($, ($) => _p.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))

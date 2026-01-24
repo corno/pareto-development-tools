@@ -10,7 +10,7 @@ import * as t_git_is_clean_to_fountain_pen from "../../is_repository_clean/trans
 
 export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
-export const Error: Error = ($) => _p.sg($, ($) => {
+export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'working directory is not clean': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`working directory not clean`),

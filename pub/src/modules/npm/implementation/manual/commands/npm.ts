@@ -29,7 +29,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                             ]))
                             case 'version': return _pt.ss($, ($) => _pt.list.literal([
                                 `version`,
-                                _p.sg($, ($) => {
+                                _p.decide.state($, ($) => {
                                     switch ($[0]) {
                                         case 'patch': return _p.ss($, ($) => `patch`)
                                         case 'minor': return _p.ss($, ($) => `minor`)

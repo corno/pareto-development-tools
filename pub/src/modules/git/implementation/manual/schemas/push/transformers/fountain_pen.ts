@@ -10,7 +10,7 @@ import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/man
 
 export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
-export const Error: Error = ($) => _p.sg($, ($) => {
+export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'could not push': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not push:`),

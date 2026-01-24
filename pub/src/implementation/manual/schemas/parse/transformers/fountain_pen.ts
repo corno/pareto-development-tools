@@ -8,7 +8,7 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const Error: Error = ($) => _p.sg($, ($) => {
+export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'expected one of': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`expected one of: `),

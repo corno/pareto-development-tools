@@ -16,7 +16,7 @@ import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/
 
 
 export const Error: Error = ($) => {
-    return _p.sg($, ($): d_out.Block_Part => {
+    return _p.decide.state($, ($): d_out.Block_Part => {
         switch ($[0]) {
             case 'error while running npm command': return _p.ss($, ($) => sh.b.sub([
                 sh.b.snippet(`error while running npm command: `),

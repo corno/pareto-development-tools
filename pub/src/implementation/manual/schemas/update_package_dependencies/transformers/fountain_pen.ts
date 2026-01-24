@@ -10,7 +10,7 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 
 import * as t_utd_to_fountain_pen from "../../../../../modules/npm/implementation/manual/schemas/update_package_dependencies/transformers/fountain_pen"
 
-export const Error: Error = ($) => _p.sg($, ($) => {
+export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'error updating pub': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`error updating /pub: `),

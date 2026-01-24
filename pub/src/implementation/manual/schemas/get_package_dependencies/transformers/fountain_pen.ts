@@ -12,7 +12,7 @@ import * as t_deserialize_package_json_to_fountain_pen from "../../../../../modu
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const Error: Error = ($) => _p.sg($, ($) => {
+export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'directory content processing': return _p.ss($, ($) => sh.b.list(_p.list.from_dictionary(
             $,
@@ -22,7 +22,7 @@ export const Error: Error = ($) => _p.sg($, ($) => {
                 sh.b.snippet(`: `),
                 sh.b.indent([
                     sh.g.nested_block([
-                        _p.sg($, ($) => {
+                        _p.decide.state($, ($) => {
                             switch ($[0]) {
                                 case 'not a directory': return _p.ss($, ($) => sh.b.snippet(`not a directory`))
                                 case 'no package.json file': return _p.ss($, ($) => sh.b.snippet(`no package.json file`))

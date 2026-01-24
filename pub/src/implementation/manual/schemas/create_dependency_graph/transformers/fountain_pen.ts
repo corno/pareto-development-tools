@@ -10,7 +10,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 import * as t_get_package_dependencies_to_fountain_pen from "../../get_package_dependencies/transformers/fountain_pen"
 
-export const Error: Error = ($) => _p.sg($, ($) => {
+export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'log': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`log: `),

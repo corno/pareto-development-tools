@@ -12,7 +12,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 
 
 export const $$: signatures.commands.api = _p.command_procedure(
-    ($p, $cr, $qr) => _p.sg($p, ($) => {
+    ($p, $cr, $qr) => _p.decide.state($p, ($) => {
         switch ($[0]) {
             case 'all packages': return _p.ss($, ($) => {
                 const path_to_project = $['path to project']
@@ -34,7 +34,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                             },
                             ($): d.Error => ['all', ['could not read packages directory', $]],
                         ),
-                        ($x, key_spaces_not_escaped): _pi.Command_Promise<d.All__Package_Error>[] => _p.sg($.instruction, ($) => {
+                        ($x, key_spaces_not_escaped): _pi.Command_Promise<d.All__Package_Error>[] => _p.decide.state($.instruction, ($) => {
                             const concatenated_path = $x.path
                             const context_path = t_path_to_path.deprecated_node_path_to_context_path(concatenated_path)
                             switch ($[0]) {
@@ -110,7 +110,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
             })
             case 'package': return _p.ss($, ($) => {
                 const path = $.path
-                return _p.sg($.instruction, ($) => {
+                return _p.decide.state($.instruction, ($) => {
                     switch ($[0]) {
                         case 'assert clean': return _p.ss($, ($) => [
                             $cr['git assert is clean'].execute(
@@ -154,7 +154,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
             })
             case 'project': return _p.ss($, ($) => {
                 const path = $.path
-                return _p.sg($.instruction, ($) => {
+                return _p.decide.state($.instruction, ($) => {
                     switch ($[0]) {
                         case 'analyze file structure': return _p.ss($, ($) => [
                             $cr['analyze file structure'].execute(

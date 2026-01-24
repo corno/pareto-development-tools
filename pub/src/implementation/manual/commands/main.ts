@@ -48,7 +48,7 @@ export const $$: signatures.commands.main = _p.command_procedure(
                 $cr['log error'].execute(
                     {
                         'lines': _p.list.literal([
-                            _p.sg($, ($) => {
+                            _p.decide.state($, ($) => {
                                 switch ($[0]) {
                                     case 'parse': return _p.ss($, ($) => s_fp_block.Group(
                                         sh.group([sh.g.nested_block([
