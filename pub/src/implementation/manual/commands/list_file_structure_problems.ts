@@ -31,7 +31,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                     _pq.dictionaryx.parallel(
                         $v.__d_map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                             const path = $.path
-                            return _pt.sg($['node type'], ($) => {
+                            return _pt.decide.state($['node type'], ($) => {
                                 switch ($[0]) {
                                     case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
                                     case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))

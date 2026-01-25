@@ -33,7 +33,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                     _pq.dictionaryx.parallel(
                         $v.__d_map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                             const path = $.path
-                            return _pt.sg($['node type'], ($) => {
+                            return _pt.decide.state($['node type'], ($) => {
                                 switch ($[0]) {
                                     case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
                                     case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
@@ -71,9 +71,9 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                                             ))).__l_map(($) => `${package_name
                                                 },${$['path']
                                                 },${$.analysis.structure.path
-                                                },${_pt.sg($.analysis.structure.classification, ($) => {
+                                                },${_pt.decide.state($.analysis.structure.classification, ($) => {
                                                     switch ($[0]) {
-                                                        case 'directory': return _pt.ss($, ($) => `directory ` + _pt.sg($, ($) => {
+                                                        case 'directory': return _pt.ss($, ($) => `directory ` + _pt.decide.state($, ($) => {
                                                             switch ($[0]) {
                                                                 case 'ignored': return _pt.ss($, ($) => `ignored`)
                                                                 case 'generated': return _pt.ss($, ($) => `generated`)
@@ -84,7 +84,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                                                                 default: return _pt.au($[0])
                                                             }
                                                         }))
-                                                        case 'file': return _pt.ss($, ($) => `file ` + _pt.sg($, ($) => {
+                                                        case 'file': return _pt.ss($, ($) => `file ` + _pt.decide.state($, ($) => {
                                                             switch ($[0]) {
                                                                 case 'generated': return _pt.ss($, ($) => `generated`)
                                                                 case 'manual': return _pt.ss($, ($) => `manual`)

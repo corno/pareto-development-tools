@@ -15,7 +15,7 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
             {
                 'path': $p.path,
             },
-            ($): d.Error => _pt.sg($, ($) => {
+            ($): d.Error => _pt.decide.state($, ($) => {
                 switch ($[0]) {
                     case 'working directory is not clean': return _pt.ss($, ($): d.Error => ['not clean', null])
                     case 'unexpected error': return _pt.ss($, ($): d.Error => ['unexpected error', $])

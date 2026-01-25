@@ -19,7 +19,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                         ]),
                         () => _pt.list.literal([])
                     ),
-                    _pt.sg($p.operation, ($) => {
+                    _pt.decide.state($p.operation, ($) => {
                         switch ($[0]) {
                             case 'update': return _pt.ss($, ($) => _pt.list.literal([
                                 `update`,
