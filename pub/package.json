@@ -9,10 +9,10 @@
   "dependencies": {
     "astn-core": "^0.5.6",
     "pareto-core-dev": "^0.12.3",
-    "pareto-fountain-pen": "^0.4.6",
+    "pareto-fountain-pen": "^0.4.7",
     "pareto-graphviz": "^0.2.4",
-    "pareto-host-nodejs": "^0.2.10",
-    "pareto-resources": "^0.2.13"
+    "pareto-host-nodejs": "^0.2.11",
+    "pareto-resources": "^0.2.14"
   },
   "bin": {
     "pdt": "./dist/bin.js"
