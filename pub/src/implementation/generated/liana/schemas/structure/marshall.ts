@@ -12,35 +12,35 @@ export const Directory: t_signatures.Directory = ($,) => ['state', _p.decide.sta
     switch ($[0]) {
         case 'dictionary':
             return _p.ss($, ($,) => ({
-                'option': "dictionary",
+                'option': 'dictionary',
                 'value': Directory($),
             }))
         case 'group':
             return _p.ss($, ($,) => ({
-                'option': "group",
+                'option': 'group',
                 'value': ['dictionary', $.__d_map(($,key,) => ['state', _p.decide.state($, ($,): t_out.Value.state => {
                     switch ($[0]) {
                         case 'directory':
                             return _p.ss($, ($,) => ({
-                                'option': "directory",
+                                'option': 'directory',
                                 'value': Directory($),
                             }))
                         case 'file':
                             return _p.ss($, ($,) => ({
-                                'option': "file",
+                                'option': 'file',
                                 'value': ['state', _p.decide.state($, ($,): t_out.Value.state => {
                                     switch ($[0]) {
                                         case 'manual':
                                             return _p.ss($, ($,) => ({
-                                                'option': "manual",
+                                                'option': 'manual',
                                                 'value': ['nothing', null],
                                             }))
                                         case 'generated':
                                             return _p.ss($, ($,) => ({
-                                                'option': "generated",
+                                                'option': 'generated',
                                                 'value': ['group', ['verbose', _p.dictionary.literal(({
                                                     'commit to git': _p.deprecated_cc($['commit to git'], ($,) => ['text', ({
-                                                        'delimiter': ['backtick', null],
+                                                        'delimiter': ['none', null],
                                                         'value': v_serialize_boolean.serialize($),
                                                     })]),
                                                 }))]],
@@ -57,14 +57,14 @@ export const Directory: t_signatures.Directory = ($,) => ['state', _p.decide.sta
             }))
         case 'wildcards':
             return _p.ss($, ($,) => ({
-                'option': "wildcards",
+                'option': 'wildcards',
                 'value': ['group', ['verbose', _p.dictionary.literal(({
                     'required directories': _p.deprecated_cc($['required directories'], ($,) => ['text', ({
-                        'delimiter': ['backtick', null],
+                        'delimiter': ['none', null],
                         'value': v_serialize_number.serialize($),
                     })]),
                     'additional directories allowed': _p.deprecated_cc($['additional directories allowed'], ($,) => ['text', ({
-                        'delimiter': ['backtick', null],
+                        'delimiter': ['none', null],
                         'value': v_serialize_boolean.serialize($),
                     })]),
                     'extensions': _p.deprecated_cc($['extensions'], ($,) => ['list', $.__l_map(($,) => ['text', ({
@@ -72,27 +72,27 @@ export const Directory: t_signatures.Directory = ($,) => ['state', _p.decide.sta
                         'value': $,
                     })])]),
                     'warn': _p.deprecated_cc($['warn'], ($,) => ['text', ({
-                        'delimiter': ['backtick', null],
+                        'delimiter': ['none', null],
                         'value': v_serialize_boolean.serialize($),
                     })]),
                 }))]],
             }))
         case 'freeform':
             return _p.ss($, ($,) => ({
-                'option': "freeform",
+                'option': 'freeform',
                 'value': ['nothing', null],
             }))
         case 'ignore':
             return _p.ss($, ($,) => ({
-                'option': "ignore",
+                'option': 'ignore',
                 'value': ['nothing', null],
             }))
         case 'generated':
             return _p.ss($, ($,) => ({
-                'option': "generated",
+                'option': 'generated',
                 'value': ['group', ['verbose', _p.dictionary.literal(({
                     'commit to git': _p.deprecated_cc($['commit to git'], ($,) => ['text', ({
-                        'delimiter': ['backtick', null],
+                        'delimiter': ['none', null],
                         'value': v_serialize_boolean.serialize($),
                     })]),
                 }))]],
