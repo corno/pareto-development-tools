@@ -21,7 +21,7 @@ import * as ds_astn_source from "astn-core/dist/implementation/manual/schemas/pa
 const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never): Object => {
 
     const expect_unique_identifiers = ($: d.Key_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object => {
-        const temp: { [key: string]: d.Value } = {}
+        const temp: { [id: string]: d.Value } = {}
         $.__for_each(($) => {
             if (temp[$.key.value] !== undefined) {
                 abort(['duplicate identifier', $.key.value])
@@ -90,9 +90,9 @@ export const $$: _pi.Deserializer_With_Parameters<d_npm_package.NPM_Package, d_d
                 $,
                 (error) => abort(['dependencies', ['not an object', null]])
             ).__d_map(
-                ($, key) => expect_text(
+                ($, id) => expect_text(
                     $,
-                    (error) => abort(['dependencies', ['not a text', key]])
+                    (error) => abort(['dependencies', ['not a text', id]])
                 )
             )
         )

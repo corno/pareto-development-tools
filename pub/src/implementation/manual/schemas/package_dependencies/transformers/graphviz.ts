@@ -19,23 +19,23 @@ export const Result: Result = ($) => {
         'edges': _p.list.flatten(
             _p.list.from_dictionary(
                 $.packages,
-                ($, key) => {
-                    const from = key
+                ($, id) => {
+                    const from = id
                     return $.dependencies.__decide(
                         ($) => _p.list.from_dictionary(
                             _p.dictionary.filter(
                                 $,
-                                ($, key) => {
-                                    if (key === "pareto-core"
-                                        || key === "pareto-core-shorthands"
-                                        //|| key === "pareto-host-nodejs"
+                                ($, id) => {
+                                    if (id === "pareto-core"
+                                        || id === "pareto-core-shorthands"
+                                        //|| id === "pareto-host-nodejs"
                                     ) {
                                         return _p.optional.not_set<d_out.Graph.edges.L>()
                                     }
                                     return _p.optional.set(({
                                         'from': from,
-                                        'to': key,
-                                        'attributes': pacakges.__get_possible_entry(key).__decide(
+                                        'to': id,
+                                        'attributes': pacakges.__get_possible_entry(id).__decide(
                                             ($) => _p.list.literal([]),
                                             () => _p.list.literal<d_out.Attributes.L>([
                                                 ['color', "red"]

@@ -42,8 +42,8 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
         case 'dependency graph': return _p.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
         case 'all': return _p.ss($, ($) => _p.decide.state($, ($) => {
             switch ($[0]) {
-                case 'packages': return _p.ss($, ($) => sh.b.indent(_p.list.from_dictionary($, ($, key) => sh.g.nested_block([
-                    sh.b.snippet(`package '${key}': `),
+                case 'packages': return _p.ss($, ($) => sh.b.indent(_p.list.from_dictionary($, ($, id) => sh.g.nested_block([
+                    sh.b.snippet(`package '${id}': `),
                     _p.decide.state($, ($) => {
                         switch ($[0]) {
                             case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))

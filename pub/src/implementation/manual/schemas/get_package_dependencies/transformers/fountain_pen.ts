@@ -16,9 +16,9 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'directory content processing': return _p.ss($, ($) => sh.b.list(_p.list.from_dictionary(
             $,
-            ($, key) => sh.b.sub([
+            ($, id) => sh.b.sub([
                 sh.b.snippet(`package `),
-                sh.b.snippet(key),
+                sh.b.snippet(id),
                 sh.b.snippet(`: `),
                 sh.b.indent([
                     sh.g.nested_block([

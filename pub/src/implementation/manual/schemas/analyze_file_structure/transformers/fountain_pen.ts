@@ -24,8 +24,8 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
         case 'directory content processing': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`directory content processing: `),
             sh.b.indent([
-                sh.g.sub(_p.list.from_dictionary($, ($, key) => sh.g.nested_block([
-                    sh.b.snippet(`${key}: `),
+                sh.g.sub(_p.list.from_dictionary($, ($, id) => sh.g.nested_block([
+                    sh.b.snippet(`${id}: `),
                     _p.decide.state($, ($) => {
                         switch ($[0]) {
                             case 'not a directory': return _p.ss($, ($) =>sh.b.snippet(`not a directory`))

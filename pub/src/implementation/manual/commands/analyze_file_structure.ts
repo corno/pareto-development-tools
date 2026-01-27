@@ -59,8 +59,8 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                                     ]),
 
                                     _pt.list.flatten(
-                                        _pt.list.from_dictionary($v, ($, key): _pi.List<string> => {
-                                            const package_name = key
+                                        _pt.list.from_dictionary($v, ($, id): _pi.List<string> => {
+                                            const package_name = id
                                             return t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
                                                 $,
                                                 {

@@ -14,8 +14,8 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
             sh.b.snippet(`expected one of: `),
             sh.b.indent([
                 sh.g.sub(
-                    _p.list.from_dictionary($, ($, key) => sh.g.nested_block([
-                        sh.b.snippet(key)
+                    _p.list.from_dictionary($, ($, id) => sh.g.nested_block([
+                        sh.b.snippet(id)
                     ]))
                 )
             ]),

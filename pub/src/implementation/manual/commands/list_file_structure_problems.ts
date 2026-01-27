@@ -54,8 +54,8 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                         $cr.log.execute(
                             {
                                 'lines': _pt.list.flatten(
-                                    _pt.list.from_dictionary($v, ($, key) => {
-                                        const package_name = key
+                                    _pt.list.from_dictionary($v, ($, id) => {
+                                        const package_name = id
                                         return t_line_count_to_line_count.dict_to_list(
                                             _pt.dictionary.filter(
                                                 t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(

@@ -61,7 +61,7 @@ export namespace defined {
 
                 case 'group': return _p.ss($, ($) => {
                     const expected = $
-                    return ['dictionary', dir.__d_map(($, key) => {
+                    return ['dictionary', dir.__d_map(($, id) => {
                         const node = $
                         const NodeX = (
                             $: d_in.Node,
@@ -136,24 +136,24 @@ export namespace defined {
                                 default: return _p.au($[0])
                             }
                         })
-                        return expected.__get_possible_entry(key).__decide(
+                        return expected.__get_possible_entry(id).__decide(
                             ($) => NodeX(
                                 node,
                                 {
-                                    'name': key,
+                                    'name': id,
                                     'expected structure': $,
-                                    'structure path': `${$p['structure path']}/${key}`,
+                                    'structure path': `${$p['structure path']}/${id}`,
                                 }
                             ),
                             () => undefined.Node( //no expected structure for this entry
                                 $,
                                 {
-                                    'name': key,
+                                    'name': id,
                                     'structure': {
                                         'classification': ['directory', ['group', null]],
                                         'path': $p['structure path'],
                                     },
-                                    'unexpected path tail': _p.optional.set(`/${key}`),
+                                    'unexpected path tail': _p.optional.set(`/${id}`),
                                 }
                             )
                         )
@@ -193,7 +193,7 @@ export namespace defined {
                     //expecting a dictionary of directories
                     const struct = $
 
-                    return ['dictionary', dir.__d_map(($, key): d_out.Node => _p.decide.state($, ($): d_out.Node => {
+                    return ['dictionary', dir.__d_map(($, id): d_out.Node => _p.decide.state($, ($): d_out.Node => {
                         switch ($[0]) {
                             case 'directory': return _p.ss($, ($) => ['directory', Directory(
                                 $,
@@ -208,9 +208,9 @@ export namespace defined {
                                     'path': `${$p['structure path']}/*`,
                                     'classification': ['directory', ['dictionary', null]],
                                 },
-                                'extension': extension(key),
+                                'extension': extension(id),
                                 'line count': line_count($),
-                                'unexpected path tail': _p.optional.set(`/${key}`),
+                                'unexpected path tail': _p.optional.set(`/${id}`),
                             }])
                             default: return _p.au($[0])
                         }
@@ -232,12 +232,12 @@ export namespace undefined {
             'unexpected path tail': _pi.Optional_Value<string>,
         }
     ): d_out.Directory => {
-        return ['dictionary', $.__d_map(($, key) => Node(
+        return ['dictionary', $.__d_map(($, id) => Node(
             $,
             {
-                'name': key,
+                'name': id,
                 'structure': $p.structure,
-                'unexpected path tail': $p['unexpected path tail'].__o_map(($) => $ + `/${key}`),
+                'unexpected path tail': $p['unexpected path tail'].__o_map(($) => $ + `/${id}`),
             }
         ))]
     }
@@ -287,8 +287,8 @@ export namespace wildcard {
             'number of directories encountered': number,
         }
     ): d_out.Directory => {
-        return ['dictionary', $.__d_map(($, key) => {
-            const tail = $p.tail + `/${key}`
+        return ['dictionary', $.__d_map(($, id) => {
+            const tail = $p.tail + `/${id}`
             return _p.decide.state($, ($): d_out.Node => {
                 switch ($[0]) {
                     case 'other': return _p.ss($, ($) => ['other', null])
@@ -297,7 +297,7 @@ export namespace wildcard {
                             'path': $p['structure path'],
                             'classification': ['directory', ['wildcards', null]],
                         },
-                        'extension': extension(key),
+                        'extension': extension(id),
                         'unexpected path tail': _p.optional.block(() => {
                             if ($p['number of directories encountered'] < $p['wildcard']['required directories']) {
                                 //files are not allowed yet, haven't descended through enough required directories
@@ -307,7 +307,7 @@ export namespace wildcard {
                                 //additional directories are not allowed and we've gone too deep
                                 return _p.optional.set(tail)
                             }
-                            const possible_file_extension = extension(key)
+                            const possible_file_extension = extension(id)
                             let extension_matched = false
                             possible_file_extension.__o_map(($) => {
                                 const file_extension = $
@@ -348,20 +348,20 @@ export namespace wildcard {
 
 
 export const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {
-    const temp: { [key: string]: d_out.File_Analysis } = {}
+    const temp: { [id: string]: d_out.File_Analysis } = {}
     const x = ($: d_out.Directory, path: string): void => {
         _p.decide.state($, ($) => {
             switch ($[0]) {
                 case 'expected a file': return _p.ss($, ($) => { })
                 case 'ignored': return _p.ss($, ($) => { })
                 case 'dictionary': return _p.ss($, ($) => {
-                    $.__d_map(($, key) => {
+                    $.__d_map(($, id) => {
 
                         _p.decide.state($, ($) => {
                             switch ($[0]) {
                                 case 'other': return //do nothing, ignore other filesystem nodes for now
-                                case 'file': return _p.ss($, ($) => temp[`${path}/${key}`] = $)
-                                case 'directory': return _p.ss($, ($) => x($, `${path}/${key}`))
+                                case 'file': return _p.ss($, ($) => temp[`${path}/${id}`] = $)
+                                case 'directory': return _p.ss($, ($) => x($, `${path}/${id}`))
                                 default: return _p.au($[0])
                             }
                         })
@@ -382,8 +382,8 @@ export const dict_to_list = ($: d_out.Flattened_Directory_With_Line_Counts): _pi
     'analysis': d_out.File_Analysis,
 }> => {
     
-    return _p.list.from_dictionary($, ($, key) => ({
-        'path': key,
+    return _p.list.from_dictionary($, ($, id) => ({
+        'path': id,
         'analysis': $,
     }))
 }

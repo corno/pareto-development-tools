@@ -31,16 +31,16 @@ export const $$: signatures.commands.write_to_directory = _p.command_procedure(
         ),
         _p.dictionaryx.parallel(
             $p.directory,
-            ($, key) => [
+            ($, id) => [
                 _pt.deprecated_cc($, ($): _pi.Command_Promise<d_write_to_directory.Error__nodes> => {
-                    const node_path = t_path_to_path.extend_node_path($p.path, { 'addition': key })
+                    const node_path = t_path_to_path.extend_node_path($p.path, { 'addition': id })
                     switch ($[0]) {
                         case 'file': return _pt.ss($, ($) => $cr['write to_file'].execute(
                             {
                                 'escape spaces in path': $p['escape spaces in path'],
                                 'group': $,
                                 'directory path': $p.path,
-                                'filename': key,
+                                'filename': id,
                                 'indentation': $p.indentation,
                                 'newline': $p.newline
                             },
