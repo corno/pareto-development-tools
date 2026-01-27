@@ -20,7 +20,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 const remove_n_characters_from_end = ($: string, n: number): string => {
 
     const chars = _pd.list.from_text($, ($) => $)
-    const length = chars.__get_number_of_elements()
+    const length = chars.__get_number_of_items()
     const new_length = length - n
     let index = -1
 
