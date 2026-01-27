@@ -9,7 +9,7 @@ export const Directory: t_signatures.Directory = ($,) => _p.decide.state($, ($,)
         case 'dictionary':
             return _p.ss($, ($,) => ['dictionary', Directory($)])
         case 'group':
-            return _p.ss($, ($,) => ['group', $.__d_map(($,key,) => _p.decide.state($, ($,): t_out.Directory.group.D => {
+            return _p.ss($, ($,) => ['group', $.__d_map(($,id,) => _p.decide.state($, ($,): t_out.Directory.group.D => {
                 switch ($[0]) {
                     case 'directory':
                         return _p.ss($, ($,) => ['directory', Directory($)])

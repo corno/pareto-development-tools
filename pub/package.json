@@ -9,10 +9,10 @@
   "dependencies": {
     "astn-core": "^0.5.10",
     "liana-core": "^0.0.3",
-    "pareto-core-dev": "^0.12.3",
+    "pareto-core-dev": "^0.12.4",
     "pareto-fountain-pen": "^0.4.8",
     "pareto-graphviz": "^0.2.5",
-    "pareto-host-nodejs": "^0.2.11",
+    "pareto-host-nodejs": "^0.2.12",
     "pareto-resources": "^0.2.16"
   },
   "bin": {
