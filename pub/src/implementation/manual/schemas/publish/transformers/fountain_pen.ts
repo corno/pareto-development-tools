@@ -15,6 +15,8 @@ import * as t_clean_and_update_package_dependencies_to_fountain_pen from "../../
 import * as t_git_is_clean_to_fountain_pen from "../../../../../modules/git/implementation/manual/schemas/is_repository_clean/transformers/fountain_pen"
 import * as t_npm_to_fountain_pen from "../../../../../modules/npm/implementation/manual/schemas/npm/transformers/fountain_pen"
 import * as t_build_and_test_to_fountain_pen from "../../build_and_test/transformers/fountain_pen"
+import * as t_get_package_json_to_fountain_pen from "../../../../../modules/npm/implementation/manual/schemas/get_package_json/transformers/fountain_pen"
+import * as t_git_ec_to_fountain_pen from "../../../../../modules/git/implementation/manual/schemas/extended_commit/transformers/fountain_pen"
 
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
@@ -53,6 +55,17 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
         case 'error while running npm publish': return _p.ss($, ($) => sh.b.sub([
             sh.b.snippet(`could not publish to npm: `),
             t_npm_to_fountain_pen.Error($)
+        ]))
+        case 'error while logging': return _p.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`could not log`),
+        ]))
+        case 'error while getting package.json': return _p.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`could not read package.json: `),
+            t_get_package_json_to_fountain_pen.Error($)
+        ]))
+        case 'error while running git extended commit': return _p.ss($, ($) => sh.b.sub([
+            sh.b.snippet(`could not commit and push: `),
+            t_git_ec_to_fountain_pen.Error($)
         ]))
 
         default: return _p.au($[0])

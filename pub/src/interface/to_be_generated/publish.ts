@@ -8,6 +8,9 @@ import * as d_git_make_pristine from "../../modules/git/interface/to_be_generate
 import * as d_npm from "../../modules/npm/interface/to_be_generated/npm_tool"
 import * as d_update_package_dependencies from "./update_package_dependencies"
 import * as d_build_and_test from "./build_and_test"
+import * as d_get_package_json from "../../modules/npm/interface/to_be_generated/get_package_json"
+import * as d_log from "pareto-resources/dist/interface/generated/liana/schemas/log/data"
+import * as d_git_ec from "../../modules/git/interface/to_be_generated/extended_commit"
 
 export type Parameters = {
     'path to package': d_path.Context_Path
@@ -30,3 +33,6 @@ export type Error =
     | ['error while running git assert is clean after updating package dependencies', d_git_aic.Error]
     | ['error while running npm version', d_npm.Error]
     | ['error while running npm publish', d_npm.Error]
+    | ['error while getting package.json', d_get_package_json.Error]
+    | ['error while logging', null]
+    | ['error while running git extended commit', d_git_ec.Error]

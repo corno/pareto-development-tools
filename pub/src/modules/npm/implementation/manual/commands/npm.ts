@@ -21,11 +21,23 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                     ),
                     _pt.decide.state($p.operation, ($) => {
                         switch ($[0]) {
-                            case 'update': return _pt.ss($, ($) => _pt.list.literal([
-                                `update`,
+                            case 'update': return _pt.ss($, ($) => _pt.list.nested_literal_old([
+                                [
+                                    `update`,
+                                ],
+                                $['package-lock only']
+                                    ? _pt.list.literal([`--package-lock-only`])
+                                    : _pt.list.literal([])
+
                             ]))
-                            case 'install': return _pt.ss($, ($) => _pt.list.literal([
-                                `install`,
+                            case 'install': return _pt.ss($, ($) => _pt.list.nested_literal_old([
+                                [
+                                    `install`,
+                                ],
+                                $['package-lock only']
+                                    ? _pt.list.literal([`--package-lock-only`])
+                                    : _pt.list.literal([])
+
                             ]))
                             case 'version': return _pt.ss($, ($) => _pt.list.literal([
                                 `version`,

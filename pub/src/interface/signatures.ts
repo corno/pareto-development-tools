@@ -114,14 +114,18 @@ export namespace commands {
         resources.commands.publish,
         {
             'git push': resources_git.commands.push
+            'git extended commit': resources_git.commands.extended_commit
             'git assert is clean': resources_git.commands.assert_is_clean
             'git make pristine': resources_git.commands.make_pristine
             'update package dependencies': resources.commands.update_package_dependencies
             'build and test': resources.commands.build_and_test
             'npm': resources_npm.commands.npm
             'npm publish': resources_npm.commands.npm_publish
+            'log': resources_pareto.commands.log
         },
-        null
+        {
+            'read file': resources_pareto.queries.read_file
+        }
     >
 
     export type update_package_dependencies = _pi.Command_Procedure<

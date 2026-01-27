@@ -9,12 +9,11 @@ import * as signatures from "../../../interface/signatures"
 
 //data types
 import * as d from "../../../interface/to_be_generated/set_up_comparison_against_published"
-import * as d_npm_package from "../schemas/npm_package/refiners/temp"
 
 //dependencies
-import { $$ as r_parse_npm_package } from "../schemas/npm_package/refiners/temp"
 import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
+import * as q_get_package_json from "../queries/get_package_json"
 // import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
 
 const remove_n_characters_from_end = ($: string, n: number): string => {
@@ -39,17 +38,15 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
         const path_x = t_path_to_path.create_node_path($p['path to local package'], `package.json`)
         return [
             _p.query(
-                $qr['read file'](
-                    path_x,
-                    ($): d.Error => ['error while reading package.json', $],
-                ),
-                ($, abort) => r_parse_npm_package(
-                    $,
-                    ($) => abort(['error while parsing package.json', $]),
+                q_get_package_json.$$({
+                    'read file': $qr['read file'],
+                })(
                     {
-                        'uri': s_path.Node_Path(path_x),
-                    }
+                        'path to package': $p['path to local package'],
+                    },
+                    ($): d.Error => ['error while getting package.json', $]
                 ),
+                ($) => $,
                 ($v) => {
                     const package_info = $v
                     const filename = `${$v.name}-${$v.version}.tgz`;

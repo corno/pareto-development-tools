@@ -53,3 +53,14 @@ export namespace commands {
     >
 
 }
+
+export namespace queries {
+
+    export type get_package_json = _pi.Query_Function<
+        resources.queries.get_package_json,
+        {
+            'read file': resources_pareto.queries.read_file
+        }
+    >
+
+}

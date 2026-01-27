@@ -258,8 +258,12 @@ _pn.run_main_command(
                                 'npm': npm,
                                 'npm publish': npm_publish,
                                 'update package dependencies': update_package_dependencies,
+                                'git extended commit': git_extended_commit,
+                                'log': $r.commands.log,
                             },
-                            null,
+                            {
+                                'read file': $r.queries['read file']
+                            },
                         ),
                     },
                     {

@@ -58,23 +58,28 @@ export const Error: Error = ($) => {
                     ])
                 ]),
             ]))
-            case 'error while reading package.json': return _p.ss($, ($) => sh.b.sub([
-                sh.b.snippet(`error while reading package.json: `),
-                sh.b.indent([
-                    sh.g.nested_block([
-                        t_read_file_to_fountain_pen.Error($)
-                    ])
-                ]),
-            ]))
-            case 'error while parsing package.json': return _p.ss($, ($) => sh.b.sub([
-                sh.b.snippet(`error while parsing package.json: `),
-                sh.b.indent([
-                    sh.g.nested_block([
-                        //FIXME
-                        // sh.b.snippet($)
-                    ])
-                ]),
-            ]))
+            case 'error while getting package.json': return _p.ss($, ($) => _p.decide.state($, ($) => {
+                switch ($[0]) {
+                    case 'error while reading package.json': return _p.ss($, ($) => sh.b.sub([
+                        sh.b.snippet(`error while reading package.json: `),
+                        sh.b.indent([
+                            sh.g.nested_block([
+                                t_read_file_to_fountain_pen.Error($)
+                            ])
+                        ]),
+                    ]))
+                    case 'error while parsing package.json': return _p.ss($, ($) => sh.b.sub([
+                        sh.b.snippet(`error while parsing package.json: `),
+                        sh.b.indent([
+                            sh.g.nested_block([
+                                //FIXME
+                                // sh.b.snippet($)
+                            ])
+                        ]),
+                    ]))
+                    default: return _p.au($[0])
+                }
+            }))
             default: return _p.au($[0])
         }
     })

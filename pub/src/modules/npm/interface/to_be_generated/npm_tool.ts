@@ -6,8 +6,12 @@ import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas
 export type Parameters = {
     'path': _pi.Optional_Value<d_path.Context_Path>,
     'operation':
-    | ['update', null]
-    | ['install', null]
+    | ['update', {
+        'package-lock only': boolean
+    }]
+    | ['install', {
+        'package-lock only': boolean
+    }]
     | ['version', 
         | ['patch', null]
         | ['minor', null]

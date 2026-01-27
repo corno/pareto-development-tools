@@ -41,7 +41,9 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         $cr['npm'].execute(
             {
                 'path': _p.optional.set($p.path),
-                'operation': ['update', null], // 'install' does not update the indirect dependencies
+                'operation': ['update', {
+                    'package-lock only': false
+                }], // 'install' does not update the indirect dependencies
             },
             ($) => ['could not install dependencies', $],
         ),
