@@ -34,7 +34,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                             },
                             ($): d.Error => ['all', ['could not read packages directory', $]],
                         ),
-                        ($x, key_spaces_not_escaped): _pi.Command_Promise<d.All__Package_Error>[] => _p.decide.state($.instruction, ($) => {
+                        ($x, id_spaces_not_escaped): _pi.Command_Promise<d.All__Package_Error>[] => _p.decide.state($.instruction, ($) => {
                             const concatenated_path = $x.path
                             const context_path = t_path_to_path.deprecated_node_path_to_context_path(concatenated_path)
                             switch ($[0]) {
@@ -86,9 +86,9 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                     $cr['npm set up comparison against published'].execute(
                                         {
                                             'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': `pub` }),
-                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `local` }), key_spaces_not_escaped),
-                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `published` }), key_spaces_not_escaped),
-                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `temp` }), key_spaces_not_escaped),
+                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `local` }), id_spaces_not_escaped),
+                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `published` }), id_spaces_not_escaped),
+                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `temp` }), id_spaces_not_escaped),
                                         },
                                         ($): d.All__Package_Error => ['set up comparison', $],
                                     )

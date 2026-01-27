@@ -20,13 +20,13 @@ import * as ds_astn_source from "astn-core/dist/implementation/manual/schemas/pa
 
 const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never): Object => {
 
-    const expect_unique_identifiers = ($: d.Key_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object => {
+    const expect_unique_identifiers = ($: d.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object => {
         const temp: { [id: string]: d.Value } = {}
         $.__for_each(($) => {
-            if (temp[$.key.value] !== undefined) {
-                abort(['duplicate identifier', $.key.value])
+            if (temp[$.id.value] !== undefined) {
+                abort(['duplicate identifier', $.id.value])
             } else {
-                temp[$.key.value] = $.value.__decide(
+                temp[$.id.value] = $.value.__decide(
                     ($) => $.value,
                     () => abort(['missing value', null]),
                 )
