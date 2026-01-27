@@ -65,11 +65,16 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                         }],
                                     )
                                 ])
-                                case 'git extended commit': return _p.ss($, ($) => [
-                                    $cr['git extended commit'].execute(
+                                case 'git commit': return _p.ss($, ($) => [
+                                    $cr['git commit'].execute(
                                         {
-                                            'path': _p.optional.set(context_path),
-                                            'instruction': $
+                                            'path': context_path,
+                                            'instruction': {
+                                                'commit message': "pdt: " + $['commit message'],
+                                                'push after commit': $['push after commit'],
+                                                'stage all changes': $['stage all changes'],
+                                            },
+                                            'skip build and tests': false,
                                         },
                                         ($): d.All__Package_Error => ['git commit', $],
                                     )
@@ -131,11 +136,16 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 }]],
                             )
                         ])
-                        case 'git extended commit': return _p.ss($, ($) => [
-                            $cr['git extended commit'].execute(
+                        case 'git commit': return _p.ss($, ($) => [
+                            $cr['git commit'].execute(
                                 {
-                                    'path': _p.optional.set(path),
-                                    'instruction': $
+                                    'path': path,
+                                    'instruction': {
+                                        'commit message': "pdt: " + $['commit message'],
+                                        'push after commit': $['push after commit'],
+                                        'stage all changes': $['stage all changes'],
+                                    },
+                                    'skip build and tests': false,
                                 },
                                 ($): d.Error => ['package', ['git commit', $]],
                             )

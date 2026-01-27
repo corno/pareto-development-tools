@@ -34,7 +34,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                 }),
                             }]
                             case 'build': return ['build', null]
-                            case 'git-commit': return ['git extended commit', {
+                            case 'git-commit': return ['git commit', {
                                 'commit message': iterator.consume(
                                     ($) => $,
                                     () => abort(['expected a text', { 'description': "commit message" }])
@@ -78,7 +78,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                         switch ($) {
                             case 'assert-clean': return ['assert clean', null]
                             case 'build-and-test': return ['build and test', null]
-                            case 'git-commit': return ['git extended commit', {
+                            case 'git-commit': return ['git commit', {
                                 'commit message': iterator.consume(
                                     ($) => $,
                                     () => abort(['expected a text', { 'description': "commit message" }])

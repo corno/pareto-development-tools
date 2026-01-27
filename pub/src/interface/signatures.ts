@@ -41,7 +41,7 @@ export namespace commands {
             'build': resources.commands.build
             'create dependency graph': resources.commands.create_dependency_graph
             'git assert is clean': resources_git.commands.assert_is_clean
-            'git extended commit': resources_git.commands.extended_commit
+            'git commit': resources.commands.git_commit
             'git remove tracked but ignored': resources_git.commands.remove_tracked_but_ignored
             'list file structure problems': resources.commands.analyze_file_structure
             'npm set up comparison against published': resources_npm.commands.set_up_comparison_against_published
@@ -81,6 +81,15 @@ export namespace commands {
         }
     >
 
+    export type git_commit = _pi.Command_Procedure<
+        resources.commands.git_commit,
+        {
+            'build and test': resources.commands.build_and_test
+            'git extended commit': resources_git.commands.extended_commit
+        },
+        null
+    >
+
     export type list_file_structure_problems = _pi.Command_Procedure<
         resources.commands.analyze_file_structure,
         {
@@ -102,14 +111,6 @@ export namespace commands {
         null
     >
 
-    export type tsc = _pi.Command_Procedure<
-        resources.commands.tsc,
-        {
-            'tsc': resources_pareto.commands.execute_smelly_command_executable
-        },
-        null
-    >
-
     export type publish = _pi.Command_Procedure<
         resources.commands.publish,
         {
@@ -126,6 +127,14 @@ export namespace commands {
         {
             'read file': resources_pareto.queries.read_file
         }
+    >
+
+    export type tsc = _pi.Command_Procedure<
+        resources.commands.tsc,
+        {
+            'tsc': resources_pareto.commands.execute_smelly_command_executable
+        },
+        null
     >
 
     export type update_package_dependencies = _pi.Command_Procedure<

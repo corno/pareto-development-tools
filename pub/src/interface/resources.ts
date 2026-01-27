@@ -9,7 +9,7 @@ import * as d_get_package_dependencies from "./to_be_generated/get_package_depen
 import * as d_publish from "./to_be_generated/publish"
 import * as d_tsc from "./to_be_generated/tsc"
 import * as d_update_package_dependencies from "./to_be_generated/update_package_dependencies"
-
+import * as d_git_commit from "./to_be_generated/git_commit"
 
 
 export namespace queries {
@@ -25,6 +25,7 @@ export namespace commands {
     export type build = _pi.Command<d_build.Error, d_build.Parameters>
     export type build_and_test = _pi.Command<d_build_and_test.Error, d_build_and_test.Parameters>
     export type create_dependency_graph = _pi.Command<d_create_dependency_graph.Error, d_create_dependency_graph.Parameters>
+    export type git_commit = _pi.Command<d_git_commit.Error, d_git_commit.Parameters>
     export type publish = _pi.Command<d_publish.Error, d_publish.Parameters>
     export type tsc = _pi.Command<d_tsc.Error, d_tsc.Parameters>
     export type update_package_dependencies = _pi.Command<d_update_package_dependencies.Error, d_update_package_dependencies.Parameters>

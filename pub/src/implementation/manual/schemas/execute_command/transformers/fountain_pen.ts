@@ -12,7 +12,7 @@ export namespace signatures {
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 //dependencies
-import * as t_git_extended_commit_to_fountain_pen from "../../../../../modules/git/implementation/manual/schemas/extended_commit/transformers/fountain_pen"
+import * as t_git_commit_to_fountain_pen from "../../git_commit/transformers/fountain_pen"
 import * as t_git_assert_clean_to_fountain_pen from "../../../../../modules/git/implementation/manual/schemas/assert_is_clean/transformers/fountain_pen"
 import * as t_git_remove_tracked_but_ignored from "../../../../../modules/git/implementation/manual/schemas/remove_tracked_but_ignored/transformers/fountain_pen"
 
@@ -33,7 +33,7 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
                 case 'publish': return _p.ss($, ($): d_out.Block_Part => t_publish.Error($))
                 case 'update dependencies': return _p.ss($, ($) => t_update_dependencies.Error($))
                 case 'git assert clean': return _p.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
-                case 'git commit': return _p.ss($, ($) => t_git_extended_commit_to_fountain_pen.Error($))
+                case 'git commit': return _p.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
 
                 default: return _p.au($[0])
             }
@@ -49,7 +49,7 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
                             case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
                             case 'build': return _p.ss($, ($) => t_build_to_fountain_pen.Error($, { 'concise': false }))
                             case 'git assert clean': return _p.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
-                            case 'git commit': return _p.ss($, ($) => t_git_extended_commit_to_fountain_pen.Error($))
+                            case 'git commit': return _p.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
                             case 'git remove tracked but ignored': return _p.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
                             case 'set up comparison': return _p.ss($, ($) => t_set_up_comparison_against_published.Error($))
                             case 'update dependencies': return _p.ss($, ($) => t_update_dependencies.Error($))

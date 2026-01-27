@@ -24,6 +24,7 @@ import { $$ as c_fp_log } from "./modules/pareto-fountain-pen-directory/implemen
 import { $$ as c_git_assert_clean } from "./modules/git/implementation/manual/commands/assert_is_clean"
 import { $$ as c_git_make_pristine } from "./modules/git/implementation/manual/commands/make_pristine"
 import { $$ as c_git_extended_commit } from "./modules/git/implementation/manual/commands/extended_commit"
+import { $$ as c_git_commit } from "./implementation/manual/commands/git_commit"
 import { $$ as c_git_push } from "./modules/git/implementation/manual/commands/push"
 import { $$ as c_git_remove_tracked_but_ignored } from "./modules/git/implementation/manual/commands/remove_tracked_but_ignored"
 import { $$ as c_npm } from "./modules/npm/implementation/manual/commands/npm"
@@ -247,7 +248,13 @@ _pn.run_main_command(
                         ),
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
                         'update package dependencies': update_package_dependencies,
-                        'git extended commit': git_extended_commit,
+                        'git commit': c_git_commit(
+                            {
+                                'build and test': build_and_test,
+                                'git extended commit': git_extended_commit,
+                            },
+                            null
+                        ),
                         'npm set up comparison against published': set_up_comparison_against_published,
                         'publish': c_publish(
                             {
