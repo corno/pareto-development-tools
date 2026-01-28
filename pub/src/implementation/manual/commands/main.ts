@@ -23,7 +23,7 @@ type My_Error =
 
 export const $$: signatures.commands.main = _p.command_procedure(
     ($p, $cr) => [
-        _p.create_error_handling_context<d.Error, My_Error>(
+        _p.handle_error<d.Error, My_Error>(
             [
                 _p.refine_without_error_transformation(
 

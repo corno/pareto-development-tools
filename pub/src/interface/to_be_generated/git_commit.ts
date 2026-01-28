@@ -11,8 +11,10 @@ export type Error =
 
 export type Parameters = {
     'path': d_path.Context_Path,
-    'skip build and tests': boolean,
     'instruction': Instruction,
 }
 
-export type Instruction = d_git_extended_commit.Instruction
+export type Instruction = {
+    'commit message': string
+    'accept broken commits': boolean
+}

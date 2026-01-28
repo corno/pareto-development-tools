@@ -17,7 +17,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                     () => abort(['expected a text', { 'description': "path to project" }])
                 )),
                 'instruction': iterator.consume(
-                    ($) => {
+                    ($): d.All_Pacakges_Instruction => {
                         switch ($) {
                             case 'assert-clean': return ['assert clean', null]
                             case 'build-and-test': return ['build and test', {
@@ -39,8 +39,17 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     ($) => $,
                                     () => abort(['expected a text', { 'description': "commit message" }])
                                 ),
-                                'stage all changes': true,
-                                'push after commit': true,
+                                'accept broken commits': _p.deprecated_block(() => {
+                                    const value = iterator.look()
+                                    return value === null
+                                        ? false
+                                        : value[0] === "accept-broken"
+                                            ? _p.deprecated_block(() => {
+                                                iterator.discard(() => null)
+                                                return true
+                                            })
+                                            : false
+                                }),
                             }]
                             case 'git-remove-tracked-but-ignored': return ['git remove tracked but ignored', null]
                             case 'set-up-comparison': return ['set up comparison', null]
@@ -83,8 +92,17 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     ($) => $,
                                     () => abort(['expected a text', { 'description': "commit message" }])
                                 ),
-                                'stage all changes': true,
-                                'push after commit': true,
+                                'accept broken commits': _p.deprecated_block(() => {
+                                    const value = iterator.look()
+                                    return value === null
+                                        ? false
+                                        : value[0] === "accept-broken"
+                                            ? _p.deprecated_block(() => {
+                                                iterator.discard(() => null)
+                                                return true
+                                            })
+                                            : false
+                                }),
                             }]
                             case 'update-dependencies': return ['update package dependencies', null]
                             default: return abort(['expected one of', _p.dictionary.literal({

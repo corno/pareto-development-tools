@@ -69,12 +69,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                     $cr['git commit'].execute(
                                         {
                                             'path': context_path,
-                                            'instruction': {
-                                                'commit message': "pdt: " + $['commit message'],
-                                                'push after commit': $['push after commit'],
-                                                'stage all changes': $['stage all changes'],
-                                            },
-                                            'skip build and tests': false,
+                                            'instruction': $,
                                         },
                                         ($): d.All__Package_Error => ['git commit', $],
                                     )
@@ -140,12 +135,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                             $cr['git commit'].execute(
                                 {
                                     'path': path,
-                                    'instruction': {
-                                        'commit message': "pdt: " + $['commit message'],
-                                        'push after commit': $['push after commit'],
-                                        'stage all changes': $['stage all changes'],
-                                    },
-                                    'skip build and tests': false,
+                                    'instruction': $,
                                 },
                                 ($): d.Error => ['package', ['git commit', $]],
                             )
