@@ -24,7 +24,7 @@ export const $$: signatures.queries.get_package_json = _p.query_function(
                 $,
                 ($) => abort(['error while parsing package.json', $]),
                 {
-                    'uri': s_path.Node_Path(path),
+                    'document resource identifier': s_path.Node_Path(path),
                 }
             )
         )

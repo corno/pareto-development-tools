@@ -35,7 +35,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                                 $,
                                 ($) => abort(['parse error', $]),
                                 {
-                                    'uri': s_path.Node_Path(path_x),
+                                    'document resource identifier': s_path.Node_Path(path_x),
                                 }
                             )
                         ))

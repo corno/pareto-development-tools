@@ -67,13 +67,13 @@ const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never):
 
 const expect_property = ($: Object, id: string, abort: (error: ['missing property', string]) => never): d.Value => $.__get_entry(id, () => abort(['missing property', id]))
 
-export const $$: _pi.Deserializer_With_Parameters<d_npm_package.NPM_Package, d_deseralize_package_json.Error, { 'uri': string }> = ($, abort, $p) => {
+export const $$: _pi.Deserializer_With_Parameters<d_npm_package.NPM_Package, d_deseralize_package_json.Error, { 'document resource identifier': string }> = ($, abort, $p) => {
     const x = ds_astn_source.Document(
         $,
         () => abort(['invalid ASTN', null]),
         {
             'tab size': 4,
-            'uri': $p.uri
+            'document resource identifier': $p['document resource identifier']
         },
     )
 

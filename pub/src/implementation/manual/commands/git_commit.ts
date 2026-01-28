@@ -15,7 +15,7 @@ export const $$: signatures.commands.git_commit = _p.command_procedure(
             $p.instruction['accept broken commits'],
             [
 
-                _p.if_.executed_successfully( //testing to determine the commit message
+                _p.if_.executed_successfully<d.Error, null>( //testing to determine the commit message
                     [
 
                         $cr['build and test'].execute(
@@ -47,7 +47,7 @@ export const $$: signatures.commands.git_commit = _p.command_procedure(
                     {
                         'path': $p['path'],
                     },
-                    ($) => null,
+                    ($): d.Error => ['error while running build and test', $],
                 ),
                 $cr['git extended commit'].execute(
                     {
