@@ -15,66 +15,40 @@ export const $$: signatures.commands.git_commit = _p.command_procedure(
             $p.instruction['accept broken commits'],
             [
 
-
-
-                _p.if_.on_successfully_executed(
-
+                _p.if_.executed_successfully( //testing to determine the commit message
                     [
-
 
                         $cr['build and test'].execute(
                             {
                                 'path': $p['path'],
                             },
-                            ($): d.Error => ['error while running build and test', $],
+                            ($) => null,
                         ),
 
                     ],
-                    () => [
-
-                        $cr['git extended commit'].execute(
-                            {
-                                'path': _p.optional.set($p['path']),
-                                'instruction': {
-                                    'stage all changes': true,
-                                    'commit message': "pdt: " + $p.instruction['commit message'],
-                                    'push after commit': true,
-                                },
-                            },
-                            ($): d.Error => ['git extended commit', $],
-                        )
-
-                    ],
                     ($) => [
-
-
                         $cr['git extended commit'].execute(
                             {
                                 'path': _p.optional.set($p['path']),
                                 'instruction': {
                                     'stage all changes': true,
-                                    'commit message': "pdt(broken): " + $p.instruction['commit message'],
+                                    'commit message': "pdt" + ($ ? "" : "(broken)") + ": " + $p.instruction['commit message'],
                                     'push after commit': true,
                                 },
                             },
                             ($): d.Error => ['git extended commit', $],
                         )
-
                     ]
-
                 ),
 
             ],
             [
-
-
                 $cr['build and test'].execute(
                     {
                         'path': $p['path'],
                     },
-                    ($): d.Error => ['error while running build and test', $],
+                    ($) => null,
                 ),
-
                 $cr['git extended commit'].execute(
                     {
                         'path': _p.optional.set($p['path']),
