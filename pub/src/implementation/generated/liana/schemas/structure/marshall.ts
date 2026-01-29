@@ -70,17 +70,17 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                                                         ($) => ({
                                                                             'option': 'generated',
                                                                             'value': ['group', ['verbose', _p.dictionary.literal(
-                                                                                ({
+                                                                                {
                                                                                     'commit to git': _p_cc(
                                                                                         $['commit to git'],
-                                                                                        ($) => ['text', ({
+                                                                                        ($) => ['text', {
                                                                                             'delimiter': ['none', null],
                                                                                             'value': v_serialize_boolean.serialize(
                                                                                                 $
                                                                                             ),
-                                                                                        })]
+                                                                                        }]
                                                                                     ),
-                                                                                })
+                                                                                }
                                                                             )]],
                                                                         })
                                                                     )
@@ -109,44 +109,44 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                     ($) => ({
                         'option': 'wildcards',
                         'value': ['group', ['verbose', _p.dictionary.literal(
-                            ({
+                            {
                                 'required directories': _p_cc(
                                     $['required directories'],
-                                    ($) => ['text', ({
+                                    ($) => ['text', {
                                         'delimiter': ['none', null],
                                         'value': v_serialize_number.serialize(
                                             $
                                         ),
-                                    })]
+                                    }]
                                 ),
                                 'additional directories allowed': _p_cc(
                                     $['additional directories allowed'],
-                                    ($) => ['text', ({
+                                    ($) => ['text', {
                                         'delimiter': ['none', null],
                                         'value': v_serialize_boolean.serialize(
                                             $
                                         ),
-                                    })]
+                                    }]
                                 ),
                                 'extensions': _p_cc(
                                     $['extensions'],
                                     ($) => ['list', $.__l_map(
-                                        ($) => ['text', ({
+                                        ($) => ['text', {
                                             'delimiter': ['quote', null],
                                             'value': $,
-                                        })]
+                                        }]
                                     )]
                                 ),
                                 'warn': _p_cc(
                                     $['warn'],
-                                    ($) => ['text', ({
+                                    ($) => ['text', {
                                         'delimiter': ['none', null],
                                         'value': v_serialize_boolean.serialize(
                                             $
                                         ),
-                                    })]
+                                    }]
                                 ),
-                            })
+                            }
                         )]],
                     })
                 )
@@ -172,17 +172,17 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                     ($) => ({
                         'option': 'generated',
                         'value': ['group', ['verbose', _p.dictionary.literal(
-                            ({
+                            {
                                 'commit to git': _p_cc(
                                     $['commit to git'],
-                                    ($) => ['text', ({
+                                    ($) => ['text', {
                                         'delimiter': ['none', null],
                                         'value': v_serialize_boolean.serialize(
                                             $
                                         ),
-                                    })]
+                                    }]
                                 ),
-                            })
+                            }
                         )]],
                     })
                 )

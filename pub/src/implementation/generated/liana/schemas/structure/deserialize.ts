@@ -13,10 +13,10 @@ export const Directory: t_signatures.Directory = ($, abort, $p) => v_unmarshall.
         ($) => abort(
             ['tbd', null]
         ),
-        ({
+        {
             'document resource identifier': $p['document resource identifier'],
             'tab size': $p['tab size'],
-        })
+        }
     )['content'],
     ($) => abort(
         ['tbd', null]

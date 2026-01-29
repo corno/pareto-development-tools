@@ -50,12 +50,12 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
                                                         case 'generated':
                                                             return _p.ss(
                                                                 $,
-                                                                ($) => ['generated', ({
+                                                                ($) => ['generated', {
                                                                     'commit to git': _p_cc(
                                                                         $['commit to git'],
                                                                         ($) => $
                                                                     ),
-                                                                })]
+                                                                }]
                                                             )
                                                         default:
                                                             return _p.au(
@@ -77,7 +77,7 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
             case 'wildcards':
                 return _p.ss(
                     $,
-                    ($) => ['wildcards', ({
+                    ($) => ['wildcards', {
                         'required directories': _p_cc(
                             $['required directories'],
                             ($) => $
@@ -96,7 +96,7 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
                             $['warn'],
                             ($) => $
                         ),
-                    })]
+                    }]
                 )
             case 'freeform':
                 return _p.ss(
@@ -111,12 +111,12 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
             case 'generated':
                 return _p.ss(
                     $,
-                    ($) => ['generated', ({
+                    ($) => ['generated', {
                         'commit to git': _p_cc(
                             $['commit to git'],
                             ($) => $
                         ),
-                    })]
+                    }]
                 )
             default:
                 return _p.au(
