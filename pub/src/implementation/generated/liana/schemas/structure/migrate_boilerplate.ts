@@ -1,6 +1,14 @@
 
 import * as _p from "pareto-core/dist/transformer"
 
+import { 
+    _p_unreachable_code_path, 
+} from "pareto-core/dist/unreachable_code_path"
+
+import { 
+    _p_cc, 
+} from "pareto-core/dist/change_context"
+
 import * as t_signatures from "../../../../../interface/generated/liana/schemas/structure/migrate_boilerplate"
 
 import * as t_out from "../../../../../interface/generated/liana/schemas/structure/data"
@@ -46,7 +54,7 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
                                                             return _p.ss(
                                                                 $, 
                                                                 ($) => ['generated', ({
-                                                                    'commit to git': _p.deprecated_cc(
+                                                                    'commit to git': _p_cc(
                                                                         $['commit to git'], 
                                                                         ($) => $
                                                                     ),
@@ -73,21 +81,21 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
                 return _p.ss(
                     $, 
                     ($) => ['wildcards', ({
-                        'required directories': _p.deprecated_cc(
+                        'required directories': _p_cc(
                             $['required directories'], 
                             ($) => $
                         ),
-                        'additional directories allowed': _p.deprecated_cc(
+                        'additional directories allowed': _p_cc(
                             $['additional directories allowed'], 
                             ($) => $
                         ),
-                        'extensions': _p.deprecated_cc(
+                        'extensions': _p_cc(
                             $['extensions'], 
                             ($) => $.__l_map(
                                 ($) => $
                             )
                         ),
-                        'warn': _p.deprecated_cc(
+                        'warn': _p_cc(
                             $['warn'], 
                             ($) => $
                         ),
@@ -107,7 +115,7 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
                 return _p.ss(
                     $, 
                     ($) => ['generated', ({
-                        'commit to git': _p.deprecated_cc(
+                        'commit to git': _p_cc(
                             $['commit to git'], 
                             ($) => $
                         ),

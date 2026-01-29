@@ -15,7 +15,7 @@ export const $$: signatures.commands.git_commit = _p.command_procedure(
             $p.instruction['accept broken commits'],
             [
 
-                _p.if_.executed_successfully<d.Error, null>( //testing to determine the commit message
+                _p.pseudo_query_successfully_executed<d.Error, null>( //testing to determine the commit message
                     [
 
                         $cr['build and test'].execute(

@@ -2,6 +2,7 @@
 import * as _p from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/transformer'
 import * as _pi from 'pareto-core/dist/interface'
+import { _p_cc } from 'pareto-core/dist/change_context'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -32,7 +33,7 @@ export const $$: signatures.commands.write_to_directory = _p.command_procedure(
         _p.dictionaryx.parallel(
             $p.directory,
             ($, id) => [
-                _pt.deprecated_cc($, ($): _pi.Command_Promise<d_write_to_directory.Error__nodes> => {
+                _p_cc($, ($): _pi.Command_Promise<d_write_to_directory.Error__nodes> => {
                     const node_path = t_path_to_path.extend_node_path($p.path, { 'addition': id })
                     switch ($[0]) {
                         case 'file': return _pt.ss($, ($) => $cr['write to_file'].execute(

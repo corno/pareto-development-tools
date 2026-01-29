@@ -1,5 +1,6 @@
 import * as _p from 'pareto-core/dist/refiner'
 import * as _pi from 'pareto-core/dist/interface'
+import { _p_deprecated_block } from 'pareto-core/dist/deprecated_block'
 
 import * as d from "../../../../../interface/to_be_generated/execute_command"
 import * as d_error from "../../../../../interface/to_be_generated/parse"
@@ -21,12 +22,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                         switch ($) {
                             case 'assert-clean': return ['assert clean', null]
                             case 'build-and-test': return ['build and test', {
-                                'concise': _p.deprecated_block(() => {
+                                'concise': _p_deprecated_block(() => {
                                     const value = iterator.look()
                                     return value === null
                                         ? false
                                         : value[0] === "concise"
-                                            ? _p.deprecated_block(() => {
+                                            ? _p_deprecated_block(() => {
                                                 iterator.discard(() => null)
                                                 return true
                                             })
@@ -39,12 +40,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     ($) => $,
                                     () => abort(['expected a text', { 'description': "commit message" }])
                                 ),
-                                'accept broken commits': _p.deprecated_block(() => {
+                                'accept broken commits': _p_deprecated_block(() => {
                                     const value = iterator.look()
                                     return value === null
                                         ? false
                                         : value[0] === "accept-broken"
-                                            ? _p.deprecated_block(() => {
+                                            ? _p_deprecated_block(() => {
                                                 iterator.discard(() => null)
                                                 return true
                                             })
@@ -92,12 +93,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     ($) => $,
                                     () => abort(['expected a text', { 'description': "commit message" }])
                                 ),
-                                'accept broken commits': _p.deprecated_block(() => {
+                                'accept broken commits': _p_deprecated_block(() => {
                                     const value = iterator.look()
                                     return value === null
                                         ? false
                                         : value[0] === "accept-broken"
-                                            ? _p.deprecated_block(() => {
+                                            ? _p_deprecated_block(() => {
                                                 iterator.discard(() => null)
                                                 return true
                                             })
@@ -169,7 +170,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                         'minor': null,
                     })])
                 ),
-                'impact': _p.deprecated_block(() => {
+                'impact': _p_deprecated_block(() => {
                     const value = iterator.look()
                     if (value === null) {
                         return abort(['expected a text', { 'description': "'--dry-run' or a one time password" }])

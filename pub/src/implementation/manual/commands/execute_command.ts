@@ -1,5 +1,6 @@
 import * as _p from 'pareto-core/dist/command'
 import * as _pi from 'pareto-core/dist/interface'
+import { _p_cc } from 'pareto-core/dist/change_context'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -191,7 +192,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                     ($): d.Error => ['package', ['publish', $]],
                 )
             ])
-            case 'set up comparison': return _p.ss($, ($) => _p.deprecated_cc(
+            case 'set up comparison': return _p.ss($, ($) => _p_cc(
                 {
                     'path to temp': t_path_to_path.extend_context_path($['path to package'], { 'addition': `temp` }),
                     'path to package': $['path to package'],

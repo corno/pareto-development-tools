@@ -1,6 +1,7 @@
 import * as _p from 'pareto-core/dist/query'
 import * as _pi from 'pareto-core/dist/interface'
 import * as _p_temp from 'pareto-core/dist/transformer'
+import { _p_cc } from 'pareto-core/dist/change_context'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -14,7 +15,7 @@ import * as s_path from "pareto-resources/dist/implementation/manual/schemas/pat
 import { $$ as r_parse_npm_package } from "../schemas/npm_package/refiners/temp"
 
 export const $$: signatures.queries.get_package_json = _p.query_function(
-    ($p, $r) => _p_temp.deprecated_cc($p, ($p) => {
+    ($p, $r) => _p_cc($p, ($p) => {
         const path = t_path_to_path.create_node_path($p['path to package'], `package.json`)
         return $r['read file'](
             path,

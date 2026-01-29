@@ -1,6 +1,14 @@
 
 import * as _p from "pareto-core/dist/transformer"
 
+import { 
+    _p_unreachable_code_path, 
+} from "pareto-core/dist/unreachable_code_path"
+
+import { 
+    _p_cc, 
+} from "pareto-core/dist/change_context"
+
 import * as t_signatures from "../../../../../interface/generated/liana/schemas/structure/marshall"
 
 import * as t_out from "astn-core/dist/interface/generated/liana/schemas/sealed_target/data"
@@ -66,7 +74,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                                                             'option': 'generated',
                                                                             'value': ['group', ['verbose', _p.dictionary.literal(
                                                                                 ({
-                                                                                    'commit to git': _p.deprecated_cc(
+                                                                                    'commit to git': _p_cc(
                                                                                         $['commit to git'], 
                                                                                         ($) => ['text', ({
                                                                                             'delimiter': ['none', null],
@@ -105,7 +113,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                         'option': 'wildcards',
                         'value': ['group', ['verbose', _p.dictionary.literal(
                             ({
-                                'required directories': _p.deprecated_cc(
+                                'required directories': _p_cc(
                                     $['required directories'], 
                                     ($) => ['text', ({
                                         'delimiter': ['none', null],
@@ -114,7 +122,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                         ),
                                     })]
                                 ),
-                                'additional directories allowed': _p.deprecated_cc(
+                                'additional directories allowed': _p_cc(
                                     $['additional directories allowed'], 
                                     ($) => ['text', ({
                                         'delimiter': ['none', null],
@@ -123,7 +131,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                         ),
                                     })]
                                 ),
-                                'extensions': _p.deprecated_cc(
+                                'extensions': _p_cc(
                                     $['extensions'], 
                                     ($) => ['list', $.__l_map(
                                         ($) => ['text', ({
@@ -132,7 +140,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                         })]
                                     )]
                                 ),
-                                'warn': _p.deprecated_cc(
+                                'warn': _p_cc(
                                     $['warn'], 
                                     ($) => ['text', ({
                                         'delimiter': ['none', null],
@@ -168,7 +176,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                         'option': 'generated',
                         'value': ['group', ['verbose', _p.dictionary.literal(
                             ({
-                                'commit to git': _p.deprecated_cc(
+                                'commit to git': _p_cc(
                                     $['commit to git'], 
                                     ($) => ['text', ({
                                         'delimiter': ['none', null],
