@@ -1,12 +1,12 @@
 
 import * as _p from "pareto-core/dist/transformer"
 
-import { 
-    _p_unreachable_code_path, 
+import {
+    _p_unreachable_code_path,
 } from "pareto-core/dist/unreachable_code_path"
 
-import { 
-    _p_cc, 
+import {
+    _p_cc,
 } from "pareto-core/dist/change_context"
 
 import * as t_signatures from "../../../../../interface/generated/liana/schemas/structure/marshall"
@@ -16,13 +16,14 @@ import * as t_out from "astn-core/dist/interface/generated/liana/schemas/sealed_
 import * as v_serialize_number from "liana-core/dist/implementation/manual/primitives/integer/serializers/decimal"
 
 import * as v_serialize_boolean from "liana-core/dist/implementation/manual/primitives/boolean/serializers/true_false"
+
 export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.state(
-    $, 
+    $,
     ($): t_out.Value.state => {
         switch ($[0]) {
             case 'dictionary':
                 return _p.ss(
-                    $, 
+                    $,
                     ($) => ({
                         'option': 'dictionary',
                         'value': Directory(
@@ -32,17 +33,17 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                 )
             case 'group':
                 return _p.ss(
-                    $, 
+                    $,
                     ($) => ({
                         'option': 'group',
                         'value': ['dictionary', $.__d_map(
-                            ($,id) => ['state', _p.decide.state(
-                                $, 
+                            ($, id) => ['state', _p.decide.state(
+                                $,
                                 ($): t_out.Value.state => {
                                     switch ($[0]) {
                                         case 'directory':
                                             return _p.ss(
-                                                $, 
+                                                $,
                                                 ($) => ({
                                                     'option': 'directory',
                                                     'value': Directory(
@@ -52,16 +53,16 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                             )
                                         case 'file':
                                             return _p.ss(
-                                                $, 
+                                                $,
                                                 ($) => ({
                                                     'option': 'file',
                                                     'value': ['state', _p.decide.state(
-                                                        $, 
+                                                        $,
                                                         ($): t_out.Value.state => {
                                                             switch ($[0]) {
                                                                 case 'manual':
                                                                     return _p.ss(
-                                                                        $, 
+                                                                        $,
                                                                         ($) => ({
                                                                             'option': 'manual',
                                                                             'value': ['nothing', null],
@@ -69,13 +70,13 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                                                     )
                                                                 case 'generated':
                                                                     return _p.ss(
-                                                                        $, 
+                                                                        $,
                                                                         ($) => ({
                                                                             'option': 'generated',
                                                                             'value': ['group', ['verbose', _p.dictionary.literal(
                                                                                 ({
                                                                                     'commit to git': _p_cc(
-                                                                                        $['commit to git'], 
+                                                                                        $['commit to git'],
                                                                                         ($) => ['text', ({
                                                                                             'delimiter': ['none', null],
                                                                                             'value': v_serialize_boolean.serialize(
@@ -108,13 +109,13 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                 )
             case 'wildcards':
                 return _p.ss(
-                    $, 
+                    $,
                     ($) => ({
                         'option': 'wildcards',
                         'value': ['group', ['verbose', _p.dictionary.literal(
                             ({
                                 'required directories': _p_cc(
-                                    $['required directories'], 
+                                    $['required directories'],
                                     ($) => ['text', ({
                                         'delimiter': ['none', null],
                                         'value': v_serialize_number.serialize(
@@ -123,7 +124,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                     })]
                                 ),
                                 'additional directories allowed': _p_cc(
-                                    $['additional directories allowed'], 
+                                    $['additional directories allowed'],
                                     ($) => ['text', ({
                                         'delimiter': ['none', null],
                                         'value': v_serialize_boolean.serialize(
@@ -132,7 +133,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                     })]
                                 ),
                                 'extensions': _p_cc(
-                                    $['extensions'], 
+                                    $['extensions'],
                                     ($) => ['list', $.__l_map(
                                         ($) => ['text', ({
                                             'delimiter': ['quote', null],
@@ -141,7 +142,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                     )]
                                 ),
                                 'warn': _p_cc(
-                                    $['warn'], 
+                                    $['warn'],
                                     ($) => ['text', ({
                                         'delimiter': ['none', null],
                                         'value': v_serialize_boolean.serialize(
@@ -155,7 +156,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                 )
             case 'freeform':
                 return _p.ss(
-                    $, 
+                    $,
                     ($) => ({
                         'option': 'freeform',
                         'value': ['nothing', null],
@@ -163,7 +164,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                 )
             case 'ignore':
                 return _p.ss(
-                    $, 
+                    $,
                     ($) => ({
                         'option': 'ignore',
                         'value': ['nothing', null],
@@ -171,13 +172,13 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                 )
             case 'generated':
                 return _p.ss(
-                    $, 
+                    $,
                     ($) => ({
                         'option': 'generated',
                         'value': ['group', ['verbose', _p.dictionary.literal(
                             ({
                                 'commit to git': _p_cc(
-                                    $['commit to git'], 
+                                    $['commit to git'],
                                     ($) => ['text', ({
                                         'delimiter': ['none', null],
                                         'value': v_serialize_boolean.serialize(
