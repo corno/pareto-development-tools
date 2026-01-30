@@ -32,7 +32,8 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                     $,
                     ($) => ({
                         'option': 'group',
-                        'value': ['dictionary', $.__d_map(
+                        'value': ['dictionary', _p.dictionary.map(
+                            $,
                             ($, id) => ['state', _p.decide.state(
                                 $,
                                 ($): t_out.Value.state => {
@@ -130,7 +131,8 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                 ),
                                 'extensions': _p_cc(
                                     $['extensions'],
-                                    ($) => ['list', $.__l_map(
+                                    ($) => ['list', _p.list.map(
+                                        $,
                                         ($) => ['text', {
                                             'delimiter': ['quote', null],
                                             'value': $,

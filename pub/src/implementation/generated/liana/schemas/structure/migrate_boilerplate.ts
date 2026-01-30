@@ -23,7 +23,8 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
             case 'group':
                 return _p.ss(
                     $,
-                    ($) => ['group', $.__d_map(
+                    ($) => ['group', _p.dictionary.map(
+                        $,
                         ($, id) => _p.decide.state(
                             $,
                             ($): t_out.Directory.group.D => {
@@ -88,7 +89,8 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
                         ),
                         'extensions': _p_cc(
                             $['extensions'],
-                            ($) => $.__l_map(
+                            ($) => _p.list.map(
+                                $,
                                 ($) => $
                             )
                         ),

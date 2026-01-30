@@ -237,7 +237,7 @@ export namespace undefined {
             {
                 'name': id,
                 'structure': $p.structure,
-                'unexpected path tail': $p['unexpected path tail'].__o_map(($) => $ + `/${id}`),
+                'unexpected path tail': _p.optional.map($p['unexpected path tail'], ($) => $ + `/${id}`),
             }
         ))]
     }
@@ -309,7 +309,7 @@ export namespace wildcard {
                             }
                             const possible_file_extension = extension(id)
                             let extension_matched = false
-                            possible_file_extension.__o_map(($) => {
+                            _p.optional.map(possible_file_extension, ($) => {
                                 const file_extension = $
                                 $p['wildcard']['extensions'].__for_each(($) => {
                                     if ($ === file_extension) {
@@ -381,7 +381,7 @@ export const dict_to_list = ($: d_out.Flattened_Directory_With_Line_Counts): _pi
     'path': string,
     'analysis': d_out.File_Analysis,
 }> => {
-    
+
     return _p.list.from_dictionary($, ($, id) => ({
         'path': id,
         'analysis': $,

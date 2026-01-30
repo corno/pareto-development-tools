@@ -41,12 +41,13 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_cc(
                 case 'group':
                     return _p_cc(
                         $['value'],
-                        ($) => ['group', v_unmarshalled_from_parse_tree.Dictionary(
-                            $,
-                            ($) => abort(
-                                ['expected a dictionary', null]
-                            )
-                        ).__d_map(
+                        ($) => ['group', _p.dictionary.map(
+                            v_unmarshalled_from_parse_tree.Dictionary(
+                                $,
+                                ($) => abort(
+                                    ['expected a dictionary', null]
+                                )
+                            ),
                             ($, id) => _p_cc(
                                 v_unmarshalled_from_parse_tree.State(
                                     $,
@@ -200,12 +201,13 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_cc(
                                             ['no such entry', "extensions"]
                                         )
                                     ),
-                                    ($) => v_unmarshalled_from_parse_tree.List(
-                                        $,
-                                        ($) => abort(
-                                            ['expected a list', null]
-                                        )
-                                    ).__l_map(
+                                    ($) => _p.list.map(
+                                        v_unmarshalled_from_parse_tree.List(
+                                            $,
+                                            ($) => abort(
+                                                ['expected a list', null]
+                                            )
+                                        ),
                                         ($) => v_unmarshalled_from_parse_tree.Text(
                                             $,
                                             ($) => abort(

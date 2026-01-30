@@ -85,7 +85,8 @@ export const $$: _pi.Deserializer_With_Parameters<d_npm_package.NPM_Package, d_d
     return {
         'name': name,
         'version': version,
-        'dependencies': root.__get_possible_entry('dependencies').__o_map(
+        'dependencies': _p.optional.map(
+            root.__get_possible_entry('dependencies'),
             ($) => expect_object(
                 $,
                 (error) => abort(['dependencies', ['not an object', null]])
