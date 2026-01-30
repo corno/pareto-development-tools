@@ -64,14 +64,6 @@ export const $$: signatures.commands.publish = _p.command_procedure(
             ($) => ['error while running npm version', $],
         ),
 
-        $cr['npm publish'].execute(
-            {
-                'path': _p.optional.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': `pub` })),
-                'impact': $p.impact,
-            },
-            ($) => ['error while running npm publish', $],
-        ),
-
         // update the package-lock.json to reflect the new version
         $cr.npm.execute(
             {
@@ -97,15 +89,6 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                 const package_info = $v
                 return [
 
-                    $cr.log.execute(
-                        {
-                            'lines': _p.list.literal([
-                                `Published package ${package_info.name} version ${package_info.version}`
-                            ]),
-                        },
-                        ($): d.Error => ['error while logging', $],
-                    ),
-
                     $cr['git extended commit'].execute(
                         {
                             'path': _p.optional.set($p['path to package']),
@@ -116,6 +99,23 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                             }
                         },
                         ($): d.Error => ['error while running git extended commit', $],
+                    ),
+
+                    $cr['npm publish'].execute(
+                        {
+                            'path': _p.optional.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': `pub` })),
+                            'impact': $p.impact,
+                        },
+                        ($) => ['error while running npm publish', $],
+                    ),
+
+                    $cr.log.execute(
+                        {
+                            'lines': _p.list.literal([
+                                `Published package ${package_info.name} version ${package_info.version}`
+                            ]),
+                        },
+                        ($): d.Error => ['error while logging', $],
                     ),
 
                 ]
