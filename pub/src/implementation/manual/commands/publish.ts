@@ -1,5 +1,5 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/transformer'
+import * as _pt from 'pareto-core/dist/expression'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -93,7 +93,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                         {
                             'path': _p.optional.set($p['path to package']),
                             'instruction': {
-                                'commit message': `Published version ${$v.version}`,
+                                'commit message': `pdt: published version ${$v.version}`,
                                 'stage all changes': true,
                                 'push after commit': true,
                             }
@@ -112,7 +112,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                     $cr.log.execute(
                         {
                             'lines': _p.list.literal([
-                                `Published package ${package_info.name} version ${package_info.version}`
+                                `published: ${package_info.name}@${package_info.version}`
                             ]),
                         },
                         ($): d.Error => ['error while logging', $],

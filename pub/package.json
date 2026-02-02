@@ -7,13 +7,13 @@
     "dist"
   ],
   "dependencies": {
-    "astn-core": "^0.5.14",
-    "liana-core": "^0.0.3",
-    "pareto-core-dev": "^0.12.4",
-    "pareto-fountain-pen": "^0.4.9",
-    "pareto-graphviz": "^0.2.5",
-    "pareto-host-nodejs": "^0.2.14",
-    "pareto-resources": "^0.2.17"
+    "astn-core": "^0.5.15",
+    "liana-core": "^0.0.4",
+    "pareto-core-dev": "^0.12.5",
+    "pareto-fountain-pen": "^0.4.10",
+    "pareto-graphviz": "^0.2.6",
+    "pareto-host-nodejs": "^0.2.15",
+    "pareto-resources": "^0.2.18"
   },
   "bin": {
     "pdt": "./dist/bin.js"

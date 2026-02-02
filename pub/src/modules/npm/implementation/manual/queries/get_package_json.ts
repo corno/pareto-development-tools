@@ -1,6 +1,6 @@
 import * as _p from 'pareto-core/dist/query'
 import * as _pi from 'pareto-core/dist/interface'
-import * as _p_temp from 'pareto-core/dist/transformer'
+import * as _p_temp from 'pareto-core/dist/expression'
 import { _p_cc } from 'pareto-core/dist/change_context'
 
 import * as signatures from "../../../interface/signatures"

@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/refiner'
+import * as _p from 'pareto-core/dist/expression'
 import * as _pi from 'pareto-core/dist/interface'
 import { _p_deprecated_block } from 'pareto-core/dist/deprecated_block'
 

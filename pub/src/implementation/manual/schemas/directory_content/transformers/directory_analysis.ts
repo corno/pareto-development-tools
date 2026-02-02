@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/transformer'
+import * as _p from 'pareto-core/dist/expression'
 import * as _pi from 'pareto-core/dist/interface'
 import * as _pds from 'pareto-core/dist/deserializer'
 import * as _ps from 'pareto-core/dist/serializer'
