@@ -1,15 +1,18 @@
 import * as _p from 'pareto-core/dist/expression'
 import * as _pi from 'pareto-core/dist/interface'
-import * as _pds from 'pareto-core/dist/deserializer'
-import * as _ps from 'pareto-core/dist/serializer'
+import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
+import _p_list_build_deprecated from 'pareto-core/dist/_p_list_build_deprecated'
+import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
+//data types
 import * as d_in from "pareto-resources/dist/interface/to_be_generated/directory_content"
 import * as d_out from "../../../../../interface/to_be_generated/directory_analysis"
 import * as d_structure from "../../../../../interface/generated/liana/schemas/structure/data"
+import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/text"
 
 const line_count = ($: string): number => {
     let lineCount = 0
-    _pds.list.from_text($, ($) => $).__for_each(($) => {
+    _p_list_from_text($, ($) => $).__l_map(($) => {
         if ($ === 10) { //newline character
             lineCount++
         }
@@ -18,11 +21,11 @@ const line_count = ($: string): number => {
 }
 
 const extension = ($: string): _pi.Optional_Value<string> => {
-    const characters = _pds.list.from_text($, ($) => $)
+    const characters = _p_list_from_text($, ($) => $)
 
     let first_period_index: null | number = null
     let current_index = 0
-    characters.__for_each(($) => {
+    characters.__l_map(($) => {
         if ($ === 46) { //period
             first_period_index = current_index
         }
@@ -33,14 +36,19 @@ const extension = ($: string): _pi.Optional_Value<string> => {
     } else {
         const fpi: number = first_period_index
         current_index = 0
-        return _p.optional.set(_ps.text.deprecated_build(($i) => {
-            characters.__for_each(($) => {
-                if (current_index > fpi) {
-                    $i.add_character($)
-                }
-                current_index++
-            })
-        }))
+        return _p.optional.set(
+            _p_text_from_list(
+                _p_list_build_deprecated<number>(($i) => {
+                    characters.__l_map(($) => {
+                        if (current_index > fpi) {
+                            $i['add item']($)
+                        }
+                        current_index++
+                    })
+                }),
+                ($) => $
+            )
+        )
     }
 }
 
@@ -237,7 +245,7 @@ export namespace undefined {
             {
                 'name': id,
                 'structure': $p.structure,
-                'unexpected path tail': _p.optional.map($p['unexpected path tail'], ($) => $ + `/${id}`),
+                'unexpected path tail': _p.optional.map($p['unexpected path tail'], ($) => $ + "/" + id),
             }
         ))]
     }
@@ -288,7 +296,7 @@ export namespace wildcard {
         }
     ): d_out.Directory => {
         return ['dictionary', $.__d_map(($, id) => {
-            const tail = $p.tail + `/${id}`
+            const tail = $p.tail + "/" + id
             return _p.decide.state($, ($): d_out.Node => {
                 switch ($[0]) {
                     case 'other': return _p.ss($, ($) => ['other', null])
@@ -311,7 +319,7 @@ export namespace wildcard {
                             let extension_matched = false
                             _p.optional.map(possible_file_extension, ($) => {
                                 const file_extension = $
-                                $p['wildcard']['extensions'].__for_each(($) => {
+                                $p['wildcard']['extensions'].__l_map(($) => {
                                     if ($ === file_extension) {
                                         extension_matched = true
                                     }
@@ -372,7 +380,7 @@ export const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_L
         })
 
     }
-    x($, ``)
+    x($, "")
     return _p.dictionary.literal(temp)
 }
 

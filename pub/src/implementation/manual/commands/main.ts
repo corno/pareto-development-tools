@@ -1,5 +1,6 @@
 import * as _p from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/expression'
+import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -7,12 +8,13 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "pareto-resources/dist/interface/to_be_generated/temp_main"
 import * as d_parse from "../../../interface/to_be_generated/parse"
 import * as d_api from "../../../interface/to_be_generated/execute_command"
+import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/text"
 
 //dependencies
 import * as r_instruction from "../schemas/execute_command/refiners/main"
 import * as t_api_to_fountain_pen from "../schemas/execute_command/transformers/fountain_pen"
 import * as t_bin_to_fountain_pen from "../schemas/parse/transformers/fountain_pen"
-import * as s_fp_block from "pareto-fountain-pen/dist/implementation/manual/schemas/block/serializers"
+import * as t_fp_block_to_text from "pareto-fountain-pen/dist/implementation/manual/schemas/block/transformers/text"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
@@ -47,10 +49,10 @@ export const $$: signatures.commands.main = _p.command_procedure(
 
                 $cr['log error'].execute(
                     {
-                        'lines': _p.list.literal([
+                        'lines': _p.list.literal<d_text.Text>([
                             _p.decide.state($, ($) => {
                                 switch ($[0]) {
-                                    case 'parse': return _p.ss($, ($) => s_fp_block.Group(
+                                    case 'parse': return _p.ss($, ($) => t_fp_block_to_text.Group(
                                         sh.group([sh.g.nested_block([
                                             t_bin_to_fountain_pen.Error($)
                                         ])]),
@@ -59,7 +61,7 @@ export const $$: signatures.commands.main = _p.command_procedure(
                                             'newline': `\n`,
                                         }
                                     ))
-                                    case 'api': return _p.ss($, ($) => s_fp_block.Group(
+                                    case 'api': return _p.ss($, ($) => t_fp_block_to_text.Group(
                                         sh.group([sh.g.nested_block([
                                             t_api_to_fountain_pen.Error($)
                                         ])]),
@@ -71,7 +73,7 @@ export const $$: signatures.commands.main = _p.command_procedure(
                                     default: return _p.au($[0])
                                 }
                             })
-                        ])
+                        ]).__l_map(($) => _p_text_from_list($, ($) => $))
                     },
                     ($) => ({
                         'exit code': 2

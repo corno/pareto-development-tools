@@ -1,33 +1,38 @@
 import * as _p from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/expression'
 import * as _pi from 'pareto-core/dist/interface'
-import * as _ps from 'pareto-core/dist/serializer'
 import * as _pq from 'pareto-core/dist/query'
-import * as _pd from 'pareto-core/dist/deserializer'
+import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
+import _p_list_build_deprecated from 'pareto-core/dist/_p_list_build_deprecated'
+import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
 import * as signatures from "../../../interface/signatures"
 
 //data types
 import * as d from "../../../interface/to_be_generated/set_up_comparison_against_published"
+import * as d_out from "pareto-fountain-pen/dist/interface/to_be_generated/text"
 
 //dependencies
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import * as q_get_package_json from "../queries/get_package_json"
 // import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
 
-const remove_n_characters_from_end = ($: string, n: number): string => {
+//shorthands
+import * as sh from "../../../../../temp_pseudo_fp"
 
-    const chars = _pd.list.from_text($, ($) => $)
+const remove_n_characters_from_end = ($: string, n: number): d_out.Text => {
+
+    const chars = _p_list_from_text($, ($) => $)
     const length = chars.__get_number_of_items()
     const new_length = length - n
     let index = -1
 
-    return _ps.text.deprecated_build(($i) => {
-        chars.__for_each(($) => {
+    return _p_list_build_deprecated(($i) => {
+        chars.__l_map(($) => {
             index += 1
             if (index < new_length) {
-                $i.add_character($)
+                $i['add item']($)
             }
         })
     })
@@ -35,7 +40,7 @@ const remove_n_characters_from_end = ($: string, n: number): string => {
 
 export const $$: signatures.commands.set_up_comparison_against_published = _p.command_procedure(
     ($p, $cr, $qr) => {
-        const path_x = t_path_to_path.create_node_path($p['path to local package'], `package.json`)
+        const path_x = t_path_to_path.create_node_path($p['path to local package'], { 'node': `package.json` })
         return [
             _p.query(
                 q_get_package_json.$$({
@@ -90,9 +95,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                                 'args': _pt.list.nested_literal_old([
                                     _pt.list.literal([
                                         `pack`,
-                                        s_path.Context_Path($p['path to local package']),
+                                        sh.b.text(t_path_to_text.Context_Path($p['path to local package'])),
                                         `--pack-destination`,
-                                        s_path.Node_Path($p['path to temp directory']),
+                                        sh.b.text(t_path_to_text.Node_Path($p['path to temp directory'])),
                                     ])
                                 ]),
                             },
@@ -110,9 +115,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                             {
                                 'args': _pt.list.literal([
                                     `-xzmf`,
-                                    `${s_path.Node_Path($p['path to temp directory'])}/${filename}`,
+                                    `${sh.b.text(t_path_to_text.Node_Path($p['path to temp directory']))}/${filename}`,
                                     `-C`,
-                                    s_path.Node_Path($p['path to output local directory']),
+                                    sh.b.text(t_path_to_text.Node_Path($p['path to output local directory'])),
                                     `--strip-components=1`,
                                 ]),
                             },
@@ -131,7 +136,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                                     `pack`,
                                     `${package_info.name}@${package_info.version}`,
                                     `--pack-destination`,
-                                    `${s_path.Node_Path($p['path to temp directory'])}/npm`,
+                                    `${sh.b.text(t_path_to_text.Node_Path($p['path to temp directory']))}/npm`,
                                 ])
                             },
                             ($) => ['error while running npm command', $],
@@ -161,9 +166,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                                     {
                                         'args': _pt.list.literal([
                                             `-xzmf`,
-                                            `${s_path.Node_Path($p['path to temp directory'])}/npm/${package_info.name}-${$v}.tgz`,
+                                            `${sh.b.text(t_path_to_text.Node_Path($p['path to temp directory']))}/npm/${package_info.name}-${_p_text_from_list($v, ($) => $)}.tgz`,
                                             `-C`,
-                                            `${s_path.Node_Path($p['path to output published directory'])}`,
+                                            `${sh.b.text(t_path_to_text.Node_Path($p['path to output published directory']))}`,
                                             `--strip-components=1`,
                                         ])
                                     },

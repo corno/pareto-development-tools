@@ -7,7 +7,9 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/tsc"
 
 //dependencies
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+
+import * as sh from "../../../temp_pseudo_fp"
 
 export const $$: signatures.commands.tsc = _p.command_procedure(
 
@@ -19,7 +21,7 @@ export const $$: signatures.commands.tsc = _p.command_procedure(
                     $p.path.__decide(
                         ($) => _pt.list.literal([
                             `--project`,
-                            s_path.Node_Path($),
+                            sh.b.text(t_path_to_text.Node_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),

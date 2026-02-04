@@ -27,7 +27,7 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
             _p.decide.state($, ($) => {
                 switch ($[0]) {
                     case 'unexpected error': return _p.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
-                    case 'working directory is not clean': return _p.ss($, ($) => sh.b.snippet(`working directory is not clean at the start`))
+                    case 'working directory is not clean': return _p.ss($, ($) => sh.b.literal("working directory is not clean at the start"))
                     default: return _p.au($[0])
                 }
             })
@@ -43,28 +43,28 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
             _p.decide.state($, ($) => {
                 switch ($[0]) {
                     case 'unexpected error': return _p.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
-                    case 'working directory is not clean': return _p.ss($, ($) => sh.b.snippet(`working directory is not clean after updating package dependencies`))
+                    case 'working directory is not clean': return _p.ss($, ($) => sh.b.literal("working directory is not clean after updating package dependencies"))
                     default: return _p.au($[0])
                 }
             })
         ]))
         case 'error while running npm version': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not increment version: `),
+            sh.b.literal("could not increment version: "),
             t_npm_to_fountain_pen.Error($)
         ]))
         case 'error while running npm publish': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not publish to npm: `),
+            sh.b.literal("could not publish to npm: "),
             t_npm_to_fountain_pen.Error($)
         ]))
         case 'error while logging': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not log`),
+            sh.b.literal("could not log"),
         ]))
         case 'error while getting package.json': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not read package.json: `),
+            sh.b.literal("could not read package.json: "),
             t_get_package_json_to_fountain_pen.Error($)
         ]))
         case 'error while running git extended commit': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not commit and push: `),
+            sh.b.literal("could not commit and push: "),
             t_git_ec_to_fountain_pen.Error($)
         ]))
 

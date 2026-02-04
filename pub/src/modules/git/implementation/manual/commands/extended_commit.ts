@@ -7,8 +7,10 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/extended_commit"
 
 //dependencies
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
 
+//shorthands
+import * as sh from "../../../../../temp_pseudo_fp"
 
 export const $$: signatures.commands.extended_commit = _p.command_procedure(
     ($p, $cr, $qr) => [
@@ -30,14 +32,14 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                 'args': _pt.list.nested_literal_old([
                                     $p.path.__decide(
                                         ($) => _pt.list.literal([
-                                            `-C`,
-                                            s_path.Context_Path($),
+                                            sh.b.literal("-C"),
+                                            sh.b.text(t_path_to_text.Context_Path($)),
                                         ]),
                                         () => undefined
                                     ),
                                     _pt.list.literal([
-                                        `add`,
-                                        `--all`,
+                                        sh.b.literal("add"),
+                                        sh.b.literal("--all"),
                                     ])
                                 ]),
                             },
@@ -50,14 +52,14 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                         'args': _pt.list.nested_literal_old([
                             $p.path.__decide(
                                 ($) => _pt.list.literal([
-                                    `-C`,
-                                    s_path.Context_Path($),
+                                    sh.b.literal("-C"),
+                                    sh.b.text(t_path_to_text.Context_Path($)),
                                 ]),
                                 () => undefined
                             ),
                             _pt.list.literal([
-                                `commit`,
-                                `-m`,
+                                sh.b.literal("commit"),
+                                sh.b.literal("-m"),
                                 $p.instruction['commit message'],
                             ])
                         ]),
@@ -72,13 +74,13 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                 'args': _pt.list.nested_literal_old([
                                     $p.path.__decide(
                                         ($) => _pt.list.literal([
-                                            `-C`,
-                                            s_path.Context_Path($),
+                                            sh.b.literal("-C"),
+                                            sh.b.text(t_path_to_text.Context_Path($)),
                                         ]),
                                         () => undefined
                                     ),
                                     _pt.list.literal([
-                                        `push`,
+                                        sh.b.literal("push"),
                                     ])
                                 ]),
                             },

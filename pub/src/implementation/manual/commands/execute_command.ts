@@ -1,6 +1,6 @@
 import * as _p from 'pareto-core/dist/command'
 import * as _pi from 'pareto-core/dist/interface'
-import { _p_cc } from 'pareto-core/dist/change_context'
+import _p_change_context from 'pareto-core/dist/_p_change_context'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -30,7 +30,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                             {
                                 'path': t_path_to_path.create_node_path(
                                     path_to_project,
-                                    `packages`
+                                    { 'node': `packages` }
                                 )
                             },
                             ($): d.Error => ['all', ['could not read packages directory', $]],
@@ -87,9 +87,9 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                     $cr['npm set up comparison against published'].execute(
                                         {
                                             'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': `pub` }),
-                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `local` }), id_spaces_not_escaped),
-                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `published` }), id_spaces_not_escaped),
-                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `temp` }), id_spaces_not_escaped),
+                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `local` }), { 'node': id_spaces_not_escaped }),
+                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `published` }), { 'node': id_spaces_not_escaped }),
+                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `temp` }), { 'node': id_spaces_not_escaped }),
                                         },
                                         ($): d.All__Package_Error => ['set up comparison', $],
                                     )
@@ -192,7 +192,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                     ($): d.Error => ['package', ['publish', $]],
                 )
             ])
-            case 'set up comparison': return _p.ss($, ($) => _p_cc(
+            case 'set up comparison': return _p.ss($, ($) => _p_change_context(
                 {
                     'path to temp': t_path_to_path.extend_context_path($['path to package'], { 'addition': `temp` }),
                     'path to package': $['path to package'],
@@ -201,9 +201,9 @@ export const $$: signatures.commands.api = _p.command_procedure(
                     $cr['npm set up comparison against published'].execute(
                         {
                             'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': `pub` }),
-                            'path to output local directory': t_path_to_path.create_node_path($['path to temp'], `local`),
-                            'path to output published directory': t_path_to_path.create_node_path($['path to temp'], `published`),
-                            'path to temp directory': t_path_to_path.create_node_path($['path to temp'], `temp`),
+                            'path to output local directory': t_path_to_path.create_node_path($['path to temp'], { 'node': `local` }),
+                            'path to output published directory': t_path_to_path.create_node_path($['path to temp'], { 'node': `published` }),
+                            'path to temp directory': t_path_to_path.create_node_path($['path to temp'], { 'node': `temp` }),
                         },
                         ($): d.Error => ['set up comparison', $],
                     )

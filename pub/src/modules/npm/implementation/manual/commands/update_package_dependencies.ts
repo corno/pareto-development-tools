@@ -14,14 +14,14 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         // clean
         $cr['remove'].execute(
             {
-                'path': t_path_to_path.create_node_path($p.path, "node_modules" ),
+                'path': t_path_to_path.create_node_path($p.path, { 'node': `node_modules` } ),
                 'error if not exists': false,
             },
             ($): d.Error => ['could not remove node_modules', $],
         ),
         $cr['remove'].execute(
             {
-                'path': t_path_to_path.create_node_path($p.path, "package-lock.json" ),
+                'path': t_path_to_path.create_node_path($p.path, { 'node': `package-lock.json` } ),
                 'error if not exists': false,
             },
             ($): d.Error => ['could not remove package-lock.json', $],

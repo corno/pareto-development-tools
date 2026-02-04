@@ -5,7 +5,10 @@ import * as _pi from 'pareto-core/dist/interface'
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+
+//shorthands
+import * as sh from "../../../../../temp_pseudo_fp"
 
 export const $$: signatures.commands.npm_publish = _p.command_procedure(
     ($p, $cr) => [
@@ -13,19 +16,19 @@ export const $$: signatures.commands.npm_publish = _p.command_procedure(
             {
                 'args': _pt.list.nested_literal_old([
                     [
-                        `publish`
+                        sh.b.literal("publish")
                     ],
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            s_path.Context_Path($),
+                            sh.b.text(t_path_to_text.Context_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
                     _p.decide.state($p.impact, ($) => {
                         switch ($[0]) {
-                            case 'dry run': return _p.ss($, ($) => [ `--dry-run` ])
+                            case 'dry run': return _p.ss($, ($) => [ sh.b.literal("--dry-run") ])
                             case 'actual publish': return _p.ss($, ($) => [
-                                `--otp`,
+                                sh.b.literal("--otp"),
                                 $['one time password'],
                             ])
                             default: return _p.au($[0])

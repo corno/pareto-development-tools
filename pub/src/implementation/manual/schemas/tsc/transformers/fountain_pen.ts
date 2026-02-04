@@ -15,7 +15,7 @@ export const Error: Error = ($, $p) => _p.decide.state($, ($): d_out.Block_Part 
         case 'error while running tsc': return _p.ss($, ($) => $p.concise
             ? sh.b.nothing()
             : sh.b.sub([
-                sh.b.snippet(`error while running tsc: `),
+                sh.b.literal("error while running tsc: "),
                 t_espe_to_fountain_pen.Error($),
                 //
             ])

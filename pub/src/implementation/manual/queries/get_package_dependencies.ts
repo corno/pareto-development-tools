@@ -1,5 +1,6 @@
 import * as _p from 'pareto-core/dist/query'
 import * as _pi from 'pareto-core/dist/interface'
+import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -9,13 +10,16 @@ import * as d_npm_package from "../../../modules/npm/interface/to_be_generated/n
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
-import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/schemas/npm_package/refiners/temp"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/schemas/npm_package/refiners/text"
+
+//shorthands
+import * as sh from "../../../temp_pseudo_fp"
 
 export const $$: signatures.queries.get_package_dependencies = _p.query_function(
     ($p, $r) => $r['read directory'](
         {
-            'path': t_path_to_path.create_node_path($p['path'], `packages`),
+            'path': t_path_to_path.create_node_path($p['path'], { 'node': `packages` }),
         },
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(
@@ -32,10 +36,10 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                             ($): d.Package_Error => ['no package.json file', null],
                         ).refine_without_error_transformation(
                             ($, abort) => r_parse_npm_package(
-                                $,
+                                _p_list_from_text($, ($) =>$),
                                 ($) => abort(['parse error', $]),
                                 {
-                                    'document resource identifier': s_path.Node_Path(path_x),
+                                    'document resource identifier': sh.b.text(t_path_to_text.Node_Path(path_x)),
                                 }
                             )
                         ))

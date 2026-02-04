@@ -7,15 +7,18 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/is_inside_work_tree"
 
 //dependencies
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+
+//shorthands
+import * as sh from "../../../../../temp_pseudo_fp"
 
 const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Outcome, Target_Error>(
-    result: _pi.Query_Result<Preparation_Result, Preparation_Error>,
+    result: _p.Query_Result<Preparation_Result, Preparation_Error>,
     handlers: {
-        success: (result: Preparation_Result) => _pi.Query_Result<Target_Outcome, Target_Error>,
-        error: (error: Preparation_Error) => _pi.Query_Result<Target_Outcome, Target_Error>,
+        success: (result: Preparation_Result) => _p.Query_Result<Target_Outcome, Target_Error>,
+        error: (error: Preparation_Error) => _p.Query_Result<Target_Outcome, Target_Error>,
     },
-): _pi.Query_Result<Target_Outcome, Target_Error> => _p.__query_result<Target_Outcome, Target_Error>((onResult, onError) => {
+): _p.Query_Result<Target_Outcome, Target_Error> => _p.__query_result<Target_Outcome, Target_Error>((onResult, onError) => {
     result.__extract_data(
         (r) => {
             handlers.success(r).__extract_data(onResult, onError)
@@ -32,8 +35,8 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
             'args': _p.list.nested_literal([
                 $p.path.__decide(
                     ($) => _p.list.literal([
-                        `-C`,
-                        s_path.Context_Path($),
+                        sh.b.literal("-C"),
+                        sh.b.text(t_path_to_text.Context_Path($)),
                     ]),
                     () => _p.list.literal([])
                 ),

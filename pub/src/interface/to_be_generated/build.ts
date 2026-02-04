@@ -10,18 +10,18 @@ export type Parameters = {
 
 export type Error =
     | ['error building pub', {
-        'path': string
+        'path': d_path.Context_Path
         'error': d_tsc.Error
     }]
     | ['error building test', {
-        'path': string
+        'path': d_path.Context_Path
         'error': d_tsc.Error
     }]
     | ['error removing pub dist dir', {
-        'path': string
+        'path': d_path.Context_Path
         'error': d_remove.Error
     }]
     | ['error removing test dist dir', {
-        'path': string
+        'path': d_path.Context_Path
         'error': d_remove.Error
     }]

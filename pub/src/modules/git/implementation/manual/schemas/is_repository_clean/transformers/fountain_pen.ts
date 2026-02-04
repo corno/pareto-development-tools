@@ -13,13 +13,13 @@ import * as t_is_inside_work_tree_to_fountain_pen from "../../is_inside_work_tre
 
 export const Error: Error = ($) => _p.decide.state($, ($): d_out.Block_Part => {
     switch ($[0]) {
-        case 'not a git repository': return _p.ss($, ($) => sh.b.snippet(`not a git repository`))
+        case 'not a git repository': return _p.ss($, ($) => sh.b.literal("not a git repository"))
         case 'could not determine git status': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not determine git status: `),
+            sh.b.literal("could not determine git status: "),
             t_eqe_to_fountain_pen.Error($)
         ]))
         case 'unknown issue': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`unknown issue while checking if git is clean: `),
+            sh.b.literal("unknown issue while checking if git is clean: "),
             t_is_inside_work_tree_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])

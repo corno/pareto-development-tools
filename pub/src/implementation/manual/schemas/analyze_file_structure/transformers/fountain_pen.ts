@@ -14,7 +14,7 @@ import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/impleme
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'log': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`log: `),
+            sh.b.literal("log: "),
             sh.b.indent([
                 sh.g.nested_block([
                     // t_tsc_to_fountain_pen.Error($)
@@ -22,13 +22,14 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
             ])
         ]))
         case 'directory content processing': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`directory content processing: `),
+            sh.b.literal("directory content processing: "),
             sh.b.indent([
                 sh.g.sub(_p.list.from_dictionary($, ($, id) => sh.g.nested_block([
-                    sh.b.snippet(`${id}: `),
+                    sh.b.literal(id),
+                    sh.b.literal(":"),
                     _p.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'not a directory': return _p.ss($, ($) =>sh.b.snippet(`not a directory`))
+                            case 'not a directory': return _p.ss($, ($) =>sh.b.literal("not a directory"))
                             case 'directory content': return _p.ss($, ($) => t_read_directory_content_to_fountain_pen.Error($))
                             default: return _p.au($[0])
                         }

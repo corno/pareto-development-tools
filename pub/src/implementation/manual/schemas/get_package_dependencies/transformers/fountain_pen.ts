@@ -17,15 +17,15 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
         case 'directory content processing': return _p.ss($, ($) => sh.b.list(_p.list.from_dictionary(
             $,
             ($, id) => sh.b.sub([
-                sh.b.snippet(`package `),
-                sh.b.snippet(id),
-                sh.b.snippet(`: `),
+                sh.b.literal("package "),
+                sh.b.literal(id),
+                sh.b.literal(": "),
                 sh.b.indent([
                     sh.g.nested_block([
                         _p.decide.state($, ($) => {
                             switch ($[0]) {
-                                case 'not a directory': return _p.ss($, ($) => sh.b.snippet(`not a directory`))
-                                case 'no package.json file': return _p.ss($, ($) => sh.b.snippet(`no package.json file`))
+                                case 'not a directory': return _p.ss($, ($) => sh.b.literal("not a directory"))
+                                case 'no package.json file': return _p.ss($, ($) => sh.b.literal("no package.json file"))
                                 case 'parse error':return _p.ss($, ($) => t_deserialize_package_json_to_fountain_pen.Error($))
                                 default: return _p.au($[0])
                             }

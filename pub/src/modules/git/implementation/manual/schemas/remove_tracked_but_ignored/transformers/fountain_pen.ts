@@ -13,21 +13,21 @@ import * as t_ece_to_fountain_pen from "pareto-resources/dist/implementation/man
 
 export const Error: Error = ($) => _p.decide.state($, ($): d_out.Block_Part => {
     switch ($[0]) {
-        case 'not clean': return _p.ss($, ($) => sh.b.snippet(`the working directory is not clean. Aborting removal of tracked but ignored files.`))
+        case 'not clean': return _p.ss($, ($) => sh.b.literal("the working directory is not clean. Aborting removal of tracked but ignored files."))
         case 'unexpected error': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`unexpected error while checking if git is clean: `),
+            sh.b.literal("unexpected error while checking if git is clean: "),
             t_git_is_clean_to_fountain_pen.Error($)
         ]))
         case 'could not remove': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not remove tracked but ignored files: `),
+            sh.b.literal("could not remove tracked but ignored files: "),
             t_ece_to_fountain_pen.Error($)
         ]))
         case 'could not add': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not add tracked but ignored files: `),
+            sh.b.literal("could not add tracked but ignored files: "),
             t_ece_to_fountain_pen.Error($)
         ]))
         case 'could not clean': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not clean tracked but ignored files: `),
+            sh.b.literal("could not clean tracked but ignored files: "),
             t_ece_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])

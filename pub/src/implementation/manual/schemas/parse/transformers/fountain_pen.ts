@@ -11,21 +11,21 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'expected one of': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`expected one of: `),
+            sh.b.literal("expected one of: "),
             sh.b.indent([
                 sh.g.sub(
                     _p.list.from_dictionary($, ($, id) => sh.g.nested_block([
-                        sh.b.snippet(id)
+                        sh.b.literal(id)
                     ]))
                 )
             ]),
 
         ]))
         case 'expected a text': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`expected a text: `),
-            sh.b.snippet($['description'])
+            sh.b.literal("expected a text: "),
+            sh.b.literal($['description'])
         ]))
-        case 'too many arguments': return _p.ss($, ($) => sh.b.snippet(`too many arguments`))
+        case 'too many arguments': return _p.ss($, ($) => sh.b.literal("too many arguments"))
         default: return _p.au($[0])
     }
 })

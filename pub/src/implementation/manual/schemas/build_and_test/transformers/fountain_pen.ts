@@ -15,7 +15,7 @@ export const Error: Error = ($, $p) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'error building': return _p.ss($, ($) => t_build_to_fountain_pen.Error($, $p))
         case 'error testing': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`error while testing:`),
+            sh.b.literal("error while testing:"),
             t_epe_to_fountain_pen.Error($),
         ]))
         default: return _p.au($[0])

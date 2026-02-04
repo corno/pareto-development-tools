@@ -1,19 +1,27 @@
 import * as _p from 'pareto-core/dist/expression'
 import * as _pi from 'pareto-core/dist/interface'
-import { _p_deprecated_block } from 'pareto-core/dist/deprecated_block'
+import _p_block_deprecated from 'pareto-core/dist/_p_block_deprecated'
+import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
 
 import * as d from "../../../../../interface/to_be_generated/execute_command"
 import * as d_error from "../../../../../interface/to_be_generated/parse"
 
-import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
+import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/schemas/context_path/refiners/text"
 
 type signature = _pi.Production<d.Parameters, d_error.Error, string>
+
+const temp_content_path = ($: string) => t_context_path_from_text.Context_Path(
+    _p_list_from_text(
+        $,
+        ($) => $,
+    )
+)
 
 export const Command: signature = (iterator, abort) => iterator.consume(
     ($): d.Parameters => {
         switch ($) {
             case 'all': return ['all packages', {
-                'path to project': ds_context_path.Context_Path(iterator.consume(
+                'path to project': temp_content_path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to project" }])
                 )),
@@ -22,12 +30,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                         switch ($) {
                             case 'assert-clean': return ['assert clean', null]
                             case 'build-and-test': return ['build and test', {
-                                'concise': _p_deprecated_block(() => {
+                                'concise': _p_block_deprecated(() => {
                                     const value = iterator.look()
                                     return value === null
                                         ? false
                                         : value[0] === "concise"
-                                            ? _p_deprecated_block(() => {
+                                            ? _p_block_deprecated(() => {
                                                 iterator.discard(() => null)
                                                 return true
                                             })
@@ -40,12 +48,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     ($) => $,
                                     () => abort(['expected a text', { 'description': "commit message" }])
                                 ),
-                                'accept broken commits': _p_deprecated_block(() => {
+                                'accept broken commits': _p_block_deprecated(() => {
                                     const value = iterator.look()
                                     return value === null
                                         ? false
                                         : value[0] === "accept-broken"
-                                            ? _p_deprecated_block(() => {
+                                            ? _p_block_deprecated(() => {
                                                 iterator.discard(() => null)
                                                 return true
                                             })
@@ -79,7 +87,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
             }]
             case 'package': return ['package', {
-                'path': ds_context_path.Context_Path(iterator.consume(
+                'path': temp_content_path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
                 )),
@@ -93,12 +101,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     ($) => $,
                                     () => abort(['expected a text', { 'description': "commit message" }])
                                 ),
-                                'accept broken commits': _p_deprecated_block(() => {
+                                'accept broken commits': _p_block_deprecated(() => {
                                     const value = iterator.look()
                                     return value === null
                                         ? false
                                         : value[0] === "accept-broken"
-                                            ? _p_deprecated_block(() => {
+                                            ? _p_block_deprecated(() => {
                                                 iterator.discard(() => null)
                                                 return true
                                             })
@@ -124,7 +132,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
             }]
             case 'project': return ['project', {
-                'path': ds_context_path.Context_Path(iterator.consume(
+                'path': temp_content_path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
                 )),
@@ -150,7 +158,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
             }]
             case 'publish': return ['publish', {
-                'path to package': ds_context_path.Context_Path(iterator.consume(
+                'path to package': temp_content_path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
                 )),
@@ -170,7 +178,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                         'minor': null,
                     })])
                 ),
-                'impact': _p_deprecated_block(() => {
+                'impact': _p_block_deprecated(() => {
                     const value = iterator.look()
                     if (value === null) {
                         return abort(['expected a text', { 'description': "'--dry-run' or a one time password" }])
@@ -191,7 +199,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                 }),
             }]
             case 'set-up-comparison': return ['set up comparison', {
-                'path to package': ds_context_path.Context_Path(iterator.consume(
+                'path to package': temp_content_path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
                 ))

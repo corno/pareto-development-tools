@@ -14,7 +14,7 @@ import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/man
 export const Error: Error = ($) => _p.decide.state($, ($): d_out.Block_Part => {
     switch ($[0]) {
         case 'error while running npm': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`error while running npm: `),
+            sh.b.literal("error while running npm: "),
             t_epe_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])

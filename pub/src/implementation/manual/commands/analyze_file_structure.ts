@@ -23,7 +23,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
         _p.query(
             $q['read directory'](
                 {
-                    'path': t_path_to_path.create_node_path($p['path to project'], `packages`),
+                    'path': t_path_to_path.create_node_path($p['path to project'], { 'node': `packages`}),
                 },
                 ($): d.Error => ['read directory', $],
             ),
@@ -31,13 +31,13 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
             ($v) => [
                 _p.query(
                     _pq.dictionaryx.parallel(
-                        $v.__d_map(($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
+                        $v.__d_map(($): _pq.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                             const path = $.path
                             return _pt.decide.state($['node type'], ($) => {
                                 switch ($[0]) {
-                                    case 'other': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                                    case 'file': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                                    case 'directory': return _pt.ss($, ($): _pi.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content($q)(
+                                    case 'other': return _pt.ss($, ($): _pq.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                                    case 'file': return _pt.ss($, ($): _pq.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                                    case 'directory': return _pt.ss($, ($): _pq.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content($q)(
                                         {
                                             'path': path,
                                         },

@@ -14,7 +14,7 @@ export const Error: Error = ($) => {
     return _p.decide.state($, ($): d_out.Block_Part => {
         switch ($[0]) {
             case 'error while reading package.json': return _p.ss($, ($) => sh.b.sub([
-                sh.b.snippet(`error while reading package.json: `),
+                sh.b.literal("error while reading package.json: "),
                 sh.b.indent([
                     sh.g.nested_block([
                         t_read_file_to_fountain_pen.Error($)
@@ -22,7 +22,7 @@ export const Error: Error = ($) => {
                 ]),
             ]))
             case 'error while parsing package.json': return _p.ss($, ($) => sh.b.sub([
-                sh.b.snippet(`error while parsing package.json: `),
+                sh.b.literal("error while parsing package.json: "),
                 sh.b.indent([
                     sh.g.nested_block([
                         //FIXME

@@ -5,7 +5,10 @@ import * as _pi from 'pareto-core/dist/interface'
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+
+//shorthands
+import * as sh from "../../../../../temp_pseudo_fp"
 
 export const $$: signatures.commands.update2latest = _p.command_procedure(
     ($p, $cr) => [
@@ -13,7 +16,7 @@ export const $$: signatures.commands.update2latest = _p.command_procedure(
             {
                 'args': _pt.list.nested_literal_old([
                     _pt.list.literal([
-                        s_path.Context_Path($p.path),
+                       sh.b.text(t_path_to_text.Context_Path($p.path)),
                     ]),
                     _pt.decide.state($p.what, ($) => {
                         // _pdev.log_debug_message(`Updating ${$p.path} to latest`, () => {})

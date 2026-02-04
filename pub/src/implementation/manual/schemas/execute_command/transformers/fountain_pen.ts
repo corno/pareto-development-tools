@@ -43,7 +43,9 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
         case 'all': return _p.ss($, ($) => _p.decide.state($, ($) => {
             switch ($[0]) {
                 case 'packages': return _p.ss($, ($) => sh.b.indent(_p.list.from_dictionary($, ($, id) => sh.g.nested_block([
-                    sh.b.snippet(`package '${id}': `),
+                    sh.b.literal("package '"),
+                    sh.b.literal(id),
+                    sh.b.literal("': "),
                     _p.decide.state($, ($) => {
                         switch ($[0]) {
                             case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
@@ -58,7 +60,7 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
                     })
                 ]))))
                 case 'could not read packages directory': return _p.ss($, ($) => sh.b.sub([
-                    sh.b.snippet(`could not read packages directory: `),
+                    sh.b.literal("could not read packages directory: "),
                     t_read_directory_to_fountain_pen.Error($)
                 ]))
                 default: return _p.au($[0])

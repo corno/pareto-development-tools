@@ -8,17 +8,20 @@ export namespace signatures {
     export type Error = _pi.Transformer_With_Parameters<d_in.Error, d_out.Block_Part, { 'concise': boolean }>
 }
 
+//shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
+//dependencies
 import * as t_tsc_to_fountain_pen from "../../tsc/transformers/fountain_pen"
 import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/remove/transformers/fountain_pen"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
 
 export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'error removing pub dist dir': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not remove pub dist dir: (`),
-            sh.b.snippet($.path),
-            sh.b.snippet(`/pub)`),
+            sh.b.literal("could not remove pub dist dir: ("),
+            sh.b.text(t_path_to_text.Context_Path($.path)),
+            sh.b.literal("/pub)"),
 
             sh.b.indent([
                 sh.g.nested_block([
@@ -28,9 +31,9 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
 
         ]))
         case 'error removing test dist dir': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not remove test dist dir: (`),
-            sh.b.snippet($.path),
-            sh.b.snippet(`/test)`),
+            sh.b.literal("could not remove test dist dir: ("),
+            sh.b.text(t_path_to_text.Context_Path($.path)),
+            sh.b.literal("/test)"),
             sh.b.indent([
                 sh.g.nested_block([
                     t_remove_to_fountain_pen.Error($.error)
@@ -38,9 +41,9 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
             ])
         ]))
         case 'error building pub': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not build pub: (`),
-            sh.b.snippet($.path),
-            sh.b.snippet(`)`),
+            sh.b.literal("could not build pub: ("),
+            sh.b.text(t_path_to_text.Context_Path($.path)),
+            sh.b.literal(")"),
             sh.b.indent([
                 sh.g.nested_block([
                     t_tsc_to_fountain_pen.Error($.error, $p)
@@ -48,9 +51,9 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
             ])
         ]))
         case 'error building test': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not build test: (`),
-            sh.b.snippet($.path),
-            sh.b.snippet(`)`),
+            sh.b.literal("could not build test: ("),
+            sh.b.text(t_path_to_text.Context_Path($.path)),
+            sh.b.literal(")"),
             sh.b.indent([
                 sh.g.nested_block([
                     t_tsc_to_fountain_pen.Error($.error, $p)

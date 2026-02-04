@@ -1,5 +1,6 @@
 import * as _p from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/expression'
+import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -7,7 +8,8 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/build_and_test"
 
 //dependencies
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 
 export const $$: signatures.commands.build_and_test = _p.command_procedure(
     ($p, $cr) => [
@@ -24,9 +26,30 @@ export const $$: signatures.commands.build_and_test = _p.command_procedure(
         $cr.node.execute(
             {
                 'args': _pt.list.literal([
-                    s_path.Context_Path($p.path) + `/test/dist/bin/test.js`,
-                    s_path.Context_Path($p.path) + `/testdata`,
-                ])
+                    t_path_to_text.Context_Path(
+                        t_path_to_path.extend_context_path_with_list(
+                            $p.path,
+                            {
+                                'addition': _pt.list.literal([
+                                    "test",
+                                    "dist",
+                                    "bin",
+                                    "test.js",
+                                ])
+                            }
+                        )
+                    ),
+                    t_path_to_text.Context_Path(
+                        t_path_to_path.extend_context_path_with_list(
+                            $p.path,
+                            {
+                                'addition': _pt.list.literal([
+                                    "testdata",
+                                ])
+                            }
+                        )
+                    ),
+                ]).__l_map(($) => _p_text_from_list($, ($) => $))
             },
             ($): d.Error => ['error testing', $],
         ),

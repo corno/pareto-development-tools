@@ -5,7 +5,10 @@ import * as _pi from 'pareto-core/dist/interface'
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+
+//shorthands
+import * as sh from "../../../../../temp_pseudo_fp"
 
 export const $$: signatures.commands.npm = _p.command_procedure(
     ($p, $cr) => [
@@ -14,8 +17,8 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                 'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            `--prefix`,
-                            s_path.Context_Path($),
+                            sh.b.literal("--prefix"),
+                            sh.b.text(t_path_to_text.Context_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
@@ -23,7 +26,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                         switch ($[0]) {
                             case 'update': return _pt.ss($, ($) => _pt.list.nested_literal_old([
                                 [
-                                    `update`,
+                                   sh.b.literal("update"),
                                 ],
                                 $['package-lock only']
                                     ? _pt.list.literal([`--package-lock-only`])
@@ -32,7 +35,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                             ]))
                             case 'install': return _pt.ss($, ($) => _pt.list.nested_literal_old([
                                 [
-                                    `install`,
+                                    sh.b.literal("install"),
                                 ],
                                 $['package-lock only']
                                     ? _pt.list.literal([`--package-lock-only`])
@@ -40,11 +43,11 @@ export const $$: signatures.commands.npm = _p.command_procedure(
 
                             ]))
                             case 'version': return _pt.ss($, ($) => _pt.list.literal([
-                                `version`,
+                                sh.b.literal("version"),
                                 _p.decide.state($, ($) => {
                                     switch ($[0]) {
-                                        case 'patch': return _p.ss($, ($) => `patch`)
-                                        case 'minor': return _p.ss($, ($) => `minor`)
+                                        case 'patch': return _p.ss($, ($) => sh.b.literal("patch"))
+                                        case 'minor': return _p.ss($, ($) => sh.b.literal("minor"))
                                         default: return _p.au($[0])
                                     }
                                 })

@@ -7,8 +7,10 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/is_repository_clean"
 
 //dependencies
-import * as s_path from "pareto-resources/dist/implementation/manual/schemas/path/serializers"
-// import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+
+//shorthands
+import * as sh from "../../../../../temp_pseudo_fp"
 
 export const $$: signatures.queries.is_repository_clean = _p.query_function(
     ($p, $qr) => $qr.git(
@@ -16,14 +18,14 @@ export const $$: signatures.queries.is_repository_clean = _p.query_function(
             'args': _p.list.nested_literal([
                 $p.path.__decide(
                     ($) => _p.list.literal([
-                        `-C`,
-                        s_path.Context_Path($),
+                        sh.b.literal("-C"),
+                        sh.b.text(t_path_to_text.Context_Path($)),
                     ]),
                     () => _p.list.literal([])
                 ),
                 _p.list.literal([
-                    `status`,
-                    `--porcelain`,
+                    sh.b.literal("status"),
+                    sh.b.literal("--porcelain"),
                 ])
             ]),
         },

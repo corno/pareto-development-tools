@@ -75,6 +75,17 @@ export const $$: signatures.commands.publish = _p.command_procedure(
             ($) => ['error while running npm version', $],
         ),
 
+        // update the package-lock.json to reflect the new version
+        $cr.npm.execute(
+            {
+                'path': _p.optional.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': `test` })),
+                'operation': ['update', {
+                    'package-lock only': true
+                }],
+            },
+            ($) => ['error while running npm version', $],
+        ),
+
         _p.query(
             q_get_package_json.$$({
                 'read file': $qr['read file'],

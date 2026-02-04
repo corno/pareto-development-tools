@@ -3,6 +3,7 @@ import * as _pi from 'pareto-core/dist/interface'
 
 //data types
 import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
+import * as d_in from "pareto-fountain-pen/dist/interface/to_be_generated/text"
 import * as d_npm_package from "../../../../../interface/to_be_generated/npm_package"
 import * as d_deseralize_package_json from "../../../../../interface/to_be_generated/deserialize_package_json"
 
@@ -15,14 +16,14 @@ type Error_Expect_Object =
 type Object = _pi.Dictionary<d.Value>
 
 //dependencies
-import * as ds_astn_source from "astn-core/dist/implementation/manual/schemas/parse_tree/deserializers"
+import * as t_parse_tree_from_text from "astn-core/dist/implementation/manual/schemas/parse_tree/refiners/text"
 
 
 const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never): Object => {
 
-    const expect_unique_identifiers = ($: d.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object => {
+    const expect_unique_identifiers_fixme = ($: d.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object => {
         const temp: { [id: string]: d.Value } = {}
-        $.__for_each(($) => {
+        $.__l_map(($) => {
             if (temp[$.id.value] !== undefined) {
                 abort(['duplicate identifier', $.id.value])
             } else {
@@ -38,10 +39,10 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
         switch ($[0]) {
             case 'concrete': return _p.ss($, ($) => _p.decide.state($, ($) => {
                 switch ($[0]) {
-                    case 'dictionary': return _p.ss($, ($) => expect_unique_identifiers($.entries, abort))
+                    case 'dictionary': return _p.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
                     case 'group': return _p.ss($, ($) => _p.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'verbose': return _p.ss($, ($) => expect_unique_identifiers($.entries, abort))
+                            case 'verbose': return _p.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
                             default: return abort(['not an object', null])
                         }
                     }))
@@ -67,8 +68,8 @@ const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never):
 
 const expect_property = ($: Object, id: string, abort: (error: ['missing property', string]) => never): d.Value => $.__get_entry(id, () => abort(['missing property', id]))
 
-export const $$: _pi.Deserializer_With_Parameters<d_npm_package.NPM_Package, d_deseralize_package_json.Error, { 'document resource identifier': string }> = ($, abort, $p) => {
-    const x = ds_astn_source.Document(
+export const $$: _pi.Refiner_With_Parameters<d_npm_package.NPM_Package, d_deseralize_package_json.Error, d_in.Text, { 'document resource identifier': string }> = ($, abort, $p) => {
+    const x = t_parse_tree_from_text.Document(
         $,
         () => abort(['invalid ASTN', null]),
         {

@@ -13,7 +13,7 @@ import * as t_get_package_dependencies_to_fountain_pen from "../../get_package_d
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'log': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`log: `),
+            sh.b.literal("log: "),
             sh.b.indent([
                 sh.g.nested_block([
                     // t_tsc_to_fountain_pen.Error($)
@@ -21,7 +21,7 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
             ])
         ]))
         case 'package dependencies': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`package dependencies: `),
+            sh.b.literal("package dependencies: "),
             sh.b.indent([
                 sh.g.nested_block([
                     t_get_package_dependencies_to_fountain_pen.Error($)

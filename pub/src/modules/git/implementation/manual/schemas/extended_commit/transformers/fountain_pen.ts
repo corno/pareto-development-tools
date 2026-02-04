@@ -14,19 +14,19 @@ import * as t_git_is_clean_to_fountain_pen from "../../is_repository_clean/trans
 export const Error: Error = ($) => _p.decide.state($, ($): d_out.Block_Part => {
     switch ($[0]) {
         case 'asserting git not clean': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`error while asserting git is not clean: `),
+            sh.b.literal("error while asserting git is not clean: "),
             t_git_is_clean_to_fountain_pen.Error($)
         ]))
         case 'could not stage': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not stage: `),
+            sh.b.literal("could not stage: "),
             t_ece_to_fountain_pen.Error($)
         ]))
         case 'could not commit': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not commit: `),
+            sh.b.literal("could not commit: "),
             t_ece_to_fountain_pen.Error($)
         ]))
         case 'could not push': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`could not push: `),
+            sh.b.literal("could not push: "),
             t_ece_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])

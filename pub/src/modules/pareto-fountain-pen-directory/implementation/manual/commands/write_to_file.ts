@@ -2,8 +2,9 @@
 import * as _pt from 'pareto-core/dist/expression'
 import * as _pi from 'pareto-core/dist/interface'
 import * as _p from 'pareto-core/dist/command'
-import * as _p_ser from 'pareto-core/dist/serializer'
-import { _p_cc } from 'pareto-core/dist/change_context'
+import _p_change_context from 'pareto-core/dist/_p_change_context'
+import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
+import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -15,12 +16,6 @@ import * as t_block_2_lines from "pareto-fountain-pen/dist/implementation/manual
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import { replace_space_in_context_path } from "../schemas/path/transformers/path"
 
-const s_list_of_texts: _pi.Serializer<_pi.List<string>> = ($) => _p_ser.text.deprecated_build(($i) => {
-    $.__for_each(($) => {
-        $i.add_snippet($)
-    })
-})
-
 export const $$: signatures.commands.write_to_file = _p.command_procedure(
     ($p, $cr) => [
         $cr['make directory'].execute(
@@ -29,14 +24,18 @@ export const $$: signatures.commands.write_to_file = _p.command_procedure(
         ),
         $cr['write file'].execute(
             {
-                'path': _p_cc(
+                'path': _p_change_context(
                     t_path_to_path.extend_node_path($p['directory path'], { 'addition': $p.filename }),
                     ($) => $p['escape spaces in path']
                         ? replace_space_in_context_path($)
                         : $,
                 ),
-                'data': s_list_of_texts(
-                    t_block_2_lines.Group($p.group, { 'indentation': $p.indentation }).__l_map(($) => $ + $p.newline),
+                'data': _p_text_from_list(
+                    _pt.list.flatten(
+                        t_block_2_lines.Group($p.group, { 'indentation': $p.indentation }).__l_map(($) => $ + $p.newline),
+                        ($) => _p_list_from_text($, ($) => $),
+                    ),
+                    ($) => $,
                 ),
             },
             ($) => ['write file', $],

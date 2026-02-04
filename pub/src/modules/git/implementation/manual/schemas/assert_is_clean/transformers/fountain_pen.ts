@@ -13,10 +13,10 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'working directory is not clean': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`working directory not clean`),
+            sh.b.literal("working directory not clean"),
         ]))
         case 'unexpected error': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`unexpected error:`),
+            sh.b.literal("unexpected error:"),
             t_git_is_clean_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])

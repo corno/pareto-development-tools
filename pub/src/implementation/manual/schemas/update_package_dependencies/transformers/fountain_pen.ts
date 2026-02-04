@@ -13,11 +13,11 @@ import * as t_utd_to_fountain_pen from "../../../../../modules/npm/implementatio
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
         case 'error updating pub': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`error updating /pub: `),
+            sh.b.literal("error updating /pub: "),
             t_utd_to_fountain_pen.Error($)
         ]))
         case 'error updating test': return _p.ss($, ($) => sh.b.sub([
-            sh.b.snippet(`error updating /test: `),
+            sh.b.literal("error updating /test: "),
             t_utd_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])
