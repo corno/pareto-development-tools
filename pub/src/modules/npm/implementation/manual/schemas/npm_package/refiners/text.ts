@@ -16,7 +16,7 @@ type Error_Expect_Object =
 type Object = _pi.Dictionary<d.Value>
 
 //dependencies
-import * as t_parse_tree_from_text from "astn-core/dist/implementation/manual/schemas/parse_tree/refiners/text"
+import * as t_parse_tree_from_list_of_characters from "astn-core/dist/implementation/manual/schemas/parse_tree/refiners/list_of_characters"
 
 
 const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never): Object => {
@@ -69,7 +69,7 @@ const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never):
 const expect_property = ($: Object, id: string, abort: (error: ['missing property', string]) => never): d.Value => $.__get_entry(id, () => abort(['missing property', id]))
 
 export const $$: _pi.Refiner_With_Parameters<d_npm_package.NPM_Package, d_deseralize_package_json.Error, d_in.List_of_Characters, { 'document resource identifier': string }> = ($, abort, $p) => {
-    const x = t_parse_tree_from_text.Document(
+    const x = t_parse_tree_from_list_of_characters.Document(
         $,
         () => abort(['invalid ASTN', null]),
         {

@@ -7,7 +7,7 @@
     "dist"
   ],
   "dependencies": {
-    "astn-core": "^0.5.19",
+    "astn-core": "^0.5.22",
     "pareto-core-dev": "^0.12.7",
     "pareto-fountain-pen": "^0.4.18",
     "pareto-graphviz": "^0.2.12",
