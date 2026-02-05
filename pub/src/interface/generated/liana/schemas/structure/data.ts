@@ -1,95 +1,95 @@
-
-import * as _pi from "pareto-core/dist/interface"
-
-export namespace Directory_ {
     
-    export type dictionary = Directory_
+    import * as _pi from "pareto-core/dist/interface"
     
-    export namespace group {
+    export namespace Directory_ {
         
-        export namespace D {
+        export type dictionary = Directory_
+        
+        export namespace group {
             
-            export type directory = Directory_
-            
-            export namespace file {
+            export namespace D {
                 
-                export type manual = null
+                export type directory = Directory_
                 
-                export namespace generated {
+                export namespace file {
                     
-                    export type commit_to_git = boolean
+                    export type manual = null
+                    
+                    export namespace generated {
+                        
+                        export type commit_to_git = boolean
+                        
+                    }
+                    
+                    export type generated = {
+                        readonly 'commit to git': generated.commit_to_git
+                    }
                     
                 }
                 
-                export type generated = {
-                    readonly 'commit to git': generated.commit_to_git
-                }
+                export type file = 
+                    | readonly ['manual', file.manual]
+                    | readonly ['generated', file.generated]
                 
             }
             
-            export type file = 
-                | readonly ['manual', file.manual]
-                | readonly ['generated', file.generated]
+            export type D = 
+                | readonly ['directory', D.directory]
+                | readonly ['file', D.file]
             
         }
         
-        export type D = 
-            | readonly ['directory', D.directory]
-            | readonly ['file', D.file]
+        export type group = _pi.Dictionary<group.D>
         
-    }
-    
-    export type group = _pi.Dictionary<group.D>
-    
-    export namespace wildcards {
-        
-        export type required_directories = number
-        
-        export type additional_directories_allowed = boolean
-        
-        export namespace extensions {
+        export namespace wildcards {
             
-            export type L = string
+            export type required_directories = number
+            
+            export type additional_directories_allowed = boolean
+            
+            export namespace extensions {
+                
+                export type L = string
+                
+            }
+            
+            export type extensions = _pi.List<extensions.L>
+            
+            export type warn = boolean
             
         }
         
-        export type extensions = _pi.List<extensions.L>
+        export type wildcards = {
+            readonly 'required directories': wildcards.required_directories
+            readonly 'additional directories allowed': wildcards.additional_directories_allowed
+            readonly 'extensions': wildcards.extensions
+            readonly 'warn': wildcards.warn
+        }
         
-        export type warn = boolean
+        export type freeform = null
+        
+        export type ignore = null
+        
+        export namespace generated {
+            
+            export type commit_to_git = boolean
+            
+        }
+        
+        export type generated = {
+            readonly 'commit to git': generated.commit_to_git
+        }
         
     }
     
-    export type wildcards = {
-        readonly 'required directories': wildcards.required_directories
-        readonly 'additional directories allowed': wildcards.additional_directories_allowed
-        readonly 'extensions': wildcards.extensions
-        readonly 'warn': wildcards.warn
+    export type Directory_ = 
+        | readonly ['dictionary', Directory_.dictionary]
+        | readonly ['group', Directory_.group]
+        | readonly ['wildcards', Directory_.wildcards]
+        | readonly ['freeform', Directory_.freeform]
+        | readonly ['ignore', Directory_.ignore]
+        | readonly ['generated', Directory_.generated]
+    
+    export { 
+        Directory_ as Directory, 
     }
-    
-    export type freeform = null
-    
-    export type ignore = null
-    
-    export namespace generated {
-        
-        export type commit_to_git = boolean
-        
-    }
-    
-    export type generated = {
-        readonly 'commit to git': generated.commit_to_git
-    }
-    
-}
-
-export type Directory_ = 
-    | readonly ['dictionary', Directory_.dictionary]
-    | readonly ['group', Directory_.group]
-    | readonly ['wildcards', Directory_.wildcards]
-    | readonly ['freeform', Directory_.freeform]
-    | readonly ['ignore', Directory_.ignore]
-    | readonly ['generated', Directory_.generated]
-
-export { 
-    Directory_ as Directory, 
-}
