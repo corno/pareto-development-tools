@@ -3,7 +3,7 @@ import * as _pi from 'pareto-core/dist/interface'
 
 //data types
 import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
-import * as d_in from "pareto-fountain-pen/dist/interface/to_be_generated/text"
+import * as d_in from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
 import * as d_npm_package from "../../../../../interface/to_be_generated/npm_package"
 import * as d_deseralize_package_json from "../../../../../interface/to_be_generated/deserialize_package_json"
 
@@ -68,7 +68,7 @@ const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never):
 
 const expect_property = ($: Object, id: string, abort: (error: ['missing property', string]) => never): d.Value => $.__get_entry(id, () => abort(['missing property', id]))
 
-export const $$: _pi.Refiner_With_Parameters<d_npm_package.NPM_Package, d_deseralize_package_json.Error, d_in.Text, { 'document resource identifier': string }> = ($, abort, $p) => {
+export const $$: _pi.Refiner_With_Parameters<d_npm_package.NPM_Package, d_deseralize_package_json.Error, d_in.List_of_Characters, { 'document resource identifier': string }> = ($, abort, $p) => {
     const x = t_parse_tree_from_text.Document(
         $,
         () => abort(['invalid ASTN', null]),

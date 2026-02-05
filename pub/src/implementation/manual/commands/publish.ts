@@ -10,6 +10,9 @@ import * as d from "../../../interface/to_be_generated/publish"
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import * as q_get_package_json from "../../../modules/npm/implementation/manual/queries/get_package_json"
 
+//shorthands
+import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+
 export const $$: signatures.commands.publish = _p.command_procedure(
 
     ($p, $cr, $qr) => [
@@ -122,9 +125,14 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
                     $cr.log.execute(
                         {
-                            'lines': _p.list.literal([
-                                `published: ${package_info.name}@${package_info.version}`
-                            ]),
+                            'message': sh.pg.sentences([
+                                sh.ph.composed([
+                                    sh.ph.literal(`published:`),
+                                    sh.ph.literal(package_info.name),
+                                    sh.ph.literal(`@`),
+                                    sh.ph.literal(package_info.version),
+                                ])
+                            ])
                         },
                         ($): d.Error => ['error while logging', $],
                     ),

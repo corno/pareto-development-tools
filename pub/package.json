@@ -7,12 +7,12 @@
     "dist"
   ],
   "dependencies": {
-    "astn-core": "^0.5.18",
+    "astn-core": "^0.5.19",
     "pareto-core-dev": "^0.12.7",
-    "pareto-fountain-pen": "^0.4.15",
-    "pareto-graphviz": "^0.2.10",
-    "pareto-host-nodejs": "^0.2.16",
-    "pareto-resources": "^0.2.24"
+    "pareto-fountain-pen": "^0.4.18",
+    "pareto-graphviz": "^0.2.12",
+    "pareto-host-nodejs": "^0.2.21",
+    "pareto-resources": "^0.2.33"
   },
   "bin": {
     "pdt": "./dist/bin.js"

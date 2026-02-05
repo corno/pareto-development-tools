@@ -10,7 +10,7 @@ import * as signatures from "../../../interface/signatures"
 
 //data types
 import * as d from "../../../interface/to_be_generated/set_up_comparison_against_published"
-import * as d_out from "pareto-fountain-pen/dist/interface/to_be_generated/text"
+import * as d_out from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
@@ -21,7 +21,7 @@ import * as q_get_package_json from "../queries/get_package_json"
 //shorthands
 import * as sh from "../../../../../temp_pseudo_fp"
 
-const remove_n_characters_from_end = ($: string, n: number): d_out.Text => {
+const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Characters => {
 
     const chars = _p_list_from_text($, ($) => $)
     const length = chars.__get_number_of_items()
@@ -95,9 +95,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                                 'args': _pt.list.nested_literal_old([
                                     _pt.list.literal([
                                         `pack`,
-                                        sh.b.text(t_path_to_text.Context_Path($p['path to local package'])),
+                                        sh.serialize(t_path_to_text.Context_Path($p['path to local package'])),
                                         `--pack-destination`,
-                                        sh.b.text(t_path_to_text.Node_Path($p['path to temp directory'])),
+                                        sh.serialize(t_path_to_text.Node_Path($p['path to temp directory'])),
                                     ])
                                 ]),
                             },
@@ -115,9 +115,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                             {
                                 'args': _pt.list.literal([
                                     `-xzmf`,
-                                    `${sh.b.text(t_path_to_text.Node_Path($p['path to temp directory']))}/${filename}`,
+                                    `${sh.serialize(t_path_to_text.Node_Path($p['path to temp directory']))}/${filename}`,
                                     `-C`,
-                                    sh.b.text(t_path_to_text.Node_Path($p['path to output local directory'])),
+                                    sh.serialize(t_path_to_text.Node_Path($p['path to output local directory'])),
                                     `--strip-components=1`,
                                 ]),
                             },
@@ -136,7 +136,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                                     `pack`,
                                     `${package_info.name}@${package_info.version}`,
                                     `--pack-destination`,
-                                    `${sh.b.text(t_path_to_text.Node_Path($p['path to temp directory']))}/npm`,
+                                    `${sh.serialize(t_path_to_text.Node_Path($p['path to temp directory']))}/npm`,
                                 ])
                             },
                             ($) => ['error while running npm command', $],
@@ -166,9 +166,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                                     {
                                         'args': _pt.list.literal([
                                             `-xzmf`,
-                                            `${sh.b.text(t_path_to_text.Node_Path($p['path to temp directory']))}/npm/${package_info.name}-${_p_text_from_list($v, ($) => $)}.tgz`,
+                                            `${sh.serialize(t_path_to_text.Node_Path($p['path to temp directory']))}/npm/${package_info.name}-${_p_text_from_list($v, ($) => $)}.tgz`,
                                             `-C`,
-                                            `${sh.b.text(t_path_to_text.Node_Path($p['path to output published directory']))}`,
+                                            `${sh.serialize(t_path_to_text.Node_Path($p['path to output published directory']))}`,
                                             `--strip-components=1`,
                                         ])
                                     },

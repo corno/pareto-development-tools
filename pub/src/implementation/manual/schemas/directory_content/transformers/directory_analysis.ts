@@ -6,9 +6,9 @@ import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
 //data types
 import * as d_in from "pareto-resources/dist/interface/to_be_generated/directory_content"
-import * as d_out from "../../../../../interface/to_be_generated/directory_analysis"
+import * as d_out from "../../../../../interface/to_be_generated/file_structure_analysis"
 import * as d_structure from "../../../../../interface/generated/liana/schemas/structure/data"
-import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/text"
+import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
 
 const line_count = ($: string): number => {
     let lineCount = 0
@@ -385,12 +385,15 @@ export const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_L
 }
 
 
-export const dict_to_list = ($: d_out.Flattened_Directory_With_Line_Counts): _pi.List<{
-    'path': string,
-    'analysis': d_out.File_Analysis,
-}> => {
+export const dict_to_list = (
+    $: d_out.Flattened_Directory_With_Line_Counts,
+    $p: {
+        'package name': string
+    }
+): d_out.File_Analysis_List => {
 
     return _p.list.from_dictionary($, ($, id) => ({
+        'package': $p['package name'],
         'path': id,
         'analysis': $,
     }))

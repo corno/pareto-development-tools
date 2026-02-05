@@ -16,19 +16,19 @@ export const $$: signatures.commands.npm_publish = _p.command_procedure(
             {
                 'args': _pt.list.nested_literal_old([
                     [
-                        sh.b.literal("publish")
+                        "publish"
                     ],
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            sh.b.text(t_path_to_text.Context_Path($)),
+                            sh.serialize(t_path_to_text.Context_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
                     _p.decide.state($p.impact, ($) => {
                         switch ($[0]) {
-                            case 'dry run': return _p.ss($, ($) => [ sh.b.literal("--dry-run") ])
+                            case 'dry run': return _p.ss($, ($) => [ "--dry-run" ])
                             case 'actual publish': return _p.ss($, ($) => [
-                                sh.b.literal("--otp"),
+                                "--otp",
                                 $['one time password'],
                             ])
                             default: return _p.au($[0])

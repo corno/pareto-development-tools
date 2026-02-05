@@ -36,10 +36,10 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                             ($): d.Package_Error => ['no package.json file', null],
                         ).refine_without_error_transformation(
                             ($, abort) => r_parse_npm_package(
-                                _p_list_from_text($, ($) =>$),
+                                $,
                                 ($) => abort(['parse error', $]),
                                 {
-                                    'document resource identifier': sh.b.text(t_path_to_text.Node_Path(path_x)),
+                                    'document resource identifier': sh.serialize(t_path_to_text.Node_Path(path_x)),
                                 }
                             )
                         ))

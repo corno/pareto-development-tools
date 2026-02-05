@@ -30,13 +30,10 @@ export const $$: signatures.commands.write_to_file = _p.command_procedure(
                         ? replace_space_in_context_path($)
                         : $,
                 ),
-                'data': _p_text_from_list(
-                    _pt.list.flatten(
-                        t_block_2_lines.Group($p.group, { 'indentation': $p.indentation }).__l_map(($) => $ + $p.newline),
-                        ($) => _p_list_from_text($, ($) => $),
-                    ),
-                    ($) => $,
-                ),
+                'data': _pt.list.flatten(
+                    t_block_2_lines.Paragraph($p.paragraph, { 'indentation': $p.indentation }).__l_map(($) => $ + $p.newline),
+                    ($) => _p_list_from_text($, ($) => $),
+                )
             },
             ($) => ['write file', $],
         )

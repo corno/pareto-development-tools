@@ -31,16 +31,16 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
                 'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            sh.b.literal("-C"),
-                            sh.b.text(t_path_to_text.Context_Path($)),
+                            "-C",
+                            sh.serialize(t_path_to_text.Context_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
                     _pt.list.literal([
-                        sh.b.literal("rm"),
-                        sh.b.literal("-r"),
-                        sh.b.literal("--cached"),
-                        sh.b.literal(".")
+                        "rm",
+                        "-r",
+                        "--cached",
+                        "."
                     ])
                 ]),
             },
@@ -51,14 +51,14 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
                 'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            sh.b.literal("-C"),
-                            sh.b.text(t_path_to_text.Context_Path($)),
+                            "-C",
+                            sh.serialize(t_path_to_text.Context_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
                     _pt.list.literal([
-                        sh.b.literal("add"),
-                        sh.b.literal("--all"),
+                        "add",
+                        "--all",
                     ])
                 ]),
             },
@@ -69,14 +69,14 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
                 'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            sh.b.literal("-C"),
-                            sh.b.text(t_path_to_text.Context_Path($)),
+                            "-C",
+                            sh.serialize(t_path_to_text.Context_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
                     _pt.list.literal([
-                        sh.b.literal("clean"),
-                        sh.b.literal("-fd"),
+                        "clean",
+                        "-fd",
                     ])
                 ]),
             },

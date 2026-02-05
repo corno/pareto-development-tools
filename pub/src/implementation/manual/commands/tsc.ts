@@ -21,7 +21,7 @@ export const $$: signatures.commands.tsc = _p.command_procedure(
                     $p.path.__decide(
                         ($) => _pt.list.literal([
                             `--project`,
-                            sh.b.text(t_path_to_text.Node_Path($)),
+                            sh.serialize(t_path_to_text.Node_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),

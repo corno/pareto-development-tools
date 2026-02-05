@@ -6,18 +6,18 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
+export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
 import * as t_utd_to_fountain_pen from "../../../../../modules/npm/implementation/manual/schemas/update_package_dependencies/transformers/fountain_pen"
 
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
-        case 'error updating pub': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("error updating /pub: "),
+        case 'error updating pub': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("error updating /pub: "),
             t_utd_to_fountain_pen.Error($)
         ]))
-        case 'error updating test': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("error updating /test: "),
+        case 'error updating test': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("error updating /test: "),
             t_utd_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])

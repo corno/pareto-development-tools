@@ -17,8 +17,8 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                 'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            sh.b.literal("--prefix"),
-                            sh.b.text(t_path_to_text.Context_Path($)),
+                            "--prefix",
+                            sh.serialize(t_path_to_text.Context_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
@@ -26,28 +26,28 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                         switch ($[0]) {
                             case 'update': return _pt.ss($, ($) => _pt.list.nested_literal_old([
                                 [
-                                   sh.b.literal("update"),
+                                   "update",
                                 ],
                                 $['package-lock only']
-                                    ? _pt.list.literal([`--package-lock-only`])
+                                    ? _pt.list.literal(["--package-lock-only"])
                                     : _pt.list.literal([])
 
                             ]))
                             case 'install': return _pt.ss($, ($) => _pt.list.nested_literal_old([
                                 [
-                                    sh.b.literal("install"),
+                                    "install",
                                 ],
                                 $['package-lock only']
-                                    ? _pt.list.literal([`--package-lock-only`])
+                                    ? _pt.list.literal(["--package-lock-only"])
                                     : _pt.list.literal([])
 
                             ]))
                             case 'version': return _pt.ss($, ($) => _pt.list.literal([
-                                sh.b.literal("version"),
+                                "version",
                                 _p.decide.state($, ($) => {
                                     switch ($[0]) {
-                                        case 'patch': return _p.ss($, ($) => sh.b.literal("patch"))
-                                        case 'minor': return _p.ss($, ($) => sh.b.literal("minor"))
+                                        case 'patch': return _p.ss($, ($) => "patch")
+                                        case 'minor': return _p.ss($, ($) => "minor")
                                         default: return _p.au($[0])
                                     }
                                 })

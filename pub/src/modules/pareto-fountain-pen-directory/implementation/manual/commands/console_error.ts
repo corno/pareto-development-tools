@@ -10,12 +10,7 @@ export const $$: signatures.commands.console_error = _p.command_procedure(
     ($p, $cr) => [
         $cr['log error'].execute(
             {
-                'lines': t_block_to_lines.Group(
-                    $p.group,
-                    {
-                        'indentation': $p.indentation
-                    }
-                )
+                'message': $p.paragraph,
             },
             ($) => $,
         )

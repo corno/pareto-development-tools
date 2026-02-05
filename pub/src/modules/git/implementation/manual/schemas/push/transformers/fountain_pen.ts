@@ -8,12 +8,12 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_command_executable/transformers/fountain_pen"
 
-export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
+export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
-        case 'could not push': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("could not push:"),
+        case 'could not push': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not push:"),
             t_epe_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])

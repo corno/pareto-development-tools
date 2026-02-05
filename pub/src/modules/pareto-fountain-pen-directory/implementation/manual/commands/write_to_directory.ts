@@ -39,7 +39,7 @@ export const $$: signatures.commands.write_to_directory = _p.command_procedure(
                         case 'file': return _pt.ss($, ($) => $cr['write to_file'].execute(
                             {
                                 'escape spaces in path': $p['escape spaces in path'],
-                                'group': $,
+                                'paragraph': $,
                                 'directory path': $p.path,
                                 'filename': id,
                                 'indentation': $p.indentation,

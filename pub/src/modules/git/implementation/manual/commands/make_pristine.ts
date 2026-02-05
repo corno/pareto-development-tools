@@ -19,16 +19,16 @@ export const $$: signatures.commands.make_pristine = _p.command_procedure(
                 'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            sh.b.literal("-C"),
-                            sh.b.text(t_path_to_text.Context_Path($)),
+                            "-C",
+                            sh.serialize(t_path_to_text.Context_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
                     _pt.list.literal([
-                        sh.b.literal("clean"),
-                        sh.b.literal("--force"),
-                        sh.b.literal("-d"), // remove whole directories
-                        sh.b.literal("-X"), // remove only ignored files (not the capital X as opposed to -x which removes all untracked files, including unignored ones)
+                        "clean",
+                        "--force",
+                        "-d", // remove whole directories
+                        "-X", // remove only ignored files (not the capital X as opposed to -x which removes all untracked files, including unignored ones)
 
                     ])
                 ]),

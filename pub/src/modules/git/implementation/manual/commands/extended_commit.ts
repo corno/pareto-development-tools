@@ -32,14 +32,14 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                 'args': _pt.list.nested_literal_old([
                                     $p.path.__decide(
                                         ($) => _pt.list.literal([
-                                            sh.b.literal("-C"),
-                                            sh.b.text(t_path_to_text.Context_Path($)),
+                                            "-C",
+                                            sh.serialize(t_path_to_text.Context_Path($)),
                                         ]),
                                         () => undefined
                                     ),
                                     _pt.list.literal([
-                                        sh.b.literal("add"),
-                                        sh.b.literal("--all"),
+                                        "add",
+                                        "--all",
                                     ])
                                 ]),
                             },
@@ -52,14 +52,14 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                         'args': _pt.list.nested_literal_old([
                             $p.path.__decide(
                                 ($) => _pt.list.literal([
-                                    sh.b.literal("-C"),
-                                    sh.b.text(t_path_to_text.Context_Path($)),
+                                    "-C",
+                                    sh.serialize(t_path_to_text.Context_Path($)),
                                 ]),
                                 () => undefined
                             ),
                             _pt.list.literal([
-                                sh.b.literal("commit"),
-                                sh.b.literal("-m"),
+                                "commit",
+                                "-m",
                                 $p.instruction['commit message'],
                             ])
                         ]),
@@ -74,13 +74,13 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                                 'args': _pt.list.nested_literal_old([
                                     $p.path.__decide(
                                         ($) => _pt.list.literal([
-                                            sh.b.literal("-C"),
-                                            sh.b.text(t_path_to_text.Context_Path($)),
+                                            "-C",
+                                            sh.serialize(t_path_to_text.Context_Path($)),
                                         ]),
                                         () => undefined
                                     ),
                                     _pt.list.literal([
-                                        sh.b.literal("push"),
+                                        "push",
                                     ])
                                 ]),
                             },

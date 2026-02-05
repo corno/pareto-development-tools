@@ -6,27 +6,27 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
+export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
 import * as t_ece_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_command_executable/transformers/fountain_pen"
 import * as t_git_is_clean_to_fountain_pen from "../../is_repository_clean/transformers/fountain_pen"
 
-export const Error: Error = ($) => _p.decide.state($, ($): d_out.Block_Part => {
+export const Error: Error = ($) => _p.decide.state($, ($): d_out.Phrase => {
     switch ($[0]) {
-        case 'asserting git not clean': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("error while asserting git is not clean: "),
+        case 'asserting git not clean': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("error while asserting git is not clean: "),
             t_git_is_clean_to_fountain_pen.Error($)
         ]))
-        case 'could not stage': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("could not stage: "),
+        case 'could not stage': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not stage: "),
             t_ece_to_fountain_pen.Error($)
         ]))
-        case 'could not commit': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("could not commit: "),
+        case 'could not commit': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not commit: "),
             t_ece_to_fountain_pen.Error($)
         ]))
-        case 'could not push': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("could not push: "),
+        case 'could not push': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not push: "),
             t_ece_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])

@@ -40,3 +40,9 @@ export type Structure_Analysis = {
 }
 
 export type Flattened_Directory_With_Line_Counts = _pi.Dictionary<File_Analysis>
+
+export type File_Analysis_List = _pi.List<{
+    'package': string,
+    'path': string,
+    'analysis': File_Analysis,
+}>

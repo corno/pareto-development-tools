@@ -14,6 +14,9 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 import * as t_line_count_to_line_count from "../schemas/directory_content/transformers/directory_analysis"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
 
+//shorthands
+import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+
 
 export const $$: signatures.commands.list_file_structure_problems = _p.command_procedure(
     ($p, $cr, $q) => [
@@ -21,7 +24,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
         _p.query(
             $q['read directory'](
                 {
-                    'path': t_path_to_path.create_node_path($p['path to project'], { 'node': `packages`}),
+                    'path': t_path_to_path.create_node_path($p['path to project'], { 'node': `packages` }),
                 },
                 ($): d.Error => ['read directory', $],
             ),
@@ -53,25 +56,29 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
 
                         $cr.log.execute(
                             {
-                                'lines': _pt.list.flatten(
-                                    _pt.list.from_dictionary($v, ($, id) => {
-                                        const package_name = id
-                                        return t_line_count_to_line_count.dict_to_list(
-                                            _pt.dictionary.filter(
-                                                t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
-                                                    $,
-                                                    {
-                                                        'expected structure': x_structure,
-                                                        'structure path': ``
-                                                    }
+                                'message': sh.pg.sentences([
+                                    sh.ph.literal("IMPLEMENT ME"),
+                                ]),
+                                // 'message': xxxx,
+                                // 'lines': _pt.list.flatten(
+                                //     _pt.list.from_dictionary($v, ($, id) => {
+                                //         const package_name = id
+                                //         return t_line_count_to_line_count.dict_to_list(
+                                //             _pt.dictionary.filter(
+                                //                 t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
+                                //                     $,
+                                //                     {
+                                //                         'expected structure': x_structure,
+                                //                         'structure path': ``
+                                //                     }
 
-                                                )),
-                                                ($) => _pt.boolean.optional_is_set($['unexpected path tail'])
-                                                    ? _p.optional.set($)
-                                                    : _p.optional.not_set())).__l_map(($) => `./packages/${package_name}${$['path']}`)
-                                    }),
-                                    ($) => $,
-                                )
+                                //                 )),
+                                //                 ($) => _pt.boolean.optional_is_set($['unexpected path tail'])
+                                //                     ? _p.optional.set($)
+                                //                     : _p.optional.not_set())).__l_map(($) => `./packages/${package_name}${$['path']}`)
+                                //     }),
+                                //     ($) => $,
+                                // )
                             },
                             ($): d.Error => ['log', $],
                         )

@@ -1,11 +1,5 @@
 import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
-import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/text"
+import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
 
-export namespace b {
-
-    export const text = ($: d_text.Text): string => _p_text_from_list($, ($) => $)
-
-    export const literal = ($: string) => $
-
-}
+export const serialize = ($: d_text.List_of_Characters): string => _p_text_from_list($, ($) => $)

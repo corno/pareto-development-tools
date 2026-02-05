@@ -6,7 +6,7 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
+export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
 import * as t_git_push_to_fountain_pen from "../../../../../modules/git/implementation/manual/schemas/push/transformers/fountain_pen"
 import * as t_git_assert_is_clean_to_fountain_pen from "../../../../../modules/git/implementation/manual/schemas/assert_is_clean/transformers/fountain_pen"
@@ -20,51 +20,51 @@ import * as t_git_ec_to_fountain_pen from "../../../../../modules/git/implementa
 
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
-        case 'error while running git push': return _p.ss($, ($) => sh.b.sub([
+        case 'error while running git push': return _p.ss($, ($) => sh.ph.composed([
             t_git_push_to_fountain_pen.Error($)
         ]))
-        case 'error while running git assert is clean at the start': return _p.ss($, ($) => sh.b.sub([
+        case 'error while running git assert is clean at the start': return _p.ss($, ($) => sh.ph.composed([
             _p.decide.state($, ($) => {
                 switch ($[0]) {
                     case 'unexpected error': return _p.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
-                    case 'working directory is not clean': return _p.ss($, ($) => sh.b.literal("working directory is not clean at the start"))
+                    case 'working directory is not clean': return _p.ss($, ($) => sh.ph.literal("working directory is not clean at the start"))
                     default: return _p.au($[0])
                 }
             })
         ]))
-        case 'error while running git make pristine': return _p.ss($, ($) => sh.b.sub([
+        case 'error while running git make pristine': return _p.ss($, ($) => sh.ph.composed([
             t_git_make_pristine_to_fountain_pen.Error($)
         ]))
-        case 'error while running update package dependencies': return _p.ss($, ($) => sh.b.sub([
+        case 'error while running update package dependencies': return _p.ss($, ($) => sh.ph.composed([
             t_clean_and_update_package_dependencies_to_fountain_pen.Error($)
         ]))
         case 'error while running build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($, { 'concise': false }))
-        case 'error while running git assert is clean after updating package dependencies': return _p.ss($, ($) => sh.b.sub([
+        case 'error while running git assert is clean after updating package dependencies': return _p.ss($, ($) => sh.ph.composed([
             _p.decide.state($, ($) => {
                 switch ($[0]) {
                     case 'unexpected error': return _p.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
-                    case 'working directory is not clean': return _p.ss($, ($) => sh.b.literal("working directory is not clean after updating package dependencies"))
+                    case 'working directory is not clean': return _p.ss($, ($) => sh.ph.literal("working directory is not clean after updating package dependencies"))
                     default: return _p.au($[0])
                 }
             })
         ]))
-        case 'error while running npm version': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("could not increment version: "),
+        case 'error while running npm version': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not increment version: "),
             t_npm_to_fountain_pen.Error($)
         ]))
-        case 'error while running npm publish': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("could not publish to npm: "),
+        case 'error while running npm publish': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not publish to npm: "),
             t_npm_to_fountain_pen.Error($)
         ]))
-        case 'error while logging': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("could not log"),
+        case 'error while logging': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not log"),
         ]))
-        case 'error while getting package.json': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("could not read package.json: "),
+        case 'error while getting package.json': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not read package.json: "),
             t_get_package_json_to_fountain_pen.Error($)
         ]))
-        case 'error while running git extended commit': return _p.ss($, ($) => sh.b.sub([
-            sh.b.literal("could not commit and push: "),
+        case 'error while running git extended commit': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not commit and push: "),
             t_git_ec_to_fountain_pen.Error($)
         ]))
 

@@ -29,7 +29,7 @@ export const $$: signatures.commands.create_dependency_graph = _p.command_proced
                 $cr.log.execute(
                     {
                         'indentation': `    `,
-                        'group': $v,
+                        'paragraph': $v,
                     },
                     ($): d.Error => ['log', null],
                 )

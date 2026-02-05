@@ -5,7 +5,7 @@ import * as d_in from "../../../../../interface/to_be_generated/execute_command"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/block/data"
 
 export namespace signatures {
-    export type Error = _pi.Transformer<d_in.Error, d_out.Block_Part>
+    export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 }
 
 //shorthands
@@ -30,9 +30,9 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
         case 'package': return _p.ss($, ($) => _p.decide.state($, ($) => {
             switch ($[0]) {
                 case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
-                case 'publish': return _p.ss($, ($): d_out.Block_Part => t_publish.Error($))
+                case 'publish': return _p.ss($, ($): d_out.Phrase => t_publish.Error($))
                 case 'update dependencies': return _p.ss($, ($) => t_update_dependencies.Error($))
-                case 'git assert clean': return _p.ss($, ($): d_out.Block_Part => t_git_assert_clean_to_fountain_pen.Error($))
+                case 'git assert clean': return _p.ss($, ($): d_out.Phrase => t_git_assert_clean_to_fountain_pen.Error($))
                 case 'git commit': return _p.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
 
                 default: return _p.au($[0])
@@ -42,10 +42,10 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
         case 'dependency graph': return _p.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
         case 'all': return _p.ss($, ($) => _p.decide.state($, ($) => {
             switch ($[0]) {
-                case 'packages': return _p.ss($, ($) => sh.b.indent(_p.list.from_dictionary($, ($, id) => sh.g.nested_block([
-                    sh.b.literal("package '"),
-                    sh.b.literal(id),
-                    sh.b.literal("': "),
+                case 'packages': return _p.ss($, ($) => sh.ph.indent(sh.pg.sentences(_p.list.from_dictionary($, ($, id) => sh.ph.composed([
+                    sh.ph.literal("package '"),
+                    sh.ph.literal(id),
+                    sh.ph.literal("': "),
                     _p.decide.state($, ($) => {
                         switch ($[0]) {
                             case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
@@ -58,15 +58,15 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
                             default: return _p.au($[0])
                         }
                     })
-                ]))))
-                case 'could not read packages directory': return _p.ss($, ($) => sh.b.sub([
-                    sh.b.literal("could not read packages directory: "),
+                ])))))
+                case 'could not read packages directory': return _p.ss($, ($) => sh.ph.composed([
+                    sh.ph.literal("could not read packages directory: "),
                     t_read_directory_to_fountain_pen.Error($)
                 ]))
                 default: return _p.au($[0])
             }
         }))
-        case 'set up comparison': return _p.ss($, ($): d_out.Block_Part => t_set_up_comparison_against_published.Error($))
+        case 'set up comparison': return _p.ss($, ($): d_out.Phrase => t_set_up_comparison_against_published.Error($))
         default: return _p.au($[0])
     }
 })

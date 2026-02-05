@@ -15,7 +15,11 @@ import * as d_directory_content from "pareto-resources/dist/interface/to_be_gene
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import * as t_line_count_to_line_count from "../schemas/directory_content/transformers/directory_analysis"
+import * as t_csv_to_fountain_pen from "../../../modules/csv/implementation/manual/schemas/csv/transformers/fountain_pen"
+import * as t_file_structure_analysis_to_csv from "../schemas/file_structure_analysis/transformers/csv"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
+
+import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 export const $$: signatures.commands.analyze_file_structure = _p.command_procedure(
     ($p, $cr, $q) => [
@@ -23,7 +27,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
         _p.query(
             $q['read directory'](
                 {
-                    'path': t_path_to_path.create_node_path($p['path to project'], { 'node': `packages`}),
+                    'path': t_path_to_path.create_node_path($p['path to project'], { 'node': `packages` }),
                 },
                 ($): d.Error => ['read directory', $],
             ),
@@ -53,58 +57,38 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                     ($v) => [
                         $cr.log.execute(
                             {
-                                'lines': _pt.list.nested_literal_old([
-                                    _pt.list.literal([
-                                        `package,filepath,structure path,classification,extension,unexpected,line count`,
-                                    ]),
 
-                                    _pt.list.flatten(
-                                        _pt.list.from_dictionary($v, ($, id): _pi.List<string> => {
-                                            const package_name = id
-                                            return t_line_count_to_line_count.dict_to_list(t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
-                                                $,
-                                                {
-                                                    'expected structure': x_structure,
-                                                    'structure path': ``
-                                                }
+                                'message': sh.pg.sentences([
+                                    sh.ph.literal("IMPLEMENT ME"),
+                                ]),
+                                        // _pt.list.from_dictionary($v, ($, id): _pi.List<string> => {
+                                        //     const package_name = id
+                                        //     return t_line_count_to_line_count.dict_to_list(
 
-                                            ))).__l_map(($) => `${package_name
-                                                },${$['path']
-                                                },${$.analysis.structure.path
-                                                },${_pt.decide.state($.analysis.structure.classification, ($) => {
-                                                    switch ($[0]) {
-                                                        case 'directory': return _pt.ss($, ($) => `directory ` + _pt.decide.state($, ($) => {
-                                                            switch ($[0]) {
-                                                                case 'ignored': return _pt.ss($, ($) => `ignored`)
-                                                                case 'generated': return _pt.ss($, ($) => `generated`)
-                                                                case 'wildcards': return _pt.ss($, ($) => `wildcards`)
-                                                                case 'dictionary': return _pt.ss($, ($) => `dictionary`)
-                                                                case 'group': return _pt.ss($, ($) => `group`)
-                                                                case 'freeform': return _pt.ss($, ($) => `freeform`)
-                                                                default: return _pt.au($[0])
-                                                            }
-                                                        }))
-                                                        case 'file': return _pt.ss($, ($) => `file ` + _pt.decide.state($, ($) => {
-                                                            switch ($[0]) {
-                                                                case 'generated': return _pt.ss($, ($) => `generated`)
-                                                                case 'manual': return _pt.ss($, ($) => `manual`)
-                                                                default: return _pt.au($[0])
-                                                            }
-                                                        }))
-                                                    }
-                                                })
-                                                },${$.analysis.extension.__decide(($) => $, () => ``)
-                                                },${$.analysis['unexpected path tail'].__decide(
-                                                    ($) => $,
-                                                    () => ``
-                                                )
-                                                },${$.analysis['line count']
-                                                }`)
-                                        }),
-                                        ($) => $
-                                    )
 
-                                ])
+
+                                // 'message': t_csv_to_fountain_pen.CSV(
+                                //     t_file_structure_analysis_to_csv.File_Analysis_List(
+                                //         t_line_count_to_line_count.dict_to_list(
+                                //             t_line_count_to_line_count.Directory2(
+                                //                 t_line_count_to_line_count.defined.Directory(
+                                //                     $,
+                                //                     {
+                                //                         'expected structure': x_structure,
+                                //                         'structure path': ``
+                                //                     }
+
+                                //                 )
+                                //             ),
+                                //             {
+                                //                 'package name': id
+                                //             }
+                                //         )
+                                //     ),
+                                //     {
+                                //         'separator': 0x2C, //comma
+                                //     }
+                                // ),
                             },
                             ($): d.Error => ['log', $],
                         )

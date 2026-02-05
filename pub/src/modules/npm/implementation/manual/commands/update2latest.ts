@@ -16,7 +16,7 @@ export const $$: signatures.commands.update2latest = _p.command_procedure(
             {
                 'args': _pt.list.nested_literal_old([
                     _pt.list.literal([
-                       sh.b.text(t_path_to_text.Context_Path($p.path)),
+                       sh.serialize(t_path_to_text.Context_Path($p.path)),
                     ]),
                     _pt.decide.state($p.what, ($) => {
                         // _pdev.log_debug_message(`Updating ${$p.path} to latest`, () => {})

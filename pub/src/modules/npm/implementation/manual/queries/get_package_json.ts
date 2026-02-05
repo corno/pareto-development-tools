@@ -26,10 +26,10 @@ export const $$: signatures.queries.get_package_json = _p.query_function(
             ($): d.Error => ['error while reading package.json', $],
         ).refine_without_error_transformation(
             ($, abort) => r_parse_npm_package(
-                _p_list_from_text($, ($) => $),
+                $,
                 ($) => abort(['error while parsing package.json', $]),
                 {
-                    'document resource identifier': sh.b.text(t_path_to_text.Node_Path(path)),
+                    'document resource identifier': sh.serialize(t_path_to_text.Node_Path(path)),
                 }
             )
         )

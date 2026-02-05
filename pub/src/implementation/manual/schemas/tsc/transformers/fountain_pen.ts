@@ -6,16 +6,16 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 
 import * as t_espe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_smelly_command_executable/transformers/fountain_pen"
 
-export type Error = _pi.Transformer_With_Parameters<d_in.Error, d_out.Block_Part, { 'concise': boolean }>
+export type Error = _pi.Transformer_With_Parameters<d_in.Error, d_out.Phrase, { 'concise': boolean }>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
-export const Error: Error = ($, $p) => _p.decide.state($, ($): d_out.Block_Part => {
+export const Error: Error = ($, $p) => _p.decide.state($, ($): d_out.Phrase => {
     switch ($[0]) {
         case 'error while running tsc': return _p.ss($, ($) => $p.concise
-            ? sh.b.nothing()
-            : sh.b.sub([
-                sh.b.literal("error while running tsc: "),
+            ? sh.ph.nothing()
+            : sh.ph.composed([
+                sh.ph.literal("error while running tsc: "),
                 t_espe_to_fountain_pen.Error($),
                 //
             ])

@@ -6,9 +6,9 @@ import _text_from_list from 'pareto-core/dist/_p_text_from_list'
 
 //data types
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
-import * as d_out from "pareto-fountain-pen/dist/interface/to_be_generated/text"
+import * as d_out from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
 
-const replace = ($: string, search: number, replace: number): d_out.Text => _p_list_build_deprecated(($i) => {
+const replace = ($: string, search: number, replace: number): d_out.List_of_Characters => _p_list_build_deprecated(($i) => {
     _p_list_from_text($, ($) => $).__l_map(($) => {
         if ($ === search) {
             $i['add item'](replace)

@@ -19,13 +19,13 @@ export const $$: signatures.commands.push = _p.command_procedure(
                 'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            sh.b.literal("-C"),
-                            sh.b.text(t_path_to_text.Context_Path($)),
+                            "-C",
+                            sh.serialize(t_path_to_text.Context_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
                     _pt.list.literal([
-                        sh.b.literal("push"),
+                        "push",
                     ])
                 ]),
             },

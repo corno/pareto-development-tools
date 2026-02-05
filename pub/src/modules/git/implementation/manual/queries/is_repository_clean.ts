@@ -18,14 +18,14 @@ export const $$: signatures.queries.is_repository_clean = _p.query_function(
             'args': _p.list.nested_literal([
                 $p.path.__decide(
                     ($) => _p.list.literal([
-                        sh.b.literal("-C"),
-                        sh.b.text(t_path_to_text.Context_Path($)),
+                        "-C",
+                        sh.serialize(t_path_to_text.Context_Path($)),
                     ]),
                     () => _p.list.literal([])
                 ),
                 _p.list.literal([
-                    sh.b.literal("status"),
-                    sh.b.literal("--porcelain"),
+                    "status",
+                    "--porcelain",
                 ])
             ]),
         },
