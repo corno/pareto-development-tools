@@ -1,9 +1,9 @@
     
-    import * as _p from "pareto-core/dist/expression"
+    import * as _p from 'pareto-core/dist/expression'
     
-    import _p_change_context from "pareto-core/dist/_p_change_context"
+    import _p_change_context from 'pareto-core/dist/_p_change_context'
     
-    import _p_text_from_list from "pareto-core/dist/_p_text_from_list"
+    import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
     
     import * as t_signatures from "../../../../../../interface/generated/liana/schemas/structure/marshall"
     
@@ -72,7 +72,7 @@
                                                                                 'option': 'generated',
                                                                                 'value': ['group', ['verbose', _p.dictionary.literal(
                                                                                     {
-                                                                                        'commit to git': _p_change_context(
+                                                                                        "commit to git": _p_change_context(
                                                                                             $['commit to git'],
                                                                                             ($) => ['text', {
                                                                                                 'delimiter': ['none', null],
@@ -114,7 +114,7 @@
                             'option': 'wildcards',
                             'value': ['group', ['verbose', _p.dictionary.literal(
                                 {
-                                    'required directories': _p_change_context(
+                                    "required directories": _p_change_context(
                                         $['required directories'],
                                         ($) => ['text', {
                                             'delimiter': ['none', null],
@@ -126,7 +126,7 @@
                                             ),
                                         }],
                                     ),
-                                    'additional directories allowed': _p_change_context(
+                                    "additional directories allowed": _p_change_context(
                                         $['additional directories allowed'],
                                         ($) => ['text', {
                                             'delimiter': ['none', null],
@@ -138,7 +138,7 @@
                                             ),
                                         }],
                                     ),
-                                    'extensions': _p_change_context(
+                                    "extensions": _p_change_context(
                                         $['extensions'],
                                         ($) => ['list', _p.list.map(
                                             $,
@@ -148,7 +148,7 @@
                                             }],
                                         )],
                                     ),
-                                    'warn': _p_change_context(
+                                    "warn": _p_change_context(
                                         $['warn'],
                                         ($) => ['text', {
                                             'delimiter': ['none', null],
@@ -187,7 +187,7 @@
                             'option': 'generated',
                             'value': ['group', ['verbose', _p.dictionary.literal(
                                 {
-                                    'commit to git': _p_change_context(
+                                    "commit to git": _p_change_context(
                                         $['commit to git'],
                                         ($) => ['text', {
                                             'delimiter': ['none', null],
