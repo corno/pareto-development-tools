@@ -35,7 +35,7 @@ export const Result: Result = ($) => {
                                     return _p.optional.set(({
                                         'from': from,
                                         'to': id,
-                                        'attributes': pacakges.__get_possible_entry(id).__decide(
+                                        'attributes': pacakges.__get_possible_entry_deprecated(id).__decide(
                                             ($) => _p.list.literal([]),
                                             () => _p.list.literal<d_out.Attributes.L>([
                                                 ['color', "red"]

@@ -66,9 +66,9 @@ const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never):
     }
 })
 
-const expect_property = ($: Object, id: string, abort: (error: ['missing property', string]) => never): d.Value => $.__get_entry(id, () => abort(['missing property', id]))
+const expect_property = ($: Object, id: string, abort: (error: ['missing property', string]) => never): d.Value => $.__get_entry_deprecated(id, () => abort(['missing property', id]))
 
-export const $$: _pi.Refiner_With_Parameters<d_npm_package.NPM_Package, d_deseralize_package_json.Error, d_in.List_of_Characters, { 'document resource identifier': string }> = ($, abort, $p) => {
+export const $$: _pi.Refiner_With_Parameter<d_npm_package.NPM_Package, d_deseralize_package_json.Error, d_in.List_of_Characters, { 'document resource identifier': string }> = ($, abort, $p) => {
     const x = t_parse_tree_from_list_of_characters.Document(
         $,
         () => abort(['invalid ASTN', null]),
@@ -87,7 +87,7 @@ export const $$: _pi.Refiner_With_Parameters<d_npm_package.NPM_Package, d_desera
         'name': name,
         'version': version,
         'dependencies': _p.optional.map(
-            root.__get_possible_entry('dependencies'),
+            root.__get_possible_entry_deprecated('dependencies'),
             ($) => expect_object(
                 $,
                 (error) => abort(['dependencies', ['not an object', null]])

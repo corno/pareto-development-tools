@@ -105,7 +105,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                 ),
                                                                                 ($) => ({
                                                                                     'commit to git': _p_change_context(
-                                                                                        $.__get_entry(
+                                                                                        $.__get_entry_deprecated(
                                                                                             'commit to git',
                                                                                             ($) => abort(
                                                                                                 ['no such entry', "commit to git"],
@@ -160,7 +160,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                             ),
                             ($) => ({
                                 'required directories': _p_change_context(
-                                    $.__get_entry(
+                                    $.__get_entry_deprecated(
                                         'required directories',
                                         ($) => abort(
                                             ['no such entry', "required directories"],
@@ -182,7 +182,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                     ),
                                 ),
                                 'additional directories allowed': _p_change_context(
-                                    $.__get_entry(
+                                    $.__get_entry_deprecated(
                                         'additional directories allowed',
                                         ($) => abort(
                                             ['no such entry', "additional directories allowed"],
@@ -204,7 +204,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                     ),
                                 ),
                                 'extensions': _p_change_context(
-                                    $.__get_entry(
+                                    $.__get_entry_deprecated(
                                         'extensions',
                                         ($) => abort(
                                             ['no such entry', "extensions"],
@@ -226,7 +226,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                     ),
                                 ),
                                 'warn': _p_change_context(
-                                    $.__get_entry(
+                                    $.__get_entry_deprecated(
                                         'warn',
                                         ($) => abort(
                                             ['no such entry', "warn"],
@@ -282,7 +282,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                             ),
                             ($) => ({
                                 'commit to git': _p_change_context(
-                                    $.__get_entry(
+                                    $.__get_entry_deprecated(
                                         'commit to git',
                                         ($) => abort(
                                             ['no such entry', "commit to git"],

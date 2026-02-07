@@ -144,7 +144,7 @@ export namespace defined {
                                 default: return _p.au($[0])
                             }
                         })
-                        return expected.__get_possible_entry(id).__decide(
+                        return expected.__get_possible_entry_deprecated(id).__decide(
                             ($) => NodeX(
                                 node,
                                 {

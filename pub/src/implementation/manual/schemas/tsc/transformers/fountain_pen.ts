@@ -6,7 +6,7 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 
 import * as t_espe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_smelly_command_executable/transformers/fountain_pen"
 
-export type Error = _pi.Transformer_With_Parameters<d_in.Error, d_out.Phrase, { 'concise': boolean }>
+export type Error = _pi.Transformer_With_Parameter<d_in.Error, d_out.Phrase, { 'concise': boolean }>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 

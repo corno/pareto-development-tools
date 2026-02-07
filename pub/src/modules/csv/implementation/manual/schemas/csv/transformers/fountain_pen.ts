@@ -7,7 +7,7 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 import * as d_in from "../../../../../interface/to_be_generated/csv"
 
 
-export type Signature = _pi.Transformer_With_Parameters<
+export type Signature = _pi.Transformer_With_Parameter<
     d_in.CSV,
     d_out.Paragraph,
     {

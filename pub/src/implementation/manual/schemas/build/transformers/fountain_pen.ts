@@ -5,7 +5,7 @@ import * as d_in from "../../../../../interface/to_be_generated/build"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/block/data"
 
 export namespace signatures {
-    export type Error = _pi.Transformer_With_Parameters<d_in.Error, d_out.Phrase, { 'concise': boolean }>
+    export type Error = _pi.Transformer_With_Parameter<d_in.Error, d_out.Phrase, { 'concise': boolean }>
 }
 
 //shorthands

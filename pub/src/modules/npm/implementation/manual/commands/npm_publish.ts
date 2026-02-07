@@ -28,8 +28,8 @@ export const $$: signatures.commands.npm_publish = _p.command_procedure(
                         switch ($[0]) {
                             case 'dry run': return _p.ss($, ($) => [ "--dry-run" ])
                             case 'actual publish': return _p.ss($, ($) => [
-                                "--otp",
-                                $['one time password'],
+                                // "--otp",
+                                // $['one time password'],
                             ])
                             default: return _p.au($[0])
                         }

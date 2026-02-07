@@ -20,7 +20,7 @@ export type Parameters = {
     'impact':
     |['dry run', null]
     |['actual publish', {
-        'one time password': string
+        //'one time password': string
     }]
 }
 

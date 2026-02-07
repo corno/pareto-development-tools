@@ -189,10 +189,10 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                 return ['dry run', null]
                             }
                             default: return ['actual publish', {
-                                'one time password': iterator.consume(
-                                    ($) => $,
-                                    () => abort(['expected a text', { 'description': "one time password" }])
-                                )
+                                // 'one time password': iterator.consume(
+                                //     ($) => $,
+                                //     () => abort(['expected a text', { 'description': "one time password" }])
+                                // )
                             }]
                         }
                     }
