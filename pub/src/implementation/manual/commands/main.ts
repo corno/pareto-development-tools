@@ -1,6 +1,5 @@
 import * as _p from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
-import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
 import * as signatures from "../../../interface/signatures"
 
