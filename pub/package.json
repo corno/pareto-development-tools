@@ -10,7 +10,7 @@
     "astn-core": "^0.5.28",
     "liana-core": "^0.0.12",
     "pareto-core-dev": "^0.12.7",
-    "pareto-fountain-pen": "^0.4.24",
+    "pareto-fountain-pen": "^0.4.25",
     "pareto-graphviz": "^0.2.13",
     "pareto-host-nodejs": "^0.2.21",
     "pareto-resources": "^0.2.34"
