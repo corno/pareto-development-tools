@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/expression'
+import * as _p from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/analyze_file_structure"
@@ -24,18 +24,21 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
         case 'directory content processing': return _p.ss($, ($) => sh.ph.composed([
             sh.ph.literal("directory content processing: "),
             sh.ph.indent(
-                sh.pg.sentences(_p.list.from_dictionary($, ($, id) => sh.ph.composed([
-                    sh.ph.literal(id),
-                    sh.ph.literal(":"),
-                    _p.decide.state($, ($) => {
-                        switch ($[0]) {
-                            case 'not a directory': return _p.ss($, ($) =>sh.ph.literal("not a directory"))
-                            case 'directory content': return _p.ss($, ($) => t_read_directory_content_to_fountain_pen.Error($))
-                            default: return _p.au($[0])
-                        }
-                    })
+                sh.pg.sentences(_p.list.from.dictionary(
+                    $,
+                ).convert(
+                    ($, id) => sh.ph.composed([
+                        sh.ph.literal(id),
+                        sh.ph.literal(":"),
+                        _p.decide.state($, ($) => {
+                            switch ($[0]) {
+                                case 'not a directory': return _p.ss($, ($) => sh.ph.literal("not a directory"))
+                                case 'directory content': return _p.ss($, ($) => t_read_directory_content_to_fountain_pen.Error($))
+                                default: return _p.au($[0])
+                            }
+                        })
 
-                ])))
+                    ])))
             )
         ]))
         case 'read directory': return _p.ss($, ($) => sh.ph.composed([

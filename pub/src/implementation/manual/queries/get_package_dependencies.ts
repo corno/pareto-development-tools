@@ -19,14 +19,14 @@ import * as sh from "../../../temp_pseudo_fp"
 export const $$: signatures.queries.get_package_dependencies = _p.query_function(
     ($p, $r) => $r['read directory'](
         {
-            'path': t_path_to_path.create_node_path($p['path'], { 'node': `packages` }),
+            'path': t_path_to_path.create_node_path($p['path'], { 'node': "packages" }),
         },
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(
         ($) => _p.dictionaryx.parallel<d_npm_package.NPM_Package, d.Error, d.Package_Error>(
             $.__d_map(($) => {
                 const path = $.path
-                const path_x = t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': `pub` }), { 'addition': `package.json` })
+                const path_x = t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': "pub" }), { 'addition': "package.json" })
                 return _p.decide.state($['node type'], ($) => {
                     switch ($[0]) {
                         case 'file': return _p.ss($, ($) => _p.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))

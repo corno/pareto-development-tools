@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/expression'
+import * as _p from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/get_package_dependencies"
@@ -14,8 +14,9 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
-        case 'directory content processing': return _p.ss($, ($) => sh.ph.composed(_p.list.from_dictionary(
+        case 'directory content processing': return _p.ss($, ($) => sh.ph.composed(_p.list.from.dictionary(
             $,
+        ).convert(
             ($, id) => sh.ph.composed([
                 sh.ph.literal("package "),
                 sh.ph.literal(id),

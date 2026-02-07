@@ -41,15 +41,15 @@ export const $$: signatures.queries.is_inside_work_tree = _p.query_function(($p,
                     () => _p.list.literal([])
                 ),
                 _p.list.literal([
-                    `rev-parse`,
-                    `--is-inside-work-tree`,
+                    "rev-parse",
+                    "--is-inside-work-tree",
                 ])
             ]),
         },
         ($) => $
     ),
     {
-        success: ($) => $.stdout.raw === `true`
+        success: ($) => $.stdout.raw === "true"
             ? _p.__query_result((onResult, onError) => {
                 onResult(true)
             })

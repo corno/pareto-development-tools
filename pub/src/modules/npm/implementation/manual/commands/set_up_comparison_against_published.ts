@@ -1,5 +1,5 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/expression'
+import * as _pt from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 import * as _pq from 'pareto-core/dist/query'
 import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
@@ -40,7 +40,7 @@ const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Chara
 
 export const $$: signatures.commands.set_up_comparison_against_published = _p.command_procedure(
     ($p, $cr, $qr) => {
-        const path_x = t_path_to_path.create_node_path($p['path to local package'], { 'node': `package.json` })
+        const path_x = t_path_to_path.create_node_path($p['path to local package'], { 'node': "package.json" })
         return [
             _p.query(
                 q_get_package_json.$$({
@@ -94,9 +94,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                             {
                                 'args': _pt.list.nested_literal_old([
                                     _pt.list.literal([
-                                        `pack`,
+                                        "pack",
                                         sh.serialize(t_path_to_text.Context_Path($p['path to local package'])),
-                                        `--pack-destination`,
+                                        "--pack-destination",
                                         sh.serialize(t_path_to_text.Node_Path($p['path to temp directory'])),
                                     ])
                                 ]),
@@ -114,11 +114,11 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                         $cr['tar'].execute(
                             {
                                 'args': _pt.list.literal([
-                                    `-xzmf`,
+                                    "-xzmf",
                                     `${sh.serialize(t_path_to_text.Node_Path($p['path to temp directory']))}/${filename}`,
-                                    `-C`,
+                                    "-C",
                                     sh.serialize(t_path_to_text.Node_Path($p['path to output local directory'])),
-                                    `--strip-components=1`,
+                                    "--strip-components=1",
                                 ]),
                             },
                             ($) => ['error while running tar', $],
@@ -126,16 +126,16 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
 
                         // Download published package using dynamic package name and version
                         $cr['make directory'].execute(
-                            t_path_to_path.extend_node_path($p['path to temp directory'], { 'addition': `npm` }),
+                            t_path_to_path.extend_node_path($p['path to temp directory'], { 'addition': "npm" }),
                             ($) => ['error while creating directory', $],
                         ),
 
                         $cr['npm'].execute(
                             {
                                 'args': _pt.list.literal([
-                                    `pack`,
+                                    "pack",
                                     `${package_info.name}@${package_info.version}`,
-                                    `--pack-destination`,
+                                    "--pack-destination",
                                     `${sh.serialize(t_path_to_text.Node_Path($p['path to temp directory']))}/npm`,
                                 ])
                             },
@@ -152,9 +152,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                             $qr.npm(
                                 {
                                     'args': _pt.list.literal([
-                                        `view`,
+                                        "view",
                                         package_info.name,
-                                        `version`,
+                                        "version",
                                     ]),
                                 },
                                 ($): d.Error => ['error while running npm query', $]
@@ -165,11 +165,11 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                                 $cr['tar'].execute<d.Error>(
                                     {
                                         'args': _pt.list.literal([
-                                            `-xzmf`,
+                                            "-xzmf",
                                             `${sh.serialize(t_path_to_text.Node_Path($p['path to temp directory']))}/npm/${package_info.name}-${_p_text_from_list($v, ($) => $)}.tgz`,
-                                            `-C`,
+                                            "-C",
                                             `${sh.serialize(t_path_to_text.Node_Path($p['path to output published directory']))}`,
-                                            `--strip-components=1`,
+                                            "--strip-components=1",
                                         ])
                                     },
                                     ($): d.Error => ['error while running tar', $],

@@ -1,5 +1,5 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/expression'
+import * as _pt from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 import * as _pq from 'pareto-core/dist/query'
 
@@ -27,7 +27,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
         _p.query(
             $q['read directory'](
                 {
-                    'path': t_path_to_path.create_node_path($p['path to project'], { 'node': `packages` }),
+                    'path': t_path_to_path.create_node_path($p['path to project'], { 'node': "packages" }),
                 },
                 ($): d.Error => ['read directory', $],
             ),
@@ -75,7 +75,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                                 //                     $,
                                 //                     {
                                 //                         'expected structure': x_structure,
-                                //                         'structure path': ``
+                                //                         'structure path': ""
                                 //                     }
 
                                 //                 )

@@ -14,14 +14,14 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         // clean
         $cr['remove'].execute(
             {
-                'path': t_path_to_path.create_node_path($p.path, { 'node': `node_modules` } ),
+                'path': t_path_to_path.create_node_path($p.path, { 'node': "node_modules" } ),
                 'error if not exists': false,
             },
             ($): d.Error => ['could not remove node_modules', $],
         ),
         $cr['remove'].execute(
             {
-                'path': t_path_to_path.create_node_path($p.path, { 'node': `package-lock.json` } ),
+                'path': t_path_to_path.create_node_path($p.path, { 'node': "package-lock.json" } ),
                 'error if not exists': false,
             },
             ($): d.Error => ['could not remove package-lock.json', $],
@@ -40,7 +40,7 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         // install/update updated dependencies
         $cr['npm'].execute(
             {
-                'path': _p.optional.set($p.path),
+                'path': _p.optional.literal.set($p.path),
                 'operation': ['update', {
                     'package-lock only': false
                 }], // 'install' does not update the indirect dependencies

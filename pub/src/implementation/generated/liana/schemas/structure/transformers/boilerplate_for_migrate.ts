@@ -1,5 +1,5 @@
 
-import * as _p from 'pareto-core/dist/expression'
+import * as _p from 'pareto-core/dist/assign'
 
 import _p_change_context from 'pareto-core/dist/_p_change_context'
 
@@ -21,8 +21,9 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
             case 'group':
                 return _p.ss(
                     $,
-                    ($) => ['group', _p.dictionary.map(
+                    ($) => ['group', _p.dictionary.from.dictionary(
                         $,
+                    ).map(
                         ($, id) => _p.decide.state(
                             $,
                             ($): t_out.Directory.group.D => {
@@ -87,8 +88,9 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
                         ),
                         'extensions': _p_change_context(
                             $['extensions'],
-                            ($) => _p.list.map(
+                            ($) => _p.list.from.list(
                                 $,
+                            ).map(
                                 ($) => $,
                             ),
                         ),

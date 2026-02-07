@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/expression'
+import * as _p from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/execute_command"
@@ -42,23 +42,37 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
         case 'dependency graph': return _p.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
         case 'all': return _p.ss($, ($) => _p.decide.state($, ($) => {
             switch ($[0]) {
-                case 'packages': return _p.ss($, ($) => sh.ph.indent(sh.pg.sentences(_p.list.from_dictionary($, ($, id) => sh.ph.composed([
-                    sh.ph.literal("package '"),
-                    sh.ph.literal(id),
-                    sh.ph.literal("': "),
-                    _p.decide.state($, ($) => {
-                        switch ($[0]) {
-                            case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
-                            case 'build': return _p.ss($, ($) => t_build_to_fountain_pen.Error($, { 'concise': false }))
-                            case 'git assert clean': return _p.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
-                            case 'git commit': return _p.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
-                            case 'git remove tracked but ignored': return _p.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
-                            case 'set up comparison': return _p.ss($, ($) => t_set_up_comparison_against_published.Error($))
-                            case 'update dependencies': return _p.ss($, ($) => t_update_dependencies.Error($))
-                            default: return _p.au($[0])
-                        }
-                    })
-                ])))))
+                case 'packages': return _p.ss($, ($) => sh.ph.indent(
+                    sh.pg.sentences(
+                        _p.list.from.dictionary(
+                            $,
+                        ).convert(
+                            ($, id) => sh.ph.composed([
+                                sh.ph.literal("package '"),
+                                sh.ph.literal(id),
+                                sh.ph.literal("': "),
+                                _p.decide.state($, ($) => {
+                                    switch ($[0]) {
+                                        case 'build and test': return _p.ss($, ($) => t_build_and_test_to_fountain_pen.Error(
+                                            $.error,
+                                            { 'concise': $.concise }
+                                        ))
+                                        case 'build': return _p.ss($, ($) => t_build_to_fountain_pen.Error(
+                                            $,
+                                            { 'concise': false }
+                                        ))
+                                        case 'git assert clean': return _p.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
+                                        case 'git commit': return _p.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
+                                        case 'git remove tracked but ignored': return _p.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
+                                        case 'set up comparison': return _p.ss($, ($) => t_set_up_comparison_against_published.Error($))
+                                        case 'update dependencies': return _p.ss($, ($) => t_update_dependencies.Error($))
+                                        default: return _p.au($[0])
+                                    }
+                                })
+                            ])
+                        )
+                    )
+                ))
                 case 'could not read packages directory': return _p.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("could not read packages directory: "),
                     t_read_directory_to_fountain_pen.Error($)

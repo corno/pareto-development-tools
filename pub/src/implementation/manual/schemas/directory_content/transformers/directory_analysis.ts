@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/expression'
+import * as _p from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
 import _p_list_build_deprecated from 'pareto-core/dist/_p_list_build_deprecated'
@@ -32,11 +32,11 @@ const extension = ($: string): _pi.Optional_Value<string> => {
         current_index++
     })
     if (first_period_index === null) {
-        return _p.optional.not_set()
+        return _p.optional.literal.not_set()
     } else {
         const fpi: number = first_period_index
         current_index = 0
-        return _p.optional.set(
+        return _p.optional.literal.set(
             _p_text_from_list(
                 _p_list_build_deprecated<number>(($i) => {
                     characters.__l_map(($) => {
@@ -113,12 +113,12 @@ export namespace defined {
                                         switch ($[0]) {
                                             case 'file': return _p.ss($, ($) => _p.decide.state($, ($) => {
                                                 switch ($[0]) {
-                                                    case 'generated': return _p.ss($, ($) => _p.optional.not_set())
-                                                    case 'manual': return _p.ss($, ($) => _p.optional.not_set())
+                                                    case 'generated': return _p.ss($, ($) => _p.optional.literal.not_set())
+                                                    case 'manual': return _p.ss($, ($) => _p.optional.literal.not_set())
                                                     default: return _p.au($[0])
                                                 }
                                             }))
-                                            case 'directory': return _p.ss($, ($) => _p.optional.set($p.name))
+                                            case 'directory': return _p.ss($, ($) => _p.optional.literal.set($p.name))
                                             default: return _p.au($[0])
                                         }
                                     })
@@ -161,7 +161,7 @@ export namespace defined {
                                         'classification': ['directory', ['group', null]],
                                         'path': $p['structure path'],
                                     },
-                                    'unexpected path tail': _p.optional.set(`/${id}`),
+                                    'unexpected path tail': _p.optional.literal.set(`/${id}`),
                                 }
                             )
                         )
@@ -175,7 +175,7 @@ export namespace defined {
                             'classification': ['directory', ['generated', null]],
                             'path': $p['structure path'],
                         },
-                        'unexpected path tail': _p.optional.not_set(),
+                        'unexpected path tail': _p.optional.literal.not_set(),
                     }
                 ))
                 case 'wildcards': return _p.ss($, ($) => wildcard.Directory(
@@ -183,7 +183,7 @@ export namespace defined {
                     {
                         'wildcard': $,
                         'structure path': $p['structure path'],
-                        'tail': ``,
+                        'tail': "",
                         'number of directories encountered': 0,
                     }
                 ))
@@ -194,7 +194,7 @@ export namespace defined {
                             'classification': ['directory', ['freeform', null]],
                             'path': $p['structure path'],
                         },
-                        'unexpected path tail': _p.optional.not_set(),
+                        'unexpected path tail': _p.optional.literal.not_set(),
                     }
                 ))
                 case 'dictionary': return _p.ss($, ($) => {
@@ -218,7 +218,7 @@ export namespace defined {
                                 },
                                 'extension': extension(id),
                                 'line count': line_count($),
-                                'unexpected path tail': _p.optional.set(`/${id}`),
+                                'unexpected path tail': _p.optional.literal.set(`/${id}`),
                             }])
                             default: return _p.au($[0])
                         }
@@ -245,7 +245,7 @@ export namespace undefined {
             {
                 'name': id,
                 'structure': $p.structure,
-                'unexpected path tail': _p.optional.map($p['unexpected path tail'], ($) => $ + "/" + id),
+                'unexpected path tail': _p.optional.from.optional($p['unexpected path tail']).map(($) => $ + "/" + id),
             }
         ))]
     }
@@ -309,15 +309,15 @@ export namespace wildcard {
                         'unexpected path tail': _p.optional.block(() => {
                             if ($p['number of directories encountered'] < $p['wildcard']['required directories']) {
                                 //files are not allowed yet, haven't descended through enough required directories
-                                return _p.optional.set(tail)
+                                return _p.optional.literal.set(tail)
                             }
                             if (!$p.wildcard['additional directories allowed'] && $p['number of directories encountered'] > $p['wildcard']['required directories']) {
                                 //additional directories are not allowed and we've gone too deep
-                                return _p.optional.set(tail)
+                                return _p.optional.literal.set(tail)
                             }
                             const possible_file_extension = extension(id)
                             let extension_matched = false
-                            _p.optional.map(possible_file_extension, ($) => {
+                            _p.optional.from.optional(possible_file_extension).map(($) => {
                                 const file_extension = $
                                 $p['wildcard']['extensions'].__l_map(($) => {
                                     if ($ === file_extension) {
@@ -327,8 +327,8 @@ export namespace wildcard {
 
                             })
                             return extension_matched
-                                ? _p.optional.not_set()
-                                : _p.optional.set(tail)
+                                ? _p.optional.literal.not_set()
+                                : _p.optional.literal.set(tail)
 
                         }),
                         'line count': line_count($),
@@ -392,9 +392,13 @@ export const dict_to_list = (
     }
 ): d_out.File_Analysis_List => {
 
-    return _p.list.from_dictionary($, ($, id) => ({
-        'package': $p['package name'],
-        'path': id,
-        'analysis': $,
-    }))
+    return _p.list.from.dictionary(
+        $,
+    ).convert(
+        ($, id) => ({
+            'package': $p['package name'],
+            'path': id,
+            'analysis': $,
+        })
+    )
 }

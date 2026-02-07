@@ -1,5 +1,5 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/expression'
+import * as _pt from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -20,13 +20,13 @@ export const $$: signatures.commands.tsc = _p.command_procedure(
                 'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
-                            `--project`,
+                            "--project",
                             sh.serialize(t_path_to_text.Node_Path($)),
                         ]),
                         () => _pt.list.literal([])
                     ),
                     _pt.list.literal([
-                        `--pretty`,
+                        "--pretty",
                     ]),
                 ]),
             },

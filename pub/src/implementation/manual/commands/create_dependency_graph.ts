@@ -1,5 +1,5 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/expression'
+import * as _pt from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -28,7 +28,7 @@ export const $$: signatures.commands.create_dependency_graph = _p.command_proced
             ($v) => [
                 $cr.log.execute(
                     {
-                        'indentation': `    `,
+                        'indentation': "    ",
                         'paragraph': $v,
                     },
                     ($): d.Error => ['log', null],

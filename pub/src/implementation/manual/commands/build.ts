@@ -16,10 +16,10 @@ export const $$: signatures.commands.build = _p.command_procedure(
         //             t_path_to_path.extend_context_path(
         //                 $p.path,
         //                 {
-        //                     'addition': `pub`
+        //                     'addition': "pub"
         //                 }
         //             ),
-        //             `dist`
+        //             "dist"
         //         ),
         //         'error if not exists': false,
         //     },
@@ -27,7 +27,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
         // ),
         $cr.tsc.execute(
             {
-                'path': _p.optional.set(t_path_to_path.create_node_path($p.path, { 'node': `pub` })),
+                'path': _p.optional.literal.set(t_path_to_path.create_node_path($p.path, { 'node': "pub" })),
             },
             ($): d.Error => ['error building pub', {
                 'path': $p.path,
@@ -40,10 +40,10 @@ export const $$: signatures.commands.build = _p.command_procedure(
                     t_path_to_path.extend_context_path(
                         $p.path,
                         {
-                            'addition': `test`
+                            'addition': "test"
                         }
                     ),
-                    { 'node': `dist` }
+                    { 'node': "dist" }
                 ),
                 'error if not exists': false,
             },
@@ -51,7 +51,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
         ),
         $cr.tsc.execute(
             {
-                'path': _p.optional.set(t_path_to_path.create_node_path($p.path, { 'node': `test` })),
+                'path': _p.optional.literal.set(t_path_to_path.create_node_path($p.path, { 'node': "test" })),
             },
             ($): d.Error => ['error building test', {
                 'path': $p.path,

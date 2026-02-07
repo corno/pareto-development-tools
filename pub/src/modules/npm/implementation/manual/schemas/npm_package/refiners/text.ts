@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/expression'
+import * as _p from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 
 //data types
@@ -86,8 +86,9 @@ export const $$: _pi.Refiner_With_Parameter<d_npm_package.NPM_Package, d_deseral
     return {
         'name': name,
         'version': version,
-        'dependencies': _p.optional.map(
+        'dependencies': _p.optional.from.optional(
             root.__get_possible_entry_deprecated('dependencies'),
+        ).map(
             ($) => expect_object(
                 $,
                 (error) => abort(['dependencies', ['not an object', null]])

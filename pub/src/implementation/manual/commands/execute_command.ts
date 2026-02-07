@@ -20,9 +20,9 @@ export const $$: signatures.commands.api = _p.command_procedure(
                 const path_to_temp = t_path_to_path.extend_context_path(
                     t_path_to_path.extend_context_path(
                         $['path to project'],
-                        { 'addition': `temp` }
+                        { 'addition': "temp" }
                     ),
-                    { 'addition': `comparison` }
+                    { 'addition': "comparison" }
                 )
                 return [
                     _p.dictionaryx.deprecated_parallel.query(
@@ -30,7 +30,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                             {
                                 'path': t_path_to_path.create_node_path(
                                     path_to_project,
-                                    { 'node': `packages` }
+                                    { 'node': "packages" }
                                 )
                             },
                             ($): d.Error => ['all', ['could not read packages directory', $]],
@@ -42,7 +42,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 case 'assert clean': return _p.ss($, ($) => [
                                     $cr['git assert is clean'].execute(
                                         {
-                                            'path': _p.optional.set(context_path)
+                                            'path': _p.optional.literal.set(context_path)
                                         },
                                         ($): d.All__Package_Error => ['git assert clean', $],
                                     )
@@ -78,7 +78,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 case 'git remove tracked but ignored': return _p.ss($, ($) => [
                                     $cr['git remove tracked but ignored'].execute(
                                         {
-                                            'path': _p.optional.set(context_path)
+                                            'path': _p.optional.literal.set(context_path)
                                         },
                                         ($): d.All__Package_Error => ['git remove tracked but ignored', $],
                                     )
@@ -86,10 +86,10 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 case 'set up comparison': return _p.ss($, ($): _pi.Command_Promise<d.All__Package_Error>[] => [
                                     $cr['npm set up comparison against published'].execute(
                                         {
-                                            'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': `pub` }),
-                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `local` }), { 'node': id_spaces_not_escaped }),
-                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `published` }), { 'node': id_spaces_not_escaped }),
-                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': `temp` }), { 'node': id_spaces_not_escaped }),
+                                            'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': "pub" }),
+                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "local" }), { 'node': id_spaces_not_escaped }),
+                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "published" }), { 'node': id_spaces_not_escaped }),
+                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "temp" }), { 'node': id_spaces_not_escaped }),
                                         },
                                         ($): d.All__Package_Error => ['set up comparison', $],
                                     )
@@ -116,7 +116,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                         case 'assert clean': return _p.ss($, ($) => [
                             $cr['git assert is clean'].execute(
                                 {
-                                    'path': _p.optional.set(path)
+                                    'path': _p.optional.literal.set(path)
                                 },
                                 ($): d.Error => ['package', ['git assert clean', $]],
                             )
@@ -194,16 +194,16 @@ export const $$: signatures.commands.api = _p.command_procedure(
             ])
             case 'set up comparison': return _p.ss($, ($) => _p_change_context(
                 {
-                    'path to temp': t_path_to_path.extend_context_path($['path to package'], { 'addition': `temp` }),
+                    'path to temp': t_path_to_path.extend_context_path($['path to package'], { 'addition': "temp" }),
                     'path to package': $['path to package'],
                 },
                 ($) => [
                     $cr['npm set up comparison against published'].execute(
                         {
-                            'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': `pub` }),
-                            'path to output local directory': t_path_to_path.create_node_path($['path to temp'], { 'node': `local` }),
-                            'path to output published directory': t_path_to_path.create_node_path($['path to temp'], { 'node': `published` }),
-                            'path to temp directory': t_path_to_path.create_node_path($['path to temp'], { 'node': `temp` }),
+                            'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': "pub" }),
+                            'path to output local directory': t_path_to_path.create_node_path($['path to temp'], { 'node': "local" }),
+                            'path to output published directory': t_path_to_path.create_node_path($['path to temp'], { 'node': "published" }),
+                            'path to temp directory': t_path_to_path.create_node_path($['path to temp'], { 'node': "temp" }),
                         },
                         ($): d.Error => ['set up comparison', $],
                     )

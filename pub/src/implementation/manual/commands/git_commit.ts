@@ -1,10 +1,13 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/expression'
+import * as _pt from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/signatures"
 
-
+//data types
 import * as d from "../../../interface/to_be_generated/git_commit"
+
+//shorthands
+import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 export const $$: signatures.commands.git_commit = _p.command_procedure(
 
@@ -29,10 +32,10 @@ export const $$: signatures.commands.git_commit = _p.command_procedure(
                     ($) => [
                         $cr['git extended commit'].execute(
                             {
-                                'path': _p.optional.set($p['path']),
+                                'path': _p.optional.literal.set($p['path']),
                                 'instruction': {
                                     'stage all changes': true,
-                                    'commit message': "pdt" + ($ ? "" : "(broken)") + ": " + $p.instruction['commit message'],
+                                    'commit message': sh.ph.literal("pdt" + ($ ? "" : "(broken)") + ": " + $p.instruction['commit message']),
                                     'push after commit': true,
                                 },
                             },
@@ -51,10 +54,10 @@ export const $$: signatures.commands.git_commit = _p.command_procedure(
                 ),
                 $cr['git extended commit'].execute(
                     {
-                        'path': _p.optional.set($p['path']),
+                        'path': _p.optional.literal.set($p['path']),
                         'instruction': {
                             'stage all changes': true,
-                            'commit message': "pdt: " + $p.instruction['commit message'],
+                            'commit message': sh.ph.literal("pdt: " + $p.instruction['commit message']),
                             'push after commit': true,
                         },
                     },

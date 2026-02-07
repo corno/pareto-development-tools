@@ -86,8 +86,8 @@ export type All_Pacakges_Instruction =
     | ['git commit', d_git_commit.Instruction]
 
     /**
-     * executes     `git rm -r --cached .`
-     * followed by  `git add --all`
+     * executes     "git rm -r --cached ."
+     * followed by  "git add --all"
      */
     | ['git remove tracked but ignored', null]
 

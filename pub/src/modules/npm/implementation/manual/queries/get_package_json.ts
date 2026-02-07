@@ -1,6 +1,6 @@
 import * as _p from 'pareto-core/dist/query'
 import * as _pi from 'pareto-core/dist/interface'
-import * as _p_temp from 'pareto-core/dist/expression'
+import * as _p_temp from 'pareto-core/dist/assign'
 import _p_change_context from 'pareto-core/dist/_p_change_context'
 import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
 
@@ -20,7 +20,7 @@ import * as sh from "../../../../../temp_pseudo_fp"
 
 export const $$: signatures.queries.get_package_json = _p.query_function(
     ($p, $r) => _p_change_context($p, ($p) => {
-        const path = t_path_to_path.create_node_path($p['path to package'], { 'node': `package.json` })
+        const path = t_path_to_path.create_node_path($p['path to package'], { 'node': "package.json" })
         return $r['read file'](
             path,
             ($): d.Error => ['error while reading package.json', $],

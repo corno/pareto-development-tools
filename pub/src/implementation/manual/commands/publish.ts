@@ -1,5 +1,5 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/expression'
+import * as _pt from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -19,21 +19,21 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
         $cr['git push'].execute(
             {
-                'path': _p.optional.set($p['path to package']),
+                'path': _p.optional.literal.set($p['path to package']),
             },
             ($): d.Error => ['error while running git push', $],
         ),
 
         $cr['git assert is clean'].execute(
             {
-                'path': _p.optional.set($p['path to package']),
+                'path': _p.optional.literal.set($p['path to package']),
             },
             ($) => ['error while running git assert is clean at the start', $],
         ),
 
         $cr['git make pristine'].execute(
             {
-                'path': _p.optional.set($p['path to package']),
+                'path': _p.optional.literal.set($p['path to package']),
             },
             ($) => ['error while running git make pristine', $],
         ),
@@ -54,14 +54,14 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
         $cr['git assert is clean'].execute(
             {
-                'path': _p.optional.set($p['path to package']),
+                'path': _p.optional.literal.set($p['path to package']),
             },
             ($) => ['error while running git assert is clean after updating package dependencies', $],
         ),
 
         $cr.npm.execute(
             {
-                'path': _p.optional.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': `pub` })),
+                'path': _p.optional.literal.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': "pub" })),
                 'operation': ['version', $p.generation],
             },
             ($) => ['error while running npm version', $],
@@ -70,7 +70,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
         // update the package-lock.json to reflect the new version
         $cr.npm.execute(
             {
-                'path': _p.optional.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': `pub` })),
+                'path': _p.optional.literal.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': "pub" })),
                 'operation': ['update', {
                     'package-lock only': true
                 }],
@@ -81,7 +81,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
         // update the package-lock.json to reflect the new version
         $cr.npm.execute(
             {
-                'path': _p.optional.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': `test` })),
+                'path': _p.optional.literal.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': "test" })),
                 'operation': ['update', {
                     'package-lock only': true
                 }],
@@ -94,7 +94,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                 'read file': $qr['read file'],
             })(
                 {
-                    'path to package': t_path_to_path.extend_context_path($p['path to package'], { 'addition': `pub` }),
+                    'path to package': t_path_to_path.extend_context_path($p['path to package'], { 'addition': "pub" }),
                 },
                 ($): d.Error => ['error while getting package.json', $]
             ),
@@ -105,9 +105,12 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
                     $cr['git extended commit'].execute(
                         {
-                            'path': _p.optional.set($p['path to package']),
+                            'path': _p.optional.literal.set($p['path to package']),
                             'instruction': {
-                                'commit message': `pdt: published version ${$v.version}`,
+                                'commit message': sh.ph.composed([
+                                    sh.ph.literal("pdt: published version "),
+                                    sh.ph.literal($v.version)
+                                ]),
                                 'stage all changes': true,
                                 'push after commit': true,
                             }
@@ -117,7 +120,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
                     $cr['npm publish'].execute(
                         {
-                            'path': _p.optional.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': `pub` })),
+                            'path': _p.optional.literal.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': "pub" })),
                             'impact': $p.impact,
                         },
                         ($) => ['error while running npm publish', $],
@@ -127,9 +130,9 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                         {
                             'message': sh.pg.sentences([
                                 sh.ph.composed([
-                                    sh.ph.literal(`published:`),
+                                    sh.ph.literal("published:"),
                                     sh.ph.literal(package_info.name),
-                                    sh.ph.literal(`@`),
+                                    sh.ph.literal("@"),
                                     sh.ph.literal(package_info.version),
                                 ])
                             ])

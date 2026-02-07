@@ -31,7 +31,7 @@ export const $$: signatures.queries.is_repository_clean = _p.query_function(
         },
         ($) => $,
     ).transform_result<boolean>(
-        ($) => $.stdout.raw === ``
+        ($) => $.stdout.raw === ""
     ).rework_error_temp(
         ($current) => $qr['is inside git work tree'](
             {

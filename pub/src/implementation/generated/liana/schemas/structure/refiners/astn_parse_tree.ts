@@ -1,5 +1,5 @@
 
-import * as _p from 'pareto-core/dist/expression'
+import * as _p from 'pareto-core/dist/assign'
 
 import _p_change_context from 'pareto-core/dist/_p_change_context'
 
@@ -41,13 +41,14 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                 case 'group':
                     return _p_change_context(
                         $['value'],
-                        ($) => ['group', _p.dictionary.map(
+                        ($) => ['group', _p.dictionary.from.dictionary(
                             v_unmarshalled_from_parse_tree.Dictionary(
                                 $,
                                 ($) => abort(
                                     ['expected a dictionary', null],
                                 ),
                             ),
+                        ).map(
                             ($, id) => _p_change_context(
                                 v_unmarshalled_from_parse_tree.State(
                                     $,
@@ -210,13 +211,14 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                             ['no such entry', "extensions"],
                                         ),
                                     ),
-                                    ($) => _p.list.map(
+                                    ($) => _p.list.from.list(
                                         v_unmarshalled_from_parse_tree.List(
                                             $,
                                             ($) => abort(
                                                 ['expected a list', null],
                                             ),
                                         ),
+                                    ).map(
                                         ($) => v_unmarshalled_from_parse_tree.Text(
                                             $,
                                             ($) => abort(

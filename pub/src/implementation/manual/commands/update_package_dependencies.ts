@@ -1,5 +1,5 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/expression'
+import * as _pt from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -15,7 +15,7 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         // update dependencies of pub
         $cr['npm update package dependencies'].execute(
             {
-                'path': t_path_to_path.extend_context_path($p.path, { 'addition': `pub`}),
+                'path': t_path_to_path.extend_context_path($p.path, { 'addition': "pub"}),
             },
             ($): d.Error => ['error updating pub', $],
         ),
@@ -23,7 +23,7 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         // update dependencies of test
         $cr['npm update package dependencies'].execute(
             {
-                'path': t_path_to_path.extend_context_path($p.path, { 'addition': `test`}),
+                'path': t_path_to_path.extend_context_path($p.path, { 'addition': "test"}),
             },
             ($) => ['error updating test', $],
         ),
