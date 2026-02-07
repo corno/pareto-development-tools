@@ -47,7 +47,7 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
                         _p.list.from.dictionary(
                             $,
                         ).convert(
-                            ($, id) => sh.ph.composed([
+                            ($, id) => sh.sentence([
                                 sh.ph.literal("package '"),
                                 sh.ph.literal(id),
                                 sh.ph.literal("': "),

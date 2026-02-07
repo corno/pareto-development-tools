@@ -21,35 +21,37 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 export const CSV: Signature = ($, $p) => sh.pg.sentences(_p.list.from.list(
     $,
 ).map(
-    ($) => sh.ph.rich(
-        _p.list.from.list(
-            $,
-        ).map(
-            ($) => sh.ph.serialize(
-                _p.list.nested_literal_old([
-                    [
-                        0x22, //"
-                    ],
-                    _p.list.from.list(
-                        _list_from_text(
-                            $,
-                            ($) => $ === 0x22 //"
-                                ? _p.list.literal([0x22, 0x22]) //escape "
-                                : _p.list.literal([$]),
+    ($) => sh.sentence([
+        sh.ph.rich(
+            _p.list.from.list(
+                $,
+            ).map(
+                ($) => sh.ph.serialize(
+                    _p.list.nested_literal_old([
+                        [
+                            0x22, //"
+                        ],
+                        _p.list.from.list(
+                            _list_from_text(
+                                $,
+                                ($) => $ === 0x22 //"
+                                    ? _p.list.literal([0x22, 0x22]) //escape "
+                                    : _p.list.literal([$]),
+                            ),
+                        ).flatten(
+                            ($) => $
                         ),
-                    ).flatten(
-                        ($) => $
-                    ),
-                    [
-                        0x22, //"
-                    ]
-                ])
-            )
-        ),
-        sh.ph.nothing(),
-        sh.ph.nothing(),
-        sh.ph.serialize(_p.list.literal([$p.separator])),
-        sh.ph.nothing(),
-    )
+                        [
+                            0x22, //"
+                        ]
+                    ])
+                )
+            ),
+            sh.ph.nothing(),
+            sh.ph.nothing(),
+            sh.ph.serialize(_p.list.literal([$p.separator])),
+            sh.ph.nothing(),
+        )
+    ])
 ))
 

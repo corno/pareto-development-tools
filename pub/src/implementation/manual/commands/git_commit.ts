@@ -35,7 +35,7 @@ export const $$: signatures.commands.git_commit = _p.command_procedure(
                                 'path': _p.optional.literal.set($p['path']),
                                 'instruction': {
                                     'stage all changes': true,
-                                    'commit message': sh.ph.literal("pdt" + ($ ? "" : "(broken)") + ": " + $p.instruction['commit message']),
+                                    'commit message': "pdt" + ($ ? "" : "(broken)") + ": " + $p.instruction['commit message'],
                                     'push after commit': true,
                                 },
                             },
@@ -57,7 +57,7 @@ export const $$: signatures.commands.git_commit = _p.command_procedure(
                         'path': _p.optional.literal.set($p['path']),
                         'instruction': {
                             'stage all changes': true,
-                            'commit message': sh.ph.literal("pdt: " + $p.instruction['commit message']),
+                            'commit message': "pdt: " + $p.instruction['commit message'],
                             'push after commit': true,
                         },
                     },

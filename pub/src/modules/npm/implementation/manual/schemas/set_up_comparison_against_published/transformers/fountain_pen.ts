@@ -22,31 +22,41 @@ export const Error: Error = ($) => {
             case 'error while running npm command': return _p.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while running npm command: "),
                 sh.ph.indent(sh.pg.sentences([
-                    t_epe_to_fountain_pen.Error($)
+                    sh.sentence([
+                        t_epe_to_fountain_pen.Error($)
+                    ])
                 ])),
             ]))
             case 'error while running npm query': return _p.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while running npm query: "),
                 sh.ph.indent(sh.pg.sentences([
-                    t_eqe_to_fountain_pen.Error($)
+                    sh.sentence([
+                        t_eqe_to_fountain_pen.Error($)
+                    ])
                 ])),
             ]))
             case 'error while running tar': return _p.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while running tar: "),
                 sh.ph.indent(sh.pg.sentences([
-                    t_epe_to_fountain_pen.Error($)
+                    sh.sentence([
+                        t_epe_to_fountain_pen.Error($)
+                    ])
                 ])),
             ]))
             case 'error while creating directory': return _p.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while creating directory: "),
                 sh.ph.indent(sh.pg.sentences([
-                    t_make_directory_to_fountain_pen.Error($)
+                    sh.sentence([
+                        t_make_directory_to_fountain_pen.Error($)
+                    ])
                 ])),
             ]))
             case 'error while removing directory': return _p.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while removing directory: "),
                 sh.ph.indent(sh.pg.sentences([
-                    t_remove_to_fountain_pen.Error($)
+                    sh.sentence([
+                        t_remove_to_fountain_pen.Error($)
+                    ])
                 ])),
             ]))
             case 'error while getting package.json': return _p.ss($, ($) => t_get_package_json_to_fountain_pen.Error($))

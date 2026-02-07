@@ -48,13 +48,15 @@ export const $$: signatures.commands.main = _p.command_procedure(
                 $cr['log error'].execute(
                     {
                         'message': sh.pg.sentences([
-                            _p.decide.state($, ($) => {
-                                switch ($[0]) {
-                                    case 'parse': return _p.ss($, ($) => t_bin_to_fountain_pen.Error($))
-                                    case 'api': return _p.ss($, ($) => t_api_to_fountain_pen.Error($))
-                                    default: return _p.au($[0])
-                                }
-                            })
+                            sh.sentence([
+                                _p.decide.state($, ($) => {
+                                    switch ($[0]) {
+                                        case 'parse': return _p.ss($, ($) => t_bin_to_fountain_pen.Error($))
+                                        case 'api': return _p.ss($, ($) => t_api_to_fountain_pen.Error($))
+                                        default: return _p.au($[0])
+                                    }
+                                })
+                            ])
                         ])
                     },
                     ($) => ({

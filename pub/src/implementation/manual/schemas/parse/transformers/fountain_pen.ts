@@ -15,7 +15,9 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
             sh.ph.indent(sh.pg.sentences(_p.list.from.dictionary(
                 $,
             ).convert(
-                ($, id) => sh.ph.literal(id)
+                ($, id) => sh.sentence([
+                    sh.ph.literal(id)
+                ])
             ))),
 
         ]))

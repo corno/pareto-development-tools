@@ -25,7 +25,9 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
 
             sh.ph.indent(
                 sh.pg.sentences([
-                    t_remove_to_fountain_pen.Error($.error)
+                    sh.sentence([
+                        t_remove_to_fountain_pen.Error($.error)
+                    ])
                 ])
             )
 
@@ -36,7 +38,9 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
             sh.ph.literal("/test)"),
             sh.ph.indent(
                 sh.pg.sentences([
-                    t_remove_to_fountain_pen.Error($.error)
+                    sh.sentence([
+                        t_remove_to_fountain_pen.Error($.error)
+                    ])
                 ])
             )
         ]))
@@ -46,7 +50,9 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
             sh.ph.literal(")"),
             sh.ph.indent(
                 sh.pg.sentences([
-                    t_tsc_to_fountain_pen.Error($.error, $p)
+                    sh.sentence([
+                        t_tsc_to_fountain_pen.Error($.error, $p)
+                    ])
                 ])
             )
         ]))
@@ -56,7 +62,9 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
             sh.ph.literal(")"),
             sh.ph.indent(
                 sh.pg.sentences([
-                    t_tsc_to_fountain_pen.Error($.error, $p)
+                    sh.sentence([
+                        t_tsc_to_fountain_pen.Error($.error, $p)
+                    ])
                 ])
             )
         ]))

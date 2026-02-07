@@ -22,14 +22,16 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
                 sh.ph.literal(id),
                 sh.ph.literal(": "),
                 sh.ph.indent(sh.pg.sentences([
-                    _p.decide.state($, ($) => {
-                        switch ($[0]) {
-                            case 'not a directory': return _p.ss($, ($) => sh.ph.literal("not a directory"))
-                            case 'no package.json file': return _p.ss($, ($) => sh.ph.literal("no package.json file"))
-                            case 'parse error': return _p.ss($, ($) => t_deserialize_package_json_to_fountain_pen.Error($))
-                            default: return _p.au($[0])
-                        }
-                    })
+                    sh.sentence([
+                        _p.decide.state($, ($) => {
+                            switch ($[0]) {
+                                case 'not a directory': return _p.ss($, ($) => sh.ph.literal("not a directory"))
+                                case 'no package.json file': return _p.ss($, ($) => sh.ph.literal("no package.json file"))
+                                case 'parse error': return _p.ss($, ($) => t_deserialize_package_json_to_fountain_pen.Error($))
+                                default: return _p.au($[0])
+                            }
+                        })
+                    ])
                 ]))
             ])
         )))

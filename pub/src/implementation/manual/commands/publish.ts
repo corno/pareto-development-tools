@@ -107,10 +107,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                         {
                             'path': _p.optional.literal.set($p['path to package']),
                             'instruction': {
-                                'commit message': sh.ph.composed([
-                                    sh.ph.literal("pdt: published version "),
-                                    sh.ph.literal($v.version)
-                                ]),
+                                'commit message': "pdt: published version " + $v.version,
                                 'stage all changes': true,
                                 'push after commit': true,
                             }
@@ -129,7 +126,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                     $cr.log.execute(
                         {
                             'message': sh.pg.sentences([
-                                sh.ph.composed([
+                                sh.sentence([
                                     sh.ph.literal("published:"),
                                     sh.ph.literal(package_info.name),
                                     sh.ph.literal("@"),

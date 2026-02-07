@@ -59,11 +59,13 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
                             {
 
                                 'message': sh.pg.sentences([
-                                    sh.ph.literal("IMPLEMENT ME"),
+                                    sh.sentence([
+                                        sh.ph.literal("IMPLEMENT ME")
+                                    ]),
                                 ]),
-                                        // _pt.list.from_dictionary($v, ($, id): _pi.List<string> => {
-                                        //     const package_name = id
-                                        //     return t_line_count_to_line_count.dict_to_list(
+                                // _pt.list.from_dictionary($v, ($, id): _pi.List<string> => {
+                                //     const package_name = id
+                                //     return t_line_count_to_line_count.dict_to_list(
 
 
 

@@ -10,16 +10,9 @@ import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schema
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
-import * as t_fp_to_text from "pareto-fountain-pen/dist/implementation/manual/schemas/block/transformers/list_of_characters"
-
-//shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/block"
 
 
 import * as temp from "../../../../../temp_pseudo_fp"
-
-
-const temp_phrase = ($: d_fp.Phrase) => _p_text_from_list(t_fp_to_text.Phrase($, {'indentation': "    ", 'newline': "\n"}), ($) => $)
 
 export const $$: signatures.commands.extended_commit = _p.command_procedure(
     ($p, $cr, $qr) => [
@@ -69,7 +62,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                             _pt.list.literal([
                                 "commit",
                                 "-m",
-                                temp_phrase($p.instruction['commit message']),
+                                $p.instruction['commit message'],
                             ])
                         ]),
                     },

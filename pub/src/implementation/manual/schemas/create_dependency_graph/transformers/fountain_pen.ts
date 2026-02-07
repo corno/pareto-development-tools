@@ -22,7 +22,9 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
             sh.ph.literal("package dependencies: "),
             sh.ph.indent(
                 sh.pg.sentences([
-                    t_get_package_dependencies_to_fountain_pen.Error($)
+                    sh.sentence([
+                        t_get_package_dependencies_to_fountain_pen.Error($)
+                    ])
                 ])
             )
         ]))

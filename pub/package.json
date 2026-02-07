@@ -10,10 +10,10 @@
     "astn-core": "^0.5.30",
     "liana-core": "^0.0.15",
     "pareto-core-dev": "^0.12.7",
-    "pareto-fountain-pen": "^0.4.27",
+    "pareto-fountain-pen": "^0.4.28",
     "pareto-graphviz": "^0.2.15",
     "pareto-host-nodejs": "^0.2.22",
-    "pareto-resources": "^0.2.37"
+    "pareto-resources": "^0.2.38"
   },
   "bin": {
     "pdt": "./dist/bin.js"

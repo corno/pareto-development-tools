@@ -57,7 +57,9 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                         $cr.log.execute(
                             {
                                 'message': sh.pg.sentences([
-                                    sh.ph.literal("IMPLEMENT ME"),
+                                   sh.sentence([
+                                    sh.ph.literal("IMPLEMENT ME")
+                                ]),
                                 ]),
                                 // 'message': xxxx,
                                 // 'lines': _pt.list.flatten(

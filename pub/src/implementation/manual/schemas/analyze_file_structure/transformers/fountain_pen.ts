@@ -27,7 +27,7 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
                 sh.pg.sentences(_p.list.from.dictionary(
                     $,
                 ).convert(
-                    ($, id) => sh.ph.composed([
+                    ($, id) => sh.sentence([
                         sh.ph.literal(id),
                         sh.ph.literal(":"),
                         _p.decide.state($, ($) => {
