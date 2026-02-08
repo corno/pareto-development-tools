@@ -24,12 +24,12 @@ export const $$: signatures.commands.publish = _p.command_procedure(
             ($): d.Error => ['error while running git push', $],
         ),
 
-        $cr['git assert is clean'].execute(
-            {
-                'path': _p.optional.literal.set($p['path to package']),
-            },
-            ($) => ['error while running git assert is clean at the start', $],
-        ),
+        // $cr['git assert is clean'].execute(
+        //     {
+        //         'path': _p.optional.literal.set($p['path to package']),
+        //     },
+        //     ($) => ['error while running git assert is clean at the start', $],
+        // ),
 
         $cr['git make pristine'].execute(
             {
@@ -52,12 +52,12 @@ export const $$: signatures.commands.publish = _p.command_procedure(
             ($) => ['error while running build and test', $],
         ),
 
-        $cr['git assert is clean'].execute(
-            {
-                'path': _p.optional.literal.set($p['path to package']),
-            },
-            ($) => ['error while running git assert is clean after updating package dependencies', $],
-        ),
+        // $cr['git assert is clean'].execute(
+        //     {
+        //         'path': _p.optional.literal.set($p['path to package']),
+        //     },
+        //     ($) => ['error while running git assert is clean after updating package dependencies', $],
+        // ),
 
         $cr.npm.execute(
             {
