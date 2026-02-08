@@ -16,6 +16,8 @@ export const Command: _pi.Refiner<d_result.Parameters, d_error.Error, d_input.Pa
             $iter,
             abort,
         ),
-        ($) => abort(['too many arguments', null]),
+        {
+            not_finished: ($) => abort(['too many arguments', null]),
+        }
     )
 )

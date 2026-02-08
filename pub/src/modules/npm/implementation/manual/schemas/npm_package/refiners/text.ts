@@ -66,7 +66,12 @@ const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never):
     }
 })
 
-const expect_property = ($: Object, id: string, abort: (error: ['missing property', string]) => never): d.Value => $.__get_entry_deprecated(id, () => abort(['missing property', id]))
+const expect_property = ($: Object, id: string, abort: (error: ['missing property', string]) => never): d.Value => $.__get_entry_deprecated(
+    id,
+    {
+        no_such_entry: () => abort(['missing property', id])
+    }
+)
 
 export const $$: _pi.Refiner_With_Parameter<d_npm_package.NPM_Package, d_deseralize_package_json.Error, d_in.List_of_Characters, { 'document resource identifier': string }> = ($, abort, $p) => {
     const x = t_parse_tree_from_list_of_characters.Document(

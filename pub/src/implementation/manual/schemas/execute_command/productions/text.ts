@@ -23,7 +23,9 @@ export const Command: signature = (iterator, abort) => iterator.consume(
             case 'all': return ['all packages', {
                 'path to project': temp_content_path(iterator.consume(
                     ($) => $,
-                    () => abort(['expected a text', { 'description': "path to project" }])
+                    {
+                        no_more_tokens: () => abort(['expected a text', { 'description': "path to project" }])
+                    }
                 )),
                 'instruction': iterator.consume(
                     ($): d.All_Pacakges_Instruction => {
@@ -46,7 +48,9 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                             case 'git-commit': return ['git commit', {
                                 'commit message': iterator.consume(
                                     ($) => $,
-                                    () => abort(['expected a text', { 'description': "commit message" }])
+                                    {
+                                        no_more_tokens: () => abort(['expected a text', { 'description': "commit message" }])
+                                    }
                                 ),
                                 'accept broken commits': _p_variables(() => {
                                     const value = iterator.look()
@@ -74,22 +78,26 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                             })])
                         }
                     },
-                    () => abort(['expected one of', _p.dictionary.literal({
-                        'assert-clean': null,
-                        'build-and-test': null,
-                        'build': null,
-                        'git-commit': null,
-                        'git-remove-tracked-but-ignored': null,
-                        'set-up-comparison': null,
-                        'update-dependencies': null,
-                    })])
+                    {
+                        no_more_tokens: () => abort(['expected one of', _p.dictionary.literal({
+                            'assert-clean': null,
+                            'build-and-test': null,
+                            'build': null,
+                            'git-commit': null,
+                            'git-remove-tracked-but-ignored': null,
+                            'set-up-comparison': null,
+                            'update-dependencies': null,
+                        })])
+                    }
                 )
 
             }]
             case 'package': return ['package', {
                 'path': temp_content_path(iterator.consume(
                     ($) => $,
-                    () => abort(['expected a text', { 'description': "path to package" }])
+                    {
+                        no_more_tokens: () => abort(['expected a text', { 'description': "path to package" }])
+                    }
                 )),
                 'instruction': iterator.consume(
                     ($) => {
@@ -99,7 +107,9 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                             case 'git-commit': return ['git commit', {
                                 'commit message': iterator.consume(
                                     ($) => $,
-                                    () => abort(['expected a text', { 'description': "commit message" }])
+                                    {
+                                        no_more_tokens: () => abort(['expected a text', { 'description': "commit message" }])
+                                    }
                                 ),
                                 'accept broken commits': _p_variables(() => {
                                     const value = iterator.look()
@@ -122,19 +132,23 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                             })])
                         }
                     },
-                    () => abort(['expected one of', _p.dictionary.literal({
-                        'assert-clean': null,
-                        'build-and-test': null,
-                        'git-commit': null,
-                        'update-dependencies': null,
-                    })])
+                    {
+                        no_more_tokens: () => abort(['expected one of', _p.dictionary.literal({
+                            'assert-clean': null,
+                            'build-and-test': null,
+                            'git-commit': null,
+                            'update-dependencies': null,
+                        })])
+                    }
                 )
 
             }]
             case 'project': return ['project', {
                 'path': temp_content_path(iterator.consume(
                     ($) => $,
-                    () => abort(['expected a text', { 'description': "path to package" }])
+                    {
+                        no_more_tokens: () => abort(['expected a text', { 'description': "path to package" }])
+                    }
                 )),
                 'instruction': iterator.consume(
                     ($) => {
@@ -149,18 +163,22 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                             })])
                         }
                     },
-                    () => abort(['expected one of', _p.dictionary.literal({
-                        'analyze-file-structure': null,
-                        'dependency-graph': null,
-                        'list-file-structure-problems': null,
-                    })])
+                    {
+                        no_more_tokens: () => abort(['expected one of', _p.dictionary.literal({
+                            'analyze-file-structure': null,
+                            'dependency-graph': null,
+                            'list-file-structure-problems': null,
+                        })])
+                    }
                 )
 
             }]
             case 'publish': return ['publish', {
                 'path to package': temp_content_path(iterator.consume(
                     ($) => $,
-                    () => abort(['expected a text', { 'description': "path to package" }])
+                    {
+                        no_more_tokens: () => abort(['expected a text', { 'description': "path to package" }])
+                    }
                 )),
                 'generation': iterator.consume(
                     ($) => {
@@ -173,10 +191,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                             })])
                         }
                     },
-                    () => abort(['expected one of', _p.dictionary.literal({
-                        'patch': null,
-                        'minor': null,
-                    })])
+                    {
+                        no_more_tokens: () => abort(['expected one of', _p.dictionary.literal({
+                            'patch': null,
+                            'minor': null,
+                        })])
+                    }
                 ),
                 'impact': _p_variables(() => {
                     const value = iterator.look()
@@ -201,7 +221,9 @@ export const Command: signature = (iterator, abort) => iterator.consume(
             case 'set-up-comparison': return ['set up comparison', {
                 'path to package': temp_content_path(iterator.consume(
                     ($) => $,
-                    () => abort(['expected a text', { 'description': "path to package" }])
+                    {
+                        no_more_tokens: () => abort(['expected a text', { 'description': "path to package" }])
+                    }
                 ))
             }]
             default: return abort(['expected one of', _p.dictionary.literal({
@@ -213,11 +235,13 @@ export const Command: signature = (iterator, abort) => iterator.consume(
             })])
         }
     },
-    () => abort(['expected one of', _p.dictionary.literal({
-        'all': null,
-        'package': null,
-        'project': null,
-        'publish': null,
-        'set-up-comparison': null,
-    })])
+    {
+        no_more_tokens: () => abort(['expected one of', _p.dictionary.literal({
+            'all': null,
+            'package': null,
+            'project': null,
+            'publish': null,
+            'set-up-comparison': null,
+        })])
+    }
 )
