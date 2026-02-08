@@ -111,7 +111,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                             {
                                                                                                 no_such_entry: ($) => abort(
                                                                                                     ['no such entry', "commit to git"],
-                                                                                                )
+                                                                                                ),
                                                                                             },
                                                                                         ),
                                                                                         ($) => v_deserialize_boolean.deserialize(
@@ -168,7 +168,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                         {
                                             no_such_entry: ($) => abort(
                                                 ['no such entry', "required directories"],
-                                            )
+                                            ),
                                         },
                                     ),
                                     ($) => v_deserialize_number.deserialize(
@@ -192,7 +192,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                         {
                                             no_such_entry: ($) => abort(
                                                 ['no such entry', "additional directories allowed"],
-                                            )
+                                            ),
                                         },
                                     ),
                                     ($) => v_deserialize_boolean.deserialize(
@@ -216,7 +216,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                         {
                                             no_such_entry: ($) => abort(
                                                 ['no such entry', "extensions"],
-                                            )
+                                            ),
                                         },
                                     ),
                                     ($) => _p.list.from.list(
@@ -241,7 +241,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                         {
                                             no_such_entry: ($) => abort(
                                                 ['no such entry', "warn"],
-                                            )
+                                            ),
                                         },
                                     ),
                                     ($) => v_deserialize_boolean.deserialize(
@@ -299,7 +299,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                         {
                                             no_such_entry: ($) => abort(
                                                 ['no such entry', "commit to git"],
-                                            )
+                                            ),
                                         },
                                     ),
                                     ($) => v_deserialize_boolean.deserialize(
