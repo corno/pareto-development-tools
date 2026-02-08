@@ -49,11 +49,7 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
             sh.ph.serialize(t_path_to_text.Context_Path($.path)),
             sh.ph.literal(")"),
             sh.ph.indent(
-                sh.pg.sentences([
-                    sh.sentence([
-                        t_tsc_to_fountain_pen.Error($.error, $p)
-                    ])
-                ])
+                t_tsc_to_fountain_pen.Error($.error, $p)
             )
         ]))
         case 'error building test': return _p.ss($, ($) => sh.ph.composed([
@@ -61,11 +57,7 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
             sh.ph.serialize(t_path_to_text.Context_Path($.path)),
             sh.ph.literal(")"),
             sh.ph.indent(
-                sh.pg.sentences([
-                    sh.sentence([
-                        t_tsc_to_fountain_pen.Error($.error, $p)
-                    ])
-                ])
+                t_tsc_to_fountain_pen.Error($.error, $p)
             )
         ]))
         default: return _p.au($[0])
