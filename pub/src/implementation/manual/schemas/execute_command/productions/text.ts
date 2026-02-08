@@ -201,19 +201,21 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                 'impact': _p_variables(() => {
                     const value = iterator.look()
                     if (value === null) {
-                        return abort(['expected a text', { 'description': "'--dry-run' or a one time password" }])
+                        return ['actual publish', {
+                            // 'one time password': iterator.consume(
+                            //     ($) => $,
+                            //     () => abort(['expected a text', { 'description': "one time password" }])
+                            // )
+                        }]
                     } else {
                         switch (value[0]) {
                             case '--dry-run': {
                                 iterator.discard(() => null)
                                 return ['dry run', null]
                             }
-                            default: return ['actual publish', {
-                                // 'one time password': iterator.consume(
-                                //     ($) => $,
-                                //     () => abort(['expected a text', { 'description': "one time password" }])
-                                // )
-                            }]
+                            default:
+                                return abort(['expected a text', { 'description': "'--dry-run'" }])
+
                         }
                     }
                 }),
