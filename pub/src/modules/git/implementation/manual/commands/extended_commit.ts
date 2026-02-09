@@ -6,7 +6,7 @@ import * as signatures from "../../../interface/signatures"
 
 //data types
 import * as d from "../../../interface/to_be_generated/extended_commit"
-import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schemas/block/data"
+import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"

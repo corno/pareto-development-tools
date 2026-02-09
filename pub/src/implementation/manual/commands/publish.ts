@@ -11,7 +11,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/sch
 import * as q_get_package_json from "../../../modules/npm/implementation/manual/queries/get_package_json"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 export const $$: signatures.commands.publish = _p.command_procedure(
 

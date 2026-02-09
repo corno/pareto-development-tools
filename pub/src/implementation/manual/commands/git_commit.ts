@@ -7,7 +7,7 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/git_commit"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 export const $$: signatures.commands.git_commit = _p.command_procedure(
 

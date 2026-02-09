@@ -2,11 +2,11 @@ import * as _p from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/git_commit"
-import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/block/data"
+import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
-import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 import * as t_git_extended_commit_to_fountain_pen from "../../../../../modules/git/implementation/manual/schemas/extended_commit/transformers/fountain_pen"
 import * as t_build_and_test_to_fountain_pen from "../../build_and_test/transformers/fountain_pen"

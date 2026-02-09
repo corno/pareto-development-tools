@@ -2,11 +2,11 @@ import * as _p from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/get_package_json"
-import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/block/data"
+import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
-import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 import * as t_read_file_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_file/transformers/fountain_pen"
 import * as t_deserialize_package_json_to_fountain_pen from "../../deserialize_package_json/transformers/fountain_pen"

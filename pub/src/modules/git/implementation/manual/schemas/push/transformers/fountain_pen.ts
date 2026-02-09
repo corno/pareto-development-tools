@@ -2,9 +2,9 @@ import * as _p from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_in from "../../../../../interface/to_be_generated/push"
-import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/block/data"
+import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
-import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_command_executable/transformers/fountain_pen"
 

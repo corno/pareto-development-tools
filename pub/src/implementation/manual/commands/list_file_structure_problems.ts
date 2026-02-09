@@ -15,7 +15,7 @@ import * as t_line_count_to_line_count from "../schemas/directory_content/transf
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 
 export const $$: signatures.commands.list_file_structure_problems = _p.command_procedure(

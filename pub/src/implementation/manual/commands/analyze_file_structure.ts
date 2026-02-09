@@ -19,7 +19,7 @@ import * as t_csv_to_fountain_pen from "../../../modules/csv/implementation/manu
 import * as t_file_structure_analysis_to_csv from "../schemas/file_structure_analysis/transformers/csv"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
 
-import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 export const $$: signatures.commands.analyze_file_structure = _p.command_procedure(
     ($p, $cr, $q) => [

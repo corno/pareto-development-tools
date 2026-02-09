@@ -14,7 +14,7 @@ import * as r_instruction from "../schemas/execute_command/refiners/main"
 import * as t_api_to_fountain_pen from "../schemas/execute_command/transformers/fountain_pen"
 import * as t_bin_to_fountain_pen from "../schemas/parse/transformers/fountain_pen"
 
-import * as sh from "pareto-fountain-pen/dist/shorthands/block"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 
 type My_Error =
