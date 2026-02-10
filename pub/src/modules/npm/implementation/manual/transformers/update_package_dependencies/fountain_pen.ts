@@ -9,7 +9,7 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 import * as t_u2l_to_fountain_pen from "../update2latest/fountain_pen"
-import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/remove/transformers/fountain_pen"
+import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/remove/fountain_pen"
 import * as t_npm_to_fountain_pen from "../npm/fountain_pen"
 
 export const Error: Error = ($) => {

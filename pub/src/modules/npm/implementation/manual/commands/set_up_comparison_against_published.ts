@@ -13,8 +13,8 @@ import * as d from "../../../interface/to_be_generated/set_up_comparison_against
 import * as d_out from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/path/path"
 import * as q_get_package_json from "../queries/get_package_json"
 // import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
 

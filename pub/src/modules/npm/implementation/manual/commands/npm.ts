@@ -5,7 +5,7 @@ import * as _pi from 'pareto-core/dist/interface'
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 
 //shorthands
 import * as sh from "../../../../../temp_loc_to_string"

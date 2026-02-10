@@ -22,7 +22,7 @@ import * as t_dependency_graph_to_fountain_pen from "../create_dependency_graph/
 import * as t_line_count_to_fountain_pen from "../get_project_files/fountain_pen"
 import * as t_publish from "../publish/fountain_pen"
 import * as t_update_dependencies from "../update_package_dependencies/fountain_pen"
-import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory/transformers/fountain_pen"
+import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_directory/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/manual/transformers/set_up_comparison_against_published/fountain_pen"
 
 export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {

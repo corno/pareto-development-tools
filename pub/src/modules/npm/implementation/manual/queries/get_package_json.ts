@@ -11,8 +11,8 @@ import * as d from "../../../interface/to_be_generated/get_package_json"
 // import * as d_npm_package from "../../../modules/npm/interface/to_be_generated/npm_package"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/path/path"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 import { $$ as r_parse_npm_package } from "../transformers/npm_package/text"
 
 //shorthands

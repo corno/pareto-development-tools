@@ -8,8 +8,8 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-import * as t_read_directory_content_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory_content/transformers/fountain_pen"
-import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory/transformers/fountain_pen"
+import * as t_read_directory_content_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_directory_content/fountain_pen"
+import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_directory/fountain_pen"
 
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {

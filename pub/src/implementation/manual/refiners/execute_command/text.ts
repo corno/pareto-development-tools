@@ -8,7 +8,7 @@ import * as d_out from "../../../../interface/to_be_generated/execute_command"
 import * as d_function from "../../../../interface/to_be_generated/parse"
 
 //dependencies
-import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/schemas/context_path/refiners/text"
+import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/refiners/context_path/text"
 
 type signature = _pi.Production<d_out.Parameters, d_function.Error, string>
 

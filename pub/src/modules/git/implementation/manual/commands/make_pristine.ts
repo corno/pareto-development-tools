@@ -7,7 +7,7 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/make_pristine"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 
 //shorthands
 import * as sh from "../../../../../temp_loc_to_string"

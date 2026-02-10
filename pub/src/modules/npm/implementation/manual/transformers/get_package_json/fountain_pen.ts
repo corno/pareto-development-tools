@@ -8,7 +8,7 @@ export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-import * as t_read_file_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_file/transformers/fountain_pen"
+import * as t_read_file_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_file/fountain_pen"
 import * as t_deserialize_package_json_to_fountain_pen from "../deserialize_package_json/fountain_pen"
 
 export const Error: Error = ($) => {

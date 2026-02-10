@@ -9,7 +9,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
 import * as t_git_is_clean_to_fountain_pen from "../is_repository_clean/fountain_pen"
-import * as t_ece_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/execute_command_executable/transformers/fountain_pen"
+import * as t_ece_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
 
 export const Error: Error = ($) => _p.decide.state($, ($): d_out.Phrase => {
     switch ($[0]) {

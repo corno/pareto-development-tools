@@ -13,8 +13,8 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 //dependencies
 import * as t_tsc_to_fountain_pen from "../tsc/fountain_pen"
-import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/remove/transformers/fountain_pen"
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
+import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/remove/fountain_pen"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 
 export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
     switch ($[0]) {
