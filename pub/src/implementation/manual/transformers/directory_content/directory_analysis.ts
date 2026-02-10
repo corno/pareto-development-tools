@@ -10,6 +10,11 @@ import * as d_out from "../../../../interface/to_be_generated/file_structure_ana
 import * as d_structure from "../../../../interface/generated/liana/schemas/structure/data"
 import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
 
+export type Parameters = {
+    'expected structure': d_structure.Directory,
+    'structure path': string,
+}
+
 const line_count = ($: string): number => {
     let lineCount = 0
     _p_list_from_text($, ($) => $).__l_map(($) => {
@@ -56,10 +61,7 @@ export namespace defined {
 
     export const Directory = (
         $: d_in.Directory,
-        $p: {
-            'expected structure': d_structure.Directory,
-            'structure path': string,
-        }
+        $p: Parameters
     ): d_out.Directory => {
         //both found and expected are directories
 

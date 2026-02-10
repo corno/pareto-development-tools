@@ -4,8 +4,8 @@ import * as _pi from 'pareto-core/dist/interface'
 //data types
 import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
 import * as d_in from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
-import * as d_npm_package from "../../../../interface/to_be_generated/npm_package"
-import * as d_deseralize_package_json from "../../../../interface/to_be_generated/deserialize_package_json"
+import * as d_out from "../../../../interface/to_be_generated/npm_package"
+import * as d_function from "../../../../interface/to_be_generated/deserialize_package_json"
 
 
 type Error_Expect_Object =
@@ -73,7 +73,7 @@ const expect_property = ($: Object, id: string, abort: (error: ['missing propert
     }
 )
 
-export const $$: _pi.Refiner_With_Parameter<d_npm_package.NPM_Package, d_deseralize_package_json.Error, d_in.List_of_Characters, { 'document resource identifier': string }> = ($, abort, $p) => {
+export const $$: _pi.Refiner_With_Parameter<d_out.NPM_Package, d_function.Error, d_in.List_of_Characters, { 'document resource identifier': string }> = ($, abort, $p) => {
     const x = t_parse_tree_from_list_of_characters.Document(
         $,
         () => abort(['invalid ASTN', null]),

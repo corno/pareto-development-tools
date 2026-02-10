@@ -3,12 +3,14 @@ import * as _pi from 'pareto-core/dist/interface'
 import _p_variables from 'pareto-core/dist/_p_variables'
 import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
 
-import * as d from "../../../../interface/to_be_generated/execute_command"
-import * as d_error from "../../../../interface/to_be_generated/parse"
+//data types
+import * as d_out from "../../../../interface/to_be_generated/execute_command"
+import * as d_function from "../../../../interface/to_be_generated/parse"
 
+//dependencies
 import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/schemas/context_path/refiners/text"
 
-type signature = _pi.Production<d.Parameters, d_error.Error, string>
+type signature = _pi.Production<d_out.Parameters, d_function.Error, string>
 
 const temp_content_path = ($: string) => t_context_path_from_text.Context_Path(
     _p_list_from_text(
@@ -18,7 +20,7 @@ const temp_content_path = ($: string) => t_context_path_from_text.Context_Path(
 )
 
 export const Command: signature = (iterator, abort) => iterator.consume(
-    ($): d.Parameters => {
+    ($): d_out.Parameters => {
         switch ($) {
             case 'all': return ['all packages', {
                 'path to project': temp_content_path(iterator.consume(
@@ -28,7 +30,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                     }
                 )),
                 'instruction': iterator.consume(
-                    ($): d.All_Pacakges_Instruction => {
+                    ($): d_out.All_Pacakges_Instruction => {
                         switch ($) {
                             case 'assert-clean': return ['assert clean', null]
                             case 'build-and-test': return ['build and test', {
