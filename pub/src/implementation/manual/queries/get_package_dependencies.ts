@@ -14,7 +14,7 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/sch
 import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/transformers/npm_package/text"
 
 //shorthands
-import * as sh from "../../../temp_pseudo_fp"
+import * as sh from "../../../temp_loc_to_string"
 
 export const $$: signatures.queries.get_package_dependencies = _p.query_function(
     ($p, $r) => $r['read directory'](

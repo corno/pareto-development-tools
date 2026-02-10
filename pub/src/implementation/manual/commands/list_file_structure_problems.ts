@@ -1,18 +1,17 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/assign'
+import * as _pa from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 import * as _pq from 'pareto-core/dist/query'
 
 import * as signatures from "../../../interface/signatures"
 
-import { $$ as x_structure } from "../../../data/structure"
+//data types
+import * as d from "../../../interface/to_be_generated/get_project_files"
+import * as d_file_analysis from "../../../interface/to_be_generated/file_structure_analysis"
 
-import * as d from "../../../interface/to_be_generated/analyze_file_structure"
-import * as d_directory_content from "pareto-resources/dist/interface/to_be_generated/directory_content"
-
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
-import * as t_line_count_to_line_count from "../transformers/directory_content/directory_analysis"
-import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
+//dependencies
+import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis"
+import { $$ as q_get_project_files } from "../queries/get_project_files"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
@@ -22,71 +21,44 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
     ($p, $cr, $q) => [
 
         _p.query(
-            $q['read directory'](
+            q_get_project_files($q)(
                 {
-                    'path': t_path_to_path.create_node_path($p['path to project'], { 'node': "packages" }),
+                    'path to project': $p['path to project'],
                 },
-                ($): d.Error => ['read directory', $],
+                ($): d.Error => $,
+
             ),
-            ($) => $,
+            ($, abort) => $,
             ($v) => [
-                _p.query(
-                    _pq.dictionaryx.parallel(
-                        $v.__d_map(($): _pq.Query_Result<d_directory_content.Directory, d.Package_Error> => {
-                            const path = $.path
-                            return _pt.decide.state($['node type'], ($) => {
-                                switch ($[0]) {
-                                    case 'other': return _pt.ss($, ($): _pq.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                                    case 'file': return _pt.ss($, ($): _pq.Query_Result<d_directory_content.Directory, d.Package_Error> => _pq.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                                    case 'directory': return _pt.ss($, ($): _pq.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content($q)(
-                                        {
-                                            'path': path,
-                                        },
-                                        ($): d.Package_Error => ['directory content', $],
-                                    ))
-                                    default: return _pt.au($[0])
-                                }
-                            })
-                        }),
-                        ($): d.Error => ['directory content processing', $],
-                    ),
-                    ($) => $,
-                    ($v) => [
+
+                $cr.log.execute(
+                    {
 
 
-                        $cr.log.execute(
-                            {
-                                'message': sh.pg.sentences([
-                                   sh.sentence([
-                                    sh.ph.literal("IMPLEMENT ME")
-                                ]),
-                                ]),
-                                // 'message': xxxx,
-                                // 'lines': _pt.list.flatten(
-                                //     _pt.list.from_dictionary($v, ($, id) => {
-                                //         const package_name = id
-                                //         return t_line_count_to_line_count.dict_to_list(
-                                //             _pt.dictionary.filter(
-                                //                 t_line_count_to_line_count.Directory2(t_line_count_to_line_count.defined.Directory(
-                                //                     $,
-                                //                     {
-                                //                         'expected structure': x_structure,
-                                //                         'structure path': ""
-                                //                     }
 
-                                //                 )),
-                                //                 ($) => _pt.boolean.optional_is_set($['unexpected path tail'])
-                                //                     ? _p.optional.literal.set($)
-                                //                     : _p.optional.literal.not_set())).__l_map(($) => `./packages/${package_name}${$['path']}`)
-                                //     }),
-                                //     ($) => $,
-                                // )
-                            },
-                            ($): d.Error => ['log', $],
-                        )
-                    ]
+                        'message': sh.pg.sentences(_pa.list.from.list(
+                            _pa.list.from.list(
+                                t_project_files_to_file_analysis_list.Project_Files($v)
+                            ).filter<d_file_analysis.File_Analysis2>(
+                                ($) => _pa.boolean.from.optional($.analysis['unexpected path tail']).is_set()
+                                    ? _p.optional.literal.set($)
+                                    : _p.optional.literal.not_set()
+                            )
+                        ).map(
+                            ($) => {
+                                return sh.sentence([
+                                    sh.ph.literal("./packages/"),
+                                    sh.ph.literal($.package),
+                                    sh.ph.literal($['path']),
+
+                                ])
+                            }
+                        ))
+                    },
+                    ($): d.Error => ['log', $],
                 )
             ]
         ),
+
     ]
 )

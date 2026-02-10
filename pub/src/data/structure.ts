@@ -38,13 +38,8 @@ const $_implementation: d_structure.Directory.group.D = directory_group({
     "generated": directory_generated(true),
 
     "manual": directory_group({
-        "schemas": directory_dictionary(dgroup({
-            "transformers": directory_wildcards(0, false, ["ts"], false),
-            "serializers.ts": file_manual(),
-            "deserializers.ts": file_manual(),
-            "refiners": directory_wildcards(0, false, ["ts"], false),
-            "productions": directory_wildcards(0, false, ["ts"], false),
-        })),
+        "transformers": directory_wildcards(1, false, ["ts"], false),
+        "refiners": directory_wildcards(1, false, ["ts"], false),
         "primitives": directory_group({
             "text": directory_group({
                 "serializers": directory_wildcards(0, false, ["ts"], false),
@@ -106,6 +101,7 @@ export const $$: d_structure.Directory = ['group', _p.dictionary.literal<d_struc
             "modules": directory_dictionary(dgroup({
                 "interface": $_interface,
                 "implementation": $_implementation,
+                "shorthands": directory_wildcards(0, false, ["ts"], false),
             })),
             "shorthands": directory_wildcards(0, false, ["ts"], false),
         }),

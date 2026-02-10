@@ -1,8 +1,7 @@
 import * as _pi from 'pareto-core/dist/interface'
 
 
-import * as d_analyze_file_structure from "./analyze_file_structure"
-import * as d_list_file_structure_problems from "./analyze_file_structure"
+import * as d_get_project_files from "./get_project_files"
 import * as d_assert_clean from "../../modules/git/interface/to_be_generated/assert_is_clean"
 import * as d_build from "./build"
 import * as d_build_and_test from "./build_and_test"
@@ -109,7 +108,7 @@ export type Error =
     | ['all', All_Error]
     | ['package', Package_Error]
 
-    | ['analyze file structure', d_analyze_file_structure.Error]
+    | ['get project files', d_get_project_files.Error]
     | ['dependency graph', d_dependency_graph.Error]
 
     | ['set up comparison', d_set_up_comparison_against_published.Error]

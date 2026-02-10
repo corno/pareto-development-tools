@@ -19,7 +19,7 @@ import * as q_get_package_json from "../queries/get_package_json"
 // import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
 
 //shorthands
-import * as sh from "../../../../../temp_pseudo_fp"
+import * as sh from "../../../../../temp_loc_to_string"
 
 const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Characters => {
 

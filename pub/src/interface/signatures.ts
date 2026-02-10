@@ -8,6 +8,15 @@ import * as resources_fp from "pareto-fountain-pen-file-structure/dist/interface
 
 export namespace queries {
 
+    export type get_project_files = _pi.Query_Function<
+        resources.queries.get_project_files,
+        {
+            'read directory': resources_pareto.queries.read_directory,
+            'read file': resources_pareto.queries.read_file
+
+        }
+    >
+
     export type get_package_dependencies = _pi.Query_Function<
         resources.queries.get_package_dependencies,
         {

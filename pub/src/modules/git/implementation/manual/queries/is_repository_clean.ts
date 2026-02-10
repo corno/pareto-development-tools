@@ -10,7 +10,7 @@ import * as d from "../../../interface/to_be_generated/is_repository_clean"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
 
 //shorthands
-import * as sh from "../../../../../temp_pseudo_fp"
+import * as sh from "../../../../../temp_loc_to_string"
 
 export const $$: signatures.queries.is_repository_clean = _p.query_function(
     ($p, $qr) => $qr.git(

@@ -12,7 +12,7 @@ import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schema
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
 
 
-import * as temp from "../../../../../temp_pseudo_fp"
+import * as temp from "../../../../../temp_loc_to_string"
 
 export const $$: signatures.commands.extended_commit = _p.command_procedure(
     ($p, $cr, $qr) => [

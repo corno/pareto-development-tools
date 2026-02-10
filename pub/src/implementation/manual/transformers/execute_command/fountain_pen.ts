@@ -19,7 +19,7 @@ import * as t_git_remove_tracked_but_ignored from "../../../../modules/git/imple
 import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pen"
 import * as t_build_to_fountain_pen from "../build/fountain_pen"
 import * as t_dependency_graph_to_fountain_pen from "../create_dependency_graph/fountain_pen"
-import * as t_line_count_to_fountain_pen from "../analyze_file_structure/fountain_pen"
+import * as t_line_count_to_fountain_pen from "../get_project_files/fountain_pen"
 import * as t_publish from "../publish/fountain_pen"
 import * as t_update_dependencies from "../update_package_dependencies/fountain_pen"
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/schemas/read_directory/transformers/fountain_pen"
@@ -38,7 +38,7 @@ export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
                 default: return _p.au($[0])
             }
         }))
-        case 'analyze file structure': return _p.ss($, ($) => t_line_count_to_fountain_pen.Error($))
+        case 'get project files': return _p.ss($, ($) => t_line_count_to_fountain_pen.Error($))
         case 'dependency graph': return _p.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
         case 'all': return _p.ss($, ($) => _p.decide.state($, ($) => {
             switch ($[0]) {

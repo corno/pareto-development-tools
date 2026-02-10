@@ -1,6 +1,6 @@
 import * as _pi from 'pareto-core/dist/interface'
 
-import * as d_analyze_file_structure from "./to_be_generated/analyze_file_structure"
+import * as d_get_project_files from "./to_be_generated/get_project_files"
 import * as d_api from "./to_be_generated/execute_command"
 import * as d_build from "./to_be_generated/build"
 import * as d_build_and_test from "./to_be_generated/build_and_test"
@@ -14,13 +14,14 @@ import * as d_git_commit from "./to_be_generated/git_commit"
 
 export namespace queries {
     
+    export type get_project_files = _pi.Query<d_get_project_files.Result, d_get_project_files.Error, d_get_project_files.Parameters>
     export type get_package_dependencies = _pi.Query<d_get_package_dependencies.Result, d_get_package_dependencies.Error, d_get_package_dependencies.Parameters>
 
 }
 
 export namespace commands {
 
-    export type analyze_file_structure = _pi.Command<d_analyze_file_structure.Error, d_analyze_file_structure.Parameters>
+    export type analyze_file_structure = _pi.Command<d_get_project_files.Error, d_get_project_files.Parameters>
     export type api = _pi.Command<d_api.Error, d_api.Parameters>
     export type build = _pi.Command<d_build.Error, d_build.Parameters>
     export type build_and_test = _pi.Command<d_build_and_test.Error, d_build_and_test.Parameters>

@@ -162,7 +162,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 {
                                     'path to project': path
                                 },
-                                ($): d.Error => ['analyze file structure', $],
+                                ($): d.Error => ['get project files', $],
                             )
                         ])
                         case 'dependency graph': return _p.ss($, ($) => [
@@ -178,7 +178,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 {
                                     'path to project': path
                                 },
-                                ($): d.Error => ['analyze file structure', $],
+                                ($): d.Error => ['get project files', $],
                             )
                         ])
 

@@ -16,7 +16,7 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/sch
 import { $$ as r_parse_npm_package } from "../transformers/npm_package/text"
 
 //shorthands
-import * as sh from "../../../../../temp_pseudo_fp"
+import * as sh from "../../../../../temp_loc_to_string"
 
 export const $$: signatures.queries.get_package_json = _p.query_function(
     ($p, $r) => _p_change_context($p, ($p) => {

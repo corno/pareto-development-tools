@@ -10,7 +10,7 @@ import * as d from "../../../interface/to_be_generated/is_inside_work_tree"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
 
 //shorthands
-import * as sh from "../../../../../temp_pseudo_fp"
+import * as sh from "../../../../../temp_loc_to_string"
 
 const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Outcome, Target_Error>(
     result: _p.Query_Result<Preparation_Result, Preparation_Error>,

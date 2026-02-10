@@ -8,7 +8,7 @@ import * as signatures from "../../../interface/signatures"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
 
 //shorthands
-import * as sh from "../../../../../temp_pseudo_fp"
+import * as sh from "../../../../../temp_loc_to_string"
 
 export const $$: signatures.commands.update2latest = _p.command_procedure(
     ($p, $cr) => [

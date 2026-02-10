@@ -9,7 +9,7 @@ import * as d from "../../../interface/to_be_generated/tsc"
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
 
-import * as sh from "../../../temp_pseudo_fp"
+import * as sh from "../../../temp_loc_to_string"
 
 export const $$: signatures.commands.tsc = _p.command_procedure(
 

@@ -5,15 +5,80 @@ import _p_list_build_deprecated from 'pareto-core/dist/_p_list_build_deprecated'
 import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
 //data types
-import * as d_in from "pareto-resources/dist/interface/to_be_generated/directory_content"
+import * as d_in from "../../../../interface/to_be_generated/project_files"
+import * as d_in_directory_content from "pareto-resources/dist/interface/to_be_generated/directory_content"
 import * as d_out from "../../../../interface/to_be_generated/file_structure_analysis"
 import * as d_structure from "../../../../interface/generated/liana/schemas/structure/data"
-import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
+
+//data
+import { $$ as x_structure } from "../../../../data/structure"
 
 export type Parameters = {
     'expected structure': d_structure.Directory,
     'structure path': string,
 }
+
+export type Project_Files = _pi.Transformer<
+    d_in.Project_Files,
+    d_out.File_Analysis_List
+>
+
+
+export const Project_Files: Project_Files = ($) => _p.list.from.dictionary(
+    $
+).flatten(
+    ($, id) => {
+        const package_name = id
+        const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {
+            const temp: { [id: string]: d_out.File_Analysis } = {}
+            const x = ($: d_out.Directory, path: string): void => {
+                _p.decide.state($, ($) => {
+                    switch ($[0]) {
+                        case 'expected a file': return _p.ss($, ($) => { })
+                        case 'ignored': return _p.ss($, ($) => { })
+                        case 'dictionary': return _p.ss($, ($) => {
+                            $.__d_map(($, id) => {
+
+                                _p.decide.state($, ($) => {
+                                    switch ($[0]) {
+                                        case 'other': return //do nothing, ignore other filesystem nodes for now
+                                        case 'file': return _p.ss($, ($) => temp[`${path}/${id}`] = $)
+                                        case 'directory': return _p.ss($, ($) => x($, `${path}/${id}`))
+                                        default: return _p.au($[0])
+                                    }
+                                })
+                            })
+                        })
+                        default: return _p.au($[0])
+                    }
+                })
+
+            }
+            x($, "")
+            return _p.dictionary.literal(temp)
+        }
+        return _p.list.from.dictionary(
+            Directory2(
+                defined.Directory(
+                    $,
+                    {
+                        'expected structure': x_structure,
+                        'structure path': "",
+                    }
+                )
+            ),
+        ).convert(
+            ($, id) => ({
+                'package': package_name,
+                'path': id,
+                'analysis': $,
+            })
+        )
+    }
+)
+
+
+
 
 const line_count = ($: string): number => {
     let lineCount = 0
@@ -60,7 +125,7 @@ const extension = ($: string): _pi.Optional_Value<string> => {
 export namespace defined {
 
     export const Directory = (
-        $: d_in.Directory,
+        $: d_in_directory_content.Directory,
         $p: Parameters
     ): d_out.Directory => {
         //both found and expected are directories
@@ -74,7 +139,7 @@ export namespace defined {
                     return ['dictionary', dir.__d_map(($, id) => {
                         const node = $
                         const NodeX = (
-                            $: d_in.Node,
+                            $: d_in_directory_content.Node,
                             $p: {
                                 'name': string,
                                 'expected structure': d_structure.Directory.group.D,
@@ -236,7 +301,7 @@ export namespace defined {
 export namespace undefined {
 
     export const Directory = (
-        $: d_in.Directory,
+        $: d_in_directory_content.Directory,
         $p: {
             'structure': d_out.Structure_Analysis,
             'unexpected path tail': _pi.Optional_Value<string>,
@@ -253,7 +318,7 @@ export namespace undefined {
     }
 
     export const Node = (
-        $: d_in.Node,
+        $: d_in_directory_content.Node,
         $p: {
             'structure': d_out.Structure_Analysis,
             'name': string,
@@ -289,7 +354,7 @@ export namespace undefined {
 export namespace wildcard {
 
     export const Directory = (
-        $: d_in.Directory,
+        $: d_in_directory_content.Directory,
         $p: {
             'wildcard': d_structure.Directory.wildcards,
             'structure path': string,
@@ -356,51 +421,3 @@ export namespace wildcard {
 }
 
 
-
-export const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {
-    const temp: { [id: string]: d_out.File_Analysis } = {}
-    const x = ($: d_out.Directory, path: string): void => {
-        _p.decide.state($, ($) => {
-            switch ($[0]) {
-                case 'expected a file': return _p.ss($, ($) => { })
-                case 'ignored': return _p.ss($, ($) => { })
-                case 'dictionary': return _p.ss($, ($) => {
-                    $.__d_map(($, id) => {
-
-                        _p.decide.state($, ($) => {
-                            switch ($[0]) {
-                                case 'other': return //do nothing, ignore other filesystem nodes for now
-                                case 'file': return _p.ss($, ($) => temp[`${path}/${id}`] = $)
-                                case 'directory': return _p.ss($, ($) => x($, `${path}/${id}`))
-                                default: return _p.au($[0])
-                            }
-                        })
-                    })
-                })
-                default: return _p.au($[0])
-            }
-        })
-
-    }
-    x($, "")
-    return _p.dictionary.literal(temp)
-}
-
-
-export const dict_to_list = (
-    $: d_out.Flattened_Directory_With_Line_Counts,
-    $p: {
-        'package name': string
-    }
-): d_out.File_Analysis_List => {
-
-    return _p.list.from.dictionary(
-        $,
-    ).convert(
-        ($, id) => ({
-            'package': $p['package name'],
-            'path': id,
-            'analysis': $,
-        })
-    )
-}
