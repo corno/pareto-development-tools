@@ -4,7 +4,7 @@ import * as resources from "./resources"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 import * as resources_git from "../modules/git/interface/resources"
 import * as resources_npm from "../modules/npm/interface/resources"
-import * as resources_fp from "pareto-fountain-pen-file-system/dist/interface/resources"
+import * as resources_fp from "pareto-fountain-pen-file-structure/dist/interface/resources"
 
 export namespace queries {
 

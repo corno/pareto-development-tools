@@ -12,11 +12,11 @@
     "liana-core": "^0.0.21",
     "pareto-core-dev": "^0.12.8",
     "pareto-fountain-pen": "^0.4.43",
-    "pareto-fountain-pen-file-system": "^0.0.1",
-    "pareto-graphviz": "^0.2.17",
+    "pareto-fountain-pen-file-structure": "^0.0.3",
+    "pareto-graphviz": "^0.2.18",
     "pareto-host-nodejs": "^0.2.29",
-    "pareto-json": "^0.3.28",
-    "pareto-resources": "^0.2.47"
+    "pareto-json": "^0.3.29",
+    "pareto-resources": "^0.2.48"
   },
   "bin": {
     "pdt": "./dist/bin.js"
