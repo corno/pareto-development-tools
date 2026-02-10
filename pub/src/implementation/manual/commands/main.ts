@@ -10,9 +10,9 @@ import * as d_api from "../../../interface/to_be_generated/execute_command"
 import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
 
 //dependencies
-import * as r_instruction from "../schemas/execute_command/refiners/main"
-import * as t_api_to_fountain_pen from "../schemas/execute_command/transformers/fountain_pen"
-import * as t_bin_to_fountain_pen from "../schemas/parse/transformers/fountain_pen"
+import * as r_instruction from "../refiners/execute_command/main"
+import * as t_api_to_fountain_pen from "../transformers/execute_command/fountain_pen"
+import * as t_bin_to_fountain_pen from "../transformers/parse/fountain_pen"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 

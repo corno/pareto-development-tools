@@ -14,9 +14,9 @@ import * as d_directory_content from "pareto-resources/dist/interface/to_be_gene
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
-import * as t_line_count_to_line_count from "../schemas/directory_content/transformers/directory_analysis"
-import * as t_csv_to_fountain_pen from "../../../modules/csv/implementation/manual/schemas/csv/transformers/fountain_pen"
-import * as t_file_structure_analysis_to_csv from "../schemas/file_structure_analysis/transformers/csv"
+import * as t_line_count_to_line_count from "../transformers/directory_content/directory_analysis"
+import * as t_csv_to_fountain_pen from "../../../modules/csv/implementation/manual/transformers/csv/fountain_pen"
+import * as t_file_structure_analysis_to_csv from "../transformers/file_structure_analysis/csv"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"

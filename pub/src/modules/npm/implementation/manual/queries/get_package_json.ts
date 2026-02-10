@@ -13,7 +13,7 @@ import * as d from "../../../interface/to_be_generated/get_package_json"
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/schemas/path/transformers/text"
-import { $$ as r_parse_npm_package } from "../schemas/npm_package/refiners/text"
+import { $$ as r_parse_npm_package } from "../transformers/npm_package/text"
 
 //shorthands
 import * as sh from "../../../../../temp_pseudo_fp"

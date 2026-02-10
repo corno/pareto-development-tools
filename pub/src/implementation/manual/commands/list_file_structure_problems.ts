@@ -11,7 +11,7 @@ import * as d from "../../../interface/to_be_generated/analyze_file_structure"
 import * as d_directory_content from "pareto-resources/dist/interface/to_be_generated/directory_content"
 
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/schemas/path/transformers/path"
-import * as t_line_count_to_line_count from "../schemas/directory_content/transformers/directory_analysis"
+import * as t_line_count_to_line_count from "../transformers/directory_content/directory_analysis"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
 
 //shorthands
