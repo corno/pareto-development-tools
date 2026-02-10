@@ -12,8 +12,8 @@
     "liana-core": "^0.0.21",
     "pareto-core-dev": "^0.12.8",
     "pareto-fountain-pen": "^0.4.44",
-    "pareto-fountain-pen-file-structure": "^0.0.5",
-    "pareto-graphviz": "^0.2.18",
+    "pareto-fountain-pen-file-structure": "^0.0.6",
+    "pareto-graphviz": "^0.2.19",
     "pareto-host-nodejs": "^0.2.30",
     "pareto-json": "^0.3.29",
     "pareto-resources": "^0.2.49"

@@ -8,7 +8,7 @@ import * as d from "../../../interface/to_be_generated/create_dependency_graph"
 
 //dependencies
 import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz"
-import * as t_graphviz_to_fountain_pen from "pareto-graphviz/dist/implementation/manual/schemas/graphviz/transformers/fountain_pen"
+import * as t_graphviz_to_fountain_pen from "pareto-graphviz/dist/implementation/manual/transformers/high_level_simple/fountain_pen"
 
 export const $$: signatures.commands.create_dependency_graph = _p.command_procedure(
     ($p, $cr, $q) => [
