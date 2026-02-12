@@ -10,7 +10,7 @@ import * as signatures from "../../../interface/signatures"
 
 //data types
 import * as d from "../../../interface/to_be_generated/set_up_comparison_against_published"
-import * as d_out from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
+import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"

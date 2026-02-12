@@ -40,26 +40,7 @@ const $_implementation: d_structure.Directory.group.D = directory_group({
     "manual": directory_group({
         "transformers": directory_wildcards(1, false, ["ts"], false),
         "refiners": directory_wildcards(1, false, ["ts"], false),
-        "primitives": directory_group({
-            "text": directory_group({
-                "serializers": directory_wildcards(0, false, ["ts"], false),
-                "deserializers": directory_wildcards(0, false, ["ts"], false),
-            }),
-            "integer": directory_group({
-                "serializers": directory_wildcards(0, false, ["ts"], false),
-                "deserializers": directory_wildcards(0, false, ["ts"], false),
-            }),
-            "boolean": directory_group({
-                "serializers": directory_wildcards(0, false, ["ts"], false),
-                "deserializers": directory_wildcards(0, false, ["ts"], false),
-            }),
-            "approximate_number": directory_group({
-                "serializers": directory_wildcards(0, false, ["ts"], false),
-                "deserializers": directory_wildcards(0, false, ["ts"], false),
-            }),
-        }),
         "text_to_text": directory_wildcards(0, false, ["ts"], false),
-
         "queries": directory_wildcards(0, false, ["ts"], false),
         "commands": directory_wildcards(0, false, ["ts"], false),
     }),

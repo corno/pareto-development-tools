@@ -3,7 +3,7 @@ import * as _pi from 'pareto-core/dist/interface'
 
 //data types
 import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
-import * as d_in from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
+import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
 import * as d_out from "../../../../interface/to_be_generated/npm_package"
 import * as d_function from "../../../../interface/to_be_generated/deserialize_package_json"
 

@@ -7,7 +7,7 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "pareto-resources/dist/interface/to_be_generated/temp_main"
 import * as d_parse from "../../../interface/to_be_generated/parse"
 import * as d_api from "../../../interface/to_be_generated/execute_command"
-import * as d_text from "pareto-fountain-pen/dist/interface/to_be_generated/list_of_characters"
+import * as d_text from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
 
 //dependencies
 import * as r_instruction from "../refiners/execute_command/main"
