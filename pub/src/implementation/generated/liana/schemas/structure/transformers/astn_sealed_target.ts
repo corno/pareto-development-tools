@@ -9,9 +9,7 @@ import * as t_signatures from "../../../../../../interface/generated/liana/schem
 
 import * as t_out from "astn-core/dist/interface/generated/liana/schemas/sealed_target/data"
 
-import * as v_serialize_number from "liana-core/dist/implementation/manual/primitives/integer/serializers/decimal"
-
-import * as v_serialize_boolean from "liana-core/dist/implementation/manual/primitives/boolean/serializers/true_false"
+import * as v_primitives_to_text from "liana-core/dist/implementation/manual/transformers/primitives/text"
 
 export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.state(
     $,
@@ -77,11 +75,8 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                                                                         $['commit to git'],
                                                                                         ($) => ['text', {
                                                                                             'delimiter': ['none', null],
-                                                                                            'value': _p_text_from_list(
-                                                                                                v_serialize_boolean.serialize(
-                                                                                                    $,
-                                                                                                ),
-                                                                                                ($) => $,
+                                                                                            'value': v_primitives_to_text.true_false(
+                                                                                                $,
                                                                                             ),
                                                                                         }],
                                                                                     ),
@@ -119,11 +114,8 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                     $['required directories'],
                                     ($) => ['text', {
                                         'delimiter': ['none', null],
-                                        'value': _p_text_from_list(
-                                            v_serialize_number.serialize(
-                                                $,
-                                            ),
-                                            ($) => $,
+                                        'value': v_primitives_to_text.decimal(
+                                            $,
                                         ),
                                     }],
                                 ),
@@ -131,11 +123,8 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                     $['additional directories allowed'],
                                     ($) => ['text', {
                                         'delimiter': ['none', null],
-                                        'value': _p_text_from_list(
-                                            v_serialize_boolean.serialize(
-                                                $,
-                                            ),
-                                            ($) => $,
+                                        'value': v_primitives_to_text.true_false(
+                                            $,
                                         ),
                                     }],
                                 ),
@@ -154,11 +143,8 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                     $['warn'],
                                     ($) => ['text', {
                                         'delimiter': ['none', null],
-                                        'value': _p_text_from_list(
-                                            v_serialize_boolean.serialize(
-                                                $,
-                                            ),
-                                            ($) => $,
+                                        'value': v_primitives_to_text.true_false(
+                                            $,
                                         ),
                                     }],
                                 ),
@@ -193,11 +179,8 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                     $['commit to git'],
                                     ($) => ['text', {
                                         'delimiter': ['none', null],
-                                        'value': _p_text_from_list(
-                                            v_serialize_boolean.serialize(
-                                                $,
-                                            ),
-                                            ($) => $,
+                                        'value': v_primitives_to_text.true_false(
+                                            $,
                                         ),
                                     }],
                                 ),
