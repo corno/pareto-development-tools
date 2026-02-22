@@ -13,10 +13,10 @@
     "pareto-core-dev": "^0.12.8",
     "pareto-fountain-pen": "^0.4.45",
     "pareto-fountain-pen-file-structure": "^0.0.6",
-    "pareto-graphviz": "^0.2.20",
-    "pareto-host-nodejs": "^0.2.31",
+    "pareto-graphviz": "^0.2.21",
+    "pareto-host-nodejs": "^0.2.33",
     "pareto-json": "^0.3.29",
-    "pareto-resources": "^0.2.50"
+    "pareto-resources": "^0.2.52"
   },
   "bin": {
     "pdt": "./dist/bin.js"

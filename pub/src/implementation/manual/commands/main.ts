@@ -64,7 +64,7 @@ export const $$: signatures.commands.main = _p.command_procedure(
                     })
                 )
             ],
-            ({
+            () => ({
                 'exit code': 1,
             })
         ),
