@@ -9,7 +9,7 @@
     "dist"
   ],
   "dependencies": {
-    "liana-core": "^0.0.33",
+    "liana-core": "^0.0.34",
     "pareto-fountain-pen": "^0.4.49",
     "pareto-fountain-pen-file-structure": "^0.0.6",
     "pareto-graphviz": "^0.2.22",
