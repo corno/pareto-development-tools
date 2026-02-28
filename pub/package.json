@@ -13,8 +13,8 @@
     "pareto-fountain-pen": "^0.4.49",
     "pareto-fountain-pen-file-structure": "^0.0.6",
     "pareto-graphviz": "^0.2.23",
-    "pareto-host-nodejs": "^0.2.33",
-    "pareto-json": "^0.3.31",
+    "pareto-host-nodejs": "^0.2.34",
+    "pareto-json": "^0.3.32",
     "pareto-resources": "^0.2.54"
   },
   "bin": {
