@@ -16,19 +16,6 @@
     "pareto-json": "^0.3.34",
     "pareto-resources": "^0.2.57"
   },
-  "bundleDependencies": [
-    "astn-core",
-    "liana-core",
-    "pareto-core-shorthands",
-    "pareto-core",
-    "pareto-fountain-pen-file-structure",
-    "pareto-fountain-pen",
-    "pareto-graphviz",
-    "pareto-host-nodejs",
-    "pareto-json",
-    "pareto-resources",
-    "pareto-static-html"
-  ],
   "bin": {
     "pdt": "./dist/bin.js"
   }

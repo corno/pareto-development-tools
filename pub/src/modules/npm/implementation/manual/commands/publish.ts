@@ -18,6 +18,7 @@ export const $$: signatures.commands.npm_publish = _p.command_procedure(
                     [
                         "publish"
                     ],
+                    //publish doesn't support --prefix, so we have to use a path to the package as an argument instead
                     $p.path.__decide(
                         ($) => _pt.list.literal([
                             sh.serialize(t_path_to_text.Context_Path($)),
