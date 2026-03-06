@@ -7,16 +7,14 @@ import * as signatures from "../../../interface/signatures"
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 
-//shorthands
-import * as sh from "../../../../../temp_loc_to_string"
-
 export const $$: signatures.commands.update2latest = _p.command_procedure(
     ($p, $cr) => [
         $cr.update2latest.execute(
             {
+                'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
                     _pt.list.literal([
-                       sh.serialize(t_path_to_text.Context_Path($p.path)),
+                        t_path_to_text.Context_Path($p.path),
                     ]),
                     _pt.decide.state($p.what, ($) => {
                         // _pdev.log_debug_message(`Updating ${$p.path} to latest`, () => {})

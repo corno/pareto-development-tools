@@ -16,10 +16,6 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/path/path"
 import * as q_get_package_json from "../queries/get_package_json"
-// import * as ds_context_path from "pareto-resources/dist/implementation/manual/schemas/context_path/deserializers"
-
-//shorthands
-import * as sh from "../../../../../temp_loc_to_string"
 
 const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Characters => {
 
@@ -92,12 +88,13 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                         // Create local package using npm pack (if local package path provided)
                         $cr['npm'].execute(
                             {
+                                'working directory': _p.optional.literal.not_set(),
                                 'args': _pt.list.nested_literal_old([
                                     _pt.list.literal([
                                         "pack",
-                                        sh.serialize(t_path_to_text.Context_Path($p['path to local package'])),
+                                        t_path_to_text.Context_Path($p['path to local package']),
                                         "--pack-destination",
-                                        sh.serialize(t_path_to_text.Node_Path($p['path to temp directory'])),
+                                        t_path_to_text.Node_Path($p['path to temp directory']),
                                     ])
                                 ]),
                             },
@@ -113,11 +110,12 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                         // Extract local package into local subdirectory using dynamic filename
                         $cr['tar'].execute(
                             {
+                                'working directory': _p.optional.literal.not_set(),
                                 'args': _pt.list.literal([
                                     "-xzmf",
-                                    `${sh.serialize(t_path_to_text.Node_Path($p['path to temp directory']))}/${filename}`,
+                                    `${t_path_to_text.Node_Path($p['path to temp directory'])}/${filename}`,
                                     "-C",
-                                    sh.serialize(t_path_to_text.Node_Path($p['path to output local directory'])),
+                                    t_path_to_text.Node_Path($p['path to output local directory']),
                                     "--strip-components=1",
                                 ]),
                             },
@@ -132,11 +130,12 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
 
                         $cr['npm'].execute(
                             {
+                                'working directory': _p.optional.literal.not_set(),
                                 'args': _pt.list.literal([
                                     "pack",
                                     `${package_info.name}@${package_info.version}`,
                                     "--pack-destination",
-                                    `${sh.serialize(t_path_to_text.Node_Path($p['path to temp directory']))}/npm`,
+                                    `${t_path_to_text.Node_Path($p['path to temp directory'])}/npm`,
                                 ])
                             },
                             ($) => ['error while running npm command', $],
@@ -151,6 +150,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                         _p.query(
                             $qr.npm(
                                 {
+                                    'working directory': _p.optional.literal.not_set(),
                                     'args': _pt.list.literal([
                                         "view",
                                         package_info.name,
@@ -164,11 +164,12 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                             ($v) => [
                                 $cr['tar'].execute<d.Error>(
                                     {
+                                        'working directory': _p.optional.literal.not_set(),
                                         'args': _pt.list.literal([
                                             "-xzmf",
-                                            `${sh.serialize(t_path_to_text.Node_Path($p['path to temp directory']))}/npm/${package_info.name}-${_p_text_from_list($v, ($) => $)}.tgz`,
+                                            `${t_path_to_text.Node_Path($p['path to temp directory'])}/npm/${package_info.name}-${_p_text_from_list($v, ($) => $)}.tgz`,
                                             "-C",
-                                            `${sh.serialize(t_path_to_text.Node_Path($p['path to output published directory']))}`,
+                                            `${t_path_to_text.Node_Path($p['path to output published directory'])}`,
                                             "--strip-components=1",
                                         ])
                                     },

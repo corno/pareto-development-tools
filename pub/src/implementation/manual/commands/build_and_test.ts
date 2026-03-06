@@ -25,6 +25,7 @@ export const $$: signatures.commands.build_and_test = _p.command_procedure(
         // test
         $cr.node.execute(
             {
+                'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.literal([
                     t_path_to_text.Context_Path(
                         t_path_to_path.extend_context_path_with_list(
@@ -49,7 +50,7 @@ export const $$: signatures.commands.build_and_test = _p.command_procedure(
                             }
                         )
                     ),
-                ]).__l_map(($) => _p_text_from_list($, ($) => $))
+                ]).__l_map(($) => $)
             },
             ($): d.Error => ['error testing', $],
         ),

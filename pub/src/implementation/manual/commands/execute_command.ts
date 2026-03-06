@@ -1,12 +1,12 @@
 import * as _p from 'pareto-core/dist/command'
 import * as _pi from 'pareto-core/dist/interface'
+// import * as _pdev from 'pareto-core-dev'
 import _p_change_context from 'pareto-core/dist/_p_change_context'
 
 import * as signatures from "../../../interface/signatures"
 
 //data types
 import * as d from "../../../interface/to_be_generated/execute_command"
-import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/path/path"
@@ -17,25 +17,19 @@ export const $$: signatures.commands.api = _p.command_procedure(
         switch ($[0]) {
             case 'all packages': return _p.ss($, ($) => {
                 const path_to_project = $['path to project']
-                const path_to_temp = t_path_to_path.extend_context_path(
-                    t_path_to_path.extend_context_path(
-                        $['path to project'],
-                        { 'addition': "temp" }
-                    ),
-                    { 'addition': "comparison" }
-                )
+                // _pdev.
                 return [
                     _p.dictionaryx.deprecated_parallel.query(
                         $qr['read directory'](
                             {
                                 'path': t_path_to_path.create_node_path(
-                                    path_to_project,
+                                    $['path to project'],
                                     { 'node': "packages" }
                                 )
                             },
                             ($): d.Error => ['all', ['could not read packages directory', $]],
                         ),
-                        ($x, id_spaces_not_escaped): _pi.Command_Promise<d.All__Package_Error>[] => _p.decide.state($.instruction, ($) => {
+                        ($x, id): _pi.Command_Promise<d.All__Package_Error>[] => _p.decide.state($.instruction, ($) => {
                             const concatenated_path = $x.path
                             const context_path = t_path_to_path.deprecated_node_path_to_context_path(concatenated_path)
                             switch ($[0]) {
@@ -83,17 +77,27 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                         ($): d.All__Package_Error => ['git remove tracked but ignored', $],
                                     )
                                 ])
-                                case 'set up comparison': return _p.ss($, ($): _pi.Command_Promise<d.All__Package_Error>[] => [
-                                    $cr['npm set up comparison against published'].execute(
-                                        {
-                                            'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': "pub" }),
-                                            'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "local" }), { 'node': id_spaces_not_escaped }),
-                                            'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "published" }), { 'node': id_spaces_not_escaped }),
-                                            'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "temp" }), { 'node': id_spaces_not_escaped }),
-                                        },
-                                        ($): d.All__Package_Error => ['set up comparison', $],
+                                case 'set up comparison': return _p.ss($, ($): _pi.Command_Promise<d.All__Package_Error>[] => {
+
+                                    const path_to_temp = t_path_to_path.extend_context_path(
+                                        t_path_to_path.extend_context_path(
+                                            path_to_project,
+                                            { 'addition': "temp" }
+                                        ),
+                                        { 'addition': "comparison" }
                                     )
-                                ])
+                                    return [
+                                        $cr['npm set up comparison against published'].execute(
+                                            {
+                                                'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': "pub" }),
+                                                'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "local" }), { 'node': id }),
+                                                'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "published" }), { 'node': id }),
+                                                'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "temp" }), { 'node': id }),
+                                            },
+                                            ($): d.All__Package_Error => ['set up comparison', $],
+                                        )
+                                    ]
+                                })
                                 case 'update package dependencies': return _p.ss($, ($) => [
                                     $cr['update package dependencies'].execute(
                                         {

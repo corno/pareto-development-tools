@@ -45,6 +45,7 @@ const create_eqe = (
             {
                 'program': program,
                 'args': $p.args,
+                'working directory': $p['working directory'],
             },
             ($) => $,
         )
@@ -59,6 +60,7 @@ const create_epe = (
         {
             'program': program,
             'args': $p.args,
+            'working directory': $p['working directory'],
         },
         ($) => $,
     )
@@ -71,6 +73,7 @@ const create_espe = (
     {
         'program': program,
         'args': $p.args,
+        'working directory': $p['working directory'],
     },
     ($) => $,
 ))

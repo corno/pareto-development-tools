@@ -13,9 +13,6 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/tra
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/transformers/npm_package/text"
 
-//shorthands
-import * as sh from "../../../temp_loc_to_string"
-
 export const $$: signatures.queries.get_package_dependencies = _p.query_function(
     ($p, $r) => $r['read directory'](
         {
@@ -39,7 +36,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                                 $,
                                 ($) => abort(['parse error', $]),
                                 {
-                                    'document resource identifier': sh.serialize(t_path_to_text.Node_Path(path_x)),
+                                    'document resource identifier': t_path_to_text.Node_Path(path_x),
                                 }
                             )
                         ))

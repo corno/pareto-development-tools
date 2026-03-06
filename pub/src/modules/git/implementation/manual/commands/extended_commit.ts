@@ -11,9 +11,6 @@ import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schema
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 
-
-import * as temp from "../../../../../temp_loc_to_string"
-
 export const $$: signatures.commands.extended_commit = _p.command_procedure(
     ($p, $cr, $qr) => [
         _p.if_.query(
@@ -21,7 +18,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                 {
                     'path': $p.path
                 },
-                 ($): d.Error => ['asserting git not clean', $],
+                ($): d.Error => ['asserting git not clean', $],
             ).transform_result(
                 ($) => !$
             ),
@@ -31,11 +28,12 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                     [
                         $cr.git.execute(
                             {
+                                'working directory': _p.optional.literal.not_set(),
                                 'args': _pt.list.nested_literal_old([
                                     $p.path.__decide(
                                         ($) => _pt.list.literal([
                                             "-C",
-                                            temp.serialize(t_path_to_text.Context_Path($)),
+                                            t_path_to_text.Context_Path($),
                                         ]),
                                         () => undefined
                                     ),
@@ -51,11 +49,12 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                 ),
                 $cr.git.execute(
                     {
+                        'working directory': _p.optional.literal.not_set(),
                         'args': _pt.list.nested_literal_old([
                             $p.path.__decide(
                                 ($) => _pt.list.literal([
                                     "-C",
-                                    temp.serialize(t_path_to_text.Context_Path($)),
+                                    t_path_to_text.Context_Path($),
                                 ]),
                                 () => undefined
                             ),
@@ -73,11 +72,12 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                     [
                         $cr.git.execute(
                             {
+                                'working directory': _p.optional.literal.not_set(),
                                 'args': _pt.list.nested_literal_old([
                                     $p.path.__decide(
                                         ($) => _pt.list.literal([
                                             "-C",
-                                            temp.serialize(t_path_to_text.Context_Path($)),
+                                            t_path_to_text.Context_Path($),
                                         ]),
                                         () => undefined
                                     ),

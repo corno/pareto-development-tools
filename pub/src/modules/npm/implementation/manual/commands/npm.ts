@@ -7,18 +7,16 @@ import * as signatures from "../../../interface/signatures"
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 
-//shorthands
-import * as sh from "../../../../../temp_loc_to_string"
-
 export const $$: signatures.commands.npm = _p.command_procedure(
     ($p, $cr) => [
         $cr['npm'].execute(
             {
+                'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
                     $p.path.__decide(
                         ($) => _pt.list.literal([
                             "--prefix",
-                            sh.serialize(t_path_to_text.Context_Path($)),
+                            t_path_to_text.Context_Path($),
                         ]),
                         () => _pt.list.literal([])
                     ),
@@ -26,7 +24,7 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                         switch ($[0]) {
                             case 'update': return _pt.ss($, ($) => _pt.list.nested_literal_old([
                                 [
-                                   "update",
+                                    "update",
                                 ],
                                 $['package-lock only']
                                     ? _pt.list.literal(["--package-lock-only"])
