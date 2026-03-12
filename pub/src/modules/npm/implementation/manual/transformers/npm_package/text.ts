@@ -24,10 +24,10 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
     const expect_unique_identifiers_fixme = ($: d.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object => {
         const temp: { [id: string]: d.Value } = {}
         $.__l_map(($) => {
-            if (temp[$.id.value] !== undefined) {
-                abort(['duplicate identifier', $.id.value])
+            if (temp[$.id.token.value] !== undefined) {
+                abort(['duplicate identifier', $.id.token.value])
             } else {
-                temp[$.id.value] = $.value.__decide(
+                temp[$.id.token.value] = $.value.__decide(
                     ($) => $.value,
                     () => abort(['missing value', null]),
                 )
@@ -58,7 +58,7 @@ const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never):
     switch ($[0]) {
         case 'concrete': return _p.ss($, ($) => _p.decide.state($, ($) => {
             switch ($[0]) {
-                case 'text': return _p.ss($, ($) => $.value)
+                case 'text': return _p.ss($, ($) => $.token.value)
                 default: return abort(['not a text', null])
             }
         }))

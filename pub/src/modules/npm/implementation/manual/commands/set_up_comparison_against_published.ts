@@ -5,6 +5,7 @@ import * as _pq from 'pareto-core/dist/query'
 import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
 import _p_list_build_deprecated from 'pareto-core/dist/_p_list_build_deprecated'
 import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
+import * as _pdev from 'pareto-core-dev'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -50,7 +51,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                 ($) => $,
                 ($v) => {
                     const package_info = $v
-                    const filename = `${$v.name}-${$v.version}.tgz`;
+                    const filename = `${$v.name}-${$v.version}.tgz`
                     return [
 
                         $cr['remove'].execute(

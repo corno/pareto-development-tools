@@ -23,7 +23,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
         ),
     ),
     ($) => _p.decide.text(
-        $['option']['value'],
+        $['option']['token']['value'],
         ($t): t_out.Directory => {
             switch ($t) {
                 case 'dictionary':
@@ -57,7 +57,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                         ),
                                     ),
                                     ($) => _p.decide.text(
-                                        $['option']['value'],
+                                        $['option']['token']['value'],
                                         ($t): t_out.Directory.group.D => {
                                             switch ($t) {
                                                 case 'directory':
@@ -81,7 +81,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                 ),
                                                             ),
                                                             ($) => _p.decide.text(
-                                                                $['option']['value'],
+                                                                $['option']['token']['value'],
                                                                 ($t): t_out.Directory.group.D.file => {
                                                                     switch ($t) {
                                                                         case 'manual':
@@ -146,7 +146,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                         default:
                                                                             return abort(
                                                                                 ['liana', {
-                                                                                    'type': ['state', ['unknown option', $['option']['value']]],
+                                                                                    'type': ['state', ['unknown option', $['option']['token']['value']]],
                                                                                     'range': v_parse_tree_to_location.Value(
                                                                                         $['value'],
                                                                                     ),
@@ -160,7 +160,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 default:
                                                     return abort(
                                                         ['liana', {
-                                                            'type': ['state', ['unknown option', $['option']['value']]],
+                                                            'type': ['state', ['unknown option', $['option']['token']['value']]],
                                                             'range': v_parse_tree_to_location.Value(
                                                                 $['value'],
                                                             ),
@@ -366,7 +366,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                 default:
                     return abort(
                         ['liana', {
-                            'type': ['state', ['unknown option', $['option']['value']]],
+                            'type': ['state', ['unknown option', $['option']['token']['value']]],
                             'range': v_parse_tree_to_location.Value(
                                 $['value'],
                             ),
