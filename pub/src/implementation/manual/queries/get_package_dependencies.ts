@@ -35,9 +35,6 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                             ($, abort) => r_parse_npm_package(
                                 $,
                                 ($) => abort(['parse error', $]),
-                                {
-                                    'document resource identifier': t_path_to_text.Node_Path(path_x),
-                                }
                             )
                         ))
                         default: return _p.au($[0])

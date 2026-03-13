@@ -73,13 +73,12 @@ const expect_property = ($: Object, id: string, abort: (error: ['missing propert
     }
 )
 
-export const $$: _pi.Refiner_With_Parameter<d_out.NPM_Package, d_function.Error, d_in.List_of_Characters, { 'document resource identifier': string }> = ($, abort, $p) => {
+export const $$: _pi.Refiner<d_out.NPM_Package, d_function.Error, d_in.List_of_Characters> = ($, abort) => {
     const x = t_parse_tree_from_list_of_characters.Document(
         $,
         () => abort(['invalid ASTN', null]),
         {
             'tab size': 4,
-            'document resource identifier': $p['document resource identifier']
         },
     )
 

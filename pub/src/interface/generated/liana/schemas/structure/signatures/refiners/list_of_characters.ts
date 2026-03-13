@@ -17,8 +17,6 @@ export namespace Directory_ {
     
     export namespace P {
         
-        export type document_resource_identifier = string
-        
         export type tab_size = number
         
     }
@@ -29,7 +27,6 @@ export type Directory_ = (
     context: Directory_.I,
     abort: _pi.Abort<Directory_.E>,
     parameters: {
-        readonly 'document resource identifier': Directory_.P.document_resource_identifier
         readonly 'tab size': Directory_.P.tab_size
     },
 ) => Directory_.O
