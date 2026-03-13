@@ -17,7 +17,7 @@ export const $$: signatures.commands.update2latest = _p.command_procedure(
                         t_path_to_text.Context_Path($p.path),
                     ]),
                     _pt.decide.state($p.what, ($) => {
-                        // _pdev.log_debug_message(`Updating ${$p.path} to latest`, () => {})
+                        // _p_log_debug_message(`Updating ${$p.path} to latest`, () => {})
                         switch ($[0]) {
                             case 'dependencies': return _pt.ss($, ($) => {
                                 return _pt.list.literal(["dependencies"])
