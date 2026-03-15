@@ -27,8 +27,11 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
             if (temp[$.id.token.value] !== undefined) {
                 abort(['duplicate identifier', $.id.token.value])
             } else {
-                temp[$.id.token.value] = $.value.__decide(
-                    ($) => $.value,
+                temp[$.id.token.value] = $.assignment.__decide(
+                    ($) => $.value.__decide(
+                        ($) => $,
+                        () => abort(['missing value', null]),
+                    ),
                     () => abort(['missing value', null]),
                 )
             }
