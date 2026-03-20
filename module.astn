@@ -1,138 +1,138 @@
 (
-    'omit (de)serializer': false
-    'schema tree': | 'set' {
-        `structure`: | 'schema' (
-            'schema imports': {}
-            'resolver imports': {}
-            'globals': (
-                'complexity': | 'unconstrained' ~
-                'text types': {
-                    `Text Value`: (
-                        'type': | 'single line' ~
+    `omit (de)serializer`: false
+    `schema tree`: | `set` {
+        'structure': | `schema` (
+            `schema imports`: {}
+            `resolver imports`: {}
+            `globals`: (
+                `complexity`: | `unconstrained` ~
+                `text types`: {
+                    'Text Value': (
+                        `type`: | `single line` ~
                     )
                 }
-                'number types': {
-                    `Position`: (
-                        'precision': | 'exact' (
-                            'decimal separator offset': ~
-                            'type': | 'natural' ~
+                `number types`: {
+                    'Position': (
+                        `precision`: | `exact` (
+                            `decimal separator offset`: _
+                            `type`: | `natural` ~
                         )
                     )
                 }
             )
-            'modules': {
-                `Directory`: (
-                    'root value': | 'state' (
-                        'options': {
-                            `dictionary`: (
-                                'constraints': ~
-                                'description': ~
-                                'value': | 'component' (
-                                    'type': | 'internal' `Directory`
-                                    'results': ~
+            `modules`: {
+                'Directory': (
+                    `root value`: | `state` (
+                        `options`: {
+                            'dictionary': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `component` (
+                                    `type`: | `internal` 'Directory'
+                                    `results`: _
                                 )
                             )
-                            `group`: (
-                                'constraints': ~
-                                'description': ~
-                                'value': | 'dictionary' (
-                                    'value': | 'state' (
-                                        'options': {
-                                            `directory`: (
-                                                'constraints': ~
-                                                'description': ~
-                                                'value': | 'component' (
-                                                    'type': | 'internal' `Directory`
-                                                    'results': ~
+                            'group': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `dictionary` (
+                                    `value`: | `state` (
+                                        `options`: {
+                                            'directory': (
+                                                `constraints`: _
+                                                `description`: _
+                                                `value`: | `component` (
+                                                    `type`: | `internal` 'Directory'
+                                                    `results`: _
                                                 )
                                             )
-                                            `file`: (
-                                                'constraints': ~
-                                                'description': ~
-                                                'value': | 'state' (
-                                                    'options': {
-                                                        `manual`: (
-                                                            'constraints': ~
-                                                            'description': ~
-                                                            'value': | 'nothing' ~
+                                            'file': (
+                                                `constraints`: _
+                                                `description`: _
+                                                `value`: | `state` (
+                                                    `options`: {
+                                                        'manual': (
+                                                            `constraints`: _
+                                                            `description`: _
+                                                            `value`: | `nothing` ~
                                                         )
-                                                        `generated`: (
-                                                            'constraints': ~
-                                                            'description': ~
-                                                            'value': | 'group' {
-                                                                `commit to git`: (
-                                                                    'description': ~
-                                                                    'value': | 'boolean' ~
+                                                        'generated': (
+                                                            `constraints`: _
+                                                            `description`: _
+                                                            `value`: | `group` {
+                                                                'commit to git': (
+                                                                    `description`: _
+                                                                    `value`: | `boolean` ~
                                                                 )
                                                             }
                                                         )
                                                     }
-                                                    'results': ~
+                                                    `results`: _
                                                 )
                                             )
                                         }
-                                        'results': ~
+                                        `results`: _
                                     )
                                 )
                             )
-                            `wildcards`: (
-                                'constraints': ~
-                                'description': ~
-                                'value': | 'group' {
-                                    `required directories`: (
-                                        'description': ~
-                                        'value': | 'number' | 'local' (
-                                            'precision': | 'exact' (
-                                                'decimal separator offset': ~
-                                                'type': | 'natural' ~
+                            'wildcards': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `group` {
+                                    'required directories': (
+                                        `description`: _
+                                        `value`: | `number` | `local` (
+                                            `precision`: | `exact` (
+                                                `decimal separator offset`: _
+                                                `type`: | `natural` ~
                                             )
                                         )
                                     )
-                                    `additional directories allowed`: (
-                                        'description': ~
-                                        'value': | 'boolean' ~
+                                    'additional directories allowed': (
+                                        `description`: _
+                                        `value`: | `boolean` ~
                                     )
-                                    `extensions`: (
-                                        'description': ~
-                                        'value': | 'list' (
-                                            'value': | 'text' | 'local' (
-                                                'type': | 'single line' ~
+                                    'extensions': (
+                                        `description`: _
+                                        `value`: | `list` (
+                                            `value`: | `text` | `local` (
+                                                `type`: | `single line` ~
                                             )
-                                            'results': ~
+                                            `results`: _
                                         )
                                     )
-                                    `warn`: (
-                                        'description': ~
-                                        'value': | 'boolean' ~
+                                    'warn': (
+                                        `description`: _
+                                        `value`: | `boolean` ~
                                     )
                                 }
                             )
-                            `freeform`: (
-                                'constraints': ~
-                                'description': ~
-                                'value': | 'nothing' ~
+                            'freeform': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
                             )
-                            `ignore`: (
-                                'constraints': ~
-                                'description': ~
-                                'value': | 'nothing' ~
+                            'ignore': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `nothing` ~
                             )
-                            `generated`: (
-                                'constraints': ~
-                                'description': ~
-                                'value': | 'group' {
-                                    `commit to git`: (
-                                        'description': ~
-                                        'value': | 'boolean' ~
+                            'generated': (
+                                `constraints`: _
+                                `description`: _
+                                `value`: | `group` {
+                                    'commit to git': (
+                                        `description`: _
+                                        `value`: | `boolean` ~
                                     )
                                 }
                             )
                         }
-                        'results': ~
+                        `results`: _
                     )
                 )
             }
-            'complexity': | 'unconstrained' ~
+            `complexity`: | `unconstrained` ~
         )
     }
 )
