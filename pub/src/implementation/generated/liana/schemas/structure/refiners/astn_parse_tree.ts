@@ -46,7 +46,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                     $,
                                 ),
                                 {
-                                    'document resource identifier': "dummy dri",
+                                    'subdocument context': _p.optional.literal.not_set(),
                                 },
                             ),
                             ($) => _p.dictionary.from.dictionary(
@@ -112,7 +112,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                                     "commit to git": null,
                                                                                                 },
                                                                                             ),
-                                                                                            'document resource identifier': "dummy dri",
+                                                                                            'subdocument context': _p.optional.literal.not_set(),
                                                                                         },
                                                                                     ),
                                                                                     ($) => _p_variables(
@@ -121,7 +121,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                             const var_verbose_group_range = v_parse_tree_to_location.Value(
                                                                                                 $['value'],
                                                                                                 {
-                                                                                                    'document resource identifier': "dummy dri",
+                                                                                                    'subdocument context': _p.optional.literal.not_set(),
                                                                                                 },
                                                                                             )
                                                                                             return {
@@ -133,7 +133,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                                         ),
                                                                                                         {
                                                                                                             'id': 'commit to git',
-                                                                                                            'document resource identifier': "dummy dri",
+                                                                                                            'subdocument context': _p.optional.literal.not_set(),
                                                                                                         },
                                                                                                     ),
                                                                                                     ($) => v_unmarshalled_from_parse_tree.Boolean(
@@ -143,7 +143,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                                         ),
                                                                                                         {
                                                                                                             'type': ['true/false', null],
-                                                                                                            'document resource identifier': "dummy dri",
+                                                                                                            'subdocument context': _p.optional.literal.not_set(),
                                                                                                         },
                                                                                                     ),
                                                                                                 ),
@@ -159,7 +159,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                     'range': v_parse_tree_to_location.Value(
                                                                                         $['value'],
                                                                                         {
-                                                                                            'document resource identifier': "dummy dri",
+                                                                                            'subdocument context': _p.optional.literal.not_set(),
                                                                                         },
                                                                                     ),
                                                                                 }],
@@ -176,7 +176,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                             'range': v_parse_tree_to_location.Value(
                                                                 $['value'],
                                                                 {
-                                                                    'document resource identifier': "dummy dri",
+                                                                    'subdocument context': _p.optional.literal.not_set(),
                                                                 },
                                                             ),
                                                         }],
@@ -206,7 +206,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                             "warn": null,
                                         },
                                     ),
-                                    'document resource identifier': "dummy dri",
+                                    'subdocument context': _p.optional.literal.not_set(),
                                 },
                             ),
                             ($) => _p_variables(
@@ -215,7 +215,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                     const var_verbose_group_range = v_parse_tree_to_location.Value(
                                         $['value'],
                                         {
-                                            'document resource identifier': "dummy dri",
+                                            'subdocument context': _p.optional.literal.not_set(),
                                         },
                                     )
                                     return {
@@ -227,7 +227,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'required directories',
-                                                    'document resource identifier': "dummy dri",
+                                                    'subdocument context': _p.optional.literal.not_set(),
                                                 },
                                             ),
                                             ($) => v_unmarshalled_from_parse_tree.Number(
@@ -237,7 +237,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'type': ['decimal', null],
-                                                    'document resource identifier': "dummy dri",
+                                                    'subdocument context': _p.optional.literal.not_set(),
                                                 },
                                             ),
                                         ),
@@ -249,7 +249,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'additional directories allowed',
-                                                    'document resource identifier': "dummy dri",
+                                                    'subdocument context': _p.optional.literal.not_set(),
                                                 },
                                             ),
                                             ($) => v_unmarshalled_from_parse_tree.Boolean(
@@ -259,7 +259,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'type': ['true/false', null],
-                                                    'document resource identifier': "dummy dri",
+                                                    'subdocument context': _p.optional.literal.not_set(),
                                                 },
                                             ),
                                         ),
@@ -271,7 +271,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'extensions',
-                                                    'document resource identifier': "dummy dri",
+                                                    'subdocument context': _p.optional.literal.not_set(),
                                                 },
                                             ),
                                             ($) => _p.list.from.list(
@@ -281,7 +281,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                         $,
                                                     ),
                                                     {
-                                                        'document resource identifier': "dummy dri",
+                                                        'subdocument context': _p.optional.literal.not_set(),
                                                     },
                                                 )['items'],
                                             ).map(
@@ -304,7 +304,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'warn',
-                                                    'document resource identifier': "dummy dri",
+                                                    'subdocument context': _p.optional.literal.not_set(),
                                                 },
                                             ),
                                             ($) => v_unmarshalled_from_parse_tree.Boolean(
@@ -314,7 +314,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'type': ['true/false', null],
-                                                    'document resource identifier': "dummy dri",
+                                                    'subdocument context': _p.optional.literal.not_set(),
                                                 },
                                             ),
                                         ),
@@ -358,7 +358,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                             "commit to git": null,
                                         },
                                     ),
-                                    'document resource identifier': "dummy dri",
+                                    'subdocument context': _p.optional.literal.not_set(),
                                 },
                             ),
                             ($) => _p_variables(
@@ -367,7 +367,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                     const var_verbose_group_range = v_parse_tree_to_location.Value(
                                         $['value'],
                                         {
-                                            'document resource identifier': "dummy dri",
+                                            'subdocument context': _p.optional.literal.not_set(),
                                         },
                                     )
                                     return {
@@ -379,7 +379,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'commit to git',
-                                                    'document resource identifier': "dummy dri",
+                                                    'subdocument context': _p.optional.literal.not_set(),
                                                 },
                                             ),
                                             ($) => v_unmarshalled_from_parse_tree.Boolean(
@@ -389,7 +389,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'type': ['true/false', null],
-                                                    'document resource identifier': "dummy dri",
+                                                    'subdocument context': _p.optional.literal.not_set(),
                                                 },
                                             ),
                                         ),
@@ -405,7 +405,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                             'range': v_parse_tree_to_location.Value(
                                 $['value'],
                                 {
-                                    'document resource identifier': "dummy dri",
+                                    'subdocument context': _p.optional.literal.not_set(),
                                 },
                             ),
                         }],
