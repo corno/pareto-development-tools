@@ -13,7 +13,7 @@ import * as t_out from "../../../../../../interface/generated/liana/schemas/stru
 
 import * as v_unmarshalled_from_parse_tree from "liana-core/dist/implementation/manual/refiners/unmarshalled/astn_parse_tree"
 
-import * as v_parse_tree_to_location from "astn-core/dist/implementation/manual/transformers/parse_tree/start_token_range"
+import * as v_parse_tree_to_location from "liana-core/dist/implementation/manual/transformers/parse_tree/start_token_range"
 
 export const Directory: t_signatures.Directory = ($, abort) => _p_change_context(
     v_unmarshalled_from_parse_tree.State(
@@ -45,6 +45,9 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                 ($) => abort(
                                     $,
                                 ),
+                                {
+                                    'document resource identifier': "dummy dri",
+                                },
                             ),
                             ($) => _p.dictionary.from.dictionary(
                                 $['entries'],
@@ -109,6 +112,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                                     "commit to git": null,
                                                                                                 },
                                                                                             ),
+                                                                                            'document resource identifier': "dummy dri",
                                                                                         },
                                                                                     ),
                                                                                     ($) => _p_variables(
@@ -116,6 +120,9 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                             
                                                                                             const var_verbose_group_range = v_parse_tree_to_location.Value(
                                                                                                 $['value'],
+                                                                                                {
+                                                                                                    'document resource identifier': "dummy dri",
+                                                                                                },
                                                                                             )
                                                                                             return {
                                                                                                 'commit to git': _p_change_context(
@@ -126,6 +133,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                                         ),
                                                                                                         {
                                                                                                             'id': 'commit to git',
+                                                                                                            'document resource identifier': "dummy dri",
                                                                                                         },
                                                                                                     ),
                                                                                                     ($) => v_unmarshalled_from_parse_tree.Boolean(
@@ -135,6 +143,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                                         ),
                                                                                                         {
                                                                                                             'type': ['true/false', null],
+                                                                                                            'document resource identifier': "dummy dri",
                                                                                                         },
                                                                                                     ),
                                                                                                 ),
@@ -149,6 +158,9 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                                                     'type': ['state', ['unknown option', $['option']['token']['value']]],
                                                                                     'range': v_parse_tree_to_location.Value(
                                                                                         $['value'],
+                                                                                        {
+                                                                                            'document resource identifier': "dummy dri",
+                                                                                        },
                                                                                     ),
                                                                                 }],
                                                                             )
@@ -163,6 +175,9 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                             'type': ['state', ['unknown option', $['option']['token']['value']]],
                                                             'range': v_parse_tree_to_location.Value(
                                                                 $['value'],
+                                                                {
+                                                                    'document resource identifier': "dummy dri",
+                                                                },
                                                             ),
                                                         }],
                                                     )
@@ -191,6 +206,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                             "warn": null,
                                         },
                                     ),
+                                    'document resource identifier': "dummy dri",
                                 },
                             ),
                             ($) => _p_variables(
@@ -198,6 +214,9 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                     
                                     const var_verbose_group_range = v_parse_tree_to_location.Value(
                                         $['value'],
+                                        {
+                                            'document resource identifier': "dummy dri",
+                                        },
                                     )
                                     return {
                                         'required directories': _p_change_context(
@@ -208,6 +227,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'required directories',
+                                                    'document resource identifier': "dummy dri",
                                                 },
                                             ),
                                             ($) => v_unmarshalled_from_parse_tree.Number(
@@ -217,6 +237,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'type': ['decimal', null],
+                                                    'document resource identifier': "dummy dri",
                                                 },
                                             ),
                                         ),
@@ -228,6 +249,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'additional directories allowed',
+                                                    'document resource identifier': "dummy dri",
                                                 },
                                             ),
                                             ($) => v_unmarshalled_from_parse_tree.Boolean(
@@ -237,6 +259,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'type': ['true/false', null],
+                                                    'document resource identifier': "dummy dri",
                                                 },
                                             ),
                                         ),
@@ -248,6 +271,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'extensions',
+                                                    'document resource identifier': "dummy dri",
                                                 },
                                             ),
                                             ($) => _p.list.from.list(
@@ -256,6 +280,9 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                     ($) => abort(
                                                         $,
                                                     ),
+                                                    {
+                                                        'document resource identifier': "dummy dri",
+                                                    },
                                                 )['items'],
                                             ).map(
                                                 ($) => _p_change_context(
@@ -277,6 +304,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'warn',
+                                                    'document resource identifier': "dummy dri",
                                                 },
                                             ),
                                             ($) => v_unmarshalled_from_parse_tree.Boolean(
@@ -286,6 +314,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'type': ['true/false', null],
+                                                    'document resource identifier': "dummy dri",
                                                 },
                                             ),
                                         ),
@@ -329,6 +358,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                             "commit to git": null,
                                         },
                                     ),
+                                    'document resource identifier': "dummy dri",
                                 },
                             ),
                             ($) => _p_variables(
@@ -336,6 +366,9 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                     
                                     const var_verbose_group_range = v_parse_tree_to_location.Value(
                                         $['value'],
+                                        {
+                                            'document resource identifier': "dummy dri",
+                                        },
                                     )
                                     return {
                                         'commit to git': _p_change_context(
@@ -346,6 +379,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'id': 'commit to git',
+                                                    'document resource identifier': "dummy dri",
                                                 },
                                             ),
                                             ($) => v_unmarshalled_from_parse_tree.Boolean(
@@ -355,6 +389,7 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                                                 ),
                                                 {
                                                     'type': ['true/false', null],
+                                                    'document resource identifier': "dummy dri",
                                                 },
                                             ),
                                         ),
@@ -369,6 +404,9 @@ export const Directory: t_signatures.Directory = ($, abort) => _p_change_context
                             'type': ['state', ['unknown option', $['option']['token']['value']]],
                             'range': v_parse_tree_to_location.Value(
                                 $['value'],
+                                {
+                                    'document resource identifier': "dummy dri",
+                                },
                             ),
                         }],
                     )
