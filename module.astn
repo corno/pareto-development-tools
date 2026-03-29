@@ -11,8 +11,8 @@
                         `type`: | `single line` ~
                     )
                 }
-                `number types`: {
-                    'Position': (
+                `simple types`: {
+                    'Natural': (
                         `precision`: | `exact` (
                             `decimal separator offset`: _
                             `type`: | `natural` ~
@@ -81,12 +81,7 @@
                                 `value`: | `group` {
                                     'required directories': (
                                         `description`: _
-                                        `value`: | `number` | `local` (
-                                            `precision`: | `exact` (
-                                                `decimal separator offset`: _
-                                                `type`: | `natural` ~
-                                            )
-                                        )
+                                        `value`: | `number` | `global` 'Natural'
                                     )
                                     'additional directories allowed': (
                                         `description`: _
