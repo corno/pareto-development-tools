@@ -10,13 +10,21 @@
                     'Text Value': (
                         `type`: | `single line` ~
                     )
+                    'text': (
+                        `type`: | `single line` ~
+                    )
                 }
                 `simple types`: {
                     'Natural': (
-                        `precision`: | `exact` (
-                            `decimal separator offset`: _
-                            `type`: | `natural` ~
+                        `type`: | `number` (
+                            `precision`: | `exact` (
+                                `number of fractional digits`: _
+                                `type`: | `natural` ~
+                            )
                         )
+                    )
+                    'boolean': (
+                        `type`: | `boolean` ~
                     )
                 }
             )
@@ -62,7 +70,7 @@
                                                             `value`: | `group` {
                                                                 'commit to git': (
                                                                     `description`: _
-                                                                    `value`: | `boolean` ~
+                                                                    `value`: | `simple` | `global` 'boolean'
                                                                 )
                                                             }
                                                         )
@@ -81,24 +89,22 @@
                                 `value`: | `group` {
                                     'required directories': (
                                         `description`: _
-                                        `value`: | `number` | `global` 'Natural'
+                                        `value`: | `simple` | `global` 'Natural'
                                     )
                                     'additional directories allowed': (
                                         `description`: _
-                                        `value`: | `boolean` ~
+                                        `value`: | `simple` | `global` 'boolean'
                                     )
                                     'extensions': (
                                         `description`: _
                                         `value`: | `list` (
-                                            `value`: | `text` | `local` (
-                                                `type`: | `single line` ~
-                                            )
+                                            `value`: | `text` | `global` 'text'
                                             `results`: _
                                         )
                                     )
                                     'warn': (
                                         `description`: _
-                                        `value`: | `boolean` ~
+                                        `value`: | `simple` | `global` 'boolean'
                                     )
                                 }
                             )
@@ -118,7 +124,7 @@
                                 `value`: | `group` {
                                     'commit to git': (
                                         `description`: _
-                                        `value`: | `boolean` ~
+                                        `value`: | `simple` | `global` 'boolean'
                                     )
                                 }
                             )
