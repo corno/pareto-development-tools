@@ -4,7 +4,7 @@ import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
 
 export type Parameters = {
-    'path': _pi.Optional_Value<d_path.Context_Path>,
+    'path': d_path.Context_Path,
 
     'impact':
     | ['dry run', null]

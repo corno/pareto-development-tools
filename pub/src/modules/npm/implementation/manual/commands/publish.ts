@@ -5,13 +5,12 @@ import * as _pi from 'pareto-core/dist/interface'
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 
 export const $$: signatures.commands.npm_publish = _p.command_procedure(
     ($p, $cr) => [
         $cr['npm'].execute(
             {
-                'working directory': $p.path,
+                'working directory': _p.optional.literal.set($p.path),
                 'args': _pt.list.nested_literal_old([
                     [
                         "publish"
