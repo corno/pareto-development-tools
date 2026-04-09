@@ -1,6 +1,6 @@
 {
   "name": "pareto-development-tools",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "author": "Corno",
   "license": "Apache-2.0",
   "main": "./dist/index.js",
@@ -9,13 +9,13 @@
     "dist"
   ],
   "dependencies": {
-    "pareto-core-dev": "0.12.14",
-    "pareto-fountain-pen": "0.4.52",
-    "pareto-fountain-pen-file-structure": "0.1.3",
-    "pareto-graphviz": "0.2.31",
-    "pareto-host-nodejs": "0.2.39",
-    "pareto-json": "0.3.36",
-    "pareto-resources": "0.2.70"
+    "pareto-core-dev": "0.12.15",
+    "pareto-fountain-pen": "0.4.53",
+    "pareto-fountain-pen-file-structure": "0.1.4",
+    "pareto-graphviz": "0.2.32",
+    "pareto-host-nodejs": "0.2.40",
+    "pareto-json": "0.3.37",
+    "pareto-resources": "0.2.71"
   },
   "bin": {
     "pdt": "./dist/bin.js"
