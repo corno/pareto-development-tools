@@ -4,10 +4,9 @@ import * as _pt from 'pareto-core/dist/assign'
 import * as signatures from "../../../interface/signatures"
 
 //data types
-import * as d from "pareto-resources/dist/interface/to_be_generated/temp_main"
+import * as d_main from "pareto-resources/dist/interface/to_be_generated/temp_main"
 import * as d_parse from "../../../interface/to_be_generated/parse"
-import * as d_api from "../../../interface/to_be_generated/execute_command"
-import * as d_text from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
+import * as d_execute_command from "../../../interface/to_be_generated/execute_command"
 
 //dependencies
 import * as r_instruction from "../refiners/execute_command/main"
@@ -19,11 +18,11 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 type My_Error =
     | ['parse', d_parse.Error]
-    | ['api', d_api.Error]
+    | ['execute command', d_execute_command.Error]
 
 export const $$: signatures.commands.main = _p.command_procedure(
     ($p, $cr) => [
-        _p.handle_error<d.Error, My_Error>(
+        _p.handle_error<d_main.Error, My_Error>(
             [
                 _p.refine_without_error_transformation(
 
@@ -37,7 +36,7 @@ export const $$: signatures.commands.main = _p.command_procedure(
                     ($v) => [
                         $cr.api.execute(
                             $v,
-                            ($) => ['api', $],
+                            ($) => ['execute command', $],
                         )
                     ],
                 )
@@ -52,7 +51,7 @@ export const $$: signatures.commands.main = _p.command_procedure(
                                 _p.decide.state($, ($) => {
                                     switch ($[0]) {
                                         case 'parse': return _p.ss($, ($) => t_bin_to_fountain_pen.Error($))
-                                        case 'api': return _p.ss($, ($) => t_api_to_fountain_pen.Error($))
+                                        case 'execute command': return _p.ss($, ($) => t_api_to_fountain_pen.Error($))
                                         default: return _p.au($[0])
                                     }
                                 })
