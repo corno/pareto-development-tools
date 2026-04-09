@@ -13,18 +13,12 @@ import * as t_context_path_from_text from "pareto-resources/dist/implementation/
 
 type signature = _pi.Production<d_out.Parameters, d_function.Error, d_in.Text, null>
 
-const temp_content_path = ($: string) => t_context_path_from_text.Context_Path(
-    _p_list_from_text(
-        $,
-        ($) => $,
-    )
-)
 
 export const Command: signature = (iterator, abort) => iterator.consume(
     ($): d_out.Parameters => {
         switch ($) {
             case 'all': return ['all packages', {
-                'path to project': temp_content_path(iterator.consume(
+                'path to project': t_context_path_from_text.Context_Path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to project" }])
                 )),
@@ -91,7 +85,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
             }]
             case 'package': return ['package', {
-                'path': temp_content_path(iterator.consume(
+                'path': t_context_path_from_text.Context_Path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
                 )),
@@ -137,7 +131,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
             }]
             case 'project': return ['project', {
-                'path': temp_content_path(iterator.consume(
+                'path': t_context_path_from_text.Context_Path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
                 )),
@@ -164,7 +158,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
             }]
             case 'publish': return ['publish', {
-                'path to package': temp_content_path(iterator.consume(
+                'path to package': t_context_path_from_text.Context_Path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
 
@@ -209,7 +203,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                 }),
             }]
             case 'set-up-comparison': return ['set up comparison', {
-                'path to package': temp_content_path(iterator.consume(
+                'path to package': t_context_path_from_text.Context_Path(iterator.consume(
                     ($) => $,
                     () => abort(['expected a text', { 'description': "path to package" }])
 

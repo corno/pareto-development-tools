@@ -15,7 +15,7 @@
     "pareto-graphviz": "^0.2.31",
     "pareto-host-nodejs": "^0.2.39",
     "pareto-json": "^0.3.36",
-    "pareto-resources": "^0.2.69"
+    "pareto-resources": "^0.2.70"
   },
   "bin": {
     "pdt": "./dist/bin.js"
