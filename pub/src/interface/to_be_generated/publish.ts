@@ -32,6 +32,7 @@ export type Error =
     | ['error while running build and test', d_build_and_test.Error]
     | ['error while running git assert is clean after updating package dependencies', d_git_aic.Error]
     | ['error while running npm version', d_npm.Error]
+    | ['error while running npm update', d_npm.Error]
     | ['error while running npm publish', d_npm.Error]
     | ['error while getting package.json', d_get_package_json.Error]
     | ['error while logging', null]

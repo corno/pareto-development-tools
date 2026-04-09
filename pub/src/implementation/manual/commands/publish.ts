@@ -75,7 +75,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                     'package-lock only': true
                 }],
             },
-            ($) => ['error while running npm version', $],
+            ($) => ['error while running npm update', $],
         ),
 
         // update the package-lock.json to reflect the new version
@@ -86,7 +86,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                     'package-lock only': true
                 }],
             },
-            ($) => ['error while running npm version', $],
+            ($) => ['error while running npm update', $],
         ),
 
         _p.query(

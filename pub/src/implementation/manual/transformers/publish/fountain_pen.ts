@@ -52,6 +52,10 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
             sh.ph.literal("could not increment version: "),
             t_npm_to_fountain_pen.Error($)
         ]))
+        case 'error while running npm update': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not update npm: "),
+            t_npm_to_fountain_pen.Error($)
+        ]))
         case 'error while running npm publish': return _p.ss($, ($) => sh.ph.composed([
             sh.ph.literal("could not publish to npm: "),
             t_npm_to_fountain_pen.Error($)
