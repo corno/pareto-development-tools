@@ -9,13 +9,13 @@
     "dist"
   ],
   "dependencies": {
-    "pareto-core-dev": "0.12.15",
-    "pareto-fountain-pen": "0.4.53",
-    "pareto-fountain-pen-file-structure": "0.1.4",
-    "pareto-graphviz": "0.2.32",
-    "pareto-host-nodejs": "0.2.40",
-    "pareto-json": "0.3.37",
-    "pareto-resources": "0.2.71"
+    "pareto-core-dev": "^0.12.0",
+    "pareto-fountain-pen": "^0.4.0",
+    "pareto-fountain-pen-file-structure": "^0.1.0",
+    "pareto-graphviz": "^0.2.0",
+    "pareto-host-nodejs": "^0.2.0",
+    "pareto-json": "^0.3.0",
+    "pareto-resources": "^0.2.0"
   },
   "bin": {
     "pdt": "./dist/bin.js"
