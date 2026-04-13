@@ -83,7 +83,7 @@ export namespace commands {
     export type create_dependency_graph = _pi.Command_Procedure<
         resources.commands.create_dependency_graph,
         {
-            'log': resources_fp.commands.console_log
+            'log': resources_pareto.commands.log
         },
         {
             'package dependencies': resources.queries.get_package_dependencies

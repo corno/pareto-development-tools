@@ -1,10 +1,12 @@
 /out
+/bin/dist
+/bin/node_modules
 /pub/dist
 /pub/node_modules
 /test/dist
 /test/node_modules
 /temp
-
+/tools/node_modules
 /pub_old/node_modules
 /pub_old/dist
 /test_old/node_modules
