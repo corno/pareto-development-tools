@@ -97,7 +97,7 @@ export type All_Pacakges_Instruction =
     | ['set up comparison', null]
 
     /**
-     * for both the pub and test packages;
+     * for both the lib and test packages;
      * first runs  git clean
      * then        update2latest
      * then        npm install

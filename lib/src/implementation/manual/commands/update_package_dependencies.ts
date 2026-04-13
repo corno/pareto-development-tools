@@ -12,12 +12,12 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/tra
 export const $$: signatures.commands.update_package_dependencies = _p.command_procedure(
     ($p, $cr) => [
 
-        // update dependencies of pub
+        // update dependencies of lib
         $cr['npm update package dependencies'].execute(
             {
-                'path': t_path_to_path.extend_context_path($p.path, { 'addition': "pub"}),
+                'path': t_path_to_path.extend_context_path($p.path, { 'addition': "lib"}),
             },
-            ($): d.Error => ['error updating pub', $],
+            ($): d.Error => ['error updating lib', $],
         ),
 
         // update dependencies of test

@@ -9,7 +9,7 @@
     "dist"
   ],
   "dependencies": {
-    "lib": "file:../pub",
+    "lib": "file:../lib",
     "pareto-host-nodejs": "^0.2.41"
   },
   "bin": {

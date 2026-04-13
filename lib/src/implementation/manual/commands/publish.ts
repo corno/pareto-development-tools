@@ -61,16 +61,16 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
         $cr.npm.execute(
             {
-                'path': _p.optional.literal.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': "pub" })),
+                'path': _p.optional.literal.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': "lib" })),
                 'operation': ['version', $p.generation],
             },
             ($) => ['error while running npm version', $],
         ),
 
-        // update the pub package-lock.json to reflect the new version
+        // update the lib package-lock.json to reflect the new version
         $cr.npm.execute(
             {
-                'path': _p.optional.literal.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': "pub" })),
+                'path': _p.optional.literal.set(t_path_to_path.extend_context_path($p['path to package'], { 'addition': "lib" })),
                 'operation': ['update', {
                     'package-lock only': true
                 }],
@@ -83,7 +83,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                 'read file': $qr['read file'],
             })(
                 {
-                    'path to package': t_path_to_path.extend_context_path($p['path to package'], { 'addition': "pub" }),
+                    'path to package': t_path_to_path.extend_context_path($p['path to package'], { 'addition': "lib" }),
                 },
                 ($): d.Error => ['error while getting package.json', $]
             ),
@@ -106,7 +106,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
                     $cr['npm publish'].execute(
                         {
-                            'path': t_path_to_path.extend_context_path($p['path to package'], { 'addition': "pub" }),
+                            'path': t_path_to_path.extend_context_path($p['path to package'], { 'addition': "lib" }),
                             'impact': $p.impact,
                         },
                         ($) => ['error while running npm publish', $],

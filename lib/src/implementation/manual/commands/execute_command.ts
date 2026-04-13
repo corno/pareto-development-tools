@@ -89,7 +89,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                     return [
                                         $cr['npm set up comparison against published'].execute(
                                             {
-                                                'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': "pub" }),
+                                                'path to local package': t_path_to_path.extend_context_path(t_path_to_path.deprecated_node_path_to_context_path(concatenated_path), { 'addition': "lib" }),
                                                 'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "local" }), { 'node': id }),
                                                 'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "published" }), { 'node': id }),
                                                 'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "temp" }), { 'node': id }),
@@ -204,7 +204,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
                 ($) => [
                     $cr['npm set up comparison against published'].execute(
                         {
-                            'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': "pub" }),
+                            'path to local package': t_path_to_path.extend_context_path($['path to package'], { 'addition': "lib" }),
                             'path to output local directory': t_path_to_path.create_node_path($['path to temp'], { 'node': "local" }),
                             'path to output published directory': t_path_to_path.create_node_path($['path to temp'], { 'node': "published" }),
                             'path to temp directory': t_path_to_path.create_node_path($['path to temp'], { 'node': "temp" }),

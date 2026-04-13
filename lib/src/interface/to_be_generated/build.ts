@@ -9,7 +9,7 @@ export type Parameters = {
 }
 
 export type Error =
-    | ['error building pub', {
+    | ['error building lib', {
         'path': d_path.Context_Path
         'error': d_tsc.Error
     }]
@@ -17,7 +17,7 @@ export type Error =
         'path': d_path.Context_Path
         'error': d_tsc.Error
     }]
-    | ['error removing pub dist dir', {
+    | ['error removing lib dist dir', {
         'path': d_path.Context_Path
         'error': d_remove.Error
     }]

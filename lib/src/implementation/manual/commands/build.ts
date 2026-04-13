@@ -16,20 +16,20 @@ export const $$: signatures.commands.build = _p.command_procedure(
         //             t_path_to_path.extend_context_path(
         //                 $p.path,
         //                 {
-        //                     'addition': "pub"
+        //                     'addition': "lib"
         //                 }
         //             ),
         //             "dist"
         //         ),
         //         'error if not exists': false,
         //     },
-        //     ($): d.Error => ['error removing pub dist dir', { 'path': $p.path, 'error': $ }],
+        //     ($): d.Error => ['error removing lib dist dir', { 'path': $p.path, 'error': $ }],
         // ),
         $cr.tsc.execute(
             {
-                'path': _p.optional.literal.set(t_path_to_path.create_node_path($p.path, { 'node': "pub" })),
+                'path': _p.optional.literal.set(t_path_to_path.create_node_path($p.path, { 'node': "lib" })),
             },
-            ($): d.Error => ['error building pub', {
+            ($): d.Error => ['error building lib', {
                 'path': $p.path,
                 'error': $,
             }],

@@ -18,10 +18,10 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 
 export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
     switch ($[0]) {
-        case 'error removing pub dist dir': return _p.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("could not remove pub dist dir: ("),
+        case 'error removing lib dist dir': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not remove lib dist dir: ("),
             sh.ph.serialize(t_path_to_text.Context_Path($.path)),
-            sh.ph.literal("/pub)"),
+            sh.ph.literal("/lib)"),
 
             sh.ph.indent(
                 sh.pg.sentences([
@@ -44,8 +44,8 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
                 ])
             )
         ]))
-        case 'error building pub': return _p.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("could not build pub: ("),
+        case 'error building lib': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not build lib: ("),
             sh.ph.serialize(t_path_to_text.Context_Path($.path)),
             sh.ph.literal(")"),
             sh.ph.indent(

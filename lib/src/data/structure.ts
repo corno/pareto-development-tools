@@ -66,7 +66,7 @@ export const $$: d_structure.Directory = ['group', _p.dictionary.literal<d_struc
     "documentation": directory_freeform(),
     "LICENSE": file_manual(),
     "out": directory_generated(false),
-    "pub": directory_group({
+    "lib": directory_group({
         "dist": directory_generated(false),
         "node_modules": directory_ignore(),
         "package-lock.json": file_generated(true),

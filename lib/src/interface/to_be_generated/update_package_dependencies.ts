@@ -9,5 +9,5 @@ export type Parameters = {
 }
 
 export type Error =
-    | ['error updating pub', d_utd.Error]
+    | ['error updating lib', d_utd.Error]
     | ['error updating test', d_utd.Error]

@@ -12,8 +12,8 @@ import * as t_utd_to_fountain_pen from "../../../../modules/npm/implementation/m
 
 export const Error: Error = ($) => _p.decide.state($, ($) => {
     switch ($[0]) {
-        case 'error updating pub': return _p.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("error updating /pub: "),
+        case 'error updating lib': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("error updating /lib: "),
             t_utd_to_fountain_pen.Error($)
         ]))
         case 'error updating test': return _p.ss($, ($) => sh.ph.composed([
