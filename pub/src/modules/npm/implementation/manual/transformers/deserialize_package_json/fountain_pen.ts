@@ -9,18 +9,34 @@ export namespace signatures {
 }
 
 //dependencies
-import * as t_read_file_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_file/fountain_pen"
+import * as t_deserialize_parse_tree_to_fp from "astn-core/dist/implementation/manual/transformers/deserialize_parse_tree/fountain_pen"
+import * as t_deserialize_parse_tree_to_location from "astn-core/dist/implementation/manual/transformers/deserialize_parse_tree/location"
+import * as t_location_to_fp from "astn-core/dist/implementation/manual/transformers/location/fountain_pen"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const Error: signatures.Error = ($) => _p.decide.state($, ($) => {
-    switch ($[0]) {
-        case 'invalid ASTN': return _p.ss($, ($) => sh.ph.literal("invalid JSON (or even ASTN)"))
-        case 'missing root object': return _p.ss($, ($) => sh.ph.literal("missing root object in package.json"))
-        case 'name': return _p.ss($, ($) => sh.ph.literal("missing or invalid 'name' property in package.json"))
-        case 'version': return _p.ss($, ($) => sh.ph.literal("missing or invalid 'version' property in package.json"))
-        case 'dependencies': return _p.ss($, ($) => sh.ph.literal("missing or invalid 'dependencies' property in package.json"))
-        default: return _p.au($[0])
-    }
-})
+export const Error: signatures.Error = ($) => sh.ph.composed([
+    sh.ph.literal(t_path_to_text.Node_Path($['path'])),
+    _p.decide.state($.type, ($) => {
+        switch ($[0]) {
+            case 'invalid ASTN': return _p.ss($, ($) => sh.ph.composed([
+                sh.ph.literal(" :"),
+                t_location_to_fp.Possible_Range(
+                    t_deserialize_parse_tree_to_location.Error($),
+                    {
+                        'character location reporting': ['one based', null],
+                    }
+                ),
+                sh.ph.literal(" : invalid JSON (or even ASTN): "),
+                t_deserialize_parse_tree_to_fp.Error($),
+            ]))
+            case 'missing root object': return _p.ss($, ($) => sh.ph.literal(" : missing root object in package.json"))
+            case 'name': return _p.ss($, ($) => sh.ph.literal(" : missing or invalid 'name' property in package.json"))
+            case 'version': return _p.ss($, ($) => sh.ph.literal(" : missing or invalid 'version' property in package.json"))
+            case 'dependencies': return _p.ss($, ($) => sh.ph.literal(" : missing or invalid 'dependencies' property in package.json"))
+            default: return _p.au($[0])
+        }
+    })
+])

@@ -6,6 +6,7 @@ import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/
 import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
 import * as d_out from "../../../../interface/to_be_generated/npm_package"
 import * as d_function from "../../../../interface/to_be_generated/deserialize_package_json"
+import * as d_parse_tree_from_x from "astn-core/dist/interface/to_be_generated/deserialize"
 
 
 type Error_Expect_Object =
@@ -76,10 +77,10 @@ const expect_property = ($: Object, id: string, abort: (error: ['missing propert
     }
 )
 
-export const $$: _pi.Refiner<d_out.NPM_Package, d_function.Error, d_in.List_of_Characters> = ($, abort) => {
+export const $$: _pi.Refiner<d_out.NPM_Package, d_function.Error['type'], d_in.List_of_Characters> = ($, abort) => {
     const x = t_parse_tree_from_list_of_characters.Document(
         $,
-        () => abort(['invalid ASTN', null]),
+        ($) => abort(['invalid ASTN', $]),
         {
             'tab size': 4,
         },

@@ -34,7 +34,10 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                         ).refine_without_error_transformation(
                             ($, abort) => r_parse_npm_package(
                                 $,
-                                ($) => abort(['parse error', $]),
+                                ($) => abort(['parse error', {
+                                    'type': $,
+                                    'path': path_x,
+                                }]),
                             )
                         ))
                         default: return _p.au($[0])

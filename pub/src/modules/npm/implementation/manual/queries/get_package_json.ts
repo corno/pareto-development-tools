@@ -23,7 +23,10 @@ export const $$: signatures.queries.get_package_json = _p.query_function(
         ).refine_without_error_transformation(
             ($, abort) => r_parse_npm_package(
                 $,
-                ($) => abort(['error while parsing package.json', $]),
+                ($) => abort(['error while parsing package.json', {
+                    'type': $,
+                    'path': path,
+                }]),
             )
         )
     })
