@@ -1,0 +1,36 @@
+(
+    `omit (de)serializer`: false
+    `schema tree`: | `set` {
+        'structure': | `schema` < {} {}< | `unconstrained` ~ {
+            'Text Value': < | `single line` ~ >
+            'text': < | `single line` ~ >
+        } {
+            'Natural': < | `number`< | `exact`< _ | `natural` ~ > > >
+            'boolean': < | `boolean` ~ >
+        } > {
+            'Directory': < | `state`< {
+                'dictionary': < _ _ | `component`< | `internal` 'Directory' _ > >
+                'group': < _ _ | `dictionary`< | `state`< {
+                    'directory': < _ _ | `component`< | `internal` 'Directory' _ > >
+                    'file': < _ _ | `state`< {
+                        'manual': < _ _ | `nothing` ~ >
+                        'generated': < _ _ | `group` {
+                            'commit to git': < _ | `simple` | `global` 'boolean' >
+                        } >
+                    } _ > >
+                } _ > > >
+                'wildcards': < _ _ | `group` {
+                    'required directories': < _ | `simple` | `global` 'Natural' >
+                    'additional directories allowed': < _ | `simple` | `global` 'boolean' >
+                    'extensions': < _ | `list`< | `text` | `global` 'text' _ > >
+                    'warn': < _ | `simple` | `global` 'boolean' >
+                } >
+                'freeform': < _ _ | `nothing` ~ >
+                'ignore': < _ _ | `nothing` ~ >
+                'generated': < _ _ | `group` {
+                    'commit to git': < _ | `simple` | `global` 'boolean' >
+                } >
+            } _ > >
+        } | `unconstrained` ~ >
+    }
+)
