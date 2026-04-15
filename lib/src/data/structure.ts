@@ -66,13 +66,28 @@ export const $$: d_structure.Directory = ['group', _p.dictionary.literal<d_struc
     "documentation": directory_freeform(),
     "LICENSE": file_manual(),
     "out": directory_generated(false),
-    "lib": directory_group({
+    "liana": directory_group({
+        ".liana": directory_ignore(),
+        "module.liana.lna": file_manual(),
+    }),
+    "bin": directory_group({
         "dist": directory_generated(false),
         "node_modules": directory_ignore(),
         "package-lock.json": file_generated(true),
         "package.json": file_manual(),
         "src": directory_group({
             "bin": directory_wildcards(0, false, ["ts"], false),
+            "globals.ts": file_generated(true),
+            "index.ts": file_generated(true),
+        }),
+        "tsconfig.json": file_generated(true)
+    }),
+    "lib": directory_group({
+        "dist": directory_generated(false),
+        "node_modules": directory_ignore(),
+        "package-lock.json": file_generated(true),
+        "package.json": file_manual(),
+        "src": directory_group({
             "data": directory_wildcards(0, true, ["ts"], false),
 
             "globals.ts": file_generated(true),
