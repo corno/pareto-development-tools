@@ -46,7 +46,7 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
                     case 'dictionary': return _p.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
                     case 'group': return _p.ss($, ($) => _p.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'verbose': return _p.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
+                            case 'verbose': return _p.ss($, ($) => expect_unique_identifiers_fixme($.properties, abort))
                             default: return abort(['not an object', null])
                         }
                     }))
