@@ -20,4 +20,3 @@ export type Error =
     | readonly ['error while running npm query', d_eqe.Error]
     | readonly ['error while running tar', d_epe.Error]
     | readonly ['error while creating directory', d_make_directory.Error]
-    | readonly ['error while removing directory', d_remove.Error]

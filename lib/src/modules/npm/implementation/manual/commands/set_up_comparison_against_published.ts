@@ -54,35 +54,28 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                     const filename = `${$v.name}-${$v.version}.tgz`
                     return [
 
-                        $cr['remove'].execute(
-                            {
-                                'path': $p['path to output published directory'],
-                                'error if not exists': false,
-                            },
-                            ($) => ['error while removing directory', $],
-                        ),
-
-                        $cr['remove'].execute(
-                            {
-                                'path': $p['path to output local directory'],
-                                'error if not exists': false,
-                            },
-                            ($) => ['error while removing directory', $],
-                        ),
-
-                        // Create main output directory
+                        // Create output published directory
                         $cr['make directory'].execute(
-                            $p['path to output published directory'],
+                            {
+                                'delete existing': true,
+                                'path': $p['path to output published directory']
+                            },
                             ($) => ['error while creating directory', $],
                         ),
-                        // Create main output directory
+                        // Create output local directory
                         $cr['make directory'].execute(
-                            $p['path to output local directory'],
+                            {
+                                'delete existing': true,
+                                'path': $p['path to output local directory']
+                            },
                             ($) => ['error while creating directory', $],
                         ),
-                        // Create main output directory
+                        // Create temp directory
                         $cr['make directory'].execute(
-                            $p['path to temp directory'],
+                            {
+                                'delete existing': true,
+                                'path': $p['path to temp directory']
+                            },
                             ($) => ['error while creating directory', $],
                         ),
 
@@ -104,7 +97,10 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
 
                         // Create local subdirectory
                         $cr['make directory'].execute(
-                            $p['path to output local directory'],
+                            {
+                                'delete existing': true,
+                                'path': $p['path to output local directory']
+                            },
                             ($) => ['error while creating directory', $],
                         ),
 
@@ -125,7 +121,10 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
 
                         // Download published package using dynamic package name and version
                         $cr['make directory'].execute(
-                            t_path_to_path.extend_node_path($p['path to temp directory'], { 'addition': "npm" }),
+                            {
+                                'delete existing': true,
+                                'path': t_path_to_path.extend_node_path($p['path to temp directory'], { 'addition': "npm" })
+                            },
                             ($) => ['error while creating directory', $],
                         ),
 
@@ -144,7 +143,10 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
 
                         // Create published subdirectory
                         $cr['make directory'].execute(
-                            $p['path to output published directory'],
+                            {
+                                'delete existing': true,
+                                'path': $p['path to output published directory']
+                            },
                             ($) => ['error while creating directory', $],
                         ),
 

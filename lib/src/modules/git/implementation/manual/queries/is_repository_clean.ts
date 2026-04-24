@@ -1,4 +1,5 @@
-import * as _p from 'pareto-core/dist/query'
+import query_function from 'pareto-core/dist/__internals/async/query_function'
+import * as _p from 'pareto-core/dist/assign'
 import * as _pi from 'pareto-core/dist/interface'
 
 import * as signatures from "../../../interface/signatures"
@@ -9,11 +10,11 @@ import * as d from "../../../interface/to_be_generated/is_repository_clean"
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
 
-export const $$: signatures.queries.is_repository_clean = _p.query_function(
+export const $$: signatures.queries.is_repository_clean = query_function(
     ($p, $qr) => $qr.git(
         {
             'working directory': _p.optional.literal.not_set(),
-            'args': _p.list.nested_literal([
+            'args': _p.list.nested_literal_old([
                 $p.path.__decide(
                     ($) => _p.list.literal([
                         "-C",

@@ -27,7 +27,6 @@ export namespace commands {
             'npm': resources_pareto.commands.execute_command_executable
             'tar': resources_pareto.commands.execute_command_executable
             'make directory': resources_pareto.commands.make_directory
-            'remove': resources_pareto.commands.remove
         },
         {
             'read file': resources_pareto.queries.read_file

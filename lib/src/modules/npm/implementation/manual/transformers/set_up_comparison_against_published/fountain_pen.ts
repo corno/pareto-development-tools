@@ -51,14 +51,6 @@ export const Error: Error = ($) => {
                     ])
                 ])),
             ]))
-            case 'error while removing directory': return _p.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("error while removing directory: "),
-                sh.ph.indent(sh.pg.sentences([
-                    sh.sentence([
-                        t_remove_to_fountain_pen.Error($)
-                    ])
-                ])),
-            ]))
             case 'error while getting package.json': return _p.ss($, ($) => t_get_package_json_to_fountain_pen.Error($))
             default: return _p.au($[0])
         }
