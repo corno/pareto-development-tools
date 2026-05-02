@@ -4,6 +4,7 @@ import * as _pn from 'pareto-host-nodejs'
 import * as _pi from 'pareto-core/dist/interface'
 import * as _pq from 'pareto-core/dist/query'
 import * as _pc from 'pareto-core/dist/command'
+import __query from 'pareto-core/dist/__internals/async/query'
 
 import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_command_executable/data"
 import * as d_espe from "pareto-resources/dist/interface/generated/liana/schemas/execute_smelly_command_executable/data"
@@ -38,7 +39,7 @@ import { $$ as c_update2latest } from "lib/dist/modules/npm/implementation/manua
 const create_eqe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
-): _pi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => _pq.__query(
+): _pi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => __query(
     ($p) => {
         return $r.queries['execute any query executable'](
             {
@@ -208,7 +209,7 @@ _pn.run_main_command(
                 'npm': create_epe("npm", $r),
                 'tar': create_epe("tar", $r),
                 'make directory': $r.commands['make directory'],
-                'remove': $r.commands.remove,
+                // 'remove': $r.commands.remove,
             },
             {
                 'read file': $r.queries['read file'],
