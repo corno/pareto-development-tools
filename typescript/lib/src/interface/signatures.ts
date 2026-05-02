@@ -68,7 +68,9 @@ export namespace commands {
             'tsc': resources.commands.tsc
             'remove': resources_pareto.commands.remove
         },
-        null
+        {
+            'stat': resources_pareto.queries.stat_possible_node
+        }
     >
 
     export type build_and_test = _pi.Command_Procedure<

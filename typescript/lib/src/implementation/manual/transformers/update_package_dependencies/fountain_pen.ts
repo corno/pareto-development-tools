@@ -9,7 +9,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 export type Error = _pi.Transformer<d_in.Error, d_out.Phrase>
 
 //dependencies
-// import * as t_stat_possible_node_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"
+import * as t_stat_possible_node_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"
 import * as t_utd_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/update_package_dependencies/fountain_pen"
 
 export const Error: Error = ($) => _p.decide.state($, ($) => {
@@ -28,7 +28,7 @@ export const Error: Error = ($) => _p.decide.state($, ($) => {
         ]))
         case 'error statting app dir': return _p.ss($, ($) => sh.ph.composed([
             sh.ph.literal("error statting /app directory: "),
-            // t_stat_possible_node_to_fountain_pen.Error($)
+            t_stat_possible_node_to_fountain_pen.Error($)
         ]))
         default: return _p.au($[0])
     }

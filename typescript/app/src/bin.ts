@@ -109,7 +109,9 @@ _pn.run_main_command(
                 'tsc': tsc,
                 'remove': $r.commands.remove
             },
-            null,
+            {
+                'stat': $r.queries['stat possible node']
+            },
         )
 
         const dependency_graph = c_dependency_graph(
