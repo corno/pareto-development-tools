@@ -16,7 +16,7 @@ import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/m
 export const $$: signatures.queries.get_package_dependencies = _p.query_function(
     ($p, $r) => $r['read directory'](
         {
-            'path': t_path_to_path.create_node_path($p['path'], { 'node': "packages" }),
+            'path': t_path_to_path.extend_context_path_with_single_step($p['path'], { 'addition': "packages" }),
         },
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(

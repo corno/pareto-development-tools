@@ -175,7 +175,9 @@ _pn.run_main_command(
             {
                 'npm update package dependencies': npm_update_package_dependencies,
             },
-            null,
+            {
+                'stat': $r.queries.stat,
+            },
         )
 
         const git_push = c_git_push(

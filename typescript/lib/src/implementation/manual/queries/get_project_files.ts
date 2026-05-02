@@ -14,7 +14,7 @@ import { $$ as q_directory_content } from "pareto-resources/dist/implementation/
 export const $$: signatures.queries.get_project_files = _p.query_function(
     ($p, $r) => $r['read directory'](
         {
-            'path': t_path_to_path.create_node_path($p['path to project'], { 'node': "packages" }),
+            'path': t_path_to_path.extend_context_path_with_single_step($p['path to project'], { 'addition': "packages" }),
         },
         ($): d.Error => ['read directory', $],
     ).query_without_error_transformation(
@@ -27,7 +27,7 @@ export const $$: signatures.queries.get_project_files = _p.query_function(
                         case 'file': return _p.ss($, ($): _p.Query_Result<d_directory_content.Directory, d.Package_Error> => _p.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
                         case 'directory': return _p.ss($, ($): _p.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content($r)(
                             {
-                                'path': path,
+                                'path': t_path_to_path.deprecated_node_path_to_context_path(path),
                             },
                             ($): d.Package_Error => ['directory content', $],
                         ))

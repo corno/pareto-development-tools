@@ -123,7 +123,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                         $cr['make directory'].execute(
                             {
                                 'delete existing': true,
-                                'path': t_path_to_path.extend_node_path($p['path to temp directory'], { 'addition': "npm" })
+                                'path': t_path_to_path.deprecated_extend_node_path($p['path to temp directory'], { 'addition': "npm" })
                             },
                             ($) => ['error while creating directory', $],
                         ),

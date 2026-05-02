@@ -151,6 +151,8 @@ export namespace commands {
         {
             'npm update package dependencies': resources_npm.commands.update_package_dependencies
         },
-        null
+        {
+            'stat': resources_pareto.queries.stat
+        }
     >
 }

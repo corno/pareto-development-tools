@@ -22,9 +22,9 @@ export const $$: signatures.commands.api = _p.command_procedure(
                     _p.dictionaryx.deprecated_parallel.query(
                         $qr['read directory'](
                             {
-                                'path': t_path_to_path.create_node_path(
+                                'path': t_path_to_path.extend_context_path_with_single_step(
                                     $['path to project'],
-                                    { 'node': "packages" }
+                                    { 'addition': "packages" }
                                 )
                             },
                             ($): d.Error => ['all', ['could not read packages directory', $]],
@@ -78,8 +78,8 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                 ])
                                 case 'set up comparison': return _p.ss($, ($): _pi.Command_Promise<d.All__Package_Error>[] => {
 
-                                    const path_to_temp = t_path_to_path.extend_context_path(
-                                        t_path_to_path.extend_context_path(
+                                    const path_to_temp = t_path_to_path.extend_context_path_with_single_step(
+                                        t_path_to_path.extend_context_path_with_single_step(
                                             path_to_project,
                                             { 'addition': "temp" }
                                         ),
@@ -89,9 +89,9 @@ export const $$: signatures.commands.api = _p.command_procedure(
                                         $cr['npm set up comparison against published'].execute(
                                             {
                                                 'path to local package': t_path_to_path.extend_context_path_with_list(context_path, { 'addition': _p.list.literal(["typescript", "lib"]) }),
-                                                'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "local" }), { 'node': id }),
-                                                'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "published" }), { 'node': id }),
-                                                'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path(path_to_temp, { 'addition': "temp" }), { 'node': id }),
+                                                'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "local" }), { 'node': id }),
+                                                'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "published" }), { 'node': id }),
+                                                'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "temp" }), { 'node': id }),
                                             },
                                             ($): d.All__Package_Error => ['set up comparison', $],
                                         )
@@ -197,7 +197,7 @@ export const $$: signatures.commands.api = _p.command_procedure(
             ])
             case 'set up comparison': return _p.ss($, ($) => _p_change_context(
                 {
-                    'path to temp': t_path_to_path.extend_context_path($['path to package'], { 'addition': "temp" }),
+                    'path to temp': t_path_to_path.extend_context_path_with_single_step($['path to package'], { 'addition': "temp" }),
                     'path to package': $['path to package'],
                 },
                 ($) => [
