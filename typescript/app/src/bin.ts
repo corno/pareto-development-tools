@@ -176,7 +176,7 @@ _pn.run_main_command(
                 'npm update package dependencies': npm_update_package_dependencies,
             },
             {
-                'stat': $r.queries.stat,
+                'stat': $r.queries['stat possible node'],
             },
         )
 

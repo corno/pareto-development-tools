@@ -152,7 +152,7 @@ export namespace commands {
             'npm update package dependencies': resources_npm.commands.update_package_dependencies
         },
         {
-            'stat': resources_pareto.queries.stat
+            'stat': resources_pareto.queries.stat_possible_node
         }
     >
 }
