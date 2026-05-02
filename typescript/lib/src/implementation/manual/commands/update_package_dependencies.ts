@@ -1,7 +1,6 @@
 import * as _pc from 'pareto-core/dist/command'
 import * as _p from 'pareto-core/dist/assign'
 import _p_variables from 'pareto-core/dist/_p_variables'
-import _p_unreachable_code_path from 'pareto-core/dist/_p_unreachable_code_path'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -52,7 +51,6 @@ export const $$: signatures.commands.update_package_dependencies = _pc.command_p
                     })),
                     [
 
-                        // _p_unreachable_code_path("SFSFSFFD"),
                         // update dependencies of app
                         $cr['npm update package dependencies'].execute(
                             {
