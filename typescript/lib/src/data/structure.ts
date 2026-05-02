@@ -70,53 +70,55 @@ export const $$: d_structure.Directory = ['group', _p.dictionary.literal<d_struc
         ".liana": directory_ignore(),
         "module.liana.lna": file_manual(),
     }),
-    "app": directory_group({
-        "dist": directory_generated(false),
-        "node_modules": directory_ignore(),
-        "package-lock.json": file_generated(true),
-        "package.json": file_manual(),
-        "src": directory_group({
-            "bin": directory_wildcards(0, false, ["ts"], false),
-            "globals.ts": file_generated(true),
-            "index.ts": file_generated(true),
+    "typescript": directory_group({
+        "app": directory_group({
+            "dist": directory_generated(false),
+            "node_modules": directory_ignore(),
+            "package-lock.json": file_generated(true),
+            "package.json": file_manual(),
+            "src": directory_group({
+                "bin": directory_wildcards(0, false, ["ts"], false),
+                "globals.ts": file_generated(true),
+                "index.ts": file_generated(true),
+            }),
+            "tsconfig.json": file_generated(true)
         }),
-        "tsconfig.json": file_generated(true)
-    }),
-    "lib": directory_group({
-        "dist": directory_generated(false),
-        "node_modules": directory_ignore(),
-        "package-lock.json": file_generated(true),
-        "package.json": file_manual(),
-        "src": directory_group({
-            "data": directory_wildcards(0, true, ["ts"], false),
+        "lib": directory_group({
+            "dist": directory_generated(false),
+            "node_modules": directory_ignore(),
+            "package-lock.json": file_generated(true),
+            "package.json": file_manual(),
+            "src": directory_group({
+                "data": directory_wildcards(0, true, ["ts"], false),
 
-            "globals.ts": file_generated(true),
-            "implementation": $_implementation,
-            "interface": $_interface,
-            "index.ts": file_generated(true),
-            "modules": directory_dictionary(dgroup({
-                "interface": $_interface,
+                "globals.ts": file_generated(true),
                 "implementation": $_implementation,
+                "interface": $_interface,
+                "index.ts": file_generated(true),
+                "modules": directory_dictionary(dgroup({
+                    "interface": $_interface,
+                    "implementation": $_implementation,
+                    "shorthands": directory_wildcards(0, false, ["ts"], false),
+                })),
                 "shorthands": directory_wildcards(0, false, ["ts"], false),
-            })),
-            "shorthands": directory_wildcards(0, false, ["ts"], false),
+            }),
+            "tsconfig.json": file_generated(true)
         }),
-        "tsconfig.json": file_generated(true)
+        "test": directory_group({
+            "dist": directory_generated(false),
+            "node_modules": directory_ignore(),
+            "package-lock.json": file_generated(true),
+            "package.json": file_manual(),
+            "src": directory_group({
+                "bin": directory_group({
+                    "test.ts": file_generated(true)
+                }),
+                "globals.ts": file_generated(true)
+            }),
+            "tsconfig.json": file_generated(true)
+        }),
     }),
     "README.md": file_manual(),
     "temp": directory_ignore(),
-    "test": directory_group({
-        "dist": directory_generated(false),
-        "node_modules": directory_ignore(),
-        "package-lock.json": file_generated(true),
-        "package.json": file_manual(),
-        "src": directory_group({
-            "bin": directory_group({
-                "test.ts": file_generated(true)
-            }),
-            "globals.ts": file_generated(true)
-        }),
-        "tsconfig.json": file_generated(true)
-    }),
     "testdata": directory_freeform(),
 })]

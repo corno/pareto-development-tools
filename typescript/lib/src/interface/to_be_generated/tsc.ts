@@ -11,5 +11,5 @@ export type Error =
 
 
 export type Parameters = {
-    'path': _pi.Optional_Value<d_path.Node_Path>,
+    'path': _pi.Optional_Value<d_path.Context_Path>,
 }

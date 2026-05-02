@@ -15,7 +15,7 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         // update dependencies of lib
         $cr['npm update package dependencies'].execute(
             {
-                'path': t_path_to_path.extend_context_path($p.path, { 'addition': "lib"}),
+                'path': t_path_to_path.extend_context_path_with_list($p.path, { 'addition': _p.list.literal(["typescript", "lib"]) }),
             },
             ($): d.Error => ['error updating lib', $],
         ),
@@ -23,7 +23,7 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         // update dependencies of test
         $cr['npm update package dependencies'].execute(
             {
-                'path': t_path_to_path.extend_context_path($p.path, { 'addition': "test"}),
+                'path': t_path_to_path.extend_context_path_with_list($p.path, { 'addition': _p.list.literal(["typescript", "test"])}),
             },
             ($) => ['error updating test', $],
         ),

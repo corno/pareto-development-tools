@@ -32,6 +32,7 @@ export const $$: signatures.commands.build_and_test = _p.command_procedure(
                             $p.path,
                             {
                                 'addition': _pt.list.literal([
+                                    "typescript",
                                     "test",
                                     "dist",
                                     "bin",

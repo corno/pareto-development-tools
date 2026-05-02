@@ -22,21 +22,26 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
     ).query_without_error_transformation(
         ($) => _p.dictionaryx.parallel<d_npm_package.NPM_Package, d.Error, d.Package_Error>(
             $.__d_map(($) => {
-                const path = $.path
-                const path_x = t_path_to_path.extend_node_path(t_path_to_path.extend_node_path(path, { 'addition': "lib" }), { 'addition': "package.json" })
+                const lib_path = t_path_to_path.extend_context_path_with_list(
+                    t_path_to_path.deprecated_node_path_to_context_path($.path),
+                    {
+                        'addition': _p.list.literal(["typescript", "lib"])
+                    }
+                )
+                const package_json_path = t_path_to_path.create_node_path(lib_path, { 'node': "package.json" })
                 return _p.decide.state($['node type'], ($) => {
                     switch ($[0]) {
                         case 'file': return _p.ss($, ($) => _p.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
                         case 'other': return _p.ss($, ($) => _p.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
                         case 'directory': return _p.ss($, ($) => $r['read file'](
-                            path_x,
+                            package_json_path,
                             ($): d.Package_Error => ['no package.json file', null],
                         ).refine_without_error_transformation(
                             ($, abort) => r_parse_npm_package(
                                 $,
                                 ($) => abort(['parse error', {
                                     'type': $,
-                                    'path': path_x,
+                                    'path': package_json_path,
                                 }]),
                             )
                         ))
