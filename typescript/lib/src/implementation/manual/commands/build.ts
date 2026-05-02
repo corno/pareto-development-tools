@@ -74,7 +74,7 @@ export const $$: signatures.commands.build = _pc.command_procedure(
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    ).transform_result(($) => _pc.decide.state($, ($) => {
+                    ).transform(($) => _pc.decide.state($, ($) => {
                         switch ($[0]) {
                             case 'does not exist': return _pc.ss($, ($) => false)
                             case 'file': return _pc.ss($, ($) => false)

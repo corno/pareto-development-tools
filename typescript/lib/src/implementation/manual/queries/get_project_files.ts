@@ -17,7 +17,7 @@ export const $$: signatures.queries.get_project_files = _p.query_function(
             'path': t_path_to_path.extend_context_path_with_single_step($p['path to project'], { 'addition': "packages" }),
         },
         ($): d.Error => ['read directory', $],
-    ).query_without_error_transformation(
+    ).query(
         ($v) => _p.dictionaryx.parallel(
             $v.__d_map(($): _p.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                 const path = $.path

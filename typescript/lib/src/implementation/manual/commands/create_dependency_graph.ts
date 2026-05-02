@@ -20,9 +20,9 @@ export const $$: signatures.commands.create_dependency_graph = _p.command_proced
                     'path': $p['path to project'],
                 },
                 ($): d.Error => ['package dependencies', $],
-            ).transform_result(
+            ).transform(
                 ($) => t_package_dependencies_to_graphviz.Result($)
-            ).transform_result(
+            ).transform(
                 ($) => t_graphviz_to_fountain_pen.Graph($)
             ),
             ($) => $,

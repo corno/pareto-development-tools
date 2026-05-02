@@ -161,7 +161,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
                                     ]),
                                 },
                                 ($): d.Error => ['error while running npm query', $]
-                            ).transform_result(($) => remove_n_characters_from_end($.stdout.raw, 1)),
+                            ).transform(($) => remove_n_characters_from_end($.stdout.raw, 1)),
                             // Extract published package into published subdirectory
                             ($) => $,
                             ($v) => [

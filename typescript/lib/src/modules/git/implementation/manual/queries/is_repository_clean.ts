@@ -29,7 +29,7 @@ export const $$: signatures.queries.is_repository_clean = query_function(
             ]),
         },
         ($) => $,
-    ).transform_result<boolean>(
+    ).transform<boolean>(
         ($) => $.stdout.raw === ""
     ).rework_error_temp(
         ($current) => $qr['is inside git work tree'](
@@ -37,7 +37,7 @@ export const $$: signatures.queries.is_repository_clean = query_function(
                 'path': $p.path
             },
             ($) => $
-        ).transform_result<d.Error>(
+        ).transform<d.Error>(
             ($) => {
                 return $
                     ? ['could not determine git status', $current]

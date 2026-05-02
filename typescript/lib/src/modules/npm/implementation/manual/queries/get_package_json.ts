@@ -20,7 +20,7 @@ export const $$: signatures.queries.get_package_json = _p.query_function(
         return $r['read file'](
             path,
             ($): d.Error => ['error while reading package.json', $],
-        ).refine_without_error_transformation(
+        ).refine(
             ($, abort) => r_parse_npm_package(
                 $,
                 ($) => abort(['error while parsing package.json', {

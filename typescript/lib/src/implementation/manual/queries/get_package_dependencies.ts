@@ -19,7 +19,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
             'path': t_path_to_path.extend_context_path_with_single_step($p['path'], { 'addition': "packages" }),
         },
         ($): d.Error => ['read directory', $],
-    ).query_without_error_transformation(
+    ).query(
         ($) => _p.dictionaryx.parallel<d_npm_package.NPM_Package, d.Error, d.Package_Error>(
             $.__d_map(($) => {
                 const lib_path = t_path_to_path.extend_context_path_with_list(
@@ -36,7 +36,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                         case 'directory': return _p.ss($, ($) => $r['read file'](
                             package_json_path,
                             ($): d.Package_Error => ['no package.json file', null],
-                        ).refine_without_error_transformation(
+                        ).refine(
                             ($, abort) => r_parse_npm_package(
                                 $,
                                 ($) => abort(['parse error', {
@@ -50,7 +50,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                 })
             }),
             ($): d.Error => ['directory content processing', $],
-        ).transform_result(
+        ).transform(
             ($) => ({
                 'packages': $,
             })

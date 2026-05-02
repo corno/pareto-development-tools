@@ -41,7 +41,7 @@ export const $$: signatures.commands.update_package_dependencies = _pc.command_p
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    ).transform_result(($) => _p.decide.state($, ($) => {
+                    ).transform(($) => _p.decide.state($, ($) => {
                         switch ($[0]) {
                             case 'does not exist': return _p.ss($, ($) => false)
                             case 'file': return _p.ss($, ($) => false)

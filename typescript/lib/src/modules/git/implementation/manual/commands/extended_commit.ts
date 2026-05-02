@@ -19,7 +19,7 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                     'path': $p.path
                 },
                 ($): d.Error => ['asserting git not clean', $],
-            ).transform_result(
+            ).transform(
                 ($) => !$
             ),
             [
