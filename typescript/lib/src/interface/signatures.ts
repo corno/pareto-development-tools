@@ -67,6 +67,7 @@ export namespace commands {
         {
             'tsc': resources.commands.tsc
             'remove': resources_pareto.commands.remove
+            'chmod': resources_pareto.commands.chmod
         },
         {
             'stat': resources_pareto.queries.stat_possible_node

@@ -1,4 +1,5 @@
 import * as _pc from 'pareto-core/dist/command'
+import * as _p from 'pareto-core/dist/assign'
 import _p_variables from 'pareto-core/dist/_p_variables'
 
 import * as signatures from "../../../interface/signatures"
@@ -16,14 +17,11 @@ export const $$: signatures.commands.build = _pc.command_procedure(
             return [
                 $cr.remove.execute(
                     {
-                        'path': t_path_to_path.create_node_path(
-                            t_path_to_path.extend_context_path_with_list(
-                                typescript_path,
-                                {
-                                    'addition': _pc.list.literal(["lib"]),
-                                }
-                            ),
-                            { 'node': "dist" }
+                        'path': t_path_to_path.extend_context_path_with_list(
+                            typescript_path,
+                            {
+                                'addition': _pc.list.literal(["lib", "dist"]),
+                            }
                         ),
                         'error if not exists': false,
                     },
@@ -40,14 +38,11 @@ export const $$: signatures.commands.build = _pc.command_procedure(
                 ),
                 $cr.remove.execute(
                     {
-                        'path': t_path_to_path.create_node_path(
-                            t_path_to_path.extend_context_path_with_list(
-                                typescript_path,
-                                {
-                                    'addition': _pc.list.literal(["test"]),
-                                }
-                            ),
-                            { 'node': "dist" }
+                        'path': t_path_to_path.extend_context_path_with_list(
+                            typescript_path,
+                            {
+                                'addition': _pc.list.literal(["test", "dist"]),
+                            }
                         ),
                         'error if not exists': false,
                     },
@@ -82,36 +77,67 @@ export const $$: signatures.commands.build = _pc.command_procedure(
                             default: return _pc.au($[0])
                         }
                     })),
-                    [
-
-                        //before uncommenting this, add the chmod +x command for the bin file(s)
-
-                        // $cr.remove.execute(
-                        //     {
-                        //         'path': t_path_to_path.create_node_path(
-                        //             t_path_to_path.extend_context_path_with_list(
-                        //                 typescript_path,
-                        //                 {
-                        //                     'addition': _pc.list.literal(["app"]),
-                        //                 }
-                        //             ),
-                        //             { 'node': "dist" }
-                        //         ),
-                        //         'error if not exists': false,
-                        //     },
-                        //     ($): d.Error => ['error removing app dist dir', { 'path': $p.path, 'error': $ }],
-                        // ),
-                        $cr.tsc.execute(
+                    _p_variables(() => {
+                        const dist_path = t_path_to_path.extend_context_path_with_list(
+                            typescript_path,
                             {
-                                'path': _pc.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["app"]) })),
-                            },
-                            ($): d.Error => ['error building app', {
-                                'path': $p.path,
-                                'error': $,
-                            }],
-                        ),
+                                'addition': _pc.list.literal(["app", "dist"]),
+                            }
+                        )
+                        return [
 
-                    ]
+                            $cr.remove.execute(
+                                {
+                                    'path': dist_path,
+                                    'error if not exists': false,
+                                },
+                                ($): d.Error => ['error removing app dist dir', { 'path': $p.path, 'error': $ }],
+                            ),
+                            $cr.tsc.execute(
+                                {
+                                    'path': _pc.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["app"]) })),
+                                },
+                                ($): d.Error => ['error building app', {
+                                    'path': $p.path,
+                                    'error': $,
+                                }],
+                            ),
+
+                            $cr.chmod.execute(
+                                {
+                                    'path': t_path_to_path.create_node_path(
+                                        dist_path,
+                                        {
+                                            'node': "bin.js"
+                                        }
+                                    ),
+                                    'mode': {
+                                        'special bits': _p.optional.literal.not_set(),
+                                        'owner': {
+                                            'read': true,
+                                            'write': true,
+                                            'execute': true,
+                                        },
+                                        'group': {
+                                            'read': true,
+                                            'write': false,
+                                            'execute': true,
+                                        },
+                                        'others': {
+                                            'read': true,
+                                            'write': false,
+                                            'execute': true,
+                                        },
+                                    },
+                                },
+                                ($): d.Error => ['error setting permissions on app dist bin.js', {
+                                    'path': dist_path,
+                                    'error': $
+                                }],
+                            )
+
+                        ]
+                    })
                 )
             ]
         }

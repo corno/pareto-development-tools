@@ -16,6 +16,7 @@ import * as t_tsc_to_fountain_pen from "../tsc/fountain_pen"
 import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/remove/fountain_pen"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/list_of_characters"
 import * as t_stat_possible_node_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"
+import * as t_chmod_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/chmod/fountain_pen"
 
 export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
     switch ($[0]) {
@@ -84,6 +85,12 @@ export const Error: signatures.Error = ($, $p) => _p.decide.state($, ($) => {
             sh.ph.indent(
                 t_tsc_to_fountain_pen.Error($.error, $p)
             )
+        ]))
+        case 'error setting permissions on app dist bin.js': return _p.ss($, ($) => sh.ph.composed([
+            sh.ph.literal("could not set permissions on app dist bin.js: ("),
+            sh.ph.serialize(t_path_to_text.Context_Path($.path)),
+            sh.ph.literal(")"),
+            t_chmod_to_fountain_pen.Error($.error)
         ]))
         default: return _p.au($[0])
     }

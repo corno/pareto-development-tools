@@ -9,6 +9,7 @@ import __query from 'pareto-core/dist/__internals/async/query'
 import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_command_executable/data"
 import * as d_espe from "pareto-resources/dist/interface/generated/liana/schemas/execute_smelly_command_executable/data"
 import * as d_eqe from "pareto-resources/dist/interface/generated/liana/schemas/execute_query_executable/data"
+import * as d_chmod from "pareto-resources/dist/interface/generated/liana/schemas/chmod/data"
 
 import { $$ as q_git_is_repository_clean } from "lib/dist/modules/git/implementation/manual/queries/is_repository_clean"
 import { $$ as q_git_is_inside_work_tree } from "lib/dist/modules/git/implementation/manual/queries/is_inside_work_tree"
@@ -107,7 +108,8 @@ _pn.run_main_command(
         const build = c_build(
             {
                 'tsc': tsc,
-                'remove': $r.commands.remove
+                'remove': $r.commands.remove,
+                'chmod': $r.commands.chmod,
             },
             {
                 'stat': $r.queries['stat possible node']
