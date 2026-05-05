@@ -15,8 +15,5 @@
   "bin": {
     "pdt": "./dist/bin.js"
   },
-  "bundleDependencies": [
-    "lib",
-    "pareto-host-nodejs"
-  ]
+  "bundleDependencies": true
 }
