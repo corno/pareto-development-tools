@@ -39,7 +39,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                         'message': sh.pg.sentences(_pa.list.from.list(
                             _pa.list.from.list(
                                 t_project_files_to_file_analysis_list.Project_Files($v)
-                            ).filter<d_file_analysis.File_Analysis2>(
+                            ).map_optionally<d_file_analysis.File_Analysis2>(
                                 ($) => _pa.boolean.from.optional($.analysis['unexpected path tail']).is_set()
                                     ? _p.optional.literal.set($)
                                     : _p.optional.literal.not_set()

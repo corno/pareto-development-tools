@@ -26,7 +26,7 @@ export const Result: Result = ($) => {
                     ($) => _p.list.from.dictionary(
                         _p.dictionary.from.dictionary(
                             $,
-                        ).filter(
+                        ).map_optionally(
                             ($, id) => {
                                 if (id === "pareto-core"
                                     || id === "pareto-core-shorthands"
