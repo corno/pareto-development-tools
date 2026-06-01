@@ -82,16 +82,26 @@ const create_espe = (
 _pn.run_main_command(
     ($r) => {
 
+        const eqe_git = create_eqe("git", $r)
+        const eqe_npm = create_eqe("npm", $r)
+
+        const epe_git = create_epe("git", $r)
+        const epe_npm = create_epe("npm", $r)
+        const epe_tsc = create_espe("tsc", $r)
+        const epe_node = create_epe("node", $r)
+        const epe_update2latest = create_epe("update2latest", $r)
+        const epe_tar = create_epe("tar", $r)
+
         const git_is_repository_clean = q_git_is_repository_clean({
-            'git': create_eqe("git", $r),
+            'git': eqe_git,
             'is inside git work tree': q_git_is_inside_work_tree({
-                'git': create_eqe("git", $r),
+                'git': eqe_git,
             }),
         })
 
         const git_assert_is_clean = c_git_assert_clean(
             {
-                'git': create_epe("git", $r),
+                'git': epe_git,
             },
             {
                 'is repository clean': git_is_repository_clean,
@@ -100,7 +110,7 @@ _pn.run_main_command(
 
         const tsc = c_tsc(
             {
-                'tsc': create_espe("tsc", $r),
+                'tsc': epe_tsc,
             },
             null,
         )
@@ -132,7 +142,7 @@ _pn.run_main_command(
 
         const git_make_pristine = c_git_make_pristine(
             {
-                'git': create_epe("git", $r),
+                'git': epe_git,
             },
             null,
         )
@@ -140,28 +150,28 @@ _pn.run_main_command(
         const build_and_test = c_build_and_test(
             {
                 'build': build,
-                'node': create_epe("node", $r),
+                'node': epe_node,
             },
             null,
         )
 
         const update2latest = c_update2latest(
             {
-                'update2latest': create_epe("update2latest", $r),
+                'update2latest': epe_update2latest,
             },
             null,
         )
 
         const npm = c_npm(
             {
-                'npm': create_epe("npm", $r),
+                'npm': epe_npm,
             },
             null,
         )
 
         const npm_publish = c_npm_publish(
             {
-                'npm': create_epe("npm", $r),
+                'npm': epe_npm,
             },
             null,
         )
@@ -186,24 +196,24 @@ _pn.run_main_command(
 
         const git_push = c_git_push(
             {
-                'git': create_epe("git", $r),
+                'git': epe_git,
             },
             null,
         )
 
         const git_remove_tracked_but_ignored = c_git_remove_tracked_but_ignored(
             {
-                'git': create_epe("git", $r),
+                'git': epe_git,
                 'assert is clean': git_assert_is_clean,
             },
             {
-                'git': create_eqe("git", $r),
+                'git': eqe_git,
             },
         )
 
         const git_extended_commit = c_git_extended_commit(
             {
-                'git': create_epe("git", $r),
+                'git': epe_git,
             },
             {
                 'git is repository clean': git_is_repository_clean,
@@ -212,14 +222,14 @@ _pn.run_main_command(
 
         const set_up_comparison_against_published = c_set_up_comparison_against_published(
             {
-                'npm': create_epe("npm", $r),
-                'tar': create_epe("tar", $r),
+                'npm': epe_npm,
+                'tar': epe_tar,
                 'make directory': $r.commands['make directory'],
                 // 'remove': $r.commands.remove,
             },
             {
                 'read file': $r.queries['read file'],
-                'npm': create_eqe("npm", $r),
+                'npm': eqe_npm,
             },
         )
 
