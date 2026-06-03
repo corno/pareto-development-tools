@@ -78,6 +78,7 @@ export const $$: d_structure.Directory = ['group', _p.dictionary.literal<d_struc
             "package.json": file_manual(),
             "src": directory_group({
                 "bin": directory_wildcards(0, false, ["ts"], false),
+                "bin.ts": file_manual(),
                 "globals.ts": file_generated(true),
                 "index.ts": file_generated(true),
             }),
