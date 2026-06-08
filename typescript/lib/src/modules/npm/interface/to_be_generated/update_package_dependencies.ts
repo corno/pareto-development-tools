@@ -2,9 +2,9 @@ import * as _pi from 'pareto-core/dist/interface'
 
 import * as d_update2latest from "./update2latest"
 
-import * as d_remove from "pareto-resources/dist/interface/generated/liana/schemas/remove/data"
+import * as d_remove from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_remove/data"
 import * as d_npm from "./npm_tool"
-import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
+import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
 
 export type Parameters = {
     'path': d_path.Context_Path,

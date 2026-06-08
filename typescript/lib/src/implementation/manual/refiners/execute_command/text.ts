@@ -9,7 +9,7 @@ import * as d_function from "../../../../interface/to_be_generated/parse"
 import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schemas/text/data"
 
 //dependencies
-import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/refiners/path/text"
+import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/refiners/path_unrestricted/text"
 
 type signature = _pi.Production<d_out.Parameters, d_function.Error, d_in.Text, null>
 

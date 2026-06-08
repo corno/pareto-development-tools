@@ -1,7 +1,7 @@
 import * as _pi from 'pareto-core/dist/interface'
 
-import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
-import * as d_read_directory from "pareto-resources/dist/interface/generated/liana/schemas/read_directory/data"
+import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
+import * as d_read_directory from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
 import * as d_directory_content from "pareto-resources/dist/interface/to_be_generated/read_directory_content"
 import * as d_project_files from "./project_files"
 

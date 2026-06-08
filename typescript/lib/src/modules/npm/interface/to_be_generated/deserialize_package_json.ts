@@ -1,5 +1,5 @@
 import * as d_deserialize from "astn-core/dist/interface/generated/liana/schemas/deserialize_parse_tree/data"
-import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/path/data"
+import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
 
 export type Error = {
     'path': d_path.Node_Path

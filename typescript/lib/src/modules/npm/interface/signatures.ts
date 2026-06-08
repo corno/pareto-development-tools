@@ -26,10 +26,10 @@ export namespace commands {
         {
             'npm': resources_pareto.commands.execute_command_executable
             'tar': resources_pareto.commands.execute_command_executable
-            'make directory': resources_pareto.commands.make_directory
+            'make directory': resources_pareto.commands.fs_unrestricted_make_directory
         },
         {
-            'read file': resources_pareto.queries.read_file
+            'read file': resources_pareto.queries.fs_unrestricted_read_file
             'npm': resources_pareto.queries.execute_query_executable
         }
     >
@@ -44,7 +44,7 @@ export namespace commands {
 
     export type update_package_dependencies = _pi.Command_Procedure<
         resources.commands.update_package_dependencies, {
-            'remove': resources_pareto.commands.remove
+            'remove': resources_pareto.commands.fs_unrestricted_remove
             'update2latest': resources.commands.update2latest
             'npm': resources.commands.npm
         },
@@ -58,7 +58,7 @@ export namespace queries {
     export type get_package_json = _pi.Query_Function<
         resources.queries.get_package_json,
         {
-            'read file': resources_pareto.queries.read_file
+            'read file': resources_pareto.queries.fs_unrestricted_read_file
         }
     >
 
