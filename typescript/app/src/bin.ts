@@ -42,7 +42,7 @@ const create_eqe = (
     $r: _pn.Available_Standard_Resources,
 ): _pi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => __query(
     ($p) => {
-        return $r['execute unrestricted'].queries['query executable'](null)(
+        return $r['execute unrestricted'].queries['query executable'](
             {
                 'program': program,
                 'args': $p.args,
@@ -57,7 +57,7 @@ const create_epe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
 ): _pi.Command<d_epe.Error, d_epe.Parameters> => _pc.__command(
-    ($p) => $r['execute unrestricted'].commands['command executable'](null).execute(
+    ($p) => $r['execute unrestricted'].commands['command executable'].execute(
         {
             'program': program,
             'args': $p.args,
@@ -70,7 +70,7 @@ const create_epe = (
 const create_espe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
-): _pi.Command<d_espe.Error, d_espe.Parameters> => _pc.__command(($p) => $r['execute unrestricted'].commands['smelly command executable'](null).execute(
+): _pi.Command<d_espe.Error, d_espe.Parameters> => _pc.__command(($p) => $r['execute unrestricted'].commands['smelly command executable'].execute(
     {
         'program': program,
         'args': $p.args,
@@ -118,23 +118,23 @@ _pn.run_main_command(
         const build = c_build(
             {
                 'tsc': tsc,
-                'remove': $r['filesystem unrestricted'].commands.remove(null),
-                'chmod': $r['filesystem unrestricted'].commands.chmod(null),
+                'remove': $r['filesystem unrestricted'].commands.remove,
+                'chmod': $r['filesystem unrestricted'].commands.chmod,
             },
             {
-                'stat': $r['filesystem unrestricted'].queries['stat possible node'](null)
+                'stat': $r['filesystem unrestricted'].queries['stat possible node']
             },
         )
 
         const dependency_graph = c_dependency_graph(
             {
-                'log': $r.stream.commands.log(null),
+                'log': $r.stream.commands.log,
             },
             {
                 'package dependencies': q_package_dependencies(
                     {
-                        'read directory': $r['filesystem unrestricted'].queries['read directory'](null),
-                        'read file': $r['filesystem unrestricted'].queries['read file'](null),
+                        'read directory': $r['filesystem unrestricted'].queries['read directory'],
+                        'read file': $r['filesystem unrestricted'].queries['read file'],
                     },
                 ),
             },
@@ -178,7 +178,7 @@ _pn.run_main_command(
 
         const npm_update_package_dependencies = c_npm_update_package_dependencies(
             {
-                'remove': $r['filesystem unrestricted'].commands.remove(null),
+                'remove': $r['filesystem unrestricted'].commands.remove,
                 'update2latest': update2latest,
                 'npm': npm,
             },
@@ -190,7 +190,7 @@ _pn.run_main_command(
                 'npm update package dependencies': npm_update_package_dependencies,
             },
             {
-                'stat': $r['filesystem unrestricted'].queries['stat possible node'](null),
+                'stat': $r['filesystem unrestricted'].queries['stat possible node'],
             },
         )
 
@@ -224,18 +224,18 @@ _pn.run_main_command(
             {
                 'npm': epe_npm,
                 'tar': epe_tar,
-                'make directory': $r['filesystem unrestricted'].commands['make directory'](null),
+                'make directory': $r['filesystem unrestricted'].commands['make directory'],
                 // 'remove': $r.commands.remove,
             },
             {
-                'read file': $r['filesystem unrestricted'].queries['read file'](null),
+                'read file': $r['filesystem unrestricted'].queries['read file'],
                 'npm': eqe_npm,
             },
         )
 
         return c_main(
             {
-                'log error': $r.stream.commands['log error'](null),
+                'log error': $r.stream.commands['log error'],
                 'api': c_api(
                     {
                         'git assert is clean': git_assert_is_clean,
@@ -244,20 +244,20 @@ _pn.run_main_command(
                         'create dependency graph': dependency_graph,
                         'analyze file structure': c_analyze_file_structure(
                             {
-                                'log': $r.stream.commands.log(null),
+                                'log': $r.stream.commands.log,
                             },
                             {
-                                'read directory': $r['filesystem unrestricted'].queries['read directory'](null),
-                                'read file': $r['filesystem unrestricted'].queries['read file'](null),
+                                'read directory': $r['filesystem unrestricted'].queries['read directory'],
+                                'read file': $r['filesystem unrestricted'].queries['read file'],
                             },
                         ),
                         'list file structure problems': c_list_file_structure_problems(
                             {
-                                'log': $r.stream.commands.log(null),
+                                'log': $r.stream.commands.log,
                             },
                             {
-                                'read directory': $r['filesystem unrestricted'].queries['read directory'](null),
-                                'read file': $r['filesystem unrestricted'].queries['read file'](null),
+                                'read directory': $r['filesystem unrestricted'].queries['read directory'],
+                                'read file': $r['filesystem unrestricted'].queries['read file'],
                             },
                         ),
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
@@ -280,15 +280,15 @@ _pn.run_main_command(
                                 'npm publish': npm_publish,
                                 'update package dependencies': update_package_dependencies,
                                 'git extended commit': git_extended_commit,
-                                'log': $r.stream.commands.log(null),
+                                'log': $r.stream.commands.log,
                             },
                             {
-                                'read file': $r['filesystem unrestricted'].queries['read file'](null)
+                                'read file': $r['filesystem unrestricted'].queries['read file']
                             },
                         ),
                     },
                     {
-                        'read directory': $r['filesystem unrestricted'].queries['read directory'](null)
+                        'read directory': $r['filesystem unrestricted'].queries['read directory']
                     },
                 ),
             },
