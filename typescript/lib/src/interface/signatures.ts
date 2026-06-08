@@ -11,8 +11,8 @@ export namespace queries {
     export type get_project_files = _pi.Query_Function<
         resources.queries.get_project_files,
         {
-            'read directory': resources_pareto.queries.fs_unrestricted_read_directory,
-            'read file': resources_pareto.queries.fs_unrestricted_read_file
+            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
+            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
 
         }
     >
@@ -20,8 +20,8 @@ export namespace queries {
     export type get_package_dependencies = _pi.Query_Function<
         resources.queries.get_package_dependencies,
         {
-            'read directory': resources_pareto.queries.fs_unrestricted_read_directory,
-            'read file': resources_pareto.queries.fs_unrestricted_read_file
+            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
+            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
 
         }
     >
@@ -33,11 +33,11 @@ export namespace commands {
     export type analyze_file_structure = _pi.Command_Procedure<
         resources.commands.analyze_file_structure,
         {
-            'log': resources_pareto.commands.stream_log
+            'log': resources_pareto.stream.commands.log
         },
         {
-            'read directory': resources_pareto.queries.fs_unrestricted_read_directory,
-            'read file': resources_pareto.queries.fs_unrestricted_read_file
+            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
+            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
 
         }
     >
@@ -58,7 +58,7 @@ export namespace commands {
             'update package dependencies': resources.commands.update_package_dependencies
         },
         {
-            'read directory': resources_pareto.queries.fs_unrestricted_read_directory
+            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory
         }
     >
 
@@ -66,11 +66,11 @@ export namespace commands {
         resources.commands.build,
         {
             'tsc': resources.commands.tsc
-            'remove': resources_pareto.commands.fs_unrestricted_remove
-            'chmod': resources_pareto.commands.fs_unrestricted_chmod
+            'remove': resources_pareto.filesystem_unrestricted.commands.remove
+            'chmod': resources_pareto.filesystem_unrestricted.commands.chmod
         },
         {
-            'stat': resources_pareto.queries.fs_unrestricted_stat_possible_node
+            'stat': resources_pareto.filesystem_unrestricted.queries.stat_possible_node
         }
     >
 
@@ -78,7 +78,7 @@ export namespace commands {
         resources.commands.build_and_test,
         {
             'build': resources.commands.build
-            'node': resources_pareto.commands.execute_command_executable
+            'node': resources_pareto.execute_sandboxed.commands.command_executable
         },
         null
     >
@@ -86,7 +86,7 @@ export namespace commands {
     export type create_dependency_graph = _pi.Command_Procedure<
         resources.commands.create_dependency_graph,
         {
-            'log': resources_pareto.commands.stream_log
+            'log': resources_pareto.stream.commands.log
         },
         {
             'package dependencies': resources.queries.get_package_dependencies
@@ -105,19 +105,19 @@ export namespace commands {
     export type list_file_structure_problems = _pi.Command_Procedure<
         resources.commands.analyze_file_structure,
         {
-            'log': resources_pareto.commands.stream_log
+            'log': resources_pareto.stream.commands.log
         },
         {
-            'read directory': resources_pareto.queries.fs_unrestricted_read_directory,
-            'read file': resources_pareto.queries.fs_unrestricted_read_file
+            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
+            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
         }
     >
 
     export type main = _pi.Command_Procedure<
-        resources_pareto.commands.main,
+        resources_pareto.resources.commands.main,
         {
             'api': resources.commands.api
-            'log error': resources_pareto.commands.stream_log_error
+            'log error': resources_pareto.stream.commands.log_error
 
         },
         null
@@ -134,17 +134,17 @@ export namespace commands {
             'build and test': resources.commands.build_and_test
             'npm': resources_npm.commands.npm
             'npm publish': resources_npm.commands.npm_publish
-            'log': resources_pareto.commands.stream_log
+            'log': resources_pareto.stream.commands.log
         },
         {
-            'read file': resources_pareto.queries.fs_unrestricted_read_file
+            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
         }
     >
 
     export type tsc = _pi.Command_Procedure<
         resources.commands.tsc,
         {
-            'tsc': resources_pareto.commands.execute_smelly_command_executable
+            'tsc': resources_pareto.execute_sandboxed.commands.smelly_command_executable
         },
         null
     >
@@ -155,7 +155,7 @@ export namespace commands {
             'npm update package dependencies': resources_npm.commands.update_package_dependencies
         },
         {
-            'stat': resources_pareto.queries.fs_unrestricted_stat_possible_node
+            'stat': resources_pareto.filesystem_unrestricted.queries.stat_possible_node
         }
     >
 }

@@ -8,7 +8,7 @@ export namespace commands {
     export type npm = _pi.Command_Procedure<
         resources.commands.npm,
         {
-            'npm': resources_pareto.commands.execute_command_executable
+            'npm': resources_pareto.execute_sandboxed.commands.command_executable
         },
         null
     >
@@ -16,7 +16,7 @@ export namespace commands {
     export type npm_publish = _pi.Command_Procedure<
         resources.commands.npm_publish,
         {
-            'npm': resources_pareto.commands.execute_command_executable
+            'npm': resources_pareto.execute_sandboxed.commands.command_executable
         },
         null
     >
@@ -24,27 +24,27 @@ export namespace commands {
     export type set_up_comparison_against_published = _pi.Command_Procedure<
         resources.commands.set_up_comparison_against_published,
         {
-            'npm': resources_pareto.commands.execute_command_executable
-            'tar': resources_pareto.commands.execute_command_executable
-            'make directory': resources_pareto.commands.fs_unrestricted_make_directory
+            'npm': resources_pareto.execute_sandboxed.commands.command_executable
+            'tar': resources_pareto.execute_sandboxed.commands.command_executable
+            'make directory': resources_pareto.filesystem_unrestricted.commands.make_directory
         },
         {
-            'read file': resources_pareto.queries.fs_unrestricted_read_file
-            'npm': resources_pareto.queries.execute_query_executable
+            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
+            'npm': resources_pareto.execute_sandboxed.queries.query_executable
         }
     >
 
     export type update2latest = _pi.Command_Procedure<
         resources.commands.update2latest,
         {
-            'update2latest': resources_pareto.commands.execute_command_executable
+            'update2latest': resources_pareto.execute_sandboxed.commands.command_executable
         },
         null
     >
 
     export type update_package_dependencies = _pi.Command_Procedure<
         resources.commands.update_package_dependencies, {
-            'remove': resources_pareto.commands.fs_unrestricted_remove
+            'remove': resources_pareto.filesystem_unrestricted.commands.remove
             'update2latest': resources.commands.update2latest
             'npm': resources.commands.npm
         },
@@ -58,7 +58,7 @@ export namespace queries {
     export type get_package_json = _pi.Query_Function<
         resources.queries.get_package_json,
         {
-            'read file': resources_pareto.queries.fs_unrestricted_read_file
+            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
         }
     >
 
