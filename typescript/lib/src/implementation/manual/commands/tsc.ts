@@ -4,7 +4,7 @@ import * as _pt from 'pareto-core/dist/assign'
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: signatures.commands.tsc = _p.command_procedure(
 

@@ -12,7 +12,7 @@ export namespace signatures {
 import * as t_deserialize_parse_tree_to_fp from "astn-core/dist/implementation/manual/transformers/deserialize_parse_tree/fountain_pen"
 import * as t_deserialize_parse_tree_to_location from "astn-core/dist/implementation/manual/transformers/deserialize_parse_tree/location"
 import * as t_location_to_fp from "astn-core/dist/implementation/manual/transformers/location/fountain_pen"
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"

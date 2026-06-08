@@ -8,7 +8,7 @@ import * as d_directory_content from "pareto-resources/dist/interface/to_be_gene
 
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/path/path"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
 
 export const $$: signatures.queries.get_project_files = _p.query_function(

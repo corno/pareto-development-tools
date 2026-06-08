@@ -42,7 +42,7 @@ const create_eqe = (
     $r: _pn.Available_Standard_Resources,
 ): _pi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => __query(
     ($p) => {
-        return $r.queries['execute any query executable'](
+        return $r['execute unrestricted'].queries['query executable'](null)(
             {
                 'program': program,
                 'args': $p.args,
@@ -57,7 +57,7 @@ const create_epe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
 ): _pi.Command<d_epe.Error, d_epe.Parameters> => _pc.__command(
-    ($p) => $r.commands['execute any command executable'].execute(
+    ($p) => $r['execute unrestricted'].commands['command executable'](null).execute(
         {
             'program': program,
             'args': $p.args,
@@ -70,7 +70,7 @@ const create_epe = (
 const create_espe = (
     program: string,
     $r: _pn.Available_Standard_Resources,
-): _pi.Command<d_espe.Error, d_espe.Parameters> => _pc.__command(($p) => $r.commands['execute any smelly command executable'].execute(
+): _pi.Command<d_espe.Error, d_espe.Parameters> => _pc.__command(($p) => $r['execute unrestricted'].commands['smelly command executable'](null).execute(
     {
         'program': program,
         'args': $p.args,
@@ -118,23 +118,23 @@ _pn.run_main_command(
         const build = c_build(
             {
                 'tsc': tsc,
-                'remove': $r.commands.remove,
-                'chmod': $r.commands.chmod,
+                'remove': $r['filesystem unrestricted'].commands.remove(null),
+                'chmod': $r['filesystem unrestricted'].commands.chmod(null),
             },
             {
-                'stat': $r.queries['stat possible node']
+                'stat': $r['filesystem unrestricted'].queries['stat possible node'](null)
             },
         )
 
         const dependency_graph = c_dependency_graph(
             {
-                'log': $r.commands.log,
+                'log': $r.stream.commands.log(null),
             },
             {
                 'package dependencies': q_package_dependencies(
                     {
-                        'read directory': $r.queries['read directory'],
-                        'read file': $r.queries['read file'],
+                        'read directory': $r['filesystem unrestricted'].queries['read directory'](null),
+                        'read file': $r['filesystem unrestricted'].queries['read file'](null),
                     },
                 ),
             },
@@ -178,7 +178,7 @@ _pn.run_main_command(
 
         const npm_update_package_dependencies = c_npm_update_package_dependencies(
             {
-                'remove': $r.commands.remove,
+                'remove': $r['filesystem unrestricted'].commands.remove(null),
                 'update2latest': update2latest,
                 'npm': npm,
             },
@@ -190,7 +190,7 @@ _pn.run_main_command(
                 'npm update package dependencies': npm_update_package_dependencies,
             },
             {
-                'stat': $r.queries['stat possible node'],
+                'stat': $r['filesystem unrestricted'].queries['stat possible node'](null),
             },
         )
 
@@ -224,18 +224,18 @@ _pn.run_main_command(
             {
                 'npm': epe_npm,
                 'tar': epe_tar,
-                'make directory': $r.commands['make directory'],
+                'make directory': $r['filesystem unrestricted'].commands['make directory'](null),
                 // 'remove': $r.commands.remove,
             },
             {
-                'read file': $r.queries['read file'],
+                'read file': $r['filesystem unrestricted'].queries['read file'](null),
                 'npm': eqe_npm,
             },
         )
 
         return c_main(
             {
-                'log error': $r.commands['log error'],
+                'log error': $r.stream.commands['log error'](null),
                 'api': c_api(
                     {
                         'git assert is clean': git_assert_is_clean,
@@ -244,20 +244,20 @@ _pn.run_main_command(
                         'create dependency graph': dependency_graph,
                         'analyze file structure': c_analyze_file_structure(
                             {
-                                'log': $r.commands.log,
+                                'log': $r.stream.commands.log(null),
                             },
                             {
-                                'read directory': $r.queries['read directory'],
-                                'read file': $r.queries['read file'],
+                                'read directory': $r['filesystem unrestricted'].queries['read directory'](null),
+                                'read file': $r['filesystem unrestricted'].queries['read file'](null),
                             },
                         ),
                         'list file structure problems': c_list_file_structure_problems(
                             {
-                                'log': $r.commands.log,
+                                'log': $r.stream.commands.log(null),
                             },
                             {
-                                'read directory': $r.queries['read directory'],
-                                'read file': $r.queries['read file'],
+                                'read directory': $r['filesystem unrestricted'].queries['read directory'](null),
+                                'read file': $r['filesystem unrestricted'].queries['read file'](null),
                             },
                         ),
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
@@ -280,15 +280,15 @@ _pn.run_main_command(
                                 'npm publish': npm_publish,
                                 'update package dependencies': update_package_dependencies,
                                 'git extended commit': git_extended_commit,
-                                'log': $r.commands.log,
+                                'log': $r.stream.commands.log(null),
                             },
                             {
-                                'read file': $r.queries['read file']
+                                'read file': $r['filesystem unrestricted'].queries['read file'](null)
                             },
                         ),
                     },
                     {
-                        'read directory': $r.queries['read directory']
+                        'read directory': $r['filesystem unrestricted'].queries['read directory'](null)
                     },
                 ),
             },

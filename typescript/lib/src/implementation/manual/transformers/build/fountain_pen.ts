@@ -14,7 +14,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 //dependencies
 import * as t_tsc_to_fountain_pen from "../tsc/fountain_pen"
 import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/remove/fountain_pen"
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/list_of_characters"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/list_of_characters"
 import * as t_stat_possible_node_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"
 import * as t_chmod_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/chmod/fountain_pen"
 

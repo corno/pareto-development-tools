@@ -9,7 +9,7 @@ import * as d from "../../../interface/to_be_generated/extended_commit"
 import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: signatures.commands.extended_commit = _p.command_procedure(
     ($p, $cr, $qr) => [

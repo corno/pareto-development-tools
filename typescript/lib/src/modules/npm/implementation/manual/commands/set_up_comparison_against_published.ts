@@ -13,8 +13,8 @@ import * as d from "../../../interface/to_be_generated/set_up_comparison_against
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/path/path"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 import * as q_get_package_json from "../queries/get_package_json"
 
 const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Characters => {

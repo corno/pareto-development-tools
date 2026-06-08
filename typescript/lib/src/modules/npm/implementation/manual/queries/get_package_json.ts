@@ -10,8 +10,8 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/get_package_json"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/path/path"
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/path/text"
+import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 import { $$ as r_parse_npm_package } from "../transformers/npm_package/text"
 
 export const $$: signatures.queries.get_package_json = _p.query_function(
