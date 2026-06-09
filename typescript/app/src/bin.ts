@@ -9,11 +9,12 @@ import __query from 'pareto-core/dist/__internals/async/query'
 import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
 import * as d_espe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
 import * as d_eqe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
-import * as d_chmod from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_chmod/data"
 
 import { $$ as q_git_is_repository_clean } from "lib/dist/modules/git/implementation/manual/queries/is_repository_clean"
 import { $$ as q_git_is_inside_work_tree } from "lib/dist/modules/git/implementation/manual/queries/is_inside_work_tree"
 import { $$ as q_package_dependencies } from "lib/dist/implementation/manual/queries/get_package_dependencies"
+
+import { $$ as q_execute_sandboxed_query_executable } from "pareto-resources/dist/implementation/manual/queries/execute_sandboxed_query_executable"
 
 import { $$ as c_analyze_file_structure } from "lib/dist/implementation/manual/commands/analyze_file_structure"
 import { $$ as c_list_file_structure_problems } from "lib/dist/implementation/manual/commands/list_file_structure_problems"
@@ -37,60 +38,57 @@ import { $$ as c_update_package_dependencies } from "lib/dist/implementation/man
 import { $$ as c_npm_update_package_dependencies } from "lib/dist/modules/npm/implementation/manual/commands/update_package_dependencies"
 import { $$ as c_update2latest } from "lib/dist/modules/npm/implementation/manual/commands/update2latest"
 
-const create_eqe = (
-    program: string,
-    $r: _pn.Available_Standard_Resources,
-): _pi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => __query(
-    ($p) => {
-        return $r['execute unrestricted'].queries['query executable'](
-            {
-                'program': program,
-                'args': $p.args,
-                'working directory': $p['working directory'],
-            },
-            ($) => $,
-        )
-    }
-)
+import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/dist/implementation/manual/commands/execute_sandboxed_command_executable"
+import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/dist/implementation/manual/commands/execute_sandboxed_smelly_command_executable"
 
-const create_epe = (
-    program: string,
-    $r: _pn.Available_Standard_Resources,
-): _pi.Command<d_epe.Error, d_epe.Parameters> => _pc.__command(
-    ($p) => $r['execute unrestricted'].commands['command executable'].execute(
-        {
-            'program': program,
-            'args': $p.args,
-            'working directory': $p['working directory'],
-        },
-        ($) => $,
-    )
-)
 
-const create_espe = (
-    program: string,
-    $r: _pn.Available_Standard_Resources,
-): _pi.Command<d_espe.Error, d_espe.Parameters> => _pc.__command(($p) => $r['execute unrestricted'].commands['smelly command executable'].execute(
-    {
-        'program': program,
-        'args': $p.args,
-        'working directory': $p['working directory'],
-    },
-    ($) => $,
-))
 
 _pn.run_main_command(
     ($r) => {
+        const create_eqe = (
+            program: string,
+        ): _pi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => q_execute_sandboxed_query_executable(
+            {
+                'unrestricted': $r['execute unrestricted'].queries['query executable'],
+            },
+            {
+                'program': program,
+            }
+        )
 
-        const eqe_git = create_eqe("git", $r)
-        const eqe_npm = create_eqe("npm", $r)
+        const create_epe = (
+            program: string,
+        ): _pi.Command<d_epe.Error, d_epe.Parameters> => c_execute_sandboxed_command_executable(
+            {
+                'unrestricted': $r['execute unrestricted'].commands['command executable'],
+            },
+            null,
+            {
+                'program': program,
+            }
+        )
 
-        const epe_git = create_epe("git", $r)
-        const epe_npm = create_epe("npm", $r)
-        const epe_tsc = create_espe("tsc", $r)
-        const epe_node = create_epe("node", $r)
-        const epe_update2latest = create_epe("update2latest", $r)
-        const epe_tar = create_epe("tar", $r)
+        const create_espe = (
+            program: string,
+        ): _pi.Command<d_espe.Error, d_espe.Parameters> => c_execute_sandboxed_smelly_command_executable(
+            {
+                'unrestricted': $r['execute unrestricted'].commands['smelly command executable'],
+            },
+            null,
+            {
+                'program': program,
+            }
+        )
+
+        const eqe_git = create_eqe("git")
+        const eqe_npm = create_eqe("npm")
+
+        const epe_git = create_epe("git")
+        const epe_npm = create_epe("npm")
+        const epe_tsc = create_espe("tsc")
+        const epe_node = create_epe("node")
+        const epe_update2latest = create_epe("update2latest")
+        const epe_tar = create_epe("tar")
 
         const git_is_repository_clean = q_git_is_repository_clean(
             {
