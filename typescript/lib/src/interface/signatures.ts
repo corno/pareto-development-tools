@@ -2,6 +2,7 @@ import * as _pi from 'pareto-core/dist/interface'
 
 import * as resources from "./resources"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
+import * as resources_pareto_stream from "pareto-stream/dist/interface/resources"
 import * as resources_git from "../modules/git/interface/resources"
 import * as resources_npm from "../modules/npm/interface/resources"
 import * as resources_fp from "pareto-fountain-pen-file-structure/dist/interface/resources"
@@ -35,7 +36,7 @@ export namespace commands {
     export type analyze_file_structure = _pi.Command_Procedure<
         resources.commands.analyze_file_structure,
         {
-            'log': resources_pareto.stream.commands.log
+            'log': resources_pareto_stream.commands.log
         },
         {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
@@ -91,7 +92,7 @@ export namespace commands {
     export type create_dependency_graph = _pi.Command_Procedure<
         resources.commands.create_dependency_graph,
         {
-            'log': resources_pareto.stream.commands.log
+            'log': resources_pareto_stream.commands.log
         },
         {
             'package dependencies': resources.queries.get_package_dependencies
@@ -112,7 +113,7 @@ export namespace commands {
     export type list_file_structure_problems = _pi.Command_Procedure<
         resources.commands.analyze_file_structure,
         {
-            'log': resources_pareto.stream.commands.log
+            'log': resources_pareto_stream.commands.log
         },
         {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
@@ -125,7 +126,7 @@ export namespace commands {
         resources_pareto.resources.commands.main,
         {
             'api': resources.commands.api
-            'log error': resources_pareto.stream.commands.log_error
+            'log error': resources_pareto_stream.commands.log_error
 
         },
         null,
@@ -143,7 +144,7 @@ export namespace commands {
             'build and test': resources.commands.build_and_test
             'npm': resources_npm.commands.npm
             'npm publish': resources_npm.commands.npm_publish
-            'log': resources_pareto.stream.commands.log
+            'log': resources_pareto_stream.commands.log
         },
         {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
