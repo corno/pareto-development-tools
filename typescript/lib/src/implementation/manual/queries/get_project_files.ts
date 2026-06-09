@@ -9,7 +9,7 @@ import * as d_directory_content from "pareto-resources/dist/interface/to_be_gene
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
-import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/read_directory_content"
+import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/resources_read_directory_content"
 
 export const $$: signatures.queries.get_project_files = _p.query_function(
     ($p, $r) => $r['read directory'](
@@ -25,7 +25,7 @@ export const $$: signatures.queries.get_project_files = _p.query_function(
                     switch ($[0]) {
                         case 'other': return _p.ss($, ($): _p.Query_Result<d_directory_content.Directory, d.Package_Error> => _p.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
                         case 'file': return _p.ss($, ($): _p.Query_Result<d_directory_content.Directory, d.Package_Error> => _p.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                        case 'directory': return _p.ss($, ($): _p.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content($r)(
+                        case 'directory': return _p.ss($, ($): _p.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content($r, null)(
                             {
                                 'path': t_path_to_path.deprecated_node_path_to_context_path(path),
                             },

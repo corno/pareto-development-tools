@@ -82,9 +82,12 @@ export const $$: signatures.commands.publish = _p.command_procedure(
             ),
 
             _p.query(
-                q_get_package_json.$$({
-                    'read file': $qr['read file'],
-                })(
+                q_get_package_json.$$(
+                    {
+                        'read file': $qr['read file'],
+                    },
+                    null
+                )(
                     {
                         'path to package': lib_path,
                     },

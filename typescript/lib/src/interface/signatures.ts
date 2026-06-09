@@ -14,7 +14,8 @@ export namespace queries {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
 
-        }
+        },
+        null
     >
 
     export type get_package_dependencies = _pi.Query_Function<
@@ -23,7 +24,8 @@ export namespace queries {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
 
-        }
+        },
+        null
     >
 
 }
@@ -38,8 +40,8 @@ export namespace commands {
         {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-
-        }
+        },
+        null
     >
 
     export type api = _pi.Command_Procedure<
@@ -59,7 +61,8 @@ export namespace commands {
         },
         {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory
-        }
+        },
+        null
     >
 
     export type build = _pi.Command_Procedure<
@@ -71,7 +74,8 @@ export namespace commands {
         },
         {
             'stat': resources_pareto.filesystem_unrestricted.queries.stat_possible_node
-        }
+        },
+        null
     >
 
     export type build_and_test = _pi.Command_Procedure<
@@ -80,6 +84,7 @@ export namespace commands {
             'build': resources.commands.build
             'node': resources_pareto.execute_sandboxed.commands.command_executable
         },
+        null,
         null
     >
 
@@ -90,7 +95,8 @@ export namespace commands {
         },
         {
             'package dependencies': resources.queries.get_package_dependencies
-        }
+        },
+        null
     >
 
     export type git_commit = _pi.Command_Procedure<
@@ -99,6 +105,7 @@ export namespace commands {
             'build and test': resources.commands.build_and_test
             'git extended commit': resources_git.commands.extended_commit
         },
+        null,
         null
     >
 
@@ -110,7 +117,8 @@ export namespace commands {
         {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-        }
+        },
+        null
     >
 
     export type main = _pi.Command_Procedure<
@@ -120,6 +128,7 @@ export namespace commands {
             'log error': resources_pareto.stream.commands.log_error
 
         },
+        null,
         null
     >
 
@@ -138,7 +147,8 @@ export namespace commands {
         },
         {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-        }
+        },
+        null
     >
 
     export type tsc = _pi.Command_Procedure<
@@ -146,6 +156,7 @@ export namespace commands {
         {
             'tsc': resources_pareto.execute_sandboxed.commands.smelly_command_executable
         },
+        null,
         null
     >
 
@@ -156,6 +167,7 @@ export namespace commands {
         },
         {
             'stat': resources_pareto.filesystem_unrestricted.queries.stat_possible_node
-        }
+        },
+        null
     >
 }

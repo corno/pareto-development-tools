@@ -39,9 +39,12 @@ export const $$: signatures.commands.set_up_comparison_against_published = _p.co
         const path_x = t_path_to_path.create_node_path($p['path to local package'], { 'node': "package.json" })
         return [
             _p.query(
-                q_get_package_json.$$({
-                    'read file': $qr['read file'],
-                })(
+                q_get_package_json.$$(
+                    {
+                        'read file': $qr['read file'],
+                    },
+                    null
+                )(
                     {
                         'path to package': $p['path to local package'],
                     },

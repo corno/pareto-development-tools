@@ -19,7 +19,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
     ($p, $cr, $q) => [
 
         _p.query(
-            q_get_project_files($q)(
+            q_get_project_files($q, null)(
                 {
                     'path to project': $p['path to project'],
                 },

@@ -21,7 +21,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
     ($p, $cr, $q) => [
 
         _p.query(
-            q_get_project_files($q)(
+            q_get_project_files($q, null)(
                 {
                     'path to project': $p['path to project'],
                 },

@@ -28,8 +28,8 @@ export const $$: signatures.commands.api = _p.command_procedure(
                             },
                             ($): d.Error => ['all', ['could not read packages directory', $]],
                         ),
-                        ($x, id): _pi.Command_Promise<d.All__Package_Error>[] => _p.decide.state($.instruction, ($) => {
-                            const context_path = t_path_to_path.deprecated_node_path_to_context_path($x.path)
+                        ($xx, id): _pi.Command_Promise<d.All__Package_Error>[] => _p.decide.state($.instruction, ($) => {
+                            const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
                             switch ($[0]) {
                                 case 'assert clean': return _p.ss($, ($) => [
                                     $cr['git assert is clean'].execute(

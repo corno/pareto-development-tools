@@ -12,7 +12,8 @@ export namespace commands {
         },
         {
             'is repository clean': resources.queries.is_repository_clean
-        }
+        },
+        null
     >
 
     export type make_pristine = _pi.Command_Procedure<
@@ -20,6 +21,7 @@ export namespace commands {
         {
             'git': resources_pareto.execute_sandboxed.commands.command_executable
         },
+        null,
         null
     >
 
@@ -30,7 +32,8 @@ export namespace commands {
         },
         {
             'git is repository clean': resources.queries.is_repository_clean
-        }
+        },
+        null
     >
 
     export type push = _pi.Command_Procedure<
@@ -38,6 +41,7 @@ export namespace commands {
         {
             'git': resources_pareto.execute_sandboxed.commands.command_executable
         },
+        null,
         null
     >
 
@@ -49,7 +53,8 @@ export namespace commands {
         },
         {
             'git': resources_pareto.execute_sandboxed.queries.query_executable,
-        }
+        },
+        null
     >
 
 }
@@ -60,7 +65,8 @@ export namespace queries {
         resources.queries.is_inside_work_tree,
         {
             'git': resources_pareto.execute_sandboxed.queries.query_executable
-        }
+        },
+        null
     >
 
     export type is_repository_clean = _pi.Query_Function<
@@ -68,7 +74,8 @@ export namespace queries {
         {
             'is inside git work tree': resources.queries.is_inside_work_tree
             'git': resources_pareto.execute_sandboxed.queries.query_executable
-        }
+        },
+        null
     >
 
 }

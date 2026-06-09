@@ -92,12 +92,18 @@ _pn.run_main_command(
         const epe_update2latest = create_epe("update2latest", $r)
         const epe_tar = create_epe("tar", $r)
 
-        const git_is_repository_clean = q_git_is_repository_clean({
-            'git': eqe_git,
-            'is inside git work tree': q_git_is_inside_work_tree({
+        const git_is_repository_clean = q_git_is_repository_clean(
+            {
                 'git': eqe_git,
-            }),
-        })
+                'is inside git work tree': q_git_is_inside_work_tree(
+                    {
+                        'git': eqe_git,
+                    },
+                    null,
+                ),
+            },
+            null,
+        )
 
         const git_assert_is_clean = c_git_assert_clean(
             {
@@ -106,12 +112,14 @@ _pn.run_main_command(
             {
                 'is repository clean': git_is_repository_clean,
             },
+            null,
         )
 
         const tsc = c_tsc(
             {
                 'tsc': epe_tsc,
             },
+            null,
             null,
         )
 
@@ -124,6 +132,7 @@ _pn.run_main_command(
             {
                 'stat': $r['filesystem unrestricted'].queries['stat possible node']
             },
+            null,
         )
 
         const dependency_graph = c_dependency_graph(
@@ -136,14 +145,17 @@ _pn.run_main_command(
                         'read directory': $r['filesystem unrestricted'].queries['read directory'],
                         'read file': $r['filesystem unrestricted'].queries['read file'],
                     },
+                    null,
                 ),
             },
+            null,
         )
 
         const git_make_pristine = c_git_make_pristine(
             {
                 'git': epe_git,
             },
+            null,
             null,
         )
 
@@ -153,12 +165,14 @@ _pn.run_main_command(
                 'node': epe_node,
             },
             null,
+            null,
         )
 
         const update2latest = c_update2latest(
             {
                 'update2latest': epe_update2latest,
             },
+            null,
             null,
         )
 
@@ -167,12 +181,14 @@ _pn.run_main_command(
                 'npm': epe_npm,
             },
             null,
+            null,
         )
 
         const npm_publish = c_npm_publish(
             {
                 'npm': epe_npm,
             },
+            null,
             null,
         )
 
@@ -183,6 +199,7 @@ _pn.run_main_command(
                 'npm': npm,
             },
             null,
+            null,
         )
 
         const update_package_dependencies = c_update_package_dependencies(
@@ -192,12 +209,14 @@ _pn.run_main_command(
             {
                 'stat': $r['filesystem unrestricted'].queries['stat possible node'],
             },
+            null,
         )
 
         const git_push = c_git_push(
             {
                 'git': epe_git,
             },
+            null,
             null,
         )
 
@@ -209,6 +228,7 @@ _pn.run_main_command(
             {
                 'git': eqe_git,
             },
+            null,
         )
 
         const git_extended_commit = c_git_extended_commit(
@@ -218,6 +238,7 @@ _pn.run_main_command(
             {
                 'git is repository clean': git_is_repository_clean,
             },
+            null,
         )
 
         const set_up_comparison_against_published = c_set_up_comparison_against_published(
@@ -231,6 +252,7 @@ _pn.run_main_command(
                 'read file': $r['filesystem unrestricted'].queries['read file'],
                 'npm': eqe_npm,
             },
+            null,
         )
 
         return c_main(
@@ -250,6 +272,7 @@ _pn.run_main_command(
                                 'read directory': $r['filesystem unrestricted'].queries['read directory'],
                                 'read file': $r['filesystem unrestricted'].queries['read file'],
                             },
+                            null,
                         ),
                         'list file structure problems': c_list_file_structure_problems(
                             {
@@ -259,6 +282,7 @@ _pn.run_main_command(
                                 'read directory': $r['filesystem unrestricted'].queries['read directory'],
                                 'read file': $r['filesystem unrestricted'].queries['read file'],
                             },
+                            null,
                         ),
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
                         'update package dependencies': update_package_dependencies,
@@ -267,7 +291,8 @@ _pn.run_main_command(
                                 'build and test': build_and_test,
                                 'git extended commit': git_extended_commit,
                             },
-                            null
+                            null,
+                            null,
                         ),
                         'npm set up comparison against published': set_up_comparison_against_published,
                         'publish': c_publish(
@@ -285,13 +310,16 @@ _pn.run_main_command(
                             {
                                 'read file': $r['filesystem unrestricted'].queries['read file']
                             },
+                            null,
                         ),
                     },
                     {
                         'read directory': $r['filesystem unrestricted'].queries['read directory']
                     },
+                    null,
                 ),
             },
+            null,
             null,
         )
     }

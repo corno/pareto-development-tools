@@ -10,6 +10,7 @@ export namespace commands {
         {
             'npm': resources_pareto.execute_sandboxed.commands.command_executable
         },
+        null,
         null
     >
 
@@ -18,6 +19,7 @@ export namespace commands {
         {
             'npm': resources_pareto.execute_sandboxed.commands.command_executable
         },
+        null,
         null
     >
 
@@ -31,7 +33,8 @@ export namespace commands {
         {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
             'npm': resources_pareto.execute_sandboxed.queries.query_executable
-        }
+        },
+        null
     >
 
     export type update2latest = _pi.Command_Procedure<
@@ -39,6 +42,7 @@ export namespace commands {
         {
             'update2latest': resources_pareto.execute_sandboxed.commands.command_executable
         },
+        null,
         null
     >
 
@@ -48,6 +52,7 @@ export namespace commands {
             'update2latest': resources.commands.update2latest
             'npm': resources.commands.npm
         },
+        null,
         null
     >
 
@@ -59,7 +64,8 @@ export namespace queries {
         resources.queries.get_package_json,
         {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-        }
+        },
+        null
     >
 
 }

@@ -32,6 +32,7 @@ export const $$: signatures.commands.create_dependency_graph = _p.command_proced
                         'log': $cr.log,
                     },
                     null,
+                    null,
                 ).execute(
                     {
                         'indentation': "    ",
