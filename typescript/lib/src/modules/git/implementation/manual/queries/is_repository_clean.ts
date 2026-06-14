@@ -2,7 +2,7 @@ import query_function from 'pareto-core/dist/__internals/async/query_function'
 import * as pt from 'pareto-core/dist/assign'
 import * as pi from 'pareto-core/dist/interface'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/queries"
 
 //data types
 import * as d from "../../../interface/to_be_generated/is_repository_clean"
@@ -10,7 +10,7 @@ import * as d from "../../../interface/to_be_generated/is_repository_clean"
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.queries.is_repository_clean = query_function(
+export const $$: signatures.query_functions.is_repository_clean = query_function(
     ($d, $s, $q) => $q.git(
         {
             'working directory': pt.optional.literal.not_set(),

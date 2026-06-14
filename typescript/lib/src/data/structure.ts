@@ -35,24 +35,12 @@ const $_implementation: d_structure.Directory.group.D = directory_group({
     "generated": directory_generated(true),
 
     "manual": directory_group({
-        "transformers": directory_wildcards(1, false, ["ts"], false),
-        "refiners": directory_wildcards(1, false, ["ts"], false),
-        "text_to_text": directory_wildcards(0, false, ["ts"], false),
-        "queries": directory_wildcards(0, false, ["ts"], false),
         "commands": directory_wildcards(0, false, ["ts"], false),
+        "productions": directory_wildcards(1, false, ["ts"], false),
+        "queries": directory_wildcards(0, false, ["ts"], false),
+        "refiners": directory_wildcards(1, false, ["ts"], false),
+        "transformers": directory_wildcards(1, false, ["ts"], false),
     }),
-
-    "operations": directory_group({
-        "pure": directory_group({
-            "dictionary": directory_wildcards(0, false, ["ts"], false),
-            "list": directory_wildcards(0, false, ["ts"], false),
-        }),
-        "impure": directory_group({
-            "dictionary": directory_wildcards(0, false, ["ts"], false),
-            "list": directory_wildcards(0, false, ["ts"], false),
-        }),
-    }),
-    "temp": directory_wildcards(0, true, ["ts"], true),
 
 })
 

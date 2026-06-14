@@ -3,7 +3,7 @@ import * as pci from 'pareto-core/dist/command_interface'
 import * as queries from "./queries"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 import * as resources_pareto_stream from "pareto-stream/dist/interface/commands"
-import * as resources_git from "../modules/git/interface/resources"
+import * as resources_git from "../modules/git/interface/commands"
 import * as resources_npm from "../modules/npm/interface/resources"
 
 import * as d_get_project_files from "./to_be_generated/get_project_files"

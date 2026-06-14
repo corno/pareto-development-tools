@@ -2,7 +2,7 @@ import * as p from 'pareto-core/dist/command'
 import * as pa from 'pareto-core/dist/assign'
 import p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/to_be_generated/extended_commit"
@@ -11,7 +11,7 @@ import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schema
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.commands.extended_commit = p.command_procedure(
+export const $$: signatures.procedures.extended_commit = p.command_procedure(
     ($d, $s, $q, $c) => [
         p.if_.query(
             $q['git is repository clean'](

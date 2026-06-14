@@ -2,7 +2,7 @@ import * as pt from 'pareto-core/dist/query'
 import * as pqi from 'pareto-core/dist/query_interface'
 
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/queries"
 
 //data types
 import * as d from "../../../interface/to_be_generated/is_inside_work_tree"
@@ -27,7 +27,7 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
     )
 })
 
-export const $$: signatures.queries.is_inside_work_tree = pt.query_function(
+export const $$: signatures.query_functions.is_inside_work_tree = pt.query_function(
     ($d, $s, $q) => temp_observe_behavior(
         $q.git(
             {
