@@ -1,12 +1,12 @@
 import * as pt from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.commands.tsc = pt.command_procedure(
+export const $$: signatures.procedures.tsc = pt.command_procedure(
 
     // tsc
     ($d, $s, $q, $c) => [

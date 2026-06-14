@@ -1,7 +1,7 @@
 import * as pt from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/to_be_generated/git_commit"
@@ -9,7 +9,7 @@ import * as d from "../../../interface/to_be_generated/git_commit"
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const $$: signatures.commands.git_commit = pt.command_procedure(
+export const $$: signatures.procedures.git_commit = pt.command_procedure(
 
     ($d, $s, $q, $c) => [
 

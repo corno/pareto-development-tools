@@ -3,7 +3,7 @@ import * as _pa from 'pareto-core/dist/assign'
 import * as pi from 'pareto-core/dist/interface'
 import * as _pq from 'pareto-core/dist/query'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/to_be_generated/get_project_files"
@@ -17,7 +17,7 @@ import { $$ as q_get_project_files } from "../queries/get_project_files"
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 
-export const $$: signatures.commands.list_file_structure_problems = pt.command_procedure(
+export const $$: signatures.procedures.list_file_structure_problems = pt.command_procedure(
     ($d, $s, $q, $c) => [
 
         pt.query(

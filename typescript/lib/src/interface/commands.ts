@@ -1,41 +1,41 @@
-import * as pqi from 'pareto-core/dist/query_interface'
 import * as pci from 'pareto-core/dist/command_interface'
 
-import * as resources from "./resources"
+import * as queries from "./queries"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
-import * as resources_pareto_stream from "pareto-stream/dist/interface/resources"
+import * as resources_pareto_stream from "pareto-stream/dist/interface/commands"
 import * as resources_git from "../modules/git/interface/resources"
 import * as resources_npm from "../modules/npm/interface/resources"
-import * as resources_fp from "pareto-fountain-pen-file-structure/dist/interface/resources"
 
-export namespace queries {
+import * as d_get_project_files from "./to_be_generated/get_project_files"
+import * as d_api from "./to_be_generated/execute_command"
+import * as d_build from "./to_be_generated/build"
+import * as d_build_and_test from "./to_be_generated/build_and_test"
+import * as d_create_dependency_graph from "./to_be_generated/create_dependency_graph"
+import * as d_publish from "./to_be_generated/publish"
+import * as d_tsc from "./to_be_generated/tsc"
+import * as d_update_package_dependencies from "./to_be_generated/update_package_dependencies"
+import * as d_git_commit from "./to_be_generated/git_commit"
 
-    export type get_project_files = pqi.Query_Function<
-        resources.queries.get_project_files,
-        null,
-        {
-            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
-            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
 
-        }
-    >
-
-    export type get_package_dependencies = pqi.Query_Function<
-        resources.queries.get_package_dependencies,
-        null,
-        {
-            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
-            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-
-        }
-    >
-
-}
 
 export namespace commands {
 
+    export type analyze_file_structure = pci.Command<d_get_project_files.Error, d_get_project_files.Parameters>
+    export type api = pci.Command<d_api.Error, d_api.Parameters>
+    export type build = pci.Command<d_build.Error, d_build.Parameters>
+    export type build_and_test = pci.Command<d_build_and_test.Error, d_build_and_test.Parameters>
+    export type create_dependency_graph = pci.Command<d_create_dependency_graph.Error, d_create_dependency_graph.Parameters>
+    export type git_commit = pci.Command<d_git_commit.Error, d_git_commit.Parameters>
+    export type publish = pci.Command<d_publish.Error, d_publish.Parameters>
+    export type tsc = pci.Command<d_tsc.Error, d_tsc.Parameters>
+    export type update_package_dependencies = pci.Command<d_update_package_dependencies.Error, d_update_package_dependencies.Parameters>
+    
+}
+
+export namespace procedures {
+
     export type analyze_file_structure = pci.Command_Procedure<
-        resources.commands.analyze_file_structure,
+        commands.analyze_file_structure,
         null,
         {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
@@ -47,54 +47,54 @@ export namespace commands {
     >
 
     export type api = pci.Command_Procedure<
-        resources.commands.api,
+        commands.api,
         null,
         {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory
         },
         {
-            'analyze file structure': resources.commands.analyze_file_structure
-            'build and test': resources.commands.build_and_test
-            'build': resources.commands.build
-            'create dependency graph': resources.commands.create_dependency_graph
+            'analyze file structure': commands.analyze_file_structure
+            'build and test': commands.build_and_test
+            'build': commands.build
+            'create dependency graph': commands.create_dependency_graph
             'git assert is clean': resources_git.commands.assert_is_clean
-            'git commit': resources.commands.git_commit
+            'git commit': commands.git_commit
             'git remove tracked but ignored': resources_git.commands.remove_tracked_but_ignored
-            'list file structure problems': resources.commands.analyze_file_structure
+            'list file structure problems': commands.analyze_file_structure
             'npm set up comparison against published': resources_npm.commands.set_up_comparison_against_published
-            'publish': resources.commands.publish
-            'update package dependencies': resources.commands.update_package_dependencies
+            'publish': commands.publish
+            'update package dependencies': commands.update_package_dependencies
         }
     >
 
     export type build = pci.Command_Procedure<
-        resources.commands.build,
+        commands.build,
         null,
         {
             'stat': resources_pareto.filesystem_unrestricted.queries.stat_possible_node
         },
         {
-            'tsc': resources.commands.tsc
+            'tsc': commands.tsc
             'remove': resources_pareto.filesystem_unrestricted.commands.remove
             'chmod': resources_pareto.filesystem_unrestricted.commands.chmod
         }
     >
 
     export type build_and_test = pci.Command_Procedure<
-        resources.commands.build_and_test,
+        commands.build_and_test,
         null,
         null,
         {
-            'build': resources.commands.build
+            'build': commands.build
             'node': resources_pareto.execute_sandboxed.commands.command_executable
         }
     >
 
     export type create_dependency_graph = pci.Command_Procedure<
-        resources.commands.create_dependency_graph,
+        commands.create_dependency_graph,
         null,
         {
-            'package dependencies': resources.queries.get_package_dependencies
+            'package dependencies': queries.queries.get_package_dependencies
         },
         {
             'log': resources_pareto_stream.commands.log
@@ -102,17 +102,17 @@ export namespace commands {
     >
 
     export type git_commit = pci.Command_Procedure<
-        resources.commands.git_commit,
+        commands.git_commit,
         null,
         null,
         {
-            'build and test': resources.commands.build_and_test
+            'build and test': commands.build_and_test
             'git extended commit': resources_git.commands.extended_commit
         }
     >
 
     export type list_file_structure_problems = pci.Command_Procedure<
-        resources.commands.analyze_file_structure,
+        commands.analyze_file_structure,
         null,
         {
             'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
@@ -128,14 +128,14 @@ export namespace commands {
         null,
         null,
         {
-            'api': resources.commands.api
+            'api': commands.api
             'log error': resources_pareto_stream.commands.log_error
 
         }
     >
 
     export type publish = pci.Command_Procedure<
-        resources.commands.publish,
+        commands.publish,
         null,
         {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
@@ -145,8 +145,8 @@ export namespace commands {
             'git extended commit': resources_git.commands.extended_commit
             'git assert is clean': resources_git.commands.assert_is_clean
             'git make pristine': resources_git.commands.make_pristine
-            'update package dependencies': resources.commands.update_package_dependencies
-            'build and test': resources.commands.build_and_test
+            'update package dependencies': commands.update_package_dependencies
+            'build and test': commands.build_and_test
             'npm': resources_npm.commands.npm
             'npm publish': resources_npm.commands.npm_publish
             'log': resources_pareto_stream.commands.log
@@ -154,7 +154,7 @@ export namespace commands {
     >
 
     export type tsc = pci.Command_Procedure<
-        resources.commands.tsc,
+        commands.tsc,
         null,
         null,
         {
@@ -163,7 +163,7 @@ export namespace commands {
     >
 
     export type update_package_dependencies = pci.Command_Procedure<
-        resources.commands.update_package_dependencies,
+        commands.update_package_dependencies,
         null,
         {
             'stat': resources_pareto.filesystem_unrestricted.queries.stat_possible_node

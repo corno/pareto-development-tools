@@ -2,7 +2,7 @@ import * as pt from 'pareto-core/dist/query'
 import * as pqi from 'pareto-core/dist/query_interface'
 
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/queries"
 
 //data types
 import * as d from "../../../interface/to_be_generated/get_project_files"
@@ -13,7 +13,7 @@ import * as d_directory_content from "pareto-resources/dist/interface/to_be_gene
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/resources_read_directory_content"
 
-export const $$: signatures.queries.get_project_files = pt.query_function(
+export const $$: signatures.query_functions.get_project_files = pt.query_function(
     ($d, $s, $q) => $q['read directory'](
         {
             'path': t_path_to_path.extend_context_path_with_single_step($d['path to project'], { 'addition': "packages" }),

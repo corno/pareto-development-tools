@@ -2,7 +2,7 @@ import * as pt from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
 import p_variables from 'pareto-core/dist/_p_variables'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/to_be_generated/publish"
@@ -14,7 +14,7 @@ import * as q_get_package_json from "../../../modules/npm/implementation/manual/
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const $$: signatures.commands.publish = pt.command_procedure(
+export const $$: signatures.procedures.publish = pt.command_procedure(
 
     ($d, $s, $q, $c) => p_variables(() => {
         const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': pt.list.literal(["typescript", "lib"]) })

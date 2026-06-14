@@ -1,6 +1,6 @@
 import * as pt from 'pareto-core/dist/command'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 
 //data types
@@ -12,7 +12,7 @@ import * as t_file_structure_analysis_to_csv from "../transformers/file_structur
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis"
 import { $$ as q_get_project_files } from "../queries/get_project_files"
 
-export const $$: signatures.commands.analyze_file_structure = pt.command_procedure(
+export const $$: signatures.procedures.analyze_file_structure = pt.command_procedure(
     ($d, $s, $q, $c) => [
 
         pt.query(

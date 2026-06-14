@@ -2,7 +2,7 @@ import * as pt from 'pareto-core/dist/query'
 import * as pqi from 'pareto-core/dist/query_interface'
 
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/queries"
 
 //data types
 import * as d from "../../../interface/to_be_generated/get_package_dependencies"
@@ -10,10 +10,9 @@ import * as d_npm_package from "../../../modules/npm/interface/to_be_generated/n
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/transformers/npm_package/text"
 
-export const $$: signatures.queries.get_package_dependencies = pt.query_function(
+export const $$: signatures.query_functions.get_package_dependencies = pt.query_function(
     ($d, $s, $q) => $q['read directory'](
         {
             'path': t_path_to_path.extend_context_path_with_single_step($d['path'], { 'addition': "packages" }),

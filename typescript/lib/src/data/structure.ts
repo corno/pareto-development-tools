@@ -24,14 +24,11 @@ const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boo
 }]]
 
 const $_interface: d_structure.Directory.group.D = directory_group({
+    "commands.ts": file_manual(),
     "generated": directory_generated(true),
-    "resources.ts": file_manual(),
-    "signatures.ts": file_manual(),
-    "signatures": directory_group({
-        "transformers": directory_wildcards(1, false, ["ts"], false),
-    }),
+    "queries.ts": file_manual(),
     "to_be_generated": directory_wildcards(0, false, ["ts"], true),
-
+    "transformers.ts": file_manual(),
 })
 
 const $_implementation: d_structure.Directory.group.D = directory_group({

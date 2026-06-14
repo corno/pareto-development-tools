@@ -2,7 +2,7 @@ import * as pt from 'pareto-core/dist/command'
 import * as _pa from 'pareto-core/dist/assign'
 import p_variables from 'pareto-core/dist/_p_variables'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/to_be_generated/build"
@@ -10,7 +10,7 @@ import * as d from "../../../interface/to_be_generated/build"
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.commands.build = pt.command_procedure(
+export const $$: signatures.procedures.build = pt.command_procedure(
     ($d, $s, $q, $c) => p_variables(
         () => {
             const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })
