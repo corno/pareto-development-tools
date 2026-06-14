@@ -1,6 +1,6 @@
-import * as _p from 'pareto-core/dist/command'
+import * as pt from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
-import _p_variables from 'pareto-core/dist/_p_variables'
+import p_variables from 'pareto-core/dist/_p_variables'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -14,29 +14,29 @@ import * as q_get_package_json from "../../../modules/npm/implementation/manual/
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const $$: signatures.commands.publish = _p.command_procedure(
+export const $$: signatures.commands.publish = pt.command_procedure(
 
-    ($d, $s, $q, $c) => _p_variables(() => {
-        const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': _p.list.literal(["typescript", "lib"]) })
+    ($d, $s, $q, $c) => p_variables(() => {
+        const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': pt.list.literal(["typescript", "lib"]) })
         return [
 
             $c['git push'].execute(
                 {
-                    'path': _p.optional.literal.set($d['path to package']),
+                    'path': pt.optional.literal.set($d['path to package']),
                 },
                 ($): d.Error => ['error while running git push', $],
             ),
 
             // $c['git assert is clean'].execute(
             //     {
-            //         'path': _p.optional.literal.set($d['path to package']),
+            //         'path': pt.optional.literal.set($d['path to package']),
             //     },
             //     ($) => ['error while running git assert is clean at the start', $],
             // ),
 
             $c['git make pristine'].execute(
                 {
-                    'path': _p.optional.literal.set($d['path to package']),
+                    'path': pt.optional.literal.set($d['path to package']),
                 },
                 ($) => ['error while running git make pristine', $],
             ),
@@ -57,14 +57,14 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
             // $c['git assert is clean'].execute(
             //     {
-            //         'path': _p.optional.literal.set($d['path to package']),
+            //         'path': pt.optional.literal.set($d['path to package']),
             //     },
             //     ($) => ['error while running git assert is clean after updating package dependencies', $],
             // ),
 
             $c.npm.execute(
                 {
-                    'path': _p.optional.literal.set(lib_path),
+                    'path': pt.optional.literal.set(lib_path),
                     'operation': ['version', $d.generation],
                 },
                 ($) => ['error while running npm version', $],
@@ -73,7 +73,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
             // update the lib package-lock.json to reflect the new version
             $c.npm.execute(
                 {
-                    'path': _p.optional.literal.set(lib_path),
+                    'path': pt.optional.literal.set(lib_path),
                     'operation': ['update', {
                         'package-lock only': true
                     }],
@@ -81,7 +81,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                 ($) => ['error while running npm update', $],
             ),
 
-            _p.query(
+            pt.query(
                 q_get_package_json.$$(
                     null,
                     {
@@ -100,7 +100,7 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
                         $c['git extended commit'].execute(
                             {
-                                'path': _p.optional.literal.set($d['path to package']),
+                                'path': pt.optional.literal.set($d['path to package']),
                                 'instruction': {
                                     'commit message': "pdt: published version " + $v.version,
                                     'stage all changes': true,

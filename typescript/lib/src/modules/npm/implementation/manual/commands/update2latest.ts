@@ -1,23 +1,23 @@
-import * as _p from 'pareto-core/dist/command'
+import * as pt from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
-import * as _pi from 'pareto-core/dist/interface'
+import * as pi from 'pareto-core/dist/interface'
 
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.commands.update2latest = _p.command_procedure(
+export const $$: signatures.commands.update2latest = pt.command_procedure(
     ($d, $s, $q, $c) => [
         $c.update2latest.execute(
             {
-                'working directory': _p.optional.literal.not_set(),
+                'working directory': pt.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
                     _pt.list.literal([
                         t_path_to_text.Context_Path($d.path),
                     ]),
                     _pt.decide.state($d.what, ($) => {
-                        // _p_log_debug_message(`Updating ${$d.path} to latest`, () => {})
+                        // p_log_debug_message(`Updating ${$d.path} to latest`, () => {})
                         switch ($[0]) {
                             case 'dependencies': return _pt.ss($, ($) => {
                                 return _pt.list.literal(["dependencies"])

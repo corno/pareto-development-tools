@@ -1,3 +1,3 @@
-import * as _pi from 'pareto-core/dist/interface'
+import * as pi from 'pareto-core/dist/interface'
 
-export type CSV = _pi.List<_pi.List<string>>
+export type CSV = pi.List<pi.List<string>>

@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/command'
+import * as pt from 'pareto-core/dist/command'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -8,7 +8,7 @@ import * as d from "../../../interface/to_be_generated/update_package_dependenci
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.commands.update_package_dependencies = _p.command_procedure(
+export const $$: signatures.commands.update_package_dependencies = pt.command_procedure(
     ($d, $s, $q, $c) => [
 
         // clean
@@ -40,7 +40,7 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         // install/update updated dependencies
         $c['npm'].execute(
             {
-                'path': _p.optional.literal.set($d.path),
+                'path': pt.optional.literal.set($d.path),
                 'operation': ['update', {
                     'package-lock only': false
                 }], // 'install' does not update the indirect dependencies

@@ -1,5 +1,5 @@
-import * as _p from 'pareto-core/dist/query'
-import * as _pqi from 'pareto-core/dist/query_interface'
+import * as pt from 'pareto-core/dist/query'
+import * as pqi from 'pareto-core/dist/query_interface'
 
 
 import * as signatures from "../../../interface/signatures"
@@ -13,28 +13,28 @@ import * as d_directory_content from "pareto-resources/dist/interface/to_be_gene
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/resources_read_directory_content"
 
-export const $$: signatures.queries.get_project_files = _p.query_function(
+export const $$: signatures.queries.get_project_files = pt.query_function(
     ($d, $s, $q) => $q['read directory'](
         {
             'path': t_path_to_path.extend_context_path_with_single_step($d['path to project'], { 'addition': "packages" }),
         },
         ($): d.Error => ['read directory', $],
     ).query(
-        ($v) => _p.dictionaryx.parallel(
+        ($v) => pt.dictionaryx.parallel(
             $v,
-            ($): _pqi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
+            ($): pqi.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                 const path = $.path
-                return _p.decide.state($['node type'], ($) => {
+                return pt.decide.state($['node type'], ($) => {
                     switch ($[0]) {
-                        case 'other': return _p.ss($, ($): _pqi.Query_Result<d_directory_content.Directory, d.Package_Error> => _p.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                        case 'file': return _p.ss($, ($): _pqi.Query_Result<d_directory_content.Directory, d.Package_Error> => _p.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                        case 'directory': return _p.ss($, ($): _pqi.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content(null, $q)(
+                        case 'other': return pt.ss($, ($): pqi.Query_Result<d_directory_content.Directory, d.Package_Error> => pt.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                        case 'file': return pt.ss($, ($): pqi.Query_Result<d_directory_content.Directory, d.Package_Error> => pt.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                        case 'directory': return pt.ss($, ($): pqi.Query_Result<d_directory_content.Directory, d.Package_Error> => q_directory_content(null, $q)(
                             {
                                 'path': t_path_to_path.deprecated_node_path_to_context_path(path),
                             },
                             ($): d.Package_Error => ['directory content', $],
                         ))
-                        default: return _p.au($[0])
+                        default: return pt.au($[0])
                     }
                 })
             },

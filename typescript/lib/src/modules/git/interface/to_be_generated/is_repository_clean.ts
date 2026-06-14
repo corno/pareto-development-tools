@@ -1,4 +1,4 @@
-import * as _pi from 'pareto-core/dist/interface'
+import * as pi from 'pareto-core/dist/interface'
 
 import * as d_eqe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
 import * as d_iwt from "./is_inside_work_tree"
@@ -12,5 +12,5 @@ export type Error =
     | ['unknown issue', d_iwt.Error]
 
 export type Parameters = {
-    'path': _pi.Optional_Value<d_path.Context_Path>,
+    'path': pi.Optional_Value<d_path.Context_Path>,
 }

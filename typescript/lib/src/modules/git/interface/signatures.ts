@@ -1,12 +1,12 @@
-import * as _pqi from 'pareto-core/dist/query_interface'
-import * as _pci from 'pareto-core/dist/command_interface'
+import * as pqi from 'pareto-core/dist/query_interface'
+import * as pci from 'pareto-core/dist/command_interface'
 
 import * as resources from "./resources"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 
 export namespace commands {
 
-    export type assert_is_clean = _pci.Command_Procedure<
+    export type assert_is_clean = pci.Command_Procedure<
         resources.commands.assert_is_clean,
         null,
         {
@@ -17,7 +17,7 @@ export namespace commands {
         }
     >
 
-    export type make_pristine = _pci.Command_Procedure<
+    export type make_pristine = pci.Command_Procedure<
         resources.commands.make_pristine,
         null,
         null,
@@ -26,7 +26,7 @@ export namespace commands {
         }
     >
 
-    export type extended_commit = _pci.Command_Procedure<
+    export type extended_commit = pci.Command_Procedure<
         resources.commands.extended_commit,
         null,
         {
@@ -37,7 +37,7 @@ export namespace commands {
         }
     >
 
-    export type push = _pci.Command_Procedure<
+    export type push = pci.Command_Procedure<
         resources.commands.push,
         null,
         null,
@@ -46,7 +46,7 @@ export namespace commands {
         }
     >
 
-    export type remove_tracked_but_ignored = _pci.Command_Procedure<
+    export type remove_tracked_but_ignored = pci.Command_Procedure<
         resources.commands.remove_tracked_but_ignored,
         null,
         {
@@ -62,7 +62,7 @@ export namespace commands {
 
 export namespace queries {
 
-    export type is_inside_work_tree = _pqi.Query_Function<
+    export type is_inside_work_tree = pqi.Query_Function<
         resources.queries.is_inside_work_tree,
         null,
         {
@@ -70,7 +70,7 @@ export namespace queries {
         }
     >
 
-    export type is_repository_clean = _pqi.Query_Function<
+    export type is_repository_clean = pqi.Query_Function<
         resources.queries.is_repository_clean,
         null,
         {

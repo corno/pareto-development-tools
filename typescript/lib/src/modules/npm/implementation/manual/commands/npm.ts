@@ -1,17 +1,17 @@
-import * as _p from 'pareto-core/dist/command'
+import * as pt from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
-import * as _pi from 'pareto-core/dist/interface'
+import * as pi from 'pareto-core/dist/interface'
 
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.commands.npm = _p.command_procedure(
+export const $$: signatures.commands.npm = pt.command_procedure(
     ($d, $s, $q, $c) => [
         $c['npm'].execute(
             {
-                'working directory': _p.optional.literal.not_set(),
+                'working directory': pt.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
                     $d.path.__decide(
                         ($) => _pt.list.literal([

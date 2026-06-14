@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core-shorthands/dist/unconstrained'
+import * as pt from 'pareto-core-shorthands/dist/unconstrained'
 
 
 import * as d_structure from "../interface/generated/liana/schemas/structure/data"
@@ -10,16 +10,16 @@ const file_generated = (commitToGit: boolean): d_structure.Directory.group.D => 
 
 const directory_ignore = (): d_structure.Directory.group.D => ['directory', ['ignore', null]]
 const directory_freeform = (): d_structure.Directory.group.D => ['directory', ['freeform', null]]
-const directory_group = (nodes: _p.Raw_Or_Normal_Dictionary<d_structure.Directory.group.D>): d_structure.Directory.group.D => ['directory', ['group', _p.dictionary.literal(nodes)]]
-const dgroup = (nodes: _p.Raw_Or_Normal_Dictionary<d_structure.Directory.group.D>): d_structure.Directory => ['group', _p.dictionary.literal(nodes)]
+const directory_group = (nodes: pt.Raw_Or_Normal_Dictionary<d_structure.Directory.group.D>): d_structure.Directory.group.D => ['directory', ['group', pt.dictionary.literal(nodes)]]
+const dgroup = (nodes: pt.Raw_Or_Normal_Dictionary<d_structure.Directory.group.D>): d_structure.Directory => ['group', pt.dictionary.literal(nodes)]
 const directory_dictionary = ($: d_structure.Directory): d_structure.Directory.group.D => ['directory', ['dictionary', $]]
 const directory_generated = (commitToGit: boolean): d_structure.Directory.group.D => ['directory', ['generated', {
     'commit to git': commitToGit,
 }]]
-const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boolean, extensions: _p.Raw_Or_Normal_List<string>, warn: boolean): d_structure.Directory.group.D => ['directory', ['wildcards', {
+const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boolean, extensions: pt.Raw_Or_Normal_List<string>, warn: boolean): d_structure.Directory.group.D => ['directory', ['wildcards', {
     'required directories': required_dirs,
     'additional directories allowed': additional_dirs_allowed,
-    'extensions': _p.list.literal<string>(extensions),
+    'extensions': pt.list.literal<string>(extensions),
     'warn': warn,
 }]]
 
@@ -59,7 +59,7 @@ const $_implementation: d_structure.Directory.group.D = directory_group({
 
 })
 
-export const $$: d_structure.Directory = ['group', _p.dictionary.literal<d_structure.Directory.group.D>({
+export const $$: d_structure.Directory = ['group', pt.dictionary.literal<d_structure.Directory.group.D>({
     ".git": directory_ignore(),
     ".gitignore": file_manual(),
     "data": directory_freeform(),

@@ -1,5 +1,5 @@
-import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/assign'
+import * as p from 'pareto-core/dist/command'
+import * as pa from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -9,20 +9,20 @@ import * as d from "../../../interface/to_be_generated/make_pristine"
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.commands.make_pristine = _p.command_procedure(
+export const $$: signatures.commands.make_pristine = p.command_procedure(
     ($d, $s, $q, $c) => [
         $c.git.execute(
             {
-                'working directory': _p.optional.literal.not_set(),
-                'args': _pt.list.nested_literal_old([
+                'working directory': p.optional.literal.not_set(),
+                'args': pa.list.nested_literal_old([
                     $d.path.__decide(
-                        ($) => _pt.list.literal([
+                        ($) => pa.list.literal([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => _pt.list.literal([])
+                        () => pa.list.literal([])
                     ),
-                    _pt.list.literal([
+                    p.list.literal([
                         "clean",
                         "--force",
                         "-d", // remove whole directories

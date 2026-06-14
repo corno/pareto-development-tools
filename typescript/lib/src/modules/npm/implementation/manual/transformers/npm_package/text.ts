@@ -1,5 +1,5 @@
-import * as _p from 'pareto-core/dist/assign'
-import * as _pi from 'pareto-core/dist/interface'
+import * as pt from 'pareto-core/dist/assign'
+import * as pi from 'pareto-core/dist/interface'
 
 //data types
 import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
@@ -14,7 +14,7 @@ type Error_Expect_Object =
     | ['duplicate identifier', string]
     | ['missing value', null]
 
-type Object = _pi.Dictionary<d.Value>
+type Object = pi.Dictionary<d.Value>
 
 //dependencies
 import * as t_parse_tree_from_list_of_characters from "astn-core/dist/implementation/manual/refiners/parse_tree/list_of_characters"
@@ -38,16 +38,16 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
             }
             return null
         })
-        return _p.dictionary.literal(temp)
+        return pt.dictionary.literal(temp)
     }
-    return _p.decide.state($.type, ($) => {
+    return pt.decide.state($.type, ($) => {
         switch ($[0]) {
-            case 'concrete': return _p.ss($, ($) => _p.decide.state($, ($) => {
+            case 'concrete': return pt.ss($, ($) => pt.decide.state($, ($) => {
                 switch ($[0]) {
-                    case 'dictionary': return _p.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
-                    case 'group': return _p.ss($, ($) => _p.decide.state($, ($) => {
+                    case 'dictionary': return pt.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
+                    case 'group': return pt.ss($, ($) => pt.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'verbose': return _p.ss($, ($) => expect_unique_identifiers_fixme($.properties, abort))
+                            case 'verbose': return pt.ss($, ($) => expect_unique_identifiers_fixme($.properties, abort))
                             default: return abort(['not an object', null])
                         }
                     }))
@@ -59,11 +59,11 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
     })
 }
 
-const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never): string => _p.decide.state($.type, ($) => {
+const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never): string => pt.decide.state($.type, ($) => {
     switch ($[0]) {
-        case 'concrete': return _p.ss($, ($) => _p.decide.state($, ($) => {
+        case 'concrete': return pt.ss($, ($) => pt.decide.state($, ($) => {
             switch ($[0]) {
-                case 'text': return _p.ss($, ($) => $.token.value)
+                case 'text': return pt.ss($, ($) => $.token.value)
                 default: return abort(['not a text', null])
             }
         }))
@@ -78,7 +78,7 @@ const expect_property = ($: Object, id: string, abort: (error: ['missing propert
     }
 )
 
-export const $$: _pi.Refiner<d_out.NPM_Package, d_function.Error['type'], d_in.List_of_Characters> = ($, abort) => {
+export const $$: pi.Refiner<d_out.NPM_Package, d_function.Error['type'], d_in.List_of_Characters> = ($, abort) => {
     const x = t_parse_tree_from_list_of_characters.Document(
         $,
         ($) => abort(['invalid ASTN', $]),
@@ -95,7 +95,7 @@ export const $$: _pi.Refiner<d_out.NPM_Package, d_function.Error['type'], d_in.L
     return {
         'name': name,
         'version': version,
-        'dependencies': _p.optional.from.optional(
+        'dependencies': pt.optional.from.optional(
             root.__get_possible_entry_deprecated('dependencies'),
         ).map(
             ($) => expect_object(

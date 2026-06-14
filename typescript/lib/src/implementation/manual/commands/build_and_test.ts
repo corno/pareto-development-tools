@@ -1,6 +1,6 @@
-import * as _p from 'pareto-core/dist/command'
+import * as pt from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
-import _p_text_from_list from 'pareto-core/dist/_p_text_from_list'
+import p_text_from_list from 'pareto-core/dist/_p_text_from_list'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -11,7 +11,7 @@ import * as d from "../../../interface/to_be_generated/build_and_test"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.commands.build_and_test = _p.command_procedure(
+export const $$: signatures.commands.build_and_test = pt.command_procedure(
     ($d, $s, $q, $c) => [
 
         // build
@@ -25,7 +25,7 @@ export const $$: signatures.commands.build_and_test = _p.command_procedure(
         // test
         $c.node.execute(
             {
-                'working directory': _p.optional.literal.not_set(),
+                'working directory': pt.optional.literal.not_set(),
                 'args': _pt.list.literal([
                     t_path_to_text.Context_Path(
                         t_path_to_path.extend_context_path_with_list(

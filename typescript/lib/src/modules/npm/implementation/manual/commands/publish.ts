@@ -1,16 +1,16 @@
-import * as _p from 'pareto-core/dist/command'
+import * as pt from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
-import * as _pi from 'pareto-core/dist/interface'
+import * as pi from 'pareto-core/dist/interface'
 
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
 
-export const $$: signatures.commands.npm_publish = _p.command_procedure(
+export const $$: signatures.commands.npm_publish = pt.command_procedure(
     ($d, $s, $q, $c) => [
         $c['npm'].execute(
             {
-                'working directory': _p.optional.literal.set($d.path),
+                'working directory': pt.optional.literal.set($d.path),
                 'args': _pt.list.nested_literal_old([
                     [
                         "publish"

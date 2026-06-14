@@ -1,8 +1,8 @@
 #!/usr/bin/env -S node --enable-source-maps
 
-import * as _pn from 'pareto-host-nodejs'
-import * as _pci from 'pareto-core/dist/command_interface'
-import * as _pqi from 'pareto-core/dist/query_interface'
+import * as ph from 'pareto-host-nodejs'
+import * as pci from 'pareto-core/dist/command_interface'
+import * as pqi from 'pareto-core/dist/query_interface'
 
 import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
 import * as d_espe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
@@ -41,11 +41,11 @@ import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-reso
 
 
 
-_pn.run_main_command(
+ph.run_main_command(
     ($r) => {
         const create_eqe = (
             program: string,
-        ): _pqi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => q_execute_sandboxed_query_executable(
+        ): pqi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => q_execute_sandboxed_query_executable(
             {
                 'program': program,
             },
@@ -56,7 +56,7 @@ _pn.run_main_command(
 
         const create_epe = (
             program: string,
-        ): _pci.Command<d_epe.Error, d_epe.Parameters> => c_execute_sandboxed_command_executable(
+        ): pci.Command<d_epe.Error, d_epe.Parameters> => c_execute_sandboxed_command_executable(
             {
                 'program': program,
             },
@@ -68,7 +68,7 @@ _pn.run_main_command(
 
         const create_espe = (
             program: string,
-        ): _pci.Command<d_espe.Error, d_espe.Parameters> => c_execute_sandboxed_smelly_command_executable(
+        ): pci.Command<d_espe.Error, d_espe.Parameters> => c_execute_sandboxed_smelly_command_executable(
             {
                 'program': program,
             },

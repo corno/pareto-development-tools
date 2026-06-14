@@ -1,5 +1,5 @@
-import * as _pqi from 'pareto-core/dist/query_interface'
-import * as _pci from 'pareto-core/dist/command_interface'
+import * as pqi from 'pareto-core/dist/query_interface'
+import * as pci from 'pareto-core/dist/command_interface'
 
 import * as resources from "./resources"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
@@ -10,7 +10,7 @@ import * as resources_fp from "pareto-fountain-pen-file-structure/dist/interface
 
 export namespace queries {
 
-    export type get_project_files = _pqi.Query_Function<
+    export type get_project_files = pqi.Query_Function<
         resources.queries.get_project_files,
         null,
         {
@@ -20,7 +20,7 @@ export namespace queries {
         }
     >
 
-    export type get_package_dependencies = _pqi.Query_Function<
+    export type get_package_dependencies = pqi.Query_Function<
         resources.queries.get_package_dependencies,
         null,
         {
@@ -34,7 +34,7 @@ export namespace queries {
 
 export namespace commands {
 
-    export type analyze_file_structure = _pci.Command_Procedure<
+    export type analyze_file_structure = pci.Command_Procedure<
         resources.commands.analyze_file_structure,
         null,
         {
@@ -46,7 +46,7 @@ export namespace commands {
         }
     >
 
-    export type api = _pci.Command_Procedure<
+    export type api = pci.Command_Procedure<
         resources.commands.api,
         null,
         {
@@ -67,7 +67,7 @@ export namespace commands {
         }
     >
 
-    export type build = _pci.Command_Procedure<
+    export type build = pci.Command_Procedure<
         resources.commands.build,
         null,
         {
@@ -80,7 +80,7 @@ export namespace commands {
         }
     >
 
-    export type build_and_test = _pci.Command_Procedure<
+    export type build_and_test = pci.Command_Procedure<
         resources.commands.build_and_test,
         null,
         null,
@@ -90,7 +90,7 @@ export namespace commands {
         }
     >
 
-    export type create_dependency_graph = _pci.Command_Procedure<
+    export type create_dependency_graph = pci.Command_Procedure<
         resources.commands.create_dependency_graph,
         null,
         {
@@ -101,7 +101,7 @@ export namespace commands {
         }
     >
 
-    export type git_commit = _pci.Command_Procedure<
+    export type git_commit = pci.Command_Procedure<
         resources.commands.git_commit,
         null,
         null,
@@ -111,7 +111,7 @@ export namespace commands {
         }
     >
 
-    export type list_file_structure_problems = _pci.Command_Procedure<
+    export type list_file_structure_problems = pci.Command_Procedure<
         resources.commands.analyze_file_structure,
         null,
         {
@@ -123,7 +123,7 @@ export namespace commands {
         }
     >
 
-    export type main = _pci.Command_Procedure<
+    export type main = pci.Command_Procedure<
         resources_pareto.resources.commands.main,
         null,
         null,
@@ -134,7 +134,7 @@ export namespace commands {
         }
     >
 
-    export type publish = _pci.Command_Procedure<
+    export type publish = pci.Command_Procedure<
         resources.commands.publish,
         null,
         {
@@ -153,7 +153,7 @@ export namespace commands {
         }
     >
 
-    export type tsc = _pci.Command_Procedure<
+    export type tsc = pci.Command_Procedure<
         resources.commands.tsc,
         null,
         null,
@@ -162,7 +162,7 @@ export namespace commands {
         }
     >
 
-    export type update_package_dependencies = _pci.Command_Procedure<
+    export type update_package_dependencies = pci.Command_Procedure<
         resources.commands.update_package_dependencies,
         null,
         {

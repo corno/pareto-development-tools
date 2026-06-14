@@ -1,4 +1,4 @@
-import * as _p from 'pareto-core/dist/command'
+import * as pt from 'pareto-core/dist/command'
 import * as _pt from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/signatures"
@@ -11,10 +11,10 @@ import * as d from "../../../interface/to_be_generated/create_dependency_graph"
 import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz"
 import * as t_graphviz_to_fountain_pen from "pareto-graphviz/dist/implementation/manual/transformers/high_level_simple/fountain_pen"
 
-export const $$: signatures.commands.create_dependency_graph = _p.command_procedure(
+export const $$: signatures.commands.create_dependency_graph = pt.command_procedure(
     ($d, $s, $q, $c) => [
 
-        _p.query(
+        pt.query(
             $q['package dependencies'](
                 {
                     'path': $d['path to project'],

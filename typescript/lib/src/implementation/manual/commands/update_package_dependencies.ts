@@ -1,6 +1,6 @@
 import * as _pc from 'pareto-core/dist/command'
-import * as _p from 'pareto-core/dist/assign'
-import _p_variables from 'pareto-core/dist/_p_variables'
+import * as pt from 'pareto-core/dist/assign'
+import p_variables from 'pareto-core/dist/_p_variables'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -11,7 +11,7 @@ import * as d from "../../../interface/to_be_generated/update_package_dependenci
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
 export const $$: signatures.commands.update_package_dependencies = _pc.command_procedure(
-    ($d, $s, $q, $c) => _p_variables(
+    ($d, $s, $q, $c) => p_variables(
         () => {
             const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })
             return [
@@ -41,12 +41,12 @@ export const $$: signatures.commands.update_package_dependencies = _pc.command_p
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    ).transform(($) => _p.decide.state($, ($) => {
+                    ).transform(($) => pt.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'does not exist': return _p.ss($, ($) => false)
-                            case 'file': return _p.ss($, ($) => false)
-                            case 'directory': return _p.ss($, ($) => true)
-                            default: return _p.au($[0])
+                            case 'does not exist': return pt.ss($, ($) => false)
+                            case 'file': return pt.ss($, ($) => false)
+                            case 'directory': return pt.ss($, ($) => true)
+                            default: return pt.au($[0])
                         }
                     })),
                     [

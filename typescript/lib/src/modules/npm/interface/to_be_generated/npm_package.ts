@@ -1,7 +1,7 @@
-import * as _pi from 'pareto-core/dist/interface'
+import * as pi from 'pareto-core/dist/interface'
 
 export type NPM_Package = {
     'name': string
     'version': string
-    'dependencies': _pi.Optional_Value<_pi.Dictionary<string>>
+    'dependencies': pi.Optional_Value<pi.Dictionary<string>>
 }

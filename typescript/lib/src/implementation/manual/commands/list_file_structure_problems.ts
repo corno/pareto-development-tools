@@ -1,6 +1,6 @@
-import * as _p from 'pareto-core/dist/command'
+import * as pt from 'pareto-core/dist/command'
 import * as _pa from 'pareto-core/dist/assign'
-import * as _pi from 'pareto-core/dist/interface'
+import * as pi from 'pareto-core/dist/interface'
 import * as _pq from 'pareto-core/dist/query'
 
 import * as signatures from "../../../interface/signatures"
@@ -17,10 +17,10 @@ import { $$ as q_get_project_files } from "../queries/get_project_files"
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 
-export const $$: signatures.commands.list_file_structure_problems = _p.command_procedure(
+export const $$: signatures.commands.list_file_structure_problems = pt.command_procedure(
     ($d, $s, $q, $c) => [
 
-        _p.query(
+        pt.query(
             q_get_project_files(null, $q)(
                 {
                     'path to project': $d['path to project'],
@@ -41,8 +41,8 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
                                 t_project_files_to_file_analysis_list.Project_Files($v)
                             ).map_optionally<d_file_analysis.File_Analysis2>(
                                 ($) => _pa.boolean.from.optional($.analysis['unexpected path tail']).is_set()
-                                    ? _p.optional.literal.set($)
-                                    : _p.optional.literal.not_set()
+                                    ? pt.optional.literal.set($)
+                                    : pt.optional.literal.not_set()
                             )
                         ).map(
                             ($) => {

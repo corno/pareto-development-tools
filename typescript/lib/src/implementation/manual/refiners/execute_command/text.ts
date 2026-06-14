@@ -1,8 +1,8 @@
-import * as _p from 'pareto-core/dist/assign'
-import * as _pi from 'pareto-core/dist/interface'
-import _p_variables from 'pareto-core/dist/_p_variables'
-import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
-import _p_cc from 'pareto-core/dist/_p_change_context'
+import * as pt from 'pareto-core/dist/assign'
+import * as pi from 'pareto-core/dist/interface'
+import p_variables from 'pareto-core/dist/_p_variables'
+import p_list_from_text from 'pareto-core/dist/_p_list_from_text'
+import p_change_context from 'pareto-core/dist/_p_change_context'
 
 //data types
 import * as d_out from "../../../../interface/to_be_generated/execute_command"
@@ -12,12 +12,12 @@ import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schema
 //dependencies
 import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/refiners/path_unrestricted/text"
 
-type signature = _pi.Production<d_out.Parameters, d_function.Error, d_in.Text, null>
+type signature = pi.Production<d_out.Parameters, d_function.Error, d_in.Text, null>
 
 
 export const Command: signature = (iterator, abort) => iterator.consume(
     ($): d_out.Parameters => ({
-        'type': _p_cc($, ($) => {
+        'type': p_change_context($, ($) => {
             {
                 switch ($) {
                     case "all": return ['all packages', {
@@ -30,12 +30,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                 switch ($) {
                                     case "assert-clean": return ['assert clean', null]
                                     case "build-and-test": return ['build and test', {
-                                        'concise': _p_variables(() => {
+                                        'concise': p_variables(() => {
                                             const value = iterator.look_raw()
                                             return value === null
                                                 ? false
                                                 : value[0] === "concise"
-                                                    ? _p_variables(() => {
+                                                    ? p_variables(() => {
                                                         iterator.discard(() => null)
                                                         return true
                                                     })
@@ -48,12 +48,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                             ($) => $,
                                             () => abort(['expected a text', { 'description': "commit message" }])
                                         ),
-                                        'accept broken commits': _p_variables(() => {
+                                        'accept broken commits': p_variables(() => {
                                             const value = iterator.look_raw()
                                             return value === null
                                                 ? false
                                                 : value[0] === "accept-broken"
-                                                    ? _p_variables(() => {
+                                                    ? p_variables(() => {
                                                         iterator.discard(() => null)
                                                         return true
                                                     })
@@ -63,7 +63,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     case "git-remove-tracked-but-ignored": return ['git remove tracked but ignored', null]
                                     case "set-up-comparison": return ['set up comparison', null]
                                     case "update-dependencies": return ['update package dependencies', null]
-                                    default: return abort(['expected one of', _p.dictionary.literal({
+                                    default: return abort(['expected one of', pt.dictionary.literal({
                                         'assert-clean': null,
                                         'build-and-test': null,
                                         'build': null,
@@ -74,7 +74,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', _p.dictionary.literal({
+                            () => abort(['expected one of', pt.dictionary.literal({
                                 'assert-clean': null,
                                 'build-and-test': null,
                                 'build': null,
@@ -102,12 +102,12 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                             ($) => $,
                                             () => abort(['expected a text', { 'description': "commit message" }])
                                         ),
-                                        'accept broken commits': _p_variables(() => {
+                                        'accept broken commits': p_variables(() => {
                                             const value = iterator.look_raw()
                                             return value === null
                                                 ? false
                                                 : value[0] === "accept-broken"
-                                                    ? _p_variables(() => {
+                                                    ? p_variables(() => {
                                                         iterator.discard(() => null)
                                                         return true
                                                     })
@@ -115,7 +115,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                         }),
                                     }]
                                     case "update-dependencies": return ['update package dependencies', null]
-                                    default: return abort(['expected one of', _p.dictionary.literal({
+                                    default: return abort(['expected one of', pt.dictionary.literal({
                                         'assert-clean': null,
                                         'build-and-test': null,
                                         'git-commit': null,
@@ -123,7 +123,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', _p.dictionary.literal({
+                            () => abort(['expected one of', pt.dictionary.literal({
                                 'assert-clean': null,
                                 'build-and-test': null,
                                 'git-commit': null,
@@ -144,14 +144,14 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     case "analyze-file-structure": return ['analyze file structure', null]
                                     case "dependency-graph": return ['dependency graph', null]
                                     case "list-file-structure-problems": return ['list file structure problems', null]
-                                    default: return abort(['expected one of', _p.dictionary.literal({
+                                    default: return abort(['expected one of', pt.dictionary.literal({
                                         'analyze-file-structure': null,
                                         'dependency-graph': null,
                                         'list-file-structure-problems': null,
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', _p.dictionary.literal({
+                            () => abort(['expected one of', pt.dictionary.literal({
                                 'analyze-file-structure': null,
                                 'dependency-graph': null,
                                 'list-file-structure-problems': null,
@@ -171,19 +171,19 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                 switch ($) {
                                     case "patch": return ['patch', null]
                                     case "minor": return ['minor', null]
-                                    default: return abort(['expected one of', _p.dictionary.literal({
+                                    default: return abort(['expected one of', pt.dictionary.literal({
                                         'patch': null,
                                         'minor': null,
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', _p.dictionary.literal({
+                            () => abort(['expected one of', pt.dictionary.literal({
                                 'patch': null,
                                 'minor': null,
                             })])
 
                         ),
-                        'impact': _p_variables(() => {
+                        'impact': p_variables(() => {
                             const value = iterator.look_raw()
                             if (value === null) {
                                 return ['actual publish', {
@@ -212,7 +212,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
                         ))
                     }]
-                    default: return abort(['expected one of', _p.dictionary.literal({
+                    default: return abort(['expected one of', pt.dictionary.literal({
                         'all': null,
                         'package': null,
                         'project': null,
@@ -223,7 +223,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
             }
         })
     }),
-    () => abort(['expected one of', _p.dictionary.literal({
+    () => abort(['expected one of', pt.dictionary.literal({
         'all': null,
         'package': null,
         'project': null,

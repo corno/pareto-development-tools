@@ -1,6 +1,6 @@
-import * as _p from 'pareto-core/dist/command'
+import * as pt from 'pareto-core/dist/command'
 import * as _pa from 'pareto-core/dist/assign'
-import _p_variables from 'pareto-core/dist/_p_variables'
+import p_variables from 'pareto-core/dist/_p_variables'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -10,8 +10,8 @@ import * as d from "../../../interface/to_be_generated/build"
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.commands.build = _p.command_procedure(
-    ($d, $s, $q, $c) => _p_variables(
+export const $$: signatures.commands.build = pt.command_procedure(
+    ($d, $s, $q, $c) => p_variables(
         () => {
             const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })
             return [
@@ -20,7 +20,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
                         'path': t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': _p.list.literal(["lib", "dist"]),
+                                'addition': pt.list.literal(["lib", "dist"]),
                             }
                         ),
                         'error if not exists': false,
@@ -29,7 +29,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
                 ),
                 $c.tsc.execute(
                     {
-                        'path': _p.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _p.list.literal(["lib"]) })),
+                        'path': pt.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': pt.list.literal(["lib"]) })),
                     },
                     ($): d.Error => ['error building lib', {
                         'path': $d.path,
@@ -41,7 +41,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
                         'path': t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': _p.list.literal(["test", "dist"]),
+                                'addition': pt.list.literal(["test", "dist"]),
                             }
                         ),
                         'error if not exists': false,
@@ -50,7 +50,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
                 ),
                 $c.tsc.execute(
                     {
-                        'path': _p.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _p.list.literal(["test"]) })),
+                        'path': pt.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': pt.list.literal(["test"]) })),
                     },
                     ($): d.Error => ['error building test', {
                         'path': $d.path,
@@ -60,7 +60,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
 
 
 
-                _p.if_.query(
+                pt.if_.query(
                     $q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,
@@ -77,11 +77,11 @@ export const $$: signatures.commands.build = _p.command_procedure(
                             default: return _pa.au($[0])
                         }
                     })),
-                    _p_variables(() => {
+                    p_variables(() => {
                         const dist_path = t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': _p.list.literal(["app", "dist"]),
+                                'addition': pt.list.literal(["app", "dist"]),
                             }
                         )
                         return [
@@ -95,7 +95,7 @@ export const $$: signatures.commands.build = _p.command_procedure(
                             ),
                             $c.tsc.execute(
                                 {
-                                    'path': _p.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _p.list.literal(["app"]) })),
+                                    'path': pt.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': pt.list.literal(["app"]) })),
                                 },
                                 ($): d.Error => ['error building app', {
                                     'path': $d.path,

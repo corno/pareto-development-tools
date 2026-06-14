@@ -1,6 +1,6 @@
 import query_function from 'pareto-core/dist/__internals/async/query_function'
-import * as _p from 'pareto-core/dist/assign'
-import * as _pi from 'pareto-core/dist/interface'
+import * as pt from 'pareto-core/dist/assign'
+import * as pi from 'pareto-core/dist/interface'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -13,16 +13,16 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 export const $$: signatures.queries.is_repository_clean = query_function(
     ($d, $s, $q) => $q.git(
         {
-            'working directory': _p.optional.literal.not_set(),
-            'args': _p.list.nested_literal_old([
+            'working directory': pt.optional.literal.not_set(),
+            'args': pt.list.nested_literal_old([
                 $d.path.__decide(
-                    ($) => _p.list.literal([
+                    ($) => pt.list.literal([
                         "-C",
                         t_path_to_text.Context_Path($),
                     ]),
-                    () => _p.list.literal([])
+                    () => pt.list.literal([])
                 ),
-                _p.list.literal([
+                pt.list.literal([
                     "status",
                     "--porcelain",
                 ])
