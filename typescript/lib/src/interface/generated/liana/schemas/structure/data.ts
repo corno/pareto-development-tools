@@ -1,5 +1,6 @@
 
-import * as _pi from 'pareto-core/dist/interface'
+import * as p_i from 'pareto-core/dist/interface'
+import * as p_di from 'pareto-core/dist/data/interface'
 
 export namespace Directory_ {
     
@@ -39,7 +40,7 @@ export namespace Directory_ {
         
     }
     
-    export type group = _pi.Dictionary<group.D>
+    export type group = p_di.Dictionary<group.D>
     
     export namespace wildcards {
         
@@ -53,7 +54,7 @@ export namespace Directory_ {
             
         }
         
-        export type extensions = _pi.List<extensions.L>
+        export type extensions = p_di.List<extensions.L>
         
         export type warn = boolean
         

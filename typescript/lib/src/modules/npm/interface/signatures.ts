@@ -1,5 +1,5 @@
-import * as pqi from 'pareto-core/dist/query_interface'
-import * as pci from 'pareto-core/dist/command_interface'
+import * as p_qi from 'pareto-core/dist/query/interface'
+import * as p_ci from 'pareto-core/dist/command/interface'
 
 
 import * as resources from "./resources"
@@ -7,7 +7,7 @@ import * as resources_pareto from "pareto-resources/dist/interface/resources"
 
 export namespace commands {
 
-    export type npm = pci.Command_Procedure<
+    export type npm = p_ci.Command_Procedure<
         resources.commands.npm,
         null,
         null,
@@ -16,7 +16,7 @@ export namespace commands {
         }
     >
 
-    export type npm_publish = pci.Command_Procedure<
+    export type npm_publish = p_ci.Command_Procedure<
         resources.commands.npm_publish,
         null,
         null,
@@ -25,7 +25,7 @@ export namespace commands {
         }
     >
 
-    export type set_up_comparison_against_published = pci.Command_Procedure<
+    export type set_up_comparison_against_published = p_ci.Command_Procedure<
         resources.commands.set_up_comparison_against_published,
         null,
         {
@@ -39,7 +39,7 @@ export namespace commands {
         }
     >
 
-    export type update2latest = pci.Command_Procedure<
+    export type update2latest = p_ci.Command_Procedure<
         resources.commands.update2latest,
         null,
         null,
@@ -48,7 +48,7 @@ export namespace commands {
         }
     >
 
-    export type update_package_dependencies = pci.Command_Procedure<
+    export type update_package_dependencies = p_ci.Command_Procedure<
         resources.commands.update_package_dependencies,
         null,
         null,
@@ -63,7 +63,7 @@ export namespace commands {
 
 export namespace queries {
 
-    export type get_package_json = pqi.Query_Function<
+    export type get_package_json = p_qi.Query_Function<
         resources.queries.get_package_json,
         null,
         {

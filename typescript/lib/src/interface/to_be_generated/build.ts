@@ -1,4 +1,4 @@
-import * as pi from 'pareto-core/dist/interface'
+import * as p_di from 'pareto-core/dist/data/interface'
 
 import * as d_tsc from "./tsc"
 import * as d_remove from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_remove/data"

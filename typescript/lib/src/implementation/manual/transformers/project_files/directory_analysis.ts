@@ -1,8 +1,10 @@
 import * as pt from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
-import p_list_from_text from 'pareto-core/dist/_p_list_from_text'
-import p_list_build_deprecated from 'pareto-core/dist/_p_list_build_deprecated'
-import p_text_from_list from 'pareto-core/dist/_p_text_from_list'
+import * as p_di from 'pareto-core/dist/data/interface'
+import * as p_ti from 'pareto-core/dist/transformer/interface'
+
+import p_list_from_text from 'pareto-core/dist/specials/list_from_text'
+import p_list_build_deprecated from 'pareto-core/dist/specials/list_build_deprecated'
+import p_text_from_list from 'pareto-core/dist/specials/text_from_list'
 
 //data types
 import * as d_in from "../../../../interface/to_be_generated/project_files"
@@ -18,7 +20,7 @@ export type Parameters = {
     'structure path': string,
 }
 
-export type Project_Files = pi.Transformer<
+export type Project_Files = p_ti.Transformer<
     d_in.Project_Files,
     d_out.File_Analysis_List
 >
@@ -102,7 +104,7 @@ const line_count = ($: string): number => {
     return lineCount + 1 //add one for the last line if it doesn't end with a newline
 }
 
-const extension = ($: string): pi.Optional_Value<string> => {
+const extension = ($: string): p_di.Optional_Value<string> => {
     const characters = p_list_from_text($, ($) => $)
 
     let first_period_index: null | number = null
@@ -318,7 +320,7 @@ export namespace undefined {
         $: d_in_directory_content.Directory,
         $p: {
             'structure': d_out.Structure_Analysis,
-            'unexpected path tail': pi.Optional_Value<string>,
+            'unexpected path tail': p_di.Optional_Value<string>,
         }
     ): d_out.Directory => {
         return ['dictionary', $.__d_map(($, id) => Node(
@@ -336,7 +338,7 @@ export namespace undefined {
         $p: {
             'structure': d_out.Structure_Analysis,
             'name': string,
-            'unexpected path tail': pi.Optional_Value<string>,
+            'unexpected path tail': p_di.Optional_Value<string>,
         }
     ): d_out.Node => {
         return pt.decide.state($, ($): d_out.Node => {

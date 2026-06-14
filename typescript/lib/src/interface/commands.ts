@@ -1,4 +1,4 @@
-import * as pci from 'pareto-core/dist/command_interface'
+import * as p_ci from 'pareto-core/dist/command/interface'
 
 import * as queries from "./queries"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
@@ -20,21 +20,21 @@ import * as d_git_commit from "./to_be_generated/git_commit"
 
 export namespace commands {
 
-    export type analyze_file_structure = pci.Command<d_get_project_files.Error, d_get_project_files.Parameters>
-    export type api = pci.Command<d_api.Error, d_api.Parameters>
-    export type build = pci.Command<d_build.Error, d_build.Parameters>
-    export type build_and_test = pci.Command<d_build_and_test.Error, d_build_and_test.Parameters>
-    export type create_dependency_graph = pci.Command<d_create_dependency_graph.Error, d_create_dependency_graph.Parameters>
-    export type git_commit = pci.Command<d_git_commit.Error, d_git_commit.Parameters>
-    export type publish = pci.Command<d_publish.Error, d_publish.Parameters>
-    export type tsc = pci.Command<d_tsc.Error, d_tsc.Parameters>
-    export type update_package_dependencies = pci.Command<d_update_package_dependencies.Error, d_update_package_dependencies.Parameters>
+    export type analyze_file_structure = p_ci.Command<d_get_project_files.Error, d_get_project_files.Parameters>
+    export type api = p_ci.Command<d_api.Error, d_api.Parameters>
+    export type build = p_ci.Command<d_build.Error, d_build.Parameters>
+    export type build_and_test = p_ci.Command<d_build_and_test.Error, d_build_and_test.Parameters>
+    export type create_dependency_graph = p_ci.Command<d_create_dependency_graph.Error, d_create_dependency_graph.Parameters>
+    export type git_commit = p_ci.Command<d_git_commit.Error, d_git_commit.Parameters>
+    export type publish = p_ci.Command<d_publish.Error, d_publish.Parameters>
+    export type tsc = p_ci.Command<d_tsc.Error, d_tsc.Parameters>
+    export type update_package_dependencies = p_ci.Command<d_update_package_dependencies.Error, d_update_package_dependencies.Parameters>
     
 }
 
 export namespace procedures {
 
-    export type analyze_file_structure = pci.Command_Procedure<
+    export type analyze_file_structure = p_ci.Command_Procedure<
         commands.analyze_file_structure,
         null,
         {
@@ -46,7 +46,7 @@ export namespace procedures {
         }
     >
 
-    export type api = pci.Command_Procedure<
+    export type api = p_ci.Command_Procedure<
         commands.api,
         null,
         {
@@ -67,7 +67,7 @@ export namespace procedures {
         }
     >
 
-    export type build = pci.Command_Procedure<
+    export type build = p_ci.Command_Procedure<
         commands.build,
         null,
         {
@@ -80,7 +80,7 @@ export namespace procedures {
         }
     >
 
-    export type build_and_test = pci.Command_Procedure<
+    export type build_and_test = p_ci.Command_Procedure<
         commands.build_and_test,
         null,
         null,
@@ -90,7 +90,7 @@ export namespace procedures {
         }
     >
 
-    export type create_dependency_graph = pci.Command_Procedure<
+    export type create_dependency_graph = p_ci.Command_Procedure<
         commands.create_dependency_graph,
         null,
         {
@@ -101,7 +101,7 @@ export namespace procedures {
         }
     >
 
-    export type git_commit = pci.Command_Procedure<
+    export type git_commit = p_ci.Command_Procedure<
         commands.git_commit,
         null,
         null,
@@ -111,7 +111,7 @@ export namespace procedures {
         }
     >
 
-    export type list_file_structure_problems = pci.Command_Procedure<
+    export type list_file_structure_problems = p_ci.Command_Procedure<
         commands.analyze_file_structure,
         null,
         {
@@ -123,7 +123,7 @@ export namespace procedures {
         }
     >
 
-    export type main = pci.Command_Procedure<
+    export type main = p_ci.Command_Procedure<
         resources_pareto.resources.commands.main,
         null,
         null,
@@ -134,7 +134,7 @@ export namespace procedures {
         }
     >
 
-    export type publish = pci.Command_Procedure<
+    export type publish = p_ci.Command_Procedure<
         commands.publish,
         null,
         {
@@ -153,7 +153,7 @@ export namespace procedures {
         }
     >
 
-    export type tsc = pci.Command_Procedure<
+    export type tsc = p_ci.Command_Procedure<
         commands.tsc,
         null,
         null,
@@ -162,7 +162,7 @@ export namespace procedures {
         }
     >
 
-    export type update_package_dependencies = pci.Command_Procedure<
+    export type update_package_dependencies = p_ci.Command_Procedure<
         commands.update_package_dependencies,
         null,
         {

@@ -1,5 +1,6 @@
 import * as pt from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
+import * as p_di from 'pareto-core/dist/data/interface'
+import * as p_ri from 'pareto-core/dist/refiner/interface'
 
 //data types
 import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
@@ -14,7 +15,7 @@ type Error_Expect_Object =
     | ['duplicate identifier', string]
     | ['missing value', null]
 
-type Object = pi.Dictionary<d.Value>
+type Object = p_di.Dictionary<d.Value>
 
 //dependencies
 import * as t_parse_tree_from_list_of_characters from "astn-core/dist/implementation/manual/refiners/parse_tree/list_of_characters"
@@ -78,7 +79,7 @@ const expect_property = ($: Object, id: string, abort: (error: ['missing propert
     }
 )
 
-export const $$: pi.Refiner<d_out.NPM_Package, d_function.Error['type'], d_in.List_of_Characters> = ($, abort) => {
+export const $$: p_ri.Refiner<d_out.NPM_Package, d_function.Error['type'], d_in.List_of_Characters> = ($, abort) => {
     const x = t_parse_tree_from_list_of_characters.Document(
         $,
         ($) => abort(['invalid ASTN', $]),

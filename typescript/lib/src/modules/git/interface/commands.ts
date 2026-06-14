@@ -1,4 +1,4 @@
-import * as pci from 'pareto-core/dist/command_interface'
+import * as p_ci from 'pareto-core/dist/command/interface'
 
 import * as queries from "./queries"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
@@ -12,17 +12,17 @@ import * as d_remove_tracked_but_ignored from "./to_be_generated/remove_tracked_
 
 export namespace commands {
 
-    export type assert_is_clean = pci.Command<d_assert_is_clean.Error, d_assert_is_clean.Parameters>
-    export type make_pristine = pci.Command<d_make_pristine.Error, d_make_pristine.Parameters>
-    export type extended_commit = pci.Command<d_extended_commit.Error, d_extended_commit.Parameters>
-    export type push = pci.Command<d_push.Error, d_push.Parameters>
-    export type remove_tracked_but_ignored = pci.Command<d_remove_tracked_but_ignored.Error, d_remove_tracked_but_ignored.Parameters>
+    export type assert_is_clean = p_ci.Command<d_assert_is_clean.Error, d_assert_is_clean.Parameters>
+    export type make_pristine = p_ci.Command<d_make_pristine.Error, d_make_pristine.Parameters>
+    export type extended_commit = p_ci.Command<d_extended_commit.Error, d_extended_commit.Parameters>
+    export type push = p_ci.Command<d_push.Error, d_push.Parameters>
+    export type remove_tracked_but_ignored = p_ci.Command<d_remove_tracked_but_ignored.Error, d_remove_tracked_but_ignored.Parameters>
 
 }
 
 export namespace procedures {
 
-    export type assert_is_clean = pci.Command_Procedure<
+    export type assert_is_clean = p_ci.Command_Procedure<
         commands.assert_is_clean,
         null,
         {
@@ -33,7 +33,7 @@ export namespace procedures {
         }
     >
 
-    export type make_pristine = pci.Command_Procedure<
+    export type make_pristine = p_ci.Command_Procedure<
         commands.make_pristine,
         null,
         null,
@@ -42,7 +42,7 @@ export namespace procedures {
         }
     >
 
-    export type extended_commit = pci.Command_Procedure<
+    export type extended_commit = p_ci.Command_Procedure<
         commands.extended_commit,
         null,
         {
@@ -53,7 +53,7 @@ export namespace procedures {
         }
     >
 
-    export type push = pci.Command_Procedure<
+    export type push = p_ci.Command_Procedure<
         commands.push,
         null,
         null,
@@ -62,7 +62,7 @@ export namespace procedures {
         }
     >
 
-    export type remove_tracked_but_ignored = pci.Command_Procedure<
+    export type remove_tracked_but_ignored = p_ci.Command_Procedure<
         commands.remove_tracked_but_ignored,
         null,
         {

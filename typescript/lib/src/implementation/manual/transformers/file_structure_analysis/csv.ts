@@ -1,11 +1,12 @@
 import * as pt from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
+import * as p_di from 'pareto-core/dist/data/interface'
+import * as p_ti from 'pareto-core/dist/transformer/interface'
 
 //data types
 import * as d_in from "../../../../interface/to_be_generated/file_structure_analysis"
 import * as d_out from "../../../../modules/csv/interface/to_be_generated/csv"
 
-export type Signature = pi.Transformer<
+export type Signature = p_ti.Transformer<
     d_in.File_Analysis_List,
     d_out.CSV
 >
@@ -25,7 +26,7 @@ export const File_Analysis_List: Signature = ($) => pt.list.nested_literal_old([
     pt.list.from.list(
         $,
     ).map(
-        ($): pi.List<string> => pt.list.literal([
+        ($): p_di.List<string> => pt.list.literal([
             $.package,
             $.path,
             $.analysis.structure.path,

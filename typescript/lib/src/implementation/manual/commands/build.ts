@@ -1,6 +1,6 @@
-import * as p_ from 'pareto-core/dist/command'
+import * as p_ from 'pareto-core/dist/command/implementation'
 import * as p_t from 'pareto-core/dist/assign'
-import p_variables from 'pareto-core/dist/_p_variables'
+import p_variables from 'pareto-core/dist/specials/variables'
 
 import * as signatures from "../../../interface/commands"
 

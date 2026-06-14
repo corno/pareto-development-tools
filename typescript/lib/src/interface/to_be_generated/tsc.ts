@@ -1,4 +1,4 @@
-import * as pi from 'pareto-core/dist/interface'
+import * as p_di from 'pareto-core/dist/data/interface'
 
 import * as d_espe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
@@ -11,5 +11,5 @@ export type Error =
 
 
 export type Parameters = {
-    'path': pi.Optional_Value<d_path.Context_Path>,
+    'path': p_di.Optional_Value<d_path.Context_Path>,
 }

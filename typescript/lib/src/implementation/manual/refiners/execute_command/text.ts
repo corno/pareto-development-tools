@@ -1,8 +1,8 @@
 import * as pt from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
-import p_variables from 'pareto-core/dist/_p_variables'
-import p_list_from_text from 'pareto-core/dist/_p_list_from_text'
-import p_change_context from 'pareto-core/dist/_p_change_context'
+import * as p_ri from 'pareto-core/dist/refiner/interface'
+import * as p_pi from 'pareto-core/dist/production/interface'
+import p_variables from 'pareto-core/dist/specials/variables'
+import p_change_context from 'pareto-core/dist/specials/change_context'
 
 //data types
 import * as d_out from "../../../../interface/to_be_generated/execute_command"
@@ -12,7 +12,7 @@ import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schema
 //dependencies
 import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/refiners/path_unrestricted/text"
 
-type signature = pi.Production<d_out.Parameters, d_function.Error, d_in.Text, null>
+type signature = p_pi.Production<d_out.Parameters, d_function.Error, d_in.Text, null>
 
 
 export const Command: signature = (iterator, abort) => iterator.consume(

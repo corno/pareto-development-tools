@@ -1,4 +1,4 @@
-import * as p from 'pareto-core/dist/command'
+import * as p from 'pareto-core/dist/command/implementation'
 import * as pa from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/commands"

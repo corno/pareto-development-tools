@@ -1,12 +1,12 @@
 import * as pt from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
+import * as p_ti from 'pareto-core/dist/transformer/interface'
 
 import * as d_in from "../../../../interface/to_be_generated/tsc"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 import * as t_espe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_smelly_command_executable/fountain_pen"
 
-export type Error = pi.Transformer_With_Parameter<d_in.Error, d_out.Paragraph, { 'concise': boolean }>
+export type Error = p_ti.Transformer_With_Parameter<d_in.Error, d_out.Paragraph, { 'concise': boolean }>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 

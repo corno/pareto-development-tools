@@ -1,5 +1,5 @@
 
-import * as _pi from 'pareto-core/dist/interface'
+import * as p_i from 'pareto-core/dist/interface'
 
 import * as i_generic from "liana-core/dist/interface/to_be_generated/deserialize"
 
@@ -25,7 +25,7 @@ export namespace Directory_ {
 
 export type Directory_ = (
     context: Directory_.I,
-    abort: _pi.Abort<Directory_.E>,
+    abort: p_i.Abort<Directory_.E>,
     parameters: {
         readonly 'tab size': Directory_.P.tab_size
     },

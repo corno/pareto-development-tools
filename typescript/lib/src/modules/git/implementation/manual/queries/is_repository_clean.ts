@@ -1,6 +1,5 @@
-import query_function from 'pareto-core/dist/__internals/async/query_function'
-import * as pt from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
+import * as p_ from 'pareto-core/dist/query/implementation'
+import * as p_t from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/queries"
 
@@ -10,19 +9,19 @@ import * as d from "../../../interface/to_be_generated/is_repository_clean"
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.query_functions.is_repository_clean = query_function(
+export const $$: signatures.query_functions.is_repository_clean = p_.query_function(
     ($d, $s, $q) => $q.git(
         {
-            'working directory': pt.optional.literal.not_set(),
-            'args': pt.list.nested_literal_old([
+            'working directory': p_t.optional.literal.not_set(),
+            'args': p_t.list.nested_literal_old([
                 $d.path.__decide(
-                    ($) => pt.list.literal([
+                    ($) => p_t.list.literal([
                         "-C",
                         t_path_to_text.Context_Path($),
                     ]),
-                    () => pt.list.literal([])
+                    () => p_t.list.literal([])
                 ),
-                pt.list.literal([
+                p_t.list.literal([
                     "status",
                     "--porcelain",
                 ])

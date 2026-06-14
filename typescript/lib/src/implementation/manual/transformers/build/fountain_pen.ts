@@ -1,11 +1,12 @@
 import * as pt from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
+import * as p_di from 'pareto-core/dist/data/interface'
+import * as p_ti from 'pareto-core/dist/transformer/interface'
 
 import * as d_in from "../../../../interface/to_be_generated/build"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 export namespace signatures {
-    export type Error = pi.Transformer_With_Parameter<d_in.Error, d_out.Phrase, { 'concise': boolean }>
+    export type Error = p_ti.Transformer_With_Parameter<d_in.Error, d_out.Phrase, { 'concise': boolean }>
 }
 
 //shorthands

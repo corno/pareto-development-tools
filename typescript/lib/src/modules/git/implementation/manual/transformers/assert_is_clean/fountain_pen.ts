@@ -1,5 +1,5 @@
 import * as pt from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
+import * as p_ti from 'pareto-core/dist/transformer/interface'
 
 import * as d_in from "../../../../interface/to_be_generated/assert_is_clean"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
@@ -8,7 +8,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 import * as t_git_is_clean_to_fountain_pen from "../is_repository_clean/fountain_pen"
 
-export type Error = pi.Transformer<d_in.Error, d_out.Phrase>
+export type Error = p_ti.Transformer<d_in.Error, d_out.Phrase>
 
 export const Error: Error = ($) => pt.decide.state($, ($) => {
     switch ($[0]) {
