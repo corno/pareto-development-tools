@@ -41,6 +41,13 @@ const $_implementation: d_structure.Directory.group.D = directory_group({
         "refiners": directory_wildcards(1, false, ["ts"], false),
         "transformers": directory_wildcards(1, false, ["ts"], false),
     }),
+    "to_be_generated": directory_group({
+        "commands": directory_wildcards(0, false, ["ts"], false),
+        "productions": directory_wildcards(1, false, ["ts"], false),
+        "queries": directory_wildcards(0, false, ["ts"], false),
+        "refiners": directory_wildcards(1, false, ["ts"], false),
+        "transformers": directory_wildcards(1, false, ["ts"], false),
+    }),
 
 })
 

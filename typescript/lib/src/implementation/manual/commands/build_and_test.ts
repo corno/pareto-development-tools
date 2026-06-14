@@ -1,6 +1,5 @@
-import * as pt from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/assign'
-import p_text_from_list from 'pareto-core/dist/_p_text_from_list'
+import * as p_ from 'pareto-core/dist/command'
+import * as p_t from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/commands"
 
@@ -11,7 +10,7 @@ import * as d from "../../../interface/to_be_generated/build_and_test"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.procedures.build_and_test = pt.command_procedure(
+export const $$: signatures.procedures.build_and_test = p_.command_procedure(
     ($d, $s, $q, $c) => [
 
         // build
@@ -25,13 +24,13 @@ export const $$: signatures.procedures.build_and_test = pt.command_procedure(
         // test
         $c.node.execute(
             {
-                'working directory': pt.optional.literal.not_set(),
-                'args': _pt.list.literal([
+                'working directory': p_.optional.literal.not_set(),
+                'args': p_t.list.literal([
                     t_path_to_text.Context_Path(
                         t_path_to_path.extend_context_path_with_list(
                             $d.path,
                             {
-                                'addition': _pt.list.literal([
+                                'addition': p_t.list.literal([
                                     "typescript",
                                     "test",
                                     "dist",
@@ -45,7 +44,7 @@ export const $$: signatures.procedures.build_and_test = pt.command_procedure(
                         t_path_to_path.extend_context_path_with_list(
                             $d.path,
                             {
-                                'addition': _pt.list.literal([
+                                'addition': p_t.list.literal([
                                     "testdata",
                                 ])
                             }

@@ -1,5 +1,5 @@
-import * as pt from 'pareto-core/dist/command'
-import * as _pa from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/command'
+import * as p_t from 'pareto-core/dist/assign'
 import p_variables from 'pareto-core/dist/_p_variables'
 
 import * as signatures from "../../../interface/commands"
@@ -10,7 +10,7 @@ import * as d from "../../../interface/to_be_generated/build"
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.procedures.build = pt.command_procedure(
+export const $$: signatures.procedures.build = p_.command_procedure(
     ($d, $s, $q, $c) => p_variables(
         () => {
             const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })
@@ -20,7 +20,7 @@ export const $$: signatures.procedures.build = pt.command_procedure(
                         'path': t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': pt.list.literal(["lib", "dist"]),
+                                'addition': p_.list.literal(["lib", "dist"]),
                             }
                         ),
                         'error if not exists': false,
@@ -29,7 +29,7 @@ export const $$: signatures.procedures.build = pt.command_procedure(
                 ),
                 $c.tsc.execute(
                     {
-                        'path': pt.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': pt.list.literal(["lib"]) })),
+                        'path': p_.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.list.literal(["lib"]) })),
                     },
                     ($): d.Error => ['error building lib', {
                         'path': $d.path,
@@ -41,7 +41,7 @@ export const $$: signatures.procedures.build = pt.command_procedure(
                         'path': t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': pt.list.literal(["test", "dist"]),
+                                'addition': p_.list.literal(["test", "dist"]),
                             }
                         ),
                         'error if not exists': false,
@@ -50,7 +50,7 @@ export const $$: signatures.procedures.build = pt.command_procedure(
                 ),
                 $c.tsc.execute(
                     {
-                        'path': pt.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': pt.list.literal(["test"]) })),
+                        'path': p_.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.list.literal(["test"]) })),
                     },
                     ($): d.Error => ['error building test', {
                         'path': $d.path,
@@ -60,7 +60,7 @@ export const $$: signatures.procedures.build = pt.command_procedure(
 
 
 
-                pt.if_.query(
+                p_.if_.query(
                     $q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,
@@ -69,19 +69,19 @@ export const $$: signatures.procedures.build = pt.command_procedure(
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    ).transform(($) => _pa.decide.state($, ($) => {
+                    ).transform(($) => p_t.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'does not exist': return _pa.ss($, ($) => false)
-                            case 'file': return _pa.ss($, ($) => false)
-                            case 'directory': return _pa.ss($, ($) => true)
-                            default: return _pa.au($[0])
+                            case 'does not exist': return p_t.ss($, ($) => false)
+                            case 'file': return p_t.ss($, ($) => false)
+                            case 'directory': return p_t.ss($, ($) => true)
+                            default: return p_t.au($[0])
                         }
                     })),
                     p_variables(() => {
                         const dist_path = t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': pt.list.literal(["app", "dist"]),
+                                'addition': p_.list.literal(["app", "dist"]),
                             }
                         )
                         return [
@@ -95,7 +95,7 @@ export const $$: signatures.procedures.build = pt.command_procedure(
                             ),
                             $c.tsc.execute(
                                 {
-                                    'path': pt.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': pt.list.literal(["app"]) })),
+                                    'path': p_.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.list.literal(["app"]) })),
                                 },
                                 ($): d.Error => ['error building app', {
                                     'path': $d.path,
@@ -112,7 +112,7 @@ export const $$: signatures.procedures.build = pt.command_procedure(
                                         }
                                     ),
                                     'mode': {
-                                        'special bits': _pa.optional.literal.not_set(),
+                                        'special bits': p_t.optional.literal.not_set(),
                                         'owner': {
                                             'read': true,
                                             'write': true,

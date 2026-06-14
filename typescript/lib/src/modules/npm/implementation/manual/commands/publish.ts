@@ -1,28 +1,27 @@
-import * as pt from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
+import * as p_ from 'pareto-core/dist/command'
+import * as p_t from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/signatures"
 
 //dependencies
 
-export const $$: signatures.commands.npm_publish = pt.command_procedure(
+export const $$: signatures.commands.npm_publish = p_.command_procedure(
     ($d, $s, $q, $c) => [
         $c['npm'].execute(
             {
-                'working directory': pt.optional.literal.set($d.path),
-                'args': _pt.list.nested_literal_old([
+                'working directory': p_.optional.literal.set($d.path),
+                'args': p_t.list.nested_literal_old([
                     [
                         "publish"
                     ],
-                    _pt.decide.state($d.impact, ($) => {
+                    p_t.decide.state($d.impact, ($) => {
                         switch ($[0]) {
-                            case 'dry run': return _pt.ss($, ($) => _pt.list.literal(["--dry-run"]))
-                            case 'actual publish': return _pt.ss($, ($) => _pt.list.literal([
+                            case 'dry run': return p_t.ss($, ($) => p_t.list.literal(["--dry-run"]))
+                            case 'actual publish': return p_t.ss($, ($) => p_t.list.literal([
                                 // "--otp",
                                 // $['one time password'],
                             ]))
-                            default: return _pt.au($[0])
+                            default: return p_t.au($[0])
                         }
                     }),
                 ]),

@@ -1,5 +1,5 @@
-import * as pt from 'pareto-core/dist/query'
-import * as pqi from 'pareto-core/dist/query_interface'
+import * as p_ from 'pareto-core/dist/query'
+import * as p_qi from 'pareto-core/dist/query_interface'
 
 
 import * as signatures from "../../../interface/queries"
@@ -11,12 +11,12 @@ import * as d from "../../../interface/to_be_generated/is_inside_work_tree"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Outcome, Target_Error>(
-    result: pqi.Query_Result<Preparation_Result, Preparation_Error>,
+    result: p_qi.Query_Result<Preparation_Result, Preparation_Error>,
     handlers: {
-        success: (result: Preparation_Result) => pqi.Query_Result<Target_Outcome, Target_Error>,
-        error: (error: Preparation_Error) => pqi.Query_Result<Target_Outcome, Target_Error>,
+        success: (result: Preparation_Result) => p_qi.Query_Result<Target_Outcome, Target_Error>,
+        error: (error: Preparation_Error) => p_qi.Query_Result<Target_Outcome, Target_Error>,
     },
-): pqi.Query_Result<Target_Outcome, Target_Error> => pt.__query_result<Target_Outcome, Target_Error>((onResult, onError) => {
+): p_qi.Query_Result<Target_Outcome, Target_Error> => p_.__query_result<Target_Outcome, Target_Error>((onResult, onError) => {
     result.__extract_data(
         (r) => {
             handlers.success(r).__extract_data(onResult, onError)
@@ -27,20 +27,20 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
     )
 })
 
-export const $$: signatures.query_functions.is_inside_work_tree = pt.query_function(
+export const $$: signatures.query_functions.is_inside_work_tree = p_.query_function(
     ($d, $s, $q) => temp_observe_behavior(
         $q.git(
             {
-                'working directory': pt.optional.literal.not_set(),
-                'args': pt.list.nested_literal([
+                'working directory': p_.optional.literal.not_set(),
+                'args': p_.list.nested_literal([
                     $d.path.__decide(
-                        ($) => pt.list.literal([
+                        ($) => p_.list.literal([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => pt.list.literal([])
+                        () => p_.list.literal([])
                     ),
-                    pt.list.literal([
+                    p_.list.literal([
                         "rev-parse",
                         "--is-inside-work-tree",
                     ])
@@ -50,37 +50,37 @@ export const $$: signatures.query_functions.is_inside_work_tree = pt.query_funct
         ),
         {
             success: ($) => $.stdout.raw === "true"
-                ? pt.__query_result((onResult, onError) => {
+                ? p_.__query_result((onResult, onError) => {
                     onResult(true)
                 })
-                : pt.__query_result<boolean, d.Error>((onResult, onError) => {
+                : p_.__query_result<boolean, d.Error>((onResult, onError) => {
                     onResult(false)
                 }),
-            error: ($) => pt.decide.state($, ($) => {
+            error: ($) => p_.decide.state($, ($) => {
                 switch ($[0]) {
-                    case 'failed to spawn': return pt.ss($, ($) => pt.__query_result<boolean, d.Error>(
+                    case 'failed to spawn': return p_.ss($, ($) => p_.__query_result<boolean, d.Error>(
                         (on_succes, on_error) => {
                             on_error(['could not run git command', {
                                 'message': $.message
                             }])
                         }
                     ))
-                    case 'non zero exit code': return pt.ss($, ($) => $['exit code'].__decide(
+                    case 'non zero exit code': return p_.ss($, ($) => $['exit code'].__decide(
                         ($) => $ === 128,
                         () => false
                     )
-                        ? pt.__query_result(
+                        ? p_.__query_result(
                             (onResult, onError) => {
                                 onResult(false)
                             }
                         )
-                        : pt.__query_result<boolean, d.Error>(
+                        : p_.__query_result<boolean, d.Error>(
                             (on_succes, on_error) => {
                                 on_error(['unexpected output', $.stderr])
                             }
                         )
                     )
-                    default: return pt.au($[0])
+                    default: return p_.au($[0])
                 }
             })
         }

@@ -1,7 +1,5 @@
-import * as pt from 'pareto-core/dist/command'
-import * as _pa from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
-import * as _pq from 'pareto-core/dist/query'
+import * as p_ from 'pareto-core/dist/command'
+import * as p_t from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/commands"
 
@@ -17,10 +15,10 @@ import { $$ as q_get_project_files } from "../queries/get_project_files"
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 
-export const $$: signatures.procedures.list_file_structure_problems = pt.command_procedure(
+export const $$: signatures.procedures.list_file_structure_problems = p_.command_procedure(
     ($d, $s, $q, $c) => [
 
-        pt.query(
+        p_.query(
             q_get_project_files(null, $q)(
                 {
                     'path to project': $d['path to project'],
@@ -36,13 +34,13 @@ export const $$: signatures.procedures.list_file_structure_problems = pt.command
 
 
 
-                        'message': sh.pg.sentences(_pa.list.from.list(
-                            _pa.list.from.list(
+                        'message': sh.pg.sentences(p_t.list.from.list(
+                            p_t.list.from.list(
                                 t_project_files_to_file_analysis_list.Project_Files($v)
                             ).map_optionally<d_file_analysis.File_Analysis2>(
-                                ($) => _pa.boolean.from.optional($.analysis['unexpected path tail']).is_set()
-                                    ? pt.optional.literal.set($)
-                                    : pt.optional.literal.not_set()
+                                ($) => p_t.boolean.from.optional($.analysis['unexpected path tail']).is_set()
+                                    ? p_.optional.literal.set($)
+                                    : p_.optional.literal.not_set()
                             )
                         ).map(
                             ($) => {

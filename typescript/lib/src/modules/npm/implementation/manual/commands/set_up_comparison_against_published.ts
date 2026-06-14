@@ -1,6 +1,5 @@
-import * as pt from 'pareto-core/dist/command'
-import * as _pa from 'pareto-core/dist/assign'
-import * as pi from 'pareto-core/dist/interface'
+import * as p_ from 'pareto-core/dist/command'
+import * as p_t from 'pareto-core/dist/assign'
 import p_list_from_text from 'pareto-core/dist/_p_list_from_text'
 import p_list_build_deprecated from 'pareto-core/dist/_p_list_build_deprecated'
 import p_text_from_list from 'pareto-core/dist/_p_text_from_list'
@@ -34,11 +33,11 @@ const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Chara
     })
 }
 
-export const $$: signatures.commands.set_up_comparison_against_published = pt.command_procedure(
+export const $$: signatures.commands.set_up_comparison_against_published = p_.command_procedure(
     ($d, $s, $q, $c) => {
         const path_x = t_path_to_path.create_node_path($d['path to local package'], { 'node': "package.json" })
         return [
-            pt.query(
+            p_.query(
                 q_get_package_json.$$(
                     null,
                     {
@@ -84,9 +83,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = pt.co
                         // Create local package using npm pack (if local package path provided)
                         $c['npm'].execute(
                             {
-                                'working directory': pt.optional.literal.not_set(),
-                                'args': _pa.list.nested_literal_old([
-                                    _pa.list.literal([
+                                'working directory': p_.optional.literal.not_set(),
+                                'args': p_t.list.nested_literal_old([
+                                    p_t.list.literal([
                                         "pack",
                                         t_path_to_text.Context_Path($d['path to local package']),
                                         "--pack-destination",
@@ -109,8 +108,8 @@ export const $$: signatures.commands.set_up_comparison_against_published = pt.co
                         // Extract local package into local subdirectory using dynamic filename
                         $c['tar'].execute(
                             {
-                                'working directory': pt.optional.literal.not_set(),
-                                'args': _pa.list.literal([
+                                'working directory': p_.optional.literal.not_set(),
+                                'args': p_t.list.literal([
                                     "-xzmf",
                                     `${t_path_to_text.Node_Path($d['path to temp directory'])}/${filename}`,
                                     "-C",
@@ -132,8 +131,8 @@ export const $$: signatures.commands.set_up_comparison_against_published = pt.co
 
                         $c['npm'].execute(
                             {
-                                'working directory': pt.optional.literal.not_set(),
-                                'args': _pa.list.literal([
+                                'working directory': p_.optional.literal.not_set(),
+                                'args': p_t.list.literal([
                                     "pack",
                                     `${package_info.name}@${package_info.version}`,
                                     "--pack-destination",
@@ -152,11 +151,11 @@ export const $$: signatures.commands.set_up_comparison_against_published = pt.co
                             ($) => ['error while creating directory', $],
                         ),
 
-                        pt.query(
+                        p_.query(
                             $q.npm(
                                 {
-                                    'working directory': pt.optional.literal.not_set(),
-                                    'args': _pa.list.literal([
+                                    'working directory': p_.optional.literal.not_set(),
+                                    'args': p_t.list.literal([
                                         "view",
                                         package_info.name,
                                         "version",
@@ -169,8 +168,8 @@ export const $$: signatures.commands.set_up_comparison_against_published = pt.co
                             ($v) => [
                                 $c['tar'].execute<d.Error>(
                                     {
-                                        'working directory': pt.optional.literal.not_set(),
-                                        'args': _pa.list.literal([
+                                        'working directory': p_.optional.literal.not_set(),
+                                        'args': p_t.list.literal([
                                             "-xzmf",
                                             `${t_path_to_text.Node_Path($d['path to temp directory'])}/npm/${package_info.name}-${p_text_from_list($v, ($) => $)}.tgz`,
                                             "-C",

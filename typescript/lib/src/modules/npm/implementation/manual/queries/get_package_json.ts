@@ -1,8 +1,6 @@
-import * as pt from 'pareto-core/dist/query'
-import * as pi from 'pareto-core/dist/interface'
+import * as p_ from 'pareto-core/dist/query'
 import * as _p_temp from 'pareto-core/dist/assign'
 import p_change_context from 'pareto-core/dist/_p_change_context'
-import p_list_from_text from 'pareto-core/dist/_p_list_from_text'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -14,7 +12,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/tra
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 import { $$ as r_parse_npm_package } from "../transformers/npm_package/text"
 
-export const $$: signatures.queries.get_package_json = pt.query_function(
+export const $$: signatures.queries.get_package_json = p_.query_function(
     ($d, $s, $r) => p_change_context($d, ($p) => {
         const path = t_path_to_path.create_node_path($p['path to package'], { 'node': "package.json" })
         return $r['read file'](

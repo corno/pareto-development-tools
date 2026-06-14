@@ -1,5 +1,5 @@
-import * as pt from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/command'
+import * as p_t from 'pareto-core/dist/assign'
 
 import * as signatures from "../../../interface/commands"
 
@@ -13,6 +13,7 @@ import * as r_instruction from "../refiners/execute_command/main"
 import * as t_api_to_fountain_pen from "../transformers/execute_command/fountain_pen"
 import * as t_bin_to_fountain_pen from "../transformers/parse/fountain_pen"
 
+//shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 
@@ -20,11 +21,11 @@ type My_Error =
     | ['parse', d_parse.Error]
     | ['execute command', d_execute_command.Error]
 
-export const $$: signatures.procedures.main = pt.command_procedure(
+export const $$: signatures.procedures.main = p_.command_procedure(
     ($d, $s, $q, $c) => [
-        pt.handle_error<d_main.Error, My_Error>(
+        p_.handle_error<d_main.Error, My_Error>(
             [
-                pt.refine_without_error_transformation(
+                p_.refine_without_error_transformation(
 
                     // parse command line instruction
                     (abort) => r_instruction.Command(
@@ -48,11 +49,11 @@ export const $$: signatures.procedures.main = pt.command_procedure(
                     {
                         'message': sh.pg.sentences([
                             sh.sentence([
-                                _pt.decide.state($, ($) => {
+                                p_t.decide.state($, ($) => {
                                     switch ($[0]) {
-                                        case 'parse': return _pt.ss($, ($) => t_bin_to_fountain_pen.Error($))
-                                        case 'execute command': return _pt.ss($, ($) => t_api_to_fountain_pen.Error($))
-                                        default: return _pt.au($[0])
+                                        case 'parse': return p_t.ss($, ($) => t_bin_to_fountain_pen.Error($))
+                                        case 'execute command': return p_t.ss($, ($) => t_api_to_fountain_pen.Error($))
+                                        default: return p_t.au($[0])
                                     }
                                 })
                             ])
