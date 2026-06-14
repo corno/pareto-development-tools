@@ -14,7 +14,8 @@ import * as d_read_directory from "pareto-resources/dist/interface/generated/lia
 import * as d_set_up_comparison_against_published from "../../modules/npm/interface/to_be_generated/set_up_comparison_against_published"
 import * as d_update_dependencies from "./update_package_dependencies"
 
-export type Parameters =
+export type Parameters = {
+    'type':
     | ['all packages', All_Packages]
     | ['package', Package]
     | ['project', Project]
@@ -29,6 +30,7 @@ export type Parameters =
         'path to package': d_path.Context_Path
     }]
     | ['publish', d_publish.Parameters]
+}
 
 export type All_Packages = {
     'path to project': d_path.Context_Path
@@ -115,7 +117,7 @@ export type Error =
 
 export type Project_Error = null
 
-export type Package_Error = 
+export type Package_Error =
     | ['build and test', {
         'error': d_build_and_test.Error,
         'concise': boolean

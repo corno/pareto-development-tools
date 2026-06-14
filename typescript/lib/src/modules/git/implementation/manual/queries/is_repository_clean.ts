@@ -11,11 +11,11 @@ import * as d from "../../../interface/to_be_generated/is_repository_clean"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: signatures.queries.is_repository_clean = query_function(
-    ($p, $qr) => $qr.git(
+    ($d, $s, $q) => $q.git(
         {
             'working directory': _p.optional.literal.not_set(),
             'args': _p.list.nested_literal_old([
-                $p.path.__decide(
+                $d.path.__decide(
                     ($) => _p.list.literal([
                         "-C",
                         t_path_to_text.Context_Path($),
@@ -32,9 +32,9 @@ export const $$: signatures.queries.is_repository_clean = query_function(
     ).transform<boolean>(
         ($) => $.stdout.raw === ""
     ).rework_error_temp(
-        ($current) => $qr['is inside git work tree'](
+        ($current) => $q['is inside git work tree'](
             {
-                'path': $p.path
+                'path': $d.path
             },
             ($) => $
         ).transform<d.Error>(

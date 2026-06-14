@@ -12,24 +12,24 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
 export const $$: signatures.commands.build_and_test = _p.command_procedure(
-    ($p, $cr) => [
+    ($d, $s, $q, $c) => [
 
         // build
-        $cr.build.execute(
+        $c.build.execute(
             {
-                'path': $p.path,
+                'path': $d.path,
             },
             ($): d.Error => ['error building', $],
         ),
 
         // test
-        $cr.node.execute(
+        $c.node.execute(
             {
                 'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.literal([
                     t_path_to_text.Context_Path(
                         t_path_to_path.extend_context_path_with_list(
-                            $p.path,
+                            $d.path,
                             {
                                 'addition': _pt.list.literal([
                                     "typescript",
@@ -43,7 +43,7 @@ export const $$: signatures.commands.build_and_test = _p.command_procedure(
                     ),
                     t_path_to_text.Context_Path(
                         t_path_to_path.extend_context_path_with_list(
-                            $p.path,
+                            $d.path,
                             {
                                 'addition': _pt.list.literal([
                                     "testdata",

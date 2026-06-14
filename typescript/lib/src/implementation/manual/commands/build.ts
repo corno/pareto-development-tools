@@ -1,5 +1,5 @@
-import * as _pc from 'pareto-core/dist/command'
-import * as _p from 'pareto-core/dist/assign'
+import * as _p from 'pareto-core/dist/command'
+import * as _pa from 'pareto-core/dist/assign'
 import _p_variables from 'pareto-core/dist/_p_variables'
 
 import * as signatures from "../../../interface/signatures"
@@ -10,57 +10,57 @@ import * as d from "../../../interface/to_be_generated/build"
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.commands.build = _pc.command_procedure(
-    ($p, $cr, $q) => _p_variables(
+export const $$: signatures.commands.build = _p.command_procedure(
+    ($d, $s, $q, $c) => _p_variables(
         () => {
-            const typescript_path = t_path_to_path.extend_context_path_with_single_step($p.path, { 'addition': "typescript" })
+            const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })
             return [
-                $cr.remove.execute(
+                $c.remove.execute(
                     {
                         'path': t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': _pc.list.literal(["lib", "dist"]),
+                                'addition': _p.list.literal(["lib", "dist"]),
                             }
                         ),
                         'error if not exists': false,
                     },
-                    ($): d.Error => ['error removing lib dist dir', { 'path': $p.path, 'error': $ }],
+                    ($): d.Error => ['error removing lib dist dir', { 'path': $d.path, 'error': $ }],
                 ),
-                $cr.tsc.execute(
+                $c.tsc.execute(
                     {
-                        'path': _pc.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["lib"]) })),
+                        'path': _p.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _p.list.literal(["lib"]) })),
                     },
                     ($): d.Error => ['error building lib', {
-                        'path': $p.path,
+                        'path': $d.path,
                         'error': $,
                     }],
                 ),
-                $cr.remove.execute(
+                $c.remove.execute(
                     {
                         'path': t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': _pc.list.literal(["test", "dist"]),
+                                'addition': _p.list.literal(["test", "dist"]),
                             }
                         ),
                         'error if not exists': false,
                     },
-                    ($): d.Error => ['error removing test dist dir', { 'path': $p.path, 'error': $ }],
+                    ($): d.Error => ['error removing test dist dir', { 'path': $d.path, 'error': $ }],
                 ),
-                $cr.tsc.execute(
+                $c.tsc.execute(
                     {
-                        'path': _pc.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["test"]) })),
+                        'path': _p.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _p.list.literal(["test"]) })),
                     },
                     ($): d.Error => ['error building test', {
-                        'path': $p.path,
+                        'path': $d.path,
                         'error': $,
                     }],
                 ),
 
 
 
-                _pc.if_.query(
+                _p.if_.query(
                     $q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,
@@ -69,41 +69,41 @@ export const $$: signatures.commands.build = _pc.command_procedure(
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    ).transform(($) => _pc.decide.state($, ($) => {
+                    ).transform(($) => _pa.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'does not exist': return _pc.ss($, ($) => false)
-                            case 'file': return _pc.ss($, ($) => false)
-                            case 'directory': return _pc.ss($, ($) => true)
-                            default: return _pc.au($[0])
+                            case 'does not exist': return _pa.ss($, ($) => false)
+                            case 'file': return _pa.ss($, ($) => false)
+                            case 'directory': return _pa.ss($, ($) => true)
+                            default: return _pa.au($[0])
                         }
                     })),
                     _p_variables(() => {
                         const dist_path = t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': _pc.list.literal(["app", "dist"]),
+                                'addition': _p.list.literal(["app", "dist"]),
                             }
                         )
                         return [
 
-                            $cr.remove.execute(
+                            $c.remove.execute(
                                 {
                                     'path': dist_path,
                                     'error if not exists': false,
                                 },
-                                ($): d.Error => ['error removing app dist dir', { 'path': $p.path, 'error': $ }],
+                                ($): d.Error => ['error removing app dist dir', { 'path': $d.path, 'error': $ }],
                             ),
-                            $cr.tsc.execute(
+                            $c.tsc.execute(
                                 {
-                                    'path': _pc.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["app"]) })),
+                                    'path': _p.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _p.list.literal(["app"]) })),
                                 },
                                 ($): d.Error => ['error building app', {
-                                    'path': $p.path,
+                                    'path': $d.path,
                                     'error': $,
                                 }],
                             ),
 
-                            $cr.chmod.execute(
+                            $c.chmod.execute(
                                 {
                                     'path': t_path_to_path.create_node_path(
                                         dist_path,
@@ -112,7 +112,7 @@ export const $$: signatures.commands.build = _pc.command_procedure(
                                         }
                                     ),
                                     'mode': {
-                                        'special bits': _p.optional.literal.not_set(),
+                                        'special bits': _pa.optional.literal.not_set(),
                                         'owner': {
                                             'read': true,
                                             'write': true,

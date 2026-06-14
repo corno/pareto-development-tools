@@ -9,12 +9,12 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 export const $$: signatures.commands.tsc = _p.command_procedure(
 
     // tsc
-    ($p, $cr) => [
-        $cr.tsc.execute(
+    ($d, $s, $q, $c) => [
+        $c.tsc.execute(
             {
                 'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
-                    $p.path.__decide(
+                    $d.path.__decide(
                         ($) => _pt.list.literal([
                             "--project",
                             t_path_to_text.Context_Path($),

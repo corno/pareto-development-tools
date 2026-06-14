@@ -21,20 +21,20 @@ type My_Error =
     | ['execute command', d_execute_command.Error]
 
 export const $$: signatures.commands.main = _p.command_procedure(
-    ($p, $cr) => [
+    ($d, $s, $q, $c) => [
         _p.handle_error<d_main.Error, My_Error>(
             [
                 _p.refine_without_error_transformation(
 
                     // parse command line instruction
                     (abort) => r_instruction.Command(
-                        $p,
+                        $d,
                         ($) => abort(['parse', $]),
                     ),
 
                     // execute API command
                     ($v) => [
-                        $cr.api.execute(
+                        $c.api.execute(
                             $v,
                             ($) => ['execute command', $],
                         )
@@ -44,15 +44,15 @@ export const $$: signatures.commands.main = _p.command_procedure(
             ],
             ($) => [
 
-                $cr['log error'].execute(
+                $c['log error'].execute(
                     {
                         'message': sh.pg.sentences([
                             sh.sentence([
-                                _p.decide.state($, ($) => {
+                                _pt.decide.state($, ($) => {
                                     switch ($[0]) {
-                                        case 'parse': return _p.ss($, ($) => t_bin_to_fountain_pen.Error($))
-                                        case 'execute command': return _p.ss($, ($) => t_api_to_fountain_pen.Error($))
-                                        default: return _p.au($[0])
+                                        case 'parse': return _pt.ss($, ($) => t_bin_to_fountain_pen.Error($))
+                                        case 'execute command': return _pt.ss($, ($) => t_api_to_fountain_pen.Error($))
+                                        default: return _pt.au($[0])
                                     }
                                 })
                             ])

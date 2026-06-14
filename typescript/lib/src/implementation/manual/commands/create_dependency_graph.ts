@@ -12,12 +12,12 @@ import * as t_package_dependencies_to_graphviz from "../transformers/package_dep
 import * as t_graphviz_to_fountain_pen from "pareto-graphviz/dist/implementation/manual/transformers/high_level_simple/fountain_pen"
 
 export const $$: signatures.commands.create_dependency_graph = _p.command_procedure(
-    ($p, $cr, $q) => [
+    ($d, $s, $q, $c) => [
 
         _p.query(
             $q['package dependencies'](
                 {
-                    'path': $p['path to project'],
+                    'path': $d['path to project'],
                 },
                 ($): d.Error => ['package dependencies', $],
             ).transform(
@@ -27,7 +27,7 @@ export const $$: signatures.commands.create_dependency_graph = _p.command_proced
             ),
             ($) => $,
             ($v) => [
-                $cr['log'].execute(
+                $c['log'].execute(
                     {
                         'message': $v
                     },

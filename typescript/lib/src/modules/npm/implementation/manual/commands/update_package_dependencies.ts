@@ -9,28 +9,28 @@ import * as d from "../../../interface/to_be_generated/update_package_dependenci
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
 export const $$: signatures.commands.update_package_dependencies = _p.command_procedure(
-    ($p, $cr) => [
+    ($d, $s, $q, $c) => [
 
         // clean
-        $cr['remove'].execute(
+        $c['remove'].execute(
             {
-                'path': t_path_to_path.extend_context_path_with_single_step($p.path, { 'addition': "node_modules" } ),
+                'path': t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "node_modules" } ),
                 'error if not exists': false,
             },
             ($): d.Error => ['could not remove node_modules', $],
         ),
-        $cr['remove'].execute(
+        $c['remove'].execute(
             {
-                'path': t_path_to_path.extend_context_path_with_single_step($p.path, { 'addition': "package-lock.json" } ),
+                'path': t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "package-lock.json" } ),
                 'error if not exists': false,
             },
             ($): d.Error => ['could not remove package-lock.json', $],
         ),
 
         // update dependencies
-        $cr['update2latest'].execute(
+        $c['update2latest'].execute(
             {
-                'path': $p.path,
+                'path': $d.path,
                 'verbose': false,
                 'what': ['dependencies', null],
             },
@@ -38,9 +38,9 @@ export const $$: signatures.commands.update_package_dependencies = _p.command_pr
         ),
 
         // install/update updated dependencies
-        $cr['npm'].execute(
+        $c['npm'].execute(
             {
-                'path': _p.optional.literal.set($p.path),
+                'path': _p.optional.literal.set($d.path),
                 'operation': ['update', {
                     'package-lock only': false
                 }], // 'install' does not update the indirect dependencies

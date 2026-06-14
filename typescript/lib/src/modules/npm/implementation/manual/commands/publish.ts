@@ -7,22 +7,22 @@ import * as signatures from "../../../interface/signatures"
 //dependencies
 
 export const $$: signatures.commands.npm_publish = _p.command_procedure(
-    ($p, $cr) => [
-        $cr['npm'].execute(
+    ($d, $s, $q, $c) => [
+        $c['npm'].execute(
             {
-                'working directory': _p.optional.literal.set($p.path),
+                'working directory': _p.optional.literal.set($d.path),
                 'args': _pt.list.nested_literal_old([
                     [
                         "publish"
                     ],
-                    _p.decide.state($p.impact, ($) => {
+                    _pt.decide.state($d.impact, ($) => {
                         switch ($[0]) {
-                            case 'dry run': return _p.ss($, ($) => ["--dry-run"])
-                            case 'actual publish': return _p.ss($, ($) => [
+                            case 'dry run': return _pt.ss($, ($) => _pt.list.literal(["--dry-run"]))
+                            case 'actual publish': return _pt.ss($, ($) => _pt.list.literal([
                                 // "--otp",
                                 // $['one time password'],
-                            ])
-                            default: return _p.au($[0])
+                            ]))
+                            default: return _pt.au($[0])
                         }
                     }),
                 ]),

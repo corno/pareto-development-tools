@@ -12,11 +12,11 @@ import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schema
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: signatures.commands.extended_commit = _p.command_procedure(
-    ($p, $cr, $qr) => [
+    ($d, $s, $q, $c) => [
         _p.if_.query(
-            $qr['git is repository clean'](
+            $q['git is repository clean'](
                 {
-                    'path': $p.path
+                    'path': $d.path
                 },
                 ($): d.Error => ['asserting git not clean', $],
             ).transform(
@@ -24,18 +24,18 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
             ),
             [
                 _p.if_.direct(
-                    $p.instruction['stage all changes'],
+                    $d.instruction['stage all changes'],
                     [
-                        $cr.git.execute(
+                        $c.git.execute(
                             {
                                 'working directory': _p.optional.literal.not_set(),
                                 'args': _pt.list.nested_literal_old([
-                                    $p.path.__decide(
+                                    $d.path.__decide(
                                         ($) => _pt.list.literal([
                                             "-C",
                                             t_path_to_text.Context_Path($),
                                         ]),
-                                        () => undefined
+                                        () => _pt.list.literal([])
                                     ),
                                     _pt.list.literal([
                                         "add",
@@ -47,39 +47,39 @@ export const $$: signatures.commands.extended_commit = _p.command_procedure(
                         )
                     ]
                 ),
-                $cr.git.execute(
+                $c.git.execute(
                     {
                         'working directory': _p.optional.literal.not_set(),
                         'args': _pt.list.nested_literal_old([
-                            $p.path.__decide(
+                            $d.path.__decide(
                                 ($) => _pt.list.literal([
                                     "-C",
                                     t_path_to_text.Context_Path($),
                                 ]),
-                                () => undefined
+                                () => _pt.list.literal([])
                             ),
                             _pt.list.literal([
                                 "commit",
                                 "-m",
-                                $p.instruction['commit message'],
+                                $d.instruction['commit message'],
                             ])
                         ]),
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
                 _p.if_.direct(
-                    $p.instruction['push after commit'],
+                    $d.instruction['push after commit'],
                     [
-                        $cr.git.execute(
+                        $c.git.execute(
                             {
                                 'working directory': _p.optional.literal.not_set(),
                                 'args': _pt.list.nested_literal_old([
-                                    $p.path.__decide(
+                                    $d.path.__decide(
                                         ($) => _pt.list.literal([
                                             "-C",
                                             t_path_to_text.Context_Path($),
                                         ]),
-                                        () => undefined
+                                        () => _pt.list.literal([])
                                     ),
                                     _pt.list.literal([
                                         "push",

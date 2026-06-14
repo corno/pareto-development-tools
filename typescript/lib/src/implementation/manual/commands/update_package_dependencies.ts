@@ -11,13 +11,13 @@ import * as d from "../../../interface/to_be_generated/update_package_dependenci
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
 export const $$: signatures.commands.update_package_dependencies = _pc.command_procedure(
-    ($p, $cr, $q) => _p_variables(
+    ($d, $s, $q, $c) => _p_variables(
         () => {
-            const typescript_path = t_path_to_path.extend_context_path_with_single_step($p.path, { 'addition': "typescript" })
+            const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })
             return [
 
                 // update dependencies of lib
-                $cr['npm update package dependencies'].execute(
+                $c['npm update package dependencies'].execute(
                     {
                         'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["lib"]) }),
                     },
@@ -25,7 +25,7 @@ export const $$: signatures.commands.update_package_dependencies = _pc.command_p
                 ),
 
                 // update dependencies of test
-                $cr['npm update package dependencies'].execute(
+                $c['npm update package dependencies'].execute(
                     {
                         'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["test"]) }),
                     },
@@ -52,7 +52,7 @@ export const $$: signatures.commands.update_package_dependencies = _pc.command_p
                     [
 
                         // update dependencies of app
-                        $cr['npm update package dependencies'].execute(
+                        $c['npm update package dependencies'].execute(
                             {
                                 'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["app"]) }),
                             },

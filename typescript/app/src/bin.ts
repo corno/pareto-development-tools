@@ -1,10 +1,8 @@
 #!/usr/bin/env -S node --enable-source-maps
 
 import * as _pn from 'pareto-host-nodejs'
-import * as _pi from 'pareto-core/dist/interface'
-import * as _pq from 'pareto-core/dist/query'
-import * as _pc from 'pareto-core/dist/command'
-import __query from 'pareto-core/dist/__internals/async/query'
+import * as _pci from 'pareto-core/dist/command_interface'
+import * as _pqi from 'pareto-core/dist/query_interface'
 
 import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
 import * as d_espe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
@@ -47,37 +45,37 @@ _pn.run_main_command(
     ($r) => {
         const create_eqe = (
             program: string,
-        ): _pi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => q_execute_sandboxed_query_executable(
+        ): _pqi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => q_execute_sandboxed_query_executable(
+            {
+                'program': program,
+            },
             {
                 'unrestricted': $r['execute unrestricted'].queries['query executable'],
             },
-            {
-                'program': program,
-            }
         )
 
         const create_epe = (
             program: string,
-        ): _pi.Command<d_epe.Error, d_epe.Parameters> => c_execute_sandboxed_command_executable(
+        ): _pci.Command<d_epe.Error, d_epe.Parameters> => c_execute_sandboxed_command_executable(
             {
-                'unrestricted': $r['execute unrestricted'].commands['command executable'],
+                'program': program,
             },
             null,
             {
-                'program': program,
-            }
+                'unrestricted': $r['execute unrestricted'].commands['command executable'],
+            },
         )
 
         const create_espe = (
             program: string,
-        ): _pi.Command<d_espe.Error, d_espe.Parameters> => c_execute_sandboxed_smelly_command_executable(
+        ): _pci.Command<d_espe.Error, d_espe.Parameters> => c_execute_sandboxed_smelly_command_executable(
             {
-                'unrestricted': $r['execute unrestricted'].commands['smelly command executable'],
+                'program': program,
             },
             null,
             {
-                'program': program,
-            }
+                'unrestricted': $r['execute unrestricted'].commands['smelly command executable'],
+            },
         )
 
         const eqe_git = create_eqe("git")
@@ -91,209 +89,219 @@ _pn.run_main_command(
         const epe_tar = create_epe("tar")
 
         const git_is_repository_clean = q_git_is_repository_clean(
+            null,
             {
                 'git': eqe_git,
                 'is inside git work tree': q_git_is_inside_work_tree(
+                    null,
                     {
                         'git': eqe_git,
                     },
-                    null,
                 ),
             },
-            null,
         )
 
         const git_assert_is_clean = c_git_assert_clean(
-            {
-                'git': epe_git,
-            },
+            null,
             {
                 'is repository clean': git_is_repository_clean,
             },
-            null,
+            {
+                'git': epe_git,
+            },
         )
 
         const tsc = c_tsc(
+            null,
+            null,
             {
                 'tsc': epe_tsc,
             },
-            null,
-            null,
         )
 
         const build = c_build(
+            null,
+            {
+                'stat': $r['filesystem unrestricted'].queries['stat possible node']
+            },
             {
                 'tsc': tsc,
                 'remove': $r['filesystem unrestricted'].commands.remove,
                 'chmod': $r['filesystem unrestricted'].commands.chmod,
             },
-            {
-                'stat': $r['filesystem unrestricted'].queries['stat possible node']
-            },
-            null,
         )
 
         const dependency_graph = c_dependency_graph(
-            {
-                'log': $r.stream.commands.log,
-            },
+            null,
             {
                 'package dependencies': q_package_dependencies(
+                    null,
                     {
                         'read directory': $r['filesystem unrestricted'].queries['read directory'],
                         'read file': $r['filesystem unrestricted'].queries['read file'],
                     },
-                    null,
                 ),
             },
-            null,
+            {
+                'log': $r.stream.commands.log,
+            },
         )
 
         const git_make_pristine = c_git_make_pristine(
+            null,
+            null,
             {
                 'git': epe_git,
             },
-            null,
-            null,
         )
 
         const build_and_test = c_build_and_test(
+            null,
+            null,
             {
                 'build': build,
                 'node': epe_node,
             },
-            null,
-            null,
         )
 
         const update2latest = c_update2latest(
+            null,
+            null,
             {
                 'update2latest': epe_update2latest,
             },
-            null,
-            null,
         )
 
         const npm = c_npm(
+            null,
+            null,
             {
                 'npm': epe_npm,
             },
-            null,
-            null,
         )
 
         const npm_publish = c_npm_publish(
+            null,
+            null,
             {
                 'npm': epe_npm,
             },
-            null,
-            null,
         )
 
         const npm_update_package_dependencies = c_npm_update_package_dependencies(
+            null,
+            null,
             {
                 'remove': $r['filesystem unrestricted'].commands.remove,
                 'update2latest': update2latest,
                 'npm': npm,
             },
-            null,
-            null,
         )
 
         const update_package_dependencies = c_update_package_dependencies(
-            {
-                'npm update package dependencies': npm_update_package_dependencies,
-            },
+            null,
             {
                 'stat': $r['filesystem unrestricted'].queries['stat possible node'],
             },
-            null,
+            {
+                'npm update package dependencies': npm_update_package_dependencies,
+            },
         )
 
         const git_push = c_git_push(
+            null,
+            null,
             {
                 'git': epe_git,
             },
-            null,
-            null,
         )
 
         const git_remove_tracked_but_ignored = c_git_remove_tracked_but_ignored(
+            null,
+            {
+                'git': eqe_git,
+            },
             {
                 'git': epe_git,
                 'assert is clean': git_assert_is_clean,
             },
-            {
-                'git': eqe_git,
-            },
-            null,
         )
 
         const git_extended_commit = c_git_extended_commit(
-            {
-                'git': epe_git,
-            },
+            null,
             {
                 'git is repository clean': git_is_repository_clean,
             },
-            null,
+            {
+                'git': epe_git,
+            },
         )
 
         const set_up_comparison_against_published = c_set_up_comparison_against_published(
+            null,
+            {
+                'read file': $r['filesystem unrestricted'].queries['read file'],
+                'npm': eqe_npm,
+            },
             {
                 'npm': epe_npm,
                 'tar': epe_tar,
                 'make directory': $r['filesystem unrestricted'].commands['make directory'],
                 // 'remove': $r.commands.remove,
             },
-            {
-                'read file': $r['filesystem unrestricted'].queries['read file'],
-                'npm': eqe_npm,
-            },
-            null,
         )
 
         return c_main(
+            null,
+            null,
             {
                 'log error': $r.stream.commands['log error'],
                 'api': c_api(
+                    null,
+                    {
+                        'read directory': $r['filesystem unrestricted'].queries['read directory']
+                    },
                     {
                         'git assert is clean': git_assert_is_clean,
                         'build and test': build_and_test,
                         'build': build,
                         'create dependency graph': dependency_graph,
                         'analyze file structure': c_analyze_file_structure(
-                            {
-                                'log': $r.stream.commands.log,
-                            },
+                            null,
                             {
                                 'read directory': $r['filesystem unrestricted'].queries['read directory'],
                                 'read file': $r['filesystem unrestricted'].queries['read file'],
                             },
-                            null,
+                            {
+                                'log': $r.stream.commands.log,
+                            },
                         ),
                         'list file structure problems': c_list_file_structure_problems(
-                            {
-                                'log': $r.stream.commands.log,
-                            },
+                            null,
                             {
                                 'read directory': $r['filesystem unrestricted'].queries['read directory'],
                                 'read file': $r['filesystem unrestricted'].queries['read file'],
                             },
-                            null,
+                            {
+                                'log': $r.stream.commands.log,
+                            },
                         ),
                         'git remove tracked but ignored': git_remove_tracked_but_ignored,
                         'update package dependencies': update_package_dependencies,
                         'git commit': c_git_commit(
+                            null,
+                            null,
                             {
                                 'build and test': build_and_test,
                                 'git extended commit': git_extended_commit,
                             },
-                            null,
-                            null,
                         ),
                         'npm set up comparison against published': set_up_comparison_against_published,
                         'publish': c_publish(
+                            null,
+                            {
+                                'read file': $r['filesystem unrestricted'].queries['read file']
+                            },
                             {
                                 'build and test': build_and_test,
                                 'git push': git_push,
@@ -305,20 +313,10 @@ _pn.run_main_command(
                                 'git extended commit': git_extended_commit,
                                 'log': $r.stream.commands.log,
                             },
-                            {
-                                'read file': $r['filesystem unrestricted'].queries['read file']
-                            },
-                            null,
                         ),
                     },
-                    {
-                        'read directory': $r['filesystem unrestricted'].queries['read directory']
-                    },
-                    null,
                 ),
             },
-            null,
-            null,
         )
     }
 )

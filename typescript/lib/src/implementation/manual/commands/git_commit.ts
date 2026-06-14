@@ -11,31 +11,31 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 export const $$: signatures.commands.git_commit = _p.command_procedure(
 
-    ($p, $cr) => [
+    ($d, $s, $q, $c) => [
 
 
         _p.if_.direct(
-            $p.instruction['accept broken commits'],
+            $d.instruction['accept broken commits'],
             [
 
                 _p.pseudo_query_successfully_executed<d.Error, null>( //testing to determine the commit message
                     [
 
-                        $cr['build and test'].execute(
+                        $c['build and test'].execute(
                             {
-                                'path': $p['path'],
+                                'path': $d['path'],
                             },
                             ($) => null,
                         ),
 
                     ],
                     ($) => [
-                        $cr['git extended commit'].execute(
+                        $c['git extended commit'].execute(
                             {
-                                'path': _p.optional.literal.set($p['path']),
+                                'path': _p.optional.literal.set($d['path']),
                                 'instruction': {
                                     'stage all changes': true,
-                                    'commit message': "pdt" + ($ ? "" : "(broken)") + ": " + $p.instruction['commit message'],
+                                    'commit message': "pdt" + ($ ? "" : "(broken)") + ": " + $d.instruction['commit message'],
                                     'push after commit': true,
                                 },
                             },
@@ -46,18 +46,18 @@ export const $$: signatures.commands.git_commit = _p.command_procedure(
 
             ],
             [
-                $cr['build and test'].execute(
+                $c['build and test'].execute(
                     {
-                        'path': $p['path'],
+                        'path': $d['path'],
                     },
                     ($): d.Error => ['error while running build and test', $],
                 ),
-                $cr['git extended commit'].execute(
+                $c['git extended commit'].execute(
                     {
-                        'path': _p.optional.literal.set($p['path']),
+                        'path': _p.optional.literal.set($d['path']),
                         'instruction': {
                             'stage all changes': true,
-                            'commit message': "pdt: " + $p.instruction['commit message'],
+                            'commit message': "pdt: " + $d.instruction['commit message'],
                             'push after commit': true,
                         },
                     },

@@ -1,71 +1,74 @@
-import * as _pi from 'pareto-core/dist/interface'
+import * as _pqi from 'pareto-core/dist/query_interface'
+import * as _pci from 'pareto-core/dist/command_interface'
+
 
 import * as resources from "./resources"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 
 export namespace commands {
 
-    export type npm = _pi.Command_Procedure<
+    export type npm = _pci.Command_Procedure<
         resources.commands.npm,
+        null,
+        null,
         {
             'npm': resources_pareto.execute_sandboxed.commands.command_executable
-        },
-        null,
-        null
+        }
     >
 
-    export type npm_publish = _pi.Command_Procedure<
+    export type npm_publish = _pci.Command_Procedure<
         resources.commands.npm_publish,
+        null,
+        null,
         {
             'npm': resources_pareto.execute_sandboxed.commands.command_executable
-        },
-        null,
-        null
+        }
     >
 
-    export type set_up_comparison_against_published = _pi.Command_Procedure<
+    export type set_up_comparison_against_published = _pci.Command_Procedure<
         resources.commands.set_up_comparison_against_published,
-        {
-            'npm': resources_pareto.execute_sandboxed.commands.command_executable
-            'tar': resources_pareto.execute_sandboxed.commands.command_executable
-            'make directory': resources_pareto.filesystem_unrestricted.commands.make_directory
-        },
+        null,
         {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
             'npm': resources_pareto.execute_sandboxed.queries.query_executable
         },
-        null
+        {
+            'npm': resources_pareto.execute_sandboxed.commands.command_executable
+            'tar': resources_pareto.execute_sandboxed.commands.command_executable
+            'make directory': resources_pareto.filesystem_unrestricted.commands.make_directory
+        }
     >
 
-    export type update2latest = _pi.Command_Procedure<
+    export type update2latest = _pci.Command_Procedure<
         resources.commands.update2latest,
+        null,
+        null,
         {
             'update2latest': resources_pareto.execute_sandboxed.commands.command_executable
-        },
-        null,
-        null
+        }
     >
 
-    export type update_package_dependencies = _pi.Command_Procedure<
-        resources.commands.update_package_dependencies, {
+    export type update_package_dependencies = _pci.Command_Procedure<
+        resources.commands.update_package_dependencies,
+        null,
+        null,
+        {
             'remove': resources_pareto.filesystem_unrestricted.commands.remove
             'update2latest': resources.commands.update2latest
             'npm': resources.commands.npm
-        },
-        null,
-        null
+        }
     >
 
 }
 
 export namespace queries {
 
-    export type get_package_json = _pi.Query_Function<
+    export type get_package_json = _pqi.Query_Function<
         resources.queries.get_package_json,
+        null,
         {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-        },
-        null
+        }
     >
 
 }

@@ -8,16 +8,16 @@ import * as signatures from "../../../interface/signatures"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: signatures.commands.update2latest = _p.command_procedure(
-    ($p, $cr) => [
-        $cr.update2latest.execute(
+    ($d, $s, $q, $c) => [
+        $c.update2latest.execute(
             {
                 'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
                     _pt.list.literal([
-                        t_path_to_text.Context_Path($p.path),
+                        t_path_to_text.Context_Path($d.path),
                     ]),
-                    _pt.decide.state($p.what, ($) => {
-                        // _p_log_debug_message(`Updating ${$p.path} to latest`, () => {})
+                    _pt.decide.state($d.what, ($) => {
+                        // _p_log_debug_message(`Updating ${$d.path} to latest`, () => {})
                         switch ($[0]) {
                             case 'dependencies': return _pt.ss($, ($) => {
                                 return _pt.list.literal(["dependencies"])
@@ -28,7 +28,7 @@ export const $$: signatures.commands.update2latest = _p.command_procedure(
                             default: return _pt.au($[0])
                         }
                     }),
-                    // $p.verbose ? _pt.list.literal(["verbose"]) : _pt.list.literal([]),
+                    // $d.verbose ? _pt.list.literal(["verbose"]) : _pt.list.literal([]),
                     _pt.list.literal(["verbose"])
                 ]),
             },

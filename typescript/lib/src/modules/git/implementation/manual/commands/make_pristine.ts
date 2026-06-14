@@ -10,12 +10,12 @@ import * as d from "../../../interface/to_be_generated/make_pristine"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: signatures.commands.make_pristine = _p.command_procedure(
-    ($p, $cr) => [
-        $cr.git.execute(
+    ($d, $s, $q, $c) => [
+        $c.git.execute(
             {
                 'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
-                    $p.path.__decide(
+                    $d.path.__decide(
                         ($) => _pt.list.literal([
                             "-C",
                             t_path_to_text.Context_Path($),

@@ -9,6 +9,7 @@
     "dist"
   ],
   "dependencies": {
+    "pareto-core": "^0.1.0",
     "pareto-core-dev": "^0.12.0",
     "pareto-fountain-pen": "^0.4.0",
     "pareto-fountain-pen-file-structure": "^0.1.0",

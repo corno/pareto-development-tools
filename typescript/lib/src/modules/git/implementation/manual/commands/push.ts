@@ -11,12 +11,12 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 
 
 export const $$: signatures.commands.push = _p.command_procedure(
-    ($p, $cr) => [
-        $cr.git.execute(
+    ($d, $s, $q, $c) => [
+        $c.git.execute(
             {
                 'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
-                    $p.path.__decide(
+                    $d.path.__decide(
                         ($) => _pt.list.literal([
                             "-C",
                             t_path_to_text.Context_Path($),

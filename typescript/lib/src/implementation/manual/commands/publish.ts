@@ -16,62 +16,62 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 export const $$: signatures.commands.publish = _p.command_procedure(
 
-    ($p, $cr, $qr) => _p_variables(() => {
-        const lib_path = t_path_to_path.extend_context_path_with_list($p['path to package'], { 'addition': _p.list.literal(["typescript", "lib"]) })
+    ($d, $s, $q, $c) => _p_variables(() => {
+        const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': _p.list.literal(["typescript", "lib"]) })
         return [
 
-            $cr['git push'].execute(
+            $c['git push'].execute(
                 {
-                    'path': _p.optional.literal.set($p['path to package']),
+                    'path': _p.optional.literal.set($d['path to package']),
                 },
                 ($): d.Error => ['error while running git push', $],
             ),
 
-            // $cr['git assert is clean'].execute(
+            // $c['git assert is clean'].execute(
             //     {
-            //         'path': _p.optional.literal.set($p['path to package']),
+            //         'path': _p.optional.literal.set($d['path to package']),
             //     },
             //     ($) => ['error while running git assert is clean at the start', $],
             // ),
 
-            $cr['git make pristine'].execute(
+            $c['git make pristine'].execute(
                 {
-                    'path': _p.optional.literal.set($p['path to package']),
+                    'path': _p.optional.literal.set($d['path to package']),
                 },
                 ($) => ['error while running git make pristine', $],
             ),
 
-            $cr['update package dependencies'].execute(
+            $c['update package dependencies'].execute(
                 {
-                    'path': $p['path to package'],
+                    'path': $d['path to package'],
                 },
                 ($) => ['error while running update package dependencies', $],
             ),
 
-            $cr['build and test'].execute(
+            $c['build and test'].execute(
                 {
-                    'path': $p['path to package'],
+                    'path': $d['path to package'],
                 },
                 ($) => ['error while running build and test', $],
             ),
 
-            // $cr['git assert is clean'].execute(
+            // $c['git assert is clean'].execute(
             //     {
-            //         'path': _p.optional.literal.set($p['path to package']),
+            //         'path': _p.optional.literal.set($d['path to package']),
             //     },
             //     ($) => ['error while running git assert is clean after updating package dependencies', $],
             // ),
 
-            $cr.npm.execute(
+            $c.npm.execute(
                 {
                     'path': _p.optional.literal.set(lib_path),
-                    'operation': ['version', $p.generation],
+                    'operation': ['version', $d.generation],
                 },
                 ($) => ['error while running npm version', $],
             ),
 
             // update the lib package-lock.json to reflect the new version
-            $cr.npm.execute(
+            $c.npm.execute(
                 {
                     'path': _p.optional.literal.set(lib_path),
                     'operation': ['update', {
@@ -83,10 +83,10 @@ export const $$: signatures.commands.publish = _p.command_procedure(
 
             _p.query(
                 q_get_package_json.$$(
+                    null,
                     {
-                        'read file': $qr['read file'],
+                        'read file': $q['read file'],
                     },
-                    null
                 )(
                     {
                         'path to package': lib_path,
@@ -98,9 +98,9 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                     const package_info = $v
                     return [
 
-                        $cr['git extended commit'].execute(
+                        $c['git extended commit'].execute(
                             {
-                                'path': _p.optional.literal.set($p['path to package']),
+                                'path': _p.optional.literal.set($d['path to package']),
                                 'instruction': {
                                     'commit message': "pdt: published version " + $v.version,
                                     'stage all changes': true,
@@ -110,15 +110,15 @@ export const $$: signatures.commands.publish = _p.command_procedure(
                             ($): d.Error => ['error while running git extended commit', $],
                         ),
 
-                        $cr['npm publish'].execute(
+                        $c['npm publish'].execute(
                             {
                                 'path': lib_path,
-                                'impact': $p.impact,
+                                'impact': $d.impact,
                             },
                             ($) => ['error while running npm publish', $],
                         ),
 
-                        $cr.log.execute(
+                        $c.log.execute(
                             {
                                 'message': sh.pg.sentences([
                                     sh.sentence([

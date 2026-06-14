@@ -15,7 +15,7 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 import { $$ as r_parse_npm_package } from "../transformers/npm_package/text"
 
 export const $$: signatures.queries.get_package_json = _p.query_function(
-    ($p, $r) => _p_change_context($p, ($p) => {
+    ($d, $s, $r) => _p_change_context($d, ($p) => {
         const path = t_path_to_path.create_node_path($p['path to package'], { 'node': "package.json" })
         return $r['read file'](
             path,

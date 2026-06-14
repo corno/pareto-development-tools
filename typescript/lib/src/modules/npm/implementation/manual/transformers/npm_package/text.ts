@@ -36,6 +36,7 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
                     () => abort(['missing value', null]),
                 )
             }
+            return null
         })
         return _p.dictionary.literal(temp)
     }

@@ -8,19 +8,19 @@ import * as signatures from "../../../interface/signatures"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: signatures.commands.npm = _p.command_procedure(
-    ($p, $cr) => [
-        $cr['npm'].execute(
+    ($d, $s, $q, $c) => [
+        $c['npm'].execute(
             {
                 'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
-                    $p.path.__decide(
+                    $d.path.__decide(
                         ($) => _pt.list.literal([
                             "--prefix",
                             t_path_to_text.Context_Path($),
                         ]),
                         () => _pt.list.literal([])
                     ),
-                    _pt.decide.state($p.operation, ($) => {
+                    _pt.decide.state($d.operation, ($) => {
                         switch ($[0]) {
                             case 'update': return _pt.ss($, ($) => _pt.list.nested_literal_old([
                                 [
@@ -42,11 +42,11 @@ export const $$: signatures.commands.npm = _p.command_procedure(
                             ]))
                             case 'version': return _pt.ss($, ($) => _pt.list.literal([
                                 "version",
-                                _p.decide.state($, ($) => {
+                                _pt.decide.state($, ($) => {
                                     switch ($[0]) {
-                                        case 'patch': return _p.ss($, ($) => "patch")
-                                        case 'minor': return _p.ss($, ($) => "minor")
-                                        default: return _p.au($[0])
+                                        case 'patch': return _pt.ss($, ($) => "patch")
+                                        case 'minor': return _pt.ss($, ($) => "minor")
+                                        default: return _pt.au($[0])
                                     }
                                 })
                             ]))

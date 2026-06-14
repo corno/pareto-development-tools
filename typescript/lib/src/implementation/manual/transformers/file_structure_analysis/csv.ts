@@ -31,7 +31,7 @@ export const File_Analysis_List: Signature = ($) => _p.list.nested_literal_old([
             $.analysis.structure.path,
             _p.decide.state($.analysis.structure.classification, ($) => {
                 switch ($[0]) {
-                    case 'directory': return _p.ss($, ($) => "directory " + _p.decide.state($, ($) => {
+                    case 'directory': return _p.ss($, ($) => "directory " + _p.decide.state($, ($): string => {
                         switch ($[0]) {
                             case 'ignored': return _p.ss($, ($) => "ignored")
                             case 'generated': return _p.ss($, ($) => "generated")
@@ -42,7 +42,7 @@ export const File_Analysis_List: Signature = ($) => _p.list.nested_literal_old([
                             default: return _p.au($[0])
                         }
                     }))
-                    case 'file': return _p.ss($, ($) => "file " + _p.decide.state($, ($) => {
+                    case 'file': return _p.ss($, ($) => "file " + _p.decide.state($, ($): string => {
                         switch ($[0]) {
                             case 'generated': return _p.ss($, ($) => "generated")
                             case 'manual': return _p.ss($, ($) => "manual")

@@ -10,10 +10,10 @@ import * as d from "../../../interface/to_be_generated/remove_tracked_but_ignore
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_procedure(
-    ($p, $cr) => [
-        $cr['assert is clean'].execute(
+    ($d, $s, $q, $c) => [
+        $c['assert is clean'].execute(
             {
-                'path': $p.path,
+                'path': $d.path,
             },
             ($): d.Error => _pt.decide.state($, ($) => {
                 switch ($[0]) {
@@ -23,11 +23,11 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
                 }
             }),
         ),
-        $cr.git.execute(
+        $c.git.execute(
             {
                 'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
-                    $p.path.__decide(
+                    $d.path.__decide(
                         ($) => _pt.list.literal([
                             "-C",
                             t_path_to_text.Context_Path($),
@@ -44,11 +44,11 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
             },
             ($) => ['could not remove', $],
         ),
-        $cr.git.execute(
+        $c.git.execute(
             {
                 'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
-                    $p.path.__decide(
+                    $d.path.__decide(
                         ($) => _pt.list.literal([
                             "-C",
                             t_path_to_text.Context_Path($),
@@ -63,11 +63,11 @@ export const $$: signatures.commands.remove_tracked_but_ignored = _p.command_pro
             },
             ($) => ['could not add', $],
         ),
-        $cr.git.execute(
+        $c.git.execute(
             {
                 'working directory': _p.optional.literal.not_set(),
                 'args': _pt.list.nested_literal_old([
-                    $p.path.__decide(
+                    $d.path.__decide(
                         ($) => _pt.list.literal([
                             "-C",
                             t_path_to_text.Context_Path($),

@@ -32,22 +32,33 @@ export const Project_Files: Project_Files = ($) => _p.list.from.dictionary(
         const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {
             const temp: { [id: string]: d_out.File_Analysis } = {}
             const x = ($: d_out.Directory, path: string): void => {
-                _p.decide.state($, ($) => {
+                _p.decide.state($, ($): null => {
                     switch ($[0]) {
-                        case 'expected a file': return _p.ss($, ($) => { })
-                        case 'ignored': return _p.ss($, ($) => { })
+                        case 'expected a file': return _p.ss($, ($) => {
+                            return null
+                        })
+                        case 'ignored': return _p.ss($, ($) => {
+                            return null
+                        })
                         case 'dictionary': return _p.ss($, ($) => {
                             $.__d_map(($, id) => {
 
-                                _p.decide.state($, ($) => {
+                                return _p.decide.state($, ($): null => {
                                     switch ($[0]) {
-                                        case 'other': return //do nothing, ignore other filesystem nodes for now
-                                        case 'file': return _p.ss($, ($) => temp[`${path}/${id}`] = $)
-                                        case 'directory': return _p.ss($, ($) => x($, `${path}/${id}`))
+                                        case 'other': return null //do nothing, ignore other filesystem nodes for now
+                                        case 'file': return _p.ss($, ($) => {
+                                            temp[`${path}/${id}`] = $
+                                            return null
+                                        })
+                                        case 'directory': return _p.ss($, ($) => {
+                                            x($, `${path}/${id}`)
+                                            return null
+                                        })
                                         default: return _p.au($[0])
                                     }
                                 })
                             })
+                            return null
                         })
                         default: return _p.au($[0])
                     }
@@ -86,6 +97,7 @@ const line_count = ($: string): number => {
         if ($ === 10) { //newline character
             lineCount++
         }
+        return null
     })
     return lineCount + 1 //add one for the last line if it doesn't end with a newline
 }
@@ -100,6 +112,7 @@ const extension = ($: string): _pi.Optional_Value<string> => {
             first_period_index = current_index
         }
         current_index++
+        return null
     })
     if (first_period_index === null) {
         return _p.optional.literal.not_set()
@@ -114,6 +127,7 @@ const extension = ($: string): _pi.Optional_Value<string> => {
                             $i['add item']($)
                         }
                         current_index++
+                        return null
                     })
                 }),
                 ($) => $
@@ -390,8 +404,9 @@ export namespace wildcard {
                                     if ($ === file_extension) {
                                         extension_matched = true
                                     }
+                                    return null
                                 })
-
+                                return null
                             })
                             return extension_matched
                                 ? _p.optional.literal.not_set()

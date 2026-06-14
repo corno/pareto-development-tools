@@ -1,7 +1,4 @@
 import * as _p from 'pareto-core/dist/command'
-import * as _pt from 'pareto-core/dist/assign'
-import * as _pi from 'pareto-core/dist/interface'
-import * as _pq from 'pareto-core/dist/query'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -16,12 +13,12 @@ import * as t_project_files_to_file_analysis_list from "../transformers/project_
 import { $$ as q_get_project_files } from "../queries/get_project_files"
 
 export const $$: signatures.commands.analyze_file_structure = _p.command_procedure(
-    ($p, $cr, $q) => [
+    ($d, $s, $q, $c) => [
 
         _p.query(
-            q_get_project_files($q, null)(
+            q_get_project_files(null, $q)(
                 {
-                    'path to project': $p['path to project'],
+                    'path to project': $d['path to project'],
                 },
                 ($): d.Error => $,
 
@@ -29,7 +26,7 @@ export const $$: signatures.commands.analyze_file_structure = _p.command_procedu
             ($, abort) => $,
             ($v) => [
 
-                $cr.log.execute(
+                $c.log.execute(
                     {
 
 

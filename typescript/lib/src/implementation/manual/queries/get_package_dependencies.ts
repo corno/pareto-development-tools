@@ -1,6 +1,6 @@
 import * as _p from 'pareto-core/dist/query'
-import * as _pi from 'pareto-core/dist/interface'
-import _p_list_from_text from 'pareto-core/dist/_p_list_from_text'
+import * as _pqi from 'pareto-core/dist/query_interface'
+
 
 import * as signatures from "../../../interface/signatures"
 
@@ -14,14 +14,15 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/transformers/npm_package/text"
 
 export const $$: signatures.queries.get_package_dependencies = _p.query_function(
-    ($p, $r) => $r['read directory'](
+    ($d, $s, $q) => $q['read directory'](
         {
-            'path': t_path_to_path.extend_context_path_with_single_step($p['path'], { 'addition': "packages" }),
+            'path': t_path_to_path.extend_context_path_with_single_step($d['path'], { 'addition': "packages" }),
         },
         ($): d.Error => ['read directory', $],
     ).query(
-        ($) => _p.dictionaryx.parallel<d_npm_package.NPM_Package, d.Error, d.Package_Error>(
-            $.__d_map(($) => {
+        ($) => _p.dictionaryx.parallel(
+            $,
+            ($): _pqi.Query_Result<d_npm_package.NPM_Package, d.Package_Error> => {
                 const lib_path = t_path_to_path.extend_context_path_with_list(
                     t_path_to_path.deprecated_node_path_to_context_path($.path),
                     {
@@ -33,7 +34,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                     switch ($[0]) {
                         case 'file': return _p.ss($, ($) => _p.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
                         case 'other': return _p.ss($, ($) => _p.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
-                        case 'directory': return _p.ss($, ($) => $r['read file'](
+                        case 'directory': return _p.ss($, ($) => $q['read file'](
                             package_json_path,
                             ($): d.Package_Error => ['no package.json file', null],
                         ).refine(
@@ -48,7 +49,7 @@ export const $$: signatures.queries.get_package_dependencies = _p.query_function
                         default: return _p.au($[0])
                     }
                 })
-            }),
+            },
             ($): d.Error => ['directory content processing', $],
         ).transform(
             ($) => ({

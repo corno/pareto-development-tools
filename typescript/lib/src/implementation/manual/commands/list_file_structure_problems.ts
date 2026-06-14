@@ -18,12 +18,12 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 
 export const $$: signatures.commands.list_file_structure_problems = _p.command_procedure(
-    ($p, $cr, $q) => [
+    ($d, $s, $q, $c) => [
 
         _p.query(
-            q_get_project_files($q, null)(
+            q_get_project_files(null, $q)(
                 {
-                    'path to project': $p['path to project'],
+                    'path to project': $d['path to project'],
                 },
                 ($): d.Error => $,
 
@@ -31,7 +31,7 @@ export const $$: signatures.commands.list_file_structure_problems = _p.command_p
             ($, abort) => $,
             ($v) => [
 
-                $cr.log.execute(
+                $c.log.execute(
                     {
 
 

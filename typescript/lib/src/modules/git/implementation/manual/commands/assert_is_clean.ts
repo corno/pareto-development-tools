@@ -7,11 +7,11 @@ import * as signatures from "../../../interface/signatures"
 import * as d from "../../../interface/to_be_generated/assert_is_clean"
 
 export const $$: signatures.commands.assert_is_clean = _p.command_procedure(
-    ($p, $cr, $qr) => [
+    ($d, $s, $q, $c) => [
         _p.assert.query(
-            $qr['is repository clean'](
+            $q['is repository clean'](
                 {
-                    'path': $p.path,
+                    'path': $d.path,
                 },
                 ($): d.Error => ['unexpected error', $]
             ),
