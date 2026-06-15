@@ -1,4 +1,4 @@
-import * as p_qi from 'pareto-core/dist/query/interface'
+import * as p_qi from 'pareto-core/dist/interface/query'
 
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 

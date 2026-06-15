@@ -1,4 +1,4 @@
-import * as p_di from 'pareto-core/dist/data/interface'
+import * as p_di from 'pareto-core/dist/interface/data'
 
 
 import * as d_ece from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"

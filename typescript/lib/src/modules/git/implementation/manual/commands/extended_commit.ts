@@ -1,6 +1,4 @@
-import * as p from 'pareto-core/dist/command/implementation'
-import * as pa from 'pareto-core/dist/assign'
-import p_text_from_list from 'pareto-core/dist/specials/text_from_list'
+import * as p_ from 'pareto-core/dist/implementation/command'
 
 import * as signatures from "../../../interface/commands"
 
@@ -11,9 +9,9 @@ import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schema
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.procedures.extended_commit = p.command_procedure(
+export const $$: signatures.procedures.extended_commit = p_.command_procedure(
     ($d, $s, $q, $c) => [
-        p.if_.query(
+        p_.if_.query(
             $q['git is repository clean'](
                 {
                     'path': $d.path
@@ -23,21 +21,21 @@ export const $$: signatures.procedures.extended_commit = p.command_procedure(
                 ($) => !$
             ),
             [
-                p.if_.direct(
+                p_.if_.direct(
                     $d.instruction['stage all changes'],
                     [
                         $c.git.execute(
                             {
-                                'working directory': p.literal.not_set(),
-                                'args': pa.literal.nested_list([
+                                'working directory': p_.literal.not_set(),
+                                'args': p_.literal.nested_list([
                                     $d.path.__decide(
-                                        ($) => pa.literal.list([
+                                        ($) => p_.literal.list([
                                             "-C",
                                             t_path_to_text.Context_Path($),
                                         ]),
-                                        () => pa.literal.list([])
+                                        () => p_.literal.list([])
                                     ),
-                                    pa.literal.list([
+                                    p_.literal.list([
                                         "add",
                                         "--all",
                                     ])
@@ -49,16 +47,16 @@ export const $$: signatures.procedures.extended_commit = p.command_procedure(
                 ),
                 $c.git.execute(
                     {
-                        'working directory': p.literal.not_set(),
-                        'args': pa.literal.nested_list([
+                        'working directory': p_.literal.not_set(),
+                        'args': p_.literal.nested_list([
                             $d.path.__decide(
-                                ($) => pa.literal.list([
+                                ($) => p_.literal.list([
                                     "-C",
                                     t_path_to_text.Context_Path($),
                                 ]),
-                                () => pa.literal.list([])
+                                () => p_.literal.list([])
                             ),
-                            pa.literal.list([
+                            p_.literal.list([
                                 "commit",
                                 "-m",
                                 $d.instruction['commit message'],
@@ -67,21 +65,21 @@ export const $$: signatures.procedures.extended_commit = p.command_procedure(
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
-                p.if_.direct(
+                p_.if_.direct(
                     $d.instruction['push after commit'],
                     [
                         $c.git.execute(
                             {
-                                'working directory': p.literal.not_set(),
-                                'args': pa.literal.nested_list([
+                                'working directory': p_.literal.not_set(),
+                                'args': p_.literal.nested_list([
                                     $d.path.__decide(
-                                        ($) => pa.literal.list([
+                                        ($) => p_.literal.list([
                                             "-C",
                                             t_path_to_text.Context_Path($),
                                         ]),
-                                        () => pa.literal.list([])
+                                        () => p_.literal.list([])
                                     ),
-                                    pa.literal.list([
+                                    p_.literal.list([
                                         "push",
                                     ])
                                 ]),

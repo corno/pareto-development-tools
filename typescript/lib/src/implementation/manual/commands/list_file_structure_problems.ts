@@ -1,5 +1,5 @@
-import * as p_ from 'pareto-core/dist/command/implementation'
-import * as p_t from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
 import * as signatures from "../../../interface/commands"
 
@@ -34,11 +34,11 @@ export const $$: signatures.procedures.list_file_structure_problems = p_.command
 
 
 
-                        'message': sh.pg.sentences(p_t.list.from.list(
-                            p_t.list.from.list(
+                        'message': sh.pg.sentences(p_temp.list.from.list(
+                            p_temp.list.from.list(
                                 t_project_files_to_file_analysis_list.Project_Files($v)
                             ).map_optionally<d_file_analysis.File_Analysis2>(
-                                ($) => p_t.boolean.from.optional($.analysis['unexpected path tail']).is_set()
+                                ($) => p_temp.boolean.from.optional($.analysis['unexpected path tail']).is_set()
                                     ? p_.literal.set($)
                                     : p_.literal.not_set()
                             )

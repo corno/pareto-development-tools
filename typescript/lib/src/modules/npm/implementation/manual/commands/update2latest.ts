@@ -1,5 +1,5 @@
-import * as p_ from 'pareto-core/dist/command/implementation'
-import * as p_t from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -11,24 +11,24 @@ export const $$: signatures.commands.update2latest = p_.command_procedure(
         $c.update2latest.execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_t.literal.nested_list([
-                    p_t.literal.list([
+                'args': p_temp.literal.nested_list([
+                    p_temp.literal.list([
                         t_path_to_text.Context_Path($d.path),
                     ]),
-                    p_t.decide.state($d.what, ($) => {
+                    p_temp.decide.state($d.what, ($) => {
                         // p_log_debug_message(`Updating ${$d.path} to latest`, () => {})
                         switch ($[0]) {
-                            case 'dependencies': return p_t.ss($, ($) => {
-                                return p_t.literal.list(["dependencies"])
+                            case 'dependencies': return p_temp.ss($, ($) => {
+                                return p_temp.literal.list(["dependencies"])
                             })
-                            case 'dev-dependencies': return p_t.ss($, ($) => {
-                                return p_t.literal.list(["devDependencies"])
+                            case 'dev-dependencies': return p_temp.ss($, ($) => {
+                                return p_temp.literal.list(["devDependencies"])
                             })
-                            default: return p_t.au($[0])
+                            default: return p_temp.au($[0])
                         }
                     }),
                     // $d.verbose ? _pt.literal.list(["verbose"]) : _pt.literal.list([]),
-                    p_t.literal.list(["verbose"])
+                    p_temp.literal.list(["verbose"])
                 ]),
             },
             ($) => ['error while running update2latest', $],

@@ -1,4 +1,4 @@
-import * as p_di from 'pareto-core/dist/data/interface'
+import * as p_di from 'pareto-core/dist/interface/data'
 
 import * as d_read_directory from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"

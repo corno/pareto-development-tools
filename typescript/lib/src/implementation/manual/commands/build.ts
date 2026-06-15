@@ -1,6 +1,6 @@
-import * as p_ from 'pareto-core/dist/command/implementation'
-import * as p_t from 'pareto-core/dist/assign'
-import p_variables from 'pareto-core/dist/specials/variables'
+import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_temp from 'pareto-core/dist/implementation/transformer'
+import p_variables from 'pareto-core/dist/implementation/specials/variables'
 
 import * as signatures from "../../../interface/commands"
 
@@ -69,12 +69,12 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    ).transform(($) => p_t.decide.state($, ($) => {
+                    ).transform(($) => p_temp.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'does not exist': return p_t.ss($, ($) => false)
-                            case 'file': return p_t.ss($, ($) => false)
-                            case 'directory': return p_t.ss($, ($) => true)
-                            default: return p_t.au($[0])
+                            case 'does not exist': return p_temp.ss($, ($) => false)
+                            case 'file': return p_temp.ss($, ($) => false)
+                            case 'directory': return p_temp.ss($, ($) => true)
+                            default: return p_temp.au($[0])
                         }
                     })),
                     p_variables(() => {
@@ -112,7 +112,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                                         }
                                     ),
                                     'mode': {
-                                        'special bits': p_t.literal.not_set(),
+                                        'special bits': p_.literal.not_set(),
                                         'owner': {
                                             'read': true,
                                             'write': true,

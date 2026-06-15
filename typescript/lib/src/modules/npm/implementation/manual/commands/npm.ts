@@ -1,5 +1,5 @@
-import * as p_ from 'pareto-core/dist/command/implementation'
-import * as p_t from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -11,45 +11,45 @@ export const $$: signatures.commands.npm = p_.command_procedure(
         $c['npm'].execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_t.literal.nested_list([
+                'args': p_.literal.nested_list([
                     $d.path.__decide(
-                        ($) => p_t.literal.list([
+                        ($) => p_.literal.list([
                             "--prefix",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => p_t.literal.list([])
+                        () => p_.literal.list([])
                     ),
-                    p_t.decide.state($d.operation, ($) => {
+                    p_temp.decide.state($d.operation, ($) => {
                         switch ($[0]) {
-                            case 'update': return p_t.ss($, ($) => p_t.literal.nested_list([
+                            case 'update': return p_temp.ss($, ($) => p_.literal.nested_list([
                                 [
                                     "update",
                                 ],
                                 $['package-lock only']
-                                    ? p_t.literal.list(["--package-lock-only"])
-                                    : p_t.literal.list([])
+                                    ? p_.literal.list(["--package-lock-only"])
+                                    : p_.literal.list([])
 
                             ]))
-                            case 'install': return p_t.ss($, ($) => p_t.literal.nested_list([
+                            case 'install': return p_temp.ss($, ($) => p_.literal.nested_list([
                                 [
                                     "install",
                                 ],
                                 $['package-lock only']
-                                    ? p_t.literal.list(["--package-lock-only"])
-                                    : p_t.literal.list([])
+                                    ? p_.literal.list(["--package-lock-only"])
+                                    : p_.literal.list([])
 
                             ]))
-                            case 'version': return p_t.ss($, ($) => p_t.literal.list([
+                            case 'version': return p_temp.ss($, ($) => p_.literal.list([
                                 "version",
-                                p_t.decide.state($, ($) => {
+                                p_temp.decide.state($, ($) => {
                                     switch ($[0]) {
-                                        case 'patch': return p_t.ss($, ($) => "patch")
-                                        case 'minor': return p_t.ss($, ($) => "minor")
-                                        default: return p_t.au($[0])
+                                        case 'patch': return p_temp.ss($, ($) => "patch")
+                                        case 'minor': return p_temp.ss($, ($) => "minor")
+                                        default: return p_temp.au($[0])
                                     }
                                 })
                             ]))
-                            default: return p_t.au($[0])
+                            default: return p_temp.au($[0])
                         }
                     })
                 ]),

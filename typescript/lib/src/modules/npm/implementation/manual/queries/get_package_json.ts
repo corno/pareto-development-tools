@@ -1,6 +1,5 @@
-import * as p_ from 'pareto-core/dist/query/implementation'
-import * as _p_temp from 'pareto-core/dist/assign'
-import p_change_context from 'pareto-core/dist/specials/change_context'
+import * as p_ from 'pareto-core/dist/implementation/query'
+import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
 
 import * as signatures from "../../../interface/signatures"
 

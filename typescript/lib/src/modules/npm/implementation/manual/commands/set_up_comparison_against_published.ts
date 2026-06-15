@@ -1,8 +1,7 @@
-import * as p_ from 'pareto-core/dist/command/implementation'
-import * as p_t from 'pareto-core/dist/assign'
-import p_list_from_text from 'pareto-core/dist/specials/list_from_text'
-import p_list_build_deprecated from 'pareto-core/dist/specials/list_build_deprecated'
-import p_text_from_list from 'pareto-core/dist/specials/text_from_list'
+import * as p_ from 'pareto-core/dist/implementation/command'
+import p_list_from_text from 'pareto-core/dist/implementation/specials/list_from_text'
+import p_list_build_deprecated from 'pareto-core/dist/implementation/specials/list_build_deprecated'
+import p_text_from_list from 'pareto-core/dist/implementation/specials/text_from_list'
 
 import * as signatures from "../../../interface/signatures"
 
@@ -84,8 +83,8 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
                         $c['npm'].execute(
                             {
                                 'working directory': p_.literal.not_set(),
-                                'args': p_t.literal.nested_list([
-                                    p_t.literal.list([
+                                'args': p_.literal.nested_list([
+                                    p_.literal.list([
                                         "pack",
                                         t_path_to_text.Context_Path($d['path to local package']),
                                         "--pack-destination",
@@ -109,7 +108,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
                         $c['tar'].execute(
                             {
                                 'working directory': p_.literal.not_set(),
-                                'args': p_t.literal.list([
+                                'args': p_.literal.list([
                                     "-xzmf",
                                     `${t_path_to_text.Node_Path($d['path to temp directory'])}/${filename}`,
                                     "-C",
@@ -132,7 +131,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
                         $c['npm'].execute(
                             {
                                 'working directory': p_.literal.not_set(),
-                                'args': p_t.literal.list([
+                                'args': p_.literal.list([
                                     "pack",
                                     `${package_info.name}@${package_info.version}`,
                                     "--pack-destination",
@@ -155,7 +154,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
                             $q.npm(
                                 {
                                     'working directory': p_.literal.not_set(),
-                                    'args': p_t.literal.list([
+                                    'args': p_.literal.list([
                                         "view",
                                         package_info.name,
                                         "version",
@@ -169,7 +168,7 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
                                 $c['tar'].execute<d.Error>(
                                     {
                                         'working directory': p_.literal.not_set(),
-                                        'args': p_t.literal.list([
+                                        'args': p_.literal.list([
                                             "-xzmf",
                                             `${t_path_to_text.Node_Path($d['path to temp directory'])}/npm/${package_info.name}-${p_text_from_list($v, ($) => $)}.tgz`,
                                             "-C",

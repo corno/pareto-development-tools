@@ -1,5 +1,5 @@
-import * as p_ from 'pareto-core/dist/command/implementation'
-import * as p_t from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
 import * as signatures from "../../../interface/commands"
 
@@ -49,11 +49,11 @@ export const $$: signatures.procedures.main = p_.command_procedure(
                     {
                         'message': sh.pg.sentences([
                             sh.sentence([
-                                p_t.decide.state($, ($) => {
+                                p_temp.decide.state($, ($) => {
                                     switch ($[0]) {
-                                        case 'parse': return p_t.ss($, ($) => t_bin_to_fountain_pen.Error($))
-                                        case 'execute command': return p_t.ss($, ($) => t_api_to_fountain_pen.Error($))
-                                        default: return p_t.au($[0])
+                                        case 'parse': return p_temp.ss($, ($) => t_bin_to_fountain_pen.Error($))
+                                        case 'execute command': return p_temp.ss($, ($) => t_api_to_fountain_pen.Error($))
+                                        default: return p_temp.au($[0])
                                     }
                                 })
                             ])

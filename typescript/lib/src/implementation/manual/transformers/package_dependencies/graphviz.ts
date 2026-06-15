@@ -1,6 +1,6 @@
 
-import * as p_i from 'pareto-core/dist/transformer/interface'
-import * as pt from 'pareto-core/dist/transformer/implementation'
+import * as p_i from 'pareto-core/dist/interface/transformer'
+import * as pt from 'pareto-core/dist/implementation/transformer'
 
 import * as d_in from "../../../../interface/to_be_generated/get_package_dependencies"
 import * as d_out from "pareto-graphviz/dist/interface/generated/liana/schemas/high_level_simple/data"

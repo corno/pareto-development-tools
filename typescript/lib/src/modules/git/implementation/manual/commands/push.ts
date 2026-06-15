@@ -1,5 +1,4 @@
-import * as p_ from 'pareto-core/dist/command/implementation'
-import * as p_t from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/implementation/command'
 
 import * as signatures from "../../../interface/commands"
 
@@ -15,15 +14,15 @@ export const $$: signatures.procedures.push = p_.command_procedure(
         $c.git.execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_t.literal.nested_list([
+                'args': p_.literal.nested_list([
                     $d.path.__decide(
-                        ($) => p_t.literal.list([
+                        ($) => p_.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => p_t.literal.list([])
+                        () => p_.literal.list([])
                     ),
-                    p_t.literal.list([
+                    p_.literal.list([
                         "push",
                     ])
                 ]),

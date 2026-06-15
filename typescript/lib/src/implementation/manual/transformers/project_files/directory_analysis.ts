@@ -1,10 +1,10 @@
-import * as pt from 'pareto-core/dist/transformer/implementation'
-import * as p_di from 'pareto-core/dist/data/interface'
-import * as p_i from 'pareto-core/dist/transformer/interface'
+import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_di from 'pareto-core/dist/interface/data'
+import * as p_i from 'pareto-core/dist/interface/transformer'
 
-import p_list_from_text from 'pareto-core/dist/specials/list_from_text'
-import p_list_build_deprecated from 'pareto-core/dist/specials/list_build_deprecated'
-import p_text_from_list from 'pareto-core/dist/specials/text_from_list'
+import p_list_from_text from 'pareto-core/dist/implementation/specials/list_from_text'
+import p_list_build_deprecated from 'pareto-core/dist/implementation/specials/list_build_deprecated'
+import p_text_from_list from 'pareto-core/dist/implementation/specials/text_from_list'
 
 //data types
 import * as d_in from "../../../../interface/to_be_generated/project_files"

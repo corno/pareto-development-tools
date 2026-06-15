@@ -1,5 +1,5 @@
-import * as p from 'pareto-core/dist/command/implementation'
-import * as pa from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
 import * as signatures from "../../../interface/commands"
 
@@ -9,32 +9,32 @@ import * as d from "../../../interface/to_be_generated/remove_tracked_but_ignore
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.procedures.remove_tracked_but_ignored = p.command_procedure(
+export const $$: signatures.procedures.remove_tracked_but_ignored = p_.command_procedure(
     ($d, $s, $q, $c) => [
         $c['assert is clean'].execute(
             {
                 'path': $d.path,
             },
-            ($): d.Error => pa.decide.state($, ($) => {
+            ($): d.Error => p_temp.decide.state($, ($) => {
                 switch ($[0]) {
-                    case 'working directory is not clean': return pa.ss($, ($): d.Error => ['not clean', null])
-                    case 'unexpected error': return pa.ss($, ($): d.Error => ['unexpected error', $])
-                    default: return pa.au($[0])
+                    case 'working directory is not clean': return p_temp.ss($, ($): d.Error => ['not clean', null])
+                    case 'unexpected error': return p_temp.ss($, ($): d.Error => ['unexpected error', $])
+                    default: return p_temp.au($[0])
                 }
             }),
         ),
         $c.git.execute(
             {
-                'working directory': p.literal.not_set(),
-                'args': pa.literal.nested_list([
+                'working directory': p_.literal.not_set(),
+                'args': p_.literal.nested_list([
                     $d.path.__decide(
-                        ($) => pa.literal.list([
+                        ($) => p_.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => pa.literal.list([])
+                        () => p_.literal.list([])
                     ),
-                    pa.literal.list([
+                    p_.literal.list([
                         "rm",
                         "-r",
                         "--cached",
@@ -46,16 +46,16 @@ export const $$: signatures.procedures.remove_tracked_but_ignored = p.command_pr
         ),
         $c.git.execute(
             {
-                'working directory': p.literal.not_set(),
-                'args': pa.literal.nested_list([
+                'working directory': p_.literal.not_set(),
+                'args': p_.literal.nested_list([
                     $d.path.__decide(
-                        ($) => pa.literal.list([
+                        ($) => p_.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => pa.literal.list([])
+                        () => p_.literal.list([])
                     ),
-                    pa.literal.list([
+                    p_.literal.list([
                         "add",
                         "--all",
                     ])
@@ -65,16 +65,16 @@ export const $$: signatures.procedures.remove_tracked_but_ignored = p.command_pr
         ),
         $c.git.execute(
             {
-                'working directory': p.literal.not_set(),
-                'args': pa.literal.nested_list([
+                'working directory': p_.literal.not_set(),
+                'args': p_.literal.nested_list([
                     $d.path.__decide(
-                        ($) => pa.literal.list([
+                        ($) => p_.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => pa.literal.list([])
+                        () => p_.literal.list([])
                     ),
-                    pa.literal.list([
+                    p_.literal.list([
                         "clean",
                         "-fd",
                     ])

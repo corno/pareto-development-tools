@@ -1,6 +1,6 @@
-import * as _pc from 'pareto-core/dist/command/implementation'
-import * as pt from 'pareto-core/dist/assign'
-import p_variables from 'pareto-core/dist/specials/variables'
+import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_temp from 'pareto-core/dist/implementation/transformer'
+import p_variables from 'pareto-core/dist/implementation/specials/variables'
 
 import * as signatures from "../../../interface/commands"
 
@@ -10,7 +10,7 @@ import * as d from "../../../interface/to_be_generated/update_package_dependenci
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.procedures.update_package_dependencies = _pc.command_procedure(
+export const $$: signatures.procedures.update_package_dependencies = p_.command_procedure(
     ($d, $s, $q, $c) => p_variables(
         () => {
             const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })
@@ -19,7 +19,7 @@ export const $$: signatures.procedures.update_package_dependencies = _pc.command
                 // update dependencies of lib
                 $c['npm update package dependencies'].execute(
                     {
-                        'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.literal.list(["lib"]) }),
+                        'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["lib"]) }),
                     },
                     ($): d.Error => ['error updating lib', $],
                 ),
@@ -27,12 +27,12 @@ export const $$: signatures.procedures.update_package_dependencies = _pc.command
                 // update dependencies of test
                 $c['npm update package dependencies'].execute(
                     {
-                        'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.literal.list(["test"]) }),
+                        'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["test"]) }),
                     },
                     ($) => ['error updating test', $],
                 ),
 
-                _pc.if_.query(
+                p_.if_.query(
                     $q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,
@@ -41,12 +41,12 @@ export const $$: signatures.procedures.update_package_dependencies = _pc.command
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    ).transform(($) => pt.decide.state($, ($) => {
+                    ).transform(($) => p_temp.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'does not exist': return pt.ss($, ($) => false)
-                            case 'file': return pt.ss($, ($) => false)
-                            case 'directory': return pt.ss($, ($) => true)
-                            default: return pt.au($[0])
+                            case 'does not exist': return p_temp.ss($, ($) => false)
+                            case 'file': return p_temp.ss($, ($) => false)
+                            case 'directory': return p_temp.ss($, ($) => true)
+                            default: return p_temp.au($[0])
                         }
                     })),
                     [
@@ -54,7 +54,7 @@ export const $$: signatures.procedures.update_package_dependencies = _pc.command
                         // update dependencies of app
                         $c['npm update package dependencies'].execute(
                             {
-                                'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.literal.list(["app"]) }),
+                                'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["app"]) }),
                             },
                             ($) => ['error updating app', $],
                         ),

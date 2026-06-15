@@ -1,5 +1,4 @@
-import * as p_ from 'pareto-core/dist/command/implementation'
-import * as p_t from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/implementation/command'
 
 import * as signatures from "../../../interface/commands"
 
@@ -25,12 +24,12 @@ export const $$: signatures.procedures.build_and_test = p_.command_procedure(
         $c.node.execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_t.literal.list([
+                'args': p_.literal.list([
                     t_path_to_text.Context_Path(
                         t_path_to_path.extend_context_path_with_list(
                             $d.path,
                             {
-                                'addition': p_t.literal.list([
+                                'addition': p_.literal.list([
                                     "typescript",
                                     "test",
                                     "dist",
@@ -44,7 +43,7 @@ export const $$: signatures.procedures.build_and_test = p_.command_procedure(
                         t_path_to_path.extend_context_path_with_list(
                             $d.path,
                             {
-                                'addition': p_t.literal.list([
+                                'addition': p_.literal.list([
                                     "testdata",
                                 ])
                             }
