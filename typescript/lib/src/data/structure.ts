@@ -5,7 +5,8 @@ const $_interface = sh.g.directory_group({
     "generated": sh.g.directory_generated(true),
     "queries.ts": sh.g.file_manual(),
     "data": sh.g.directory_wildcards(0, false, ["ts"], true),
-    "transformers.ts": sh.g.file_manual(),
+    "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
+    "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
 })
 
 const $_implementation = sh.g.directory_group({

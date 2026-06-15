@@ -15,7 +15,7 @@ const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Out
         success: (result: Preparation_Result) => p_.Query_Result<Target_Outcome, Target_Error>,
         error: (error: Preparation_Error) => p_.Query_Result<Target_Outcome, Target_Error>,
     },
-): p_.Query_Result<Target_Outcome, Target_Error> => p_.__query_result<Target_Outcome, Target_Error>((onResult, onError) => {
+): p_.Query_Result<Target_Outcome, Target_Error> => p_.query_result<Target_Outcome, Target_Error>((onResult, onError) => {
     result.__extract_data(
         (r) => {
             handlers.success(r).__extract_data(onResult, onError)
@@ -49,15 +49,15 @@ export const $$: signatures.query_functions.is_inside_work_tree = p_.query_funct
         ),
         {
             success: ($) => $.stdout.raw === "true"
-                ? p_.__query_result((onResult, onError) => {
+                ? p_.query_result((onResult, onError) => {
                     onResult(true)
                 })
-                : p_.__query_result<boolean, d.Error>((onResult, onError) => {
+                : p_.query_result<boolean, d.Error>((onResult, onError) => {
                     onResult(false)
                 }),
             error: ($) => p_.decide.state($, ($) => {
                 switch ($[0]) {
-                    case 'failed to spawn': return p_.ss($, ($) => p_.__query_result<boolean, d.Error>(
+                    case 'failed to spawn': return p_.ss($, ($) => p_.query_result<boolean, d.Error>(
                         (on_succes, on_error) => {
                             on_error(['could not run git command', {
                                 'message': $.message
@@ -68,12 +68,12 @@ export const $$: signatures.query_functions.is_inside_work_tree = p_.query_funct
                         ($) => $ === 128,
                         () => false
                     )
-                        ? p_.__query_result(
+                        ? p_.query_result(
                             (onResult, onError) => {
                                 onResult(false)
                             }
                         )
-                        : p_.__query_result<boolean, d.Error>(
+                        : p_.query_result<boolean, d.Error>(
                             (on_succes, on_error) => {
                                 on_error(['unexpected output', $.stderr])
                             }
