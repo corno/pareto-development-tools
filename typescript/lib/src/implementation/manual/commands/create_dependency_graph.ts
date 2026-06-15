@@ -1,4 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
+import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
 import * as signatures from "../../../interface/commands"
 
@@ -14,17 +15,16 @@ export const $$: signatures.procedures.create_dependency_graph = p_.command_proc
     ($d, $s, $q, $c) => [
 
         p_.query(
-            $q['package dependencies'](
+            p_super_query_result($q['package dependencies'](
                 {
                     'path': $d['path to project'],
                 },
                 ($): d.Error => ['package dependencies', $],
-            ).transform(
+            )).transform(
                 ($) => t_package_dependencies_to_graphviz.Result($)
             ).transform(
                 ($) => t_graphviz_to_fountain_pen.Graph($)
             ),
-            ($) => $,
             ($v) => [
                 $c['log'].execute(
                     {

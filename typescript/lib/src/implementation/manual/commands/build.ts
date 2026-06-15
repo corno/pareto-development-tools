@@ -1,6 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import * as p_temp from 'pareto-core/dist/implementation/transformer'
 import p_variables from 'pareto-core/dist/implementation/specials/variables'
+import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
 import * as signatures from "../../../interface/commands"
 
@@ -61,7 +62,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
 
 
                 p_.if_.query(
-                    $q.stat(
+                    p_super_query_result($q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,
                             {
@@ -69,7 +70,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    ).transform(($) => p_temp.decide.state($, ($) => {
+                    )).transform(($) => p_temp.decide.state($, ($) => {
                         switch ($[0]) {
                             case 'does not exist': return p_temp.ss($, ($) => false)
                             case 'file': return p_temp.ss($, ($) => false)

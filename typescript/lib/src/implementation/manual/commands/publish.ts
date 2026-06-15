@@ -92,7 +92,6 @@ export const $$: signatures.procedures.publish = p_.command_procedure(
                     },
                     ($): d.Error => ['error while getting package.json', $]
                 ),
-                ($) => $,
                 ($v) => {
                     const package_info = $v
                     return [

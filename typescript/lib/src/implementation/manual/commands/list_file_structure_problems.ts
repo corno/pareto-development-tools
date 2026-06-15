@@ -26,7 +26,6 @@ export const $$: signatures.procedures.list_file_structure_problems = p_.command
                 ($): d.Error => $,
 
             ),
-            ($, abort) => $,
             ($v) => [
 
                 $c.log.execute(

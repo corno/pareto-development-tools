@@ -1,5 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/query'
-import * as p_qi from 'pareto-core/dist/interface/query'
+import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
 
 import * as signatures from "../../../interface/queries"
@@ -14,12 +14,12 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/tra
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/resources_read_directory_content"
 
 export const $$: signatures.query_functions.get_project_files = p_.query_function(
-    ($d, $s, $q) => $q['read directory'](
+    ($d, $s, $q) => p_super_query_result($q['read directory'](
         {
             'path': t_path_to_path.extend_context_path_with_single_step($d['path to project'], { 'addition': "packages" }),
         },
         ($): d.Error => ['read directory', $],
-    ).query(
+    )).query(
         ($v) => p_.dictionaryx.parallel(
             $v,
             ($): p_.Query_Result<d_directory_content.Directory, d.Package_Error> => {

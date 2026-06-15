@@ -1,5 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/query'
-import * as p_qi from 'pareto-core/dist/interface/query'
+import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
 
 import * as signatures from "../../../interface/queries"
@@ -13,13 +13,13 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/tra
 import { $$ as r_parse_npm_package } from "../../../modules/npm/implementation/manual/transformers/npm_package/text"
 
 export const $$: signatures.query_functions.get_package_dependencies = p_.query_function(
-    ($d, $s, $q) => $q['read directory'](
+    ($d, $s, $q) => p_super_query_result($q['read directory'](
         {
             'path': t_path_to_path.extend_context_path_with_single_step($d['path'], { 'addition': "packages" }),
         },
         ($): d.Error => ['read directory', $],
-    ).query(
-        ($) => p_.dictionaryx.parallel(
+    )).query(
+        ($) => p_super_query_result(p_.dictionaryx.parallel(
             $,
             ($): p_.Query_Result<d_npm_package.NPM_Package, d.Package_Error> => {
                 const lib_path = t_path_to_path.extend_context_path_with_list(
@@ -33,10 +33,10 @@ export const $$: signatures.query_functions.get_package_dependencies = p_.query_
                     switch ($[0]) {
                         case 'file': return p_.ss($, ($) => p_.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
                         case 'other': return p_.ss($, ($) => p_.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
-                        case 'directory': return p_.ss($, ($) => $q['read file'](
+                        case 'directory': return p_.ss($, ($) => p_super_query_result($q['read file'](
                             package_json_path,
                             ($): d.Package_Error => ['no package.json file', null],
-                        ).refine(
+                        )).refine(
                             ($, abort) => r_parse_npm_package(
                                 $,
                                 ($) => abort(['parse error', {
@@ -50,7 +50,7 @@ export const $$: signatures.query_functions.get_package_dependencies = p_.query_
                 })
             },
             ($): d.Error => ['directory content processing', $],
-        ).transform(
+        )).transform(
             ($) => ({
                 'packages': $,
             })

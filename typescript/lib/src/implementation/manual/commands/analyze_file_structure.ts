@@ -23,7 +23,6 @@ export const $$: signatures.procedures.analyze_file_structure = p_.command_proce
                 ($): d.Error => $,
 
             ),
-            ($, abort) => $,
             ($v) => [
 
                 $c.log.execute(

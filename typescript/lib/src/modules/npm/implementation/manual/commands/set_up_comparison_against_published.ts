@@ -2,6 +2,7 @@ import * as p_ from 'pareto-core/dist/implementation/command'
 import p_list_from_text from 'pareto-core/dist/implementation/specials/list_from_text'
 import p_list_build_deprecated from 'pareto-core/dist/implementation/specials/list_build_deprecated'
 import p_text_from_list from 'pareto-core/dist/implementation/specials/text_from_list'
+import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
 import * as signatures from "../../../interface/commands"
 
@@ -48,7 +49,6 @@ export const $$: signatures.procedures.set_up_comparison_against_published = p_.
                     },
                     ($): d.Error => ['error while getting package.json', $]
                 ),
-                ($) => $,
                 ($v) => {
                     const package_info = $v
                     const filename = `${$v.name}-${$v.version}.tgz`
@@ -151,7 +151,7 @@ export const $$: signatures.procedures.set_up_comparison_against_published = p_.
                         ),
 
                         p_.query(
-                            $q.npm(
+                             p_super_query_result($q.npm(
                                 {
                                     'working directory': p_.literal.not_set(),
                                     'args': p_.literal.list([
@@ -161,9 +161,8 @@ export const $$: signatures.procedures.set_up_comparison_against_published = p_.
                                     ]),
                                 },
                                 ($): d.Error => ['error while running npm query', $]
-                            ).transform(($) => remove_n_characters_from_end($.stdout.raw, 1)),
+                            )).transform(($) => remove_n_characters_from_end($.stdout.raw, 1)),
                             // Extract published package into published subdirectory
-                            ($) => $,
                             ($v) => [
                                 $c['tar'].execute<d.Error>(
                                     {
