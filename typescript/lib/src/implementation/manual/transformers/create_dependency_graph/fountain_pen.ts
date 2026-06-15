@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 import * as d_in from "../../../../interface/data/create_dependency_graph"
@@ -10,15 +10,15 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 import * as t_get_package_dependencies_to_fountain_pen from "../get_package_dependencies/fountain_pen"
 
-export const Error: Error = ($) => pt.decide.state($, ($) => {
+export const Error: Error = ($) => p_.decide.state($, ($) => {
     switch ($[0]) {
-        case 'log': return pt.ss($, ($) => sh.ph.composed([
+        case 'log': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("log: "),
             sh.ph.indent(sh.pg.sentences([
                 // t_tsc_to_fountain_pen.Error($)
             ]))
         ]))
-        case 'package dependencies': return pt.ss($, ($) => sh.ph.composed([
+        case 'package dependencies': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("package dependencies: "),
             sh.ph.indent(
                 sh.pg.sentences([
@@ -28,6 +28,6 @@ export const Error: Error = ($) => pt.decide.state($, ($) => {
                 ])
             )
         ]))
-        default: return pt.au($[0])
+        default: return p_.au($[0])
     }
 })

@@ -28,7 +28,7 @@ export const $$: signatures.procedures.publish = p_.command_procedure(
 
             // $c['git assert is clean'].execute(
             //     {
-            //         'path': pt.literal.set($d['path to package']),
+            //         'path': p_.literal.set($d['path to package']),
             //     },
             //     ($) => ['error while running git assert is clean at the start', $],
             // ),
@@ -56,7 +56,7 @@ export const $$: signatures.procedures.publish = p_.command_procedure(
 
             // $c['git assert is clean'].execute(
             //     {
-            //         'path': pt.literal.set($d['path to package']),
+            //         'path': p_.literal.set($d['path to package']),
             //     },
             //     ($) => ['error while running git assert is clean after updating package dependencies', $],
             // ),

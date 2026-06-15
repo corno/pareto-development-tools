@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 import * as d_in from "../../../../interface/data/parse"
@@ -8,11 +8,11 @@ export type Error = p_i.Transformer<d_in.Error, d_out.Phrase>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const Error: Error = ($) => pt.decide.state($, ($) => {
+export const Error: Error = ($) => p_.decide.state($, ($) => {
     switch ($[0]) {
-        case 'expected one of': return pt.ss($, ($) => sh.ph.composed([
+        case 'expected one of': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("expected one of: "),
-            sh.ph.indent(sh.pg.sentences(pt.list.from.dictionary(
+            sh.ph.indent(sh.pg.sentences(p_.list.from.dictionary(
                 $,
             ).convert(
                 ($, id) => sh.sentence([
@@ -21,11 +21,11 @@ export const Error: Error = ($) => pt.decide.state($, ($) => {
             ))),
 
         ]))
-        case 'expected a text': return pt.ss($, ($) => sh.ph.composed([
+        case 'expected a text': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("expected a text: "),
             sh.ph.literal($['description'])
         ]))
-        case 'too many arguments': return pt.ss($, ($) => sh.ph.literal("too many arguments"))
-        default: return pt.au($[0])
+        case 'too many arguments': return p_.ss($, ($) => sh.ph.literal("too many arguments"))
+        default: return p_.au($[0])
     }
 })

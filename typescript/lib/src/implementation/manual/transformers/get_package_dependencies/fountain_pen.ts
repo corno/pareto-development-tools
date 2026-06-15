@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 import * as d_in from "../../../../interface/data/get_package_dependencies"
@@ -12,9 +12,9 @@ import * as t_deserialize_package_json_to_fountain_pen from "../../../../modules
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const Error: Error = ($) => pt.decide.state($, ($) => {
+export const Error: Error = ($) => p_.decide.state($, ($) => {
     switch ($[0]) {
-        case 'directory content processing': return pt.ss($, ($) => sh.ph.composed(pt.list.from.dictionary(
+        case 'directory content processing': return p_.ss($, ($) => sh.ph.composed(p_.list.from.dictionary(
             $,
         ).convert(
             ($, id) => sh.ph.composed([
@@ -23,19 +23,19 @@ export const Error: Error = ($) => pt.decide.state($, ($) => {
                 sh.ph.literal(": "),
                 sh.ph.indent(sh.pg.sentences([
                     sh.sentence([
-                        pt.decide.state($, ($) => {
+                        p_.decide.state($, ($) => {
                             switch ($[0]) {
-                                case 'not a directory': return pt.ss($, ($) => sh.ph.literal("not a directory"))
-                                case 'no package.json file': return pt.ss($, ($) => sh.ph.literal("no package.json file"))
-                                case 'parse error': return pt.ss($, ($) => t_deserialize_package_json_to_fountain_pen.Error($))
-                                default: return pt.au($[0])
+                                case 'not a directory': return p_.ss($, ($) => sh.ph.literal("not a directory"))
+                                case 'no package.json file': return p_.ss($, ($) => sh.ph.literal("no package.json file"))
+                                case 'parse error': return p_.ss($, ($) => t_deserialize_package_json_to_fountain_pen.Error($))
+                                default: return p_.au($[0])
                             }
                         })
                     ])
                 ]))
             ])
         )))
-        case 'read directory': return pt.ss($, ($) => t_read_directory_to_fountain_pen.Error($))
-        default: return pt.au($[0])
+        case 'read directory': return p_.ss($, ($) => t_read_directory_to_fountain_pen.Error($))
+        default: return p_.au($[0])
     }
 })

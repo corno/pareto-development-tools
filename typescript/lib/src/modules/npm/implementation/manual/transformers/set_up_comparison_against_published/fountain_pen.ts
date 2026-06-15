@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 import * as d_in from "../../../../interface/data/set_up_comparison_against_published"
@@ -15,9 +15,9 @@ import * as t_get_package_json_to_fountain_pen from "../get_package_json/fountai
 
 
 export const Error: Error = ($) => {
-    return pt.decide.state($, ($): d_out.Phrase => {
+    return p_.decide.state($, ($): d_out.Phrase => {
         switch ($[0]) {
-            case 'error while running npm command': return pt.ss($, ($) => sh.ph.composed([
+            case 'error while running npm command': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while running npm command: "),
                 sh.ph.indent(sh.pg.sentences([
                     sh.sentence([
@@ -25,7 +25,7 @@ export const Error: Error = ($) => {
                     ])
                 ])),
             ]))
-            case 'error while running npm query': return pt.ss($, ($) => sh.ph.composed([
+            case 'error while running npm query': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while running npm query: "),
                 sh.ph.indent(sh.pg.sentences([
                     sh.sentence([
@@ -33,7 +33,7 @@ export const Error: Error = ($) => {
                     ])
                 ])),
             ]))
-            case 'error while running tar': return pt.ss($, ($) => sh.ph.composed([
+            case 'error while running tar': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while running tar: "),
                 sh.ph.indent(sh.pg.sentences([
                     sh.sentence([
@@ -41,7 +41,7 @@ export const Error: Error = ($) => {
                     ])
                 ])),
             ]))
-            case 'error while creating directory': return pt.ss($, ($) => sh.ph.composed([
+            case 'error while creating directory': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while creating directory: "),
                 sh.ph.indent(sh.pg.sentences([
                     sh.sentence([
@@ -49,8 +49,8 @@ export const Error: Error = ($) => {
                     ])
                 ])),
             ]))
-            case 'error while getting package.json': return pt.ss($, ($) => t_get_package_json_to_fountain_pen.Error($))
-            default: return pt.au($[0])
+            case 'error while getting package.json': return p_.ss($, ($) => t_get_package_json_to_fountain_pen.Error($))
+            default: return p_.au($[0])
         }
     })
 }

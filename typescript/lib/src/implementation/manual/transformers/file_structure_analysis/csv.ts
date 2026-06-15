@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 //data types
@@ -10,9 +10,9 @@ export type Signature = p_i.Transformer<
     d_out.CSV
 >
 
-export const File_Analysis_List: Signature = ($) => pt.literal.nested_list([
+export const File_Analysis_List: Signature = ($) => p_.literal.nested_list([
     [
-        pt.literal.list([
+        p_.literal.list([
             "package",
             "filepath",
             "structure path",
@@ -22,31 +22,31 @@ export const File_Analysis_List: Signature = ($) => pt.literal.nested_list([
             "line count",
         ]),
     ],
-    pt.list.from.list(
+    p_.list.from.list(
         $,
     ).map(
-        ($) => pt.literal.list([
+        ($) => p_.literal.list([
             $.package,
             $.path,
             $.analysis.structure.path,
-            pt.decide.state($.analysis.structure.classification, ($) => {
+            p_.decide.state($.analysis.structure.classification, ($) => {
                 switch ($[0]) {
-                    case 'directory': return pt.ss($, ($) => "directory " + pt.decide.state($, ($): string => {
+                    case 'directory': return p_.ss($, ($) => "directory " + p_.decide.state($, ($): string => {
                         switch ($[0]) {
-                            case 'ignored': return pt.ss($, ($) => "ignored")
-                            case 'generated': return pt.ss($, ($) => "generated")
-                            case 'wildcards': return pt.ss($, ($) => "wildcards")
-                            case 'dictionary': return pt.ss($, ($) => "dictionary")
-                            case 'group': return pt.ss($, ($) => "group")
-                            case 'freeform': return pt.ss($, ($) => "freeform")
-                            default: return pt.au($[0])
+                            case 'ignored': return p_.ss($, ($) => "ignored")
+                            case 'generated': return p_.ss($, ($) => "generated")
+                            case 'wildcards': return p_.ss($, ($) => "wildcards")
+                            case 'dictionary': return p_.ss($, ($) => "dictionary")
+                            case 'group': return p_.ss($, ($) => "group")
+                            case 'freeform': return p_.ss($, ($) => "freeform")
+                            default: return p_.au($[0])
                         }
                     }))
-                    case 'file': return pt.ss($, ($) => "file " + pt.decide.state($, ($): string => {
+                    case 'file': return p_.ss($, ($) => "file " + p_.decide.state($, ($): string => {
                         switch ($[0]) {
-                            case 'generated': return pt.ss($, ($) => "generated")
-                            case 'manual': return pt.ss($, ($) => "manual")
-                            default: return pt.au($[0])
+                            case 'generated': return p_.ss($, ($) => "generated")
+                            case 'manual': return p_.ss($, ($) => "manual")
+                            default: return p_.au($[0])
                         }
                     }))
                 }

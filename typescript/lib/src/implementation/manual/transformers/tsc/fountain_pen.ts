@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 import * as d_in from "../../../../interface/data/tsc"
@@ -10,9 +10,9 @@ export type Error = p_i.Transformer_With_Parameter<d_in.Error, d_out.Paragraph, 
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const Error: Error = ($, $p) => pt.decide.state($, ($): d_out.Paragraph => {
+export const Error: Error = ($, $p) => p_.decide.state($, ($): d_out.Paragraph => {
     switch ($[0]) {
-        case 'error while running tsc': return pt.ss($, ($) => $p.concise
+        case 'error while running tsc': return p_.ss($, ($) => $p.concise
             ? sh.pg.composed([])
             : sh.pg.sentences([
                 sh.sentence([
@@ -24,6 +24,6 @@ export const Error: Error = ($, $p) => pt.decide.state($, ($): d_out.Paragraph =
                 //
             ])
         )
-        default: return pt.au($[0])
+        default: return p_.au($[0])
     }
 })

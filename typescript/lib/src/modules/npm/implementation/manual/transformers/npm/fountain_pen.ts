@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 import * as d_in from "../../../../interface/data/npm_tool"
@@ -11,12 +11,12 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
 
 
-export const Error: Error = ($) => pt.decide.state($, ($): d_out.Phrase => {
+export const Error: Error = ($) => p_.decide.state($, ($): d_out.Phrase => {
     switch ($[0]) {
-        case 'error while running npm': return pt.ss($, ($) => sh.ph.composed([
+        case 'error while running npm': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("error while running npm: "),
             t_epe_to_fountain_pen.Error($)
         ]))
-        default: return pt.au($[0])
+        default: return p_.au($[0])
     }
 })

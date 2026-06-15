@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_di from 'pareto-core/dist/interface/data'
 import * as p_ri from 'pareto-core/dist/interface/refiner'
 
@@ -38,16 +38,16 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
             }
             return null
         })
-        return pt.literal.dictionary(temp)
+        return p_.literal.dictionary(temp)
     }
-    return pt.decide.state($.type, ($) => {
+    return p_.decide.state($.type, ($) => {
         switch ($[0]) {
-            case 'concrete': return pt.ss($, ($) => pt.decide.state($, ($) => {
+            case 'concrete': return p_.ss($, ($) => p_.decide.state($, ($) => {
                 switch ($[0]) {
-                    case 'dictionary': return pt.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
-                    case 'group': return pt.ss($, ($) => pt.decide.state($, ($) => {
+                    case 'dictionary': return p_.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
+                    case 'group': return p_.ss($, ($) => p_.decide.state($, ($) => {
                         switch ($[0]) {
-                            case 'verbose': return pt.ss($, ($) => expect_unique_identifiers_fixme($.properties, abort))
+                            case 'verbose': return p_.ss($, ($) => expect_unique_identifiers_fixme($.properties, abort))
                             default: return abort(['not an object', null])
                         }
                     }))
@@ -59,11 +59,11 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
     })
 }
 
-const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never): string => pt.decide.state($.type, ($) => {
+const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never): string => p_.decide.state($.type, ($) => {
     switch ($[0]) {
-        case 'concrete': return pt.ss($, ($) => pt.decide.state($, ($) => {
+        case 'concrete': return p_.ss($, ($) => p_.decide.state($, ($) => {
             switch ($[0]) {
-                case 'text': return pt.ss($, ($) => $.token.value)
+                case 'text': return p_.ss($, ($) => $.token.value)
                 default: return abort(['not a text', null])
             }
         }))
@@ -95,7 +95,7 @@ export const $$: p_ri.Refiner<d_out.NPM_Package, d_function.Error['type'], d_in.
     return {
         'name': name,
         'version': version,
-        'dependencies': pt.optional.from.optional(
+        'dependencies': p_.optional.from.optional(
             root.__get_possible_entry_deprecated('dependencies'),
         ).map(
             ($) => expect_object(

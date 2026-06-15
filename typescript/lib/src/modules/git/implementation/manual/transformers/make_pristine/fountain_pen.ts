@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 import * as d_in from "../../../../interface/data/make_pristine"
@@ -10,12 +10,12 @@ import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/man
 
 export type Error = p_i.Transformer<d_in.Error, d_out.Phrase>
 
-export const Error: Error = ($) => pt.decide.state($, ($) => {
+export const Error: Error = ($) => p_.decide.state($, ($) => {
     switch ($[0]) {
-        case 'unexpected error': return pt.ss($, ($) => sh.ph.composed([
+        case 'unexpected error': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("unexpected error:"),
             t_epe_to_fountain_pen.Error($)
         ]))
-        default: return pt.au($[0])
+        default: return p_.au($[0])
     }
 })

@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 import * as d_in from "../../../../interface/data/update_package_dependencies"
@@ -13,25 +13,25 @@ import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/
 import * as t_npm_to_fountain_pen from "../npm/fountain_pen"
 
 export const Error: Error = ($) => {
-    return pt.decide.state($, ($) => {
+    return p_.decide.state($, ($) => {
         switch ($[0]) {
-            case 'could not remove node_modules': return pt.ss($, ($) => sh.ph.composed([
+            case 'could not remove node_modules': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("could not remove node_modules: "),
                 t_remove_to_fountain_pen.Error($)
             ]))
-            case 'could not remove package-lock.json': return pt.ss($, ($) => sh.ph.composed([
+            case 'could not remove package-lock.json': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("could not remove package-lock.json: "),
                 t_remove_to_fountain_pen.Error($)
             ]))
-            case 'could not update to latest': return pt.ss($, ($) => sh.ph.composed([
+            case 'could not update to latest': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("could not update to latest typescript dependencies: "),
                 t_u2l_to_fountain_pen.Error($)
             ]))
-            case 'could not install dependencies': return pt.ss($, ($) => sh.ph.composed([
+            case 'could not install dependencies': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("could not install dependencies typescript dependencies: "),
                 t_npm_to_fountain_pen.Error($)
             ]))
-            default: return pt.au($[0])
+            default: return p_.au($[0])
         }
     })
 }

@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 import p_list_from_text from 'pareto-core/dist/implementation/specials/list_from_text'
 
@@ -18,25 +18,25 @@ export type Signature = p_i.Transformer_With_Parameter<
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const CSV: Signature = ($, $p) => sh.pg.sentences(pt.list.from.list(
+export const CSV: Signature = ($, $p) => sh.pg.sentences(p_.list.from.list(
     $,
 ).map(
     ($) => sh.sentence([
         sh.ph.rich(
-            pt.list.from.list(
+            p_.list.from.list(
                 $,
             ).map(
                 ($) => sh.ph.serialize(
-                    pt.literal.nested_list([
+                    p_.literal.nested_list([
                         [
                             0x22, //"
                         ],
-                        pt.list.from.list(
+                        p_.list.from.list(
                             p_list_from_text(
                                 $,
                                 ($) => $ === 0x22 //"
-                                    ? pt.literal.list([0x22, 0x22]) //escape "
-                                    : pt.literal.list([$]),
+                                    ? p_.literal.list([0x22, 0x22]) //escape "
+                                    : p_.literal.list([$]),
                             ),
                         ).flatten(
                             ($) => $
@@ -49,7 +49,7 @@ export const CSV: Signature = ($, $p) => sh.pg.sentences(pt.list.from.list(
             ),
             sh.ph.nothing(),
             sh.ph.nothing(),
-            sh.ph.serialize(pt.literal.list([$p.separator])),
+            sh.ph.serialize(p_.literal.list([$p.separator])),
             sh.ph.nothing(),
         )
     ])

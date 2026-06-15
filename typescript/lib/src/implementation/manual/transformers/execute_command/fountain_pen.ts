@@ -1,4 +1,4 @@
-import * as pt from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
 import * as d_in from "../../../../interface/data/execute_command"
@@ -25,50 +25,50 @@ import * as t_update_dependencies from "../update_package_dependencies/fountain_
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_directory/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/manual/transformers/set_up_comparison_against_published/fountain_pen"
 
-export const Error: signatures.Error = ($) => pt.decide.state($, ($) => {
+export const Error: signatures.Error = ($) => p_.decide.state($, ($) => {
     switch ($[0]) {
-        case 'package': return pt.ss($, ($) => pt.decide.state($, ($) => {
+        case 'package': return p_.ss($, ($) => p_.decide.state($, ($) => {
             switch ($[0]) {
-                case 'build and test': return pt.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
-                case 'publish': return pt.ss($, ($): d_out.Phrase => t_publish.Error($))
-                case 'update dependencies': return pt.ss($, ($) => t_update_dependencies.Error($))
-                case 'git assert clean': return pt.ss($, ($): d_out.Phrase => t_git_assert_clean_to_fountain_pen.Error($))
-                case 'git commit': return pt.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
+                case 'build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
+                case 'publish': return p_.ss($, ($): d_out.Phrase => t_publish.Error($))
+                case 'update dependencies': return p_.ss($, ($) => t_update_dependencies.Error($))
+                case 'git assert clean': return p_.ss($, ($): d_out.Phrase => t_git_assert_clean_to_fountain_pen.Error($))
+                case 'git commit': return p_.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
 
-                default: return pt.au($[0])
+                default: return p_.au($[0])
             }
         }))
-        case 'get project files': return pt.ss($, ($) => t_line_count_to_fountain_pen.Error($))
-        case 'dependency graph': return pt.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
-        case 'all': return pt.ss($, ($) => pt.decide.state($, ($) => {
+        case 'get project files': return p_.ss($, ($) => t_line_count_to_fountain_pen.Error($))
+        case 'dependency graph': return p_.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
+        case 'all': return p_.ss($, ($) => p_.decide.state($, ($) => {
             switch ($[0]) {
-                case 'packages': return pt.ss($, ($) => sh.ph.composed([
+                case 'packages': return p_.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("could not execute command for the following packages:"),
                     sh.ph.indent(
                         sh.pg.sentences(
-                            pt.list.from.dictionary(
+                            p_.list.from.dictionary(
                                 $,
                             ).convert(
                                 ($, id) => sh.sentence([
                                     sh.ph.literal("package '"),
                                     sh.ph.literal(id),
                                     sh.ph.literal("': "),
-                                    pt.decide.state($, ($) => {
+                                    p_.decide.state($, ($) => {
                                         switch ($[0]) {
-                                            case 'build and test': return pt.ss($, ($) => t_build_and_test_to_fountain_pen.Error(
+                                            case 'build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error(
                                                 $.error,
                                                 { 'concise': $.concise }
                                             ))
-                                            case 'build': return pt.ss($, ($) => t_build_to_fountain_pen.Error(
+                                            case 'build': return p_.ss($, ($) => t_build_to_fountain_pen.Error(
                                                 $,
                                                 { 'concise': false }
                                             ))
-                                            case 'git assert clean': return pt.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
-                                            case 'git commit': return pt.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
-                                            case 'git remove tracked but ignored': return pt.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
-                                            case 'set up comparison': return pt.ss($, ($) => t_set_up_comparison_against_published.Error($))
-                                            case 'update dependencies': return pt.ss($, ($) => t_update_dependencies.Error($))
-                                            default: return pt.au($[0])
+                                            case 'git assert clean': return p_.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
+                                            case 'git commit': return p_.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
+                                            case 'git remove tracked but ignored': return p_.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
+                                            case 'set up comparison': return p_.ss($, ($) => t_set_up_comparison_against_published.Error($))
+                                            case 'update dependencies': return p_.ss($, ($) => t_update_dependencies.Error($))
+                                            default: return p_.au($[0])
                                         }
                                     })
                                 ])
@@ -76,14 +76,14 @@ export const Error: signatures.Error = ($) => pt.decide.state($, ($) => {
                         )
                     )
                 ]))
-                case 'could not read packages directory': return pt.ss($, ($) => sh.ph.composed([
+                case 'could not read packages directory': return p_.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("could not read packages directory: "),
                     t_read_directory_to_fountain_pen.Error($)
                 ]))
-                default: return pt.au($[0])
+                default: return p_.au($[0])
             }
         }))
-        case 'set up comparison': return pt.ss($, ($): d_out.Phrase => t_set_up_comparison_against_published.Error($))
-        default: return pt.au($[0])
+        case 'set up comparison': return p_.ss($, ($): d_out.Phrase => t_set_up_comparison_against_published.Error($))
+        default: return p_.au($[0])
     }
 })
