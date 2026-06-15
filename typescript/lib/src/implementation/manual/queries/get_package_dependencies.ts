@@ -21,7 +21,7 @@ export const $$: signatures.query_functions.get_package_dependencies = p_.query_
     ).query(
         ($) => p_.dictionaryx.parallel(
             $,
-            ($): p_qi.Query_Result<d_npm_package.NPM_Package, d.Package_Error> => {
+            ($): p_.Query_Result<d_npm_package.NPM_Package, d.Package_Error> => {
                 const lib_path = t_path_to_path.extend_context_path_with_list(
                     t_path_to_path.deprecated_node_path_to_context_path($.path),
                     {

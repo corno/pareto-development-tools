@@ -1,5 +1,4 @@
 import * as p_ from 'pareto-core/dist/command/implementation'
-import * as p_ci from 'pareto-core/dist/command/interface'
 
 
 import p_change_context from 'pareto-core/dist/specials/change_context'
@@ -30,7 +29,7 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                             },
                             ($): d.Error => ['all', ['could not read packages directory', $]],
                         ),
-                        ($xx, id): p_ci.Command_Promise<d.All__Package_Error>[] => [
+                        ($xx, id): p_.Command_Promise<d.All__Package_Error>[] => [
                             p_.decide.state($.instruction, ($) => {
                                 const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
                                 switch ($[0]) {
@@ -68,7 +67,7 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                                         },
                                         ($): d.All__Package_Error => ['git remove tracked but ignored', $],
                                     ))
-                                    case 'set up comparison': return p_.ss($, ($): p_ci.Command_Promise<d.All__Package_Error> => {
+                                    case 'set up comparison': return p_.ss($, ($): p_.Command_Promise<d.All__Package_Error> => {
 
                                         const path_to_temp = t_path_to_path.extend_context_path_with_single_step(
                                             t_path_to_path.extend_context_path_with_single_step(

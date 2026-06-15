@@ -1,5 +1,4 @@
 import * as p_ from 'pareto-core/dist/query/implementation'
-import * as p_qi from 'pareto-core/dist/query/interface'
 
 
 import * as signatures from "../../../interface/queries"
@@ -11,12 +10,12 @@ import * as d from "../../../interface/to_be_generated/is_inside_work_tree"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 const temp_observe_behavior = <Preparation_Result, Preparation_Error, Target_Outcome, Target_Error>(
-    result: p_qi.Query_Result<Preparation_Result, Preparation_Error>,
+    result: p_.Query_Result<Preparation_Result, Preparation_Error>,
     handlers: {
-        success: (result: Preparation_Result) => p_qi.Query_Result<Target_Outcome, Target_Error>,
-        error: (error: Preparation_Error) => p_qi.Query_Result<Target_Outcome, Target_Error>,
+        success: (result: Preparation_Result) => p_.Query_Result<Target_Outcome, Target_Error>,
+        error: (error: Preparation_Error) => p_.Query_Result<Target_Outcome, Target_Error>,
     },
-): p_qi.Query_Result<Target_Outcome, Target_Error> => p_.__query_result<Target_Outcome, Target_Error>((onResult, onError) => {
+): p_.Query_Result<Target_Outcome, Target_Error> => p_.__query_result<Target_Outcome, Target_Error>((onResult, onError) => {
     result.__extract_data(
         (r) => {
             handlers.success(r).__extract_data(onResult, onError)

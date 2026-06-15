@@ -1,11 +1,11 @@
 import * as pt from 'pareto-core/dist/transformer/implementation'
-import * as p_ti from 'pareto-core/dist/transformer/interface'
+import * as p_i from 'pareto-core/dist/transformer/interface'
 
 //data types
 import * as d_in from "../../../../interface/to_be_generated/file_structure_analysis"
 import * as d_out from "../../../../modules/csv/interface/to_be_generated/csv"
 
-export type Signature = p_ti.Transformer<
+export type Signature = p_i.Transformer<
     d_in.File_Analysis_List,
     d_out.CSV
 >

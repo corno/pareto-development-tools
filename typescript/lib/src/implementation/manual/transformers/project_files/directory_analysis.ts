@@ -1,6 +1,6 @@
 import * as pt from 'pareto-core/dist/transformer/implementation'
 import * as p_di from 'pareto-core/dist/data/interface'
-import * as p_ti from 'pareto-core/dist/transformer/interface'
+import * as p_i from 'pareto-core/dist/transformer/interface'
 
 import p_list_from_text from 'pareto-core/dist/specials/list_from_text'
 import p_list_build_deprecated from 'pareto-core/dist/specials/list_build_deprecated'
@@ -20,7 +20,7 @@ export type Parameters = {
     'structure path': string,
 }
 
-export type Project_Files = p_ti.Transformer<
+export type Project_Files = p_i.Transformer<
     d_in.Project_Files,
     d_out.File_Analysis_List
 >
