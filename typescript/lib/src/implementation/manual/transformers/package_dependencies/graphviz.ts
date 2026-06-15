@@ -11,11 +11,11 @@ export type Result = p_ti.Transformer<d_in.Result, d_out.Graph>
 export const Result: Result = ($) => {
     const pacakges = $.packages
     return {
-        'attributes': pt.list.literal<d_out_attributes.Attributes.L>([
+        'attributes': pt.literal.list<d_out_attributes.Attributes.L>([
             ['rankdir', ['LR', null]],
         ]),
         'nodes': $.packages.__d_map(($) => ({
-            'attributes': pt.list.literal<d_out_attributes.Attributes.L>([]),
+            'attributes': pt.literal.list<d_out_attributes.Attributes.L>([]),
         })),
         'edges': pt.list.from.dictionary(
             $.packages
@@ -32,14 +32,14 @@ export const Result: Result = ($) => {
                                     || id === "pareto-core-shorthands"
                                     //|| id === "pareto-host-nodejs"
                                 ) {
-                                    return pt.optional.literal.not_set<d_out.Graph.edges.L>()
+                                    return pt.literal.not_set<d_out.Graph.edges.L>()
                                 }
-                                return pt.optional.literal.set(({
+                                return pt.literal.set(({
                                     'from': from,
                                     'to': id,
                                     'attributes': pacakges.__get_possible_entry_deprecated(id).__decide(
-                                        ($) => pt.list.literal([]),
-                                        () => pt.list.literal<d_out_attributes.Attributes.L>([
+                                        ($) => pt.literal.list([]),
+                                        () => pt.literal.list<d_out_attributes.Attributes.L>([
                                             ['color', "red"]
                                         ])
                                     ),
@@ -49,7 +49,7 @@ export const Result: Result = ($) => {
                     ).convert(
                         ($) => $,
                     ),
-                    () => pt.list.literal([])
+                    () => pt.literal.list([])
                 )
             }
         ),

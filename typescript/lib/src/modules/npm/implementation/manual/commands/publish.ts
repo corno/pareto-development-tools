@@ -9,15 +9,15 @@ export const $$: signatures.commands.npm_publish = p_.command_procedure(
     ($d, $s, $q, $c) => [
         $c['npm'].execute(
             {
-                'working directory': p_.optional.literal.set($d.path),
-                'args': p_t.list.nested_literal_old([
+                'working directory': p_.literal.set($d.path),
+                'args': p_t.literal.nested_list([
                     [
                         "publish"
                     ],
                     p_t.decide.state($d.impact, ($) => {
                         switch ($[0]) {
-                            case 'dry run': return p_t.ss($, ($) => p_t.list.literal(["--dry-run"]))
-                            case 'actual publish': return p_t.ss($, ($) => p_t.list.literal([
+                            case 'dry run': return p_t.ss($, ($) => p_t.literal.list(["--dry-run"]))
+                            case 'actual publish': return p_t.ss($, ($) => p_t.literal.list([
                                 // "--otp",
                                 // $['one time password'],
                             ]))

@@ -31,7 +31,7 @@ export const $$: signatures.procedures.git_commit = p_.command_procedure(
                     ($) => [
                         $c['git extended commit'].execute(
                             {
-                                'path': p_.optional.literal.set($d['path']),
+                                'path': p_.literal.set($d['path']),
                                 'instruction': {
                                     'stage all changes': true,
                                     'commit message': "pdt" + ($ ? "" : "(broken)") + ": " + $d.instruction['commit message'],
@@ -53,7 +53,7 @@ export const $$: signatures.procedures.git_commit = p_.command_procedure(
                 ),
                 $c['git extended commit'].execute(
                     {
-                        'path': p_.optional.literal.set($d['path']),
+                        'path': p_.literal.set($d['path']),
                         'instruction': {
                             'stage all changes': true,
                             'commit message': "pdt: " + $d.instruction['commit message'],

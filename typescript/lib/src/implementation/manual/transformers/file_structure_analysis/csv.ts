@@ -1,5 +1,4 @@
 import * as pt from 'pareto-core/dist/transformer/implementation'
-import * as p_di from 'pareto-core/dist/data/interface'
 import * as p_ti from 'pareto-core/dist/transformer/interface'
 
 //data types
@@ -11,9 +10,9 @@ export type Signature = p_ti.Transformer<
     d_out.CSV
 >
 
-export const File_Analysis_List: Signature = ($) => pt.list.nested_literal_old([
+export const File_Analysis_List: Signature = ($) => pt.literal.nested_list([
     [
-        pt.list.literal([
+        pt.literal.list([
             "package",
             "filepath",
             "structure path",
@@ -26,7 +25,7 @@ export const File_Analysis_List: Signature = ($) => pt.list.nested_literal_old([
     pt.list.from.list(
         $,
     ).map(
-        ($): p_di.List<string> => pt.list.literal([
+        ($) => pt.literal.list([
             $.package,
             $.path,
             $.analysis.structure.path,

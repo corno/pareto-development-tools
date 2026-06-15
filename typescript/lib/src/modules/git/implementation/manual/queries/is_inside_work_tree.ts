@@ -31,16 +31,16 @@ export const $$: signatures.query_functions.is_inside_work_tree = p_.query_funct
     ($d, $s, $q) => temp_observe_behavior(
         $q.git(
             {
-                'working directory': p_.optional.literal.not_set(),
-                'args': p_.list.nested_literal([
+                'working directory': p_.literal.not_set(),
+                'args': p_.literal.nested_list([
                     $d.path.__decide(
-                        ($) => p_.list.literal([
+                        ($) => p_.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => p_.list.literal([])
+                        () => p_.literal.list([])
                     ),
-                    p_.list.literal([
+                    p_.literal.list([
                         "rev-parse",
                         "--is-inside-work-tree",
                     ])

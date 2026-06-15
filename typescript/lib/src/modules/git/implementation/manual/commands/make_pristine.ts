@@ -13,16 +13,16 @@ export const $$: signatures.procedures.make_pristine = p.command_procedure(
     ($d, $s, $q, $c) => [
         $c.git.execute(
             {
-                'working directory': p.optional.literal.not_set(),
-                'args': pa.list.nested_literal_old([
+                'working directory': p.literal.not_set(),
+                'args': pa.literal.nested_list([
                     $d.path.__decide(
-                        ($) => pa.list.literal([
+                        ($) => pa.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => pa.list.literal([])
+                        () => pa.literal.list([])
                     ),
-                    p.list.literal([
+                    p.literal.list([
                         "clean",
                         "--force",
                         "-d", // remove whole directories

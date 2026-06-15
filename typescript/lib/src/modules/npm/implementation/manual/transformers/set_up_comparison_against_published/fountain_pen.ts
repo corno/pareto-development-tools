@@ -1,5 +1,4 @@
 import * as pt from 'pareto-core/dist/transformer/implementation'
-import * as p_di from 'pareto-core/dist/data/interface'
 import * as p_ti from 'pareto-core/dist/transformer/interface'
 
 import * as d_in from "../../../../interface/to_be_generated/set_up_comparison_against_published"
@@ -12,8 +11,6 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
 import * as t_eqe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_query_executable/fountain_pen"
 import * as t_make_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/make_directory/fountain_pen"
-import * as t_read_file_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_file/fountain_pen"
-import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/remove/fountain_pen"
 import * as t_get_package_json_to_fountain_pen from "../get_package_json/fountain_pen"
 
 

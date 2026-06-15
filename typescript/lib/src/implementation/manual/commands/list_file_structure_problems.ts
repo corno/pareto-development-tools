@@ -39,8 +39,8 @@ export const $$: signatures.procedures.list_file_structure_problems = p_.command
                                 t_project_files_to_file_analysis_list.Project_Files($v)
                             ).map_optionally<d_file_analysis.File_Analysis2>(
                                 ($) => p_t.boolean.from.optional($.analysis['unexpected path tail']).is_set()
-                                    ? p_.optional.literal.set($)
-                                    : p_.optional.literal.not_set()
+                                    ? p_.literal.set($)
+                                    : p_.literal.not_set()
                             )
                         ).map(
                             ($) => {

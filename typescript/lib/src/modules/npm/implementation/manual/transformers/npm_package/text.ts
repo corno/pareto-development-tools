@@ -7,7 +7,6 @@ import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/
 import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
 import * as d_out from "../../../../interface/to_be_generated/npm_package"
 import * as d_function from "../../../../interface/to_be_generated/deserialize_package_json"
-import * as d_parse_tree_from_x from "astn-core/dist/interface/to_be_generated/deserialize"
 
 
 type Error_Expect_Object =
@@ -39,7 +38,7 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
             }
             return null
         })
-        return pt.dictionary.literal(temp)
+        return pt.literal.dictionary(temp)
     }
     return pt.decide.state($.type, ($) => {
         switch ($[0]) {

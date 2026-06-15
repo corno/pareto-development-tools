@@ -1,5 +1,4 @@
 import * as pt from 'pareto-core/dist/assign'
-import * as p_ri from 'pareto-core/dist/refiner/interface'
 import * as p_pi from 'pareto-core/dist/production/interface'
 import p_variables from 'pareto-core/dist/specials/variables'
 import p_change_context from 'pareto-core/dist/specials/change_context'
@@ -63,7 +62,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     case "git-remove-tracked-but-ignored": return ['git remove tracked but ignored', null]
                                     case "set-up-comparison": return ['set up comparison', null]
                                     case "update-dependencies": return ['update package dependencies', null]
-                                    default: return abort(['expected one of', pt.dictionary.literal({
+                                    default: return abort(['expected one of', pt.literal.dictionary({
                                         'assert-clean': null,
                                         'build-and-test': null,
                                         'build': null,
@@ -74,7 +73,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', pt.dictionary.literal({
+                            () => abort(['expected one of', pt.literal.dictionary({
                                 'assert-clean': null,
                                 'build-and-test': null,
                                 'build': null,
@@ -115,7 +114,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                         }),
                                     }]
                                     case "update-dependencies": return ['update package dependencies', null]
-                                    default: return abort(['expected one of', pt.dictionary.literal({
+                                    default: return abort(['expected one of', pt.literal.dictionary({
                                         'assert-clean': null,
                                         'build-and-test': null,
                                         'git-commit': null,
@@ -123,7 +122,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', pt.dictionary.literal({
+                            () => abort(['expected one of', pt.literal.dictionary({
                                 'assert-clean': null,
                                 'build-and-test': null,
                                 'git-commit': null,
@@ -144,14 +143,14 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     case "analyze-file-structure": return ['analyze file structure', null]
                                     case "dependency-graph": return ['dependency graph', null]
                                     case "list-file-structure-problems": return ['list file structure problems', null]
-                                    default: return abort(['expected one of', pt.dictionary.literal({
+                                    default: return abort(['expected one of', pt.literal.dictionary({
                                         'analyze-file-structure': null,
                                         'dependency-graph': null,
                                         'list-file-structure-problems': null,
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', pt.dictionary.literal({
+                            () => abort(['expected one of', pt.literal.dictionary({
                                 'analyze-file-structure': null,
                                 'dependency-graph': null,
                                 'list-file-structure-problems': null,
@@ -171,13 +170,13 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                 switch ($) {
                                     case "patch": return ['patch', null]
                                     case "minor": return ['minor', null]
-                                    default: return abort(['expected one of', pt.dictionary.literal({
+                                    default: return abort(['expected one of', pt.literal.dictionary({
                                         'patch': null,
                                         'minor': null,
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', pt.dictionary.literal({
+                            () => abort(['expected one of', pt.literal.dictionary({
                                 'patch': null,
                                 'minor': null,
                             })])
@@ -212,7 +211,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
 
                         ))
                     }]
-                    default: return abort(['expected one of', pt.dictionary.literal({
+                    default: return abort(['expected one of', pt.literal.dictionary({
                         'all': null,
                         'package': null,
                         'project': null,
@@ -223,7 +222,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
             }
         })
     }),
-    () => abort(['expected one of', pt.dictionary.literal({
+    () => abort(['expected one of', pt.literal.dictionary({
         'all': null,
         'package': null,
         'project': null,

@@ -69,7 +69,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                                                                         $,
                                                                         ($) => ({
                                                                             'option': 'generated',
-                                                                            'value': ['group', ['verbose', _p.dictionary.literal(
+                                                                            'value': ['group', ['verbose', _p.literal.dictionary(
                                                                                 {
                                                                                     "commit to git": _p_change_context(
                                                                                         $['commit to git'],
@@ -108,7 +108,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                     $,
                     ($) => ({
                         'option': 'wildcards',
-                        'value': ['group', ['verbose', _p.dictionary.literal(
+                        'value': ['group', ['verbose', _p.literal.dictionary(
                             {
                                 "required directories": _p_change_context(
                                     $['required directories'],
@@ -173,7 +173,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', _p.decide.stat
                     $,
                     ($) => ({
                         'option': 'generated',
-                        'value': ['group', ['verbose', _p.dictionary.literal(
+                        'value': ['group', ['verbose', _p.literal.dictionary(
                             {
                                 "commit to git": _p_change_context(
                                     $['commit to git'],

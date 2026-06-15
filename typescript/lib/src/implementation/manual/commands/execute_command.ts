@@ -36,7 +36,7 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                                 switch ($[0]) {
                                     case 'assert clean': return p_.ss($, ($) => $c['git assert is clean'].execute(
                                         {
-                                            'path': p_.optional.literal.set(context_path)
+                                            'path': p_.literal.set(context_path)
                                         },
                                         ($): d.All__Package_Error => ['git assert clean', $],
                                     ))
@@ -64,7 +64,7 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                                     ))
                                     case 'git remove tracked but ignored': return p_.ss($, ($) => $c['git remove tracked but ignored'].execute(
                                         {
-                                            'path': p_.optional.literal.set(context_path)
+                                            'path': p_.literal.set(context_path)
                                         },
                                         ($): d.All__Package_Error => ['git remove tracked but ignored', $],
                                     ))
@@ -79,7 +79,7 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                                         )
                                         return $c['npm set up comparison against published'].execute(
                                             {
-                                                'path to local package': t_path_to_path.extend_context_path_with_list(context_path, { 'addition': p_.list.literal(["typescript", "lib"]) }),
+                                                'path to local package': t_path_to_path.extend_context_path_with_list(context_path, { 'addition': p_.literal.list(["typescript", "lib"]) }),
                                                 'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "local" }), { 'node': id }),
                                                 'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "published" }), { 'node': id }),
                                                 'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "temp" }), { 'node': id }),
@@ -106,7 +106,7 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                         switch ($[0]) {
                             case 'assert clean': return p_.ss($, ($) => $c['git assert is clean'].execute(
                                 {
-                                    'path': p_.optional.literal.set(path)
+                                    'path': p_.literal.set(path)
                                 },
                                 ($): d.Error => ['package', ['git assert clean', $]],
                             ))
@@ -174,7 +174,7 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                     },
                     ($) => $c['npm set up comparison against published'].execute(
                         {
-                            'path to local package': t_path_to_path.extend_context_path_with_list($['path to package'], { 'addition': p_.list.literal(["typescript", "lib"]) }),
+                            'path to local package': t_path_to_path.extend_context_path_with_list($['path to package'], { 'addition': p_.literal.list(["typescript", "lib"]) }),
                             'path to output local directory': t_path_to_path.create_node_path($['path to temp'], { 'node': "local" }),
                             'path to output published directory': t_path_to_path.create_node_path($['path to temp'], { 'node': "published" }),
                             'path to temp directory': t_path_to_path.create_node_path($['path to temp'], { 'node': "temp" }),

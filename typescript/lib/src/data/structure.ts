@@ -1,117 +1,94 @@
-import * as pt from 'pareto-core-shorthands/dist/unconstrained'
+import * as sh from "../shorthands/structure"
 
-
-import * as d_structure from "../interface/generated/liana/schemas/structure/data"
-
-const file_manual = (): d_structure.Directory.group.D => ['file', ['manual', null]]
-const file_generated = (commitToGit: boolean): d_structure.Directory.group.D => ['file', ['generated', {
-    'commit to git': commitToGit,
-}]]
-
-const directory_ignore = (): d_structure.Directory.group.D => ['directory', ['ignore', null]]
-const directory_freeform = (): d_structure.Directory.group.D => ['directory', ['freeform', null]]
-const directory_group = (nodes: pt.Raw_Or_Normal_Dictionary<d_structure.Directory.group.D>): d_structure.Directory.group.D => ['directory', ['group', pt.dictionary.literal(nodes)]]
-const dgroup = (nodes: pt.Raw_Or_Normal_Dictionary<d_structure.Directory.group.D>): d_structure.Directory => ['group', pt.dictionary.literal(nodes)]
-const directory_dictionary = ($: d_structure.Directory): d_structure.Directory.group.D => ['directory', ['dictionary', $]]
-const directory_generated = (commitToGit: boolean): d_structure.Directory.group.D => ['directory', ['generated', {
-    'commit to git': commitToGit,
-}]]
-const directory_wildcards = (required_dirs: number, additional_dirs_allowed: boolean, extensions: pt.Raw_Or_Normal_List<string>, warn: boolean): d_structure.Directory.group.D => ['directory', ['wildcards', {
-    'required directories': required_dirs,
-    'additional directories allowed': additional_dirs_allowed,
-    'extensions': pt.list.literal<string>(extensions),
-    'warn': warn,
-}]]
-
-const $_interface: d_structure.Directory.group.D = directory_group({
-    "commands.ts": file_manual(),
-    "generated": directory_generated(true),
-    "queries.ts": file_manual(),
-    "to_be_generated": directory_wildcards(0, false, ["ts"], true),
-    "transformers.ts": file_manual(),
+const $_interface = sh.g.directory_group({
+    "commands.ts": sh.g.file_manual(),
+    "generated": sh.g.directory_generated(true),
+    "queries.ts": sh.g.file_manual(),
+    "to_be_generated": sh.g.directory_wildcards(0, false, ["ts"], true),
+    "transformers.ts": sh.g.file_manual(),
 })
 
-const $_implementation: d_structure.Directory.group.D = directory_group({
-    "generated": directory_generated(true),
+const $_implementation = sh.g.directory_group({
+    "generated": sh.g.directory_generated(true),
 
-    "manual": directory_group({
-        "commands": directory_wildcards(0, false, ["ts"], false),
-        "productions": directory_wildcards(1, false, ["ts"], false),
-        "queries": directory_wildcards(0, false, ["ts"], false),
-        "refiners": directory_wildcards(1, false, ["ts"], false),
-        "transformers": directory_wildcards(1, false, ["ts"], false),
+    "manual": sh.g.directory_group({
+        "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
+        "productions": sh.g.directory_wildcards(1, false, ["ts"], false),
+        "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
+        "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
+        "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
     }),
-    "to_be_generated": directory_group({
-        "commands": directory_wildcards(0, false, ["ts"], false),
-        "productions": directory_wildcards(1, false, ["ts"], false),
-        "queries": directory_wildcards(0, false, ["ts"], false),
-        "refiners": directory_wildcards(1, false, ["ts"], false),
-        "transformers": directory_wildcards(1, false, ["ts"], false),
+    "to_be_generated": sh.g.directory_group({
+        "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
+        "productions": sh.g.directory_wildcards(1, false, ["ts"], false),
+        "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
+        "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
+        "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
     }),
 
 })
 
-export const $$: d_structure.Directory = ['group', pt.dictionary.literal<d_structure.Directory.group.D>({
-    ".git": directory_ignore(),
-    ".gitignore": file_manual(),
-    "data": directory_freeform(),
-    "documentation": directory_freeform(),
-    "LICENSE": file_manual(),
-    "out": directory_generated(false),
-    "liana": directory_group({
-        ".liana": directory_ignore(),
-        "module.liana.lna": file_manual(),
+export const $$ = sh.dgroup({
+    ".git": sh.g.directory_ignore(),
+    ".gitignore": sh.g.file_manual(),
+    "data": sh.g.directory_freeform(),
+    "documentation": sh.g.directory_freeform(),
+    "LICENSE": sh.g.file_manual(),
+    "out": sh.g.directory_generated(false),
+    "liana": sh.g.directory_group({
+        ".liana": sh.g.directory_ignore(),
+        "module.liana.lna": sh.g.file_manual(),
     }),
-    "typescript": directory_group({
-        "app": directory_group({
-            "dist": directory_generated(false),
-            "node_modules": directory_ignore(),
-            "package-lock.json": file_generated(true),
-            "package.json": file_manual(),
-            "src": directory_group({
-                "bin": directory_wildcards(0, false, ["ts"], false),
-                "bin.ts": file_manual(),
-                "globals.ts": file_generated(true),
-                "index.ts": file_generated(true),
+    "typescript": sh.g.directory_group({
+        "app": sh.g.directory_group({
+            "dist": sh.g.directory_generated(false),
+            "node_modules": sh.g.directory_ignore(),
+            "package-lock.json": sh.g.file_generated(true),
+            "package.json": sh.g.file_manual(),
+            "src": sh.g.directory_group({
+                "bin": sh.g.directory_wildcards(0, false, ["ts"], false),
+                "bin.ts": sh.g.file_manual(),
+                "globals.ts": sh.g.file_generated(true),
+                "index.ts": sh.g.file_generated(true),
             }),
-            "tsconfig.json": file_generated(true)
+            "tsconfig.json": sh.g.file_generated(true)
         }),
-        "lib": directory_group({
-            "dist": directory_generated(false),
-            "node_modules": directory_ignore(),
-            "package-lock.json": file_generated(true),
-            "package.json": file_manual(),
-            "src": directory_group({
-                "data": directory_wildcards(0, true, ["ts"], false),
+        "lib": sh.g.directory_group({
+            "dist": sh.g.directory_generated(false),
+            "node_modules": sh.g.directory_ignore(),
+            "package-lock.json": sh.g.file_generated(true),
+            "package.json": sh.g.file_manual(),
+            "src": sh.g.directory_group({
+                "data": sh.g.directory_wildcards(0, true, ["ts"], false),
 
-                "globals.ts": file_generated(true),
+                "globals.ts": sh.g.file_generated(true),
                 "implementation": $_implementation,
                 "interface": $_interface,
-                "index.ts": file_generated(true),
-                "modules": directory_dictionary(dgroup({
+                "index.ts": sh.g.file_generated(true),
+                "modules": sh.g.directory_dictionary(sh.dgroup({
                     "interface": $_interface,
                     "implementation": $_implementation,
-                    "shorthands": directory_wildcards(0, false, ["ts"], false),
+                    "shorthands": sh.g.directory_wildcards(0, false, ["ts"], false),
                 })),
-                "shorthands": directory_wildcards(0, false, ["ts"], false),
+                "shorthands": sh.g.directory_wildcards(0, false, ["ts"], false),
             }),
-            "tsconfig.json": file_generated(true)
+            "tsconfig.json": sh.g.file_generated(true)
         }),
-        "test": directory_group({
-            "dist": directory_generated(false),
-            "node_modules": directory_ignore(),
-            "package-lock.json": file_generated(true),
-            "package.json": file_manual(),
-            "src": directory_group({
-                "bin": directory_group({
-                    "test.ts": file_generated(true)
+        "test": sh.g.directory_group({
+            "dist": sh.g.directory_generated(false),
+            "node_modules": sh.g.directory_ignore(),
+            "package-lock.json": sh.g.file_generated(true),
+            "package.json": sh.g.file_manual(),
+            "src": sh.g.directory_group({
+                "bin": sh.g.directory_group({
+                    "test.ts": sh.g.file_generated(true)
                 }),
-                "globals.ts": file_generated(true)
+                "globals.ts": sh.g.file_generated(true)
             }),
-            "tsconfig.json": file_generated(true)
+            "tsconfig.json": sh.g.file_generated(true)
         }),
     }),
-    "README.md": file_manual(),
-    "temp": directory_ignore(),
-    "testdata": directory_freeform(),
-})]
+    "README.md": sh.g.file_manual(),
+    "temp": sh.g.directory_ignore(),
+    "testdata": sh.g.directory_freeform(),
+})

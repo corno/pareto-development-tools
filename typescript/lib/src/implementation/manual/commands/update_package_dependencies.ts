@@ -19,7 +19,7 @@ export const $$: signatures.procedures.update_package_dependencies = _pc.command
                 // update dependencies of lib
                 $c['npm update package dependencies'].execute(
                     {
-                        'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["lib"]) }),
+                        'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.literal.list(["lib"]) }),
                     },
                     ($): d.Error => ['error updating lib', $],
                 ),
@@ -27,7 +27,7 @@ export const $$: signatures.procedures.update_package_dependencies = _pc.command
                 // update dependencies of test
                 $c['npm update package dependencies'].execute(
                     {
-                        'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["test"]) }),
+                        'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.literal.list(["test"]) }),
                     },
                     ($) => ['error updating test', $],
                 ),
@@ -54,7 +54,7 @@ export const $$: signatures.procedures.update_package_dependencies = _pc.command
                         // update dependencies of app
                         $c['npm update package dependencies'].execute(
                             {
-                                'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.list.literal(["app"]) }),
+                                'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': _pc.literal.list(["app"]) }),
                             },
                             ($) => ['error updating app', $],
                         ),

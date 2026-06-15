@@ -25,16 +25,16 @@ export const $$: signatures.procedures.remove_tracked_but_ignored = p.command_pr
         ),
         $c.git.execute(
             {
-                'working directory': p.optional.literal.not_set(),
-                'args': pa.list.nested_literal_old([
+                'working directory': p.literal.not_set(),
+                'args': pa.literal.nested_list([
                     $d.path.__decide(
-                        ($) => pa.list.literal([
+                        ($) => pa.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => pa.list.literal([])
+                        () => pa.literal.list([])
                     ),
-                    pa.list.literal([
+                    pa.literal.list([
                         "rm",
                         "-r",
                         "--cached",
@@ -46,16 +46,16 @@ export const $$: signatures.procedures.remove_tracked_but_ignored = p.command_pr
         ),
         $c.git.execute(
             {
-                'working directory': p.optional.literal.not_set(),
-                'args': pa.list.nested_literal_old([
+                'working directory': p.literal.not_set(),
+                'args': pa.literal.nested_list([
                     $d.path.__decide(
-                        ($) => pa.list.literal([
+                        ($) => pa.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => pa.list.literal([])
+                        () => pa.literal.list([])
                     ),
-                    pa.list.literal([
+                    pa.literal.list([
                         "add",
                         "--all",
                     ])
@@ -65,16 +65,16 @@ export const $$: signatures.procedures.remove_tracked_but_ignored = p.command_pr
         ),
         $c.git.execute(
             {
-                'working directory': p.optional.literal.not_set(),
-                'args': pa.list.nested_literal_old([
+                'working directory': p.literal.not_set(),
+                'args': pa.literal.nested_list([
                     $d.path.__decide(
-                        ($) => pa.list.literal([
+                        ($) => pa.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => pa.list.literal([])
+                        () => pa.literal.list([])
                     ),
-                    pa.list.literal([
+                    pa.literal.list([
                         "clean",
                         "-fd",
                     ])

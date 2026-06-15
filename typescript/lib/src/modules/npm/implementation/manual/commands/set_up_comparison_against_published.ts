@@ -83,9 +83,9 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
                         // Create local package using npm pack (if local package path provided)
                         $c['npm'].execute(
                             {
-                                'working directory': p_.optional.literal.not_set(),
-                                'args': p_t.list.nested_literal_old([
-                                    p_t.list.literal([
+                                'working directory': p_.literal.not_set(),
+                                'args': p_t.literal.nested_list([
+                                    p_t.literal.list([
                                         "pack",
                                         t_path_to_text.Context_Path($d['path to local package']),
                                         "--pack-destination",
@@ -108,8 +108,8 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
                         // Extract local package into local subdirectory using dynamic filename
                         $c['tar'].execute(
                             {
-                                'working directory': p_.optional.literal.not_set(),
-                                'args': p_t.list.literal([
+                                'working directory': p_.literal.not_set(),
+                                'args': p_t.literal.list([
                                     "-xzmf",
                                     `${t_path_to_text.Node_Path($d['path to temp directory'])}/${filename}`,
                                     "-C",
@@ -131,8 +131,8 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
 
                         $c['npm'].execute(
                             {
-                                'working directory': p_.optional.literal.not_set(),
-                                'args': p_t.list.literal([
+                                'working directory': p_.literal.not_set(),
+                                'args': p_t.literal.list([
                                     "pack",
                                     `${package_info.name}@${package_info.version}`,
                                     "--pack-destination",
@@ -154,8 +154,8 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
                         p_.query(
                             $q.npm(
                                 {
-                                    'working directory': p_.optional.literal.not_set(),
-                                    'args': p_t.list.literal([
+                                    'working directory': p_.literal.not_set(),
+                                    'args': p_t.literal.list([
                                         "view",
                                         package_info.name,
                                         "version",
@@ -168,8 +168,8 @@ export const $$: signatures.commands.set_up_comparison_against_published = p_.co
                             ($v) => [
                                 $c['tar'].execute<d.Error>(
                                     {
-                                        'working directory': p_.optional.literal.not_set(),
-                                        'args': p_t.list.literal([
+                                        'working directory': p_.literal.not_set(),
+                                        'args': p_t.literal.list([
                                             "-xzmf",
                                             `${t_path_to_text.Node_Path($d['path to temp directory'])}/npm/${package_info.name}-${p_text_from_list($v, ($) => $)}.tgz`,
                                             "-C",

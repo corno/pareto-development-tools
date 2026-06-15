@@ -40,7 +40,7 @@ export const $$: signatures.commands.update_package_dependencies = p_.command_pr
         // install/update updated dependencies
         $c['npm'].execute(
             {
-                'path': p_.optional.literal.set($d.path),
+                'path': p_.literal.set($d.path),
                 'operation': ['update', {
                     'package-lock only': false
                 }], // 'install' does not update the indirect dependencies

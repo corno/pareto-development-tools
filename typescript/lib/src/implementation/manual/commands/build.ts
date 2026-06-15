@@ -20,7 +20,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                         'path': t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': p_.list.literal(["lib", "dist"]),
+                                'addition': p_.literal.list(["lib", "dist"]),
                             }
                         ),
                         'error if not exists': false,
@@ -29,7 +29,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                 ),
                 $c.tsc.execute(
                     {
-                        'path': p_.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.list.literal(["lib"]) })),
+                        'path': p_.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["lib"]) })),
                     },
                     ($): d.Error => ['error building lib', {
                         'path': $d.path,
@@ -41,7 +41,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                         'path': t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': p_.list.literal(["test", "dist"]),
+                                'addition': p_.literal.list(["test", "dist"]),
                             }
                         ),
                         'error if not exists': false,
@@ -50,7 +50,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                 ),
                 $c.tsc.execute(
                     {
-                        'path': p_.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.list.literal(["test"]) })),
+                        'path': p_.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["test"]) })),
                     },
                     ($): d.Error => ['error building test', {
                         'path': $d.path,
@@ -81,7 +81,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                         const dist_path = t_path_to_path.extend_context_path_with_list(
                             typescript_path,
                             {
-                                'addition': p_.list.literal(["app", "dist"]),
+                                'addition': p_.literal.list(["app", "dist"]),
                             }
                         )
                         return [
@@ -95,7 +95,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                             ),
                             $c.tsc.execute(
                                 {
-                                    'path': p_.optional.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.list.literal(["app"]) })),
+                                    'path': p_.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["app"]) })),
                                 },
                                 ($): d.Error => ['error building app', {
                                     'path': $d.path,
@@ -112,7 +112,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
                                         }
                                     ),
                                     'mode': {
-                                        'special bits': p_t.optional.literal.not_set(),
+                                        'special bits': p_t.literal.not_set(),
                                         'owner': {
                                             'read': true,
                                             'write': true,

@@ -14,16 +14,16 @@ export const $$: signatures.procedures.push = p_.command_procedure(
     ($d, $s, $q, $c) => [
         $c.git.execute(
             {
-                'working directory': p_.optional.literal.not_set(),
-                'args': p_t.list.nested_literal_old([
+                'working directory': p_.literal.not_set(),
+                'args': p_t.literal.nested_list([
                     $d.path.__decide(
-                        ($) => p_t.list.literal([
+                        ($) => p_t.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
                         ]),
-                        () => p_t.list.literal([])
+                        () => p_t.literal.list([])
                     ),
-                    p_t.list.literal([
+                    p_t.literal.list([
                         "push",
                     ])
                 ]),

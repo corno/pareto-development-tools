@@ -16,26 +16,26 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 export const $$: signatures.procedures.publish = p_.command_procedure(
 
     ($d, $s, $q, $c) => p_variables(() => {
-        const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': p_.list.literal(["typescript", "lib"]) })
+        const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': p_.literal.list(["typescript", "lib"]) })
         return [
 
             $c['git push'].execute(
                 {
-                    'path': p_.optional.literal.set($d['path to package']),
+                    'path': p_.literal.set($d['path to package']),
                 },
                 ($): d.Error => ['error while running git push', $],
             ),
 
             // $c['git assert is clean'].execute(
             //     {
-            //         'path': pt.optional.literal.set($d['path to package']),
+            //         'path': pt.literal.set($d['path to package']),
             //     },
             //     ($) => ['error while running git assert is clean at the start', $],
             // ),
 
             $c['git make pristine'].execute(
                 {
-                    'path': p_.optional.literal.set($d['path to package']),
+                    'path': p_.literal.set($d['path to package']),
                 },
                 ($) => ['error while running git make pristine', $],
             ),
@@ -56,14 +56,14 @@ export const $$: signatures.procedures.publish = p_.command_procedure(
 
             // $c['git assert is clean'].execute(
             //     {
-            //         'path': pt.optional.literal.set($d['path to package']),
+            //         'path': pt.literal.set($d['path to package']),
             //     },
             //     ($) => ['error while running git assert is clean after updating package dependencies', $],
             // ),
 
             $c.npm.execute(
                 {
-                    'path': p_.optional.literal.set(lib_path),
+                    'path': p_.literal.set(lib_path),
                     'operation': ['version', $d.generation],
                 },
                 ($) => ['error while running npm version', $],
@@ -72,7 +72,7 @@ export const $$: signatures.procedures.publish = p_.command_procedure(
             // update the lib package-lock.json to reflect the new version
             $c.npm.execute(
                 {
-                    'path': p_.optional.literal.set(lib_path),
+                    'path': p_.literal.set(lib_path),
                     'operation': ['update', {
                         'package-lock only': true
                     }],
@@ -99,7 +99,7 @@ export const $$: signatures.procedures.publish = p_.command_procedure(
 
                         $c['git extended commit'].execute(
                             {
-                                'path': p_.optional.literal.set($d['path to package']),
+                                'path': p_.literal.set($d['path to package']),
                                 'instruction': {
                                     'commit message': "pdt: published version " + $v.version,
                                     'stage all changes': true,

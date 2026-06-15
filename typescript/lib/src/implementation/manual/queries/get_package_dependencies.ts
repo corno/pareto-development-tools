@@ -25,7 +25,7 @@ export const $$: signatures.query_functions.get_package_dependencies = p_.query_
                 const lib_path = t_path_to_path.extend_context_path_with_list(
                     t_path_to_path.deprecated_node_path_to_context_path($.path),
                     {
-                        'addition': p_.list.literal(["typescript", "lib"])
+                        'addition': p_.literal.list(["typescript", "lib"])
                     }
                 )
                 const package_json_path = t_path_to_path.create_node_path(lib_path, { 'node': "package.json" })

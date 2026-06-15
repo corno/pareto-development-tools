@@ -12,16 +12,16 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 export const $$: signatures.query_functions.is_repository_clean = p_.query_function(
     ($d, $s, $q) => $q.git(
         {
-            'working directory': p_t.optional.literal.not_set(),
-            'args': p_t.list.nested_literal_old([
+            'working directory': p_t.literal.not_set(),
+            'args': p_t.literal.nested_list([
                 $d.path.__decide(
-                    ($) => p_t.list.literal([
+                    ($) => p_t.literal.list([
                         "-C",
                         t_path_to_text.Context_Path($),
                     ]),
-                    () => p_t.list.literal([])
+                    () => p_t.literal.list([])
                 ),
-                p_t.list.literal([
+                p_t.literal.list([
                     "status",
                     "--porcelain",
                 ])

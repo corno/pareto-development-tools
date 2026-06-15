@@ -68,7 +68,7 @@ export const Project_Files: Project_Files = ($) => pt.list.from.dictionary(
 
             }
             x($, "")
-            return pt.dictionary.literal(temp)
+            return pt.literal.dictionary(temp)
         }
         return pt.list.from.dictionary(
             Directory2(
@@ -117,11 +117,11 @@ const extension = ($: string): p_di.Optional_Value<string> => {
         return null
     })
     if (first_period_index === null) {
-        return pt.optional.literal.not_set()
+        return pt.literal.not_set()
     } else {
         const fpi: number = first_period_index
         current_index = 0
-        return pt.optional.literal.set(
+        return pt.literal.set(
             p_text_from_list(
                 p_list_build_deprecated<number>(($i) => {
                     characters.__l_map(($) => {
@@ -196,12 +196,12 @@ export namespace defined {
                                         switch ($[0]) {
                                             case 'file': return pt.ss($, ($) => pt.decide.state($, ($) => {
                                                 switch ($[0]) {
-                                                    case 'generated': return pt.ss($, ($) => pt.optional.literal.not_set())
-                                                    case 'manual': return pt.ss($, ($) => pt.optional.literal.not_set())
+                                                    case 'generated': return pt.ss($, ($) => pt.literal.not_set())
+                                                    case 'manual': return pt.ss($, ($) => pt.literal.not_set())
                                                     default: return pt.au($[0])
                                                 }
                                             }))
-                                            case 'directory': return pt.ss($, ($) => pt.optional.literal.set($p.name))
+                                            case 'directory': return pt.ss($, ($) => pt.literal.set($p.name))
                                             default: return pt.au($[0])
                                         }
                                     })
@@ -244,7 +244,7 @@ export namespace defined {
                                         'classification': ['directory', ['group', null]],
                                         'path': $p['structure path'],
                                     },
-                                    'unexpected path tail': pt.optional.literal.set(`/${id}`),
+                                    'unexpected path tail': pt.literal.set(`/${id}`),
                                 }
                             )
                         )
@@ -258,7 +258,7 @@ export namespace defined {
                             'classification': ['directory', ['generated', null]],
                             'path': $p['structure path'],
                         },
-                        'unexpected path tail': pt.optional.literal.not_set(),
+                        'unexpected path tail': pt.literal.not_set(),
                     }
                 ))
                 case 'wildcards': return pt.ss($, ($) => wildcard.Directory(
@@ -277,7 +277,7 @@ export namespace defined {
                             'classification': ['directory', ['freeform', null]],
                             'path': $p['structure path'],
                         },
-                        'unexpected path tail': pt.optional.literal.not_set(),
+                        'unexpected path tail': pt.literal.not_set(),
                     }
                 ))
                 case 'dictionary': return pt.ss($, ($) => {
@@ -301,7 +301,7 @@ export namespace defined {
                                 },
                                 'extension': extension(id),
                                 'line count': line_count($),
-                                'unexpected path tail': pt.optional.literal.set(`/${id}`),
+                                'unexpected path tail': pt.literal.set(`/${id}`),
                             }])
                             default: return pt.au($[0])
                         }
@@ -392,11 +392,11 @@ export namespace wildcard {
                         'unexpected path tail': pt.optional.block(() => {
                             if ($p['number of directories encountered'] < $p['wildcard']['required directories']) {
                                 //files are not allowed yet, haven't descended through enough required directories
-                                return pt.optional.literal.set(tail)
+                                return pt.literal.set(tail)
                             }
                             if (!$p.wildcard['additional directories allowed'] && $p['number of directories encountered'] > $p['wildcard']['required directories']) {
                                 //additional directories are not allowed and we've gone too deep
-                                return pt.optional.literal.set(tail)
+                                return pt.literal.set(tail)
                             }
                             const possible_file_extension = extension(id)
                             let extension_matched = false
@@ -411,8 +411,8 @@ export namespace wildcard {
                                 return null
                             })
                             return extension_matched
-                                ? pt.optional.literal.not_set()
-                                : pt.optional.literal.set(tail)
+                                ? pt.literal.not_set()
+                                : pt.literal.set(tail)
 
                         }),
                         'line count': line_count($),
