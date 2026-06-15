@@ -1,7 +1,7 @@
 import * as pt from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
-import * as d_in from "../../../../interface/to_be_generated/update2latest"
+import * as d_in from "../../../../interface/data/update2latest"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 export type Error = p_i.Transformer<d_in.Error, d_out.Phrase>

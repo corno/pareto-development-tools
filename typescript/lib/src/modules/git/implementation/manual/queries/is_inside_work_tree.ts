@@ -4,7 +4,7 @@ import * as p_ from 'pareto-core/dist/implementation/query'
 import * as signatures from "../../../interface/queries"
 
 //data types
-import * as d from "../../../interface/to_be_generated/is_inside_work_tree"
+import * as d from "../../../interface/data/is_inside_work_tree"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"

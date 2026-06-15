@@ -1,12 +1,12 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.commands.update2latest = p_.command_procedure(
+export const $$: signatures.procedures.update2latest = p_.command_procedure(
     ($d, $s, $q, $c) => [
         $c.update2latest.execute(
             {

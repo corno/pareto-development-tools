@@ -5,7 +5,7 @@ import * as p_qi from 'pareto-core/dist/interface/query'
 import * as signatures from "../../../interface/queries"
 
 //data types
-import * as d from "../../../interface/to_be_generated/get_project_files"
+import * as d from "../../../interface/data/get_project_files"
 import * as d_directory_content from "pareto-resources/dist/interface/to_be_generated/directory_content"
 
 

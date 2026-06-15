@@ -4,8 +4,8 @@ import * as p_temp from 'pareto-core/dist/implementation/transformer'
 import * as signatures from "../../../interface/commands"
 
 //data types
-import * as d from "../../../interface/to_be_generated/get_project_files"
-import * as d_file_analysis from "../../../interface/to_be_generated/file_structure_analysis"
+import * as d from "../../../interface/data/get_project_files"
+import * as d_file_analysis from "../../../interface/data/file_structure_analysis"
 
 //dependencies
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis"

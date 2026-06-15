@@ -4,7 +4,7 @@ import p_list_from_text from 'pareto-core/dist/implementation/specials/list_from
 
 //data types
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
-import * as d_in from "../../../../interface/to_be_generated/csv"
+import * as d_in from "../../../../interface/data/csv"
 
 
 export type Signature = p_i.Transformer_With_Parameter<

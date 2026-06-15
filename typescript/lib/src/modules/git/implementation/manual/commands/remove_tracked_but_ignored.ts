@@ -4,7 +4,7 @@ import * as p_temp from 'pareto-core/dist/implementation/transformer'
 import * as signatures from "../../../interface/commands"
 
 //data types
-import * as d from "../../../interface/to_be_generated/remove_tracked_but_ignored"
+import * as d from "../../../interface/data/remove_tracked_but_ignored"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"

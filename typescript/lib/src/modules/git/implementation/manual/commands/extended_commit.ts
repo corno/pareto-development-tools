@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/dist/implementation/command'
 import * as signatures from "../../../interface/commands"
 
 //data types
-import * as d from "../../../interface/to_be_generated/extended_commit"
+import * as d from "../../../interface/data/extended_commit"
 import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 //dependencies

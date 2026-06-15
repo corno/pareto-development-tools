@@ -1,7 +1,7 @@
 import * as pt from 'pareto-core/dist/implementation/transformer'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
-import * as d_in from "../../../../interface/to_be_generated/assert_is_clean"
+import * as d_in from "../../../../interface/data/assert_is_clean"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"

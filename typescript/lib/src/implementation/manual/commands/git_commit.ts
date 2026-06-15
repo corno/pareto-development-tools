@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/dist/implementation/command'
 import * as signatures from "../../../interface/commands"
 
 //data types
-import * as d from "../../../interface/to_be_generated/git_commit"
+import * as d from "../../../interface/data/git_commit"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"

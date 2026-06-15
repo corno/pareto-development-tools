@@ -1,8 +1,8 @@
 import * as p_di from 'pareto-core/dist/interface/data'
 
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
-import * as d_git_extended_commit from "../../modules/git/interface/to_be_generated/extended_commit"
-import * as d_build_and_test from "../to_be_generated/build_and_test"
+import * as d_git_extended_commit from "../../modules/git/interface/data/extended_commit"
+import * as d_build_and_test from "../data/build_and_test"
 
 export type Error =
     | ['git extended commit', d_git_extended_commit.Error]

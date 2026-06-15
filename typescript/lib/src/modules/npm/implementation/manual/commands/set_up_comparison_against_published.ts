@@ -3,10 +3,10 @@ import p_list_from_text from 'pareto-core/dist/implementation/specials/list_from
 import p_list_build_deprecated from 'pareto-core/dist/implementation/specials/list_build_deprecated'
 import p_text_from_list from 'pareto-core/dist/implementation/specials/text_from_list'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 //data types
-import * as d from "../../../interface/to_be_generated/set_up_comparison_against_published"
+import * as d from "../../../interface/data/set_up_comparison_against_published"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
 
 //dependencies
@@ -32,7 +32,7 @@ const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Chara
     })
 }
 
-export const $$: signatures.commands.set_up_comparison_against_published = p_.command_procedure(
+export const $$: signatures.procedures.set_up_comparison_against_published = p_.command_procedure(
     ($d, $s, $q, $c) => {
         const path_x = t_path_to_path.create_node_path($d['path to local package'], { 'node': "package.json" })
         return [

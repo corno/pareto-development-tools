@@ -4,7 +4,7 @@ import * as signatures from "../../../interface/commands"
 
 
 //data types
-import * as d from "../../../interface/to_be_generated/get_project_files"
+import * as d from "../../../interface/data/get_project_files"
 
 //dependencies
 import * as t_csv_to_fountain_pen from "../../../modules/csv/implementation/manual/transformers/csv/fountain_pen"

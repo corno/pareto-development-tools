@@ -5,8 +5,8 @@ import * as signatures from "../../../interface/commands"
 
 //data types
 import * as d_main from "pareto-resources/dist/interface/to_be_generated/temp_main"
-import * as d_parse from "../../../interface/to_be_generated/parse"
-import * as d_execute_command from "../../../interface/to_be_generated/execute_command"
+import * as d_parse from "../../../interface/data/parse"
+import * as d_execute_command from "../../../interface/data/execute_command"
 
 //dependencies
 import * as r_instruction from "../refiners/execute_command/main"

@@ -2,8 +2,8 @@ import * as p_qi from 'pareto-core/dist/interface/query'
 
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 
-import * as d_get_package_dependencies from "./to_be_generated/get_package_dependencies"
-import * as d_get_project_files from "./to_be_generated/get_project_files"
+import * as d_get_package_dependencies from "./data/get_package_dependencies"
+import * as d_get_project_files from "./data/get_project_files"
 
 export namespace queries {
     

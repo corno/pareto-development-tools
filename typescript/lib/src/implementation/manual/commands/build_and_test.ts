@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/dist/implementation/command'
 import * as signatures from "../../../interface/commands"
 
 //data types
-import * as d from "../../../interface/to_be_generated/build_and_test"
+import * as d from "../../../interface/data/build_and_test"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"

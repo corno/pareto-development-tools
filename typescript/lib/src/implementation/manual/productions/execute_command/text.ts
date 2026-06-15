@@ -4,8 +4,8 @@ import p_variables from 'pareto-core/dist/implementation/specials/variables'
 import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
 
 //data types
-import * as d_out from "../../../../interface/to_be_generated/execute_command"
-import * as d_function from "../../../../interface/to_be_generated/parse"
+import * as d_out from "../../../../interface/data/execute_command"
+import * as d_function from "../../../../interface/data/parse"
 import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schemas/text/data"
 
 //dependencies

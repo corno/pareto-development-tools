@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/dist/implementation/command'
 import * as signatures from "../../../interface/commands"
 
 //data types
-import * as d from "../../../interface/to_be_generated/create_dependency_graph"
+import * as d from "../../../interface/data/create_dependency_graph"
 
 //dependencies
 // import { $$ as c_fp_log } from "pareto-fountain-pen-file-structure/dist/implementation/manual/commands/console_log"

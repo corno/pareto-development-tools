@@ -4,11 +4,11 @@ import * as queries from "./queries"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 
 //data types
-import * as d_assert_is_clean from "./to_be_generated/assert_is_clean"
-import * as d_make_pristine from "./to_be_generated/make_pristine"
-import * as d_push from "./to_be_generated/push"
-import * as d_extended_commit from "./to_be_generated/extended_commit"
-import * as d_remove_tracked_but_ignored from "./to_be_generated/remove_tracked_but_ignored"
+import * as d_assert_is_clean from "./data/assert_is_clean"
+import * as d_make_pristine from "./data/make_pristine"
+import * as d_push from "./data/push"
+import * as d_extended_commit from "./data/extended_commit"
+import * as d_remove_tracked_but_ignored from "./data/remove_tracked_but_ignored"
 
 export namespace commands {
 

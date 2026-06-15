@@ -1,14 +1,14 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 
-import * as signatures from "../../../interface/signatures"
+import * as signatures from "../../../interface/commands"
 
 //data types
-import * as d from "../../../interface/to_be_generated/update_package_dependencies"
+import * as d from "../../../interface/data/update_package_dependencies"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.commands.update_package_dependencies = p_.command_procedure(
+export const $$: signatures.procedures.update_package_dependencies = p_.command_procedure(
     ($d, $s, $q, $c) => [
 
         // clean

@@ -5,8 +5,8 @@ import * as p_ri from 'pareto-core/dist/interface/refiner'
 //data types
 import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
 import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
-import * as d_out from "../../../../interface/to_be_generated/npm_package"
-import * as d_function from "../../../../interface/to_be_generated/deserialize_package_json"
+import * as d_out from "../../../../interface/data/npm_package"
+import * as d_function from "../../../../interface/data/deserialize_package_json"
 
 
 type Error_Expect_Object =

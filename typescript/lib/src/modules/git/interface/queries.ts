@@ -2,8 +2,8 @@ import * as p_qi from 'pareto-core/dist/interface/query'
 
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 
-import * as d_is_repository_clean from "./to_be_generated/is_repository_clean"
-import * as d_is_inside_work_tree from "./to_be_generated/is_inside_work_tree"
+import * as d_is_repository_clean from "./data/is_repository_clean"
+import * as d_is_inside_work_tree from "./data/is_inside_work_tree"
 
 export namespace queries {
 

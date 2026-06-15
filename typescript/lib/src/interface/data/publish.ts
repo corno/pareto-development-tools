@@ -2,15 +2,15 @@ import * as p_di from 'pareto-core/dist/interface/data'
 
 // import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
-import * as d_push from "../../modules/git/interface/to_be_generated/push"
-import * as d_git_aic from "../../modules/git/interface/to_be_generated/assert_is_clean"
-import * as d_git_make_pristine from "../../modules/git/interface/to_be_generated/make_pristine"
-import * as d_npm from "../../modules/npm/interface/to_be_generated/npm_tool"
+import * as d_push from "../../modules/git/interface/data/push"
+import * as d_git_aic from "../../modules/git/interface/data/assert_is_clean"
+import * as d_git_make_pristine from "../../modules/git/interface/data/make_pristine"
+import * as d_npm from "../../modules/npm/interface/data/npm_tool"
 import * as d_update_package_dependencies from "./update_package_dependencies"
 import * as d_build_and_test from "./build_and_test"
-import * as d_get_package_json from "../../modules/npm/interface/to_be_generated/get_package_json"
+import * as d_get_package_json from "../../modules/npm/interface/data/get_package_json"
 import * as d_log from "pareto-stream/dist/interface/generated/liana/schemas/log/data"
-import * as d_git_ec from "../../modules/git/interface/to_be_generated/extended_commit"
+import * as d_git_ec from "../../modules/git/interface/data/extended_commit"
 
 export type Parameters = {
     'path to package': d_path.Context_Path

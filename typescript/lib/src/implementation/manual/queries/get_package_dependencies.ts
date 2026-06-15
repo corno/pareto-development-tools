@@ -5,8 +5,8 @@ import * as p_qi from 'pareto-core/dist/interface/query'
 import * as signatures from "../../../interface/queries"
 
 //data types
-import * as d from "../../../interface/to_be_generated/get_package_dependencies"
-import * as d_npm_package from "../../../modules/npm/interface/to_be_generated/npm_package"
+import * as d from "../../../interface/data/get_package_dependencies"
+import * as d_npm_package from "../../../modules/npm/interface/data/npm_package"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"

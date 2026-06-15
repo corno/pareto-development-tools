@@ -2,16 +2,16 @@ import * as p_di from 'pareto-core/dist/interface/data'
 
 
 import * as d_get_project_files from "./get_project_files"
-import * as d_assert_clean from "../../modules/git/interface/to_be_generated/assert_is_clean"
+import * as d_assert_clean from "../../modules/git/interface/data/assert_is_clean"
 import * as d_build from "./build"
 import * as d_build_and_test from "./build_and_test"
 import * as d_dependency_graph from "./create_dependency_graph"
 import * as d_git_commit from "./git_commit"
-import * as d_git_remove_tracked_but_ignored from "../../modules/git/interface/to_be_generated/remove_tracked_but_ignored"
+import * as d_git_remove_tracked_but_ignored from "../../modules/git/interface/data/remove_tracked_but_ignored"
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
 import * as d_publish from "./publish"
 import * as d_read_directory from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
-import * as d_set_up_comparison_against_published from "../../modules/npm/interface/to_be_generated/set_up_comparison_against_published"
+import * as d_set_up_comparison_against_published from "../../modules/npm/interface/data/set_up_comparison_against_published"
 import * as d_update_dependencies from "./update_package_dependencies"
 
 export type Parameters = {
