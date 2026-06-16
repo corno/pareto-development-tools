@@ -61,7 +61,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
 
 
 
-                p_.if_.query(
+                p_.if_.query_deprecated(
                     p_super_query_result($q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,

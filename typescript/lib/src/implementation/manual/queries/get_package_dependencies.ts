@@ -19,7 +19,7 @@ export const $$: signatures.query_functions.get_package_dependencies = p_.query_
         },
         ($): d.Error => ['read directory', $],
     )).query(
-        ($) => p_super_query_result(p_.dictionaryx.parallel(
+        ($) => p_super_query_result(p_.dictionary(
             $,
             ($): p_.Query_Result<d_npm_package.NPM_Package, d.Package_Error> => {
                 const lib_path = t_path_to_path.extend_context_path_with_list(

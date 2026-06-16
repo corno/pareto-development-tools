@@ -20,7 +20,7 @@ export const $$: signatures.query_functions.get_project_files = p_.query_functio
         },
         ($): d.Error => ['read directory', $],
     )).query(
-        ($v) => p_.dictionaryx.parallel(
+        ($v) => p_.dictionary(
             $v,
             ($): p_.Query_Result<d_directory_content.Directory, d.Package_Error> => {
                 const path = $.path

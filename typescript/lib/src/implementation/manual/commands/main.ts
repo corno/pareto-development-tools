@@ -25,7 +25,7 @@ export const $$: signatures.procedures.main = p_.command_procedure(
     ($d, $s, $q, $c) => [
         p_.handle_error<d_main.Error, My_Error>(
             [
-                p_.refine_without_error_transformation(
+                p_.refine(
 
                     // parse command line instruction
                     (abort) => r_instruction.Command(

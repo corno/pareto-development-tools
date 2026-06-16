@@ -33,7 +33,7 @@ export const $$: signatures.procedures.update_package_dependencies = p_.command_
                     ($) => ['error updating test', $],
                 ),
 
-                p_.if_.query(
+                p_.if_.query_deprecated(
                     p_super_query_result($q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,

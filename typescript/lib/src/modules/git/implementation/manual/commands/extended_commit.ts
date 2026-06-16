@@ -12,7 +12,7 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 
 export const $$: signatures.procedures.extended_commit = p_.command_procedure(
     ($d, $s, $q, $c) => [
-        p_.if_.query(
+        p_.if_.query_deprecated(
             p_super_query_result($q['git is repository clean'](
                 {
                     'path': $d.path

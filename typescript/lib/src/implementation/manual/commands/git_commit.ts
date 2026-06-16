@@ -17,7 +17,7 @@ export const $$: signatures.procedures.git_commit = p_.command_procedure(
             $d.instruction['accept broken commits'],
             [
 
-                p_.pseudo_query_successfully_executed<d.Error, null>( //testing to determine the commit message
+                p_.test_for_successful_execution<d.Error, null>( //testing to determine the commit message
                     [
 
                         $c['build and test'].execute(
@@ -34,7 +34,13 @@ export const $$: signatures.procedures.git_commit = p_.command_procedure(
                                 'path': p_.literal.set($d['path']),
                                 'instruction': {
                                     'stage all changes': true,
-                                    'commit message': "pdt" + ($ ? "" : "(broken)") + ": " + $d.instruction['commit message'],
+                                    'commit message': "pdt"
+                                        + $.__decide(
+                                            () => "(broken)",
+                                            () => "",
+                                        )
+                                        + ": "
+                                        + $d.instruction['commit message'],
                                     'push after commit': true,
                                 },
                             },
