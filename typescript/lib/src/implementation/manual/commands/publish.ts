@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import p_variables from 'pareto-core/dist/implementation/specials/variables'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/data/publish"
@@ -13,7 +13,7 @@ import * as q_get_package_json from "../../../modules/npm/implementation/manual/
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const $$: signatures.procedures.publish = p_.command_procedure(
+export const $$: interface_.procedures.publish = p_.command_procedure(
 
     ($d, $s, $q, $c) => p_variables(() => {
         const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': p_.literal.list(["typescript", "lib"]) })
@@ -80,7 +80,7 @@ export const $$: signatures.procedures.publish = p_.command_procedure(
                 ($) => ['error while running npm update', $],
             ),
 
-            p_.query(
+            p_.s.query(
                 q_get_package_json.$$(
                     null,
                     {

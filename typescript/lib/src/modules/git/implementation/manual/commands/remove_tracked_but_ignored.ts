@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/data/remove_tracked_but_ignored"
@@ -9,7 +9,7 @@ import * as d from "../../../interface/data/remove_tracked_but_ignored"
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.procedures.remove_tracked_but_ignored = p_.command_procedure(
+export const $$: interface_.procedures.remove_tracked_but_ignored = p_.command_procedure(
     ($d, $s, $q, $c) => [
         $c['assert is clean'].execute(
             {

@@ -4,7 +4,7 @@ import p_list_build_deprecated from 'pareto-core/dist/implementation/specials/li
 import p_text_from_list from 'pareto-core/dist/implementation/specials/text_from_list'
 import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/data/set_up_comparison_against_published"
@@ -33,11 +33,11 @@ const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Chara
     })
 }
 
-export const $$: signatures.procedures.set_up_comparison_against_published = p_.command_procedure(
+export const $$: interface_.procedures.set_up_comparison_against_published = p_.command_procedure(
     ($d, $s, $q, $c) => {
         const path_x = t_path_to_path.create_node_path($d['path to local package'], { 'node': "package.json" })
         return [
-            p_.query(
+            p_.s.query(
                 q_get_package_json.$$(
                     null,
                     {
@@ -150,7 +150,7 @@ export const $$: signatures.procedures.set_up_comparison_against_published = p_.
                             ($) => ['error while creating directory', $],
                         ),
 
-                        p_.query(
+                        p_.s.query(
                              p_super_query_result($q.npm(
                                 {
                                     'working directory': p_.literal.not_set(),

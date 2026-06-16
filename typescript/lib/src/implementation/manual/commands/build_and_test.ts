@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/data/build_and_test"
@@ -9,7 +9,7 @@ import * as d from "../../../interface/data/build_and_test"
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.procedures.build_and_test = p_.command_procedure(
+export const $$: interface_.procedures.build_and_test = p_.command_procedure(
     ($d, $s, $q, $c) => [
 
         // build

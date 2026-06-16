@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/data/get_project_files"
@@ -15,10 +15,10 @@ import { $$ as q_get_project_files } from "../queries/get_project_files"
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 
-export const $$: signatures.procedures.list_file_structure_problems = p_.command_procedure(
+export const $$: interface_.procedures.list_file_structure_problems = p_.command_procedure(
     ($d, $s, $q, $c) => [
 
-        p_.query(
+        p_.s.query(
             q_get_project_files(null, $q)(
                 {
                     'path to project': $d['path to project'],

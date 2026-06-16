@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d_main from "pareto-resources/dist/interface/data/temp_main"
@@ -21,11 +21,11 @@ type My_Error =
     | ['parse', d_parse.Error]
     | ['execute command', d_execute_command.Error]
 
-export const $$: signatures.procedures.main = p_.command_procedure(
+export const $$: interface_.procedures.main = p_.command_procedure(
     ($d, $s, $q, $c) => [
-        p_.handle_error<d_main.Error, My_Error>(
+        p_.s.handle_error<d_main.Error, My_Error>(
             [
-                p_.refine(
+                p_.s.refine(
 
                     // parse command line instruction
                     (abort) => r_instruction.Command(

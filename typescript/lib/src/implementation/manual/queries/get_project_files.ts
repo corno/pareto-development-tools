@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/dist/implementation/query'
 import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
 
-import * as signatures from "../../../interface/queries"
+import * as interface_ from "../../../interface/queries"
 
 //data types
 import * as d from "../../../interface/data/get_project_files"
@@ -13,21 +13,21 @@ import * as d_directory_content from "pareto-resources/dist/interface/data/direc
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/resources_read_directory_content"
 
-export const $$: signatures.query_functions.get_project_files = p_.query_function(
+export const $$: interface_.query_functions.get_project_files = p_.query_function(
     ($d, $s, $q) => p_super_query_result($q['read directory'](
         {
             'path': t_path_to_path.extend_context_path_with_single_step($d['path to project'], { 'addition': "packages" }),
         },
         ($): d.Error => ['read directory', $],
     )).query(
-        ($v) => p_.dictionary(
+        ($v) => p_.e.dictionary(
             $v,
             ($)=> {
                 const path = $.path
                 return p_.decide.state($['node type'], ($) => {
                     switch ($[0]) {
-                        case 'other': return p_.ss($, ($) => p_.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                        case 'file': return p_.ss($, ($) => p_.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                        case 'other': return p_.ss($, ($) => p_.e.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                        case 'file': return p_.ss($, ($) => p_.e.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
                         case 'directory': return p_.ss($, ($) => q_directory_content(null, $q)(
                             {
                                 'path': t_path_to_path.deprecated_node_path_to_context_path(path),

@@ -1,11 +1,11 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //dependencies
 
-export const $$: signatures.procedures.npm_publish = p_.command_procedure(
+export const $$: interface_.procedures.npm_publish = p_.command_procedure(
     ($d, $s, $q, $c) => [
         $c['npm'].execute(
             {

@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/query'
 import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
-import * as signatures from "../../../interface/queries"
+import * as interface_ from "../../../interface/queries"
 
 //data types
 import * as d from "../../../interface/data/is_repository_clean"
@@ -9,7 +9,7 @@ import * as d from "../../../interface/data/is_repository_clean"
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.query_functions.is_repository_clean = p_.query_function(
+export const $$: interface_.query_functions.is_repository_clean = p_.query_function(
     ($d, $s, $q) =>  p_super_query_result($q.git(
         {
             'working directory': p_.literal.not_set(),

@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/dist/implementation/query'
 import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
 import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
-import * as signatures from "../../../interface/queries"
+import * as interface_ from "../../../interface/queries"
 
 //data types
 import * as d from "../../../interface/data/get_package_json"
@@ -12,7 +12,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/tra
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 import { $$ as r_parse_npm_package } from "../transformers/npm_package/text"
 
-export const $$: signatures.query_functions.get_package_json = p_.query_function(
+export const $$: interface_.query_functions.get_package_json = p_.query_function(
     ($d, $s, $r) => p_change_context($d, ($p) => {
         const path = t_path_to_path.create_node_path($p['path to package'], { 'node': "package.json" })
         return p_super_query_result($r['read file'](

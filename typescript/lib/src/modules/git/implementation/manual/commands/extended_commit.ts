@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/data/extended_commit"
@@ -10,9 +10,9 @@ import * as d_fp from "pareto-fountain-pen/dist/interface/generated/liana/schema
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: signatures.procedures.extended_commit = p_.command_procedure(
+export const $$: interface_.procedures.extended_commit = p_.command_procedure(
     ($d, $s, $q, $c) => [
-        p_.if_.query_deprecated(
+        p_.s.if_.query_deprecated(
             p_super_query_result($q['git is repository clean'](
                 {
                     'path': $d.path
@@ -22,7 +22,7 @@ export const $$: signatures.procedures.extended_commit = p_.command_procedure(
                 ($) => !$
             ),
             [
-                p_.if_.direct(
+                p_.s.if_.direct(
                     $d.instruction['stage all changes'],
                     [
                         $c.git.execute(
@@ -66,7 +66,7 @@ export const $$: signatures.procedures.extended_commit = p_.command_procedure(
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
-                p_.if_.direct(
+                p_.s.if_.direct(
                     $d.instruction['push after commit'],
                     [
                         $c.git.execute(

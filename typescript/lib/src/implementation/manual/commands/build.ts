@@ -3,7 +3,7 @@ import * as p_temp from 'pareto-core/dist/implementation/transformer'
 import p_variables from 'pareto-core/dist/implementation/specials/variables'
 import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/data/build"
@@ -11,7 +11,7 @@ import * as d from "../../../interface/data/build"
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: signatures.procedures.build = p_.command_procedure(
+export const $$: interface_.procedures.build = p_.command_procedure(
     ($d, $s, $q, $c) => p_variables(
         () => {
             const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })
@@ -61,7 +61,7 @@ export const $$: signatures.procedures.build = p_.command_procedure(
 
 
 
-                p_.if_.query_deprecated(
+                p_.s.if_.query_deprecated(
                     p_super_query_result($q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,

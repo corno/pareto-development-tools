@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/data/git_commit"
@@ -8,16 +8,16 @@ import * as d from "../../../interface/data/git_commit"
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const $$: signatures.procedures.git_commit = p_.command_procedure(
+export const $$: interface_.procedures.git_commit = p_.command_procedure(
 
     ($d, $s, $q, $c) => [
 
 
-        p_.if_.direct(
+        p_.s.if_.direct(
             $d.instruction['accept broken commits'],
             [
 
-                p_.test_for_successful_execution<d.Error, null>( //testing to determine the commit message
+                p_.s.test_for_successful_execution<d.Error, null>( //testing to determine the commit message
                     [
 
                         $c['build and test'].execute(

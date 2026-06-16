@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/dist/implementation/command'
 
 import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
 
-import * as signatures from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../interface/data/execute_command"
@@ -12,7 +12,7 @@ import * as d from "../../../interface/data/execute_command"
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
 
-export const $$: signatures.procedures.api = p_.command_procedure(
+export const $$: interface_.procedures.api = p_.command_procedure(
     ($d, $s, $q, $c) => [
         p_.decide.state($d.type, ($) => {
             switch ($[0]) {
@@ -20,7 +20,7 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                     const ap = $
 
                     return [
-                        p_.query(
+                        p_.s.query(
                             $q['read directory'](
                                 {
                                     'path': t_path_to_path.extend_context_path_with_single_step(
@@ -31,7 +31,7 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                                 ($): d.Error => ['all', ['could not read packages directory', $]],
                             ),
                             ($) => [
-                                p_.dictionary(
+                                p_.s.dictionary(
                                     $,
                                     ($xx, id): p_.Command_Block<d.All__Package_Error> => [
                                         p_.decide.state(ap.instruction, ($) => {
