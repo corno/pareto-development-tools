@@ -8,7 +8,7 @@ import p_text_from_list from 'pareto-core/dist/implementation/specials/text_from
 
 //data types
 import * as d_in from "../../../../interface/data/project_files"
-import * as d_in_directory_content from "pareto-resources/dist/interface/to_be_generated/directory_content"
+import * as d_in_directory_content from "pareto-resources/dist/interface/data/directory_content"
 import * as d_out from "../../../../interface/data/file_structure_analysis"
 import * as d_structure from "../../../../interface/generated/liana/schemas/structure/data"
 

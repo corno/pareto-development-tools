@@ -4,7 +4,7 @@ import * as p_temp from 'pareto-core/dist/implementation/transformer'
 import * as signatures from "../../../interface/commands"
 
 //data types
-import * as d_main from "pareto-resources/dist/interface/to_be_generated/temp_main"
+import * as d_main from "pareto-resources/dist/interface/data/temp_main"
 import * as d_parse from "../../../interface/data/parse"
 import * as d_execute_command from "../../../interface/data/execute_command"
 

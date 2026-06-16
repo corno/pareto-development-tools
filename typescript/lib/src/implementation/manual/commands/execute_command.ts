@@ -17,9 +17,9 @@ export const $$: signatures.procedures.api = p_.command_procedure(
         p_.decide.state($d.type, ($) => {
             switch ($[0]) {
                 case 'all packages': return p_.ss($, ($) => {
-                    const path_to_project = $['path to project']
-                    // _pdev.
-                    return p_.dictionaryx.deprecated_parallel.query(
+                    const ap = $
+
+                    return p_.query(
                         $q['read directory'](
                             {
                                 'path': t_path_to_path.extend_context_path_with_single_step(
@@ -29,74 +29,79 @@ export const $$: signatures.procedures.api = p_.command_procedure(
                             },
                             ($): d.Error => ['all', ['could not read packages directory', $]],
                         ),
-                        ($xx, id): p_.Command_Promise<d.All__Package_Error>[] => [
-                            p_.decide.state($.instruction, ($) => {
-                                const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
-                                switch ($[0]) {
-                                    case 'assert clean': return p_.ss($, ($) => $c['git assert is clean'].execute(
-                                        {
-                                            'path': p_.literal.set(context_path)
-                                        },
-                                        ($): d.All__Package_Error => ['git assert clean', $],
-                                    ))
-                                    case 'build': return p_.ss($, ($) => $c['build'].execute(
-                                        {
-                                            'path': context_path,
-                                        },
-                                        ($): d.All__Package_Error => ['build', $],
-                                    ))
-                                    case 'build and test': return p_.ss($, ($x) => $c['build and test'].execute(
-                                        {
-                                            'path': context_path,
-                                        },
-                                        ($): d.All__Package_Error => ['build and test', {
-                                            'error': $,
-                                            'concise': $x.concise
-                                        }],
-                                    ))
-                                    case 'git commit': return p_.ss($, ($) => $c['git commit'].execute(
-                                        {
-                                            'path': context_path,
-                                            'instruction': $,
-                                        },
-                                        ($): d.All__Package_Error => ['git commit', $],
-                                    ))
-                                    case 'git remove tracked but ignored': return p_.ss($, ($) => $c['git remove tracked but ignored'].execute(
-                                        {
-                                            'path': p_.literal.set(context_path)
-                                        },
-                                        ($): d.All__Package_Error => ['git remove tracked but ignored', $],
-                                    ))
-                                    case 'set up comparison': return p_.ss($, ($): p_.Command_Promise<d.All__Package_Error> => {
+                        ($) => [
+                            p_.dictionaryx.parallel(
+                                $,
+                                ($xx, id): p_.Command_Block<d.All__Package_Error> => [
+                                    p_.decide.state(ap.instruction, ($) => {
+                                        const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
+                                        switch ($[0]) {
+                                            case 'assert clean': return p_.ss($, ($) => $c['git assert is clean'].execute(
+                                                {
+                                                    'path': p_.literal.set(context_path)
+                                                },
+                                                ($): d.All__Package_Error => ['git assert clean', $],
+                                            ))
+                                            case 'build': return p_.ss($, ($) => $c['build'].execute(
+                                                {
+                                                    'path': context_path,
+                                                },
+                                                ($): d.All__Package_Error => ['build', $],
+                                            ))
+                                            case 'build and test': return p_.ss($, ($x) => $c['build and test'].execute(
+                                                {
+                                                    'path': context_path,
+                                                },
+                                                ($): d.All__Package_Error => ['build and test', {
+                                                    'error': $,
+                                                    'concise': $x.concise
+                                                }],
+                                            ))
+                                            case 'git commit': return p_.ss($, ($) => $c['git commit'].execute(
+                                                {
+                                                    'path': context_path,
+                                                    'instruction': $,
+                                                },
+                                                ($): d.All__Package_Error => ['git commit', $],
+                                            ))
+                                            case 'git remove tracked but ignored': return p_.ss($, ($) => $c['git remove tracked but ignored'].execute(
+                                                {
+                                                    'path': p_.literal.set(context_path)
+                                                },
+                                                ($): d.All__Package_Error => ['git remove tracked but ignored', $],
+                                            ))
+                                            case 'set up comparison': return p_.ss($, ($): p_.Command_Promise<d.All__Package_Error> => {
 
-                                        const path_to_temp = t_path_to_path.extend_context_path_with_single_step(
-                                            t_path_to_path.extend_context_path_with_single_step(
-                                                path_to_project,
-                                                { 'addition': "temp" }
-                                            ),
-                                            { 'addition': "comparison" }
-                                        )
-                                        return $c['npm set up comparison against published'].execute(
-                                            {
-                                                'path to local package': t_path_to_path.extend_context_path_with_list(context_path, { 'addition': p_.literal.list(["typescript", "lib"]) }),
-                                                'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "local" }), { 'node': id }),
-                                                'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "published" }), { 'node': id }),
-                                                'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "temp" }), { 'node': id }),
-                                            },
-                                            ($): d.All__Package_Error => ['set up comparison', $],
-                                        )
+                                                const path_to_temp = t_path_to_path.extend_context_path_with_single_step(
+                                                    t_path_to_path.extend_context_path_with_single_step(
+                                                        ap['path to project'],
+                                                        { 'addition': "temp" }
+                                                    ),
+                                                    { 'addition': "comparison" }
+                                                )
+                                                return $c['npm set up comparison against published'].execute(
+                                                    {
+                                                        'path to local package': t_path_to_path.extend_context_path_with_list(context_path, { 'addition': p_.literal.list(["typescript", "lib"]) }),
+                                                        'path to output local directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "local" }), { 'node': id }),
+                                                        'path to output published directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "published" }), { 'node': id }),
+                                                        'path to temp directory': t_path_to_path.create_node_path(t_path_to_path.extend_context_path_with_single_step(path_to_temp, { 'addition': "temp" }), { 'node': id }),
+                                                    },
+                                                    ($): d.All__Package_Error => ['set up comparison', $],
+                                                )
+                                            })
+                                            case 'update package dependencies': return p_.ss($, ($) => $c['update package dependencies'].execute(
+                                                {
+                                                    'path': context_path
+                                                },
+                                                ($): d.All__Package_Error => ['update dependencies', $],
+                                            ))
+                                            default: return p_.au($[0])
+                                        }
                                     })
-                                    case 'update package dependencies': return p_.ss($, ($) => $c['update package dependencies'].execute(
-                                        {
-                                            'path': context_path
-                                        },
-                                        ($): d.All__Package_Error => ['update dependencies', $],
-                                    ))
-                                    default: return p_.au($[0])
-                                }
-                            })
-                        ],
-                        ($) => ['all', ['packages', $]]
+                                ],
+                                ($): d.Error => ['all', ['packages', $]]
+                            )
+                        ]
                     )
                 })
                 case 'package': return p_.ss($, ($) => {

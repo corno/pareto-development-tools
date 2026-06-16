@@ -3,7 +3,7 @@ import p_iterate from 'pareto-core/dist/implementation/specials/iterate'
 
 import * as d_out from "../../../../interface/data/execute_command"
 import * as d_function from "../../../../interface/data/parse"
-import * as d_in from "pareto-resources/dist/interface/to_be_generated/temp_main"
+import * as d_in from "pareto-resources/dist/interface/data/temp_main"
 
 import * as r_from_text from "../../productions/execute_command/text"
 

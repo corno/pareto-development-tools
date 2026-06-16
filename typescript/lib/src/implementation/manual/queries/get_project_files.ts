@@ -6,7 +6,7 @@ import * as signatures from "../../../interface/queries"
 
 //data types
 import * as d from "../../../interface/data/get_project_files"
-import * as d_directory_content from "pareto-resources/dist/interface/to_be_generated/directory_content"
+import * as d_directory_content from "pareto-resources/dist/interface/data/directory_content"
 
 
 //dependencies
