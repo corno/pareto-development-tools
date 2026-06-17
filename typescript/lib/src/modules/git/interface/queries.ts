@@ -1,4 +1,4 @@
-import * as p_qi from 'pareto-core/dist/interface/query'
+import * as p_ from 'pareto-core/dist/interface/query'
 
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 
@@ -7,14 +7,14 @@ import * as d_is_inside_work_tree from "./data/is_inside_work_tree"
 
 export namespace queries {
 
-    export type is_repository_clean = p_qi.Query<d_is_repository_clean.Result, d_is_repository_clean.Error, d_is_repository_clean.Parameters>
-    export type is_inside_work_tree = p_qi.Query<d_is_inside_work_tree.Result, d_is_inside_work_tree.Error, d_is_inside_work_tree.Parameters>
+    export type is_repository_clean = p_.Query<d_is_repository_clean.Result, d_is_repository_clean.Error, d_is_repository_clean.Parameters>
+    export type is_inside_work_tree = p_.Query<d_is_inside_work_tree.Result, d_is_inside_work_tree.Error, d_is_inside_work_tree.Parameters>
 
 }
 
 export namespace query_functions {
 
-    export type is_inside_work_tree = p_qi.Query_Function<
+    export type is_inside_work_tree = p_.Query_Function<
         queries.is_inside_work_tree,
         null,
         {
@@ -22,7 +22,7 @@ export namespace query_functions {
         }
     >
 
-    export type is_repository_clean = p_qi.Query_Function<
+    export type is_repository_clean = p_.Query_Function<
         queries.is_repository_clean,
         null,
         {

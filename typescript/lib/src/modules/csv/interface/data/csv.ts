@@ -1,3 +1,3 @@
-import * as p_di from 'pareto-core/dist/interface/data'
+import * as p_ from 'pareto-core/dist/interface/data'
 
-export type CSV = p_di.List<p_di.List<string>>
+export type CSV = p_.List<p_.List<string>>

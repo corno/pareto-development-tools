@@ -1,7 +1,7 @@
-import * as p_di from 'pareto-core/dist/interface/data'
+import * as p_ from 'pareto-core/dist/interface/data'
 
 export type Error =
-    | ['expected one of', p_di.Dictionary<null>]
+    | ['expected one of', p_.Dictionary<null>]
     | ['expected a text', {
         'description': string
     }]

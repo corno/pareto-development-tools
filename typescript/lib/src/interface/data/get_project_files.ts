@@ -1,4 +1,4 @@
-import * as p_di from 'pareto-core/dist/interface/data'
+import * as p_ from 'pareto-core/dist/interface/data'
 
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
 import * as d_read_directory from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
@@ -9,7 +9,7 @@ export type Parameters = {
     'path to project': d_path.Context_Path,
 }
 
-export type Packages = p_di.Dictionary<d_directory_content.Result>
+export type Packages = p_.Dictionary<d_directory_content.Result>
 
 export type Package_Error =
     | ['not a directory', null]
@@ -17,7 +17,7 @@ export type Package_Error =
 
 export type Error =
     | ['read directory', d_read_directory.Error]
-    | ['directory content processing', p_di.Dictionary<Package_Error>]
+    | ['directory content processing', p_.Dictionary<Package_Error>]
     | ['log', null]
 
     

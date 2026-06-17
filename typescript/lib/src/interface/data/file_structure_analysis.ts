@@ -1,8 +1,8 @@
-import * as p_di from 'pareto-core/dist/interface/data'
+import * as p_ from 'pareto-core/dist/interface/data'
 
 export type Directory =
     | ['ignored', null]
-    | ['dictionary', p_di.Dictionary<Node>]
+    | ['dictionary', p_.Dictionary<Node>]
     | ['expected a file', null]
 
 
@@ -29,8 +29,8 @@ export type File_Classification =
 
 export type File_Analysis = {
     'structure': Structure_Analysis,
-    'extension': p_di.Optional_Value<string>,
-    'unexpected path tail': p_di.Optional_Value<string>,
+    'extension': p_.Optional_Value<string>,
+    'unexpected path tail': p_.Optional_Value<string>,
     'line count': number,
 }
 
@@ -39,9 +39,9 @@ export type Structure_Analysis = {
     'classification': Classification
 }
 
-export type Flattened_Directory_With_Line_Counts = p_di.Dictionary<File_Analysis>
+export type Flattened_Directory_With_Line_Counts = p_.Dictionary<File_Analysis>
 
-export type File_Analysis_List = p_di.List<File_Analysis2>
+export type File_Analysis_List = p_.List<File_Analysis2>
 
 export type File_Analysis2 = {
     'package': string,

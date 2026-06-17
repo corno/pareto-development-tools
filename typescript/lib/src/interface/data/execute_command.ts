@@ -1,4 +1,4 @@
-import * as p_di from 'pareto-core/dist/interface/data'
+import * as p_ from 'pareto-core/dist/interface/data'
 
 
 import * as d_get_project_files from "./get_project_files"
@@ -129,7 +129,7 @@ export type Package_Error =
 
 export type All_Error =
     | ['could not read packages directory', d_read_directory.Error]
-    | ['packages', p_di.Dictionary<All__Package_Error>]
+    | ['packages', p_.Dictionary<All__Package_Error>]
 
 export type All__Package_Error =
     | ['build and test', {
