@@ -20,13 +20,79 @@ export type Parameters = {
     'structure path': string,
 }
 
-export type Project_Files = p_i.Transformer<
-    d_in.Project_Files,
-    d_out.File_Analysis_List
->
 
 
-export const Project_Files: Project_Files = ($) => p_.list.from.dictionary(
+export namespace interface_ {
+
+    export type line_count = p_i.Transformer<
+        string,
+        number
+    >
+
+    export type extension = p_i.Transformer<
+        string,
+        p_di.Optional_Value<string>
+    >
+
+    export type Project_Files = p_i.Transformer<
+        d_in.Project_Files,
+        d_out.File_Analysis_List
+    >
+
+
+    export namespace defined {
+
+        export type Directory = p_i.Transformer_With_Parameter<
+            d_in_directory_content.Directory,
+            d_out.Directory,
+            Parameters
+        >
+
+    }
+
+    export namespace undefined {
+
+        export type Directory = p_i.Transformer_With_Parameter<
+            d_in_directory_content.Directory,
+            d_out.Directory,
+            {
+                'structure': d_out.Structure_Analysis,
+                'unexpected path tail': p_di.Optional_Value<string>,
+            }
+        >
+
+        export type Node = p_i.Transformer_With_Parameter<
+            d_in_directory_content.Node,
+            d_out.Node,
+            {
+                'structure': d_out.Structure_Analysis,
+                'name': string,
+                'unexpected path tail': p_di.Optional_Value<string>,
+            }
+        >
+
+    }
+
+    export namespace wildcard {
+
+        export type Directory = p_i.Transformer_With_Parameter<
+            d_in_directory_content.Directory,
+            d_out.Directory,
+            {
+                'wildcard': d_structure.Directory.wildcards,
+                'structure path': string,
+                'tail': string,
+                'number of directories encountered': number,
+            }
+        >
+
+    }
+
+}
+
+
+
+export const Project_Files: interface_.Project_Files = ($) => p_.list.from.dictionary(
     $
 ).flatten(
     ($, id) => {
@@ -93,7 +159,7 @@ export const Project_Files: Project_Files = ($) => p_.list.from.dictionary(
 
 
 
-const line_count = ($: string): number => {
+const line_count: interface_.line_count = ($) => {
     let lineCount = 0
     p_list_from_text($, ($) => $).__l_map(($) => {
         if ($ === 10) { //newline character
@@ -104,7 +170,7 @@ const line_count = ($: string): number => {
     return lineCount + 1 //add one for the last line if it doesn't end with a newline
 }
 
-const extension = ($: string): p_di.Optional_Value<string> => {
+const extension: interface_.extension = ($) => {
     const characters = p_list_from_text($, ($) => $)
 
     let first_period_index: null | number = null
@@ -137,13 +203,9 @@ const extension = ($: string): p_di.Optional_Value<string> => {
         )
     }
 }
-
 export namespace defined {
 
-    export const Directory = (
-        $: d_in_directory_content.Directory,
-        $p: Parameters
-    ): d_out.Directory => {
+    export const Directory: interface_.defined.Directory = ($, $p) => {
         //both found and expected are directories
 
         const dir = $
@@ -316,13 +378,7 @@ export namespace defined {
 
 export namespace undefined {
 
-    export const Directory = (
-        $: d_in_directory_content.Directory,
-        $p: {
-            'structure': d_out.Structure_Analysis,
-            'unexpected path tail': p_di.Optional_Value<string>,
-        }
-    ): d_out.Directory => {
+    export const Directory: interface_.undefined.Directory = ($, $p) => {
         return ['dictionary', $.__d_map(($, id) => Node(
             $,
             {
@@ -333,14 +389,7 @@ export namespace undefined {
         ))]
     }
 
-    export const Node = (
-        $: d_in_directory_content.Node,
-        $p: {
-            'structure': d_out.Structure_Analysis,
-            'name': string,
-            'unexpected path tail': p_di.Optional_Value<string>,
-        }
-    ): d_out.Node => {
+    export const Node: interface_.undefined.Node = ($, $p) => {
         return p_.decide.state($, ($): d_out.Node => {
             switch ($[0]) {
                 case 'file': return p_.ss($, ($): d_out.Node => ['file', {
@@ -369,15 +418,7 @@ export namespace undefined {
 
 export namespace wildcard {
 
-    export const Directory = (
-        $: d_in_directory_content.Directory,
-        $p: {
-            'wildcard': d_structure.Directory.wildcards,
-            'structure path': string,
-            'tail': string,
-            'number of directories encountered': number,
-        }
-    ): d_out.Directory => {
+    export const Directory: interface_.wildcard.Directory = ($, $p) => {
         return ['dictionary', $.__d_map(($, id) => {
             const tail = $p.tail + "/" + id
             return p_.decide.state($, ($): d_out.Node => {
