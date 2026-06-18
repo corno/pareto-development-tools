@@ -22,7 +22,7 @@ export const $$: interface_.procedures.extended_commit = p_.command_procedure(
                 ($) => !$
             ),
             [
-                p_.s.if_.direct(
+                p_.s.if_(
                     $d.instruction['stage all changes'],
                     [
                         $c.git.execute(
@@ -66,7 +66,7 @@ export const $$: interface_.procedures.extended_commit = p_.command_procedure(
                     },
                     ($): d.Error => ['could not commit', $],
                 ),
-                p_.s.if_.direct(
+                p_.s.if_(
                     $d.instruction['push after commit'],
                     [
                         $c.git.execute(

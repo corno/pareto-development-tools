@@ -17,7 +17,10 @@ import * as q_get_package_json from "../queries/get_package_json"
 
 const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Characters => {
 
-    const chars = p_list_from_text($, ($) => $)
+    const chars = p_list_from_text(
+        $,
+        ($) => $
+    )
     const length = chars.__get_number_of_items()
     const new_length = length - n
     let index = -1
@@ -151,7 +154,7 @@ export const $$: interface_.procedures.set_up_comparison_against_published = p_.
                         ),
 
                         p_.s.query(
-                             p_super_query_result($q.npm(
+                            p_super_query_result($q.npm(
                                 {
                                     'working directory': p_.literal.not_set(),
                                     'args': p_.literal.list([
@@ -169,7 +172,10 @@ export const $$: interface_.procedures.set_up_comparison_against_published = p_.
                                         'working directory': p_.literal.not_set(),
                                         'args': p_.literal.list([
                                             "-xzmf",
-                                            `${t_path_to_text.Node_Path($d['path to temp directory'])}/npm/${package_info.name}-${p_text_from_list($v, ($) => $)}.tgz`,
+                                            `${t_path_to_text.Node_Path($d['path to temp directory'])}/npm/${package_info.name}-${p_text_from_list(
+                                                $v,
+                                                ($) => $
+                                            )}.tgz`,
                                             "-C",
                                             `${t_path_to_text.Node_Path($d['path to output published directory'])}`,
                                             "--strip-components=1",

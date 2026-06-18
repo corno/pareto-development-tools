@@ -161,7 +161,10 @@ export const Project_Files: interface_.Project_Files = ($) => p_.list.from.dicti
 
 const line_count: interface_.line_count = ($) => {
     let lineCount = 0
-    p_list_from_text($, ($) => $).__l_map(($) => {
+    p_list_from_text(
+        $,
+        ($) => $
+    ).__l_map(($) => {
         if ($ === 10) { //newline character
             lineCount++
         }
@@ -171,7 +174,10 @@ const line_count: interface_.line_count = ($) => {
 }
 
 const extension: interface_.extension = ($) => {
-    const characters = p_list_from_text($, ($) => $)
+    const characters = p_list_from_text(
+        $,
+        ($) => $
+    )
 
     let first_period_index: null | number = null
     let current_index = 0

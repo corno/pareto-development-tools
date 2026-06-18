@@ -49,7 +49,9 @@ export const $$: interface_.procedures.build_and_test = p_.command_procedure(
                             }
                         )
                     ),
-                ]).__l_map(($) => $)
+                ]).__l_map(
+                    ($) => $
+                )
             },
             ($): d.Error => ['error testing', $],
         ),

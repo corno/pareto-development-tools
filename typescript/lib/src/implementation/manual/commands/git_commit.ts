@@ -13,7 +13,7 @@ export const $$: interface_.procedures.git_commit = p_.command_procedure(
     ($d, $s, $q, $c) => [
 
 
-        p_.s.if_.direct(
+        p_.s.if_(
             $d.instruction['accept broken commits'],
             [
 
