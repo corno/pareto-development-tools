@@ -15,7 +15,7 @@ export const $$: interface_.procedures.update2latest = p_.command_procedure(
                     p_temp.literal.list([
                         t_path_to_text.Context_Path($d.path),
                     ]),
-                    p_temp.decide.state($d.what, ($) => {
+                    p_temp.from.state($d.what).decide(($) => {
                         // p_log_debug_message(`Updating ${$d.path} to latest`, () => {})
                         switch ($[0]) {
                             case 'dependencies': return p_temp.ss($, ($) => {

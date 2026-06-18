@@ -13,7 +13,7 @@ import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/
 import * as t_npm_to_fountain_pen from "../npm/fountain_pen"
 
 export const Error: Error = ($) => {
-    return p_.decide.state($, ($) => {
+    return p_.from.state($).decide(($) => {
         switch ($[0]) {
             case 'could not remove node_modules': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("could not remove node_modules: "),

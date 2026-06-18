@@ -70,7 +70,7 @@ export const $$: interface_.procedures.build = p_.command_procedure(
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    )).transform(($) => p_temp.decide.state($, ($) => {
+                    )).transform(($) => p_temp.from.state($).decide(($) => {
                         switch ($[0]) {
                             case 'does not exist': return p_temp.ss($, ($) => false)
                             case 'file': return p_temp.ss($, ($) => false)

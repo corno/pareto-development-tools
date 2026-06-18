@@ -19,7 +19,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 export const Error: signatures.Error = ($) => sh.ph.composed([
     sh.ph.literal(t_path_to_text.Node_Path($['path'])),
-    p_.decide.state($.type, ($) => {
+    p_.from.state($.type).decide(($) => {
         switch ($[0]) {
             case 'invalid ASTN': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal(" :"),

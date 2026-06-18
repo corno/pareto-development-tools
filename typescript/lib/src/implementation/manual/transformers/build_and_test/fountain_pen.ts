@@ -11,7 +11,7 @@ import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/man
 
 export type Error = p_i.Transformer_With_Parameter<d_in.Error, d_out.Phrase, { 'concise': boolean }>
 
-export const Error: Error = ($, $p) => p_.decide.state($, ($) => {
+export const Error: Error = ($, $p) => p_.from.state($).decide(($) => {
     switch ($[0]) {
         case 'error building': return p_.ss($, ($) => t_build_to_fountain_pen.Error($, $p))
         case 'error testing': return p_.ss($, ($) => sh.ph.composed([

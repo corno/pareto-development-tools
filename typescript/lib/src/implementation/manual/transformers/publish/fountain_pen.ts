@@ -18,13 +18,13 @@ import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pe
 import * as t_get_package_json_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/get_package_json/fountain_pen"
 import * as t_git_ec_to_fountain_pen from "../../../../modules/git/implementation/manual/transformers/extended_commit/fountain_pen"
 
-export const Error: Error = ($) => p_.decide.state($, ($) => {
+export const Error: Error = ($) => p_.from.state($).decide(($) => {
     switch ($[0]) {
         case 'error while running git push': return p_.ss($, ($) => sh.ph.composed([
             t_git_push_to_fountain_pen.Error($)
         ]))
         case 'error while running git assert is clean at the start': return p_.ss($, ($) => sh.ph.composed([
-            p_.decide.state($, ($) => {
+            p_.from.state($).decide(($) => {
                 switch ($[0]) {
                     case 'unexpected error': return p_.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
                     case 'working directory is not clean': return p_.ss($, ($) => sh.ph.literal("working directory is not clean at the start"))
@@ -40,7 +40,7 @@ export const Error: Error = ($) => p_.decide.state($, ($) => {
         ]))
         case 'error while running build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error($, { 'concise': false }))
         case 'error while running git assert is clean after updating package dependencies': return p_.ss($, ($) => sh.ph.composed([
-            p_.decide.state($, ($) => {
+            p_.from.state($).decide(($) => {
                 switch ($[0]) {
                     case 'unexpected error': return p_.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
                     case 'working directory is not clean': return p_.ss($, ($) => sh.ph.literal("working directory is not clean after updating package dependencies"))

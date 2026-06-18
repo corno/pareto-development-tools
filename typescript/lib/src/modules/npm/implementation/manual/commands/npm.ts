@@ -19,7 +19,7 @@ export const $$: interface_.procedures.npm = p_.command_procedure(
                         ]),
                         () => p_.literal.list([])
                     ),
-                    p_temp.decide.state($d.operation, ($) => {
+                    p_temp.from.state($d.operation).decide(($) => {
                         switch ($[0]) {
                             case 'update': return p_temp.ss($, ($) => p_.literal.nested_list([
                                 [
@@ -41,7 +41,7 @@ export const $$: interface_.procedures.npm = p_.command_procedure(
                             ]))
                             case 'version': return p_temp.ss($, ($) => p_.literal.list([
                                 "version",
-                                p_temp.decide.state($, ($) => {
+                                p_temp.from.state($).decide(($) => {
                                     switch ($[0]) {
                                         case 'patch': return p_temp.ss($, ($) => "patch")
                                         case 'minor': return p_temp.ss($, ($) => "minor")

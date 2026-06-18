@@ -12,7 +12,7 @@ import * as t_read_file_to_fountain_pen from "pareto-resources/dist/implementati
 import * as t_deserialize_package_json_to_fountain_pen from "../deserialize_package_json/fountain_pen"
 
 export const Error: Error = ($) => {
-    return p_.decide.state($, ($): d_out.Phrase => {
+    return p_.from.state($).decide(($): d_out.Phrase => {
         switch ($[0]) {
             case 'error while reading package.json': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while reading package.json: "),

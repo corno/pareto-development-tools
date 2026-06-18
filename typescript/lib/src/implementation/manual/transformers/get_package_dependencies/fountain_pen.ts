@@ -12,18 +12,18 @@ import * as t_deserialize_package_json_to_fountain_pen from "../../../../modules
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const Error: Error = ($) => p_.decide.state($, ($) => {
+export const Error: Error = ($) => p_.from.state($).decide(($) => {
     switch ($[0]) {
-        case 'directory content processing': return p_.ss($, ($) => sh.ph.composed(p_.list.from.dictionary(
+        case 'directory content processing': return p_.ss($, ($) => sh.ph.composed(p_.from.dictionary(
             $,
-        ).convert(
+        ).convert_to_list(
             ($, id) => sh.ph.composed([
                 sh.ph.literal("package "),
                 sh.ph.literal(id),
                 sh.ph.literal(": "),
                 sh.ph.indent(sh.pg.sentences([
                     sh.sentence([
-                        p_.decide.state($, ($) => {
+                        p_.from.state($).decide(($) => {
                             switch ($[0]) {
                                 case 'not a directory': return p_.ss($, ($) => sh.ph.literal("not a directory"))
                                 case 'no package.json file': return p_.ss($, ($) => sh.ph.literal("no package.json file"))

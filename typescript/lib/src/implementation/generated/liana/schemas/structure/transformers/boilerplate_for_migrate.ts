@@ -1,64 +1,67 @@
 
-import * as _p from 'pareto-core/dist/assign'
+import * as p_ from 'pareto-core/dist/implementation/transformer'
 
-import _p_change_context from 'pareto-core/dist/implementation/specials/change_context'
+import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
 
 import * as t_signatures from "../../../../../../interface/generated/liana/schemas/structure/signatures/transformers/boilerplate_for_migrate"
 
 import * as t_out from "../../../../../../interface/generated/liana/schemas/structure/data"
 
-export const Directory: t_signatures.Directory = ($) => _p.decide.state(
+const p_decide_state = <State, B>($: State,  assign: ($: State) => B) => assign($)
+
+
+export const Directory: t_signatures.Directory = ($) => p_decide_state(
     $,
     ($): t_out.Directory => {
         switch ($[0]) {
             case 'dictionary':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ['dictionary', Directory(
                         $,
                     )],
                 )
             case 'group':
-                return _p.ss(
+                return p_.ss(
                     $,
-                    ($) => ['group', _p.dictionary.from.dictionary(
+                    ($) => ['group', p_.from.dictionary(
                         $,
                     ).map(
-                        ($, id) => _p.decide.state(
+                        ($, id) => p_decide_state(
                             $,
                             ($): t_out.Directory.group.D => {
                                 switch ($[0]) {
                                     case 'directory':
-                                        return _p.ss(
+                                        return p_.ss(
                                             $,
                                             ($) => ['directory', Directory(
                                                 $,
                                             )],
                                         )
                                     case 'file':
-                                        return _p.ss(
+                                        return p_.ss(
                                             $,
-                                            ($) => ['file', _p.decide.state(
+                                            ($) => ['file', p_decide_state(
                                                 $,
                                                 ($): t_out.Directory.group.D.file => {
                                                     switch ($[0]) {
                                                         case 'manual':
-                                                            return _p.ss(
+                                                            return p_.ss(
                                                                 $,
                                                                 ($) => ['manual', null],
                                                             )
                                                         case 'generated':
-                                                            return _p.ss(
+                                                            return p_.ss(
                                                                 $,
                                                                 ($) => ['generated', {
-                                                                    'commit to git': _p_change_context(
+                                                                    'commit to git': p_change_context(
                                                                         $['commit to git'],
                                                                         ($) => $,
                                                                     ),
                                                                 }],
                                                             )
                                                         default:
-                                                            return _p.au(
+                                                            return p_.au(
                                                                 $[0],
                                                             )
                                                     }
@@ -66,7 +69,7 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
                                             )],
                                         )
                                     default:
-                                        return _p.au(
+                                        return p_.au(
                                             $[0],
                                         )
                                 }
@@ -75,53 +78,53 @@ export const Directory: t_signatures.Directory = ($) => _p.decide.state(
                     )],
                 )
             case 'wildcards':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ['wildcards', {
-                        'required directories': _p_change_context(
+                        'required directories': p_change_context(
                             $['required directories'],
                             ($) => $,
                         ),
-                        'additional directories allowed': _p_change_context(
+                        'additional directories allowed': p_change_context(
                             $['additional directories allowed'],
                             ($) => $,
                         ),
-                        'extensions': _p_change_context(
+                        'extensions': p_change_context(
                             $['extensions'],
-                            ($) => _p.list.from.list(
+                            ($) => p_.from.list(
                                 $,
                             ).map(
                                 ($) => $,
                             ),
                         ),
-                        'warn': _p_change_context(
+                        'warn': p_change_context(
                             $['warn'],
                             ($) => $,
                         ),
                     }],
                 )
             case 'freeform':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ['freeform', null],
                 )
             case 'ignore':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ['ignore', null],
                 )
             case 'generated':
-                return _p.ss(
+                return p_.ss(
                     $,
                     ($) => ['generated', {
-                        'commit to git': _p_change_context(
+                        'commit to git': p_change_context(
                             $['commit to git'],
                             ($) => $,
                         ),
                     }],
                 )
             default:
-                return _p.au(
+                return p_.au(
                     $[0],
                 )
         }

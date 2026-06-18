@@ -25,9 +25,9 @@ import * as t_update_dependencies from "../update_package_dependencies/fountain_
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_directory/fountain_pen"
 import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/manual/transformers/set_up_comparison_against_published/fountain_pen"
 
-export const Error: signatures.Error = ($) => p_.decide.state($, ($) => {
+export const Error: signatures.Error = ($) => p_.from.state($).decide(($) => {
     switch ($[0]) {
-        case 'package': return p_.ss($, ($) => p_.decide.state($, ($) => {
+        case 'package': return p_.ss($, ($) => p_.from.state($).decide(($) => {
             switch ($[0]) {
                 case 'build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
                 case 'publish': return p_.ss($, ($): d_out.Phrase => t_publish.Error($))
@@ -40,20 +40,20 @@ export const Error: signatures.Error = ($) => p_.decide.state($, ($) => {
         }))
         case 'get project files': return p_.ss($, ($) => t_line_count_to_fountain_pen.Error($))
         case 'dependency graph': return p_.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
-        case 'all': return p_.ss($, ($) => p_.decide.state($, ($) => {
+        case 'all': return p_.ss($, ($) => p_.from.state($).decide(($) => {
             switch ($[0]) {
                 case 'packages': return p_.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("could not execute command for the following packages:"),
                     sh.ph.indent(
                         sh.pg.sentences(
-                            p_.list.from.dictionary(
+                            p_.from.dictionary(
                                 $,
-                            ).convert(
+                            ).convert_to_list(
                                 ($, id) => sh.sentence([
                                     sh.ph.literal("package '"),
                                     sh.ph.literal(id),
                                     sh.ph.literal("': "),
-                                    p_.decide.state($, ($) => {
+                                    p_.from.state($).decide(($) => {
                                         switch ($[0]) {
                                             case 'build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error(
                                                 $.error,

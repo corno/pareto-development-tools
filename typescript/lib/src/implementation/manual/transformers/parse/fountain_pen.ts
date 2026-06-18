@@ -8,13 +8,13 @@ export type Error = p_i.Transformer<d_in.Error, d_out.Phrase>
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const Error: Error = ($) => p_.decide.state($, ($) => {
+export const Error: Error = ($) => p_.from.state($).decide(($) => {
     switch ($[0]) {
         case 'expected one of': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("expected one of: "),
-            sh.ph.indent(sh.pg.sentences(p_.list.from.dictionary(
+            sh.ph.indent(sh.pg.sentences(p_.from.dictionary(
                 $,
-            ).convert(
+            ).convert_to_list(
                 ($, id) => sh.sentence([
                     sh.ph.literal(id)
                 ])

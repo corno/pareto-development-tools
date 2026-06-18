@@ -42,7 +42,7 @@ export const $$: interface_.procedures.update_package_dependencies = p_.command_
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    )).transform(($) => p_temp.decide.state($, ($) => {
+                    )).transform(($) => p_temp.from.state($).decide(($) => {
                         switch ($[0]) {
                             case 'does not exist': return p_temp.ss($, ($) => false)
                             case 'file': return p_temp.ss($, ($) => false)

@@ -1,4 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_t from 'pareto-core/dist/implementation/transformer'
 import p_list_from_text from 'pareto-core/dist/implementation/specials/list_from_text'
 import p_list_build_deprecated from 'pareto-core/dist/implementation/specials/list_build_deprecated'
 import p_text_from_list from 'pareto-core/dist/implementation/specials/text_from_list'
@@ -21,12 +22,12 @@ const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Chara
         $,
         ($) => $
     )
-    const length = chars.__get_number_of_items()
+    const length = p_t.from.list(chars).amount_of_items()
     const new_length = length - n
     let index = -1
 
     return p_list_build_deprecated(($i) => {
-        chars.__l_map(($) => {
+        chars.__l_map_deprecated(($) => {
             index += 1
             if (index < new_length) {
                 $i['add item']($)

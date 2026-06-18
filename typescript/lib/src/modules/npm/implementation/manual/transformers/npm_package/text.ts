@@ -24,7 +24,7 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
 
     const expect_unique_identifiers_fixme = ($: d.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object => {
         const temp: { [id: string]: d.Value } = {}
-        $.__l_map(($) => {
+        $.__l_map_deprecated(($) => {
             if (temp[$.id.token.value] !== undefined) {
                 abort(['duplicate identifier', $.id.token.value])
             } else {
@@ -40,12 +40,12 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
         })
         return p_.literal.dictionary(temp)
     }
-    return p_.decide.state($.type, ($) => {
+    return p_.from.state($.type).decide(($) => {
         switch ($[0]) {
-            case 'concrete': return p_.ss($, ($) => p_.decide.state($, ($) => {
+            case 'concrete': return p_.ss($, ($) => p_.from.state($).decide(($) => {
                 switch ($[0]) {
                     case 'dictionary': return p_.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
-                    case 'group': return p_.ss($, ($) => p_.decide.state($, ($) => {
+                    case 'group': return p_.ss($, ($) => p_.from.state($).decide(($) => {
                         switch ($[0]) {
                             case 'verbose': return p_.ss($, ($) => expect_unique_identifiers_fixme($.properties, abort))
                             default: return abort(['not an object', null])
@@ -59,9 +59,9 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
     })
 }
 
-const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never): string => p_.decide.state($.type, ($) => {
+const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never): string => p_.from.state($.type).decide(($) => {
     switch ($[0]) {
-        case 'concrete': return p_.ss($, ($) => p_.decide.state($, ($) => {
+        case 'concrete': return p_.ss($, ($) => p_.from.state($).decide(($) => {
             switch ($[0]) {
                 case 'text': return p_.ss($, ($) => $.token.value)
                 default: return abort(['not a text', null])
@@ -95,13 +95,13 @@ export const $$: p_ri.Refiner<d_out.NPM_Package, d_function.Error['type'], d_in.
     return {
         'name': name,
         'version': version,
-        'dependencies': p_.optional.from.optional(
+        'dependencies': p_.from.optional(
             root.__get_possible_entry_deprecated('dependencies'),
         ).map(
             ($) => expect_object(
                 $,
                 (error) => abort(['dependencies', ['not an object', null]])
-            ).__d_map(
+            ).__d_map_deprecated(
                 ($, id) => expect_text(
                     $,
                     (error) => abort(['dependencies', ['not a text', id]])

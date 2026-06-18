@@ -18,12 +18,12 @@ export type Signature = p_i.Transformer_With_Parameter<
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const CSV: Signature = ($, $p) => sh.pg.sentences(p_.list.from.list(
+export const CSV: Signature = ($, $p) => sh.pg.sentences(p_.from.list(
     $,
 ).map(
     ($) => sh.sentence([
         sh.ph.rich(
-            p_.list.from.list(
+            p_.from.list(
                 $,
             ).map(
                 ($) => sh.ph.serialize(
@@ -31,7 +31,7 @@ export const CSV: Signature = ($, $p) => sh.pg.sentences(p_.list.from.list(
                         [
                             0x22, //"
                         ],
-                        p_.list.from.list(
+                        p_.from.list(
                             p_list_from_text(
                                 $,
                                 ($) => $ === 0x22 //"

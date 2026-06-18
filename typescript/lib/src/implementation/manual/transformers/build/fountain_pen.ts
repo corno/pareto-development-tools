@@ -18,7 +18,7 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 import * as t_stat_possible_node_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"
 import * as t_chmod_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/chmod/fountain_pen"
 
-export const Error: signatures.Error = ($, $p) => p_.decide.state($, ($) => {
+export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(($) => {
     switch ($[0]) {
         case 'error removing lib dist dir': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("could not remove lib dist dir: ("),

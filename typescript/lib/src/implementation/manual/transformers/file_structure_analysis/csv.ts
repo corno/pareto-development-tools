@@ -22,16 +22,16 @@ export const File_Analysis_List: Signature = ($) => p_.literal.nested_list([
             "line count",
         ]),
     ],
-    p_.list.from.list(
+    p_.from.list(
         $,
     ).map(
         ($) => p_.literal.list([
             $.package,
             $.path,
             $.analysis.structure.path,
-            p_.decide.state($.analysis.structure.classification, ($) => {
+            p_.from.state($.analysis.structure.classification).decide(($) => {
                 switch ($[0]) {
-                    case 'directory': return p_.ss($, ($) => "directory " + p_.decide.state($, ($): string => {
+                    case 'directory': return p_.ss($, ($) => "directory " + p_.from.state($).decide(($): string => {
                         switch ($[0]) {
                             case 'ignored': return p_.ss($, ($) => "ignored")
                             case 'generated': return p_.ss($, ($) => "generated")
@@ -42,7 +42,7 @@ export const File_Analysis_List: Signature = ($) => p_.literal.nested_list([
                             default: return p_.au($[0])
                         }
                     }))
-                    case 'file': return p_.ss($, ($) => "file " + p_.decide.state($, ($): string => {
+                    case 'file': return p_.ss($, ($) => "file " + p_.from.state($).decide(($): string => {
                         switch ($[0]) {
                             case 'generated': return p_.ss($, ($) => "generated")
                             case 'manual': return p_.ss($, ($) => "manual")

@@ -10,7 +10,7 @@ export type Error = p_i.Transformer_With_Parameter<d_in.Error, d_out.Paragraph, 
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const Error: Error = ($, $p) => p_.decide.state($, ($): d_out.Paragraph => {
+export const Error: Error = ($, $p) => p_.from.state($).decide(($): d_out.Paragraph => {
     switch ($[0]) {
         case 'error while running tsc': return p_.ss($, ($) => $p.concise
             ? sh.pg.composed([])

@@ -10,7 +10,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 import * as t_get_package_dependencies_to_fountain_pen from "../get_package_dependencies/fountain_pen"
 
-export const Error: Error = ($) => p_.decide.state($, ($) => {
+export const Error: Error = ($) => p_.from.state($).decide(($) => {
     switch ($[0]) {
         case 'log': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("log: "),

@@ -15,7 +15,7 @@ export const $$: interface_.procedures.remove_tracked_but_ignored = p_.command_p
             {
                 'path': $d.path,
             },
-            ($): d.Error => p_temp.decide.state($, ($) => {
+            ($): d.Error => p_temp.from.state($).decide(($) => {
                 switch ($[0]) {
                     case 'working directory is not clean': return p_temp.ss($, ($): d.Error => ['not clean', null])
                     case 'unexpected error': return p_temp.ss($, ($): d.Error => ['unexpected error', $])

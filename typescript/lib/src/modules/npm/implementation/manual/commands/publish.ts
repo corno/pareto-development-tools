@@ -14,7 +14,7 @@ export const $$: interface_.procedures.npm_publish = p_.command_procedure(
                     [
                         "publish"
                     ],
-                    p_temp.decide.state($d.impact, ($) => {
+                    p_temp.from.state($d.impact).decide(($) => {
                         switch ($[0]) {
                             case 'dry run': return p_temp.ss($, ($) => p_temp.literal.list(["--dry-run"]))
                             case 'actual publish': return p_temp.ss($, ($) => p_temp.literal.list([

@@ -14,17 +14,17 @@ export const Result: Result = ($) => {
         'attributes': p_.literal.list<d_out_attributes.Attributes.L>([
             ['rankdir', ['LR', null]],
         ]),
-        'nodes': $.packages.__d_map(($) => ({
+        'nodes': $.packages.__d_map_deprecated(($) => ({
             'attributes': p_.literal.list<d_out_attributes.Attributes.L>([]),
         })),
-        'edges': p_.list.from.dictionary(
+        'edges': p_.from.dictionary(
             $.packages
-        ).flatten(
+        ).flatten_to_list(
             ($, id) => {
                 const from = id
                 return $.dependencies.__decide(
-                    ($) => p_.list.from.dictionary(
-                        p_.dictionary.from.dictionary(
+                    ($) => p_.from.dictionary(
+                        p_.from.dictionary(
                             $,
                         ).map_optionally(
                             ($, id) => {
@@ -46,7 +46,7 @@ export const Result: Result = ($) => {
                                 }))
                             }
                         ),
-                    ).convert(
+                    ).convert_to_list(
                         ($) => $,
                     ),
                     () => p_.literal.list([])
