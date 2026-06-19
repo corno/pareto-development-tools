@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 
 
-import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
+import p_change_context from 'pareto-core/dist/implementation/refiner/specials/change_context'
 
 import * as interface_ from "../../../interface/commands"
 

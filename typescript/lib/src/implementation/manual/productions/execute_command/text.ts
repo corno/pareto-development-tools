@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/production'
 import * as p_pi from 'pareto-core/dist/interface/production'
-import p_variables from 'pareto-core/dist/implementation/specials/variables'
-import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
+import p_variables from 'pareto-core/dist/implementation/refiner/specials/variables'
+import p_change_context from 'pareto-core/dist/implementation/refiner/specials/change_context'
 
 //data types
 import * as d_out from "../../../../interface/data/execute_command"

@@ -1,7 +1,7 @@
 
 import * as p_ from 'pareto-core/dist/implementation/transformer'
 
-import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
+import p_change_context from 'pareto-core/dist/implementation/refiner/specials/change_context'
 
 import * as t_signatures from "../../../../../../interface/generated/liana/schemas/structure/signatures/transformers/boilerplate_for_migrate"
 

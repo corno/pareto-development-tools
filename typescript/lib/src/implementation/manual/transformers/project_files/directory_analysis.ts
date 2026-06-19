@@ -2,10 +2,10 @@ import * as p_ from 'pareto-core/dist/implementation/transformer'
 import * as p_di from 'pareto-core/dist/interface/data'
 import * as p_i from 'pareto-core/dist/interface/transformer'
 
-import p_list_from_text from 'pareto-core/dist/implementation/specials/list_from_text'
-import p_list_build_deprecated from 'pareto-core/dist/implementation/specials/list_build_deprecated'
-import p_text_from_list from 'pareto-core/dist/implementation/specials/text_from_list'
-import p_change_context from 'pareto-core/dist/implementation/specials/change_context'
+import p_list_from_text from 'pareto-core/dist/implementation/refiner/specials/list_from_text'
+import p_list_build_deprecated from 'pareto-core/dist/implementation/refiner/specials/list_build_deprecated'
+import p_text_from_list from 'pareto-core/dist/implementation/transformer/specials/text_from_list'
+import p_change_context from 'pareto-core/dist/implementation/refiner/specials/change_context'
 
 //data types
 import * as d_in from "../../../../interface/data/project_files"
