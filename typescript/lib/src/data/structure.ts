@@ -20,11 +20,11 @@ const $_implementation = sh.g.directory_group({
         "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
     }),
     "to_be_generated": sh.g.directory_group({
-        "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
-        "productions": sh.g.directory_wildcards(1, false, ["ts"], false),
-        "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
-        "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
-        "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
+        "commands": sh.g.directory_generated(false),
+        "productions": sh.g.directory_generated(false),
+        "queries": sh.g.directory_generated(false),
+        "refiners": sh.g.directory_generated(false),
+        "transformers": sh.g.directory_generated(false),
     }),
 
 })
