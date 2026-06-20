@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --enable-source-maps
 
-import * as ph from 'pareto-host-nodejs'
+import * as p_h from 'pareto-host-nodejs'
 import * as p_ci from 'pareto-core/dist/interface/command'
 import * as p_qi from 'pareto-core/dist/interface/query'
 
@@ -41,7 +41,7 @@ import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-reso
 
 
 
-ph.run_main_command(
+p_h.run_main_command(
     ($r) => {
         const create_eqe = (
             program: string,
