@@ -24,12 +24,12 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
 
     const expect_unique_identifiers_fixme = ($: d.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object => {
         const temp: { [id: string]: d.Value } = {}
-        $.__l_map_deprecated(($) => {
+        p_.from.list($).map(($) => {
             if (temp[$.id.token.value] !== undefined) {
                 abort(['duplicate identifier', $.id.token.value])
             } else {
-                temp[$.id.token.value] = $.assignment.__decide(
-                    ($) => $.value.__decide(
+                temp[$.id.token.value] = p_.from.optional($.assignment).decide(
+                    ($) => p_.from.optional($.value).decide(
                         ($) => $,
                         () => abort(['missing value', null]),
                     ),

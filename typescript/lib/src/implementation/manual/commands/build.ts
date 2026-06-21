@@ -59,9 +59,7 @@ export const $$: interface_.procedures.build = p_.command_procedure(
                     }],
                 ),
 
-
-
-                p_.s.if_.query_deprecated(
+                p_.s.query(
                     p_super_query_result($q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,
@@ -70,76 +68,82 @@ export const $$: interface_.procedures.build = p_.command_procedure(
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    )).transform(($) => p_temp.from.state($).decide(($) => {
-                        switch ($[0]) {
-                            case 'does not exist': return p_temp.ss($, ($) => false)
-                            case 'file': return p_temp.ss($, ($) => false)
-                            case 'directory': return p_temp.ss($, ($) => true)
-                            default: return p_temp.au($[0])
-                        }
-                    })),
-                    p_variables(() => {
-                        const dist_path = t_path_to_path.extend_context_path_with_list(
-                            typescript_path,
-                            {
-                                'addition': p_.literal.list(["app", "dist"]),
-                            }
-                        )
-                        return [
+                    )),
+                    ($) => [
 
-                            $c.remove.execute(
-                                {
-                                    'path': dist_path,
-                                    'error if not exists': false,
-                                },
-                                ($): d.Error => ['error removing app dist dir', { 'path': $d.path, 'error': $ }],
-                            ),
-                            $c.tsc.execute(
-                                {
-                                    'path': p_.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["app"]) })),
-                                },
-                                ($): d.Error => ['error building app', {
-                                    'path': $d.path,
-                                    'error': $,
-                                }],
-                            ),
+                        p_.s.if_(
+                            p_temp.from.state($).decide(($) => {
+                                switch ($[0]) {
+                                    case 'does not exist': return p_temp.ss($, ($) => false)
+                                    case 'file': return p_temp.ss($, ($) => false)
+                                    case 'directory': return p_temp.ss($, ($) => true)
+                                    default: return p_temp.au($[0])
+                                }
+                            }),
+                            p_variables(() => {
+                                const dist_path = t_path_to_path.extend_context_path_with_list(
+                                    typescript_path,
+                                    {
+                                        'addition': p_.literal.list(["app", "dist"]),
+                                    }
+                                )
+                                return [
 
-                            $c.chmod.execute(
-                                {
-                                    'path': t_path_to_path.create_node_path(
-                                        dist_path,
+                                    $c.remove.execute(
                                         {
-                                            'node': "bin.js"
-                                        }
+                                            'path': dist_path,
+                                            'error if not exists': false,
+                                        },
+                                        ($): d.Error => ['error removing app dist dir', { 'path': $d.path, 'error': $ }],
                                     ),
-                                    'mode': {
-                                        'special bits': p_.literal.not_set(),
-                                        'owner': {
-                                            'read': true,
-                                            'write': true,
-                                            'execute': true,
+                                    $c.tsc.execute(
+                                        {
+                                            'path': p_.literal.set(t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["app"]) })),
                                         },
-                                        'group': {
-                                            'read': true,
-                                            'write': false,
-                                            'execute': true,
-                                        },
-                                        'others': {
-                                            'read': true,
-                                            'write': false,
-                                            'execute': true,
-                                        },
-                                    },
-                                },
-                                ($): d.Error => ['error setting permissions on app dist bin.js', {
-                                    'path': dist_path,
-                                    'error': $
-                                }],
-                            )
+                                        ($): d.Error => ['error building app', {
+                                            'path': $d.path,
+                                            'error': $,
+                                        }],
+                                    ),
 
-                        ]
-                    })
-                )
+                                    $c.chmod.execute(
+                                        {
+                                            'path': t_path_to_path.create_node_path(
+                                                dist_path,
+                                                {
+                                                    'node': "bin.js"
+                                                }
+                                            ),
+                                            'mode': {
+                                                'special bits': p_.literal.not_set(),
+                                                'owner': {
+                                                    'read': true,
+                                                    'write': true,
+                                                    'execute': true,
+                                                },
+                                                'group': {
+                                                    'read': true,
+                                                    'write': false,
+                                                    'execute': true,
+                                                },
+                                                'others': {
+                                                    'read': true,
+                                                    'write': false,
+                                                    'execute': true,
+                                                },
+                                            },
+                                        },
+                                        ($): d.Error => ['error setting permissions on app dist bin.js', {
+                                            'path': dist_path,
+                                            'error': $
+                                        }],
+                                    )
+
+                                ]
+                            })
+                        )
+                    ]
+                ),
             ]
         }
     )

@@ -12,11 +12,11 @@ export const Error: Error = ($) => p_.from.state($).decide(($) => {
     switch ($[0]) {
         case 'could not run git command': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("could not run git command: "),
-            sh.ph.composed($.message.lines.__l_map_deprecated(($) => sh.ph.literal($)))
+            sh.ph.composed(p_.from.list($.message.lines).map(($) => sh.ph.literal($)))
         ]))
         case 'unexpected output': return p_.ss($, ($) => sh.ph.composed([
             sh.ph.literal("unexpected output from git command: "),
-            sh.ph.composed($.lines.__l_map_deprecated(($) => sh.ph.literal($)))
+            sh.ph.composed(p_.from.list($.lines).map(($) => sh.ph.literal($)))
         ]))
         default: return p_.au($[0])
     }

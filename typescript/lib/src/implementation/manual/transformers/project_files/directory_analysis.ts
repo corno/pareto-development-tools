@@ -162,10 +162,10 @@ export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary
 
 const line_count: interface_.line_count = ($) => {
     let lineCount = 0
-    p_list_from_text(
+    p_.from.list(p_list_from_text(
         $,
         ($) => $
-    ).__l_map_deprecated(($) => {
+    )).map(($) => {
         if ($ === 10) { //newline character
             lineCount++
         }
@@ -182,7 +182,7 @@ const extension: interface_.extension = ($) => {
 
     let first_period_index: null | number = null
     let current_index = 0
-    characters.__l_map_deprecated(($) => {
+    p_.from.list(characters).map(($) => {
         if ($ === 46) { //period
             first_period_index = current_index
         }
@@ -197,7 +197,7 @@ const extension: interface_.extension = ($) => {
         return p_.literal.set(
             p_text_from_list(
                 p_list_build_deprecated<number>(($i) => {
-                    characters.__l_map_deprecated(($) => {
+                    p_.from.list(characters).map(($) => {
                         if (current_index > fpi) {
                             $i['add item']($)
                         }
@@ -296,7 +296,7 @@ export namespace defined {
                                 default: return p_.au($[0])
                             }
                         })
-                        return expected.__get_possible_entry_deprecated(id).__decide(
+                        return p_.from.optional(expected.__get_possible_entry_deprecated(id)).decide(
                             ($) => NodeX(
                                 node,
                                 {
@@ -449,7 +449,7 @@ export namespace wildcard {
                             let extension_matched = false
                             p_.from.optional(extension(id)).map(($) => {
                                 const file_extension = $
-                                $p['wildcard']['extensions'].__l_map_deprecated(($) => {
+                                p_.from.list($p['wildcard']['extensions']).map(($) => {
                                     if ($ === file_extension) {
                                         extension_matched = true
                                     }

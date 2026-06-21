@@ -51,8 +51,8 @@ export const File_Analysis_List: Signature = ($) => p_.literal.nested_list([
                     }))
                 }
             }),
-            $.analysis.extension.__decide(($) => $, () => ""),
-            $.analysis['unexpected path tail'].__decide(
+            p_.from.optional($.analysis.extension).decide(($) => $, () => ""),
+            p_.from.optional($.analysis['unexpected path tail']).decide(
                 ($) => $,
                 () => ""
             ),

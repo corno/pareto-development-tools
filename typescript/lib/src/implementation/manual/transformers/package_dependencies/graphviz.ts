@@ -22,7 +22,7 @@ export const Result: Result = ($) => {
         ).flatten_to_list(
             ($, id) => {
                 const from = id
-                return $.dependencies.__decide(
+                return p_.from.optional($.dependencies).decide(
                     ($) => p_.from.dictionary(
                         p_.from.dictionary(
                             $,
@@ -37,7 +37,7 @@ export const Result: Result = ($) => {
                                 return p_.literal.set(({
                                     'from': from,
                                     'to': id,
-                                    'attributes': pacakges.__get_possible_entry_deprecated(id).__decide(
+                                    'attributes': p_.from.optional(pacakges.__get_possible_entry_deprecated(id)).decide(
                                         ($) => p_.literal.list([]),
                                         () => p_.literal.list<d_out_attributes.Attributes.L>([
                                             ['color', "red"]

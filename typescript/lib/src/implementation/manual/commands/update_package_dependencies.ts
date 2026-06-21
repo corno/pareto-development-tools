@@ -33,7 +33,7 @@ export const $$: interface_.procedures.update_package_dependencies = p_.command_
                     ($) => ['error updating test', $],
                 ),
 
-                p_.s.if_.query_deprecated(
+                p_.s.query(
                     p_super_query_result($q.stat(
                         t_path_to_path.create_node_path(
                             typescript_path,
@@ -42,26 +42,33 @@ export const $$: interface_.procedures.update_package_dependencies = p_.command_
                             }
                         ),
                         ($): d.Error => ['error statting app dir', $]
-                    )).transform(($) => p_temp.from.state($).decide(($) => {
-                        switch ($[0]) {
-                            case 'does not exist': return p_temp.ss($, ($) => false)
-                            case 'file': return p_temp.ss($, ($) => false)
-                            case 'directory': return p_temp.ss($, ($) => true)
-                            default: return p_temp.au($[0])
-                        }
-                    })),
-                    [
+                    )),
+                    ($) => [
 
-                        // update dependencies of app
-                        $c['npm update package dependencies'].execute(
-                            {
-                                'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["app"]) }),
-                            },
-                            ($) => ['error updating app', $],
-                        ),
+                        p_.s.if_(//validate that the app dir exists, and is a directory
+                            p_temp.from.state($).decide(($): boolean => {
+                                switch ($[0]) {
+                                    case 'does not exist': return p_temp.ss($, ($) => false)
+                                    case 'file': return p_temp.ss($, ($) => false)
+                                    case 'directory': return p_temp.ss($, ($) => true)
+                                    default: return p_temp.au($[0])
+                                }
+                            }),
+                            [
+
+                                // update dependencies of app
+                                $c['npm update package dependencies'].execute(
+                                    {
+                                        'path': t_path_to_path.extend_context_path_with_list(typescript_path, { 'addition': p_.literal.list(["app"]) }),
+                                    },
+                                    ($) => ['error updating app', $],
+                                ),
+
+                            ]
+                        )
 
                     ]
-                )
+                ),
             ]
         }
     )
