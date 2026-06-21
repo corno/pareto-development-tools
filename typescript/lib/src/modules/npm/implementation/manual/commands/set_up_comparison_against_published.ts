@@ -87,13 +87,11 @@ export const $$: interface_.procedures.set_up_comparison_against_published = p_.
                         $c['npm'].execute(
                             {
                                 'working directory': p_.literal.not_set(),
-                                'args': p_.literal.nested_list([
-                                    p_.literal.list([
-                                        "pack",
-                                        t_path_to_text.Context_Path($d['path to local package']),
-                                        "--pack-destination",
-                                        t_path_to_text.Node_Path($d['path to temp directory']),
-                                    ])
+                                'args': p_.literal.list([
+                                    "pack",
+                                    t_path_to_text.Context_Path($d['path to local package']),
+                                    "--pack-destination",
+                                    t_path_to_text.Node_Path($d['path to temp directory']),
                                 ]),
                             },
                             ($) => ['error while running npm command', $],

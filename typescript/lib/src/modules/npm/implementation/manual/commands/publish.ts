@@ -11,9 +11,9 @@ export const $$: interface_.procedures.npm_publish = p_.command_procedure(
             {
                 'working directory': p_.literal.set($d.path),
                 'args': p_temp.literal.nested_list([
-                    [
+                    p_.literal.list([
                         "publish"
-                    ],
+                    ]),
                     p_temp.from.state($d.impact).decide(($) => {
                         switch ($[0]) {
                             case 'dry run': return p_temp.ss($, ($) => p_temp.literal.list(["--dry-run"]))

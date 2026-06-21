@@ -11,7 +11,7 @@ export type Signature = p_i.Transformer<
 >
 
 export const File_Analysis_List: Signature = ($) => p_.literal.nested_list([
-    [
+    p_.literal.list([
         p_.literal.list([
             "package",
             "filepath",
@@ -21,7 +21,7 @@ export const File_Analysis_List: Signature = ($) => p_.literal.nested_list([
             "unexpected",
             "line count",
         ]),
-    ],
+    ]),
     p_.from.list(
         $,
     ).map(

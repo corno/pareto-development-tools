@@ -28,9 +28,9 @@ export const CSV: Signature = ($, $p) => sh.pg.sentences(p_.from.list(
             ).map(
                 ($) => sh.ph.serialize(
                     p_.literal.nested_list([
-                        [
+                        p_.literal.list([
                             0x22, //"
-                        ],
+                        ]),
                         p_.from.list(
                             p_list_from_text(
                                 $,
@@ -41,9 +41,9 @@ export const CSV: Signature = ($, $p) => sh.pg.sentences(p_.from.list(
                         ).flatten(
                             ($) => $
                         ),
-                        [
+                        p_.literal.list([
                             0x22, //"
-                        ]
+                        ])
                     ])
                 )
             ),

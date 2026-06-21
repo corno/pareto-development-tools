@@ -22,18 +22,18 @@ export const $$: interface_.procedures.npm = p_.command_procedure(
                     p_temp.from.state($d.operation).decide(($) => {
                         switch ($[0]) {
                             case 'update': return p_temp.ss($, ($) => p_.literal.nested_list([
-                                [
+                                p_.literal.list([
                                     "update",
-                                ],
+                                ]),
                                 $['package-lock only']
                                     ? p_.literal.list(["--package-lock-only"])
                                     : p_.literal.list([])
 
                             ]))
                             case 'install': return p_temp.ss($, ($) => p_.literal.nested_list([
-                                [
+                                p_.literal.list([
                                     "install",
-                                ],
+                                ]),
                                 $['package-lock only']
                                     ? p_.literal.list(["--package-lock-only"])
                                     : p_.literal.list([])
