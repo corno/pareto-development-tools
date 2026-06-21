@@ -10,7 +10,7 @@ export type Signature = p_i.Transformer<
     d_out.CSV
 >
 
-export const File_Analysis_List: Signature = ($) => p_.literal.nested_list([
+export const File_Analysis_List: Signature = ($) => p_.literal.segmented_list([
     p_.literal.list([
         p_.literal.list([
             "package",

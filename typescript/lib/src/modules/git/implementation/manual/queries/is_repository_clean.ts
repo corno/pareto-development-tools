@@ -13,7 +13,7 @@ export const $$: interface_.query_functions.is_repository_clean = p_.query_funct
     ($d, $s, $q) =>  p_super_query_result($q.git(
         {
             'working directory': p_.literal.not_set(),
-            'args': p_.literal.nested_list([
+            'args': p_.literal.segmented_list([
                 $d.path.__decide(
                     ($) => p_.literal.list([
                         "-C",

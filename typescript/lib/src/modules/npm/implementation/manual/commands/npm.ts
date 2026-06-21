@@ -11,7 +11,7 @@ export const $$: interface_.procedures.npm = p_.command_procedure(
         $c['npm'].execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_.literal.nested_list([
+                'args': p_.literal.segmented_list([
                     $d.path.__decide(
                         ($) => p_.literal.list([
                             "--prefix",
@@ -21,7 +21,7 @@ export const $$: interface_.procedures.npm = p_.command_procedure(
                     ),
                     p_temp.from.state($d.operation).decide(($) => {
                         switch ($[0]) {
-                            case 'update': return p_temp.ss($, ($) => p_.literal.nested_list([
+                            case 'update': return p_temp.ss($, ($) => p_.literal.segmented_list([
                                 p_.literal.list([
                                     "update",
                                 ]),
@@ -30,7 +30,7 @@ export const $$: interface_.procedures.npm = p_.command_procedure(
                                     : p_.literal.list([])
 
                             ]))
-                            case 'install': return p_temp.ss($, ($) => p_.literal.nested_list([
+                            case 'install': return p_temp.ss($, ($) => p_.literal.segmented_list([
                                 p_.literal.list([
                                     "install",
                                 ]),

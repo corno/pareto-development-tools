@@ -14,7 +14,7 @@ export const $$: interface_.procedures.push = p_.command_procedure(
         $c.git.execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_.literal.nested_list([
+                'args': p_.literal.segmented_list([
                     $d.path.__decide(
                         ($) => p_.literal.list([
                             "-C",

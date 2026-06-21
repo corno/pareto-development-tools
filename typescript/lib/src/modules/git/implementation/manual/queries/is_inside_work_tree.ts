@@ -11,7 +11,7 @@ export const $$: interface_.query_functions.is_inside_work_tree = p_.query_funct
         $q.git(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_.literal.nested_list([
+                'args': p_.literal.segmented_list([
                     $d.path.__decide(
                         ($) => p_.literal.list([
                             "-C",

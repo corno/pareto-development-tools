@@ -12,7 +12,10 @@ export const $$: interface_.procedures.tsc = p_.command_procedure(
         $c.tsc.execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_.literal.nested_list([
+                'args': p_.literal.segmented_list([
+                    p_.literal.list([
+                        "--pretty",
+                    ]),
                     $d.path.__decide(
                         ($) => p_.literal.list([
                             "--project",
@@ -20,9 +23,6 @@ export const $$: interface_.procedures.tsc = p_.command_procedure(
                         ]),
                         () => p_.literal.list([])
                     ),
-                    p_.literal.list([
-                        "--pretty",
-                    ]),
                 ]),
             },
             ($) => ['error while running tsc', $],

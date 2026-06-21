@@ -11,7 +11,7 @@ export const $$: interface_.procedures.update2latest = p_.command_procedure(
         $c.update2latest.execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_temp.literal.nested_list([
+                'args': p_temp.literal.segmented_list([
                     p_temp.literal.list([
                         t_path_to_text.Context_Path($d.path),
                     ]),

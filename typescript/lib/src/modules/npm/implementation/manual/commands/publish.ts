@@ -10,7 +10,7 @@ export const $$: interface_.procedures.npm_publish = p_.command_procedure(
         $c['npm'].execute(
             {
                 'working directory': p_.literal.set($d.path),
-                'args': p_temp.literal.nested_list([
+                'args': p_temp.literal.segmented_list([
                     p_.literal.list([
                         "publish"
                     ]),

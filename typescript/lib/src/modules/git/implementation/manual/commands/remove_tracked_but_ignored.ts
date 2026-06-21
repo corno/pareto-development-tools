@@ -26,7 +26,7 @@ export const $$: interface_.procedures.remove_tracked_but_ignored = p_.command_p
         $c.git.execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_.literal.nested_list([
+                'args': p_.literal.segmented_list([
                     $d.path.__decide(
                         ($) => p_.literal.list([
                             "-C",
@@ -47,7 +47,7 @@ export const $$: interface_.procedures.remove_tracked_but_ignored = p_.command_p
         $c.git.execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_.literal.nested_list([
+                'args': p_.literal.segmented_list([
                     $d.path.__decide(
                         ($) => p_.literal.list([
                             "-C",
@@ -66,7 +66,7 @@ export const $$: interface_.procedures.remove_tracked_but_ignored = p_.command_p
         $c.git.execute(
             {
                 'working directory': p_.literal.not_set(),
-                'args': p_.literal.nested_list([
+                'args': p_.literal.segmented_list([
                     $d.path.__decide(
                         ($) => p_.literal.list([
                             "-C",
