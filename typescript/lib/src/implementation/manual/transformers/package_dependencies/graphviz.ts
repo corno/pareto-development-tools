@@ -14,7 +14,7 @@ export const Result: Result = ($) => {
         'attributes': p_.literal.list<d_out_attributes.Attributes.L>([
             ['rankdir', ['LR', null]],
         ]),
-        'nodes': $.packages.__d_map_deprecated(($) => ({
+        'nodes': p_.from.dictionary($.packages).map(($) => ({
             'attributes': p_.literal.list<d_out_attributes.Attributes.L>([]),
         })),
         'edges': p_.from.dictionary(

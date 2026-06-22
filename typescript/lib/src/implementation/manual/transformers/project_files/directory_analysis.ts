@@ -110,7 +110,7 @@ export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary
                             return null
                         })
                         case 'dictionary': return p_.ss($, ($) => {
-                            $.__d_map_deprecated(($, id) => {
+                            p_.from.dictionary($).map(($, id) => {
 
                                 return p_.from.state($).decide(($): null => {
                                     switch ($[0]) {
@@ -215,13 +215,13 @@ export namespace defined {
     export const Directory: interface_.defined.Directory = ($, $p) => {
         //both found and expected are directories
 
-        const dir = $
+        const $v_dir = $
         return p_.from.state($p['expected structure']).decide(($): d_out.Directory => {
             switch ($[0]) {
 
                 case 'group': return p_.ss($, ($) => {
                     const $v_expected = $
-                    return ['dictionary', dir.__d_map_deprecated(($, id) => {
+                    return ['dictionary', p_.from.dictionary($v_dir).map(($, id) => {
                         const node = $
                         const NodeX = (
                             $: d_in_directory_content.Node,
@@ -329,7 +329,7 @@ export namespace defined {
                 })
                 case 'ignore': return p_.ss($, ($) => ['ignored', null])
                 case 'generated': return p_.ss($, ($) => undefined.Directory(
-                    dir,
+                    $v_dir,
                     {
                         'structure': {
                             'classification': ['directory', ['generated', null]],
@@ -339,7 +339,7 @@ export namespace defined {
                     }
                 ))
                 case 'wildcards': return p_.ss($, ($) => wildcard.Directory(
-                    dir,
+                    $v_dir,
                     {
                         'wildcard': $,
                         'structure path': $p['structure path'],
@@ -348,7 +348,7 @@ export namespace defined {
                     }
                 ))
                 case 'freeform': return p_.ss($, ($) => undefined.Directory(
-                    dir,
+                    $v_dir,
                     {
                         'structure': {
                             'classification': ['directory', ['freeform', null]],
@@ -361,7 +361,7 @@ export namespace defined {
                     //expecting a dictionary of directories
                     const struct = $
 
-                    return ['dictionary', dir.__d_map_deprecated(($, id): d_out.Node => p_.from.state($).decide(($): d_out.Node => {
+                    return ['dictionary', $v_dir.__d_map_deprecated(($, id): d_out.Node => p_.from.state($).decide(($): d_out.Node => {
                         switch ($[0]) {
                             case 'directory': return p_.ss($, ($) => ['directory', Directory(
                                 $,
@@ -402,7 +402,7 @@ export namespace defined {
 export namespace undefined {
 
     export const Directory: interface_.undefined.Directory = ($, $p) => {
-        return ['dictionary', $.__d_map_deprecated(($, id) => Node(
+        return ['dictionary', p_.from.dictionary($).map(($, id) => Node(
             $,
             {
                 'name': id,
@@ -445,7 +445,7 @@ export namespace undefined {
 export namespace wildcard {
 
     export const Directory: interface_.wildcard.Directory = ($, $p) => {
-        return ['dictionary', $.__d_map_deprecated(($, id) => {
+        return ['dictionary', p_.from.dictionary($).map(($, id) => {
             const tail = p_.literal.chain(
                 $p.tail,
                 id,

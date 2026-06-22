@@ -24,7 +24,7 @@ export const Directory: t_signatures.Directory = ($, abort) => p_change_context(
     ),
     ($): t_out.Directory => p_.from.text(
         $['option']['token']['value'],
-    ).state(
+    ).to_state(
         $, 
         ($, $t): t_out.Directory => {
             switch ($t) {
@@ -63,7 +63,7 @@ export const Directory: t_signatures.Directory = ($, abort) => p_change_context(
                                     ),
                                     ($) => p_.from.text(
                                         $['option']['token']['value'],
-                                    ).state($, 
+                                    ).to_state($, 
                                         ($, $t): t_out.Directory.group.D => {
                                             switch ($t) {
                                                 case 'directory':
@@ -88,7 +88,7 @@ export const Directory: t_signatures.Directory = ($, abort) => p_change_context(
                                                             ),
                                                             ($) => p_.from.text(
                                                                 $['option']['token']['value'],
-                                                            ).state($, 
+                                                            ).to_state($, 
                                                                 ($, $t): t_out.Directory.group.D.file => {
                                                                     switch ($t) {
                                                                         case 'manual':
