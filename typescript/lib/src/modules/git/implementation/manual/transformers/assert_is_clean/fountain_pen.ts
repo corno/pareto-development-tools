@@ -10,15 +10,16 @@ import * as t_git_is_clean_to_fountain_pen from "../is_repository_clean/fountain
 
 export type Error = p_i.Transformer<d_in.Error, d_out.Phrase>
 
-export const Error: Error = ($) => p_.from.state($).decide(($) => {
-    switch ($[0]) {
-        case 'working directory is not clean': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("working directory not clean"),
-        ]))
-        case 'unexpected error': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("unexpected error:"),
-            t_git_is_clean_to_fountain_pen.Error($)
-        ]))
-        default: return p_.au($[0])
-    }
-})
+export const Error: Error = ($) => p_.from.state($).decide(
+    ($) => {
+        switch ($[0]) {
+            case 'working directory is not clean': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("working directory not clean"),
+            ]))
+            case 'unexpected error': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("unexpected error:"),
+                t_git_is_clean_to_fountain_pen.Error($)
+            ]))
+            default: return p_.au($[0])
+        }
+    })

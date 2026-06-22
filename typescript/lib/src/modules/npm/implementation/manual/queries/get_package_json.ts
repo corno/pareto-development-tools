@@ -13,20 +13,21 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 import { NPM_Package as r_parse_npm_package } from "../refiners/npm_package/list_of_characters"
 
 export const $$: interface_.query_functions.get_package_json = p_.query_function(
-    ($d, $s, $r) => p_variables(() => {
-        const path = t_path_to_path.create_node_path($d['path to package'], { 'node': "package.json" })
-        return p_super_query_result($r['read file'](
-            path,
-            ($): d.Error => ['error while reading package.json', $],
-        )).refine(
-            ($, abort) => r_parse_npm_package(
-                $,
-                ($) => abort(['error while parsing package.json', {
-                    'type': $,
-                    'path': path,
-                }]),
+    ($d, $s, $r) => p_variables(
+        () => {
+            const path = t_path_to_path.create_node_path($d['path to package'], { 'node': "package.json" })
+            return p_super_query_result($r['read file'](
+                path,
+                ($): d.Error => ['error while reading package.json', $],
+            )).refine(
+                ($, abort) => r_parse_npm_package(
+                    $,
+                    ($) => abort(['error while parsing package.json', {
+                        'type': $,
+                        'path': path,
+                    }]),
+                )
             )
-        )
-    })
+        })
 )
 

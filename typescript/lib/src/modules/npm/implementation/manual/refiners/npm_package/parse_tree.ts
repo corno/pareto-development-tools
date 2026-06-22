@@ -25,56 +25,62 @@ const Object_: p_ri.Refiner<
 
     const expect_unique_identifiers_fixme = ($: d_in.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object_ => {
         const temp: { [id: string]: d_in.Value } = {}
-        p_.from.list($).map(($) => {
-            if (temp[$.id.token.value] !== undefined) {
-                abort(['duplicate identifier', $.id.token.value])
-            } else {
-                temp[$.id.token.value] = p_.from.optional($.assignment).decide(
-                    ($) => p_.from.optional($.value).decide(
-                        ($) => $,
+        p_.from.list($).map(
+            ($) => {
+                if (temp[$.id.token.value] !== undefined) {
+                    abort(['duplicate identifier', $.id.token.value])
+                } else {
+                    temp[$.id.token.value] = p_.from.optional($.assignment).decide(
+                        ($) => p_.from.optional($.value).decide(
+                            ($) => $,
+                            () => abort(['missing value', null]),
+                        ),
                         () => abort(['missing value', null]),
-                    ),
-                    () => abort(['missing value', null]),
-                )
-            }
-            return null
-        })
+                    )
+                }
+                return null
+            })
         return p_.literal.dictionary(temp)
     }
-    return p_.from.state($.type).decide(($) => {
-        switch ($[0]) {
-            case 'concrete': return p_.ss($, ($) => p_.from.state($).decide(($) => {
-                switch ($[0]) {
-                    case 'dictionary': return p_.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
-                    case 'group': return p_.ss($, ($) => p_.from.state($).decide(($) => {
+    return p_.from.state($.type).decide(
+        ($) => {
+            switch ($[0]) {
+                case 'concrete': return p_.ss($, ($) => p_.from.state($).decide(
+                    ($) => {
                         switch ($[0]) {
-                            case 'verbose': return p_.ss($, ($) => expect_unique_identifiers_fixme($.properties, abort))
+                            case 'dictionary': return p_.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
+                            case 'group': return p_.ss($, ($) => p_.from.state($).decide(
+                                ($) => {
+                                    switch ($[0]) {
+                                        case 'verbose': return p_.ss($, ($) => expect_unique_identifiers_fixme($.properties, abort))
+                                        default: return abort(['not an object', null])
+                                    }
+                                }))
                             default: return abort(['not an object', null])
                         }
                     }))
-                    default: return abort(['not an object', null])
-                }
-            }))
-            default: return abort(['not an object', null])
-        }
-    })
+                default: return abort(['not an object', null])
+            }
+        })
 }
 
 const Text: p_ri.Refiner<
     string,
     ['not a text', null],
     d_in.Value
-> = ($, abort) => p_.from.state($.type).decide(($) => {
-    switch ($[0]) {
-        case 'concrete': return p_.ss($, ($) => p_.from.state($).decide(($) => {
-            switch ($[0]) {
-                case 'text': return p_.ss($, ($) => $.token.value)
-                default: return abort(['not a text', null])
-            }
-        }))
-        default: return abort(['not a text', null])
-    }
-})
+> = ($, abort) => p_.from.state($.type).decide(
+    ($) => {
+        switch ($[0]) {
+            case 'concrete': return p_.ss($, ($) => p_.from.state($).decide(
+                ($) => {
+                    switch ($[0]) {
+                        case 'text': return p_.ss($, ($) => $.token.value)
+                        default: return abort(['not a text', null])
+                    }
+                }))
+            default: return abort(['not a text', null])
+        }
+    })
 
 const Property: p_ri.Refiner_With_Parameter<
     d_in.Value,

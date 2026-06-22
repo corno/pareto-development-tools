@@ -26,15 +26,17 @@ const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Chara
     const new_length = length - n
     let index = -1
 
-    return p_list_build_deprecated(($i) => {
-        p_t.from.list(chars).map(($) => {
-            index += 1
-            if (index < new_length) {
-                $i['add item']($)
-            }
-            return null
+    return p_list_build_deprecated(
+        ($i) => {
+            p_t.from.list(chars).map(
+                ($) => {
+                    index += 1
+                    if (index < new_length) {
+                        $i['add item']($)
+                    }
+                    return null
+                })
         })
-    })
 }
 
 export const $$: interface_.procedures.set_up_comparison_against_published = p_.command_procedure(
@@ -163,7 +165,9 @@ export const $$: interface_.procedures.set_up_comparison_against_published = p_.
                                     ]),
                                 },
                                 ($): d.Error => ['error while running npm query', $]
-                            )).transform(($) => remove_n_characters_from_end($.stdout.raw, 1)),
+                            )).transform(
+                                ($) => remove_n_characters_from_end($.stdout.raw, 1)
+                            ),
                             // Extract published package into published subdirectory
                             ($v) => [
                                 $c['tar'].execute<d.Error>(

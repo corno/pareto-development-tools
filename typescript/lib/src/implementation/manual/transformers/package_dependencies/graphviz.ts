@@ -14,39 +14,37 @@ export const Result: Result = ($) => {
         'attributes': p_.literal.list<d_out_attributes.Attributes.L>([
             ['rankdir', ['LR', null]],
         ]),
-        'nodes': p_.from.dictionary($.packages).map(($) => ({
-            'attributes': p_.literal.list<d_out_attributes.Attributes.L>([]),
-        })),
-        'edges': p_.from.dictionary(
-            $.packages
+        'nodes': p_.from.dictionary($.packages).map(
+            ($) => ({
+                'attributes': p_.literal.list<d_out_attributes.Attributes.L>([]),
+            })),
+        'edges': p_.from.dictionary($.packages
         ).flatten_to_list(
             ($, id) => {
                 const from = id
                 return p_.from.optional($.dependencies).decide(
-                    ($) => p_.from.dictionary(
-                        p_.from.dictionary(
-                            $,
-                        ).map_optionally(
-                            ($, id) => {
-                                if (id === "pareto-core"
-                                    || id === "pareto-core-shorthands"
-                                    //|| id === "pareto-host-nodejs"
-                                ) {
-                                    return p_.literal.not_set<d_out.Graph.edges.L>()
-                                }
-                                return p_.literal.set(({
-                                    'from': from,
-                                    'to': id,
-                                    'attributes': p_.from.dictionary($v_packages).get_possible_entry(
-                                        id,
-                                        ($) => p_.literal.list([]),
-                                        () => p_.literal.list<d_out_attributes.Attributes.L>([
-                                            ['color', "red"]
-                                        ])
-                                    ),
-                                }))
+                    ($) => p_.from.dictionary(p_.from.dictionary($,
+                    ).map_optionally(
+                        ($, id) => {
+                            if (id === "pareto-core"
+                                || id === "pareto-core-shorthands"
+                                //|| id === "pareto-host-nodejs"
+                            ) {
+                                return p_.literal.not_set<d_out.Graph.edges.L>()
                             }
-                        ),
+                            return p_.literal.set({
+                                'from': from,
+                                'to': id,
+                                'attributes': p_.from.dictionary($v_packages).get_possible_entry(
+                                    id,
+                                    ($) => p_.literal.list([]),
+                                    () => p_.literal.list<d_out_attributes.Attributes.L>([
+                                        ['color', "red"]
+                                    ])
+                                ),
+                            })
+                        }
+                    ),
                     ).convert_to_list(
                         ($) => $,
                     ),

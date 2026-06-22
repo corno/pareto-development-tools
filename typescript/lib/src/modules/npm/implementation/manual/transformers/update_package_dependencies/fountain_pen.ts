@@ -13,25 +13,26 @@ import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/
 import * as t_npm_to_fountain_pen from "../npm/fountain_pen"
 
 export const Error: Error = ($) => {
-    return p_.from.state($).decide(($) => {
-        switch ($[0]) {
-            case 'could not remove node_modules': return p_.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("could not remove node_modules: "),
-                t_remove_to_fountain_pen.Error($)
-            ]))
-            case 'could not remove package-lock.json': return p_.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("could not remove package-lock.json: "),
-                t_remove_to_fountain_pen.Error($)
-            ]))
-            case 'could not update to latest': return p_.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("could not update to latest typescript dependencies: "),
-                t_u2l_to_fountain_pen.Error($)
-            ]))
-            case 'could not install dependencies': return p_.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("could not install dependencies typescript dependencies: "),
-                t_npm_to_fountain_pen.Error($)
-            ]))
-            default: return p_.au($[0])
-        }
-    })
+    return p_.from.state($).decide(
+        ($) => {
+            switch ($[0]) {
+                case 'could not remove node_modules': return p_.ss($, ($) => sh.ph.composed([
+                    sh.ph.literal("could not remove node_modules: "),
+                    t_remove_to_fountain_pen.Error($)
+                ]))
+                case 'could not remove package-lock.json': return p_.ss($, ($) => sh.ph.composed([
+                    sh.ph.literal("could not remove package-lock.json: "),
+                    t_remove_to_fountain_pen.Error($)
+                ]))
+                case 'could not update to latest': return p_.ss($, ($) => sh.ph.composed([
+                    sh.ph.literal("could not update to latest typescript dependencies: "),
+                    t_u2l_to_fountain_pen.Error($)
+                ]))
+                case 'could not install dependencies': return p_.ss($, ($) => sh.ph.composed([
+                    sh.ph.literal("could not install dependencies typescript dependencies: "),
+                    t_npm_to_fountain_pen.Error($)
+                ]))
+                default: return p_.au($[0])
+            }
+        })
 }

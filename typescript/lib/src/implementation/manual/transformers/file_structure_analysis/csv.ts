@@ -25,36 +25,39 @@ export const File_Analysis_List: Signature = ($) => p_.literal.segmented_list([
             "line count",
         ]),
     ]),
-    p_.from.list(
-        $,
+    p_.from.list($,
     ).map(
         ($) => p_.literal.list<string>([
             $.package,
             $.path,
             t_to_text.Path($.analysis.structure.path),
-            p_.from.state($.analysis.structure.classification).decide(($) => {
-                switch ($[0]) {
-                    case 'directory': return p_.ss($, ($) => "directory " + p_.from.state($).decide(($): string => {
-                        switch ($[0]) {
-                            case 'ignored': return p_.ss($, ($) => "ignored")
-                            case 'generated': return p_.ss($, ($) => "generated")
-                            case 'wildcards': return p_.ss($, ($) => "wildcards")
-                            case 'dictionary': return p_.ss($, ($) => "dictionary")
-                            case 'group': return p_.ss($, ($) => "group")
-                            case 'freeform': return p_.ss($, ($) => "freeform")
-                            default: return p_.au($[0])
-                        }
-                    }))
-                    case 'file': return p_.ss($, ($) => "file " + p_.from.state($).decide(($): string => {
-                        switch ($[0]) {
-                            case 'generated': return p_.ss($, ($) => "generated")
-                            case 'manual': return p_.ss($, ($) => "manual")
-                            default: return p_.au($[0])
-                        }
-                    }))
-                }
-            }),
-            p_.from.optional($.analysis.extension).decide(($) => $, () => ""),
+            p_.from.state($.analysis.structure.classification).decide(
+                ($) => {
+                    switch ($[0]) {
+                        case 'directory': return p_.ss($, ($) => "directory " + p_.from.state($).decide(
+                            ($): string => {
+                                switch ($[0]) {
+                                    case 'ignored': return p_.ss($, ($) => "ignored")
+                                    case 'generated': return p_.ss($, ($) => "generated")
+                                    case 'wildcards': return p_.ss($, ($) => "wildcards")
+                                    case 'dictionary': return p_.ss($, ($) => "dictionary")
+                                    case 'group': return p_.ss($, ($) => "group")
+                                    case 'freeform': return p_.ss($, ($) => "freeform")
+                                    default: return p_.au($[0])
+                                }
+                            }))
+                        case 'file': return p_.ss($, ($) => "file " + p_.from.state($).decide(
+                            ($): string => {
+                                switch ($[0]) {
+                                    case 'generated': return p_.ss($, ($) => "generated")
+                                    case 'manual': return p_.ss($, ($) => "manual")
+                                    default: return p_.au($[0])
+                                }
+                            }))
+                    }
+                }),
+            p_.from.optional($.analysis.extension).decide(
+                ($) => $, () => ""),
             p_.from.optional($.analysis['unexpected path tail']).decide(
                 ($) => t_to_text.Path($),
                 () => ""

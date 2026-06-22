@@ -46,14 +46,15 @@ export const $$: interface_.procedures.update_package_dependencies = p_.command_
                     ($) => [
 
                         p_.s.if_(//validate that the app dir exists, and is a directory
-                            p_temp.from.state($).decide(($): boolean => {
-                                switch ($[0]) {
-                                    case 'does not exist': return p_temp.ss($, ($) => false)
-                                    case 'file': return p_temp.ss($, ($) => false)
-                                    case 'directory': return p_temp.ss($, ($) => true)
-                                    default: return p_temp.au($[0])
-                                }
-                            }),
+                            p_temp.from.state($).decide(
+                                ($): boolean => {
+                                    switch ($[0]) {
+                                        case 'does not exist': return p_temp.ss($, ($) => false)
+                                        case 'file': return p_temp.ss($, ($) => false)
+                                        case 'directory': return p_temp.ss($, ($) => true)
+                                        default: return p_temp.au($[0])
+                                    }
+                                }),
                             [
 
                                 // update dependencies of app

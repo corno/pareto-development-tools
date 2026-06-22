@@ -15,17 +15,18 @@ export const $$: interface_.procedures.update2latest = p_.command_procedure(
                     p_temp.literal.list([
                         t_path_to_text.Context_Path($d.path),
                     ]),
-                    p_temp.from.state($d.what).decide(($) => {
-                        switch ($[0]) {
-                            case 'dependencies': return p_temp.ss($, ($) => {
-                                return p_temp.literal.list(["dependencies"])
-                            })
-                            case 'dev-dependencies': return p_temp.ss($, ($) => {
-                                return p_temp.literal.list(["devDependencies"])
-                            })
-                            default: return p_temp.au($[0])
-                        }
-                    }),
+                    p_temp.from.state($d.what).decide(
+                        ($) => {
+                            switch ($[0]) {
+                                case 'dependencies': return p_temp.ss($, ($) => {
+                                    return p_temp.literal.list(["dependencies"])
+                                })
+                                case 'dev-dependencies': return p_temp.ss($, ($) => {
+                                    return p_temp.literal.list(["devDependencies"])
+                                })
+                                default: return p_temp.au($[0])
+                            }
+                        }),
                     p_temp.literal.list(["verbose"])
                 ]),
             },

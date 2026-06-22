@@ -15,42 +15,43 @@ import * as t_get_package_json_to_fountain_pen from "../get_package_json/fountai
 
 
 export const Error: Error = ($) => {
-    return p_.from.state($).decide(($): d_out.Phrase => {
-        switch ($[0]) {
-            case 'error while running npm command': return p_.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("error while running npm command: "),
-                sh.ph.indent(sh.pg.sentences([
-                    sh.sentence([
-                        t_epe_to_fountain_pen.Error($)
-                    ])
-                ])),
-            ]))
-            case 'error while running npm query': return p_.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("error while running npm query: "),
-                sh.ph.indent(sh.pg.sentences([
-                    sh.sentence([
-                        t_eqe_to_fountain_pen.Error($)
-                    ])
-                ])),
-            ]))
-            case 'error while running tar': return p_.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("error while running tar: "),
-                sh.ph.indent(sh.pg.sentences([
-                    sh.sentence([
-                        t_epe_to_fountain_pen.Error($)
-                    ])
-                ])),
-            ]))
-            case 'error while creating directory': return p_.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("error while creating directory: "),
-                sh.ph.indent(sh.pg.sentences([
-                    sh.sentence([
-                        t_make_directory_to_fountain_pen.Error($)
-                    ])
-                ])),
-            ]))
-            case 'error while getting package.json': return p_.ss($, ($) => t_get_package_json_to_fountain_pen.Error($))
-            default: return p_.au($[0])
-        }
-    })
+    return p_.from.state($).decide(
+        ($): d_out.Phrase => {
+            switch ($[0]) {
+                case 'error while running npm command': return p_.ss($, ($) => sh.ph.composed([
+                    sh.ph.literal("error while running npm command: "),
+                    sh.ph.indent(sh.pg.sentences([
+                        sh.sentence([
+                            t_epe_to_fountain_pen.Error($)
+                        ])
+                    ])),
+                ]))
+                case 'error while running npm query': return p_.ss($, ($) => sh.ph.composed([
+                    sh.ph.literal("error while running npm query: "),
+                    sh.ph.indent(sh.pg.sentences([
+                        sh.sentence([
+                            t_eqe_to_fountain_pen.Error($)
+                        ])
+                    ])),
+                ]))
+                case 'error while running tar': return p_.ss($, ($) => sh.ph.composed([
+                    sh.ph.literal("error while running tar: "),
+                    sh.ph.indent(sh.pg.sentences([
+                        sh.sentence([
+                            t_epe_to_fountain_pen.Error($)
+                        ])
+                    ])),
+                ]))
+                case 'error while creating directory': return p_.ss($, ($) => sh.ph.composed([
+                    sh.ph.literal("error while creating directory: "),
+                    sh.ph.indent(sh.pg.sentences([
+                        sh.sentence([
+                            t_make_directory_to_fountain_pen.Error($)
+                        ])
+                    ])),
+                ]))
+                case 'error while getting package.json': return p_.ss($, ($) => t_get_package_json_to_fountain_pen.Error($))
+                default: return p_.au($[0])
+            }
+        })
 }

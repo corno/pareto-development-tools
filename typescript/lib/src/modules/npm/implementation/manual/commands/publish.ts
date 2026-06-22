@@ -14,16 +14,17 @@ export const $$: interface_.procedures.npm_publish = p_.command_procedure(
                     p_.literal.list([
                         "publish"
                     ]),
-                    p_temp.from.state($d.impact).decide(($) => {
-                        switch ($[0]) {
-                            case 'dry run': return p_temp.ss($, ($) => p_temp.literal.list(["--dry-run"]))
-                            case 'actual publish': return p_temp.ss($, ($) => p_temp.literal.list([
-                                // "--otp",
-                                // $['one time password'],
-                            ]))
-                            default: return p_temp.au($[0])
-                        }
-                    }),
+                    p_temp.from.state($d.impact).decide(
+                        ($) => {
+                            switch ($[0]) {
+                                case 'dry run': return p_temp.ss($, ($) => p_temp.literal.list(["--dry-run"]))
+                                case 'actual publish': return p_temp.ss($, ($) => p_temp.literal.list([
+                                    // "--otp",
+                                    // $['one time password'],
+                                ]))
+                                default: return p_temp.au($[0])
+                            }
+                        }),
                 ]),
             },
             ($) => ['error while running npm', $],

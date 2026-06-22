@@ -29,17 +29,20 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                 switch ($) {
                                     case "assert-clean": return ['assert clean', null]
                                     case "build-and-test": return ['build and test', {
-                                        'concise': p_variables(() => {
-                                            const value = iterator.look_raw()
-                                            return value === null
-                                                ? false
-                                                : value[0] === "concise"
-                                                    ? p_variables(() => {
-                                                        iterator.discard(() => null)
-                                                        return true
-                                                    })
-                                                    : false
-                                        }),
+                                        'concise': p_variables(
+                                            () => {
+                                                const value = iterator.look_raw()
+                                                return value === null
+                                                    ? false
+                                                    : value[0] === "concise"
+                                                        ? p_variables(
+                                                            () => {
+                                                                iterator.discard(
+                                                                    () => null)
+                                                                return true
+                                                            })
+                                                        : false
+                                            }),
                                     }]
                                     case "build": return ['build', null]
                                     case "git-commit": return ['git commit', {
@@ -47,17 +50,20 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                             ($) => $,
                                             () => abort(['expected a text', { 'description': "commit message" }])
                                         ),
-                                        'accept broken commits': p_variables(() => {
-                                            const value = iterator.look_raw()
-                                            return value === null
-                                                ? false
-                                                : value[0] === "accept-broken"
-                                                    ? p_variables(() => {
-                                                        iterator.discard(() => null)
-                                                        return true
-                                                    })
-                                                    : false
-                                        }),
+                                        'accept broken commits': p_variables(
+                                            () => {
+                                                const value = iterator.look_raw()
+                                                return value === null
+                                                    ? false
+                                                    : value[0] === "accept-broken"
+                                                        ? p_variables(
+                                                            () => {
+                                                                iterator.discard(
+                                                                    () => null)
+                                                                return true
+                                                            })
+                                                        : false
+                                            }),
                                     }]
                                     case "git-remove-tracked-but-ignored": return ['git remove tracked but ignored', null]
                                     case "set-up-comparison": return ['set up comparison', null]
@@ -101,17 +107,20 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                             ($) => $,
                                             () => abort(['expected a text', { 'description': "commit message" }])
                                         ),
-                                        'accept broken commits': p_variables(() => {
-                                            const value = iterator.look_raw()
-                                            return value === null
-                                                ? false
-                                                : value[0] === "accept-broken"
-                                                    ? p_variables(() => {
-                                                        iterator.discard(() => null)
-                                                        return true
-                                                    })
-                                                    : false
-                                        }),
+                                        'accept broken commits': p_variables(
+                                            () => {
+                                                const value = iterator.look_raw()
+                                                return value === null
+                                                    ? false
+                                                    : value[0] === "accept-broken"
+                                                        ? p_variables(
+                                                            () => {
+                                                                iterator.discard(
+                                                                    () => null)
+                                                                return true
+                                                            })
+                                                        : false
+                                            }),
                                     }]
                                     case "update-dependencies": return ['update package dependencies', null]
                                     default: return abort(['expected one of', p_.literal.dictionary({
@@ -182,27 +191,29 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                             })])
 
                         ),
-                        'impact': p_variables(() => {
-                            const value = iterator.look_raw()
-                            if (value === null) {
-                                return ['actual publish', {
-                                    // 'one time password': iterator.consume(
-                                    //     ($) => $,
-                                    //     () => abort(['expected a text', { 'description': "one time password" }])
-                                    // )
-                                }]
-                            } else {
-                                switch (value[0]) {
-                                    case "--dry-run": {
-                                        iterator.discard(() => null)
-                                        return ['dry run', null]
-                                    }
-                                    default:
-                                        return abort(['expected a text', { 'description': "'--dry-run'" }])
+                        'impact': p_variables(
+                            () => {
+                                const value = iterator.look_raw()
+                                if (value === null) {
+                                    return ['actual publish', {
+                                        // 'one time password': iterator.consume(
+                                        //     ($) => $,
+                                        //     () => abort(['expected a text', { 'description': "one time password" }])
+                                        // )
+                                    }]
+                                } else {
+                                    switch (value[0]) {
+                                        case "--dry-run": {
+                                            iterator.discard(
+                                                () => null)
+                                            return ['dry run', null]
+                                        }
+                                        default:
+                                            return abort(['expected a text', { 'description': "'--dry-run'" }])
 
+                                    }
                                 }
-                            }
-                        }),
+                            }),
                     }]
                     case "set-up-comparison": return ['set up comparison', {
                         'path to package': t_context_path_from_text.Context_Path(iterator.consume(

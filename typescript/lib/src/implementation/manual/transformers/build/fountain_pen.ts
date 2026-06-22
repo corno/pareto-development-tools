@@ -18,80 +18,81 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 import * as t_stat_possible_node_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"
 import * as t_chmod_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/chmod/fountain_pen"
 
-export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(($) => {
-    switch ($[0]) {
-        case 'error removing lib dist dir': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("could not remove lib dist dir: ("),
-            sh.ph.serialize(t_path_to_text.Context_Path($.path)),
-            sh.ph.literal("/lib)"),
+export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
+    ($) => {
+        switch ($[0]) {
+            case 'error removing lib dist dir': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("could not remove lib dist dir: ("),
+                sh.ph.serialize(t_path_to_text.Context_Path($.path)),
+                sh.ph.literal("/lib)"),
 
-            sh.ph.indent(
-                sh.pg.sentences([
-                    sh.sentence([
-                        t_remove_to_fountain_pen.Error($.error)
+                sh.ph.indent(
+                    sh.pg.sentences([
+                        sh.sentence([
+                            t_remove_to_fountain_pen.Error($.error)
+                        ])
                     ])
-                ])
-            )
+                )
 
-        ]))
-        case 'error building lib': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("could not build lib: ("),
-            sh.ph.serialize(t_path_to_text.Context_Path($.path)),
-            sh.ph.literal(")"),
-            sh.ph.indent(
-                t_tsc_to_fountain_pen.Error($.error, $p)
-            )
-        ]))
-        case 'error removing test dist dir': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("could not remove test dist dir: ("),
-            sh.ph.serialize(t_path_to_text.Context_Path($.path)),
-            sh.ph.literal("/test)"),
-            sh.ph.indent(
-                sh.pg.sentences([
-                    sh.sentence([
-                        t_remove_to_fountain_pen.Error($.error)
+            ]))
+            case 'error building lib': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("could not build lib: ("),
+                sh.ph.serialize(t_path_to_text.Context_Path($.path)),
+                sh.ph.literal(")"),
+                sh.ph.indent(
+                    t_tsc_to_fountain_pen.Error($.error, $p)
+                )
+            ]))
+            case 'error removing test dist dir': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("could not remove test dist dir: ("),
+                sh.ph.serialize(t_path_to_text.Context_Path($.path)),
+                sh.ph.literal("/test)"),
+                sh.ph.indent(
+                    sh.pg.sentences([
+                        sh.sentence([
+                            t_remove_to_fountain_pen.Error($.error)
+                        ])
                     ])
-                ])
-            )
-        ]))
-        case 'error building test': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("could not build test: ("),
-            sh.ph.serialize(t_path_to_text.Context_Path($.path)),
-            sh.ph.literal(")"),
-            sh.ph.indent(
-                t_tsc_to_fountain_pen.Error($.error, $p)
-            )
-        ]))
-        case 'error statting app dir': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("error statting /app directory: "),
-            t_stat_possible_node_to_fountain_pen.Error($)
-        ]))
-        case 'error removing app dist dir': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("could not remove app dist dir: ("),
-            sh.ph.serialize(t_path_to_text.Context_Path($.path)),
-            sh.ph.literal("/app)"),
-            sh.ph.indent(
-                sh.pg.sentences([
-                    sh.sentence([
-                        t_remove_to_fountain_pen.Error($.error)
+                )
+            ]))
+            case 'error building test': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("could not build test: ("),
+                sh.ph.serialize(t_path_to_text.Context_Path($.path)),
+                sh.ph.literal(")"),
+                sh.ph.indent(
+                    t_tsc_to_fountain_pen.Error($.error, $p)
+                )
+            ]))
+            case 'error statting app dir': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("error statting /app directory: "),
+                t_stat_possible_node_to_fountain_pen.Error($)
+            ]))
+            case 'error removing app dist dir': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("could not remove app dist dir: ("),
+                sh.ph.serialize(t_path_to_text.Context_Path($.path)),
+                sh.ph.literal("/app)"),
+                sh.ph.indent(
+                    sh.pg.sentences([
+                        sh.sentence([
+                            t_remove_to_fountain_pen.Error($.error)
+                        ])
                     ])
-                ])
-            )
-        ]))
-        case 'error building app': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("could not build app: ("),
-            sh.ph.serialize(t_path_to_text.Context_Path($.path)),
-            sh.ph.literal(")"),
-            sh.ph.indent(
-                t_tsc_to_fountain_pen.Error($.error, $p)
-            )
-        ]))
-        case 'error setting permissions on app dist bin.js': return p_.ss($, ($) => sh.ph.composed([
-            sh.ph.literal("could not set permissions on app dist bin.js: ("),
-            sh.ph.serialize(t_path_to_text.Context_Path($.path)),
-            sh.ph.literal(")"),
-            t_chmod_to_fountain_pen.Error($.error)
-        ]))
-        default: return p_.au($[0])
-    }
-})
+                )
+            ]))
+            case 'error building app': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("could not build app: ("),
+                sh.ph.serialize(t_path_to_text.Context_Path($.path)),
+                sh.ph.literal(")"),
+                sh.ph.indent(
+                    t_tsc_to_fountain_pen.Error($.error, $p)
+                )
+            ]))
+            case 'error setting permissions on app dist bin.js': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("could not set permissions on app dist bin.js: ("),
+                sh.ph.serialize(t_path_to_text.Context_Path($.path)),
+                sh.ph.literal(")"),
+                t_chmod_to_fountain_pen.Error($.error)
+            ]))
+            default: return p_.au($[0])
+        }
+    })

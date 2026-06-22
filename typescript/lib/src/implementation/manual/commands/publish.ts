@@ -15,124 +15,125 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 export const $$: interface_.procedures.publish = p_.command_procedure(
 
-    ($d, $s, $q, $c) => p_variables(() => {
-        const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': p_.literal.list(["typescript", "lib"]) })
-        return [
+    ($d, $s, $q, $c) => p_variables(
+        () => {
+            const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': p_.literal.list(["typescript", "lib"]) })
+            return [
 
-            $c['git push'].execute(
-                {
-                    'path': p_.literal.set($d['path to package']),
-                },
-                ($): d.Error => ['error while running git push', $],
-            ),
-
-            // $c['git assert is clean'].execute(
-            //     {
-            //         'path': p_.literal.set($d['path to package']),
-            //     },
-            //     ($) => ['error while running git assert is clean at the start', $],
-            // ),
-
-            $c['git make pristine'].execute(
-                {
-                    'path': p_.literal.set($d['path to package']),
-                },
-                ($) => ['error while running git make pristine', $],
-            ),
-
-            $c['update package dependencies'].execute(
-                {
-                    'path': $d['path to package'],
-                },
-                ($) => ['error while running update package dependencies', $],
-            ),
-
-            $c['build and test'].execute(
-                {
-                    'path': $d['path to package'],
-                },
-                ($) => ['error while running build and test', $],
-            ),
-
-            // $c['git assert is clean'].execute(
-            //     {
-            //         'path': p_.literal.set($d['path to package']),
-            //     },
-            //     ($) => ['error while running git assert is clean after updating package dependencies', $],
-            // ),
-
-            $c.npm.execute(
-                {
-                    'path': p_.literal.set(lib_path),
-                    'operation': ['version', $d.generation],
-                },
-                ($) => ['error while running npm version', $],
-            ),
-
-            // update the lib package-lock.json to reflect the new version
-            $c.npm.execute(
-                {
-                    'path': p_.literal.set(lib_path),
-                    'operation': ['update', {
-                        'package-lock only': true
-                    }],
-                },
-                ($) => ['error while running npm update', $],
-            ),
-
-            p_.s.query(
-                q_get_package_json.$$(
-                    null,
+                $c['git push'].execute(
                     {
-                        'read file': $q['read file'],
+                        'path': p_.literal.set($d['path to package']),
                     },
-                )(
-                    {
-                        'path to package': lib_path,
-                    },
-                    ($): d.Error => ['error while getting package.json', $]
+                    ($): d.Error => ['error while running git push', $],
                 ),
-                ($v) => {
-                    const package_info = $v
-                    return [
 
-                        $c['git extended commit'].execute(
-                            {
-                                'path': p_.literal.set($d['path to package']),
-                                'instruction': {
-                                    'commit message': "pdt: published version " + $v.version,
-                                    'stage all changes': true,
-                                    'push after commit': true,
-                                }
-                            },
-                            ($): d.Error => ['error while running git extended commit', $],
-                        ),
+                // $c['git assert is clean'].execute(
+                //     {
+                //         'path': p_.literal.set($d['path to package']),
+                //     },
+                //     ($) => ['error while running git assert is clean at the start', $],
+                // ),
 
-                        $c['npm publish'].execute(
-                            {
-                                'path': lib_path,
-                                'impact': $d.impact,
-                            },
-                            ($) => ['error while running npm publish', $],
-                        ),
+                $c['git make pristine'].execute(
+                    {
+                        'path': p_.literal.set($d['path to package']),
+                    },
+                    ($) => ['error while running git make pristine', $],
+                ),
 
-                        $c.log.execute(
-                            {
-                                'message': sh.pg.sentences([
-                                    sh.sentence([
-                                        sh.ph.literal("published:"),
-                                        sh.ph.literal(package_info.name),
-                                        sh.ph.literal("@"),
-                                        sh.ph.literal(package_info.version),
+                $c['update package dependencies'].execute(
+                    {
+                        'path': $d['path to package'],
+                    },
+                    ($) => ['error while running update package dependencies', $],
+                ),
+
+                $c['build and test'].execute(
+                    {
+                        'path': $d['path to package'],
+                    },
+                    ($) => ['error while running build and test', $],
+                ),
+
+                // $c['git assert is clean'].execute(
+                //     {
+                //         'path': p_.literal.set($d['path to package']),
+                //     },
+                //     ($) => ['error while running git assert is clean after updating package dependencies', $],
+                // ),
+
+                $c.npm.execute(
+                    {
+                        'path': p_.literal.set(lib_path),
+                        'operation': ['version', $d.generation],
+                    },
+                    ($) => ['error while running npm version', $],
+                ),
+
+                // update the lib package-lock.json to reflect the new version
+                $c.npm.execute(
+                    {
+                        'path': p_.literal.set(lib_path),
+                        'operation': ['update', {
+                            'package-lock only': true
+                        }],
+                    },
+                    ($) => ['error while running npm update', $],
+                ),
+
+                p_.s.query(
+                    q_get_package_json.$$(
+                        null,
+                        {
+                            'read file': $q['read file'],
+                        },
+                    )(
+                        {
+                            'path to package': lib_path,
+                        },
+                        ($): d.Error => ['error while getting package.json', $]
+                    ),
+                    ($v) => {
+                        const package_info = $v
+                        return [
+
+                            $c['git extended commit'].execute(
+                                {
+                                    'path': p_.literal.set($d['path to package']),
+                                    'instruction': {
+                                        'commit message': "pdt: published version " + $v.version,
+                                        'stage all changes': true,
+                                        'push after commit': true,
+                                    }
+                                },
+                                ($): d.Error => ['error while running git extended commit', $],
+                            ),
+
+                            $c['npm publish'].execute(
+                                {
+                                    'path': lib_path,
+                                    'impact': $d.impact,
+                                },
+                                ($) => ['error while running npm publish', $],
+                            ),
+
+                            $c.log.execute(
+                                {
+                                    'message': sh.pg.sentences([
+                                        sh.sentence([
+                                            sh.ph.literal("published:"),
+                                            sh.ph.literal(package_info.name),
+                                            sh.ph.literal("@"),
+                                            sh.ph.literal(package_info.version),
+                                        ])
                                     ])
-                                ])
-                            },
-                            ($): d.Error => ['error while logging', $],
-                        ),
+                                },
+                                ($): d.Error => ['error while logging', $],
+                            ),
 
-                    ]
-                }
-            )
-        ]
-    })
+                        ]
+                    }
+                )
+            ]
+        })
 )

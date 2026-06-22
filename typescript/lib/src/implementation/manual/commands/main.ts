@@ -49,13 +49,14 @@ export const $$: interface_.procedures.main = p_.command_procedure(
                     {
                         'message': sh.pg.sentences([
                             sh.sentence([
-                                p_temp.from.state($).decide(($) => {
-                                    switch ($[0]) {
-                                        case 'parse': return p_temp.ss($, ($) => t_bin_to_fountain_pen.Error($))
-                                        case 'execute command': return p_temp.ss($, ($) => t_api_to_fountain_pen.Error($))
-                                        default: return p_temp.au($[0])
-                                    }
-                                })
+                                p_temp.from.state($).decide(
+                                    ($) => {
+                                        switch ($[0]) {
+                                            case 'parse': return p_temp.ss($, ($) => t_bin_to_fountain_pen.Error($))
+                                            case 'execute command': return p_temp.ss($, ($) => t_api_to_fountain_pen.Error($))
+                                            default: return p_temp.au($[0])
+                                        }
+                                    })
                             ])
                         ])
                     },
