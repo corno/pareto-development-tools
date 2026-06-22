@@ -37,9 +37,8 @@ export const Result: Result = ($) => {
                                 return p_.literal.set(({
                                     'from': from,
                                     'to': id,
-                                    'attributes': p_.from.optional(
-                                        p_.from.dictionary(pacakges).get_possible_entry(id)
-                                    ).decide(
+                                    'attributes': p_.from.dictionary(pacakges).get_possible_entry(
+                                        id,
                                         ($) => p_.literal.list([]),
                                         () => p_.literal.list<d_out_attributes.Attributes.L>([
                                             ['color', "red"]

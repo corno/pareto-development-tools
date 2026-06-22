@@ -126,7 +126,7 @@ export const NPM_Package: p_ri.Refiner<
         'name': name,
         'version': version,
         'dependencies': p_.from.optional(
-            p_temp.from.dictionary(root).get_possible_entry("dependencies"),
+            p_.from.dictionary(root).get_possible_entry("dependencies"),
         ).map(
             ($) => Object_(
                 $,

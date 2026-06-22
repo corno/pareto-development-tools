@@ -220,7 +220,7 @@ export namespace defined {
             switch ($[0]) {
 
                 case 'group': return p_.ss($, ($) => {
-                    const expected = $
+                    const $v_expected = $
                     return ['dictionary', dir.__d_map_deprecated(($, id) => {
                         const node = $
                         const NodeX = (
@@ -298,9 +298,8 @@ export namespace defined {
                                 default: return p_.au($[0])
                             }
                         })
-                        return p_.from.optional(
-                            p_.from.dictionary(expected).get_possible_entry(id)
-                        ).decide(
+                        return p_.from.dictionary($v_expected).get_possible_entry(
+                            id,
                             ($) => NodeX(
                                 node,
                                 {
