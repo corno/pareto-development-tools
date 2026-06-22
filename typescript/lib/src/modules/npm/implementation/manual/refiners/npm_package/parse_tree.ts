@@ -1,7 +1,8 @@
 import * as p_ from 'pareto-core/dist/implementation/refiner'
-import * as p_temp from 'pareto-core/dist/implementation/transformer'
+import * as p_t from 'pareto-core/dist/implementation/transformer'
 import * as p_di from 'pareto-core/dist/interface/data'
 import * as p_ri from 'pareto-core/dist/interface/refiner'
+import p_change_context from 'pareto-core/dist/implementation/refiner/specials/change_context'
 
 //data types
 import * as d_in from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
@@ -94,49 +95,57 @@ export const NPM_Package: p_ri.Refiner<
     d_function.Error['type'],
     d_in.Document
 > = ($, abort) => {
-    
 
-    const root = Object_(
-        $.content,
-        ($) => abort(['missing root object', null])
-    )
-    const name = Text(
-        Property(
-            root,
-            ($) => abort(['name', ['missing', null]]),
-            {
-                'id': "name",
-            }
+    return p_change_context(
+        Object_(
+            $.content,
+            ($) => abort(['missing root object', null])
         ),
-        (error) => abort(['name', ['not a text', null]])
-    )
+        ($) => {
 
-    const version = Text(
-        Property(
-            root,
-            ($) => abort(['version', ['missing', null]]),
-            {
-                'id': "version",
-            }
-        ),
-        (error) => abort(['version', ['not a text', null]])
-    )
-
-    return {
-        'name': name,
-        'version': version,
-        'dependencies': p_.from.optional(
-            p_.from.dictionary(root).get_possible_entry("dependencies"),
-        ).map(
-            ($) => Object_(
-                $,
-                ($) => abort(['dependencies', ['not an object', null]])
-            ).__d_map_deprecated(
-                ($, id) => Text(
+            const $p_name = Text(
+                Property(
                     $,
-                    ($) => abort(['dependencies', ['not a text', id]])
-                )
+                    ($) => abort(['name', ['missing', null]]),
+                    {
+                        'id': "name",
+                    }
+                ),
+                (error) => abort(['name', ['not a text', null]])
             )
-        )
-    }
+
+            const $p_version = Text(
+                Property(
+                    $,
+                    ($) => abort(['version', ['missing', null]]),
+                    {
+                        'id': "version",
+                    }
+                ),
+                (error) => abort(['version', ['not a text', null]])
+            )
+
+            return {
+                'name': $p_name,
+                'version': $p_version,
+                'dependencies': p_t.from.dictionary($).get_possible_entry(
+                    "dependencies",
+                    ($) => p_.literal.set(p_change_context(
+                        Object_(
+                            $,
+                            ($) => abort(['dependencies', ['not an object', null]])
+                        ),
+                        ($) => p_.from.dictionary($).map(
+                            ($, id) => Text(
+                                $,
+                                ($) => abort(['dependencies', ['not a text', id]])
+                            )
+                        )
+                    )),
+                    () => p_.literal.not_set()
+                ),
+            }
+        }
+    )
+
 }

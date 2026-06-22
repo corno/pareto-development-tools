@@ -9,7 +9,7 @@ import * as d_out_attributes from "pareto-graphviz/dist/interface/generated/lian
 export type Result = p_i.Transformer<d_in.Result, d_out.Graph>
 
 export const Result: Result = ($) => {
-    const pacakges = $.packages
+    const $v_packages = $.packages
     return {
         'attributes': p_.literal.list<d_out_attributes.Attributes.L>([
             ['rankdir', ['LR', null]],
@@ -37,7 +37,7 @@ export const Result: Result = ($) => {
                                 return p_.literal.set(({
                                     'from': from,
                                     'to': id,
-                                    'attributes': p_.from.dictionary(pacakges).get_possible_entry(
+                                    'attributes': p_.from.dictionary($v_packages).get_possible_entry(
                                         id,
                                         ($) => p_.literal.list([]),
                                         () => p_.literal.list<d_out_attributes.Attributes.L>([
