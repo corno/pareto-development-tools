@@ -1,5 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/query'
-
+import * as p_t from 'pareto-core/dist/implementation/transformer'
 
 import * as interface_ from "../../../interface/queries"
 
@@ -12,7 +12,7 @@ export const $$: interface_.query_functions.is_inside_work_tree = p_.query_funct
             {
                 'working directory': p_.literal.not_set(),
                 'args': p_.literal.segmented_list([
-                    $d.path.__decide(
+                    p_t.from.optional($d.path).decide(
                         ($) => p_.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),
@@ -36,7 +36,7 @@ export const $$: interface_.query_functions.is_inside_work_tree = p_.query_funct
                     case 'failed to spawn': return p_.ss($, ($) => p_.e.direct_error(['could not run git command', {
                         'message': $.message
                     }]))
-                    case 'non zero exit code': return p_.ss($, ($) => $['exit code'].__decide(
+                    case 'non zero exit code': return p_.ss($, ($) => p_t.from.optional($['exit code']).decide(
                         ($) => $ === 128,
                         () => false
                     )

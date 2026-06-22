@@ -1,4 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_t from 'pareto-core/dist/implementation/transformer'
 
 import * as interface_ from "../../../interface/commands"
 
@@ -16,7 +17,7 @@ export const $$: interface_.procedures.tsc = p_.command_procedure(
                     p_.literal.list([
                         "--pretty",
                     ]),
-                    $d.path.__decide(
+                    p_t.from.optional($d.path).decide(
                         ($) => p_.literal.list([
                             "--project",
                             t_path_to_text.Context_Path($),

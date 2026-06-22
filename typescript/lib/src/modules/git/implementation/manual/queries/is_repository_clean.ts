@@ -1,4 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/query'
+import * as p_t from 'pareto-core/dist/implementation/transformer'
 import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
 import * as interface_ from "../../../interface/queries"
@@ -14,7 +15,7 @@ export const $$: interface_.query_functions.is_repository_clean = p_.query_funct
         {
             'working directory': p_.literal.not_set(),
             'args': p_.literal.segmented_list([
-                $d.path.__decide(
+                p_t.from.optional($d.path).decide(
                     ($) => p_.literal.list([
                         "-C",
                         t_path_to_text.Context_Path($),

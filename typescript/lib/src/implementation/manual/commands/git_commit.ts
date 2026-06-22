@@ -1,4 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_t from 'pareto-core/dist/implementation/transformer'
 
 import * as interface_ from "../../../interface/commands"
 
@@ -35,7 +36,7 @@ export const $$: interface_.procedures.git_commit = p_.command_procedure(
                                 'instruction': {
                                     'stage all changes': true,
                                     'commit message': "pdt"
-                                        + $.__decide(
+                                        + p_t.from.optional($).decide(
                                             () => "(broken)",
                                             () => "",
                                         )

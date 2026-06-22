@@ -1,4 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_t from 'pareto-core/dist/implementation/transformer'
 
 import * as interface_ from "../../../interface/commands"
 
@@ -14,7 +15,7 @@ export const $$: interface_.procedures.make_pristine = p_.command_procedure(
             {
                 'working directory': p_.literal.not_set(),
                 'args': p_.literal.segmented_list([
-                    $d.path.__decide(
+                    p_t.from.optional($d.path).decide(
                         ($) => p_.literal.list([
                             "-C",
                             t_path_to_text.Context_Path($),

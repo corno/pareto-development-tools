@@ -12,7 +12,7 @@ export const $$: interface_.procedures.npm = p_.command_procedure(
             {
                 'working directory': p_.literal.not_set(),
                 'args': p_.literal.segmented_list([
-                    $d.path.__decide(
+                    p_temp.from.optional($d.path).decide(
                         ($) => p_.literal.list([
                             "--prefix",
                             t_path_to_text.Context_Path($),

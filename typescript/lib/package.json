@@ -16,7 +16,7 @@
     "pareto-fountain-pen-file-structure": "^0.1.0",
     "pareto-graphviz": "^0.2.0",
     "pareto-json": "^0.3.0",
-    "pareto-resources": "^0.2.118",
+    "pareto-resources": "^0.2.0",
     "pareto-static-html": "^0.1.0",
     "pareto-stream": "^0.1.0"
   }
