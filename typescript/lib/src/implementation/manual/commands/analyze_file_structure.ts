@@ -27,10 +27,6 @@ export const $$: interface_.procedures.analyze_file_structure = p_.command_proce
 
                 $c.log.execute(
                     {
-
-
-
-
                         'message': t_csv_to_fountain_pen.CSV(
                             t_file_structure_analysis_to_csv.File_Analysis_List(
                                 t_project_files_to_file_analysis_list.Project_Files($v)

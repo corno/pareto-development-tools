@@ -1,10 +1,10 @@
-import * as p_ from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/dist/implementation/refiner'
+import * as p_temp from 'pareto-core/dist/implementation/transformer'
 import * as p_di from 'pareto-core/dist/interface/data'
 import * as p_ri from 'pareto-core/dist/interface/refiner'
 
 //data types
-import * as d from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
-import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
+import * as d_in from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
 import * as d_out from "../../../../interface/data/npm_package"
 import * as d_function from "../../../../interface/data/deserialize_package_json"
 
@@ -14,16 +14,16 @@ type Error_Expect_Object =
     | ['duplicate identifier', string]
     | ['missing value', null]
 
-type Object = p_di.Dictionary<d.Value>
+type Object_ = p_di.Dictionary<d_in.Value>
 
-//dependencies
-import * as t_parse_tree_from_list_of_characters from "astn-core/dist/implementation/manual/refiners/parse_tree/list_of_characters"
+const Object_: p_ri.Refiner<
+    Object_,
+    Error_Expect_Object,
+    d_in.Value
+> = ($, abort) => {
 
-
-const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never): Object => {
-
-    const expect_unique_identifiers_fixme = ($: d.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object => {
-        const temp: { [id: string]: d.Value } = {}
+    const expect_unique_identifiers_fixme = ($: d_in.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object_ => {
+        const temp: { [id: string]: d_in.Value } = {}
         p_.from.list($).map(($) => {
             if (temp[$.id.token.value] !== undefined) {
                 abort(['duplicate identifier', $.id.token.value])
@@ -59,7 +59,11 @@ const expect_object = ($: d.Value, abort: (error: Error_Expect_Object) => never)
     })
 }
 
-const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never): string => p_.from.state($.type).decide(($) => {
+const Text: p_ri.Refiner<
+    string,
+    ['not a text', null],
+    d_in.Value
+> = ($, abort) => p_.from.state($.type).decide(($) => {
     switch ($[0]) {
         case 'concrete': return p_.ss($, ($) => p_.from.state($).decide(($) => {
             switch ($[0]) {
@@ -71,40 +75,66 @@ const expect_text = ($: d.Value, abort: (error: ['not a text', null]) => never):
     }
 })
 
-const expect_property = ($: Object, id: string, abort: (error: ['missing property', string]) => never): d.Value => $.__get_entry_deprecated(
-    id,
+const Property: p_ri.Refiner_With_Parameter<
+    d_in.Value,
+    ['missing property', string],
+    Object_,
     {
-        no_such_entry: () => abort(['missing property', id])
+        'id': string
+    }
+> = ($, abort, $p): d_in.Value => p_.from.dictionary($).get_entry(
+    $p.id,
+    {
+        no_such_entry: () => abort(['missing property', $p.id])
     }
 )
 
-export const $$: p_ri.Refiner<d_out.NPM_Package, d_function.Error['type'], d_in.List_of_Characters> = ($, abort) => {
-    const x = t_parse_tree_from_list_of_characters.Document(
-        $,
-        ($) => abort(['invalid ASTN', $]),
-        {
-            'tab size': 4,
-        },
+export const NPM_Package: p_ri.Refiner<
+    d_out.NPM_Package,
+    d_function.Error['type'],
+    d_in.Document
+> = ($, abort) => {
+    
+
+    const root = Object_(
+        $.content,
+        ($) => abort(['missing root object', null])
+    )
+    const name = Text(
+        Property(
+            root,
+            ($) => abort(['name', ['missing', null]]),
+            {
+                'id': "name",
+            }
+        ),
+        (error) => abort(['name', ['not a text', null]])
     )
 
-    const root = expect_object(x.content, (error) => abort(['missing root object', null]))
-    const name = expect_text(expect_property(root, 'name', (error) => abort(['name', ['missing', null]])), (error) => abort(['name', ['not a text', null]]))
-
-    const version = expect_text(expect_property(root, 'version', (error) => abort(['version', ['missing', null]])), (error) => abort(['version', ['not a text', null]]))
+    const version = Text(
+        Property(
+            root,
+            ($) => abort(['version', ['missing', null]]),
+            {
+                'id': "version",
+            }
+        ),
+        (error) => abort(['version', ['not a text', null]])
+    )
 
     return {
         'name': name,
         'version': version,
         'dependencies': p_.from.optional(
-            root.__get_possible_entry_deprecated('dependencies'),
+            p_temp.from.dictionary(root).get_possible_entry("dependencies"),
         ).map(
-            ($) => expect_object(
+            ($) => Object_(
                 $,
-                (error) => abort(['dependencies', ['not an object', null]])
+                ($) => abort(['dependencies', ['not an object', null]])
             ).__d_map_deprecated(
-                ($, id) => expect_text(
+                ($, id) => Text(
                     $,
-                    (error) => abort(['dependencies', ['not a text', id]])
+                    ($) => abort(['dependencies', ['not a text', id]])
                 )
             )
         )

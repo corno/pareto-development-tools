@@ -27,7 +27,7 @@ const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Chara
     let index = -1
 
     return p_list_build_deprecated(($i) => {
-        chars.__l_map_deprecated(($) => {
+        p_t.from.list(chars).map(($) => {
             index += 1
             if (index < new_length) {
                 $i['add item']($)

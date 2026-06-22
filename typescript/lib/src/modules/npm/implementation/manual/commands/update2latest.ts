@@ -16,7 +16,6 @@ export const $$: interface_.procedures.update2latest = p_.command_procedure(
                         t_path_to_text.Context_Path($d.path),
                     ]),
                     p_temp.from.state($d.what).decide(($) => {
-                        // p_log_debug_message(`Updating ${$d.path} to latest`, () => {})
                         switch ($[0]) {
                             case 'dependencies': return p_temp.ss($, ($) => {
                                 return p_temp.literal.list(["dependencies"])
@@ -27,7 +26,6 @@ export const $$: interface_.procedures.update2latest = p_.command_procedure(
                             default: return p_temp.au($[0])
                         }
                     }),
-                    // $d.verbose ? _pt.literal.list(["verbose"]) : _pt.literal.list([]),
                     p_temp.literal.list(["verbose"])
                 ]),
             },

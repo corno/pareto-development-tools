@@ -18,7 +18,7 @@ import { $$ as x_structure } from "../../../../data/structure"
 
 export type Parameters = {
     'expected structure': d_structure.Directory,
-    'structure path': string,
+    'structure path': d_out.Path,
 }
 
 
@@ -58,7 +58,7 @@ export namespace interface_ {
             d_out.Directory,
             {
                 'structure': d_out.Structure_Analysis,
-                'unexpected path tail': p_di.Optional_Value<string>,
+                'unexpected path tail': p_di.Optional_Value<d_out.Path>,
             }
         >
 
@@ -68,7 +68,7 @@ export namespace interface_ {
             {
                 'structure': d_out.Structure_Analysis,
                 'name': string,
-                'unexpected path tail': p_di.Optional_Value<string>,
+                'unexpected path tail': p_di.Optional_Value<d_out.Path>,
             }
         >
 
@@ -81,8 +81,8 @@ export namespace interface_ {
             d_out.Directory,
             {
                 'wildcard': d_structure.Directory.wildcards,
-                'structure path': string,
-                'tail': string,
+                'structure path': d_out.Path,
+                'tail': d_out.Path,
                 'number of directories encountered': number,
             }
         >
@@ -96,12 +96,12 @@ export namespace interface_ {
 export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary(
     $
 ).flatten_to_list(
-    ($, id) => {
+    ($, id): d_out.File_Analysis_List => {
         const package_name = id
         const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {
             const temp: { [id: string]: d_out.File_Analysis } = {}
             const x = ($: d_out.Directory, path: string): void => {
-                p_.from.state($).decide( ($): null => {
+                p_.from.state($).decide(($): null => {
                     switch ($[0]) {
                         case 'expected a file': return p_.ss($, ($) => {
                             return null
@@ -143,7 +143,7 @@ export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary
                     $,
                     {
                         'expected structure': x_structure,
-                        'structure path': "",
+                        'structure path': p_.literal.list([]),
                     }
                 )
             ),
@@ -216,7 +216,7 @@ export namespace defined {
         //both found and expected are directories
 
         const dir = $
-        return p_.from.state($p['expected structure']).decide( ($): d_out.Directory => {
+        return p_.from.state($p['expected structure']).decide(($): d_out.Directory => {
             switch ($[0]) {
 
                 case 'group': return p_.ss($, ($) => {
@@ -228,7 +228,7 @@ export namespace defined {
                             $p: {
                                 'name': string,
                                 'expected structure': d_structure.Directory.group.D,
-                                'structure path': string,
+                                'structure path': d_out.Path,
                             }
                         ): d_out.Node => p_.from.state($).decide(($): d_out.Node => {
                             switch ($[0]) {
@@ -270,7 +270,9 @@ export namespace defined {
                                                     default: return p_.au($[0])
                                                 }
                                             }))
-                                            case 'directory': return p_.ss($, ($) => p_.literal.set($p.name))
+                                            case 'directory': return p_.ss($, ($) => p_.literal.set(p_.literal.list([
+                                                $p['name'],
+                                            ])))
                                             default: return p_.au($[0])
                                         }
                                     })
@@ -296,13 +298,18 @@ export namespace defined {
                                 default: return p_.au($[0])
                             }
                         })
-                        return p_.from.optional(expected.__get_possible_entry_deprecated(id)).decide(
+                        return p_.from.optional(
+                            p_.from.dictionary(expected).get_possible_entry(id)
+                        ).decide(
                             ($) => NodeX(
                                 node,
                                 {
                                     'name': id,
                                     'expected structure': $,
-                                    'structure path': `${$p['structure path']}/${id}`,
+                                    'structure path': p_.literal.chain(
+                                        $p['structure path'],
+                                        id,
+                                    ),
                                 }
                             ),
                             () => undefined.Node( //no expected structure for this entry
@@ -313,7 +320,9 @@ export namespace defined {
                                         'classification': ['directory', ['group', null]],
                                         'path': $p['structure path'],
                                     },
-                                    'unexpected path tail': p_.literal.set(`/${id}`),
+                                    'unexpected path tail': p_.literal.set(p_.literal.list([
+                                        id,
+                                    ])),
                                 }
                             )
                         )
@@ -335,7 +344,7 @@ export namespace defined {
                     {
                         'wildcard': $,
                         'structure path': $p['structure path'],
-                        'tail': "",
+                        'tail': p_.literal.list([]),
                         'number of directories encountered': 0,
                     }
                 ))
@@ -359,18 +368,26 @@ export namespace defined {
                                 $,
                                 {
                                     'expected structure': struct,
-                                    'structure path': `${$p['structure path']}/*`,
+                                    'structure path': p_.literal.chain(
+                                        $p['structure path'],
+                                        "*",
+                                    )
                                 }
                             )])
                             case 'other': return p_.ss($, ($) => ['other', null])
                             case 'file': return p_.ss($, ($): d_out.Node => ['file', {
                                 'structure': {
-                                    'path': `${$p['structure path']}/*`,
+                                    'path': p_.literal.chain(
+                                        $p['structure path'],
+                                        "*",
+                                    ),
                                     'classification': ['directory', ['dictionary', null]],
                                 },
                                 'extension': extension(id),
                                 'line count': line_count($),
-                                'unexpected path tail': p_.literal.set(`/${id}`),
+                                'unexpected path tail': p_.literal.set(p_.literal.list([
+                                    id,
+                                ])),
                             }])
                             default: return p_.au($[0])
                         }
@@ -391,7 +408,10 @@ export namespace undefined {
             {
                 'name': id,
                 'structure': $p.structure,
-                'unexpected path tail': p_.from.optional($p['unexpected path tail']).map(($) => $ + "/" + id),
+                'unexpected path tail': p_.from.optional($p['unexpected path tail']).map(($) => p_.literal.chain(
+                    $,
+                    id,
+                )),
             }
         ))]
     }
@@ -427,7 +447,10 @@ export namespace wildcard {
 
     export const Directory: interface_.wildcard.Directory = ($, $p) => {
         return ['dictionary', $.__d_map_deprecated(($, id) => {
-            const tail = $p.tail + "/" + id
+            const tail = p_.literal.chain(
+                $p.tail,
+                id,
+            )
             return p_.from.state($).decide(($): d_out.Node => {
                 switch ($[0]) {
                     case 'other': return p_.ss($, ($) => ['other', null])
@@ -437,7 +460,7 @@ export namespace wildcard {
                             'classification': ['directory', ['wildcards', null]],
                         },
                         'extension': extension(id),
-                        'unexpected path tail': p_change_context($, ($) => {
+                        'unexpected path tail': p_change_context($, ($): d_out.File_Analysis['unexpected path tail'] => {
                             if ($p['number of directories encountered'] < $p['wildcard']['required directories']) {
                                 //files are not allowed yet, haven't descended through enough required directories
                                 return p_.literal.set(tail)

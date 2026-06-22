@@ -5,6 +5,7 @@ export type Directory =
     | ['dictionary', p_.Dictionary<Node>]
     | ['expected a file', null]
 
+export type Path = p_.List<string>
 
 export type Node =
     | ['other', null]
@@ -30,12 +31,12 @@ export type File_Classification =
 export type File_Analysis = {
     'structure': Structure_Analysis,
     'extension': p_.Optional_Value<string>,
-    'unexpected path tail': p_.Optional_Value<string>,
+    'unexpected path tail': p_.Optional_Value<Path>,
     'line count': number,
 }
 
 export type Structure_Analysis = {
-    'path': string
+    'path': Path,
     'classification': Classification
 }
 
