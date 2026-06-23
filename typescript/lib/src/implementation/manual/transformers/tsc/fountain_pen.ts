@@ -14,7 +14,7 @@ export type Error = p_i.Transformer_With_Parameter<
     }
 >
 
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 export const Error: Error = ($, $p) => p_.from.state($).decide(
     ($): d_out.Paragraph => {

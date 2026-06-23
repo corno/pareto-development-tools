@@ -14,7 +14,7 @@ import * as t_api_to_fountain_pen from "../transformers/execute_command/fountain
 import * as t_bin_to_fountain_pen from "../transformers/parse/fountain_pen"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 
 type My_Error =

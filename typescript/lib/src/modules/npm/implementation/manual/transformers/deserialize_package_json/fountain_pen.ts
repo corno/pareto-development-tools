@@ -17,7 +17,7 @@ import * as t_location_to_fp from "astn-core/dist/implementation/manual/transfor
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 export const Error: signatures.Error = ($) => sh.ph.composed([
     sh.ph.literal(t_path_to_text.Node_Path($['path'])),

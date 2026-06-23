@@ -6,13 +6,9 @@ import * as interface_ from "../../../interface/commands"
 //data types
 import * as d from "../../../interface/data/git_commit"
 
-//shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
-
 export const $$: interface_.procedures.git_commit = p_.command_procedure(
 
     ($d, $s, $q, $c) => [
-
 
         p_.s.if_(
             $d.instruction['accept broken commits'],
@@ -30,6 +26,7 @@ export const $$: interface_.procedures.git_commit = p_.command_procedure(
 
                     ],
                     ($) => [
+
                         $c['git extended commit'].execute(
                             {
                                 'path': p_.literal.set($d['path']),
@@ -47,6 +44,7 @@ export const $$: interface_.procedures.git_commit = p_.command_procedure(
                             },
                             ($): d.Error => ['git extended commit', $],
                         )
+                        
                     ]
                 ),
 

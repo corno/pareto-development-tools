@@ -15,7 +15,7 @@ export namespace signatures {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 //dependencies
 import * as t_tsc_to_fountain_pen from "../tsc/fountain_pen"

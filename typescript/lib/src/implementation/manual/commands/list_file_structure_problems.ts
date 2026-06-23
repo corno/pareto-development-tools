@@ -13,7 +13,7 @@ import * as t_to_text from "../transformers/file_structure_analysis/text"
 import { $$ as q_get_project_files } from "../queries/get_project_files"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 
 export const $$: interface_.procedures.list_file_structure_problems = p_.command_procedure(

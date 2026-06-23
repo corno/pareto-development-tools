@@ -11,7 +11,7 @@ d_in.Error, d_out.Phrase
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 //dependencies
 import * as t_git_commit_to_fountain_pen from "../git_commit/fountain_pen"

@@ -8,7 +8,7 @@ export type Error = p_i.Transformer<
 d_in.Error, d_out.Phrase
 >
 
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 import * as t_get_package_dependencies_to_fountain_pen from "../get_package_dependencies/fountain_pen"
 

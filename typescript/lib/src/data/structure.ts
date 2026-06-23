@@ -1,4 +1,4 @@
-import * as sh from "../shorthands/structure"
+import * as sh from "../shorthands/structure/manual"
 
 const $_interface = sh.g.directory_group({
     "commands.ts": sh.g.file_manual(),
@@ -11,7 +11,6 @@ const $_interface = sh.g.directory_group({
 
 const $_implementation = sh.g.directory_group({
     "generated": sh.g.directory_generated(true),
-
     "manual": sh.g.directory_group({
         "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
         "productions": sh.g.directory_wildcards(1, false, ["ts"], false),
@@ -69,9 +68,17 @@ export const $$ = sh.dgroup({
                 "modules": sh.g.directory_dictionary(sh.dgroup({
                     "interface": $_interface,
                     "implementation": $_implementation,
-                    "shorthands": sh.g.directory_wildcards(0, false, ["ts"], false),
+                    "shorthands": sh.g.directory_dictionary(sh.dgroup({
+                        "deprecated.ts": sh.g.file_manual(),
+                        "manual.ts": sh.g.file_manual(),
+                        "target.ts": sh.g.file_manual(),
+                    })),
                 })),
-                "shorthands": sh.g.directory_wildcards(0, false, ["ts"], false),
+                "shorthands": sh.g.directory_dictionary(sh.dgroup({
+                    "deprecated.ts": sh.g.file_manual(),
+                    "manual.ts": sh.g.file_manual(),
+                    "target.ts": sh.g.file_manual(),
+                })),
             }),
             "tsconfig.json": sh.g.file_generated(true)
         }),

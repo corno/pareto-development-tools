@@ -11,7 +11,7 @@ import * as t_path_to_path from "pareto-resources/dist/implementation/manual/tra
 import * as q_get_package_json from "../../../modules/npm/implementation/manual/queries/get_package_json"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 export const $$: interface_.procedures.publish = p_.command_procedure(
 

@@ -16,7 +16,7 @@ export type Signature = p_i.Transformer_With_Parameter<
 >
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
+import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 export const CSV: Signature = ($, $p) => sh.pg.sentences(
     p_.from.list($).map(
