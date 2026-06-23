@@ -22,7 +22,8 @@ export const Error: Error = ($) => {
             switch ($[0]) {
                 case 'error while running npm command': return p_.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("error while running npm command: "),
-                    sh.ph.indent(sh.pg.sentences([
+                    sh.ph.indent(
+sh.pg.sentences([
                         sh.sentence([
                             t_epe_to_fountain_pen.Error($)
                         ])
@@ -30,7 +31,8 @@ export const Error: Error = ($) => {
                 ]))
                 case 'error while running npm query': return p_.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("error while running npm query: "),
-                    sh.ph.indent(sh.pg.sentences([
+                    sh.ph.indent(
+sh.pg.sentences([
                         sh.sentence([
                             t_eqe_to_fountain_pen.Error($)
                         ])
@@ -38,7 +40,8 @@ export const Error: Error = ($) => {
                 ]))
                 case 'error while running tar': return p_.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("error while running tar: "),
-                    sh.ph.indent(sh.pg.sentences([
+                    sh.ph.indent(
+sh.pg.sentences([
                         sh.sentence([
                             t_epe_to_fountain_pen.Error($)
                         ])
@@ -46,7 +49,8 @@ export const Error: Error = ($) => {
                 ]))
                 case 'error while creating directory': return p_.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("error while creating directory: "),
-                    sh.ph.indent(sh.pg.sentences([
+                    sh.ph.indent(
+sh.pg.sentences([
                         sh.sentence([
                             t_make_directory_to_fountain_pen.Error($)
                         ])

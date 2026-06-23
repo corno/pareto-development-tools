@@ -17,7 +17,8 @@ export const Error: Error = ($) => p_.from.state($).decide(
         switch ($[0]) {
             case 'log': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("log: "),
-                sh.ph.indent(sh.pg.sentences([
+                sh.ph.indent(
+sh.pg.sentences([
                     // t_tsc_to_fountain_pen.Error($)
                 ]))
             ]))

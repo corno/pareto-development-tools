@@ -19,7 +19,8 @@ export const Error: Error = ($) => {
             switch ($[0]) {
                 case 'error while reading package.json': return p_.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("error while reading package.json: "),
-                    sh.ph.indent(sh.pg.sentences([
+                    sh.ph.indent(
+sh.pg.sentences([
                         sh.sentence([
                             t_read_file_to_fountain_pen.Error($)
                         ])
@@ -27,7 +28,8 @@ export const Error: Error = ($) => {
                 ]))
                 case 'error while parsing package.json': return p_.ss($, ($) => sh.ph.composed([
                     sh.ph.literal("error while parsing package.json: "),
-                    sh.ph.indent(sh.pg.sentences([
+                    sh.ph.indent(
+sh.pg.sentences([
                         sh.sentence([
                             t_deserialize_package_json_to_fountain_pen.Error($)
                         ])

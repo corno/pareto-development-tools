@@ -65,20 +65,23 @@ export const $$ = sh.dgroup({
                 "implementation": $_implementation,
                 "interface": $_interface,
                 "index.ts": sh.g.file_generated(true),
-                "modules": sh.g.directory_dictionary(sh.dgroup({
-                    "interface": $_interface,
-                    "implementation": $_implementation,
-                    "shorthands": sh.g.directory_dictionary(sh.dgroup({
+                "modules": sh.g.directory_dictionary(
+                    sh.dgroup({
+                        "interface": $_interface,
+                        "implementation": $_implementation,
+                        "shorthands": sh.g.directory_dictionary(
+                            sh.dgroup({
+                                "deprecated.ts": sh.g.file_manual(),
+                                "manual.ts": sh.g.file_manual(),
+                                "target.ts": sh.g.file_manual(),
+                            })),
+                    })),
+                "shorthands": sh.g.directory_dictionary(
+                    sh.dgroup({
                         "deprecated.ts": sh.g.file_manual(),
                         "manual.ts": sh.g.file_manual(),
                         "target.ts": sh.g.file_manual(),
                     })),
-                })),
-                "shorthands": sh.g.directory_dictionary(sh.dgroup({
-                    "deprecated.ts": sh.g.file_manual(),
-                    "manual.ts": sh.g.file_manual(),
-                    "target.ts": sh.g.file_manual(),
-                })),
             }),
             "tsconfig.json": sh.g.file_generated(true)
         }),

@@ -23,7 +23,8 @@ export const Error: Error = ($) => p_.from.state($).decide(
                         sh.ph.literal("package "),
                         sh.ph.literal(id),
                         sh.ph.literal(": "),
-                        sh.ph.indent(sh.pg.sentences([
+                        sh.ph.indent(
+sh.pg.sentences([
                             sh.sentence([
                                 p_.from.state($).decide(
                                     ($) => {

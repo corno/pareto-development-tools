@@ -15,7 +15,8 @@ export const Error: Error = ($) => p_.from.state($).decide(
         switch ($[0]) {
             case 'expected one of': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("expected one of: "),
-                sh.ph.indent(sh.pg.sentences(
+                sh.ph.indent(
+sh.pg.sentences(
                     p_.from.dictionary($).convert_to_list(
                         ($, id) => sh.sentence([
                             sh.ph.literal(id)
