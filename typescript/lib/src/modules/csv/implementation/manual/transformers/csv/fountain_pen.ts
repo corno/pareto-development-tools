@@ -18,37 +18,36 @@ export type Signature = p_i.Transformer_With_Parameter<
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export const CSV: Signature = ($, $p) => sh.pg.sentences(p_.from.list($,
-).map(
-    ($) => sh.sentence([
-        sh.ph.rich(
-            p_.from.list($,
-            ).map(
-                ($) => sh.ph.serialize(
-                    p_.literal.segmented_list([
-                        p_.literal.list([
-                            0x22, //"
-                        ]),
-                        p_.from.list(p_list_from_text(
+export const CSV: Signature = ($, $p) => sh.pg.sentences(
+    p_.from.list($).map(
+        ($) => sh.sentence([
+            sh.ph.rich(
+                p_.from.list($,).map(
+                    ($) => sh.ph.serialize(
+                        p_.literal.segmented_list([
+                            p_.literal.list([
+                                0x22, //"
+                            ]),
+                            p_.from.list(p_list_from_text(
                                 $,
                                 ($) => $ === 0x22 //"
                                     ? p_.literal.list([0x22, 0x22]) //escape "
                                     : p_.literal.list([$]),
                             ),
-                        ).flatten(
-                            ($) => $
-                        ),
-                        p_.literal.list([
-                            0x22, //"
+                            ).flatten(
+                                ($) => $
+                            ),
+                            p_.literal.list([
+                                0x22, //"
+                            ])
                         ])
-                    ])
-                )
-            ),
-            sh.ph.nothing(),
-            sh.ph.nothing(),
-            sh.ph.serialize(p_.literal.list([$p.separator])),
-            sh.ph.nothing(),
-        )
-    ])
-))
+                    )
+                ),
+                sh.ph.nothing(),
+                sh.ph.nothing(),
+                sh.ph.serialize(p_.literal.list([$p.separator])),
+                sh.ph.nothing(),
+            )
+        ])
+    ))
 

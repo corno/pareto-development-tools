@@ -49,8 +49,7 @@ export const Error: signatures.Error = ($) => p_.from.state($).decide(
                             sh.ph.literal("could not execute command for the following packages:"),
                             sh.ph.indent(
                                 sh.pg.sentences(
-                                    p_.from.dictionary($,
-                                    ).convert_to_list(
+                                    p_.from.dictionary($).convert_to_list(
                                         ($, id) => sh.sentence([
                                             sh.ph.literal("package '"),
                                             sh.ph.literal(id),

@@ -93,8 +93,7 @@ export namespace interface_ {
 
 
 
-export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary($
-).flatten_to_list(
+export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary($).flatten_to_list(
     ($, id): d_out.File_Analysis_List => {
         const package_name = id
         const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {

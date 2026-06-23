@@ -25,8 +25,7 @@ export const File_Analysis_List: Signature = ($) => p_.literal.segmented_list([
             "line count",
         ]),
     ]),
-    p_.from.list($,
-    ).map(
+    p_.from.list($).map(
         ($) => p_.literal.list<string>([
             $.package,
             $.path,
