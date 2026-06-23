@@ -34,7 +34,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                         'option': 'group',
                         'value': ['dictionary', p_.from.dictionary($,
                         ).map(
-                            ($, id) => ['state', p_decide_state(
+                            ($, id): t_out.Value => ['state', p_decide_state(
                                 $,
                                 ($): t_out.Value.state => {
                                     switch ($[0]) {
