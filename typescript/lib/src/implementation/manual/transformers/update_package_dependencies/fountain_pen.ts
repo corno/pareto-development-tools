@@ -6,7 +6,9 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
-export type Error = p_i.Transformer<d_in.Error, d_out.Phrase>
+export type Error = p_i.Transformer<
+d_in.Error, d_out.Phrase
+>
 
 //dependencies
 import * as t_stat_possible_node_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"

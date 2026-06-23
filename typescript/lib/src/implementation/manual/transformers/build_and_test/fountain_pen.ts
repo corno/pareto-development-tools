@@ -9,7 +9,13 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 import * as t_build_to_fountain_pen from "../build/fountain_pen"
 import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
 
-export type Error = p_i.Transformer_With_Parameter<d_in.Error, d_out.Phrase, { 'concise': boolean }>
+export type Error = p_i.Transformer_With_Parameter<
+    d_in.Error,
+    d_out.Phrase,
+    {
+        'concise': boolean
+    }
+>
 
 export const Error: Error = ($, $p) => p_.from.state($).decide(
     ($) => {

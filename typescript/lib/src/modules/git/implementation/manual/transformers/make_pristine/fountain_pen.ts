@@ -8,7 +8,9 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose"
 
 import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
 
-export type Error = p_i.Transformer<d_in.Error, d_out.Phrase>
+export type Error = p_i.Transformer<
+d_in.Error, d_out.Phrase
+>
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {

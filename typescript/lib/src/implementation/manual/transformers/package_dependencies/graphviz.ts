@@ -6,7 +6,9 @@ import * as d_in from "../../../../interface/data/get_package_dependencies"
 import * as d_out from "pareto-graphviz/dist/interface/generated/liana/schemas/high_level_simple/data"
 import * as d_out_attributes from "pareto-graphviz/dist/interface/generated/liana/schemas/attributes/data"
 
-export type Result = p_i.Transformer<d_in.Result, d_out.Graph>
+export type Result = p_i.Transformer<
+d_in.Result, d_out.Graph
+>
 
 export const Result: Result = ($) => {
     const $v_packages = $.packages

@@ -5,7 +5,9 @@ import * as d_in from "../../../../interface/data/deserialize_package_json"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 export namespace signatures {
-    export type Error = p_i.Transformer<d_in.Error, d_out.Phrase>
+    export type Error = p_i.Transformer<
+d_in.Error, d_out.Phrase
+>
 }
 
 //dependencies

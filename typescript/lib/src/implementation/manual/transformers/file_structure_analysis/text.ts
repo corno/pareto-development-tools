@@ -5,7 +5,9 @@ import p_list_from_text from 'pareto-core/dist/implementation/refiner/specials/l
 
 //data types
 import * as d_in from "../../../../interface/data/file_structure_analysis"
-export const Path: p_i.Transformer<d_in.Path, string> = ($) => p_text_from_list(
+export const Path: p_i.Transformer<
+d_in.Path, string
+> = ($) => p_text_from_list(
     p_.from.list($).flatten(
         ($) => p_.literal.segmented_list([
             p_.literal.list([
