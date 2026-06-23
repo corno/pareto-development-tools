@@ -8,7 +8,9 @@ import * as d_in from "pareto-resources/dist/interface/data/temp_main"
 import * as pr_from_text from "../../productions/execute_command/text"
 
 
-export const Command: p_i.Refiner<d_out.Parameters, d_function.Error, d_in.Parameters> = ($, abort) => p_iterate(
+export const Command: p_i.Refiner<
+d_out.Parameters, d_function.Error, d_in.Parameters
+> = ($, abort) => p_iterate(
     $.arguments,
     null,
     ($iter) => $iter.assert_finished(
