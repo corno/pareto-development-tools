@@ -14,7 +14,7 @@ export const Command: p_i.Refiner<
 > = ($, abort) => p_iterate<string, d_function.Error, null, d_out.Parameters>(
     $.arguments,
     null,
-    p_.literal.set(['too many arguments', null]),
+    () => p_.literal.set(['too many arguments', null]),
     abort,
     ($iter) => pr_from_text.Command(
         $iter,
