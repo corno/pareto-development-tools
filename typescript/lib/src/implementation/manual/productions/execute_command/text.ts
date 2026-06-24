@@ -14,7 +14,7 @@ import * as t_context_path_from_text from "pareto-resources/dist/implementation/
 type signature = p_pi.Production<d_out.Parameters, d_function.Error, d_in.Text, null>
 
 
-export const Command: signature = (iterator, abort) => iterator.consume(
+export const Command: signature = (iterator) => iterator.consume(
     ($): d_out.Parameters => ({
         'type': p_change_context($, ($) => {
             {
@@ -22,7 +22,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                     case "all": return ['all packages', {
                         'path to project': t_context_path_from_text.Context_Path(iterator.consume(
                             ($) => $,
-                            () => abort(['expected a text', { 'description': "path to project" }])
+                            () => iterator.abort(['expected a text', { 'description': "path to project" }])
                         )),
                         'instruction': iterator.consume(
                             ($): d_out.All_Pacakges_Instruction => {
@@ -48,7 +48,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     case "git-commit": return ['git commit', {
                                         'commit message': iterator.consume(
                                             ($) => $,
-                                            () => abort(['expected a text', { 'description': "commit message" }])
+                                            () => iterator.abort(['expected a text', { 'description': "commit message" }])
                                         ),
                                         'accept broken commits': p_variables(
                                             () => {
@@ -68,7 +68,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     case "git-remove-tracked-but-ignored": return ['git remove tracked but ignored', null]
                                     case "set-up-comparison": return ['set up comparison', null]
                                     case "update-dependencies": return ['update package dependencies', null]
-                                    default: return abort(['expected one of', p_.literal.dictionary({
+                                    default: return iterator.abort(['expected one of', p_.literal.dictionary({
                                         'assert-clean': null,
                                         'build-and-test': null,
                                         'build': null,
@@ -79,7 +79,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', p_.literal.dictionary({
+                            () => iterator.abort(['expected one of', p_.literal.dictionary({
                                 'assert-clean': null,
                                 'build-and-test': null,
                                 'build': null,
@@ -95,7 +95,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                     case "package": return ['package', {
                         'path': t_context_path_from_text.Context_Path(iterator.consume(
                             ($) => $,
-                            () => abort(['expected a text', { 'description': "path to package" }])
+                            () => iterator.abort(['expected a text', { 'description': "path to package" }])
                         )),
                         'instruction': iterator.consume(
                             ($) => {
@@ -105,7 +105,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     case "git-commit": return ['git commit', {
                                         'commit message': iterator.consume(
                                             ($) => $,
-                                            () => abort(['expected a text', { 'description': "commit message" }])
+                                            () => iterator.abort(['expected a text', { 'description': "commit message" }])
                                         ),
                                         'accept broken commits': p_variables(
                                             () => {
@@ -123,7 +123,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                             }),
                                     }]
                                     case "update-dependencies": return ['update package dependencies', null]
-                                    default: return abort(['expected one of', p_.literal.dictionary({
+                                    default: return iterator.abort(['expected one of', p_.literal.dictionary({
                                         'assert-clean': null,
                                         'build-and-test': null,
                                         'git-commit': null,
@@ -131,7 +131,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', p_.literal.dictionary({
+                            () => iterator.abort(['expected one of', p_.literal.dictionary({
                                 'assert-clean': null,
                                 'build-and-test': null,
                                 'git-commit': null,
@@ -144,7 +144,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                     case "project": return ['project', {
                         'path': t_context_path_from_text.Context_Path(iterator.consume(
                             ($) => $,
-                            () => abort(['expected a text', { 'description': "path to package" }])
+                            () => iterator.abort(['expected a text', { 'description': "path to package" }])
                         )),
                         'instruction': iterator.consume(
                             ($) => {
@@ -152,14 +152,14 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     case "analyze-file-structure": return ['analyze file structure', null]
                                     case "dependency-graph": return ['dependency graph', null]
                                     case "list-file-structure-problems": return ['list file structure problems', null]
-                                    default: return abort(['expected one of', p_.literal.dictionary({
+                                    default: return iterator.abort(['expected one of', p_.literal.dictionary({
                                         'analyze-file-structure': null,
                                         'dependency-graph': null,
                                         'list-file-structure-problems': null,
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', p_.literal.dictionary({
+                            () => iterator.abort(['expected one of', p_.literal.dictionary({
                                 'analyze-file-structure': null,
                                 'dependency-graph': null,
                                 'list-file-structure-problems': null,
@@ -171,7 +171,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                     case "publish": return ['publish', {
                         'path to package': t_context_path_from_text.Context_Path(iterator.consume(
                             ($) => $,
-                            () => abort(['expected a text', { 'description': "path to package" }])
+                            () => iterator.abort(['expected a text', { 'description': "path to package" }])
 
                         )),
                         'generation': iterator.consume(
@@ -179,13 +179,13 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                 switch ($) {
                                     case "patch": return ['patch', null]
                                     case "minor": return ['minor', null]
-                                    default: return abort(['expected one of', p_.literal.dictionary({
+                                    default: return iterator.abort(['expected one of', p_.literal.dictionary({
                                         'patch': null,
                                         'minor': null,
                                     })])
                                 }
                             },
-                            () => abort(['expected one of', p_.literal.dictionary({
+                            () => iterator.abort(['expected one of', p_.literal.dictionary({
                                 'patch': null,
                                 'minor': null,
                             })])
@@ -198,7 +198,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                     return ['actual publish', {
                                         // 'one time password': iterator.consume(
                                         //     ($) => $,
-                                        //     () => abort(['expected a text', { 'description': "one time password" }])
+                                        //     () => iterator.abort(['expected a text', { 'description': "one time password" }])
                                         // )
                                     }]
                                 } else {
@@ -209,7 +209,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                                             return ['dry run', null]
                                         }
                                         default:
-                                            return abort(['expected a text', { 'description': "'--dry-run'" }])
+                                            return iterator.abort(['expected a text', { 'description': "'--dry-run'" }])
 
                                     }
                                 }
@@ -218,11 +218,11 @@ export const Command: signature = (iterator, abort) => iterator.consume(
                     case "set-up-comparison": return ['set up comparison', {
                         'path to package': t_context_path_from_text.Context_Path(iterator.consume(
                             ($) => $,
-                            () => abort(['expected a text', { 'description': "path to package" }])
+                            () => iterator.abort(['expected a text', { 'description': "path to package" }])
 
                         ))
                     }]
-                    default: return abort(['expected one of', p_.literal.dictionary({
+                    default: return iterator.abort(['expected one of', p_.literal.dictionary({
                         'all': null,
                         'package': null,
                         'project': null,
@@ -233,7 +233,7 @@ export const Command: signature = (iterator, abort) => iterator.consume(
             }
         })
     }),
-    () => abort(['expected one of', p_.literal.dictionary({
+    () => iterator.abort(['expected one of', p_.literal.dictionary({
         'all': null,
         'package': null,
         'project': null,
