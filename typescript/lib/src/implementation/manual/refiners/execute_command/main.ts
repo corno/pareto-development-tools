@@ -10,13 +10,23 @@ import * as pr_from_text from "../../productions/execute_command/text"
 
 
 export const Command: p_i.Refiner<
-    d_out.Parameters, d_function.Error, d_in.Parameters
-> = ($, abort) => p_iterate<string, d_function.Error, null, d_out.Parameters>(
-    $.arguments,
-    null,
-    () => p_.literal.set(['too many arguments', null]),
-    abort,
-    ($iter) => pr_from_text.Command(
-        $iter,
-    )
-)
+    d_out.Parameters,
+    d_function.Error,
+    d_in.Parameters
+> = ($, abort) => p_iterate<
+    d_out.Parameters,
+    d_function.Error,
+    d_function.Expected,
+    string,
+    null
+>({
+
+    list: $.arguments,
+    end_info: null,
+    abort: abort,
+    assign: (iterator) => pr_from_text.Command(
+        iterator,
+    ),
+    create_dangling_item_error: () => p_.literal.set(['too many arguments', null]),
+    create_expectation_error: (expected, found) => ['expected one of', expected]
+})

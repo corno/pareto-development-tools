@@ -11,7 +11,13 @@ import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schema
 //dependencies
 import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/refiners/path_unrestricted/text"
 
-type signature = p_pi.Production<d_out.Parameters, d_function.Error, d_in.Text, null>
+type signature = p_pi.Production<
+    d_out.Parameters,
+    d_function.Error,
+    d_function.Expected,
+    d_in.Text,
+    null
+>
 
 
 export const Command: signature = (iterator) => iterator.consume(
@@ -38,7 +44,8 @@ export const Command: signature = (iterator) => iterator.consume(
                                                         ? p_variables(
                                                             () => {
                                                                 iterator.discard(
-                                                                    () => null)
+                                                                    () => null
+                                                                )
                                                                 return true
                                                             })
                                                         : false
@@ -59,7 +66,8 @@ export const Command: signature = (iterator) => iterator.consume(
                                                         ? p_variables(
                                                             () => {
                                                                 iterator.discard(
-                                                                    () => null)
+                                                                    () => null
+                                                                )
                                                                 return true
                                                             })
                                                         : false
@@ -116,7 +124,8 @@ export const Command: signature = (iterator) => iterator.consume(
                                                         ? p_variables(
                                                             () => {
                                                                 iterator.discard(
-                                                                    () => null)
+                                                                    () => null
+                                                                )
                                                                 return true
                                                             })
                                                         : false
@@ -205,7 +214,8 @@ export const Command: signature = (iterator) => iterator.consume(
                                     switch (value[0]) {
                                         case "--dry-run": {
                                             iterator.discard(
-                                                () => null)
+                                                () => null
+                                            )
                                             return ['dry run', null]
                                         }
                                         default:
