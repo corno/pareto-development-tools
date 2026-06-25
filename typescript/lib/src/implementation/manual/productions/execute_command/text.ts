@@ -21,7 +21,7 @@ type signature = p_pi.Production<
 
 
 export const Command: signature = (iterator, abort) => ({
-    'type': iterator.consume.state(
+    'type': iterator.consume_with_expectation(
         ['expected one of', p_.literal.dictionary({
             "all": null,
             "package": null,
@@ -29,17 +29,18 @@ export const Command: signature = (iterator, abort) => ({
             "publish": null,
             "set-up-comparison": null,
         })] as d_function.Error,
+        (end_info, expected) => abort(expected),
         ($): d_out.Parameters['type'] => {
             {
                 switch ($) {
                     case "all": return ['all packages', {
                         'path to project': t_context_path_from_text.Context_Path(
-                            iterator.consume.text(
+                            iterator.consume(
+                                ($) => abort(['expected a text', { 'description': "path to project" }]),
                                 ($) => $,
-                                (end_info) => abort(['expected a text', { 'description': "path to project" }])
                             )
                         ),
-                        'instruction': iterator.consume.state(
+                        'instruction': iterator.consume_with_expectation(
                             ['expected one of', p_.literal.dictionary({
                                 "assert-clean": null,
                                 "build-and-test": null,
@@ -49,34 +50,35 @@ export const Command: signature = (iterator, abort) => ({
                                 "set-up-comparison": null,
                                 "update-dependencies": null,
                             })] as d_function.Error,
+                            (end_info, expected) => abort(expected),
                             ($, expected): d_out.All_Pacakges_Instruction => {
                                 switch ($) {
                                     case "assert-clean": return ['assert clean', null]
                                     case "build-and-test": return ['build and test', {
                                         'concise': iterator.peek(
+                                            () => false,
                                             ($) => $ === "concise"
-                                                ? iterator.consume.boolean(
+                                                ? iterator.consume(
+                                                    () => p_unreachable_code_path("peeked"),
                                                     () => true,
-                                                    () => p_unreachable_code_path("peeked")
                                                 )
                                                 : false,
-                                            () => false
                                         ),
                                     }]
                                     case "build": return ['build', null]
                                     case "git-commit": return ['git commit', {
-                                        'commit message': iterator.consume.text(
+                                        'commit message': iterator.consume(
+                                            ($) => abort(['expected a text', { 'description': "commit message" }]),
                                             ($) => $,
-                                            (end_info) => abort(['expected a text', { 'description': "commit message" }])
                                         ),
                                         'accept broken commits': iterator.peek(
+                                            () => false,
                                             ($) => $ === "accept-broken"
-                                                ? iterator.consume.boolean(
+                                                ? iterator.consume(
+                                                    () => p_unreachable_code_path("peeked"),
                                                     () => true,
-                                                    () => p_unreachable_code_path("peeked")
                                                 )
                                                 : false,
-                                            () => false
                                         ),
                                     }]
                                     case "git-remove-tracked-but-ignored": return ['git remove tracked but ignored', null]
@@ -85,66 +87,66 @@ export const Command: signature = (iterator, abort) => ({
                                     default: return abort(expected)
                                 }
                             },
-                            (end_info, expected) => abort(expected)
 
                         )
 
                     }]
                     case "package": return ['package', {
                         'path': t_context_path_from_text.Context_Path(
-                            iterator.consume.text(
+                            iterator.consume(
+                                ($) => abort(['expected a text', { 'description': "path to package" }]),
                                 ($) => $,
-                                (end_info) => abort(['expected a text', { 'description': "path to package" }])
                             )
                         ),
-                        'instruction': iterator.consume.state(
+                        'instruction': iterator.consume_with_expectation(
                             ['expected one of', p_.literal.dictionary({
                                 "assert-clean": null,
                                 "build-and-test": null,
                                 "git-commit": null,
                                 "update-dependencies": null,
                             })] as d_function.Error,
+                            (end_info, expected) => abort(expected),
                             ($, expected) => {
                                 switch ($) {
                                     case "assert-clean": return ['assert clean', null]
                                     case "build-and-test": return ['build and test', null]
                                     case "git-commit": return ['git commit', {
-                                        'commit message': iterator.consume.text(
+                                        'commit message': iterator.consume(
+                                            ($) => abort(['expected a text', { 'description': "commit message" }]),
                                             ($) => $,
-                                            (end_info) => abort(['expected a text', { 'description': "commit message" }])
                                         ),
                                         'accept broken commits': iterator.peek(
+                                            () => false,
                                             ($) => $ === "accept-broken"
-                                                ? iterator.consume.boolean(
+                                                ? iterator.consume(
+                                                    () => p_unreachable_code_path("peeked"),
                                                     () => true,
-                                                    () => p_unreachable_code_path("peeked")
                                                 )
                                                 : false,
-                                            () => false
                                         ),
                                     }]
                                     case "update-dependencies": return ['update package dependencies', null]
                                     default: return abort(expected)
                                 }
                             },
-                            (end_info, expected) => abort(expected)
 
                         )
 
                     }]
                     case "project": return ['project', {
                         'path': t_context_path_from_text.Context_Path(
-                            iterator.consume.text(
+                            iterator.consume(
+                                ($) => abort(['expected a text', { 'description': "path to package" }]),
                                 ($) => $,
-                                (end_info) => abort(['expected a text', { 'description': "path to package" }])
                             )
                         ),
-                        'instruction': iterator.consume.state(
+                        'instruction': iterator.consume_with_expectation(
                             ['expected one of', p_.literal.dictionary({
                                 "analyze-file-structure": null,
                                 "dependency-graph": null,
                                 "list-file-structure-problems": null,
                             })] as d_function.Error,
+                            (end_info, expected) => abort(expected),
                             ($, expected) => {
                                 switch ($) {
                                     case "analyze-file-structure": return ['analyze file structure', null]
@@ -153,23 +155,23 @@ export const Command: signature = (iterator, abort) => ({
                                     default: return abort(expected)
                                 }
                             },
-                            (end_info, expected) => abort(expected)
                         )
 
                     }]
                     case "publish": return ['publish', {
                         'path to package': t_context_path_from_text.Context_Path(
-                            iterator.consume.text(
+                            iterator.consume(
+                                ($) => abort(['expected a text', { 'description': "path to package" }]),
                                 ($) => $,
-                                (end_info) => abort(['expected a text', { 'description': "path to package" }])
 
                             )
                         ),
-                        'generation': iterator.consume.state(
+                        'generation': iterator.consume_with_expectation(
                             ['expected one of', p_.literal.dictionary({
                                 "patch": null,
                                 "minor": null,
                             })] as d_function.Error,
+                            (end_info, expected) => abort(expected),
                             ($, expected) => {
                                 switch ($) {
                                     case "patch": return ['patch', null]
@@ -177,11 +179,17 @@ export const Command: signature = (iterator, abort) => ({
                                     default: return abort(expected)
                                 }
                             },
-                            (end_info, expected) => abort(expected)
 
                         ),
-                        'impact': iterator.consume.state(
+                        'impact': iterator.consume_with_expectation(
                             null,
+                            ($) => ['actual publish', {
+
+                                // 'one time password': iterator.xconsume(
+                                //     ($) => $,
+                                //     (end_info, abort) => abort(['expected a text', { 'description': "one time password" }])
+                                // )
+                            }],
                             ($, expected): d_publish.Parameters['impact'] => {
                                 switch ($) {
                                     case "dry-run": return ['dry run', null]
@@ -190,13 +198,6 @@ export const Command: signature = (iterator, abort) => ({
                                     })])
                                 }
                             },
-                            (end_info) => ['actual publish', {
-
-                                // 'one time password': iterator.consume.text(
-                                //     ($) => $,
-                                //     (end_info, abort) => abort(['expected a text', { 'description': "one time password" }])
-                                // )
-                            }]
 
 
 
@@ -204,9 +205,9 @@ export const Command: signature = (iterator, abort) => ({
                     }]
                     case "set-up-comparison": return ['set up comparison', {
                         'path to package': t_context_path_from_text.Context_Path(
-                            iterator.consume.text(
+                            iterator.consume(
+                                ($) => abort(['expected a text', { 'description': "path to package" }]),
                                 ($) => $,
-                                (end_info) => abort(['expected a text', { 'description': "path to package" }])
 
                             )
                         )
@@ -221,6 +222,5 @@ export const Command: signature = (iterator, abort) => ({
                 }
             }
         },
-        (end_info, expected) => abort(expected)
     )
 })
