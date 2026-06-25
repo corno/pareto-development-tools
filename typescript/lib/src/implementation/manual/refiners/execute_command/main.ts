@@ -15,18 +15,16 @@ export const Command: p_i.Refiner<
     d_in.Parameters
 > = ($, abort) => p_iterate<
     d_out.Parameters,
-    d_function.Error,
-    d_function.Expected,
     string,
     null
 >({
 
     list: $.arguments,
     end_info: null,
-    abort: abort,
     assign: (iterator) => pr_from_text.Command(
         iterator,
+        abort,
     ),
-    create_dangling_item_error: () => p_.literal.set(['too many arguments', null]),
-    create_expectation_error: (expected, found) => ['expected one of', expected]
+    on_dangling_item: () => abort(['too many arguments', null]),
+    // create_expectation_error: (expected, found) => ['expected one of', expected]
 })
