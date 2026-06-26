@@ -26,5 +26,4 @@ export const Command: p_i.Refiner<
         abort,
     ),
     on_dangling_item: () => abort(['too many arguments', null]),
-    // create_expectation_error: (expected, found) => ['expected one of', expected]
 })
