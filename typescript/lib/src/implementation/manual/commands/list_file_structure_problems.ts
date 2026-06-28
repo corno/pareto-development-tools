@@ -9,7 +9,6 @@ import * as d_file_analysis from "../../../interface/data/file_structure_analysi
 
 //dependencies
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis"
-import * as t_to_text from "../transformers/file_structure_analysis/text"
 import { $$ as q_get_project_files } from "../queries/get_project_files"
 
 //shorthands

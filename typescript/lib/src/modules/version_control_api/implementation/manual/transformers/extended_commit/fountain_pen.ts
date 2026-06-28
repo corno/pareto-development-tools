@@ -14,7 +14,7 @@ import * as t_ece_to_fountain_pen from "pareto-resources/dist/implementation/man
 import * as t_git_is_clean_to_fountain_pen from "../is_repository_clean/fountain_pen"
 
 export const Error: Error = ($) => p_.from.state($).decide(
-    ($): d_out.Phrase => {
+    ($) => {
         switch ($[0]) {
             case 'asserting git not clean': return p_.ss($, ($) => sh.ph.composed([
                 sh.ph.literal("error while asserting git is not clean: "),

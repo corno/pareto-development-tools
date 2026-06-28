@@ -20,21 +20,21 @@ export const $$: interface_.procedures.publish = p_.command_procedure(
             const lib_path = t_path_to_path.extend_context_path_with_list($d['path to package'], { 'addition': p_.literal.list(["typescript", "lib"]) })
             return [
 
-                $c['git push'].execute(
+                $c['version control push'].execute(
                     {
                         'path': p_.literal.set($d['path to package']),
                     },
                     ($): d.Error => ['error while running git push', $],
                 ),
 
-                // $c['git assert is clean'].execute(
+                // $c['version control assert is clean'].execute(
                 //     {
                 //         'path': p_.literal.set($d['path to package']),
                 //     },
                 //     ($) => ['error while running git assert is clean at the start', $],
                 // ),
 
-                $c['git make pristine'].execute(
+                $c['version control make pristine'].execute(
                     {
                         'path': p_.literal.set($d['path to package']),
                     },
@@ -55,7 +55,7 @@ export const $$: interface_.procedures.publish = p_.command_procedure(
                     ($) => ['error while running build and test', $],
                 ),
 
-                // $c['git assert is clean'].execute(
+                // $c['version control assert is clean'].execute(
                 //     {
                 //         'path': p_.literal.set($d['path to package']),
                 //     },
@@ -97,7 +97,7 @@ export const $$: interface_.procedures.publish = p_.command_procedure(
                         const package_info = $v
                         return [
 
-                            $c['git extended commit'].execute(
+                            $c['version control extended commit'].execute(
                                 {
                                     'path': p_.literal.set($d['path to package']),
                                     'instruction': {

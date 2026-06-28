@@ -1,4 +1,3 @@
-import * as p_ from 'pareto-core/dist/implementation/refiner'
 import * as p_i from 'pareto-core/dist/interface/refiner'
 import p_iterate from 'pareto-core/dist/implementation/refiner/specials/iterate'
 

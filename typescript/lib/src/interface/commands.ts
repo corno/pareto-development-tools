@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/dist/interface/command'
 import * as queries from "./queries"
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 import * as resources_pareto_stream from "pareto-stream/dist/interface/commands"
-import * as resources_git from "../modules/git/interface/commands"
+import * as resources_version_control from "../modules/version_control_api/interface/commands"
 import * as resources_npm from "../modules/npm/interface/commands"
 
 import * as d_get_project_files from "./data/get_project_files"
@@ -14,7 +14,7 @@ import * as d_create_dependency_graph from "./data/create_dependency_graph"
 import * as d_publish from "./data/publish"
 import * as d_tsc from "./data/tsc"
 import * as d_update_package_dependencies from "./data/update_package_dependencies"
-import * as d_git_commit from "./data/git_commit"
+import * as d_version_control_commit from "./data/git_commit"
 
 
 
@@ -25,7 +25,7 @@ export namespace commands {
     export type build = p_.Command<d_build.Error, d_build.Parameters>
     export type build_and_test = p_.Command<d_build_and_test.Error, d_build_and_test.Parameters>
     export type create_dependency_graph = p_.Command<d_create_dependency_graph.Error, d_create_dependency_graph.Parameters>
-    export type git_commit = p_.Command<d_git_commit.Error, d_git_commit.Parameters>
+    export type version_control_commit = p_.Command<d_version_control_commit.Error, d_version_control_commit.Parameters>
     export type publish = p_.Command<d_publish.Error, d_publish.Parameters>
     export type tsc = p_.Command<d_tsc.Error, d_tsc.Parameters>
     export type update_package_dependencies = p_.Command<d_update_package_dependencies.Error, d_update_package_dependencies.Parameters>
@@ -57,9 +57,9 @@ export namespace procedures {
             'build and test': commands.build_and_test
             'build': commands.build
             'create dependency graph': commands.create_dependency_graph
-            'git assert is clean': resources_git.commands.assert_is_clean
-            'git commit': commands.git_commit
-            'git remove tracked but ignored': resources_git.commands.remove_tracked_but_ignored
+            'version control assert is clean': resources_version_control.commands.assert_is_clean
+            'version control commit': commands.version_control_commit
+            'version control remove tracked but ignored': resources_version_control.commands.remove_tracked_but_ignored
             'list file structure problems': commands.analyze_file_structure
             'npm set up comparison against published': resources_npm.commands.set_up_comparison_against_published
             'publish': commands.publish
@@ -101,13 +101,13 @@ export namespace procedures {
         }
     >
 
-    export type git_commit = p_.Command_Procedure<
-        commands.git_commit,
+    export type version_control_commit = p_.Command_Procedure<
+        commands.version_control_commit,
         null,
         null,
         {
             'build and test': commands.build_and_test
-            'git extended commit': resources_git.commands.extended_commit
+            'version control extended commit': resources_version_control.commands.extended_commit
         }
     >
 
@@ -141,10 +141,10 @@ export namespace procedures {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
         },
         {
-            'git push': resources_git.commands.push
-            'git extended commit': resources_git.commands.extended_commit
-            'git assert is clean': resources_git.commands.assert_is_clean
-            'git make pristine': resources_git.commands.make_pristine
+            'version control push': resources_version_control.commands.push
+            'version control extended commit': resources_version_control.commands.extended_commit
+            'version control assert is clean': resources_version_control.commands.assert_is_clean
+            'version control make pristine': resources_version_control.commands.make_pristine
             'update package dependencies': commands.update_package_dependencies
             'build and test': commands.build_and_test
             'npm': resources_npm.commands.npm

@@ -1,4 +1,3 @@
-import * as p_ from 'pareto-core/dist/interface/data'
 
 import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
 import * as d_build from "./build"

@@ -1,8 +1,7 @@
 import * as p_ from 'pareto-core/dist/interface/data'
 
-
+//data types
 import * as d_ece from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
-import * as d_gac from "./assert_is_clean"
 import * as d_gic from "./is_repository_clean"
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
 

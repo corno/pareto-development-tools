@@ -2,12 +2,12 @@ import * as p_ from 'pareto-core/dist/interface/data'
 
 
 import * as d_get_project_files from "./get_project_files"
-import * as d_assert_clean from "../../modules/git/interface/data/assert_is_clean"
+import * as d_assert_clean from "../../modules/version_control_api/interface/data/assert_is_clean"
 import * as d_build from "./build"
 import * as d_build_and_test from "./build_and_test"
 import * as d_dependency_graph from "./create_dependency_graph"
 import * as d_git_commit from "./git_commit"
-import * as d_git_remove_tracked_but_ignored from "../../modules/git/interface/data/remove_tracked_but_ignored"
+import * as d_git_remove_tracked_but_ignored from "../../modules/version_control_api/interface/data/remove_tracked_but_ignored"
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
 import * as d_publish from "./publish"
 import * as d_read_directory from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
@@ -47,7 +47,7 @@ export type Package = {
 
 
     | ['build and test', null]
-    | ['git commit', d_git_commit.Instruction]
+    | ['version control commit', d_git_commit.Instruction]
     | ['update package dependencies', null]
 
 }
@@ -84,13 +84,13 @@ export type All_Pacakges_Instruction =
     /**
      * stages all changes, makes a commit with the given message, and pushes the commit
      */
-    | ['git commit', d_git_commit.Instruction]
+    | ['version control commit', d_git_commit.Instruction]
 
     /**
      * executes     "git rm -r --cached ."
      * followed by  "git add --all"
      */
-    | ['git remove tracked but ignored', null]
+    | ['version control remove tracked but ignored', null]
 
     /**
      * sets up 2 directories in /temp of the package dir; one of the local package and one of the published package
@@ -122,8 +122,8 @@ export type Package_Error =
         'error': d_build_and_test.Error,
         'concise': boolean
     }]
-    | ['git assert clean', d_assert_clean.Error]
-    | ['git commit', d_git_commit.Error]
+    | ['version control assert clean', d_assert_clean.Error]
+    | ['version control commit', d_git_commit.Error]
     | ['publish', d_publish.Error]
     | ['update dependencies', d_update_dependencies.Error]
 
@@ -137,8 +137,8 @@ export type All__Package_Error =
         'concise': boolean
     }]
     | ['build', d_build.Error]
-    | ['git assert clean', d_assert_clean.Error]
-    | ['git commit', d_git_commit.Error]
-    | ['git remove tracked but ignored', d_git_remove_tracked_but_ignored.Error]
+    | ['version control assert clean', d_assert_clean.Error]
+    | ['version control commit', d_git_commit.Error]
+    | ['version control remove tracked but ignored', d_git_remove_tracked_but_ignored.Error]
     | ['update dependencies', d_update_dependencies.Error]
     | ['set up comparison', d_set_up_comparison_against_published.Error]

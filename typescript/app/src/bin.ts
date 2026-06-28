@@ -4,7 +4,7 @@ import * as p_h from 'pareto-host-nodejs'
 import * as p_ci from 'pareto-core/dist/interface/command'
 import * as p_qi from 'pareto-core/dist/interface/query'
 
-import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
+import * as d_ece from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
 import * as d_espe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
 import * as d_eqe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
 
@@ -24,7 +24,7 @@ import { $$ as c_dependency_graph } from "lib/dist/implementation/manual/command
 import { $$ as c_git_assert_clean } from "lib/dist/modules/git/implementation/manual/commands/assert_is_clean"
 import { $$ as c_git_make_pristine } from "lib/dist/modules/git/implementation/manual/commands/make_pristine"
 import { $$ as c_git_extended_commit } from "lib/dist/modules/git/implementation/manual/commands/extended_commit"
-import { $$ as c_git_commit } from "lib/dist/implementation/manual/commands/git_commit"
+import { $$ as c_git_commit } from "lib/dist/implementation/manual/commands/version_control_commit"
 import { $$ as c_git_push } from "lib/dist/modules/git/implementation/manual/commands/push"
 import { $$ as c_git_remove_tracked_but_ignored } from "lib/dist/modules/git/implementation/manual/commands/remove_tracked_but_ignored"
 import { $$ as c_npm } from "lib/dist/modules/npm/implementation/manual/commands/npm"
@@ -54,9 +54,9 @@ p_h.run_main_command(
             },
         )
 
-        const create_epe = (
+        const create_ece = (
             program: string,
-        ): p_ci.Command<d_epe.Error, d_epe.Parameters> => c_execute_sandboxed_command_executable(
+        ): p_ci.Command<d_ece.Error, d_ece.Parameters> => c_execute_sandboxed_command_executable(
             {
                 'program': program,
             },
@@ -81,41 +81,96 @@ p_h.run_main_command(
         const eqe_git = create_eqe("git")
         const eqe_npm = create_eqe("npm")
 
-        const epe_git = create_epe("git")
-        const epe_npm = create_epe("npm")
-        const epe_tsc = create_espe("tsc")
-        const epe_node = create_epe("node")
-        const epe_update2latest = create_epe("update2latest")
-        const epe_tar = create_epe("tar")
+        const ece_git = create_ece("git")
+        const ece_npm = create_ece("npm")
+        const ece_tsc = create_espe("tsc")
+        const ece_node = create_ece("node")
+        const ece_update2latest = create_ece("update2latest")
+        const ece_tar = create_ece("tar")
 
-        const git_is_repository_clean = q_git_is_repository_clean(
-            null,
-            {
-                'git': eqe_git,
-                'is inside git work tree': q_git_is_inside_work_tree(
-                    null,
-                    {
-                        'git': eqe_git,
-                    },
-                ),
-            },
-        )
+        const git = (() => {
 
-        const git_assert_is_clean = c_git_assert_clean(
-            null,
-            {
-                'is repository clean': git_is_repository_clean,
-            },
-            {
-                'git': epe_git,
-            },
-        )
+            const git_is_repository_clean = q_git_is_repository_clean(
+                null,
+                {
+                    'git': eqe_git,
+                    'is inside git work tree': q_git_is_inside_work_tree(
+                        null,
+                        {
+                            'git': eqe_git,
+                        },
+                    ),
+                },
+            )
+
+            const git_assert_is_clean = c_git_assert_clean(
+                null,
+                {
+                    'is repository clean': git_is_repository_clean,
+                },
+                {
+                    'git': ece_git,
+                },
+            )
+
+
+            const git_make_pristine = c_git_make_pristine(
+                null,
+                null,
+                {
+                    'git': ece_git,
+                },
+            )
+            const git_push = c_git_push(
+                null,
+                null,
+                {
+                    'git': ece_git,
+                },
+            )
+
+            const git_remove_tracked_but_ignored = c_git_remove_tracked_but_ignored(
+                null,
+                {
+                    'git': eqe_git,
+                },
+                {
+                    'git': ece_git,
+                    'assert is clean': git_assert_is_clean,
+                },
+            )
+
+            const git_extended_commit = c_git_extended_commit(
+                null,
+                {
+                    'git is repository clean': git_is_repository_clean,
+                },
+                {
+                    'git': ece_git,
+                },
+            )
+
+            return {
+                'queries': {
+                    'is repository clean': git_is_repository_clean,
+                },
+                'commands': {
+                    'assert is clean': git_assert_is_clean,
+                    'make pristine': git_make_pristine,
+                    'push': git_push,
+                    'remove tracked but ignored': git_remove_tracked_but_ignored,
+                    'extended commit': git_extended_commit,
+                },
+            }
+        })()
+
+
 
         const tsc = c_tsc(
             null,
             null,
             {
-                'tsc': epe_tsc,
+                'tsc': ece_tsc,
             },
         )
 
@@ -147,20 +202,13 @@ p_h.run_main_command(
             },
         )
 
-        const git_make_pristine = c_git_make_pristine(
-            null,
-            null,
-            {
-                'git': epe_git,
-            },
-        )
 
         const build_and_test = c_build_and_test(
             null,
             null,
             {
                 'build': build,
-                'node': epe_node,
+                'node': ece_node,
             },
         )
 
@@ -168,7 +216,7 @@ p_h.run_main_command(
             null,
             null,
             {
-                'update2latest': epe_update2latest,
+                'update2latest': ece_update2latest,
             },
         )
 
@@ -176,7 +224,7 @@ p_h.run_main_command(
             null,
             null,
             {
-                'npm': epe_npm,
+                'npm': ece_npm,
             },
         )
 
@@ -184,7 +232,7 @@ p_h.run_main_command(
             null,
             null,
             {
-                'npm': epe_npm,
+                'npm': ece_npm,
             },
         )
 
@@ -208,35 +256,6 @@ p_h.run_main_command(
             },
         )
 
-        const git_push = c_git_push(
-            null,
-            null,
-            {
-                'git': epe_git,
-            },
-        )
-
-        const git_remove_tracked_but_ignored = c_git_remove_tracked_but_ignored(
-            null,
-            {
-                'git': eqe_git,
-            },
-            {
-                'git': epe_git,
-                'assert is clean': git_assert_is_clean,
-            },
-        )
-
-        const git_extended_commit = c_git_extended_commit(
-            null,
-            {
-                'git is repository clean': git_is_repository_clean,
-            },
-            {
-                'git': epe_git,
-            },
-        )
-
         const set_up_comparison_against_published = c_set_up_comparison_against_published(
             null,
             {
@@ -244,8 +263,8 @@ p_h.run_main_command(
                 'npm': eqe_npm,
             },
             {
-                'npm': epe_npm,
-                'tar': epe_tar,
+                'npm': ece_npm,
+                'tar': ece_tar,
                 'make directory': $r['filesystem unrestricted'].commands['make directory'],
                 // 'remove': $r.commands.remove,
             },
@@ -262,7 +281,7 @@ p_h.run_main_command(
                         'read directory': $r['filesystem unrestricted'].queries['read directory']
                     },
                     {
-                        'git assert is clean': git_assert_is_clean,
+                        'version control assert is clean': git.commands['assert is clean'],
                         'build and test': build_and_test,
                         'build': build,
                         'create dependency graph': dependency_graph,
@@ -286,14 +305,14 @@ p_h.run_main_command(
                                 'log': $r.stream.commands.log,
                             },
                         ),
-                        'git remove tracked but ignored': git_remove_tracked_but_ignored,
+                        'version control remove tracked but ignored': git.commands['remove tracked but ignored'],
                         'update package dependencies': update_package_dependencies,
-                        'git commit': c_git_commit(
+                        'version control commit': c_git_commit(
                             null,
                             null,
                             {
                                 'build and test': build_and_test,
-                                'git extended commit': git_extended_commit,
+                                'version control extended commit': git.commands['extended commit'],
                             },
                         ),
                         'npm set up comparison against published': set_up_comparison_against_published,
@@ -304,13 +323,13 @@ p_h.run_main_command(
                             },
                             {
                                 'build and test': build_and_test,
-                                'git push': git_push,
-                                'git assert is clean': git_assert_is_clean,
-                                'git make pristine': git_make_pristine,
+                                'version control push': git.commands['push'],
+                                'version control assert is clean': git.commands['assert is clean'],
+                                'version control make pristine': git.commands['make pristine'],
                                 'npm': npm,
                                 'npm publish': npm_publish,
                                 'update package dependencies': update_package_dependencies,
-                                'git extended commit': git_extended_commit,
+                                'version control extended commit': git.commands['extended commit'],
                                 'log': $r.stream.commands.log,
                             },
                         ),

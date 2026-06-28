@@ -443,7 +443,6 @@ export namespace undefined {
                         'line count': line_count($),
                     }])
                     case 'directory': return p_.ss($, ($) => {
-                        const dir = $
                         return ['directory', Directory(
                             $,
                             {

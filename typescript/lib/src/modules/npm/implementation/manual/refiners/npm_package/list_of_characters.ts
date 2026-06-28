@@ -1,4 +1,3 @@
-import * as p_ from 'pareto-core/dist/implementation/refiner'
 import * as p_ri from 'pareto-core/dist/interface/refiner'
 
 //data types

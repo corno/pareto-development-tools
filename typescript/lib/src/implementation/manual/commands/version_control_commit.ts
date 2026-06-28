@@ -6,7 +6,7 @@ import * as interface_ from "../../../interface/commands"
 //data types
 import * as d from "../../../interface/data/git_commit"
 
-export const $$: interface_.procedures.git_commit = p_.command_procedure(
+export const $$: interface_.procedures.version_control_commit = p_.command_procedure(
 
     ($d, $s, $q, $c) => [
 
@@ -27,7 +27,7 @@ export const $$: interface_.procedures.git_commit = p_.command_procedure(
                     ],
                     ($) => [
 
-                        $c['git extended commit'].execute(
+                        $c['version control extended commit'].execute(
                             {
                                 'path': p_.literal.set($d['path']),
                                 'instruction': {
@@ -42,7 +42,7 @@ export const $$: interface_.procedures.git_commit = p_.command_procedure(
                                     'push after commit': true,
                                 },
                             },
-                            ($): d.Error => ['git extended commit', $],
+                            ($): d.Error => ['version control extended commit', $],
                         )
                         
                     ]
@@ -56,7 +56,7 @@ export const $$: interface_.procedures.git_commit = p_.command_procedure(
                     },
                     ($): d.Error => ['error while running build and test', $],
                 ),
-                $c['git extended commit'].execute(
+                $c['version control extended commit'].execute(
                     {
                         'path': p_.literal.set($d['path']),
                         'instruction': {
@@ -65,7 +65,7 @@ export const $$: interface_.procedures.git_commit = p_.command_procedure(
                             'push after commit': true,
                         },
                     },
-                    ($): d.Error => ['git extended commit', $],
+                    ($): d.Error => ['version control extended commit', $],
                 )
 
             ]

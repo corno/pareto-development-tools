@@ -38,11 +38,11 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                             const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
                                             switch ($[0]) {
                                                 case 'assert clean': return p_.ss($, ($) => [
-                                                    $c['git assert is clean'].execute(
+                                                    $c['version control assert is clean'].execute(
                                                         {
                                                             'path': p_.literal.set(context_path)
                                                         },
-                                                        ($): d.All__Package_Error => ['git assert clean', $],
+                                                        ($): d.All__Package_Error => ['version control assert clean', $],
                                                     )
                                                 ])
                                                 case 'build': return p_.ss($, ($) => [
@@ -64,21 +64,21 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                                         }],
                                                     )
                                                 ])
-                                                case 'git commit': return p_.ss($, ($) => [
-                                                    $c['git commit'].execute(
+                                                case 'version control commit': return p_.ss($, ($) => [
+                                                    $c['version control commit'].execute(
                                                         {
                                                             'path': context_path,
                                                             'instruction': $,
                                                         },
-                                                        ($): d.All__Package_Error => ['git commit', $],
+                                                        ($): d.All__Package_Error => ['version control commit', $],
                                                     )
                                                 ])
-                                                case 'git remove tracked but ignored': return p_.ss($, ($) => [
-                                                    $c['git remove tracked but ignored'].execute(
+                                                case 'version control remove tracked but ignored': return p_.ss($, ($) => [
+                                                    $c['version control remove tracked but ignored'].execute(
                                                         {
                                                             'path': p_.literal.set(context_path)
                                                         },
-                                                        ($): d.All__Package_Error => ['git remove tracked but ignored', $],
+                                                        ($): d.All__Package_Error => ['version control remove tracked but ignored', $],
                                                     )
                                                 ])
                                                 case 'set up comparison': return p_.ss($, ($): p_.Command_Block<d.All__Package_Error> => {
@@ -126,11 +126,11 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                         p_.decide.state($.instruction, ($) => {
                             switch ($[0]) {
                                 case 'assert clean': return p_.ss($, ($) => [
-                                    $c['git assert is clean'].execute(
+                                    $c['version control assert is clean'].execute(
                                         {
                                             'path': p_.literal.set(path)
                                         },
-                                        ($): d.Error => ['package', ['git assert clean', $]],
+                                        ($): d.Error => ['package', ['version control assert clean', $]],
                                     )
                                 ])
                                 case 'build and test': return p_.ss($, ($) => [
@@ -144,13 +144,13 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                         }]],
                                     )
                                 ])
-                                case 'git commit': return p_.ss($, ($) => [
-                                    $c['git commit'].execute(
+                                case 'version control commit': return p_.ss($, ($) => [
+                                    $c['version control commit'].execute(
                                         {
                                             'path': path,
                                             'instruction': $,
                                         },
-                                        ($): d.Error => ['package', ['git commit', $]],
+                                        ($): d.Error => ['package', ['version control commit', $]],
                                     )
                                 ])
                                 case 'update package dependencies': return p_.ss($, ($) => [

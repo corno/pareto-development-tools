@@ -1,6 +1,5 @@
 import * as p_ from 'pareto-core/dist/implementation/production'
 import * as p_pi from 'pareto-core/dist/interface/production'
-import p_variables from 'pareto-core/dist/implementation/refiner/specials/variables'
 import p_unreachable_code_path from 'pareto-core/dist/implementation/transformer/specials/unreachable_code_path'
 
 //data types
@@ -66,7 +65,7 @@ export const Command: signature = (iterator, abort) => ({
                                         ),
                                     }]
                                     case "build": return ['build', null]
-                                    case "git-commit": return ['git commit', {
+                                    case "git-commit": return ['version control commit', {
                                         'commit message': iterator.consume(
                                             ($) => abort(['expected a text', { 'description': "commit message" }]),
                                             ($) => $,
@@ -81,7 +80,7 @@ export const Command: signature = (iterator, abort) => ({
                                                 : false,
                                         ),
                                     }]
-                                    case "git-remove-tracked-but-ignored": return ['git remove tracked but ignored', null]
+                                    case "git-remove-tracked-but-ignored": return ['version control remove tracked but ignored', null]
                                     case "set-up-comparison": return ['set up comparison', null]
                                     case "update-dependencies": return ['update package dependencies', null]
                                     default: return abort(expected)
@@ -110,7 +109,7 @@ export const Command: signature = (iterator, abort) => ({
                                 switch ($) {
                                     case "assert-clean": return ['assert clean', null]
                                     case "build-and-test": return ['build and test', null]
-                                    case "git-commit": return ['git commit', {
+                                    case "git-commit": return ['version control commit', {
                                         'commit message': iterator.consume(
                                             ($) => abort(['expected a text', { 'description': "commit message" }]),
                                             ($) => $,

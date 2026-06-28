@@ -9,7 +9,6 @@ import * as d from "../../../interface/data/get_package_json"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 import { NPM_Package as r_parse_npm_package } from "../refiners/npm_package/list_of_characters"
 
 export const $$: interface_.query_functions.get_package_json = p_.query_function(
