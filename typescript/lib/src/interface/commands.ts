@@ -58,7 +58,7 @@ export namespace procedures {
             'build': commands.build
             'create dependency graph': commands.create_dependency_graph
             'version control assert is clean': resources_version_control.commands.assert_is_clean
-            'version control commit': commands.version_control_commit
+            'commit changes': commands.version_control_commit
             'version control remove tracked but ignored': resources_version_control.commands.remove_tracked_but_ignored
             'list file structure problems': commands.analyze_file_structure
             'npm set up comparison against published': resources_npm.commands.set_up_comparison_against_published

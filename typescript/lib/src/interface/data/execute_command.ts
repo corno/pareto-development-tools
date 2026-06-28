@@ -47,7 +47,7 @@ export type Package = {
 
 
     | ['build and test', null]
-    | ['version control commit', d_git_commit.Instruction]
+    | ['commit changes', d_git_commit.Instruction]
     | ['update package dependencies', null]
 
 }
@@ -84,7 +84,7 @@ export type All_Pacakges_Instruction =
     /**
      * stages all changes, makes a commit with the given message, and pushes the commit
      */
-    | ['version control commit', d_git_commit.Instruction]
+    | ['commit changes', d_git_commit.Instruction]
 
     /**
      * executes     "git rm -r --cached ."
@@ -123,7 +123,7 @@ export type Package_Error =
         'concise': boolean
     }]
     | ['version control assert clean', d_assert_clean.Error]
-    | ['version control commit', d_git_commit.Error]
+    | ['commit changes', d_git_commit.Error]
     | ['publish', d_publish.Error]
     | ['update dependencies', d_update_dependencies.Error]
 
@@ -138,7 +138,7 @@ export type All__Package_Error =
     }]
     | ['build', d_build.Error]
     | ['version control assert clean', d_assert_clean.Error]
-    | ['version control commit', d_git_commit.Error]
+    | ['commit changes', d_git_commit.Error]
     | ['version control remove tracked but ignored', d_git_remove_tracked_but_ignored.Error]
     | ['update dependencies', d_update_dependencies.Error]
     | ['set up comparison', d_set_up_comparison_against_published.Error]

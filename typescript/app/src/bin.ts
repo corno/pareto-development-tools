@@ -307,7 +307,7 @@ p_h.run_main_command(
                         ),
                         'version control remove tracked but ignored': git.commands['remove tracked but ignored'],
                         'update package dependencies': update_package_dependencies,
-                        'version control commit': c_git_commit(
+                        'commit changes': c_git_commit(
                             null,
                             null,
                             {

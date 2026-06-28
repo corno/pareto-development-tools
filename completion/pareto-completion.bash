@@ -12,10 +12,10 @@ _pdt_completions() {
     local commands="all package project publish set-up-comparison"
     
     # All packages sub-commands
-    local all_subcommands="assert-clean build-and-test build git-commit git-remove-tracked-but-ignored set-up-comparison update-dependencies"
+    local all_subcommands="assert-clean build-and-test build commit-changes git-remove-tracked-but-ignored set-up-comparison update-dependencies"
     
     # Package sub-commands
-    local package_subcommands="assert-clean build-and-test git-commit update-dependencies"
+    local package_subcommands="assert-clean build-and-test commit-changes update-dependencies"
     
     # Project sub-commands
     local project_subcommands="analyze-file-structure dependency-graph list-file-structure-problems"
@@ -38,8 +38,8 @@ _pdt_completions() {
             elif [ "$COMP_CWORD" -eq 3 ]; then
                 # Complete all sub-command
                 COMPREPLY=($(compgen -W "${all_subcommands}" -- ${cur}))
-            elif [ "$COMP_CWORD" -eq 4 ] && [ "${COMP_WORDS[3]}" == "git-commit" ]; then
-                # For git-commit, expect a commit message (no completion)
+            elif [ "$COMP_CWORD" -eq 4 ] && [ "${COMP_WORDS[3]}" == "commit-changes" ]; then
+                # For commit-changes, expect a commit message (no completion)
                 COMPREPLY=()
             elif [ "$COMP_CWORD" -eq 4 ] && [ "${COMP_WORDS[3]}" == "build-and-test" ]; then
                 # Optional 'concise' flag for build-and-test

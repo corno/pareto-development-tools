@@ -64,13 +64,13 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                                         }],
                                                     )
                                                 ])
-                                                case 'version control commit': return p_.ss($, ($) => [
-                                                    $c['version control commit'].execute(
+                                                case 'commit changes': return p_.ss($, ($) => [
+                                                    $c['commit changes'].execute(
                                                         {
                                                             'path': context_path,
                                                             'instruction': $,
                                                         },
-                                                        ($): d.All__Package_Error => ['version control commit', $],
+                                                        ($): d.All__Package_Error => ['commit changes', $],
                                                     )
                                                 ])
                                                 case 'version control remove tracked but ignored': return p_.ss($, ($) => [
@@ -144,13 +144,13 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                         }]],
                                     )
                                 ])
-                                case 'version control commit': return p_.ss($, ($) => [
-                                    $c['version control commit'].execute(
+                                case 'commit changes': return p_.ss($, ($) => [
+                                    $c['commit changes'].execute(
                                         {
                                             'path': path,
                                             'instruction': $,
                                         },
-                                        ($): d.Error => ['package', ['version control commit', $]],
+                                        ($): d.Error => ['package', ['commit changes', $]],
                                     )
                                 ])
                                 case 'update package dependencies': return p_.ss($, ($) => [

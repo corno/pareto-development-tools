@@ -44,7 +44,7 @@ export const Command: signature = (iterator, abort) => ({
                                 "assert-clean": null,
                                 "build-and-test": null,
                                 "build": null,
-                                "git-commit": null,
+                                "commit-changes": null,
                                 "git-remove-tracked-but-ignored": null,
                                 "set-up-comparison": null,
                                 "update-dependencies": null,
@@ -65,7 +65,7 @@ export const Command: signature = (iterator, abort) => ({
                                         ),
                                     }]
                                     case "build": return ['build', null]
-                                    case "git-commit": return ['version control commit', {
+                                    case "commit-changes": return ['commit changes', {
                                         'commit message': iterator.consume(
                                             ($) => abort(['expected a text', { 'description': "commit message" }]),
                                             ($) => $,
@@ -101,7 +101,7 @@ export const Command: signature = (iterator, abort) => ({
                             ['expected one of', p_.literal.dictionary({
                                 "assert-clean": null,
                                 "build-and-test": null,
-                                "git-commit": null,
+                                "commit-changes": null,
                                 "update-dependencies": null,
                             })] as d_function.Error,
                             (end_info, expected) => abort(expected),
@@ -109,7 +109,7 @@ export const Command: signature = (iterator, abort) => ({
                                 switch ($) {
                                     case "assert-clean": return ['assert clean', null]
                                     case "build-and-test": return ['build and test', null]
-                                    case "git-commit": return ['version control commit', {
+                                    case "commit-changes": return ['commit changes', {
                                         'commit message': iterator.consume(
                                             ($) => abort(['expected a text', { 'description': "commit message" }]),
                                             ($) => $,
