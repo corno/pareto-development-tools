@@ -21,7 +21,6 @@ import { $$ as c_git_assert_clean } from "lib/dist/modules/git/implementation/ma
 import { $$ as c_git_make_pristine } from "lib/dist/modules/git/implementation/manual/commands/make_pristine"
 import { $$ as c_git_extended_commit } from "lib/dist/modules/git/implementation/manual/commands/extended_commit"
 import { $$ as c_git_push } from "lib/dist/modules/git/implementation/manual/commands/push"
-import { $$ as c_git_remove_tracked_but_ignored } from "lib/dist/modules/git/implementation/manual/commands/remove_tracked_but_ignored"
 
 //npm module
 import { $$ as c_npm } from "lib/dist/modules/npm/implementation/manual/commands/npm"
@@ -133,17 +132,6 @@ p_h.run_main_command(
                 },
             )
 
-            const git_remove_tracked_but_ignored = c_git_remove_tracked_but_ignored(
-                null,
-                {
-                    'git': eqe_git,
-                },
-                {
-                    'git': ece_git,
-                    'assert no open changes': git_assert_is_clean,
-                },
-            )
-
             const git_extended_commit = c_git_extended_commit(
                 null,
                 {
@@ -162,7 +150,6 @@ p_h.run_main_command(
                     'assert no open changes': git_assert_is_clean,
                     'make pristine': git_make_pristine,
                     'push': git_push,
-                    'remove tracked but ignored': git_remove_tracked_but_ignored,
                     'extended commit': git_extended_commit,
                 },
             }
@@ -309,7 +296,6 @@ p_h.run_main_command(
                                 'log': $r.stream.commands.log,
                             },
                         ),
-                        'version control remove tracked but ignored': git.commands['remove tracked but ignored'],
                         'update package dependencies': update_package_dependencies,
                         'commit changes': c_git_commit(
                             null,

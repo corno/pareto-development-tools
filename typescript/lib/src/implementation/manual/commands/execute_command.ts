@@ -73,14 +73,6 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                                         ($): d.All__Package_Error => ['commit changes', $],
                                                     )
                                                 ])
-                                                case 'version control remove tracked but ignored': return p_.ss($, ($) => [
-                                                    $c['version control remove tracked but ignored'].execute(
-                                                        {
-                                                            'path': p_.literal.set(context_path)
-                                                        },
-                                                        ($): d.All__Package_Error => ['version control remove tracked but ignored', $],
-                                                    )
-                                                ])
                                                 case 'set up comparison': return p_.ss($, ($): p_.Command_Block<d.All__Package_Error> => {
 
                                                     const path_to_temp = t_path_to_path.extend_context_path_with_single_step(

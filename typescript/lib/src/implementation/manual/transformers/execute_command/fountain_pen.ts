@@ -69,7 +69,6 @@ export const Error: signatures.Error = ($) => p_.from.state($).decide(
                                                         ))
                                                         case 'version control assert no open changes': return p_.ss($, ($) => t_git_assert_no_open_changes_to_fountain_pen.Error($))
                                                         case 'commit changes': return p_.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
-                                                        case 'version control remove tracked but ignored': return p_.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
                                                         case 'set up comparison': return p_.ss($, ($) => t_set_up_comparison_against_published.Error($))
                                                         case 'update dependencies': return p_.ss($, ($) => t_update_dependencies.Error($))
                                                         default: return p_.au($[0])

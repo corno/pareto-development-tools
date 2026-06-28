@@ -87,12 +87,6 @@ export type All_Pacakges_Instruction =
     | ['commit changes', d_git_commit.Instruction]
 
     /**
-     * executes     "git rm -r --cached ."
-     * followed by  "git add --all"
-     */
-    | ['version control remove tracked but ignored', null]
-
-    /**
      * sets up 2 directories in /temp of the package dir; one of the local package and one of the published package
      * these directories can be diffed to determine what changes have not been published yet
      */
@@ -139,6 +133,5 @@ export type All__Package_Error =
     | ['build', d_build.Error]
     | ['version control assert no open changes', d_assert_clean.Error]
     | ['commit changes', d_git_commit.Error]
-    | ['version control remove tracked but ignored', d_git_remove_tracked_but_ignored.Error]
     | ['update dependencies', d_update_dependencies.Error]
     | ['set up comparison', d_set_up_comparison_against_published.Error]

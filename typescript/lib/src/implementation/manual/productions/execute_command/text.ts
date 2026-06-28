@@ -45,7 +45,6 @@ export const Command: signature = (iterator, abort) => ({
                                 "build-and-test": null,
                                 "build": null,
                                 "commit-changes": null,
-                                "git-remove-tracked-but-ignored": null,
                                 "set-up-comparison": null,
                                 "update-dependencies": null,
                             })] as d_function.Error,
@@ -80,7 +79,6 @@ export const Command: signature = (iterator, abort) => ({
                                                 : false,
                                         ),
                                     }]
-                                    case "git-remove-tracked-but-ignored": return ['version control remove tracked but ignored', null]
                                     case "set-up-comparison": return ['set up comparison', null]
                                     case "update-dependencies": return ['update package dependencies', null]
                                     default: return abort(expected)

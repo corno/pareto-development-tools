@@ -12,7 +12,7 @@ _pdt_completions() {
     local commands="all package project publish set-up-comparison"
     
     # All packages sub-commands
-    local all_subcommands="assert-no-open-changes build-and-test build commit-changes git-remove-tracked-but-ignored set-up-comparison update-dependencies"
+    local all_subcommands="assert-no-open-changes build-and-test build commit-changes set-up-comparison update-dependencies"
     
     # Package sub-commands
     local package_subcommands="assert-no-open-changes build-and-test commit-changes update-dependencies"
