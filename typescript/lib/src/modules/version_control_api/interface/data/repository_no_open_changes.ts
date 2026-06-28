@@ -7,8 +7,8 @@ import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas
 export type Result = boolean
 
 export type Error =
-    | ['could not determine git status', d_eqe.Error]
-    | ['not a git repository', null]
+    | ['could not determine status', d_eqe.Error]
+    | ['not a repository', null]
     | ['unknown issue', d_iwt.Error]
 
 export type Parameters = {

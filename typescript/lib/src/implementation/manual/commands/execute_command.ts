@@ -37,12 +37,12 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                         p_.decide.state(ap.instruction, ($) => {
                                             const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
                                             switch ($[0]) {
-                                                case 'assert clean': return p_.ss($, ($) => [
-                                                    $c['version control assert is clean'].execute(
+                                                case 'assert no open changes': return p_.ss($, ($) => [
+                                                    $c['version control assert no open changes'].execute(
                                                         {
                                                             'path': p_.literal.set(context_path)
                                                         },
-                                                        ($): d.All__Package_Error => ['version control assert clean', $],
+                                                        ($): d.All__Package_Error => ['version control assert no open changes', $],
                                                     )
                                                 ])
                                                 case 'build': return p_.ss($, ($) => [
@@ -125,12 +125,12 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                     return [
                         p_.decide.state($.instruction, ($) => {
                             switch ($[0]) {
-                                case 'assert clean': return p_.ss($, ($) => [
-                                    $c['version control assert is clean'].execute(
+                                case 'assert no open changes': return p_.ss($, ($) => [
+                                    $c['version control assert no open changes'].execute(
                                         {
                                             'path': p_.literal.set(path)
                                         },
-                                        ($): d.Error => ['package', ['version control assert clean', $]],
+                                        ($): d.Error => ['package', ['version control assert no open changes', $]],
                                     )
                                 ])
                                 case 'build and test': return p_.ss($, ($) => [

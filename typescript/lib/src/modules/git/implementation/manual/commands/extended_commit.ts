@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/dist/implementation/command'
 import * as p_t from 'pareto-core/dist/implementation/transformer'
 import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
-import * as interface_ from "../../../../version_control_api/interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../../version_control_api/interface/data/extended_commit"
@@ -14,11 +14,11 @@ export const $$: interface_.procedures.extended_commit = p_.command_procedure(
     ($d, $s, $q, $c) => [
 
         p_.s.query(
-            p_super_query_result($q['git is repository clean'](
+            p_super_query_result($q['repository no open changes'](
                 {
                     'path': $d.path
                 },
-                ($): d.Error => ['asserting git not clean', $],
+                ($): d.Error => ['asserting no open changes', $],
             )),
             ($) => [
 

@@ -41,7 +41,7 @@ export const Command: signature = (iterator, abort) => ({
                         ),
                         'instruction': iterator.consume_with_expectation(
                             ['expected one of', p_.literal.dictionary({
-                                "assert-clean": null,
+                                "assert-no-open-changes": null,
                                 "build-and-test": null,
                                 "build": null,
                                 "commit-changes": null,
@@ -52,7 +52,7 @@ export const Command: signature = (iterator, abort) => ({
                             (end_info, expected) => abort(expected),
                             ($, expected): d_out.All_Pacakges_Instruction => {
                                 switch ($) {
-                                    case "assert-clean": return ['assert clean', null]
+                                    case "assert-no-open-changes": return ['assert no open changes', null]
                                     case "build-and-test": return ['build and test', {
                                         'concise': iterator.peek(
                                             () => false,
@@ -99,7 +99,7 @@ export const Command: signature = (iterator, abort) => ({
                         ),
                         'instruction': iterator.consume_with_expectation(
                             ['expected one of', p_.literal.dictionary({
-                                "assert-clean": null,
+                                "assert-no-open-changes": null,
                                 "build-and-test": null,
                                 "commit-changes": null,
                                 "update-dependencies": null,
@@ -107,7 +107,7 @@ export const Command: signature = (iterator, abort) => ({
                             (end_info, expected) => abort(expected),
                             ($, expected) => {
                                 switch ($) {
-                                    case "assert-clean": return ['assert clean', null]
+                                    case "assert-no-open-changes": return ['assert no open changes', null]
                                     case "build-and-test": return ['build and test', null]
                                     case "commit-changes": return ['commit changes', {
                                         'commit message': iterator.consume(

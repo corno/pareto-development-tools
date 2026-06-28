@@ -1,0 +1,62 @@
+import * as p_ from 'pareto-core/dist/interface/command'
+
+import * as queries from "../../version_control_api/interface/queries"
+import * as resources_pareto from "pareto-resources/dist/interface/resources"
+
+import * as commands from "../../version_control_api/interface/commands"
+
+export namespace procedures {
+
+    export type assert_no_open_changes = p_.Command_Procedure<
+        commands.commands.assert_no_open_changes,
+        null,
+        {
+            'repository no open changes': queries.queries.repository_no_open_changes
+        },
+        {
+            'git': resources_pareto.execute_sandboxed.commands.command_executable
+        }
+    >
+
+    export type make_pristine = p_.Command_Procedure<
+        commands.commands.make_pristine,
+        null,
+        null,
+        {
+            'git': resources_pareto.execute_sandboxed.commands.command_executable
+        }
+    >
+
+    export type extended_commit = p_.Command_Procedure<
+        commands.commands.extended_commit,
+        null,
+        {
+            'repository no open changes': queries.queries.repository_no_open_changes
+        },
+        {
+            'git': resources_pareto.execute_sandboxed.commands.command_executable
+        }
+    >
+
+    export type push = p_.Command_Procedure<
+        commands.commands.push,
+        null,
+        null,
+        {
+            'git': resources_pareto.execute_sandboxed.commands.command_executable
+        }
+    >
+
+    export type remove_tracked_but_ignored = p_.Command_Procedure<
+        commands.commands.remove_tracked_but_ignored,
+        null,
+        {
+            'git': resources_pareto.execute_sandboxed.queries.query_executable,
+        },
+        {
+            'git': resources_pareto.execute_sandboxed.commands.command_executable,
+            'assert no open changes': commands.commands.assert_no_open_changes
+        }
+    >
+
+}

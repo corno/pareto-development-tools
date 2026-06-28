@@ -11,13 +11,13 @@ d_in.Error, d_out.Phrase
 >
 
 import * as t_ece_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
-import * as t_git_is_clean_to_fountain_pen from "../is_repository_clean/fountain_pen"
+import * as t_git_is_clean_to_fountain_pen from "../repository_has_no_open_changes/fountain_pen"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'asserting git not clean': return p_.ss($, ($) => sh.ph.composed([
-                sh.ph.literal("error while asserting git is not clean: "),
+            case 'asserting no open changes': return p_.ss($, ($) => sh.ph.composed([
+                sh.ph.literal("error while asserting no open changes: "),
                 t_git_is_clean_to_fountain_pen.Error($)
             ]))
             case 'could not stage': return p_.ss($, ($) => sh.ph.composed([

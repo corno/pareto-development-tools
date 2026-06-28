@@ -1,7 +1,7 @@
 // import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
 import * as d_push from "../../modules/version_control_api/interface/data/push"
-import * as d_git_aic from "../../modules/version_control_api/interface/data/assert_is_clean"
+import * as d_git_aic from "../../modules/version_control_api/interface/data/assert_no_open_changes"
 import * as d_git_make_pristine from "../../modules/version_control_api/interface/data/make_pristine"
 import * as d_npm from "../../modules/npm/interface/data/npm_tool"
 import * as d_update_package_dependencies from "./update_package_dependencies"
@@ -23,11 +23,11 @@ export type Parameters = {
 
 export type Error =
     | ['error while running git push', d_push.Error]
-    | ['error while running git assert is clean at the start', d_git_aic.Error]
+    | ['error while running git assert no open changes at the start', d_git_aic.Error]
     | ['error while running git make pristine', d_git_make_pristine.Error]
     | ['error while running update package dependencies', d_update_package_dependencies.Error]
     | ['error while running build and test', d_build_and_test.Error]
-    | ['error while running git assert is clean after updating package dependencies', d_git_aic.Error]
+    | ['error while running git assert no open changes after updating package dependencies', d_git_aic.Error]
     | ['error while running npm version', d_npm.Error]
     | ['error while running npm update', d_npm.Error]
     | ['error while running npm publish', d_npm.Error]

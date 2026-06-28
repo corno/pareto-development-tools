@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/dist/interface/data'
 
 
 import * as d_get_project_files from "./get_project_files"
-import * as d_assert_clean from "../../modules/version_control_api/interface/data/assert_is_clean"
+import * as d_assert_clean from "../../modules/version_control_api/interface/data/assert_no_open_changes"
 import * as d_build from "./build"
 import * as d_build_and_test from "./build_and_test"
 import * as d_dependency_graph from "./create_dependency_graph"
@@ -43,7 +43,7 @@ export type Package = {
     /**
      * asserts that the git working tree is clean for 1 specified package
      */
-    | ['assert clean', null]
+    | ['assert no open changes', null]
 
 
     | ['build and test', null]
@@ -70,7 +70,7 @@ export type All_Pacakges_Instruction =
     /**
      * verifies that the git working tree is clean, raises an error if not
      */
-    | ['assert clean', null]
+    | ['assert no open changes', null]
 
     /**
      * builds all packages and runs their tests
@@ -122,7 +122,7 @@ export type Package_Error =
         'error': d_build_and_test.Error,
         'concise': boolean
     }]
-    | ['version control assert clean', d_assert_clean.Error]
+    | ['version control assert no open changes', d_assert_clean.Error]
     | ['commit changes', d_git_commit.Error]
     | ['publish', d_publish.Error]
     | ['update dependencies', d_update_dependencies.Error]
@@ -137,7 +137,7 @@ export type All__Package_Error =
         'concise': boolean
     }]
     | ['build', d_build.Error]
-    | ['version control assert clean', d_assert_clean.Error]
+    | ['version control assert no open changes', d_assert_clean.Error]
     | ['commit changes', d_git_commit.Error]
     | ['version control remove tracked but ignored', d_git_remove_tracked_but_ignored.Error]
     | ['update dependencies', d_update_dependencies.Error]

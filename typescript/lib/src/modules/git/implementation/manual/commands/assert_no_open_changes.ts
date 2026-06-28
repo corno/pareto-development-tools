@@ -1,15 +1,15 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 
-import * as interface_ from "../../../../version_control_api/interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
-import * as d from "../../../../version_control_api/interface/data/assert_is_clean"
+import * as d from "../../../../version_control_api/interface/data/assert_no_open_changes"
 
-export const $$: interface_.procedures.assert_is_clean = p_.command_procedure(
+export const $$: interface_.procedures.assert_no_open_changes = p_.command_procedure(
     ($d, $s, $q, $c) => [
 
         p_.s.query(
-            $q['is repository clean'](
+            $q['repository no open changes'](
                 {
                     'path': $d.path,
                 },
@@ -19,7 +19,7 @@ export const $$: interface_.procedures.assert_is_clean = p_.command_procedure(
 
                 p_.s.assert(
                     $,
-                    ['working directory is not clean', null]
+                    ['working directory has open changes', null]
                 )
 
             ]

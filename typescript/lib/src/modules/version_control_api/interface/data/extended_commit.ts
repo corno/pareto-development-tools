@@ -1,11 +1,11 @@
 import * as p_ from 'pareto-core/dist/interface/data'
 
 import * as d_ece from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
-import * as d_is_repository_clean from "./is_repository_clean"
+import * as d_repository_no_open_changes from "./repository_no_open_changes"
 import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
 
 export type Error =
-    | ['asserting git not clean', d_is_repository_clean.Error]
+    | ['asserting no open changes', d_repository_no_open_changes.Error]
     | ['could not stage', d_ece.Error]
     | ['could not commit', d_ece.Error]
     | ['could not push', d_ece.Error]

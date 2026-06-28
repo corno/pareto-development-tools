@@ -2,33 +2,12 @@ import * as p_ from 'pareto-core/dist/interface/query'
 
 import * as resources_pareto from "pareto-resources/dist/interface/resources"
 
-import * as d_is_repository_clean from "./data/is_repository_clean"
+import * as d_repository_no_open_changes from "./data/repository_no_open_changes"
 import * as d_is_inside_work_tree from "./data/is_inside_work_tree"
 
 export namespace queries {
 
-    export type is_repository_clean = p_.Query<d_is_repository_clean.Result, d_is_repository_clean.Error, d_is_repository_clean.Parameters>
+    export type repository_no_open_changes = p_.Query<d_repository_no_open_changes.Result, d_repository_no_open_changes.Error, d_repository_no_open_changes.Parameters>
     export type is_inside_work_tree = p_.Query<d_is_inside_work_tree.Result, d_is_inside_work_tree.Error, d_is_inside_work_tree.Parameters>
-
-}
-
-export namespace query_functions {
-
-    export type is_inside_work_tree = p_.Query_Function<
-        queries.is_inside_work_tree,
-        null,
-        {
-            'git': resources_pareto.execute_sandboxed.queries.query_executable
-        }
-    >
-
-    export type is_repository_clean = p_.Query_Function<
-        queries.is_repository_clean,
-        null,
-        {
-            'is inside git work tree': queries.is_inside_work_tree
-            'git': resources_pareto.execute_sandboxed.queries.query_executable
-        }
-    >
 
 }

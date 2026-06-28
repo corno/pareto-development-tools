@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import * as p_temp from 'pareto-core/dist/implementation/transformer'
 
-import * as interface_ from "../../../../version_control_api/interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //data types
 import * as d from "../../../../version_control_api/interface/data/remove_tracked_but_ignored"
@@ -11,14 +11,14 @@ import * as t_path_to_text from "pareto-resources/dist/implementation/manual/tra
 
 export const $$: interface_.procedures.remove_tracked_but_ignored = p_.command_procedure(
     ($d, $s, $q, $c) => [
-        $c['assert is clean'].execute(
+        $c['assert no open changes'].execute(
             {
                 'path': $d.path,
             },
             ($): d.Error => p_temp.from.state($).decide(
                 ($) => {
                     switch ($[0]) {
-                        case 'working directory is not clean': return p_temp.ss($, ($): d.Error => ['not clean', null])
+                        case 'working directory has open changes': return p_temp.ss($, ($): d.Error => ['open changes present', null])
                         case 'unexpected error': return p_temp.ss($, ($): d.Error => ['unexpected error', $])
                         default: return p_temp.au($[0])
                     }
@@ -81,7 +81,7 @@ export const $$: interface_.procedures.remove_tracked_but_ignored = p_.command_p
                     ])
                 ]),
             },
-            ($) => ['could not clean', $],
+            ($) => ['could not remove', $],
         ),
     ]
 )

@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/dist/implementation/command'
 import * as p_t from 'pareto-core/dist/implementation/transformer'
 
-import * as interface_ from "../../../../version_control_api/interface/commands"
+import * as interface_ from "../../../interface/commands"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"

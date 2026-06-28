@@ -57,7 +57,7 @@ export namespace procedures {
             'build and test': commands.build_and_test
             'build': commands.build
             'create dependency graph': commands.create_dependency_graph
-            'version control assert is clean': resources_version_control.commands.assert_is_clean
+            'version control assert no open changes': resources_version_control.commands.assert_no_open_changes
             'commit changes': commands.version_control_commit
             'version control remove tracked but ignored': resources_version_control.commands.remove_tracked_but_ignored
             'list file structure problems': commands.analyze_file_structure
@@ -143,7 +143,7 @@ export namespace procedures {
         {
             'version control push': resources_version_control.commands.push
             'version control extended commit': resources_version_control.commands.extended_commit
-            'version control assert is clean': resources_version_control.commands.assert_is_clean
+            'version control assert no open changes': resources_version_control.commands.assert_no_open_changes
             'version control make pristine': resources_version_control.commands.make_pristine
             'update package dependencies': commands.update_package_dependencies
             'build and test': commands.build_and_test

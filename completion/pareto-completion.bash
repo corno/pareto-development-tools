@@ -12,10 +12,10 @@ _pdt_completions() {
     local commands="all package project publish set-up-comparison"
     
     # All packages sub-commands
-    local all_subcommands="assert-clean build-and-test build commit-changes git-remove-tracked-but-ignored set-up-comparison update-dependencies"
+    local all_subcommands="assert-no-open-changes build-and-test build commit-changes git-remove-tracked-but-ignored set-up-comparison update-dependencies"
     
     # Package sub-commands
-    local package_subcommands="assert-clean build-and-test commit-changes update-dependencies"
+    local package_subcommands="assert-no-open-changes build-and-test commit-changes update-dependencies"
     
     # Project sub-commands
     local project_subcommands="analyze-file-structure dependency-graph list-file-structure-problems"
@@ -74,7 +74,7 @@ _pdt_completions() {
             fi
             return 0
             ;;
-        assert-clean|build-and-test)
+        assert-no-open-changes|build-and-test)
             # These commands take a project path
             if [ "$COMP_CWORD" -eq 2 ]; then
                 COMPREPLY=($(compgen -d -- ${cur}))
@@ -91,7 +91,7 @@ _pdt_completions() {
             fi
             return 0
             ;;
-        assert-clean|build-and-test)
+        assert-no-open-changes|build-and-test)
             # These commands take a project path
             if [ "$COMP_CWORD" -eq 2 ]; then
                 COMPREPLY=($(compgen -d -- ${cur}))

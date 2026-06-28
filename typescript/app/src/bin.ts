@@ -8,12 +8,31 @@ import * as d_ece from "pareto-resources/dist/interface/generated/liana/schemas/
 import * as d_espe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
 import * as d_eqe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
 
-import { $$ as q_git_is_repository_clean } from "lib/dist/modules/git/implementation/manual/queries/is_repository_clean"
-import { $$ as q_git_is_inside_work_tree } from "lib/dist/modules/git/implementation/manual/queries/is_inside_work_tree"
-import { $$ as q_package_dependencies } from "lib/dist/implementation/manual/queries/get_package_dependencies"
-
+//pareto-resources
 import { $$ as q_execute_sandboxed_query_executable } from "pareto-resources/dist/implementation/manual/queries/execute_sandboxed_query_executable"
+import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/dist/implementation/manual/commands/execute_sandboxed_command_executable"
+import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/dist/implementation/manual/commands/execute_sandboxed_smelly_command_executable"
 
+
+//git module
+import { $$ as q_git_is_repository_clean } from "lib/dist/modules/git/implementation/manual/queries/repository_no_open_changes"
+import { $$ as q_git_is_inside_work_tree } from "lib/dist/modules/git/implementation/manual/queries/is_inside_work_tree"
+import { $$ as c_git_assert_clean } from "lib/dist/modules/git/implementation/manual/commands/assert_no_open_changes"
+import { $$ as c_git_make_pristine } from "lib/dist/modules/git/implementation/manual/commands/make_pristine"
+import { $$ as c_git_extended_commit } from "lib/dist/modules/git/implementation/manual/commands/extended_commit"
+import { $$ as c_git_push } from "lib/dist/modules/git/implementation/manual/commands/push"
+import { $$ as c_git_remove_tracked_but_ignored } from "lib/dist/modules/git/implementation/manual/commands/remove_tracked_but_ignored"
+
+//npm module
+import { $$ as c_npm } from "lib/dist/modules/npm/implementation/manual/commands/npm"
+import { $$ as c_npm_publish } from "lib/dist/modules/npm/implementation/manual/commands/publish"
+import { $$ as c_set_up_comparison_against_published } from "lib/dist/modules/npm/implementation/manual/commands/set_up_comparison_against_published"
+import { $$ as c_npm_update_package_dependencies } from "lib/dist/modules/npm/implementation/manual/commands/update_package_dependencies"
+import { $$ as c_update2latest } from "lib/dist/modules/npm/implementation/manual/commands/update2latest"
+
+
+//internal
+import { $$ as q_package_dependencies } from "lib/dist/implementation/manual/queries/get_package_dependencies"
 import { $$ as c_analyze_file_structure } from "lib/dist/implementation/manual/commands/analyze_file_structure"
 import { $$ as c_list_file_structure_problems } from "lib/dist/implementation/manual/commands/list_file_structure_problems"
 import { $$ as c_api } from "lib/dist/implementation/manual/commands/execute_command"
@@ -21,25 +40,10 @@ import { $$ as c_main } from "lib/dist/implementation/manual/commands/main"
 import { $$ as c_build } from "lib/dist/implementation/manual/commands/build"
 import { $$ as c_build_and_test } from "lib/dist/implementation/manual/commands/build_and_test"
 import { $$ as c_dependency_graph } from "lib/dist/implementation/manual/commands/create_dependency_graph"
-import { $$ as c_git_assert_clean } from "lib/dist/modules/git/implementation/manual/commands/assert_is_clean"
-import { $$ as c_git_make_pristine } from "lib/dist/modules/git/implementation/manual/commands/make_pristine"
-import { $$ as c_git_extended_commit } from "lib/dist/modules/git/implementation/manual/commands/extended_commit"
 import { $$ as c_git_commit } from "lib/dist/implementation/manual/commands/version_control_commit"
-import { $$ as c_git_push } from "lib/dist/modules/git/implementation/manual/commands/push"
-import { $$ as c_git_remove_tracked_but_ignored } from "lib/dist/modules/git/implementation/manual/commands/remove_tracked_but_ignored"
-import { $$ as c_npm } from "lib/dist/modules/npm/implementation/manual/commands/npm"
-import { $$ as c_npm_publish } from "lib/dist/modules/npm/implementation/manual/commands/publish"
 import { $$ as c_publish } from "lib/dist/implementation/manual/commands/publish"
-import { $$ as c_set_up_comparison_against_published } from "lib/dist/modules/npm/implementation/manual/commands/set_up_comparison_against_published"
 import { $$ as c_tsc } from "lib/dist/implementation/manual/commands/tsc"
 import { $$ as c_update_package_dependencies } from "lib/dist/implementation/manual/commands/update_package_dependencies"
-import { $$ as c_npm_update_package_dependencies } from "lib/dist/modules/npm/implementation/manual/commands/update_package_dependencies"
-import { $$ as c_update2latest } from "lib/dist/modules/npm/implementation/manual/commands/update2latest"
-
-import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/dist/implementation/manual/commands/execute_sandboxed_command_executable"
-import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/dist/implementation/manual/commands/execute_sandboxed_smelly_command_executable"
-
-
 
 p_h.run_main_command(
     ($r) => {
@@ -94,7 +98,7 @@ p_h.run_main_command(
                 null,
                 {
                     'git': eqe_git,
-                    'is inside git work tree': q_git_is_inside_work_tree(
+                    'is inside work tree': q_git_is_inside_work_tree(
                         null,
                         {
                             'git': eqe_git,
@@ -106,7 +110,7 @@ p_h.run_main_command(
             const git_assert_is_clean = c_git_assert_clean(
                 null,
                 {
-                    'is repository clean': git_is_repository_clean,
+                    'repository no open changes': git_is_repository_clean,
                 },
                 {
                     'git': ece_git,
@@ -136,14 +140,14 @@ p_h.run_main_command(
                 },
                 {
                     'git': ece_git,
-                    'assert is clean': git_assert_is_clean,
+                    'assert no open changes': git_assert_is_clean,
                 },
             )
 
             const git_extended_commit = c_git_extended_commit(
                 null,
                 {
-                    'git is repository clean': git_is_repository_clean,
+                    'repository no open changes': git_is_repository_clean,
                 },
                 {
                     'git': ece_git,
@@ -152,10 +156,10 @@ p_h.run_main_command(
 
             return {
                 'queries': {
-                    'is repository clean': git_is_repository_clean,
+                    'repository no open changes': git_is_repository_clean,
                 },
                 'commands': {
-                    'assert is clean': git_assert_is_clean,
+                    'assert no open changes': git_assert_is_clean,
                     'make pristine': git_make_pristine,
                     'push': git_push,
                     'remove tracked but ignored': git_remove_tracked_but_ignored,
@@ -281,7 +285,7 @@ p_h.run_main_command(
                         'read directory': $r['filesystem unrestricted'].queries['read directory']
                     },
                     {
-                        'version control assert is clean': git.commands['assert is clean'],
+                        'version control assert no open changes': git.commands['assert no open changes'],
                         'build and test': build_and_test,
                         'build': build,
                         'create dependency graph': dependency_graph,
@@ -324,7 +328,7 @@ p_h.run_main_command(
                             {
                                 'build and test': build_and_test,
                                 'version control push': git.commands['push'],
-                                'version control assert is clean': git.commands['assert is clean'],
+                                'version control assert no open changes': git.commands['assert no open changes'],
                                 'version control make pristine': git.commands['make pristine'],
                                 'npm': npm,
                                 'npm publish': npm_publish,

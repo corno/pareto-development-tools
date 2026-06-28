@@ -15,7 +15,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 //dependencies
 import * as t_git_commit_to_fountain_pen from "../git_commit/fountain_pen"
-import * as t_git_assert_clean_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/assert_is_clean/fountain_pen"
+import * as t_git_assert_no_open_changes_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/assert_no_open_changes/fountain_pen"
 import * as t_git_remove_tracked_but_ignored from "../../../../modules/version_control_api/implementation/manual/transformers/remove_tracked_but_ignored/fountain_pen"
 
 import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pen"
@@ -36,7 +36,7 @@ export const Error: signatures.Error = ($) => p_.from.state($).decide(
                         case 'build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
                         case 'publish': return p_.ss($, ($) => t_publish.Error($))
                         case 'update dependencies': return p_.ss($, ($) => t_update_dependencies.Error($))
-                        case 'version control assert clean': return p_.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
+                        case 'version control assert no open changes': return p_.ss($, ($) => t_git_assert_no_open_changes_to_fountain_pen.Error($))
                         case 'commit changes': return p_.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
 
                         default: return p_.au($[0])
@@ -67,7 +67,7 @@ export const Error: signatures.Error = ($) => p_.from.state($).decide(
                                                             $,
                                                             { 'concise': false }
                                                         ))
-                                                        case 'version control assert clean': return p_.ss($, ($) => t_git_assert_clean_to_fountain_pen.Error($))
+                                                        case 'version control assert no open changes': return p_.ss($, ($) => t_git_assert_no_open_changes_to_fountain_pen.Error($))
                                                         case 'commit changes': return p_.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
                                                         case 'version control remove tracked but ignored': return p_.ss($, ($) => t_git_remove_tracked_but_ignored.Error($))
                                                         case 'set up comparison': return p_.ss($, ($) => t_set_up_comparison_against_published.Error($))

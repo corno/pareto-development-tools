@@ -2,15 +2,15 @@ import * as p_ from 'pareto-core/dist/implementation/query'
 import * as p_t from 'pareto-core/dist/implementation/transformer'
 import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
 
-import * as interface_ from "../../../../version_control_api/interface/queries"
+import * as interface_ from "../../../interface/queries"
 
 //data types
-import * as d from "../../../../version_control_api/interface/data/is_repository_clean"
+import * as d from "../../../../version_control_api/interface/data/repository_no_open_changes"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: interface_.query_functions.is_repository_clean = p_.query_function(
+export const $$: interface_.query_functions.repository_no_open_changes = p_.query_function(
     ($d, $s, $q) =>  p_super_query_result($q.git(
         {
             'working directory': p_.literal.not_set(),
@@ -32,7 +32,7 @@ export const $$: interface_.query_functions.is_repository_clean = p_.query_funct
     )).transform<boolean>(
         ($) => $.stdout.raw === ""
     ).rework_error_temp(
-        ($current) =>  p_super_query_result($q['is inside git work tree'](
+        ($current) =>  p_super_query_result($q['is inside work tree'](
             {
                 'path': $d.path
             },
@@ -40,8 +40,8 @@ export const $$: interface_.query_functions.is_repository_clean = p_.query_funct
         )).transform<d.Error>(
             ($) => {
                 return $
-                    ? ['could not determine git status', $current]
-                    : ['not a git repository', null]
+                    ? ['could not determine status', $current]
+                    : ['not a repository', null]
             }
         ),
         ($): d.Error => ['unknown issue', $]

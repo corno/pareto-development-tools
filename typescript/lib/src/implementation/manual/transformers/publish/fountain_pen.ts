@@ -13,7 +13,7 @@ d_in.Error, d_out.Phrase
 import * as t_git_push_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/push/fountain_pen"
 import * as t_git_make_pristine_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/make_pristine/fountain_pen"
 import * as t_clean_and_update_package_dependencies_to_fountain_pen from "../update_package_dependencies/fountain_pen"
-import * as t_git_is_clean_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/is_repository_clean/fountain_pen"
+import * as t_git_is_clean_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/repository_has_no_open_changes/fountain_pen"
 import * as t_npm_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/npm/fountain_pen"
 import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pen"
 import * as t_get_package_json_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/get_package_json/fountain_pen"
@@ -25,12 +25,12 @@ export const Error: Error = ($) => p_.from.state($).decide(
             case 'error while running git push': return p_.ss($, ($) => sh.ph.composed([
                 t_git_push_to_fountain_pen.Error($)
             ]))
-            case 'error while running git assert is clean at the start': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running git assert no open changes at the start': return p_.ss($, ($) => sh.ph.composed([
                 p_.from.state($).decide(
                     ($) => {
                         switch ($[0]) {
                             case 'unexpected error': return p_.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
-                            case 'working directory is not clean': return p_.ss($, ($) => sh.ph.literal("working directory is not clean at the start"))
+                            case 'working directory has open changes': return p_.ss($, ($) => sh.ph.literal("working directory has open changes at the start"))
                             default: return p_.au($[0])
                         }
                     })
@@ -42,12 +42,12 @@ export const Error: Error = ($) => p_.from.state($).decide(
                 t_clean_and_update_package_dependencies_to_fountain_pen.Error($)
             ]))
             case 'error while running build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error($, { 'concise': false }))
-            case 'error while running git assert is clean after updating package dependencies': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running git assert no open changes after updating package dependencies': return p_.ss($, ($) => sh.ph.composed([
                 p_.from.state($).decide(
                     ($) => {
                         switch ($[0]) {
                             case 'unexpected error': return p_.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
-                            case 'working directory is not clean': return p_.ss($, ($) => sh.ph.literal("working directory is not clean after updating package dependencies"))
+                            case 'working directory has open changes': return p_.ss($, ($) => sh.ph.literal("working directory has open changes after updating package dependencies"))
                             default: return p_.au($[0])
                         }
                     })
