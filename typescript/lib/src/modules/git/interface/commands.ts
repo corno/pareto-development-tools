@@ -47,16 +47,4 @@ export namespace procedures {
         }
     >
 
-    export type remove_tracked_but_ignored = p_.Command_Procedure<
-        commands.commands.remove_tracked_but_ignored,
-        null,
-        {
-            'git': resources_pareto.execute_sandboxed.queries.query_executable,
-        },
-        {
-            'git': resources_pareto.execute_sandboxed.commands.command_executable,
-            'assert no open changes': commands.commands.assert_no_open_changes
-        }
-    >
-
 }

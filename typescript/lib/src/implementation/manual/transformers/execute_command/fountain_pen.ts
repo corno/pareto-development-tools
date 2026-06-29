@@ -16,7 +16,6 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 //dependencies
 import * as t_git_commit_to_fountain_pen from "../git_commit/fountain_pen"
 import * as t_git_assert_no_open_changes_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/assert_no_open_changes/fountain_pen"
-import * as t_git_remove_tracked_but_ignored from "../../../../modules/version_control_api/implementation/manual/transformers/remove_tracked_but_ignored/fountain_pen"
 
 import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pen"
 import * as t_build_to_fountain_pen from "../build/fountain_pen"
