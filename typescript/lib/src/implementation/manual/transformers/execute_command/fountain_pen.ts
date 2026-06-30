@@ -29,24 +29,24 @@ import * as t_set_up_comparison_against_published from "../../../../modules/npm/
 export const Error: signatures.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'package': return p_.ss($, ($) => p_.from.state($).decide(
+            case 'package': return p_.option($, ($) => p_.from.state($).decide(
                 ($) => {
                     switch ($[0]) {
-                        case 'build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
-                        case 'publish': return p_.ss($, ($) => t_publish.Error($))
-                        case 'update dependencies': return p_.ss($, ($) => t_update_dependencies.Error($))
-                        case 'version control assert no open changes': return p_.ss($, ($) => t_git_assert_no_open_changes_to_fountain_pen.Error($))
-                        case 'commit changes': return p_.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
+                        case 'build and test': return p_.option($, ($) => t_build_and_test_to_fountain_pen.Error($.error, { 'concise': $.concise }))
+                        case 'publish': return p_.option($, ($) => t_publish.Error($))
+                        case 'update dependencies': return p_.option($, ($) => t_update_dependencies.Error($))
+                        case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_fountain_pen.Error($))
+                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_fountain_pen.Error($))
 
                         default: return p_.au($[0])
                     }
                 }))
-            case 'get project files': return p_.ss($, ($) => t_line_count_to_fountain_pen.Error($))
-            case 'dependency graph': return p_.ss($, ($) => t_dependency_graph_to_fountain_pen.Error($))
-            case 'all': return p_.ss($, ($) => p_.from.state($).decide(
+            case 'get project files': return p_.option($, ($) => t_line_count_to_fountain_pen.Error($))
+            case 'dependency graph': return p_.option($, ($) => t_dependency_graph_to_fountain_pen.Error($))
+            case 'all': return p_.option($, ($) => p_.from.state($).decide(
                 ($) => {
                     switch ($[0]) {
-                        case 'packages': return p_.ss($, ($) => sh.ph.composed([
+                        case 'packages': return p_.option($, ($) => sh.ph.composed([
                             sh.ph.literal("could not execute command for the following packages:"),
                             sh.ph.indent(
                                 sh.pg.sentences(
@@ -58,18 +58,18 @@ export const Error: signatures.Error = ($) => p_.from.state($).decide(
                                             p_.from.state($).decide(
                                                 ($) => {
                                                     switch ($[0]) {
-                                                        case 'build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error(
+                                                        case 'build and test': return p_.option($, ($) => t_build_and_test_to_fountain_pen.Error(
                                                             $.error,
                                                             { 'concise': $.concise }
                                                         ))
-                                                        case 'build': return p_.ss($, ($) => t_build_to_fountain_pen.Error(
+                                                        case 'build': return p_.option($, ($) => t_build_to_fountain_pen.Error(
                                                             $,
                                                             { 'concise': false }
                                                         ))
-                                                        case 'version control assert no open changes': return p_.ss($, ($) => t_git_assert_no_open_changes_to_fountain_pen.Error($))
-                                                        case 'commit changes': return p_.ss($, ($) => t_git_commit_to_fountain_pen.Error($))
-                                                        case 'set up comparison': return p_.ss($, ($) => t_set_up_comparison_against_published.Error($))
-                                                        case 'update dependencies': return p_.ss($, ($) => t_update_dependencies.Error($))
+                                                        case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_fountain_pen.Error($))
+                                                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_fountain_pen.Error($))
+                                                        case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))
+                                                        case 'update dependencies': return p_.option($, ($) => t_update_dependencies.Error($))
                                                         default: return p_.au($[0])
                                                     }
                                                 })
@@ -78,14 +78,14 @@ export const Error: signatures.Error = ($) => p_.from.state($).decide(
                                 )
                             )
                         ]))
-                        case 'could not read packages directory': return p_.ss($, ($) => sh.ph.composed([
+                        case 'could not read packages directory': return p_.option($, ($) => sh.ph.composed([
                             sh.ph.literal("could not read packages directory: "),
                             t_read_directory_to_fountain_pen.Error($)
                         ]))
                         default: return p_.au($[0])
                     }
                 }))
-            case 'set up comparison': return p_.ss($, ($) => t_set_up_comparison_against_published.Error($))
+            case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))
             default: return p_.au($[0])
         }
     })

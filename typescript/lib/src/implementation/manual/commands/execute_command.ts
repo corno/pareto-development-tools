@@ -16,7 +16,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
     ($d, $s, $q, $c) => [
         p_.decide.state($d.type, ($) => {
             switch ($[0]) {
-                case 'all packages': return p_.ss($, ($) => {
+                case 'all packages': return p_.option($, ($) => {
                     const ap = $
 
                     return [
@@ -37,7 +37,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                         p_.decide.state(ap.instruction, ($) => {
                                             const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
                                             switch ($[0]) {
-                                                case 'assert no open changes': return p_.ss($, ($) => [
+                                                case 'assert no open changes': return p_.option($, ($) => [
                                                     $c['version control assert no open changes'].execute(
                                                         {
                                                             'path': p_.literal.set(context_path)
@@ -45,7 +45,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                                         ($): d.All__Package_Error => ['version control assert no open changes', $],
                                                     )
                                                 ])
-                                                case 'build': return p_.ss($, ($) => [
+                                                case 'build': return p_.option($, ($) => [
                                                     $c['build'].execute(
                                                         {
                                                             'path': context_path,
@@ -53,7 +53,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                                         ($): d.All__Package_Error => ['build', $],
                                                     )
                                                 ])
-                                                case 'build and test': return p_.ss($, ($x) => [
+                                                case 'build and test': return p_.option($, ($x) => [
                                                     $c['build and test'].execute(
                                                         {
                                                             'path': context_path,
@@ -64,7 +64,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                                         }],
                                                     )
                                                 ])
-                                                case 'commit changes': return p_.ss($, ($) => [
+                                                case 'commit changes': return p_.option($, ($) => [
                                                     $c['commit changes'].execute(
                                                         {
                                                             'path': context_path,
@@ -73,7 +73,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                                         ($): d.All__Package_Error => ['commit changes', $],
                                                     )
                                                 ])
-                                                case 'set up comparison': return p_.ss($, ($): p_.Command_Block<d.All__Package_Error> => {
+                                                case 'set up comparison': return p_.option($, ($): p_.Command_Block<d.All__Package_Error> => {
 
                                                     const path_to_temp = t_path_to_path.extend_context_path_with_single_step(
                                                         t_path_to_path.extend_context_path_with_single_step(
@@ -94,7 +94,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                                         )
                                                     ]
                                                 })
-                                                case 'update package dependencies': return p_.ss($, ($) => [
+                                                case 'update package dependencies': return p_.option($, ($) => [
                                                     $c['update package dependencies'].execute(
                                                         {
                                                             'path': context_path
@@ -112,12 +112,12 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                         )
                     ]
                 })
-                case 'package': return p_.ss($, ($) => {
+                case 'package': return p_.option($, ($) => {
                     const path = $.path
                     return [
                         p_.decide.state($.instruction, ($) => {
                             switch ($[0]) {
-                                case 'assert no open changes': return p_.ss($, ($) => [
+                                case 'assert no open changes': return p_.option($, ($) => [
                                     $c['version control assert no open changes'].execute(
                                         {
                                             'path': p_.literal.set(path)
@@ -125,7 +125,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                         ($): d.Error => ['package', ['version control assert no open changes', $]],
                                     )
                                 ])
-                                case 'build and test': return p_.ss($, ($) => [
+                                case 'build and test': return p_.option($, ($) => [
                                     $c['build and test'].execute(
                                         {
                                             'path': path,
@@ -136,7 +136,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                         }]],
                                     )
                                 ])
-                                case 'commit changes': return p_.ss($, ($) => [
+                                case 'commit changes': return p_.option($, ($) => [
                                     $c['commit changes'].execute(
                                         {
                                             'path': path,
@@ -145,7 +145,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                         ($): d.Error => ['package', ['commit changes', $]],
                                     )
                                 ])
-                                case 'update package dependencies': return p_.ss($, ($) => [
+                                case 'update package dependencies': return p_.option($, ($) => [
                                     $c['update package dependencies'].execute(
                                         {
                                             'path': path
@@ -158,12 +158,12 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                         })
                     ]
                 })
-                case 'project': return p_.ss($, ($) => {
+                case 'project': return p_.option($, ($) => {
                     const path = $.path
                     return [
                         p_.decide.state($.instruction, ($) => {
                             switch ($[0]) {
-                                case 'analyze file structure': return p_.ss($, ($) => [
+                                case 'analyze file structure': return p_.option($, ($) => [
                                     $c['analyze file structure'].execute(
                                         {
                                             'path to project': path
@@ -171,7 +171,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                         ($): d.Error => ['get project files', $],
                                     )
                                 ])
-                                case 'dependency graph': return p_.ss($, ($) => [
+                                case 'dependency graph': return p_.option($, ($) => [
                                     $c['create dependency graph'].execute(
                                         {
                                             'path to project': path
@@ -179,7 +179,7 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                                         ($): d.Error => ['dependency graph', $],
                                     )
                                 ])
-                                case 'list file structure problems': return p_.ss($, ($) => [
+                                case 'list file structure problems': return p_.option($, ($) => [
                                     $c['list file structure problems'].execute(
                                         {
                                             'path to project': path
@@ -193,13 +193,13 @@ export const $$: interface_.procedures.api = p_.command_procedure(
                         })
                     ]
                 })
-                case 'publish': return p_.ss($, ($) => [
+                case 'publish': return p_.option($, ($) => [
                     $c['publish'].execute(
                         $,
                         ($): d.Error => ['package', ['publish', $]],
                     )
                 ])
-                case 'set up comparison': return p_.ss($, ($) => [
+                case 'set up comparison': return p_.option($, ($) => [
                     p_change_context(
                         {
                             'path to temp': t_path_to_path.extend_context_path_with_single_step($['path to package'], { 'addition': "temp" }),

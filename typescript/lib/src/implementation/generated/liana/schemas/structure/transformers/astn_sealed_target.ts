@@ -18,7 +18,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
     ($): t_out.Value.state => {
         switch ($[0]) {
             case 'dictionary':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ({
                         'option': 'dictionary',
@@ -28,7 +28,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                     }),
                 )
             case 'group':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ({
                         'option': 'group',
@@ -39,7 +39,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                                 ($): t_out.Value.state => {
                                     switch ($[0]) {
                                         case 'directory':
-                                            return p_.ss(
+                                            return p_.option(
                                                 $,
                                                 ($) => ({
                                                     'option': 'directory',
@@ -49,7 +49,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                                                 }),
                                             )
                                         case 'file':
-                                            return p_.ss(
+                                            return p_.option(
                                                 $,
                                                 ($) => ({
                                                     'option': 'file',
@@ -58,7 +58,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                                                         ($): t_out.Value.state => {
                                                             switch ($[0]) {
                                                                 case 'manual':
-                                                                    return p_.ss(
+                                                                    return p_.option(
                                                                         $,
                                                                         ($) => ({
                                                                             'option': 'manual',
@@ -66,7 +66,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                                                                         }),
                                                                     )
                                                                 case 'generated':
-                                                                    return p_.ss(
+                                                                    return p_.option(
                                                                         $,
                                                                         ($) => ({
                                                                             'option': 'generated',
@@ -105,7 +105,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                     }),
                 )
             case 'wildcards':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ({
                         'option': 'wildcards',
@@ -153,7 +153,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                     }),
                 )
             case 'freeform':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ({
                         'option': 'freeform',
@@ -161,7 +161,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                     }),
                 )
             case 'ignore':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ({
                         'option': 'ignore',
@@ -169,7 +169,7 @@ export const Directory: t_signatures.Directory = ($) => ['state', p_decide_state
                     }),
                 )
             case 'generated':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ({
                         'option': 'generated',

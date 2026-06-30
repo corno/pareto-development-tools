@@ -31,9 +31,9 @@ export const $$: interface_.query_functions.get_package_dependencies = p_.query_
                 const package_json_path = t_path_to_path.create_node_path(lib_path, { 'node': "package.json" })
                 return p_.decide.state($['node type'], ($) => {
                     switch ($[0]) {
-                        case 'file': return p_.ss($, ($) => p_.e.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
-                        case 'other': return p_.ss($, ($) => p_.e.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
-                        case 'directory': return p_.ss($, ($) => p_super_query_result($q['read file'](
+                        case 'file': return p_.option($, ($) => p_.e.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
+                        case 'other': return p_.option($, ($) => p_.e.direct_error<d_npm_package.NPM_Package, d.Package_Error>(['not a directory', null]))
+                        case 'directory': return p_.option($, ($) => p_super_query_result($q['read file'](
                             package_json_path,
                             ($): d.Package_Error => ['no package.json file', null],
                         )).refine(

@@ -27,7 +27,7 @@ import * as t_chmod_to_fountain_pen from "pareto-resources/dist/implementation/m
 export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'error removing lib dist dir': return p_.ss($, ($) => sh.ph.composed([
+            case 'error removing lib dist dir': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not remove lib dist dir: ("),
                 sh.ph.serialize(t_path_to_text.Context_Path($.path)),
                 sh.ph.literal("/lib)"),
@@ -41,7 +41,7 @@ export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
                 )
 
             ]))
-            case 'error building lib': return p_.ss($, ($) => sh.ph.composed([
+            case 'error building lib': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not build lib: ("),
                 sh.ph.serialize(t_path_to_text.Context_Path($.path)),
                 sh.ph.literal(")"),
@@ -49,7 +49,7 @@ export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
                     t_tsc_to_fountain_pen.Error($.error, $p)
                 )
             ]))
-            case 'error removing test dist dir': return p_.ss($, ($) => sh.ph.composed([
+            case 'error removing test dist dir': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not remove test dist dir: ("),
                 sh.ph.serialize(t_path_to_text.Context_Path($.path)),
                 sh.ph.literal("/test)"),
@@ -61,7 +61,7 @@ export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
                     ])
                 )
             ]))
-            case 'error building test': return p_.ss($, ($) => sh.ph.composed([
+            case 'error building test': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not build test: ("),
                 sh.ph.serialize(t_path_to_text.Context_Path($.path)),
                 sh.ph.literal(")"),
@@ -69,11 +69,11 @@ export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
                     t_tsc_to_fountain_pen.Error($.error, $p)
                 )
             ]))
-            case 'error statting app dir': return p_.ss($, ($) => sh.ph.composed([
+            case 'error statting app dir': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error statting /app directory: "),
                 t_stat_possible_node_to_fountain_pen.Error($)
             ]))
-            case 'error removing app dist dir': return p_.ss($, ($) => sh.ph.composed([
+            case 'error removing app dist dir': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not remove app dist dir: ("),
                 sh.ph.serialize(t_path_to_text.Context_Path($.path)),
                 sh.ph.literal("/app)"),
@@ -85,7 +85,7 @@ export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
                     ])
                 )
             ]))
-            case 'error building app': return p_.ss($, ($) => sh.ph.composed([
+            case 'error building app': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not build app: ("),
                 sh.ph.serialize(t_path_to_text.Context_Path($.path)),
                 sh.ph.literal(")"),
@@ -93,7 +93,7 @@ export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
                     t_tsc_to_fountain_pen.Error($.error, $p)
                 )
             ]))
-            case 'error setting permissions on app dist bin.js': return p_.ss($, ($) => sh.ph.composed([
+            case 'error setting permissions on app dist bin.js': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not set permissions on app dist bin.js: ("),
                 sh.ph.serialize(t_path_to_text.Context_Path($.path)),
                 sh.ph.literal(")"),

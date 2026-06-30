@@ -15,10 +15,10 @@ d_in.Error, d_out.Phrase
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'working directory has open changes': return p_.ss($, ($) => sh.ph.composed([
+            case 'working directory has open changes': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("the working directory has open changes. Aborting operation."),
             ]))
-            case 'unexpected error': return p_.ss($, ($) => sh.ph.composed([
+            case 'unexpected error': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("unexpected error:"),
                 t_git_is_clean_to_fountain_pen.Error($)
             ]))

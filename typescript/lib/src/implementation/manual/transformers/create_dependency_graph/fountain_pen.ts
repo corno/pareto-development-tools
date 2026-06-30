@@ -15,14 +15,14 @@ import * as t_get_package_dependencies_to_fountain_pen from "../get_package_depe
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'log': return p_.ss($, ($) => sh.ph.composed([
+            case 'log': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("log: "),
                 sh.ph.indent(
 sh.pg.sentences([
                     // t_tsc_to_fountain_pen.Error($)
                 ]))
             ]))
-            case 'package dependencies': return p_.ss($, ($) => sh.ph.composed([
+            case 'package dependencies': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("package dependencies: "),
                 sh.ph.indent(
                     sh.pg.sentences([

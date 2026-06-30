@@ -13,7 +13,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'expected one of': return p_.ss($, ($) => sh.ph.composed([
+            case 'expected one of': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("expected one of: "),
                 sh.ph.indent(
 sh.pg.sentences(
@@ -25,11 +25,11 @@ sh.pg.sentences(
                 ),
 
             ]))
-            case 'expected a text': return p_.ss($, ($) => sh.ph.composed([
+            case 'expected a text': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("expected a text: "),
                 sh.ph.literal($['description'])
             ]))
-            case 'too many arguments': return p_.ss($, ($) => sh.ph.literal("too many arguments"))
+            case 'too many arguments': return p_.option($, ($) => sh.ph.literal("too many arguments"))
             default: return p_.au($[0])
         }
     })

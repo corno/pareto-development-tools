@@ -45,14 +45,14 @@ const Object_: p_ri.Refiner<
     return p_.from.state($.type).decide(
         ($) => {
             switch ($[0]) {
-                case 'concrete': return p_.ss($, ($) => p_.from.state($).decide(
+                case 'concrete': return p_.option($, ($) => p_.from.state($).decide(
                     ($) => {
                         switch ($[0]) {
-                            case 'dictionary': return p_.ss($, ($) => expect_unique_identifiers_fixme($.entries, abort))
-                            case 'group': return p_.ss($, ($) => p_.from.state($).decide(
+                            case 'dictionary': return p_.option($, ($) => expect_unique_identifiers_fixme($.entries, abort))
+                            case 'group': return p_.option($, ($) => p_.from.state($).decide(
                                 ($) => {
                                     switch ($[0]) {
-                                        case 'verbose': return p_.ss($, ($) => expect_unique_identifiers_fixme($.properties, abort))
+                                        case 'verbose': return p_.option($, ($) => expect_unique_identifiers_fixme($.properties, abort))
                                         default: return abort(['not an object', null])
                                     }
                                 }))
@@ -71,10 +71,10 @@ const Text: p_ri.Refiner<
 > = ($, abort) => p_.from.state($.type).decide(
     ($) => {
         switch ($[0]) {
-            case 'concrete': return p_.ss($, ($) => p_.from.state($).decide(
+            case 'concrete': return p_.option($, ($) => p_.from.state($).decide(
                 ($) => {
                     switch ($[0]) {
-                        case 'text': return p_.ss($, ($) => $.token.value)
+                        case 'text': return p_.option($, ($) => $.token.value)
                         default: return abort(['not a text', null])
                     }
                 }))

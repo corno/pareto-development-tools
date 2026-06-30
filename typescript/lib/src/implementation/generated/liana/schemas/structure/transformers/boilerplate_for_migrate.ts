@@ -15,14 +15,14 @@ export const Directory: t_signatures.Directory = ($) => p_decide_state(
     ($): t_out.Directory => {
         switch ($[0]) {
             case 'dictionary':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['dictionary', Directory(
                         $,
                     )],
                 )
             case 'group':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['group', p_.from.dictionary($,
                     ).map(
@@ -31,26 +31,26 @@ export const Directory: t_signatures.Directory = ($) => p_decide_state(
                             ($): t_out.Directory.group.D => {
                                 switch ($[0]) {
                                     case 'directory':
-                                        return p_.ss(
+                                        return p_.option(
                                             $,
                                             ($) => ['directory', Directory(
                                                 $,
                                             )],
                                         )
                                     case 'file':
-                                        return p_.ss(
+                                        return p_.option(
                                             $,
                                             ($) => ['file', p_decide_state(
                                                 $,
                                                 ($): t_out.Directory.group.D.file => {
                                                     switch ($[0]) {
                                                         case 'manual':
-                                                            return p_.ss(
+                                                            return p_.option(
                                                                 $,
                                                                 ($) => ['manual', null],
                                                             )
                                                         case 'generated':
-                                                            return p_.ss(
+                                                            return p_.option(
                                                                 $,
                                                                 ($) => ['generated', {
                                                                     'commit to git': p_change_context(
@@ -77,7 +77,7 @@ export const Directory: t_signatures.Directory = ($) => p_decide_state(
                     )],
                 )
             case 'wildcards':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['wildcards', {
                         'required directories': p_change_context(
@@ -102,17 +102,17 @@ export const Directory: t_signatures.Directory = ($) => p_decide_state(
                     }],
                 )
             case 'freeform':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['freeform', null],
                 )
             case 'ignore':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['ignore', null],
                 )
             case 'generated':
-                return p_.ss(
+                return p_.option(
                     $,
                     ($) => ['generated', {
                         'commit to git': p_change_context(

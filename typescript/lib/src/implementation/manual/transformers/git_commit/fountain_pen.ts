@@ -16,10 +16,10 @@ import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pe
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'version control extended commit': return p_.ss($, ($) => sh.ph.composed([
+            case 'version control extended commit': return p_.option($, ($) => sh.ph.composed([
                 t_git_extended_commit_to_fountain_pen.Error($)
             ]))
-            case 'error while running build and test': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running build and test': return p_.option($, ($) => sh.ph.composed([
                 t_build_and_test_to_fountain_pen.Error($, { 'concise': true })
             ]))
             default: return p_.au($[0])

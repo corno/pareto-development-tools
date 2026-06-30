@@ -102,13 +102,13 @@ export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary
                 p_.from.state($).decide(
                     ($): null => {
                         switch ($[0]) {
-                            case 'expected a file': return p_.ss($, ($) => {
+                            case 'expected a file': return p_.option($, ($) => {
                                 return null
                             })
-                            case 'ignored': return p_.ss($, ($) => {
+                            case 'ignored': return p_.option($, ($) => {
                                 return null
                             })
-                            case 'dictionary': return p_.ss($, ($) => {
+                            case 'dictionary': return p_.option($, ($) => {
                                 p_.from.dictionary($).map(
                                     ($, id) => {
 
@@ -116,11 +116,11 @@ export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary
                                             ($): null => {
                                                 switch ($[0]) {
                                                     case 'other': return null //do nothing, ignore other filesystem nodes for now
-                                                    case 'file': return p_.ss($, ($) => {
+                                                    case 'file': return p_.option($, ($) => {
                                                         temp[`${path}/${id}`] = $
                                                         return null
                                                     })
-                                                    case 'directory': return p_.ss($, ($) => {
+                                                    case 'directory': return p_.option($, ($) => {
                                                         x($, `${path}/${id}`)
                                                         return null
                                                     })
@@ -176,14 +176,14 @@ const line_count: interface_.line_count = ($) => {
 }
 
 const extension: interface_.extension = ($) => {
-    const characters = p_list_from_text(
+    const $v_characters = p_list_from_text(
         $,
         ($) => $
     )
 
     let first_period_index: null | number = null
     let current_index = 0
-    p_.from.list(characters).map(
+    p_.from.list($v_characters).map(
         ($) => {
             if ($ === 46) { //period
                 first_period_index = current_index
@@ -200,7 +200,7 @@ const extension: interface_.extension = ($) => {
             p_text_from_list(
                 p_list_build_deprecated<number>(
                     ($i) => {
-                        p_.from.list(characters).map(
+                        p_.from.list($v_characters).map(
                             ($) => {
                                 if (current_index > fpi) {
                                     $i['add item']($)
@@ -224,7 +224,7 @@ export namespace defined {
             ($): d_out.Directory => {
                 switch ($[0]) {
 
-                    case 'group': return p_.ss($, ($) => {
+                    case 'group': return p_.option($, ($) => {
                         const $v_expected = $
                         return ['dictionary', p_.from.dictionary($v_dir).map(
                             ($, id) => {
@@ -239,29 +239,29 @@ export namespace defined {
                                 ): d_out.Node => p_.from.state($).decide(
                                     ($): d_out.Node => {
                                         switch ($[0]) {
-                                            case 'file': return p_.ss($, ($): d_out.Node => ['file', ({
+                                            case 'file': return p_.option($, ($): d_out.Node => ['file', ({
                                                 'structure': {
                                                     'path': $p['structure path'],
                                                     'classification': p_.from.state($p['expected structure']).decide(
                                                         ($): d_out.Classification => {
                                                             switch ($[0]) {
-                                                                case 'file': return p_.ss($, ($) => p_.from.state($).decide(
+                                                                case 'file': return p_.option($, ($) => p_.from.state($).decide(
                                                                     ($) => {
                                                                         switch ($[0]) {
-                                                                            case 'generated': return p_.ss($, ($) => ['file', ['generated', null]])
-                                                                            case 'manual': return p_.ss($, ($) => ['file', ['manual', null]])
+                                                                            case 'generated': return p_.option($, ($) => ['file', ['generated', null]])
+                                                                            case 'manual': return p_.option($, ($) => ['file', ['manual', null]])
                                                                             default: return p_.au($[0])
                                                                         }
                                                                     }))
-                                                                case 'directory': return p_.ss($, ($) => ['directory', p_.from.state($).decide(
+                                                                case 'directory': return p_.option($, ($) => ['directory', p_.from.state($).decide(
                                                                     ($): d_out.Directory_Classification => {
                                                                         switch ($[0]) {
-                                                                            case 'wildcards': return p_.ss($, ($) => ['wildcards', null])
-                                                                            case 'freeform': return p_.ss($, ($) => ['freeform', null])
-                                                                            case 'ignore': return p_.ss($, ($) => ['ignored', null])
-                                                                            case 'generated': return p_.ss($, ($) => ['generated', null])
-                                                                            case 'dictionary': return p_.ss($, ($) => ['dictionary', null])
-                                                                            case 'group': return p_.ss($, ($) => ['group', null])
+                                                                            case 'wildcards': return p_.option($, ($) => ['wildcards', null])
+                                                                            case 'freeform': return p_.option($, ($) => ['freeform', null])
+                                                                            case 'ignore': return p_.option($, ($) => ['ignored', null])
+                                                                            case 'generated': return p_.option($, ($) => ['generated', null])
+                                                                            case 'dictionary': return p_.option($, ($) => ['dictionary', null])
+                                                                            case 'group': return p_.option($, ($) => ['group', null])
                                                                             default: return p_.au($[0])
                                                                         }
                                                                     })])
@@ -274,29 +274,29 @@ export namespace defined {
                                                 'unexpected path tail': p_.from.state($p['expected structure']).decide(
                                                     ($) => {
                                                         switch ($[0]) {
-                                                            case 'file': return p_.ss($, ($) => p_.from.state($).decide(
+                                                            case 'file': return p_.option($, ($) => p_.from.state($).decide(
                                                                 ($) => {
                                                                     switch ($[0]) {
-                                                                        case 'generated': return p_.ss($, ($) => p_.literal.not_set())
-                                                                        case 'manual': return p_.ss($, ($) => p_.literal.not_set())
+                                                                        case 'generated': return p_.option($, ($) => p_.literal.not_set())
+                                                                        case 'manual': return p_.option($, ($) => p_.literal.not_set())
                                                                         default: return p_.au($[0])
                                                                     }
                                                                 }))
-                                                            case 'directory': return p_.ss($, ($) => p_.literal.set(p_.literal.list([
+                                                            case 'directory': return p_.option($, ($) => p_.literal.set(p_.literal.list([
                                                                 $p['name'],
                                                             ])))
                                                             default: return p_.au($[0])
                                                         }
                                                     })
                                             })])
-                                            case 'directory': return p_.ss($, ($): d_out.Node => {
+                                            case 'directory': return p_.option($, ($): d_out.Node => {
                                                 //found a directory in the filesystem, check expected structure
                                                 const dir = $
                                                 return ['directory', p_.from.state($p['expected structure']).decide(
                                                     ($): d_out.Directory => {
                                                         switch ($[0]) {
-                                                            case 'file': return p_.ss($, ($) => ['expected a file', null])
-                                                            case 'directory': return p_.ss($, ($) => Directory(
+                                                            case 'file': return p_.option($, ($) => ['expected a file', null])
+                                                            case 'directory': return p_.option($, ($) => Directory(
                                                                 dir,
                                                                 {
                                                                     'expected structure': $,
@@ -307,7 +307,7 @@ export namespace defined {
                                                         }
                                                     })]
                                             })
-                                            case 'other': return p_.ss($, ($) => ['other', null])
+                                            case 'other': return p_.option($, ($) => ['other', null])
                                             default: return p_.au($[0])
                                         }
                                     })
@@ -340,8 +340,8 @@ export namespace defined {
                                 )
                             })]
                     })
-                    case 'ignore': return p_.ss($, ($) => ['ignored', null])
-                    case 'generated': return p_.ss($, ($) => undefined.Directory(
+                    case 'ignore': return p_.option($, ($) => ['ignored', null])
+                    case 'generated': return p_.option($, ($) => undefined.Directory(
                         $v_dir,
                         {
                             'structure': {
@@ -351,7 +351,7 @@ export namespace defined {
                             'unexpected path tail': p_.literal.not_set(),
                         }
                     ))
-                    case 'wildcards': return p_.ss($, ($) => wildcard.Directory(
+                    case 'wildcards': return p_.option($, ($) => wildcard.Directory(
                         $v_dir,
                         {
                             'wildcard': $,
@@ -360,7 +360,7 @@ export namespace defined {
                             'number of directories encountered': 0,
                         }
                     ))
-                    case 'freeform': return p_.ss($, ($) => undefined.Directory(
+                    case 'freeform': return p_.option($, ($) => undefined.Directory(
                         $v_dir,
                         {
                             'structure': {
@@ -370,7 +370,7 @@ export namespace defined {
                             'unexpected path tail': p_.literal.not_set(),
                         }
                     ))
-                    case 'dictionary': return p_.ss($, ($) => {
+                    case 'dictionary': return p_.option($, ($) => {
                         //expecting a dictionary of directories
                         const struct = $
 
@@ -378,7 +378,7 @@ export namespace defined {
                             ($, id): d_out.Node => p_.from.state($).decide(
                                 ($): d_out.Node => {
                                     switch ($[0]) {
-                                        case 'directory': return p_.ss($, ($) => ['directory', Directory(
+                                        case 'directory': return p_.option($, ($) => ['directory', Directory(
                                             $,
                                             {
                                                 'expected structure': struct,
@@ -388,8 +388,8 @@ export namespace defined {
                                                 )
                                             }
                                         )])
-                                        case 'other': return p_.ss($, ($) => ['other', null])
-                                        case 'file': return p_.ss($, ($): d_out.Node => ['file', {
+                                        case 'other': return p_.option($, ($) => ['other', null])
+                                        case 'file': return p_.option($, ($): d_out.Node => ['file', {
                                             'structure': {
                                                 'path': p_.literal.chain(
                                                     $p['structure path'],
@@ -436,13 +436,13 @@ export namespace undefined {
         return p_.from.state($).decide(
             ($): d_out.Node => {
                 switch ($[0]) {
-                    case 'file': return p_.ss($, ($): d_out.Node => ['file', {
+                    case 'file': return p_.option($, ($): d_out.Node => ['file', {
                         'unexpected path tail': $p['unexpected path tail'],
                         'structure': $p['structure'],
                         'extension': extension($p['name']),
                         'line count': line_count($),
                     }])
-                    case 'directory': return p_.ss($, ($) => {
+                    case 'directory': return p_.option($, ($) => {
                         return ['directory', Directory(
                             $,
                             {
@@ -451,7 +451,7 @@ export namespace undefined {
                             }
                         )]
                     })
-                    case 'other': return p_.ss($, ($) => ['other', null])
+                    case 'other': return p_.option($, ($) => ['other', null])
                     default: return p_.au($[0])
                 }
             })
@@ -471,8 +471,8 @@ export namespace wildcard {
                 return p_.from.state($).decide(
                     ($): d_out.Node => {
                         switch ($[0]) {
-                            case 'other': return p_.ss($, ($) => ['other', null])
-                            case 'file': return p_.ss($, ($): d_out.Node => ['file', {
+                            case 'other': return p_.option($, ($) => ['other', null])
+                            case 'file': return p_.option($, ($): d_out.Node => ['file', {
                                 'structure': {
                                     'path': $p['structure path'],
                                     'classification': ['directory', ['wildcards', null]],
@@ -507,7 +507,7 @@ export namespace wildcard {
                                 }),
                                 'line count': line_count($),
                             }])
-                            case 'directory': return ['directory', p_.ss($, ($) => {
+                            case 'directory': return ['directory', p_.option($, ($) => {
                                 return Directory(
                                     $,
                                     {

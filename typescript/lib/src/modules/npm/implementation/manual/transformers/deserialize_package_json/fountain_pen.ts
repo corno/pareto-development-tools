@@ -24,7 +24,7 @@ export const Error: signatures.Error = ($) => sh.ph.composed([
     p_.from.state($.type).decide(
         ($) => {
             switch ($[0]) {
-                case 'invalid ASTN': return p_.ss($, ($) => sh.ph.composed([
+                case 'invalid ASTN': return p_.option($, ($) => sh.ph.composed([
                     sh.ph.literal(" :"),
                     t_location_to_fp.Possible_Range(
                         t_deserialize_parse_tree_to_location.Error($),
@@ -35,10 +35,10 @@ export const Error: signatures.Error = ($) => sh.ph.composed([
                     sh.ph.literal(" : invalid JSON (or even ASTN): "),
                     t_deserialize_parse_tree_to_fp.Error($),
                 ]))
-                case 'missing root object': return p_.ss($, ($) => sh.ph.literal(" : missing root object in package.json"))
-                case 'name': return p_.ss($, ($) => sh.ph.literal(" : missing or invalid 'name' property in package.json"))
-                case 'version': return p_.ss($, ($) => sh.ph.literal(" : missing or invalid 'version' property in package.json"))
-                case 'dependencies': return p_.ss($, ($) => sh.ph.literal(" : missing or invalid 'dependencies' property in package.json"))
+                case 'missing root object': return p_.option($, ($) => sh.ph.literal(" : missing root object in package.json"))
+                case 'name': return p_.option($, ($) => sh.ph.literal(" : missing or invalid 'name' property in package.json"))
+                case 'version': return p_.option($, ($) => sh.ph.literal(" : missing or invalid 'version' property in package.json"))
+                case 'dependencies': return p_.option($, ($) => sh.ph.literal(" : missing or invalid 'dependencies' property in package.json"))
                 default: return p_.au($[0])
             }
         })

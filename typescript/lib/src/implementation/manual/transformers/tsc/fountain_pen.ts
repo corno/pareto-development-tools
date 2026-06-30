@@ -19,7 +19,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 export const Error: Error = ($, $p) => p_.from.state($).decide(
     ($): d_out.Paragraph => {
         switch ($[0]) {
-            case 'error while running tsc': return p_.ss($, ($) => $p.concise
+            case 'error while running tsc': return p_.option($, ($) => $p.concise
                 ? sh.pg.composed([])
                 : sh.pg.sentences([
                     sh.sentence([

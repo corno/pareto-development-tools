@@ -15,7 +15,7 @@ d_in.Error, d_out.Phrase
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'unexpected error': return p_.ss($, ($) => sh.ph.composed([
+            case 'unexpected error': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("unexpected error:"),
                 t_epe_to_fountain_pen.Error($)
             ]))

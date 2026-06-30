@@ -16,12 +16,12 @@ import * as t_is_inside_work_tree_to_fountain_pen from "../is_inside_work_tree/f
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'not a repository': return p_.ss($, ($) => sh.ph.literal("not a repository"))
-            case 'could not determine status': return p_.ss($, ($) => sh.ph.composed([
+            case 'not a repository': return p_.option($, ($) => sh.ph.literal("not a repository"))
+            case 'could not determine status': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not determine status: "),
                 t_eqe_to_fountain_pen.Error($)
             ]))
-            case 'unknown issue': return p_.ss($, ($) => sh.ph.composed([
+            case 'unknown issue': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("unknown issue while checking if repository has no open changes: "),
                 t_is_inside_work_tree_to_fountain_pen.Error($)
             ]))

@@ -13,12 +13,12 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'could not run git command': return p_.ss($, ($) => sh.ph.composed([
+            case 'could not run git command': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not run git command: "),
                 sh.ph.composed(p_.from.list($.message.lines).map(
                     ($) => sh.ph.literal($)))
             ]))
-            case 'unexpected output': return p_.ss($, ($) => sh.ph.composed([
+            case 'unexpected output': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("unexpected output from git command: "),
                 sh.ph.composed(p_.from.list($.lines).map(
                     ($) => sh.ph.literal($)))

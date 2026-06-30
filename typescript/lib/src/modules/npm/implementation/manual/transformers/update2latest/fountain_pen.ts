@@ -15,7 +15,7 @@ import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/man
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'error while running update2latest': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running update2latest': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error while running update2latest: "),
                 t_epe_to_fountain_pen.Error($)
             ]))

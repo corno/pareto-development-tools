@@ -26,9 +26,9 @@ export const $$: interface_.query_functions.get_project_files = p_.query_functio
                 const path = $.path
                 return p_.decide.state($['node type'], ($) => {
                     switch ($[0]) {
-                        case 'other': return p_.ss($, ($) => p_.e.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                        case 'file': return p_.ss($, ($) => p_.e.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                        case 'directory': return p_.ss($, ($) => q_directory_content(null, $q)(
+                        case 'other': return p_.option($, ($) => p_.e.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                        case 'file': return p_.option($, ($) => p_.e.direct_error<d_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                        case 'directory': return p_.option($, ($) => q_directory_content(null, $q)(
                             {
                                 'path': t_path_to_path.deprecated_node_path_to_context_path(path),
                             },

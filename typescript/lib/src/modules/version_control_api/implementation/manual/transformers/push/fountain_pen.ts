@@ -15,7 +15,7 @@ d_in.Error, d_out.Phrase
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'could not push': return p_.ss($, ($) => sh.ph.composed([
+            case 'could not push': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not push:"),
                 t_epe_to_fountain_pen.Error($)
             ]))

@@ -16,19 +16,19 @@ import * as t_git_is_clean_to_fountain_pen from "../repository_has_no_open_chang
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'asserting no open changes': return p_.ss($, ($) => sh.ph.composed([
+            case 'asserting no open changes': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error while asserting no open changes: "),
                 t_git_is_clean_to_fountain_pen.Error($)
             ]))
-            case 'could not stage': return p_.ss($, ($) => sh.ph.composed([
+            case 'could not stage': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not stage: "),
                 t_ece_to_fountain_pen.Error($)
             ]))
-            case 'could not commit': return p_.ss($, ($) => sh.ph.composed([
+            case 'could not commit': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not commit: "),
                 t_ece_to_fountain_pen.Error($)
             ]))
-            case 'could not push': return p_.ss($, ($) => sh.ph.composed([
+            case 'could not push': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not push: "),
                 t_ece_to_fountain_pen.Error($)
             ]))

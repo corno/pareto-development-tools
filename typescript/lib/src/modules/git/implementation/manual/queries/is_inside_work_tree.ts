@@ -33,10 +33,10 @@ export const $$: interface_.query_functions.is_inside_work_tree = p_.query_funct
                 : p_.e.direct_result(false),
             error: ($) => p_.decide.state($, ($) => {
                 switch ($[0]) {
-                    case 'failed to spawn': return p_.ss($, ($) => p_.e.direct_error(['could not run git command', {
+                    case 'failed to spawn': return p_.option($, ($) => p_.e.direct_error(['could not run git command', {
                         'message': $.message
                     }]))
-                    case 'non zero exit code': return p_.ss($, ($) => p_t.from.optional($['exit code']).decide(
+                    case 'non zero exit code': return p_.option($, ($) => p_t.from.optional($['exit code']).decide(
                         ($) => $ === 128,
                         () => false
                     )

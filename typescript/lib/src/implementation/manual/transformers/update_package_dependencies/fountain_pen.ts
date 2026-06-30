@@ -17,19 +17,19 @@ import * as t_utd_to_fountain_pen from "../../../../modules/npm/implementation/m
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'error updating lib': return p_.ss($, ($) => sh.ph.composed([
+            case 'error updating lib': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error updating /lib: "),
                 t_utd_to_fountain_pen.Error($)
             ]))
-            case 'error updating test': return p_.ss($, ($) => sh.ph.composed([
+            case 'error updating test': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error updating /test: "),
                 t_utd_to_fountain_pen.Error($)
             ]))
-            case 'error updating app': return p_.ss($, ($) => sh.ph.composed([
+            case 'error updating app': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error updating /app: "),
                 t_utd_to_fountain_pen.Error($)
             ]))
-            case 'error statting app dir': return p_.ss($, ($) => sh.ph.composed([
+            case 'error statting app dir': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error statting /app directory: "),
                 t_stat_possible_node_to_fountain_pen.Error($)
             ]))

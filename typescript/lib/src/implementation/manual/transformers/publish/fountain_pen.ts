@@ -22,56 +22,56 @@ import * as t_git_ec_to_fountain_pen from "../../../../modules/version_control_a
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'error while running git push': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running git push': return p_.option($, ($) => sh.ph.composed([
                 t_git_push_to_fountain_pen.Error($)
             ]))
-            case 'error while running git assert no open changes at the start': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running git assert no open changes at the start': return p_.option($, ($) => sh.ph.composed([
                 p_.from.state($).decide(
                     ($) => {
                         switch ($[0]) {
-                            case 'unexpected error': return p_.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
-                            case 'working directory has open changes': return p_.ss($, ($) => sh.ph.literal("working directory has open changes at the start"))
+                            case 'unexpected error': return p_.option($, ($) => t_git_is_clean_to_fountain_pen.Error($))
+                            case 'working directory has open changes': return p_.option($, ($) => sh.ph.literal("working directory has open changes at the start"))
                             default: return p_.au($[0])
                         }
                     })
             ]))
-            case 'error while running git make pristine': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running git make pristine': return p_.option($, ($) => sh.ph.composed([
                 t_git_make_pristine_to_fountain_pen.Error($)
             ]))
-            case 'error while running update package dependencies': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running update package dependencies': return p_.option($, ($) => sh.ph.composed([
                 t_clean_and_update_package_dependencies_to_fountain_pen.Error($)
             ]))
-            case 'error while running build and test': return p_.ss($, ($) => t_build_and_test_to_fountain_pen.Error($, { 'concise': false }))
-            case 'error while running git assert no open changes after updating package dependencies': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running build and test': return p_.option($, ($) => t_build_and_test_to_fountain_pen.Error($, { 'concise': false }))
+            case 'error while running git assert no open changes after updating package dependencies': return p_.option($, ($) => sh.ph.composed([
                 p_.from.state($).decide(
                     ($) => {
                         switch ($[0]) {
-                            case 'unexpected error': return p_.ss($, ($) => t_git_is_clean_to_fountain_pen.Error($))
-                            case 'working directory has open changes': return p_.ss($, ($) => sh.ph.literal("working directory has open changes after updating package dependencies"))
+                            case 'unexpected error': return p_.option($, ($) => t_git_is_clean_to_fountain_pen.Error($))
+                            case 'working directory has open changes': return p_.option($, ($) => sh.ph.literal("working directory has open changes after updating package dependencies"))
                             default: return p_.au($[0])
                         }
                     })
             ]))
-            case 'error while running npm version': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running npm version': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not increment version: "),
                 t_npm_to_fountain_pen.Error($)
             ]))
-            case 'error while running npm update': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running npm update': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not update npm: "),
                 t_npm_to_fountain_pen.Error($)
             ]))
-            case 'error while running npm publish': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running npm publish': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not publish to npm: "),
                 t_npm_to_fountain_pen.Error($)
             ]))
-            case 'error while logging': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while logging': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not log"),
             ]))
-            case 'error while getting package.json': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while getting package.json': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not read package.json: "),
                 t_get_package_json_to_fountain_pen.Error($)
             ]))
-            case 'error while running git extended commit': return p_.ss($, ($) => sh.ph.composed([
+            case 'error while running git extended commit': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not commit and push: "),
                 t_git_ec_to_fountain_pen.Error($)
             ]))
