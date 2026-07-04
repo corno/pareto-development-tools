@@ -10,8 +10,8 @@ d_in.Error, d_out.Phrase
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_git_extended_commit_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/extended_commit/fountain_pen"
-import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pen"
+import * as t_git_extended_commit_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/extended_commit/prose"
+import * as t_build_and_test_to_fountain_pen from "../build_and_test/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {

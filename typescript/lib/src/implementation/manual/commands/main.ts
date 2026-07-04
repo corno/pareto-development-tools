@@ -10,8 +10,8 @@ import * as d_execute_command from "../../../interface/data/execute_command"
 
 //dependencies
 import * as r_instruction from "../refiners/execute_command/main"
-import * as t_api_to_fountain_pen from "../transformers/execute_command/fountain_pen"
-import * as t_bin_to_fountain_pen from "../transformers/parse/fountain_pen"
+import * as t_api_to_fountain_pen from "../transformers/execute_command/prose"
+import * as t_bin_to_fountain_pen from "../transformers/parse/prose"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"

@@ -7,7 +7,7 @@ import * as interface_ from "../../../interface/commands"
 import * as d from "../../../interface/data/get_project_files"
 
 //dependencies
-import * as t_csv_to_fountain_pen from "../../../modules/csv/implementation/manual/transformers/csv/fountain_pen"
+import * as t_csv_to_fountain_pen from "../../../modules/csv/implementation/manual/transformers/csv/prose"
 import * as t_file_structure_analysis_to_csv from "../transformers/file_structure_analysis/csv"
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis"
 import { $$ as q_get_project_files } from "../queries/get_project_files"

@@ -10,9 +10,9 @@ d_in.Error, d_out.Phrase
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_u2l_to_fountain_pen from "../update2latest/fountain_pen"
+import * as t_u2l_to_fountain_pen from "../update2latest/prose"
 import * as t_remove_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/remove/fountain_pen"
-import * as t_npm_to_fountain_pen from "../npm/fountain_pen"
+import * as t_npm_to_fountain_pen from "../npm/prose"
 
 export const Error: Error = ($) => {
     return p_.from.state($).decide(

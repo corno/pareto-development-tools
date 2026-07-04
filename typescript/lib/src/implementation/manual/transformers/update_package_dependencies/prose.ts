@@ -12,7 +12,7 @@ d_in.Error, d_out.Phrase
 
 //dependencies
 import * as t_stat_possible_node_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"
-import * as t_utd_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/update_package_dependencies/fountain_pen"
+import * as t_utd_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/update_package_dependencies/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {

@@ -13,7 +13,7 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
 import * as t_eqe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_query_executable/fountain_pen"
 import * as t_make_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/make_directory/fountain_pen"
-import * as t_get_package_json_to_fountain_pen from "../get_package_json/fountain_pen"
+import * as t_get_package_json_to_fountain_pen from "../get_package_json/prose"
 
 
 export const Error: Error = ($) => {

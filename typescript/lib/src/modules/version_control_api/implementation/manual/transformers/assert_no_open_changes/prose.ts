@@ -6,7 +6,7 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_git_is_clean_to_fountain_pen from "../repository_has_no_open_changes/fountain_pen"
+import * as t_git_is_clean_to_fountain_pen from "../repository_has_no_open_changes/prose"
 
 export type Error = p_i.Transformer<
 d_in.Error, d_out.Phrase

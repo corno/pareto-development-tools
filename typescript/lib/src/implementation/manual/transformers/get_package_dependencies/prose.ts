@@ -10,7 +10,7 @@ d_in.Error, d_out.Phrase
 
 //dependencies
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_directory/fountain_pen"
-import * as t_deserialize_package_json_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/deserialize_package_json/fountain_pen"
+import * as t_deserialize_package_json_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/deserialize_package_json/prose"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 

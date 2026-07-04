@@ -10,7 +10,7 @@ d_in.Error, d_out.Phrase
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_get_package_dependencies_to_fountain_pen from "../get_package_dependencies/fountain_pen"
+import * as t_get_package_dependencies_to_fountain_pen from "../get_package_dependencies/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {

@@ -11,7 +11,7 @@ d_in.Error, d_out.Phrase
 >
 
 import * as t_ece_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
-import * as t_git_is_clean_to_fountain_pen from "../repository_has_no_open_changes/fountain_pen"
+import * as t_git_is_clean_to_fountain_pen from "../repository_has_no_open_changes/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {

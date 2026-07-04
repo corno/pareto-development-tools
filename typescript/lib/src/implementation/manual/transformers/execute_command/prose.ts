@@ -14,17 +14,17 @@ d_in.Error, d_out.Phrase
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 //dependencies
-import * as t_git_commit_to_fountain_pen from "../git_commit/fountain_pen"
-import * as t_git_assert_no_open_changes_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/assert_no_open_changes/fountain_pen"
+import * as t_git_commit_to_fountain_pen from "../git_commit/prose"
+import * as t_git_assert_no_open_changes_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/assert_no_open_changes/prose"
 
-import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pen"
-import * as t_build_to_fountain_pen from "../build/fountain_pen"
-import * as t_dependency_graph_to_fountain_pen from "../create_dependency_graph/fountain_pen"
-import * as t_line_count_to_fountain_pen from "../get_project_files/fountain_pen"
-import * as t_publish from "../publish/fountain_pen"
-import * as t_update_dependencies from "../update_package_dependencies/fountain_pen"
+import * as t_build_and_test_to_fountain_pen from "../build_and_test/prose"
+import * as t_build_to_fountain_pen from "../build/prose"
+import * as t_dependency_graph_to_fountain_pen from "../create_dependency_graph/prose"
+import * as t_line_count_to_fountain_pen from "../get_project_files/prose"
+import * as t_publish from "../publish/prose"
+import * as t_update_dependencies from "../update_package_dependencies/prose"
 import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_directory/fountain_pen"
-import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/manual/transformers/set_up_comparison_against_published/fountain_pen"
+import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/manual/transformers/set_up_comparison_against_published/prose"
 
 export const Error: signatures.Error = ($) => p_.from.state($).decide(
     ($) => {

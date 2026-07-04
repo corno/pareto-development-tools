@@ -10,14 +10,14 @@ export type Error = p_i.Transformer<
 d_in.Error, d_out.Phrase
 >
 
-import * as t_git_push_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/push/fountain_pen"
-import * as t_git_make_pristine_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/make_pristine/fountain_pen"
-import * as t_clean_and_update_package_dependencies_to_fountain_pen from "../update_package_dependencies/fountain_pen"
-import * as t_git_is_clean_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/repository_has_no_open_changes/fountain_pen"
-import * as t_npm_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/npm/fountain_pen"
-import * as t_build_and_test_to_fountain_pen from "../build_and_test/fountain_pen"
-import * as t_get_package_json_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/get_package_json/fountain_pen"
-import * as t_git_ec_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/extended_commit/fountain_pen"
+import * as t_git_push_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/push/prose"
+import * as t_git_make_pristine_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/make_pristine/prose"
+import * as t_clean_and_update_package_dependencies_to_fountain_pen from "../update_package_dependencies/prose"
+import * as t_git_is_clean_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/repository_has_no_open_changes/prose"
+import * as t_npm_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/npm/prose"
+import * as t_build_and_test_to_fountain_pen from "../build_and_test/prose"
+import * as t_get_package_json_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/get_package_json/prose"
+import * as t_git_ec_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/extended_commit/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
