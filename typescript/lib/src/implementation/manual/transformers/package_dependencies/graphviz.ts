@@ -7,7 +7,8 @@ import * as d_out from "pareto-graphviz/dist/interface/generated/liana/schemas/h
 import * as d_out_attributes from "pareto-graphviz/dist/interface/generated/liana/schemas/attributes/data"
 
 export type Result = p_i.Transformer<
-d_in.Result, d_out.Graph
+    d_in.Result,
+    d_out.Graph
 >
 
 export const Result: Result = ($) => {

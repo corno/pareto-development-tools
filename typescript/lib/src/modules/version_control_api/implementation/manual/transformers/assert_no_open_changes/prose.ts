@@ -9,7 +9,8 @@ import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 import * as t_git_is_clean_to_prose from "../repository_has_no_open_changes/prose"
 
 export type Error = p_i.Transformer<
-d_in.Error, d_out.Phrase
+    d_in.Error,
+    d_out.Phrase
 >
 
 export const Error: Error = ($) => p_.from.state($).decide(

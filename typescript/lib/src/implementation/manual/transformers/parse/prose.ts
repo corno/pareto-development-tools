@@ -5,7 +5,8 @@ import * as d_in from "../../../../interface/data/parse"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 export type Error = p_i.Transformer<
-d_in.Error, d_out.Phrase
+    d_in.Error,
+    d_out.Phrase
 >
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
@@ -16,12 +17,12 @@ export const Error: Error = ($) => p_.from.state($).decide(
             case 'expected one of': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("expected one of: "),
                 sh.ph.indent(
-sh.pg.sentences(
-                    p_.from.dictionary($).convert_to_list(
-                        ($, id) => sh.sentence([
-                            sh.ph.literal(id)
-                        ])
-                    ))
+                    sh.pg.sentences(
+                        p_.from.dictionary($).convert_to_list(
+                            ($, id) => sh.sentence([
+                                sh.ph.literal(id)
+                            ])
+                        ))
                 ),
 
             ]))

@@ -5,7 +5,8 @@ import * as d_in from "../../../../interface/data/create_dependency_graph"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
 export type Error = p_i.Transformer<
-d_in.Error, d_out.Phrase
+    d_in.Error,
+    d_out.Phrase
 >
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
@@ -18,9 +19,9 @@ export const Error: Error = ($) => p_.from.state($).decide(
             case 'log': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("log: "),
                 sh.ph.indent(
-sh.pg.sentences([
-                    // t_tsc_to_prose.Error($)
-                ]))
+                    sh.pg.sentences([
+                        // t_tsc_to_prose.Error($)
+                    ]))
             ]))
             case 'package dependencies': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("package dependencies: "),
