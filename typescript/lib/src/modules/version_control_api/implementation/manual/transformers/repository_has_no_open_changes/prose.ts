@@ -10,8 +10,8 @@ export type Error = p_i.Transformer<
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_eqe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_query_executable/fountain_pen"
-import * as t_is_inside_work_tree_to_fountain_pen from "../is_inside_work_tree/prose"
+import * as t_eqe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_query_executable/fountain_pen"
+import * as t_is_inside_work_tree_to_prose from "../is_inside_work_tree/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
@@ -19,11 +19,11 @@ export const Error: Error = ($) => p_.from.state($).decide(
             case 'not a repository': return p_.option($, ($) => sh.ph.literal("not a repository"))
             case 'could not determine status': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not determine status: "),
-                t_eqe_to_fountain_pen.Error($)
+                t_eqe_to_prose.Error($)
             ]))
             case 'unknown issue': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("unknown issue while checking if repository has no open changes: "),
-                t_is_inside_work_tree_to_fountain_pen.Error($)
+                t_is_inside_work_tree_to_prose.Error($)
             ]))
             default: return p_.au($[0])
         }

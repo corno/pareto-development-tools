@@ -10,10 +10,10 @@ export type Error = p_i.Transformer<
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
-import * as t_eqe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_query_executable/fountain_pen"
-import * as t_make_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/make_directory/fountain_pen"
-import * as t_get_package_json_to_fountain_pen from "../get_package_json/prose"
+import * as t_epe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
+import * as t_eqe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_query_executable/fountain_pen"
+import * as t_make_directory_to_prose from "pareto-resources/dist/implementation/manual/transformers/make_directory/fountain_pen"
+import * as t_get_package_json_to_prose from "../get_package_json/prose"
 
 
 export const Error: Error = ($) => {
@@ -25,7 +25,7 @@ export const Error: Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_epe_to_fountain_pen.Error($)
+                                t_epe_to_prose.Error($)
                             ])
                         ])),
                 ]))
@@ -34,7 +34,7 @@ export const Error: Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_eqe_to_fountain_pen.Error($)
+                                t_eqe_to_prose.Error($)
                             ])
                         ])),
                 ]))
@@ -43,7 +43,7 @@ export const Error: Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_epe_to_fountain_pen.Error($)
+                                t_epe_to_prose.Error($)
                             ])
                         ])),
                 ]))
@@ -52,11 +52,11 @@ export const Error: Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_make_directory_to_fountain_pen.Error($)
+                                t_make_directory_to_prose.Error($)
                             ])
                         ])),
                 ]))
-                case 'error while getting package.json': return p_.option($, ($) => t_get_package_json_to_fountain_pen.Error($))
+                case 'error while getting package.json': return p_.option($, ($) => t_get_package_json_to_prose.Error($))
                 default: return p_.au($[0])
             }
         }

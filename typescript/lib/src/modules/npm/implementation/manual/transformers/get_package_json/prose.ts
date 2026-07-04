@@ -10,8 +10,8 @@ export type Error = p_i.Transformer<
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_read_file_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_file/fountain_pen"
-import * as t_deserialize_package_json_to_fountain_pen from "../deserialize_package_json/prose"
+import * as t_read_file_to_prose from "pareto-resources/dist/implementation/manual/transformers/read_file/fountain_pen"
+import * as t_deserialize_package_json_to_prose from "../deserialize_package_json/prose"
 
 export const Error: Error = ($) => {
     return p_.from.state($).decide(
@@ -22,7 +22,7 @@ export const Error: Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_read_file_to_fountain_pen.Error($)
+                                t_read_file_to_prose.Error($)
                             ])
                         ])),
                 ]))
@@ -31,7 +31,7 @@ export const Error: Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_deserialize_package_json_to_fountain_pen.Error($)
+                                t_deserialize_package_json_to_prose.Error($)
                             ])
                         ])),
                 ]))

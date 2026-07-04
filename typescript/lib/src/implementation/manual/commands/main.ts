@@ -10,8 +10,8 @@ import * as d_execute_command from "../../../interface/data/execute_command"
 
 //dependencies
 import * as r_instruction from "../refiners/execute_command/main"
-import * as t_api_to_fountain_pen from "../transformers/execute_command/prose"
-import * as t_bin_to_fountain_pen from "../transformers/parse/prose"
+import * as t_api_to_prose from "../transformers/execute_command/prose"
+import * as t_bin_to_prose from "../transformers/parse/prose"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
@@ -52,8 +52,8 @@ export const $$: interface_.procedures.main = p_.command_procedure(
                                 p_temp.from.state($).decide(
                                     ($) => {
                                         switch ($[0]) {
-                                            case 'parse': return p_temp.ss($, ($) => t_bin_to_fountain_pen.Error($))
-                                            case 'execute command': return p_temp.ss($, ($) => t_api_to_fountain_pen.Error($))
+                                            case 'parse': return p_temp.ss($, ($) => t_bin_to_prose.Error($))
+                                            case 'execute command': return p_temp.ss($, ($) => t_api_to_prose.Error($))
                                             default: return p_temp.au($[0])
                                         }
                                     })

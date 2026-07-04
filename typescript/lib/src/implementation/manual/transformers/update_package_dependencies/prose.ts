@@ -11,27 +11,27 @@ d_in.Error, d_out.Phrase
 >
 
 //dependencies
-import * as t_stat_possible_node_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"
-import * as t_utd_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/update_package_dependencies/prose"
+import * as t_stat_possible_node_to_prose from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/fountain_pen"
+import * as t_utd_to_prose from "../../../../modules/npm/implementation/manual/transformers/update_package_dependencies/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error updating lib': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error updating /lib: "),
-                t_utd_to_fountain_pen.Error($)
+                t_utd_to_prose.Error($)
             ]))
             case 'error updating test': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error updating /test: "),
-                t_utd_to_fountain_pen.Error($)
+                t_utd_to_prose.Error($)
             ]))
             case 'error updating app': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error updating /app: "),
-                t_utd_to_fountain_pen.Error($)
+                t_utd_to_prose.Error($)
             ]))
             case 'error statting app dir': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error statting /app directory: "),
-                t_stat_possible_node_to_fountain_pen.Error($)
+                t_stat_possible_node_to_prose.Error($)
             ]))
             default: return p_.au($[0])
         }

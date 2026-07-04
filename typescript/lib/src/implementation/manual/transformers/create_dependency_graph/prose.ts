@@ -10,7 +10,7 @@ d_in.Error, d_out.Phrase
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_get_package_dependencies_to_fountain_pen from "../get_package_dependencies/prose"
+import * as t_get_package_dependencies_to_prose from "../get_package_dependencies/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
@@ -19,7 +19,7 @@ export const Error: Error = ($) => p_.from.state($).decide(
                 sh.ph.literal("log: "),
                 sh.ph.indent(
 sh.pg.sentences([
-                    // t_tsc_to_fountain_pen.Error($)
+                    // t_tsc_to_prose.Error($)
                 ]))
             ]))
             case 'package dependencies': return p_.option($, ($) => sh.ph.composed([
@@ -27,7 +27,7 @@ sh.pg.sentences([
                 sh.ph.indent(
                     sh.pg.sentences([
                         sh.sentence([
-                            t_get_package_dependencies_to_fountain_pen.Error($)
+                            t_get_package_dependencies_to_prose.Error($)
                         ])
                     ])
                 )

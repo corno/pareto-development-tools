@@ -9,8 +9,8 @@ d_in.Error, d_out.Phrase
 >
 
 //dependencies
-import * as t_read_directory_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/read_directory/fountain_pen"
-import * as t_deserialize_package_json_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/deserialize_package_json/prose"
+import * as t_read_directory_to_prose from "pareto-resources/dist/implementation/manual/transformers/read_directory/fountain_pen"
+import * as t_deserialize_package_json_to_prose from "../../../../modules/npm/implementation/manual/transformers/deserialize_package_json/prose"
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
@@ -31,7 +31,7 @@ sh.pg.sentences([
                                         switch ($[0]) {
                                             case 'not a directory': return p_.option($, ($) => sh.ph.literal("not a directory"))
                                             case 'no package.json file': return p_.option($, ($) => sh.ph.literal("no package.json file"))
-                                            case 'parse error': return p_.option($, ($) => t_deserialize_package_json_to_fountain_pen.Error($))
+                                            case 'parse error': return p_.option($, ($) => t_deserialize_package_json_to_prose.Error($))
                                             default: return p_.au($[0])
                                         }
                                     })
@@ -39,7 +39,7 @@ sh.pg.sentences([
                         ]))
                     ])
                 )))
-            case 'read directory': return p_.option($, ($) => t_read_directory_to_fountain_pen.Error($))
+            case 'read directory': return p_.option($, ($) => t_read_directory_to_prose.Error($))
             default: return p_.au($[0])
         }
     })

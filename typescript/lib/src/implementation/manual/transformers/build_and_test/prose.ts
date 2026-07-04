@@ -6,8 +6,8 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_build_to_fountain_pen from "../build/prose"
-import * as t_epe_to_fountain_pen from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
+import * as t_build_to_prose from "../build/prose"
+import * as t_epe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
 
 export type Error = p_i.Transformer_With_Parameter<
     d_in.Error,
@@ -20,10 +20,10 @@ export type Error = p_i.Transformer_With_Parameter<
 export const Error: Error = ($, $p) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'error building': return p_.option($, ($) => t_build_to_fountain_pen.Error($, $p))
+            case 'error building': return p_.option($, ($) => t_build_to_prose.Error($, $p))
             case 'error testing': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("error while testing:"),
-                t_epe_to_fountain_pen.Error($),
+                t_epe_to_prose.Error($),
             ]))
             default: return p_.au($[0])
         }

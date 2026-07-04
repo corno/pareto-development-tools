@@ -10,43 +10,43 @@ export type Error = p_i.Transformer<
 d_in.Error, d_out.Phrase
 >
 
-import * as t_git_push_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/push/prose"
-import * as t_git_make_pristine_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/make_pristine/prose"
-import * as t_clean_and_update_package_dependencies_to_fountain_pen from "../update_package_dependencies/prose"
-import * as t_git_is_clean_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/repository_has_no_open_changes/prose"
-import * as t_npm_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/npm/prose"
-import * as t_build_and_test_to_fountain_pen from "../build_and_test/prose"
-import * as t_get_package_json_to_fountain_pen from "../../../../modules/npm/implementation/manual/transformers/get_package_json/prose"
-import * as t_git_ec_to_fountain_pen from "../../../../modules/version_control_api/implementation/manual/transformers/extended_commit/prose"
+import * as t_git_push_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/push/prose"
+import * as t_git_make_pristine_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/make_pristine/prose"
+import * as t_clean_and_update_package_dependencies_to_prose from "../update_package_dependencies/prose"
+import * as t_git_is_clean_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/repository_has_no_open_changes/prose"
+import * as t_npm_to_prose from "../../../../modules/npm/implementation/manual/transformers/npm/prose"
+import * as t_build_and_test_to_prose from "../build_and_test/prose"
+import * as t_get_package_json_to_prose from "../../../../modules/npm/implementation/manual/transformers/get_package_json/prose"
+import * as t_git_ec_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/extended_commit/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error while running git push': return p_.option($, ($) => sh.ph.composed([
-                t_git_push_to_fountain_pen.Error($)
+                t_git_push_to_prose.Error($)
             ]))
             case 'error while running git assert no open changes at the start': return p_.option($, ($) => sh.ph.composed([
                 p_.from.state($).decide(
                     ($) => {
                         switch ($[0]) {
-                            case 'unexpected error': return p_.option($, ($) => t_git_is_clean_to_fountain_pen.Error($))
+                            case 'unexpected error': return p_.option($, ($) => t_git_is_clean_to_prose.Error($))
                             case 'working directory has open changes': return p_.option($, ($) => sh.ph.literal("working directory has open changes at the start"))
                             default: return p_.au($[0])
                         }
                     })
             ]))
             case 'error while running git make pristine': return p_.option($, ($) => sh.ph.composed([
-                t_git_make_pristine_to_fountain_pen.Error($)
+                t_git_make_pristine_to_prose.Error($)
             ]))
             case 'error while running update package dependencies': return p_.option($, ($) => sh.ph.composed([
-                t_clean_and_update_package_dependencies_to_fountain_pen.Error($)
+                t_clean_and_update_package_dependencies_to_prose.Error($)
             ]))
-            case 'error while running build and test': return p_.option($, ($) => t_build_and_test_to_fountain_pen.Error($, { 'concise': false }))
+            case 'error while running build and test': return p_.option($, ($) => t_build_and_test_to_prose.Error($, { 'concise': false }))
             case 'error while running git assert no open changes after updating package dependencies': return p_.option($, ($) => sh.ph.composed([
                 p_.from.state($).decide(
                     ($) => {
                         switch ($[0]) {
-                            case 'unexpected error': return p_.option($, ($) => t_git_is_clean_to_fountain_pen.Error($))
+                            case 'unexpected error': return p_.option($, ($) => t_git_is_clean_to_prose.Error($))
                             case 'working directory has open changes': return p_.option($, ($) => sh.ph.literal("working directory has open changes after updating package dependencies"))
                             default: return p_.au($[0])
                         }
@@ -54,26 +54,26 @@ export const Error: Error = ($) => p_.from.state($).decide(
             ]))
             case 'error while running npm version': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not increment version: "),
-                t_npm_to_fountain_pen.Error($)
+                t_npm_to_prose.Error($)
             ]))
             case 'error while running npm update': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not update npm: "),
-                t_npm_to_fountain_pen.Error($)
+                t_npm_to_prose.Error($)
             ]))
             case 'error while running npm publish': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not publish to npm: "),
-                t_npm_to_fountain_pen.Error($)
+                t_npm_to_prose.Error($)
             ]))
             case 'error while logging': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not log"),
             ]))
             case 'error while getting package.json': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not read package.json: "),
-                t_get_package_json_to_fountain_pen.Error($)
+                t_get_package_json_to_prose.Error($)
             ]))
             case 'error while running git extended commit': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.literal("could not commit and push: "),
-                t_git_ec_to_fountain_pen.Error($)
+                t_git_ec_to_prose.Error($)
             ]))
 
             default: return p_.au($[0])
