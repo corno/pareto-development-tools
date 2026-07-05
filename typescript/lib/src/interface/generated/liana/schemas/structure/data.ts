@@ -1,6 +1,6 @@
 
-import * as p_i from 'pareto-core/dist/interface/__internal/Abort'
-import * as p_di from 'pareto-core/dist/interface/data'
+import * as p_i from 'pareto-core/interface/__internal/Abort'
+import * as p_di from 'pareto-core/interface/data'
 
 export namespace Directory_ {
     
@@ -91,6 +91,6 @@ export type Directory_ =
     | readonly ['ignore', Directory_.ignore]
     | readonly ['generated', Directory_.generated]
 
-export { 
+export type { 
     Directory_ as Directory, 
 }

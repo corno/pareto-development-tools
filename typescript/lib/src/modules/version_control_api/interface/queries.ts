@@ -1,9 +1,9 @@
-import * as p_ from 'pareto-core/dist/interface/query'
+import * as p_ from 'pareto-core/interface/query'
 
-import * as resources_pareto from "pareto-resources/dist/interface/resources"
+import * as resources_pareto from "pareto-resources/interface/resources"
 
-import * as d_repository_no_open_changes from "./data/repository_no_open_changes"
-import * as d_is_inside_work_tree from "./data/is_inside_work_tree"
+import * as d_repository_no_open_changes from "./data/repository_no_open_changes.js"
+import * as d_is_inside_work_tree from "./data/is_inside_work_tree.js"
 
 export namespace queries {
 

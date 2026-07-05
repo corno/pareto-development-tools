@@ -1,15 +1,15 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import * as p_temp from 'pareto-core/dist/implementation/transformer'
-import p_variables from 'pareto-core/dist/implementation/command/specials/variables'
-import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
+import * as p_ from 'pareto-core/implementation/command'
+import * as p_temp from 'pareto-core/implementation/transformer'
+import p_variables from 'pareto-core/implementation/command/specials/variables'
+import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d from "../../../interface/data/update_package_dependencies"
+import * as d from "../../../interface/data/update_package_dependencies.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
 export const $$: interface_.procedures.update_package_dependencies = p_.command_procedure(
     ($d, $s, $q, $c) => p_variables(

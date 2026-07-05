@@ -1,7 +1,7 @@
-import * as p_ from 'pareto-core-shorthands/dist/unconstrained_manual'
+import * as p_ from 'pareto-core-shorthands/unconstrained_manual'
 
 
-import * as d_structure from "../../interface/generated/liana/schemas/structure/data"
+import * as d_structure from "../../interface/generated/liana/schemas/structure/data.js"
 
 export namespace g {
 

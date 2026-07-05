@@ -1,13 +1,13 @@
-import * as p_ from 'pareto-core/dist/implementation/refiner'
-import * as p_t from 'pareto-core/dist/implementation/transformer'
-import * as p_di from 'pareto-core/dist/interface/data'
-import * as p_ri from 'pareto-core/dist/interface/refiner'
-import p_change_context from 'pareto-core/dist/implementation/refiner/specials/change_context'
+import * as p_ from 'pareto-core/implementation/refiner'
+import * as p_t from 'pareto-core/implementation/transformer'
+import * as p_di from 'pareto-core/interface/data'
+import * as p_ri from 'pareto-core/interface/refiner'
+import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //data types
-import * as d_in from "astn-core/dist/interface/generated/liana/schemas/parse_tree/data"
-import * as d_out from "../../../../interface/data/npm_package"
-import * as d_function from "../../../../interface/data/deserialize_package_json"
+import * as d_in from "astn-core/interface/generated/liana/schemas/parse_tree/data"
+import * as d_out from "../../../../interface/data/npm_package.js"
+import * as d_function from "../../../../interface/data/deserialize_package_json.js"
 
 
 type Error_Expect_Object =

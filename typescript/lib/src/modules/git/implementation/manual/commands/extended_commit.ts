@@ -1,14 +1,14 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import * as p_t from 'pareto-core/dist/implementation/transformer'
-import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
+import * as p_ from 'pareto-core/implementation/command'
+import * as p_t from 'pareto-core/implementation/transformer'
+import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d from "../../../../version_control_api/interface/data/extended_commit"
+import * as d from "../../../../version_control_api/interface/data/extended_commit.js"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
+import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: interface_.procedures.extended_commit = p_.command_procedure(
     ($d, $s, $q, $c) => [

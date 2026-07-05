@@ -1,9 +1,9 @@
-import * as p_ from 'pareto-core/dist/interface/data'
+import * as p_ from 'pareto-core/interface/data'
 
-import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
-import * as d_read_directory from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
-import * as d_directory_content from "pareto-resources/dist/interface/data/read_directory_content"
-import * as d_project_files from "./project_files"
+import * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
+import * as d_read_directory from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
+import * as d_directory_content from "pareto-resources/interface/data/read_directory_content"
+import * as d_project_files from "./project_files.js"
 
 export type Parameters = {
     'path to project': d_path.Context_Path,

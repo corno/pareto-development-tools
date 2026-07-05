@@ -1,13 +1,13 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
+import * as p_ from 'pareto-core/implementation/command'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d from "../../../interface/data/build_and_test"
+import * as d from "../../../interface/data/build_and_test.js"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
+import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
 export const $$: interface_.procedures.build_and_test = p_.command_procedure(
     ($d, $s, $q, $c) => [

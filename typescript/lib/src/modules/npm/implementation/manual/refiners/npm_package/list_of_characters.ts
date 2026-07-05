@@ -1,13 +1,13 @@
-import * as p_ri from 'pareto-core/dist/interface/refiner'
+import * as p_ri from 'pareto-core/interface/refiner'
 
 //data types
-import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
-import * as d_out from "../../../../interface/data/npm_package"
-import * as d_function from "../../../../interface/data/deserialize_package_json"
+import * as d_in from "pareto-fountain-pen/interface/generated/liana/schemas/list_of_characters/data"
+import * as d_out from "../../../../interface/data/npm_package.js"
+import * as d_function from "../../../../interface/data/deserialize_package_json.js"
 
 //dependencies
-import * as r_parse_tree_from_list_of_characters from "astn-core/dist/implementation/manual/refiners/parse_tree/list_of_characters"
-import * as r_from_parse_tree from "./parse_tree"
+import * as r_parse_tree_from_list_of_characters from "astn-core/implementation/manual/refiners/parse_tree/list_of_characters"
+import * as r_from_parse_tree from "./parse_tree.js"
 
 export const NPM_Package: p_ri.Refiner<
     d_out.NPM_Package,

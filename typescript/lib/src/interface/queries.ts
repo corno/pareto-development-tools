@@ -1,9 +1,9 @@
-import * as p_ from 'pareto-core/dist/interface/query'
+import * as p_ from 'pareto-core/interface/query'
 
-import * as resources_pareto from "pareto-resources/dist/interface/resources"
+import * as resources_pareto from "pareto-resources/interface/resources"
 
-import * as d_get_package_dependencies from "./data/get_package_dependencies"
-import * as d_get_project_files from "./data/get_project_files"
+import * as d_get_package_dependencies from "./data/get_package_dependencies.js"
+import * as d_get_project_files from "./data/get_project_files.js"
 
 export namespace queries {
     

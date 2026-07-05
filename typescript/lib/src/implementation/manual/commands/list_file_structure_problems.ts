@@ -1,18 +1,18 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import * as p_temp from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/command'
+import * as p_temp from 'pareto-core/implementation/transformer'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d from "../../../interface/data/get_project_files"
-import * as d_file_analysis from "../../../interface/data/file_structure_analysis"
+import * as d from "../../../interface/data/get_project_files.js"
+import * as d_file_analysis from "../../../interface/data/file_structure_analysis.js"
 
 //dependencies
-import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis"
-import { $$ as q_get_project_files } from "../queries/get_project_files"
+import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
+import { $$ as q_get_project_files } from "../queries/get_project_files.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 
 export const $$: interface_.procedures.list_file_structure_problems = p_.command_procedure(

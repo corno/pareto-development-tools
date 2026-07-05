@@ -1,10 +1,10 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import * as p_t from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/command'
+import * as p_t from 'pareto-core/implementation/transformer'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d from "../../../interface/data/git_commit"
+import * as d from "../../../interface/data/git_commit.js"
 
 export const $$: interface_.procedures.version_control_commit = p_.command_procedure(
 

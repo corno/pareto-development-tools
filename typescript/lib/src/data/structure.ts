@@ -1,4 +1,4 @@
-import * as sh from "../shorthands/structure/manual"
+import * as sh from "../shorthands/structure/manual.js"
 
 const $_interface = sh.g.directory_group({
     "commands.ts": sh.g.file_manual(),

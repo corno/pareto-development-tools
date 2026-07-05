@@ -1,14 +1,14 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
+import * as p_ from 'pareto-core/implementation/command'
+import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d from "../../../interface/data/create_dependency_graph"
+import * as d from "../../../interface/data/create_dependency_graph.js"
 
 //dependencies
-import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz"
-import * as t_graphviz_to_prose from "pareto-graphviz/dist/implementation/manual/transformers/high_level_simple/prose"
+import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz.js"
+import * as t_graphviz_to_prose from "pareto-graphviz/implementation/manual/transformers/high_level_simple/prose"
 
 export const $$: interface_.procedures.create_dependency_graph = p_.command_procedure(
     ($d, $s, $q, $c) => [

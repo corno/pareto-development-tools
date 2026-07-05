@@ -1,7 +1,7 @@
 
-import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
-import * as d_git_extended_commit from "../../modules/version_control_api/interface/data/extended_commit"
-import * as d_build_and_test from "../data/build_and_test"
+import * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
+import * as d_git_extended_commit from "../../modules/version_control_api/interface/data/extended_commit.js"
+import * as d_build_and_test from "../data/build_and_test.js"
 
 export type Error =
     | ['version control extended commit', d_git_extended_commit.Error]

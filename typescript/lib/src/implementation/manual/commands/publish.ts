@@ -1,17 +1,17 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import p_variables from 'pareto-core/dist/implementation/command/specials/variables'
+import * as p_ from 'pareto-core/implementation/command'
+import p_variables from 'pareto-core/implementation/command/specials/variables'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d from "../../../interface/data/publish"
+import * as d from "../../../interface/data/publish.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
-import * as q_get_package_json from "../../../modules/npm/implementation/manual/queries/get_package_json"
+import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import * as q_get_package_json from "../../../modules/npm/implementation/manual/queries/get_package_json.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 export const $$: interface_.procedures.publish = p_.command_procedure(
 

@@ -1,15 +1,15 @@
-import * as p_ from 'pareto-core/dist/implementation/production'
-import * as p_pi from 'pareto-core/dist/interface/production'
-import p_unreachable_code_path from 'pareto-core/dist/implementation/transformer/specials/unreachable_code_path'
+import * as p_ from 'pareto-core/implementation/production'
+import * as p_pi from 'pareto-core/interface/production'
+import p_unreachable_code_path from 'pareto-core/implementation/transformer/specials/unreachable_code_path'
 
 //data types
-import * as d_out from "../../../../interface/data/execute_command"
-import * as d_function from "../../../../interface/data/parse"
-import * as d_in from "pareto-fountain-pen/dist/interface/generated/liana/schemas/text/data"
-import * as d_publish from "../../../../interface/data/publish"
+import * as d_out from "../../../../interface/data/execute_command.js"
+import * as d_function from "../../../../interface/data/parse.js"
+import * as d_in from "pareto-fountain-pen/interface/generated/liana/schemas/text/data"
+import * as d_publish from "../../../../interface/data/publish.js"
 
 //dependencies
-import * as t_context_path_from_text from "pareto-resources/dist/implementation/manual/refiners/path_unrestricted/text"
+import * as t_context_path_from_text from "pareto-resources/implementation/manual/refiners/path_unrestricted/text"
 
 type signature = p_pi.Production<
     d_out.Parameters,

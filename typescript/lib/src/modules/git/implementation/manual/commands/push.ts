@@ -1,13 +1,13 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import * as p_t from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/command'
+import * as p_t from 'pareto-core/implementation/transformer'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d from "../../../../version_control_api/interface/data/push"
+import * as d from "../../../../version_control_api/interface/data/push.js"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
+import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 
 
 export const $$: interface_.procedures.push = p_.command_procedure(

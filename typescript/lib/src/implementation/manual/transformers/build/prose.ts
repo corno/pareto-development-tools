@@ -1,8 +1,8 @@
-import * as p_ from 'pareto-core/dist/implementation/transformer'
-import * as p_i from 'pareto-core/dist/interface/transformer'
+import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_i from 'pareto-core/interface/transformer'
 
-import * as d_in from "../../../../interface/data/build"
-import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
+import * as d_in from "../../../../interface/data/build.js"
+import * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
 
 export namespace signatures {
     export type Error = p_i.Transformer_With_Parameter<
@@ -15,14 +15,14 @@ export namespace signatures {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
-import * as t_tsc_to_prose from "../tsc/prose"
-import * as t_remove_to_prose from "pareto-resources/dist/implementation/manual/transformers/remove/prose"
-import * as t_path_to_loc from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/deprecated_list_of_characters"
-import * as t_stat_possible_node_to_prose from "pareto-resources/dist/implementation/manual/transformers/stat_possible_node/prose"
-import * as t_chmod_to_prose from "pareto-resources/dist/implementation/manual/transformers/chmod/prose"
+import * as t_tsc_to_prose from "../tsc/prose.js"
+import * as t_remove_to_prose from "pareto-resources/implementation/manual/transformers/remove/prose"
+import * as t_path_to_loc from "pareto-resources/implementation/manual/transformers/unrestricted_path/deprecated_list_of_characters"
+import * as t_stat_possible_node_to_prose from "pareto-resources/implementation/manual/transformers/stat_possible_node/prose"
+import * as t_chmod_to_prose from "pareto-resources/implementation/manual/transformers/chmod/prose"
 
 export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
     ($) => {

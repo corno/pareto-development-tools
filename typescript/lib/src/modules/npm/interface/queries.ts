@@ -1,8 +1,8 @@
-import * as p_ from 'pareto-core/dist/interface/query'
+import * as p_ from 'pareto-core/interface/query'
 
-import * as d_get_package_json from "./data/get_package_json"
+import * as d_get_package_json from "./data/get_package_json.js"
 
-import * as resources_pareto from "pareto-resources/dist/interface/resources"
+import * as resources_pareto from "pareto-resources/interface/resources"
 
 
 export namespace queries {

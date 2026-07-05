@@ -1,20 +1,20 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import * as p_temp from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/command'
+import * as p_temp from 'pareto-core/implementation/transformer'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d_main from "pareto-resources/dist/interface/data/temp_main"
-import * as d_parse from "../../../interface/data/parse"
-import * as d_execute_command from "../../../interface/data/execute_command"
+import * as d_main from "pareto-resources/interface/data/temp_main"
+import * as d_parse from "../../../interface/data/parse.js"
+import * as d_execute_command from "../../../interface/data/execute_command.js"
 
 //dependencies
-import * as r_instruction from "../refiners/execute_command/main"
-import * as t_api_to_prose from "../transformers/execute_command/prose"
-import * as t_bin_to_prose from "../transformers/parse/prose"
+import * as r_instruction from "../refiners/execute_command/main.js"
+import * as t_api_to_prose from "../transformers/execute_command/prose.js"
+import * as t_bin_to_prose from "../transformers/parse/prose.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 
 type My_Error =

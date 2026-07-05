@@ -1,20 +1,20 @@
-import * as p_ from 'pareto-core/dist/interface/command'
+import * as p_ from 'pareto-core/interface/command'
 
-import * as queries from "./queries"
-import * as resources_pareto from "pareto-resources/dist/interface/resources"
-import * as resources_pareto_stream from "pareto-stream/dist/interface/commands"
-import * as resources_version_control from "../modules/version_control_api/interface/commands"
-import * as resources_npm from "../modules/npm/interface/commands"
+import * as queries from "./queries.js"
+import * as resources_pareto from "pareto-resources/interface/resources"
+import * as resources_pareto_stream from "pareto-stream/interface/commands"
+import * as resources_version_control from "../modules/version_control_api/interface/commands.js"
+import * as resources_npm from "../modules/npm/interface/commands.js"
 
-import * as d_get_project_files from "./data/get_project_files"
-import * as d_api from "./data/execute_command"
-import * as d_build from "./data/build"
-import * as d_build_and_test from "./data/build_and_test"
-import * as d_create_dependency_graph from "./data/create_dependency_graph"
-import * as d_publish from "./data/publish"
-import * as d_tsc from "./data/tsc"
-import * as d_update_package_dependencies from "./data/update_package_dependencies"
-import * as d_version_control_commit from "./data/git_commit"
+import * as d_get_project_files from "./data/get_project_files.js"
+import * as d_api from "./data/execute_command.js"
+import * as d_build from "./data/build.js"
+import * as d_build_and_test from "./data/build_and_test.js"
+import * as d_create_dependency_graph from "./data/create_dependency_graph.js"
+import * as d_publish from "./data/publish.js"
+import * as d_tsc from "./data/tsc.js"
+import * as d_update_package_dependencies from "./data/update_package_dependencies.js"
+import * as d_version_control_commit from "./data/git_commit.js"
 
 
 

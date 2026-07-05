@@ -1,10 +1,10 @@
-import * as p_ from 'pareto-core/dist/interface/command'
+import * as p_ from 'pareto-core/interface/command'
 
 //data types
-import * as d_assert_no_open_changes from "./data/assert_no_open_changes"
-import * as d_make_pristine from "./data/make_pristine"
-import * as d_push from "./data/push"
-import * as d_extended_commit from "./data/extended_commit"
+import * as d_assert_no_open_changes from "./data/assert_no_open_changes.js"
+import * as d_make_pristine from "./data/make_pristine.js"
+import * as d_push from "./data/push.js"
+import * as d_extended_commit from "./data/extended_commit.js"
 
 export namespace commands {
 

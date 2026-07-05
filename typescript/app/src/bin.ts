@@ -1,48 +1,48 @@
 #!/usr/bin/env -S node --enable-source-maps
 
-import * as p_h from 'pareto-host-nodejs'
-import * as p_ci from 'pareto-core/dist/interface/command'
-import * as p_qi from 'pareto-core/dist/interface/query'
+import * as p_h from 'pareto-host-nodejs/index'
+import * as p_ci from 'pareto-core/interface/command'
+import * as p_qi from 'pareto-core/interface/query'
 
-import * as d_ece from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
-import * as d_espe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
-import * as d_eqe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
+import * as d_ece from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
+import * as d_espe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
+import * as d_eqe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
 
 //pareto-resources
-import { $$ as q_execute_sandboxed_query_executable } from "pareto-resources/dist/implementation/manual/queries/execute_sandboxed_query_executable"
-import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/dist/implementation/manual/commands/execute_sandboxed_command_executable"
-import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/dist/implementation/manual/commands/execute_sandboxed_smelly_command_executable"
+import { $$ as q_execute_sandboxed_query_executable } from "pareto-resources/implementation/manual/queries/execute_sandboxed_query_executable"
+import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/implementation/manual/commands/execute_sandboxed_command_executable"
+import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/implementation/manual/commands/execute_sandboxed_smelly_command_executable"
 
 
 //git module
-import { $$ as q_git_is_repository_clean } from "lib/dist/modules/git/implementation/manual/queries/repository_no_open_changes"
-import { $$ as q_git_is_inside_work_tree } from "lib/dist/modules/git/implementation/manual/queries/is_inside_work_tree"
-import { $$ as c_git_assert_clean } from "lib/dist/modules/git/implementation/manual/commands/assert_no_open_changes"
-import { $$ as c_git_make_pristine } from "lib/dist/modules/git/implementation/manual/commands/make_pristine"
-import { $$ as c_git_extended_commit } from "lib/dist/modules/git/implementation/manual/commands/extended_commit"
-import { $$ as c_git_push } from "lib/dist/modules/git/implementation/manual/commands/push"
+import { $$ as q_git_is_repository_clean } from "lib/modules/git/implementation/manual/queries/repository_no_open_changes"
+import { $$ as q_git_is_inside_work_tree } from "lib/modules/git/implementation/manual/queries/is_inside_work_tree"
+import { $$ as c_git_assert_clean } from "lib/modules/git/implementation/manual/commands/assert_no_open_changes"
+import { $$ as c_git_make_pristine } from "lib/modules/git/implementation/manual/commands/make_pristine"
+import { $$ as c_git_extended_commit } from "lib/modules/git/implementation/manual/commands/extended_commit"
+import { $$ as c_git_push } from "lib/modules/git/implementation/manual/commands/push"
 
 //npm module
-import { $$ as c_npm } from "lib/dist/modules/npm/implementation/manual/commands/npm"
-import { $$ as c_npm_publish } from "lib/dist/modules/npm/implementation/manual/commands/publish"
-import { $$ as c_set_up_comparison_against_published } from "lib/dist/modules/npm/implementation/manual/commands/set_up_comparison_against_published"
-import { $$ as c_npm_update_package_dependencies } from "lib/dist/modules/npm/implementation/manual/commands/update_package_dependencies"
-import { $$ as c_update2latest } from "lib/dist/modules/npm/implementation/manual/commands/update2latest"
+import { $$ as c_npm } from "lib/modules/npm/implementation/manual/commands/npm"
+import { $$ as c_npm_publish } from "lib/modules/npm/implementation/manual/commands/publish"
+import { $$ as c_set_up_comparison_against_published } from "lib/modules/npm/implementation/manual/commands/set_up_comparison_against_published"
+import { $$ as c_npm_update_package_dependencies } from "lib/modules/npm/implementation/manual/commands/update_package_dependencies"
+import { $$ as c_update2latest } from "lib/modules/npm/implementation/manual/commands/update2latest"
 
 
 //internal
-import { $$ as q_package_dependencies } from "lib/dist/implementation/manual/queries/get_package_dependencies"
-import { $$ as c_analyze_file_structure } from "lib/dist/implementation/manual/commands/analyze_file_structure"
-import { $$ as c_list_file_structure_problems } from "lib/dist/implementation/manual/commands/list_file_structure_problems"
-import { $$ as c_api } from "lib/dist/implementation/manual/commands/execute_command"
-import { $$ as c_main } from "lib/dist/implementation/manual/commands/main"
-import { $$ as c_build } from "lib/dist/implementation/manual/commands/build"
-import { $$ as c_build_and_test } from "lib/dist/implementation/manual/commands/build_and_test"
-import { $$ as c_dependency_graph } from "lib/dist/implementation/manual/commands/create_dependency_graph"
-import { $$ as c_git_commit } from "lib/dist/implementation/manual/commands/version_control_commit"
-import { $$ as c_publish } from "lib/dist/implementation/manual/commands/publish"
-import { $$ as c_tsc } from "lib/dist/implementation/manual/commands/tsc"
-import { $$ as c_update_package_dependencies } from "lib/dist/implementation/manual/commands/update_package_dependencies"
+import { $$ as q_package_dependencies } from "lib/implementation/manual/queries/get_package_dependencies"
+import { $$ as c_analyze_file_structure } from "lib/implementation/manual/commands/analyze_file_structure"
+import { $$ as c_list_file_structure_problems } from "lib/implementation/manual/commands/list_file_structure_problems"
+import { $$ as c_api } from "lib/implementation/manual/commands/execute_command"
+import { $$ as c_main } from "lib/implementation/manual/commands/main"
+import { $$ as c_build } from "lib/implementation/manual/commands/build"
+import { $$ as c_build_and_test } from "lib/implementation/manual/commands/build_and_test"
+import { $$ as c_dependency_graph } from "lib/implementation/manual/commands/create_dependency_graph"
+import { $$ as c_git_commit } from "lib/implementation/manual/commands/version_control_commit"
+import { $$ as c_publish } from "lib/implementation/manual/commands/publish"
+import { $$ as c_tsc } from "lib/implementation/manual/commands/tsc"
+import { $$ as c_update_package_dependencies } from "lib/implementation/manual/commands/update_package_dependencies"
 
 p_h.run_main_command(
     ($r) => {

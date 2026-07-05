@@ -1,17 +1,17 @@
-import * as p_ from 'pareto-core/dist/implementation/query'
-import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
+import * as p_ from 'pareto-core/implementation/query'
+import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
 
-import * as interface_ from "../../../interface/queries"
+import * as interface_ from "../../../interface/queries.js"
 
 //data types
-import * as d from "../../../interface/data/get_project_files"
-import * as d_directory_content from "pareto-resources/dist/interface/data/directory_content"
+import * as d from "../../../interface/data/get_project_files.js"
+import * as d_directory_content from "pareto-resources/interface/data/directory_content"
 
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
-import { $$ as q_directory_content } from "pareto-resources/dist/implementation/manual/queries/resources_read_directory_content"
+import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import { $$ as q_directory_content } from "pareto-resources/implementation/manual/queries/resources_read_directory_content"
 
 export const $$: interface_.query_functions.get_project_files = p_.query_function(
     ($d, $s, $q) => p_super_query_result($q['read directory'](

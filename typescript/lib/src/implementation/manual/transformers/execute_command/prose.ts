@@ -1,8 +1,8 @@
-import * as p_ from 'pareto-core/dist/implementation/transformer'
-import * as p_i from 'pareto-core/dist/interface/transformer'
+import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_i from 'pareto-core/interface/transformer'
 
-import * as d_in from "../../../../interface/data/execute_command"
-import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
+import * as d_in from "../../../../interface/data/execute_command.js"
+import * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
 
 export namespace signatures {
     export type Error = p_i.Transformer<
@@ -12,20 +12,20 @@ export namespace signatures {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
-import * as t_git_commit_to_prose from "../git_commit/prose"
-import * as t_git_assert_no_open_changes_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/assert_no_open_changes/prose"
+import * as t_git_commit_to_prose from "../git_commit/prose.js"
+import * as t_git_assert_no_open_changes_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/assert_no_open_changes/prose.js"
 
-import * as t_build_and_test_to_prose from "../build_and_test/prose"
-import * as t_build_to_prose from "../build/prose"
-import * as t_dependency_graph_to_prose from "../create_dependency_graph/prose"
-import * as t_line_count_to_prose from "../get_project_files/prose"
-import * as t_publish from "../publish/prose"
-import * as t_update_dependencies from "../update_package_dependencies/prose"
-import * as t_read_directory_to_prose from "pareto-resources/dist/implementation/manual/transformers/read_directory/prose"
-import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/manual/transformers/set_up_comparison_against_published/prose"
+import * as t_build_and_test_to_prose from "../build_and_test/prose.js"
+import * as t_build_to_prose from "../build/prose.js"
+import * as t_dependency_graph_to_prose from "../create_dependency_graph/prose.js"
+import * as t_line_count_to_prose from "../get_project_files/prose.js"
+import * as t_publish from "../publish/prose.js"
+import * as t_update_dependencies from "../update_package_dependencies/prose.js"
+import * as t_read_directory_to_prose from "pareto-resources/implementation/manual/transformers/read_directory/prose"
+import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/manual/transformers/set_up_comparison_against_published/prose.js"
 
 export const Error: signatures.Error = ($) => p_.from.state($).decide(
     ($) => {

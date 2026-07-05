@@ -1,8 +1,8 @@
-import * as p_ from 'pareto-core/dist/implementation/transformer'
-import * as p_i from 'pareto-core/dist/interface/transformer'
+import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_i from 'pareto-core/interface/transformer'
 
-import * as d_in from "../../../../interface/data/deserialize_package_json"
-import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
+import * as d_in from "../../../../interface/data/deserialize_package_json.js"
+import * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
 
 export namespace signatures {
     export type Error = p_i.Transformer<
@@ -12,13 +12,13 @@ export namespace signatures {
 }
 
 //dependencies
-import * as t_deserialize_parse_tree_to_prose from "astn-core/dist/implementation/manual/transformers/deserialize_parse_tree/prose"
-import * as t_deserialize_parse_tree_to_location from "astn-core/dist/implementation/manual/transformers/deserialize_parse_tree/location"
-import * as t_location_to_prose from "astn-core/dist/implementation/manual/transformers/location/prose"
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
+import * as t_deserialize_parse_tree_to_prose from "astn-core/implementation/manual/transformers/deserialize_parse_tree/prose"
+import * as t_deserialize_parse_tree_to_location from "astn-core/implementation/manual/transformers/deserialize_parse_tree/location"
+import * as t_location_to_prose from "astn-core/implementation/manual/transformers/location/prose"
+import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 export const Error: signatures.Error = ($) => sh.ph.composed([
     sh.ph.literal(t_path_to_text.Node_Path($['path'])),

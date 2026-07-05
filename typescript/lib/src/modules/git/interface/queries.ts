@@ -1,8 +1,8 @@
-import * as p_ from 'pareto-core/dist/interface/query'
+import * as p_ from 'pareto-core/interface/query'
 
-import * as resources_pareto from "pareto-resources/dist/interface/resources"
+import * as resources_pareto from "pareto-resources/interface/resources"
 
-import * as queries from "../../version_control_api/interface/queries"
+import * as queries from "../../version_control_api/interface/queries.js"
 
 export namespace query_functions {
 

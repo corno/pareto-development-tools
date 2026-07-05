@@ -1,10 +1,10 @@
-import * as p_ from 'pareto-core/dist/implementation/query'
-import * as p_t from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/query'
+import * as p_t from 'pareto-core/implementation/transformer'
 
-import * as interface_ from "../../../interface/queries"
+import * as interface_ from "../../../interface/queries.js"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
+import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 
 export const $$: interface_.query_functions.is_inside_work_tree = p_.query_function(
     ($d, $s, $q) => p_.e.observe_behavior(

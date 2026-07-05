@@ -1,15 +1,15 @@
-import * as p_ from 'pareto-core/dist/implementation/query'
-import p_variables from 'pareto-core/dist/implementation/query/specials/variables'
-import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
+import * as p_ from 'pareto-core/implementation/query'
+import p_variables from 'pareto-core/implementation/query/specials/variables'
+import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import * as interface_ from "../../../interface/queries"
+import * as interface_ from "../../../interface/queries.js"
 
 //data types
-import * as d from "../../../interface/data/get_package_json"
+import * as d from "../../../interface/data/get_package_json.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
-import { NPM_Package as r_parse_npm_package } from "../refiners/npm_package/list_of_characters"
+import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import { NPM_Package as r_parse_npm_package } from "../refiners/npm_package/list_of_characters.js"
 
 export const $$: interface_.query_functions.get_package_json = p_.query_function(
     ($d, $s, $r) => p_variables(

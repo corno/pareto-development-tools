@@ -1,17 +1,17 @@
-import * as p_ from 'pareto-core/dist/interface/data'
+import * as p_ from 'pareto-core/interface/data'
 
 
-import * as d_get_project_files from "./get_project_files"
-import * as d_assert_clean from "../../modules/version_control_api/interface/data/assert_no_open_changes"
-import * as d_build from "./build"
-import * as d_build_and_test from "./build_and_test"
-import * as d_dependency_graph from "./create_dependency_graph"
-import * as d_git_commit from "./git_commit"
-import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
-import * as d_publish from "./publish"
-import * as d_read_directory from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
-import * as d_set_up_comparison_against_published from "../../modules/npm/interface/data/set_up_comparison_against_published"
-import * as d_update_dependencies from "./update_package_dependencies"
+import * as d_get_project_files from "./get_project_files.js"
+import * as d_assert_clean from "../../modules/version_control_api/interface/data/assert_no_open_changes.js"
+import * as d_build from "./build.js"
+import * as d_build_and_test from "./build_and_test.js"
+import * as d_dependency_graph from "./create_dependency_graph.js"
+import * as d_git_commit from "./git_commit.js"
+import * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
+import * as d_publish from "./publish.js"
+import * as d_read_directory from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
+import * as d_set_up_comparison_against_published from "../../modules/npm/interface/data/set_up_comparison_against_published.js"
+import * as d_update_dependencies from "./update_package_dependencies.js"
 
 export type Parameters = {
     'type':

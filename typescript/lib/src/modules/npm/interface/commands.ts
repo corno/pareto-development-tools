@@ -1,10 +1,10 @@
-import * as p_ from 'pareto-core/dist/interface/command'
+import * as p_ from 'pareto-core/interface/command'
 
-import * as d_npm from "./data/npm_tool"
-import * as d_npm_publish from "./data/npm_publish"
-import * as d_update2latest from "./data/update2latest"
-import * as d_set_up_comparison_against_published from "./data/set_up_comparison_against_published"
-import * as d_update_package_dependencies from "./data/update_package_dependencies"
+import * as d_npm from "./data/npm_tool.js"
+import * as d_npm_publish from "./data/npm_publish.js"
+import * as d_update2latest from "./data/update2latest.js"
+import * as d_set_up_comparison_against_published from "./data/set_up_comparison_against_published.js"
+import * as d_update_package_dependencies from "./data/update_package_dependencies.js"
 
 export namespace commands {
 
@@ -16,7 +16,7 @@ export namespace commands {
 
 }
 
-import * as resources_pareto from "pareto-resources/dist/interface/resources"
+import * as resources_pareto from "pareto-resources/interface/resources"
 
 export namespace procedures {
 

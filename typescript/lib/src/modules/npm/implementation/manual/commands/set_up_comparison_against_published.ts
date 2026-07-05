@@ -1,20 +1,20 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import * as p_t from 'pareto-core/dist/implementation/transformer'
-import p_list_from_text from 'pareto-core/dist/implementation/refiner/specials/list_from_text'
-import p_list_build_deprecated from 'pareto-core/dist/implementation/refiner/specials/list_build_deprecated'
-import p_text_from_list from 'pareto-core/dist/implementation/transformer/specials/text_from_list'
-import p_super_query_result from 'pareto-core/dist/implementation/query/super_query_result'
+import * as p_ from 'pareto-core/implementation/command'
+import * as p_t from 'pareto-core/implementation/transformer'
+import p_list_from_text from 'pareto-core/implementation/refiner/specials/list_from_text'
+import p_list_build_deprecated from 'pareto-core/implementation/refiner/specials/list_build_deprecated'
+import p_text_from_list from 'pareto-core/implementation/transformer/specials/text_from_list'
+import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //data types
-import * as d from "../../../interface/data/set_up_comparison_against_published"
-import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/list_of_characters/data"
+import * as d from "../../../interface/data/set_up_comparison_against_published.js"
+import * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/list_of_characters/data"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/text"
-import * as t_path_to_path from "pareto-resources/dist/implementation/manual/transformers/unrestricted_path/unrestricted_path"
-import * as q_get_package_json from "../queries/get_package_json"
+import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
+import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import * as q_get_package_json from "../queries/get_package_json.js"
 
 const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Characters => {
 

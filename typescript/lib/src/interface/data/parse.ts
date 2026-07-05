@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/dist/interface/data'
+import * as p_ from 'pareto-core/interface/data'
 
 export type Error =
     | ['expected one of', Expected]

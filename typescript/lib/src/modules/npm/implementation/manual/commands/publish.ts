@@ -1,7 +1,7 @@
-import * as p_ from 'pareto-core/dist/implementation/command'
-import * as p_temp from 'pareto-core/dist/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/command'
+import * as p_temp from 'pareto-core/implementation/transformer'
 
-import * as interface_ from "../../../interface/commands"
+import * as interface_ from "../../../interface/commands.js"
 
 //dependencies
 

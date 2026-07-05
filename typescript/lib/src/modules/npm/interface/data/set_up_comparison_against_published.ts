@@ -1,9 +1,9 @@
 
-import * as d_epe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
-import * as d_eqe from "pareto-resources/dist/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
-import * as d_make_directory from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_make_directory/data"
-import * as d_path from "pareto-resources/dist/interface/generated/liana/schemas/fs_unrestricted_path/data"
-import * as d_get_package_json from "./get_package_json"
+import * as d_epe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
+import * as d_eqe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
+import * as d_make_directory from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_make_directory/data"
+import * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
+import * as d_get_package_json from "./get_package_json.js"
 
 export type Parameters = {
     'path to local package': d_path.Context_Path,
