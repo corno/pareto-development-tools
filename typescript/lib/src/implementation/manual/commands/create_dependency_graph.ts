@@ -7,9 +7,8 @@ import * as interface_ from "../../../interface/commands"
 import * as d from "../../../interface/data/create_dependency_graph"
 
 //dependencies
-// import { $$ as c_fp_log } from "pareto-fountain-pen-file-structure/dist/implementation/manual/commands/console_log"
 import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz"
-import * as t_graphviz_to_prose from "pareto-graphviz/dist/implementation/manual/transformers/high_level_simple/fountain_pen"
+import * as t_graphviz_to_prose from "pareto-graphviz/dist/implementation/manual/transformers/high_level_simple/prose"
 
 export const $$: interface_.procedures.create_dependency_graph = p_.command_procedure(
     ($d, $s, $q, $c) => [

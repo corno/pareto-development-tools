@@ -10,7 +10,7 @@ export type Error = p_i.Transformer<
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_read_file_to_prose from "pareto-resources/dist/implementation/manual/transformers/read_file/fountain_pen"
+import * as t_read_file_to_prose from "pareto-resources/dist/implementation/manual/transformers/read_file/prose"
 import * as t_deserialize_package_json_to_prose from "../deserialize_package_json/prose"
 
 export const Error: Error = ($) => {

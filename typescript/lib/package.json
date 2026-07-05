@@ -1,6 +1,6 @@
 {
   "name": "pareto-development-tools",
-  "version": "0.2.23",
+  "version": "0.2.24",
   "author": "Corno",
   "license": "Apache-2.0",
   "main": "./dist/index.js",

@@ -12,7 +12,7 @@ export type Error = p_i.Transformer<
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 import * as t_u2l_to_prose from "../update2latest/prose"
-import * as t_remove_to_prose from "pareto-resources/dist/implementation/manual/transformers/remove/fountain_pen"
+import * as t_remove_to_prose from "pareto-resources/dist/implementation/manual/transformers/remove/prose"
 import * as t_npm_to_prose from "../npm/prose"
 
 export const Error: Error = ($) => {

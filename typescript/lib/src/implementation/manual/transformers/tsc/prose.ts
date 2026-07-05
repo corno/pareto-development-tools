@@ -4,7 +4,7 @@ import * as p_i from 'pareto-core/dist/interface/transformer'
 import * as d_in from "../../../../interface/data/tsc"
 import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schemas/prose/data"
 
-import * as t_espe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_smelly_command_executable/fountain_pen"
+import * as t_espe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_smelly_command_executable/prose"
 
 export type Error = p_i.Transformer_With_Parameter<
     d_in.Error,

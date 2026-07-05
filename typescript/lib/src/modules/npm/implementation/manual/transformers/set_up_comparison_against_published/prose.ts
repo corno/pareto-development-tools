@@ -10,9 +10,9 @@ export type Error = p_i.Transformer<
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_epe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
-import * as t_eqe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_query_executable/fountain_pen"
-import * as t_make_directory_to_prose from "pareto-resources/dist/implementation/manual/transformers/make_directory/fountain_pen"
+import * as t_epe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/prose"
+import * as t_eqe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_query_executable/prose"
+import * as t_make_directory_to_prose from "pareto-resources/dist/implementation/manual/transformers/make_directory/prose"
 import * as t_get_package_json_to_prose from "../get_package_json/prose"
 
 

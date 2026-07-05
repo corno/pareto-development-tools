@@ -11,7 +11,7 @@ export type Error = p_i.Transformer<
     d_out.Phrase
 >
 
-import * as t_ece_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
+import * as t_ece_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/prose"
 import * as t_git_is_clean_to_prose from "../repository_has_no_open_changes/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(

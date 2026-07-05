@@ -11,8 +11,8 @@ export type Error = p_i.Transformer<
 
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
-import * as t_read_directory_content_to_prose from "pareto-resources/dist/implementation/manual/transformers/read_directory_content/fountain_pen"
-import * as t_read_directory_to_prose from "pareto-resources/dist/implementation/manual/transformers/read_directory/fountain_pen"
+import * as t_read_directory_content_to_prose from "pareto-resources/dist/implementation/manual/transformers/read_directory_content/prose"
+import * as t_read_directory_to_prose from "pareto-resources/dist/implementation/manual/transformers/read_directory/prose"
 
 export const Error: Error = ($) => p_.from.state($).decide(
     ($) => {

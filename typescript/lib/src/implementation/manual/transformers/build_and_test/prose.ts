@@ -7,7 +7,7 @@ import * as d_out from "pareto-fountain-pen/dist/interface/generated/liana/schem
 import * as sh from "pareto-fountain-pen/dist/shorthands/prose/deprecated"
 
 import * as t_build_to_prose from "../build/prose"
-import * as t_epe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/fountain_pen"
+import * as t_epe_to_prose from "pareto-resources/dist/implementation/manual/transformers/execute_command_executable/prose"
 
 export type Error = p_i.Transformer_With_Parameter<
     d_in.Error,
