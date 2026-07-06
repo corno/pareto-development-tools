@@ -1,5 +1,5 @@
-import * as p_ from 'pareto-core/implementation/production'
-import * as p_pi from 'pareto-core/interface/production'
+import * as p_ from 'pareto-core/implementation/refiner'
+import * as p_pi from 'pareto-core/interface/refiner'
 import p_unreachable_code_path from 'pareto-core/implementation/transformer/specials/unreachable_code_path'
 
 //data types
