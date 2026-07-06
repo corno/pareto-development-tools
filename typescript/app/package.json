@@ -3,12 +3,10 @@
   "version": "0.2.10",
   "author": "Corno",
   "license": "Apache-2.0",
-  "main": "./dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
   "files": [
     "dist"
   ],
-  "type": "module",
   "dependencies": {
     "lib": "file:../lib",
     "pareto-host-nodejs": "^0.2.0"
