@@ -30,10 +30,10 @@ const $_implementation = sh.g.directory_group({
 
 export const $$ = sh.dgroup({
     ".git": sh.g.directory_ignore(),
-    ".gitignore": sh.g.file_manual(),
+    ".gitignore": sh.g.file_generated(true),
     "data": sh.g.directory_freeform(),
     "documentation": sh.g.directory_freeform(),
-    "LICENSE": sh.g.file_manual(),
+    "LICENSE": sh.g.file_generated(true),
     "out": sh.g.directory_generated(false),
     "liana": sh.g.directory_group({
         ".liana": sh.g.directory_ignore(),
