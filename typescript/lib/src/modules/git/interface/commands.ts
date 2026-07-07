@@ -5,7 +5,7 @@ import * as command_actions_pareto_resources from "pareto-resources/interface/co
 
 import * as command_actions from "../../version_control_api/interface/command_actions.js"
 
-export type assert_no_open_changes = p_.Command_Procedure<
+export type assert_no_open_changes = p_.Command<
     command_actions.assert_no_open_changes,
     null,
     {
@@ -16,7 +16,7 @@ export type assert_no_open_changes = p_.Command_Procedure<
     }
 >
 
-export type make_pristine = p_.Command_Procedure<
+export type make_pristine = p_.Command<
     command_actions.make_pristine,
     null,
     null,
@@ -25,7 +25,7 @@ export type make_pristine = p_.Command_Procedure<
     }
 >
 
-export type extended_commit = p_.Command_Procedure<
+export type extended_commit = p_.Command<
     command_actions.extended_commit,
     null,
     {
@@ -36,7 +36,7 @@ export type extended_commit = p_.Command_Procedure<
     }
 >
 
-export type push = p_.Command_Procedure<
+export type push = p_.Command<
     command_actions.push,
     null,
     null,

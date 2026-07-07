@@ -4,7 +4,7 @@ import * as query_actions_pareto_filesystem_unrestricted_api from "pareto-filesy
 import * as query_actions from "./query_actions.js"
 
 
-    export type get_project_files = p_.Query_Function<
+    export type get_project_files = p_.Query<
         query_actions.get_project_files,
         null,
         {
@@ -14,7 +14,7 @@ import * as query_actions from "./query_actions.js"
         }
     >
 
-    export type get_package_dependencies = p_.Query_Function<
+    export type get_package_dependencies = p_.Query<
         query_actions.get_package_dependencies,
         null,
         {

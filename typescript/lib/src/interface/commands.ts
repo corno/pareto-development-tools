@@ -10,7 +10,7 @@ import * as command_actions_pareto_resources from "pareto-resources/interface/co
 import * as command_actions_pareto_stream_api from "pareto-stream-api/interface/command_actions"
 import * as command_actions_version_control from "../modules/version_control_api/interface/command_actions.js"
 
-export type analyze_file_structure = p_.Command_Procedure<
+export type analyze_file_structure = p_.Command<
     command_actions.analyze_file_structure,
     null,
     {
@@ -22,7 +22,7 @@ export type analyze_file_structure = p_.Command_Procedure<
     }
 >
 
-export type api = p_.Command_Procedure<
+export type api = p_.Command<
     command_actions.api,
     null,
     {
@@ -42,7 +42,7 @@ export type api = p_.Command_Procedure<
     }
 >
 
-export type build = p_.Command_Procedure<
+export type build = p_.Command<
     command_actions.build,
     null,
     {
@@ -55,7 +55,7 @@ export type build = p_.Command_Procedure<
     }
 >
 
-export type build_and_test = p_.Command_Procedure<
+export type build_and_test = p_.Command<
     command_actions.build_and_test,
     null,
     null,
@@ -65,7 +65,7 @@ export type build_and_test = p_.Command_Procedure<
     }
 >
 
-export type create_dependency_graph = p_.Command_Procedure<
+export type create_dependency_graph = p_.Command<
     command_actions.create_dependency_graph,
     null,
     {
@@ -76,7 +76,7 @@ export type create_dependency_graph = p_.Command_Procedure<
     }
 >
 
-export type version_control_commit = p_.Command_Procedure<
+export type version_control_commit = p_.Command<
     command_actions.version_control_commit,
     null,
     null,
@@ -86,7 +86,7 @@ export type version_control_commit = p_.Command_Procedure<
     }
 >
 
-export type list_file_structure_problems = p_.Command_Procedure<
+export type list_file_structure_problems = p_.Command<
     command_actions.analyze_file_structure,
     null,
     {
@@ -98,7 +98,7 @@ export type list_file_structure_problems = p_.Command_Procedure<
     }
 >
 
-export type main = p_.Command_Procedure<
+export type main = p_.Command<
     command_actions_pareto_application_api.main,
     null,
     null,
@@ -109,7 +109,7 @@ export type main = p_.Command_Procedure<
     }
 >
 
-export type publish = p_.Command_Procedure<
+export type publish = p_.Command<
     command_actions.publish,
     null,
     {
@@ -128,7 +128,7 @@ export type publish = p_.Command_Procedure<
     }
 >
 
-export type tsc = p_.Command_Procedure<
+export type tsc = p_.Command<
     command_actions.tsc,
     null,
     null,
@@ -137,7 +137,7 @@ export type tsc = p_.Command_Procedure<
     }
 >
 
-export type update_package_dependencies = p_.Command_Procedure<
+export type update_package_dependencies = p_.Command<
     command_actions.update_package_dependencies,
     null,
     {

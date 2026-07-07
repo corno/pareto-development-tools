@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/interface/query'
 import * as queries_actions from "../../version_control_api/interface/query_actions.js"
 import * as query_actions_pareto_resources from "pareto-resources/interface/query_actions"
 
-export type is_inside_work_tree = p_.Query_Function<
+export type is_inside_work_tree = p_.Query<
     queries_actions.is_inside_work_tree,
     null,
     {
@@ -11,7 +11,7 @@ export type is_inside_work_tree = p_.Query_Function<
     }
 >
 
-export type repository_no_open_changes = p_.Query_Function<
+export type repository_no_open_changes = p_.Query<
     queries_actions.repository_no_open_changes,
     null,
     {

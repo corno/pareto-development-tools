@@ -6,7 +6,7 @@ import * as query_actions_pareto_resources from "pareto-resources/interface/quer
 import * as command_actions_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/command_actions"
 import * as query_actions_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
 
-export type npm = p_.Command_Procedure<
+export type npm = p_.Command<
     command_actions.npm,
     null,
     null,
@@ -15,7 +15,7 @@ export type npm = p_.Command_Procedure<
     }
 >
 
-export type npm_publish = p_.Command_Procedure<
+export type npm_publish = p_.Command<
     command_actions.npm_publish,
     null,
     null,
@@ -24,7 +24,7 @@ export type npm_publish = p_.Command_Procedure<
     }
 >
 
-export type set_up_comparison_against_published = p_.Command_Procedure<
+export type set_up_comparison_against_published = p_.Command<
     command_actions.set_up_comparison_against_published,
     null,
     {
@@ -38,7 +38,7 @@ export type set_up_comparison_against_published = p_.Command_Procedure<
     }
 >
 
-export type update2latest = p_.Command_Procedure<
+export type update2latest = p_.Command<
     command_actions.update2latest,
     null,
     null,
@@ -47,7 +47,7 @@ export type update2latest = p_.Command_Procedure<
     }
 >
 
-export type update_package_dependencies = p_.Command_Procedure<
+export type update_package_dependencies = p_.Command<
     command_actions.update_package_dependencies,
     null,
     null,
