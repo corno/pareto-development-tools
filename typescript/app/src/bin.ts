@@ -12,7 +12,7 @@ import * as d_eqe from "pareto-resources/interface/generated/liana/schemas/execu
 
 //resources
 import * as rs_execute_unrestricted from "pareto-host-nodejs/execute_unrestricted/index"
-import * as rs_stream from "pareto-host-nodejs/stream/index"
+import * as rs_stream from "pareto-resource-stream/index"
 import * as rs_filesystem_unrestricted from "pareto-host-nodejs/file_system_unrestricted/index"
 
 //dependencies

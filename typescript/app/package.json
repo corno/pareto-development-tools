@@ -10,13 +10,15 @@
   "dependencies": {
     "lib": "file:../lib",
     "pareto-core": "^0.1.0",
-    "pareto-host-nodejs": "^0.2.0"
+    "pareto-host-nodejs": "^0.2.0",
+    "pareto-resource-stream": "^0.1.1"
   },
   "bin": {
     "pdt": "./dist/bin.js"
   },
   "bundleDependencies": [
     "lib",
-    "pareto-host-nodejs"
+    "pareto-host-nodejs",
+    "pareto-resource-stream"
   ]
 }
