@@ -4,16 +4,22 @@ import * as p_h from 'pareto-host-nodejs/index'
 import * as p_ci from 'pareto-core/interface/command'
 import * as p_qi from 'pareto-core/interface/query'
 
+
+//data types
 import * as d_ece from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
 import * as d_espe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
 import * as d_eqe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
 
+//resources
+import * as rs_execute_unrestricted from "pareto-host-nodejs/execute_unrestricted/index"
+import * as rs_stream from "pareto-host-nodejs/stream/index"
+import * as rs_filesystem_unrestricted from "pareto-host-nodejs/file_system_unrestricted/index"
+
+//dependencies
 //pareto-resources
 import { $$ as q_execute_sandboxed_query_executable } from "pareto-resources/implementation/manual/queries/execute_sandboxed_query_executable"
 import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/implementation/manual/commands/execute_sandboxed_command_executable"
 import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/implementation/manual/commands/execute_sandboxed_smelly_command_executable"
-
-
 //git module
 import { $$ as q_git_is_repository_clean } from "lib/modules/git/implementation/manual/queries/repository_no_open_changes"
 import { $$ as q_git_is_inside_work_tree } from "lib/modules/git/implementation/manual/queries/is_inside_work_tree"
@@ -21,15 +27,12 @@ import { $$ as c_git_assert_clean } from "lib/modules/git/implementation/manual/
 import { $$ as c_git_make_pristine } from "lib/modules/git/implementation/manual/commands/make_pristine"
 import { $$ as c_git_extended_commit } from "lib/modules/git/implementation/manual/commands/extended_commit"
 import { $$ as c_git_push } from "lib/modules/git/implementation/manual/commands/push"
-
 //npm module
 import { $$ as c_npm } from "lib/modules/npm/implementation/manual/commands/npm"
 import { $$ as c_npm_publish } from "lib/modules/npm/implementation/manual/commands/publish"
 import { $$ as c_set_up_comparison_against_published } from "lib/modules/npm/implementation/manual/commands/set_up_comparison_against_published"
 import { $$ as c_npm_update_package_dependencies } from "lib/modules/npm/implementation/manual/commands/update_package_dependencies"
 import { $$ as c_update2latest } from "lib/modules/npm/implementation/manual/commands/update2latest"
-
-
 //internal
 import { $$ as q_package_dependencies } from "lib/implementation/manual/queries/get_package_dependencies"
 import { $$ as c_analyze_file_structure } from "lib/implementation/manual/commands/analyze_file_structure"
@@ -45,7 +48,7 @@ import { $$ as c_tsc } from "lib/implementation/manual/commands/tsc"
 import { $$ as c_update_package_dependencies } from "lib/implementation/manual/commands/update_package_dependencies"
 
 p_h.run_main_command(
-    ($r) => {
+    () => {
         const create_eqe = (
             program: string,
         ): p_qi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => q_execute_sandboxed_query_executable(
@@ -53,7 +56,7 @@ p_h.run_main_command(
                 'program': program,
             },
             {
-                'unrestricted': $r['execute unrestricted'].queries['query executable'],
+                'unrestricted': rs_execute_unrestricted.$.queries['query executable'],
             },
         )
 
@@ -65,7 +68,7 @@ p_h.run_main_command(
             },
             null,
             {
-                'unrestricted': $r['execute unrestricted'].commands['command executable'],
+                'unrestricted': rs_execute_unrestricted.$.commands['command executable'],
             },
         )
 
@@ -77,7 +80,7 @@ p_h.run_main_command(
             },
             null,
             {
-                'unrestricted': $r['execute unrestricted'].commands['smelly command executable'],
+                'unrestricted': rs_execute_unrestricted.$.commands['smelly command executable'],
             },
         )
 
@@ -168,12 +171,12 @@ p_h.run_main_command(
         const build = c_build(
             null,
             {
-                'stat': $r['filesystem unrestricted'].queries['stat possible node']
+                'stat': rs_filesystem_unrestricted.$.queries['stat possible node']
             },
             {
                 'tsc': tsc,
-                'remove': $r['filesystem unrestricted'].commands.remove,
-                'chmod': $r['filesystem unrestricted'].commands.chmod,
+                'remove': rs_filesystem_unrestricted.$.commands.remove,
+                'chmod': rs_filesystem_unrestricted.$.commands.chmod,
             },
         )
 
@@ -183,13 +186,13 @@ p_h.run_main_command(
                 'package dependencies': q_package_dependencies(
                     null,
                     {
-                        'read directory': $r['filesystem unrestricted'].queries['read directory'],
-                        'read file': $r['filesystem unrestricted'].queries['read file'],
+                        'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
+                        'read file': rs_filesystem_unrestricted.$.queries['read file'],
                     },
                 ),
             },
             {
-                'log': $r.stream.commands.log,
+                'log': rs_stream.$.commands.log,
             },
         )
 
@@ -231,7 +234,7 @@ p_h.run_main_command(
             null,
             null,
             {
-                'remove': $r['filesystem unrestricted'].commands.remove,
+                'remove': rs_filesystem_unrestricted.$.commands.remove,
                 'update2latest': update2latest,
                 'npm': npm,
             },
@@ -240,7 +243,7 @@ p_h.run_main_command(
         const update_package_dependencies = c_update_package_dependencies(
             null,
             {
-                'stat': $r['filesystem unrestricted'].queries['stat possible node'],
+                'stat': rs_filesystem_unrestricted.$.queries['stat possible node'],
             },
             {
                 'npm update package dependencies': npm_update_package_dependencies,
@@ -250,14 +253,14 @@ p_h.run_main_command(
         const set_up_comparison_against_published = c_set_up_comparison_against_published(
             null,
             {
-                'read file': $r['filesystem unrestricted'].queries['read file'],
+                'read file': rs_filesystem_unrestricted.$.queries['read file'],
                 'npm': eqe_npm,
             },
             {
                 'npm': ece_npm,
                 'tar': ece_tar,
-                'make directory': $r['filesystem unrestricted'].commands['make directory'],
-                // 'remove': $r.commands.remove,
+                'make directory': rs_filesystem_unrestricted.$.commands['make directory'],
+                // 'remove': rs_filesystem_unrestricted.$.commands.remove,
             },
         )
 
@@ -265,11 +268,11 @@ p_h.run_main_command(
             null,
             null,
             {
-                'log error': $r.stream.commands['log error'],
+                'log error': rs_stream.$.commands['log error'],
                 'api': c_api(
                     null,
                     {
-                        'read directory': $r['filesystem unrestricted'].queries['read directory']
+                        'read directory': rs_filesystem_unrestricted.$.queries['read directory']
                     },
                     {
                         'version control assert no open changes': git.commands['assert no open changes'],
@@ -279,21 +282,21 @@ p_h.run_main_command(
                         'analyze file structure': c_analyze_file_structure(
                             null,
                             {
-                                'read directory': $r['filesystem unrestricted'].queries['read directory'],
-                                'read file': $r['filesystem unrestricted'].queries['read file'],
+                                'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
+                                'read file': rs_filesystem_unrestricted.$.queries['read file'],
                             },
                             {
-                                'log': $r.stream.commands.log,
+                                'log': rs_stream.$.commands.log,
                             },
                         ),
                         'list file structure problems': c_list_file_structure_problems(
                             null,
                             {
-                                'read directory': $r['filesystem unrestricted'].queries['read directory'],
-                                'read file': $r['filesystem unrestricted'].queries['read file'],
+                                'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
+                                'read file': rs_filesystem_unrestricted.$.queries['read file'],
                             },
                             {
-                                'log': $r.stream.commands.log,
+                                'log': rs_stream.$.commands.log,
                             },
                         ),
                         'update package dependencies': update_package_dependencies,
@@ -309,7 +312,7 @@ p_h.run_main_command(
                         'publish': c_publish(
                             null,
                             {
-                                'read file': $r['filesystem unrestricted'].queries['read file']
+                                'read file': rs_filesystem_unrestricted.$.queries['read file']
                             },
                             {
                                 'build and test': build_and_test,
@@ -320,7 +323,7 @@ p_h.run_main_command(
                                 'npm publish': npm_publish,
                                 'update package dependencies': update_package_dependencies,
                                 'version control extended commit': git.commands['extended commit'],
-                                'log': $r.stream.commands.log,
+                                'log': rs_stream.$.commands.log,
                             },
                         ),
                     },
