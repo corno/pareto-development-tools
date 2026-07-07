@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/interface/command'
 
 import * as queries from "./queries.js"
 import * as resources_pareto from "pareto-resources/interface/resources"
-import * as resources_pareto_stream from "pareto-stream/interface/commands"
+import * as resources_pareto_stream from "pareto-stream-api/interface/commands"
 import * as resources_version_control from "../modules/version_control_api/interface/commands.js"
 import * as resources_npm from "../modules/npm/interface/commands.js"
 
