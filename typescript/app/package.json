@@ -11,7 +11,9 @@
     "lib": "file:../lib",
     "pareto-core": "^0.1.0",
     "pareto-host-nodejs": "^0.2.0",
-    "pareto-resource-stream": "^0.1.1"
+    "pareto-resource-execute-unrestricted": "^0.1.0",
+    "pareto-resource-filesystem-unrestricted": "^0.1.0",
+    "pareto-resource-stream": "^0.1.0"
   },
   "bin": {
     "pdt": "./dist/bin.js"

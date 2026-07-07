@@ -11,9 +11,9 @@ import * as d_espe from "pareto-resources/interface/generated/liana/schemas/exec
 import * as d_eqe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
 
 //resources
-import * as rs_execute_unrestricted from "pareto-host-nodejs/execute_unrestricted/index"
+import * as rs_execute_unrestricted from "pareto-resource-execute-unrestricted/index"
 import * as rs_stream from "pareto-resource-stream/index"
-import * as rs_filesystem_unrestricted from "pareto-host-nodejs/file_system_unrestricted/index"
+import * as rs_filesystem_unrestricted from "pareto-resource-filesystem-unrestricted/index"
 
 //dependencies
 //pareto-resources
