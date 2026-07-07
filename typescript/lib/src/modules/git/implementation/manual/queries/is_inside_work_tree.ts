@@ -6,7 +6,7 @@ import * as interface_ from "../../../interface/queries.js"
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: interface_.query_functions.is_inside_work_tree = p_.query_function(
+export const $$: interface_.is_inside_work_tree = p_.query(
     ($d, $s, $q) => p_.e.observe_behavior(
         $q.git(
             {

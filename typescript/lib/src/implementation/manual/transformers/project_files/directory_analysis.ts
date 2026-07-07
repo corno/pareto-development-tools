@@ -9,7 +9,7 @@ import p_change_context from 'pareto-core/implementation/refiner/specials/change
 
 //data types
 import * as d_in from "../../../../interface/data/project_files.js"
-import * as d_in_directory_content from "pareto-resources/interface/data/directory_content"
+import * as d_in_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
 import * as d_out from "../../../../interface/data/file_structure_analysis.js"
 import * as d_structure from "../../../../interface/generated/liana/schemas/structure/data.js"
 

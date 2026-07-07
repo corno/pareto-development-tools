@@ -39,7 +39,7 @@ const remove_n_characters_from_end = ($: string, n: number): d_out.List_of_Chara
         })
 }
 
-export const $$: interface_.procedures.set_up_comparison_against_published = p_.command_procedure(
+export const $$: interface_.set_up_comparison_against_published = p_.command(
     ($d, $s, $q, $c) => {
         // const path_x = t_path_to_path.create_node_path($d['path to local package'], { 'node': "package.json" })
         return [

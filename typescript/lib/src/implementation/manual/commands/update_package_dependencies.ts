@@ -11,7 +11,7 @@ import * as d from "../../../interface/data/update_package_dependencies.js"
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: interface_.procedures.update_package_dependencies = p_.command_procedure(
+export const $$: interface_.update_package_dependencies = p_.command(
     ($d, $s, $q, $c) => p_variables(
         () => {
             const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })

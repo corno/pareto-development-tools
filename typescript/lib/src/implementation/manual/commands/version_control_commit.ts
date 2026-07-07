@@ -6,7 +6,7 @@ import * as interface_ from "../../../interface/commands.js"
 //data types
 import * as d from "../../../interface/data/git_commit.js"
 
-export const $$: interface_.procedures.version_control_commit = p_.command_procedure(
+export const $$: interface_.version_control_commit = p_.command(
 
     ($d, $s, $q, $c) => [
 

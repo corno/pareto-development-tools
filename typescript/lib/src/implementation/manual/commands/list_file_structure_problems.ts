@@ -15,7 +15,7 @@ import { $$ as q_get_project_files } from "../queries/get_project_files.js"
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 
-export const $$: interface_.procedures.list_file_structure_problems = p_.command_procedure(
+export const $$: interface_.list_file_structure_problems = p_.command(
     ($d, $s, $q, $c) => [
 
         p_.s.query(

@@ -12,7 +12,7 @@ import * as t_file_structure_analysis_to_csv from "../transformers/file_structur
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
 import { $$ as q_get_project_files } from "../queries/get_project_files.js"
 
-export const $$: interface_.procedures.analyze_file_structure = p_.command_procedure(
+export const $$: interface_.analyze_file_structure = p_.command(
     ($d, $s, $q, $c) => [
 
         p_.s.query(

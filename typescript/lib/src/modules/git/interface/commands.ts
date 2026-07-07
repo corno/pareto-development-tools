@@ -1,50 +1,46 @@
 import * as p_ from 'pareto-core/interface/command'
 
-import * as queries from "../../version_control_api/interface/queries.js"
-import * as resources_pareto from "pareto-resources/interface/resources"
+import * as query_actions from "../../version_control_api/interface/query_actions.js"
+import * as command_actions_pareto_resources from "pareto-resources/interface/command_actions"
 
-import * as commands from "../../version_control_api/interface/commands.js"
+import * as command_actions from "../../version_control_api/interface/command_actions.js"
 
-export namespace procedures {
+export type assert_no_open_changes = p_.Command_Procedure<
+    command_actions.assert_no_open_changes,
+    null,
+    {
+        'repository no open changes': query_actions.repository_no_open_changes
+    },
+    {
+        'git': command_actions_pareto_resources.execute_sandboxed.command_executable
+    }
+>
 
-    export type assert_no_open_changes = p_.Command_Procedure<
-        commands.commands.assert_no_open_changes,
-        null,
-        {
-            'repository no open changes': queries.queries.repository_no_open_changes
-        },
-        {
-            'git': resources_pareto.execute_sandboxed.commands.command_executable
-        }
-    >
+export type make_pristine = p_.Command_Procedure<
+    command_actions.make_pristine,
+    null,
+    null,
+    {
+        'git': command_actions_pareto_resources.execute_sandboxed.command_executable
+    }
+>
 
-    export type make_pristine = p_.Command_Procedure<
-        commands.commands.make_pristine,
-        null,
-        null,
-        {
-            'git': resources_pareto.execute_sandboxed.commands.command_executable
-        }
-    >
+export type extended_commit = p_.Command_Procedure<
+    command_actions.extended_commit,
+    null,
+    {
+        'repository no open changes': query_actions.repository_no_open_changes
+    },
+    {
+        'git': command_actions_pareto_resources.execute_sandboxed.command_executable
+    }
+>
 
-    export type extended_commit = p_.Command_Procedure<
-        commands.commands.extended_commit,
-        null,
-        {
-            'repository no open changes': queries.queries.repository_no_open_changes
-        },
-        {
-            'git': resources_pareto.execute_sandboxed.commands.command_executable
-        }
-    >
-
-    export type push = p_.Command_Procedure<
-        commands.commands.push,
-        null,
-        null,
-        {
-            'git': resources_pareto.execute_sandboxed.commands.command_executable
-        }
-    >
-
-}
+export type push = p_.Command_Procedure<
+    command_actions.push,
+    null,
+    null,
+    {
+        'git': command_actions_pareto_resources.execute_sandboxed.command_executable
+    }
+>

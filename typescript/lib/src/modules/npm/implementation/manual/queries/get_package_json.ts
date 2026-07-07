@@ -11,7 +11,7 @@ import * as d from "../../../interface/data/get_package_json.js"
 import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 import { NPM_Package as r_parse_npm_package } from "../refiners/npm_package/list_of_characters.js"
 
-export const $$: interface_.query_functions.get_package_json = p_.query_function(
+export const $$: interface_.get_package_json = p_.query(
     ($d, $s, $r) => p_variables(
         () => {
             const path = t_path_to_path.create_node_path($d['path to package'], { 'node': "package.json" })

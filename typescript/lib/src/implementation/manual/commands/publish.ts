@@ -13,7 +13,7 @@ import * as q_get_package_json from "../../../modules/npm/implementation/manual/
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
-export const $$: interface_.procedures.publish = p_.command_procedure(
+export const $$: interface_.publish = p_.command(
 
     ($d, $s, $q, $c) => p_variables(
         () => {

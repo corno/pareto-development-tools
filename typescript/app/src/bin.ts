@@ -1,8 +1,8 @@
 #!/usr/bin/env -S node --enable-source-maps
 
 import * as p_h from 'pareto-host-nodejs/index'
-import * as p_ci from 'pareto-core/interface/command'
-import * as p_qi from 'pareto-core/interface/query'
+import * as p_ci from 'pareto-core/interface/command_action'
+import * as p_qi from 'pareto-core/interface/query_action'
 
 
 //data types
@@ -51,7 +51,7 @@ p_h.run_main_command(
     () => {
         const create_eqe = (
             program: string,
-        ): p_qi.Query<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => q_execute_sandboxed_query_executable(
+        ): p_qi.Query_Action<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => q_execute_sandboxed_query_executable(
             {
                 'program': program,
             },
@@ -62,7 +62,7 @@ p_h.run_main_command(
 
         const create_ece = (
             program: string,
-        ): p_ci.Command<d_ece.Error, d_ece.Parameters> => c_execute_sandboxed_command_executable(
+        ): p_ci.Command_Action<d_ece.Error, d_ece.Parameters> => c_execute_sandboxed_command_executable(
             {
                 'program': program,
             },
@@ -74,7 +74,7 @@ p_h.run_main_command(
 
         const create_espe = (
             program: string,
-        ): p_ci.Command<d_espe.Error, d_espe.Parameters> => c_execute_sandboxed_smelly_command_executable(
+        ): p_ci.Command_Action<d_espe.Error, d_espe.Parameters> => c_execute_sandboxed_smelly_command_executable(
             {
                 'program': program,
             },

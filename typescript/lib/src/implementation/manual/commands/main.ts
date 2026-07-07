@@ -21,7 +21,7 @@ type My_Error =
     | ['parse', d_parse.Error]
     | ['execute command', d_execute_command.Error]
 
-export const $$: interface_.procedures.main = p_.command_procedure(
+export const $$: interface_.main = p_.command(
     ($d, $s, $q, $c) => [
         p_.s.handle_error<d_main.Error, My_Error>(
             [

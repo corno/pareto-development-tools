@@ -10,7 +10,7 @@ import * as d from "../../../../version_control_api/interface/data/extended_comm
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: interface_.procedures.extended_commit = p_.command_procedure(
+export const $$: interface_.extended_commit = p_.command(
     ($d, $s, $q, $c) => [
 
         p_.s.query(

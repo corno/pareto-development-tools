@@ -10,7 +10,7 @@ export type Error = p_i.Transformer<
 >
 
 //dependencies
-import * as t_read_directory_to_prose from "pareto-resources/implementation/manual/transformers/read_directory/prose"
+import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/read_directory/prose"
 import * as t_deserialize_package_json_to_prose from "../../../../modules/npm/implementation/manual/transformers/deserialize_package_json/prose.js"
 
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"

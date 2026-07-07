@@ -5,7 +5,7 @@ import * as interface_ from "../../../interface/commands.js"
 //data types
 import * as d from "../../../../version_control_api/interface/data/assert_no_open_changes.js"
 
-export const $$: interface_.procedures.assert_no_open_changes = p_.command_procedure(
+export const $$: interface_.assert_no_open_changes = p_.command(
     ($d, $s, $q, $c) => [
 
         p_.s.query(

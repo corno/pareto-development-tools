@@ -9,7 +9,7 @@ import * as d from "../../../interface/data/build_and_test.js"
 import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: interface_.procedures.build_and_test = p_.command_procedure(
+export const $$: interface_.build_and_test = p_.command(
     ($d, $s, $q, $c) => [
 
         // build

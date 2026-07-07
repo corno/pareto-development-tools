@@ -1,5 +1,5 @@
 
-import * as d_read_file from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_read_file/data"
+import * as d_read_file from "pareto-filesystem-unrestricted-api/interface/generated/liana/schemas/fs_unrestricted_read_file/data"
 import * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
 import * as d_deserialize_package_json from "./deserialize_package_json.js"
 import * as d_npm_package from "./npm_package.js"

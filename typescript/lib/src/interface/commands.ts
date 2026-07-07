@@ -1,175 +1,149 @@
 import * as p_ from 'pareto-core/interface/command'
 
-import * as queries from "./queries.js"
-import * as resources_pareto from "pareto-resources/interface/resources"
-import * as resources_pareto_application_api from "pareto-application-api/interface/resources"
-import * as resources_pareto_stream_api from "pareto-stream-api/interface/commands"
-import * as resources_version_control from "../modules/version_control_api/interface/commands.js"
-import * as resources_npm from "../modules/npm/interface/commands.js"
+import * as query_actions from "./query_actions.js"
+import * as query_actions_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
+import * as command_actions from "./command_actions.js"
+import * as command_actions_npm from "../modules/npm/interface/command_actions.js"
+import * as command_actions_pareto_application_api from "pareto-application-api/interface/command_actions"
+import * as command_actions_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/command_actions"
+import * as command_actions_pareto_resources from "pareto-resources/interface/command_actions"
+import * as command_actions_pareto_stream_api from "pareto-stream-api/interface/command_actions"
+import * as command_actions_version_control from "../modules/version_control_api/interface/command_actions.js"
 
-import * as d_get_project_files from "./data/get_project_files.js"
-import * as d_api from "./data/execute_command.js"
-import * as d_build from "./data/build.js"
-import * as d_build_and_test from "./data/build_and_test.js"
-import * as d_create_dependency_graph from "./data/create_dependency_graph.js"
-import * as d_publish from "./data/publish.js"
-import * as d_tsc from "./data/tsc.js"
-import * as d_update_package_dependencies from "./data/update_package_dependencies.js"
-import * as d_version_control_commit from "./data/git_commit.js"
+export type analyze_file_structure = p_.Command_Procedure<
+    command_actions.analyze_file_structure,
+    null,
+    {
+        'read directory': query_actions_pareto_filesystem_unrestricted_api.read_directory,
+        'read file': query_actions_pareto_filesystem_unrestricted_api.read_file
+    },
+    {
+        'log': command_actions_pareto_stream_api.log
+    }
+>
 
+export type api = p_.Command_Procedure<
+    command_actions.api,
+    null,
+    {
+        'read directory': query_actions_pareto_filesystem_unrestricted_api.read_directory
+    },
+    {
+        'analyze file structure': command_actions.analyze_file_structure
+        'build and test': command_actions.build_and_test
+        'build': command_actions.build
+        'create dependency graph': command_actions.create_dependency_graph
+        'version control assert no open changes': command_actions_version_control.assert_no_open_changes
+        'commit changes': command_actions.version_control_commit
+        'list file structure problems': command_actions.analyze_file_structure
+        'npm set up comparison against published': command_actions_npm.set_up_comparison_against_published
+        'publish': command_actions.publish
+        'update package dependencies': command_actions.update_package_dependencies
+    }
+>
 
+export type build = p_.Command_Procedure<
+    command_actions.build,
+    null,
+    {
+        'stat': query_actions_pareto_filesystem_unrestricted_api.stat_possible_node
+    },
+    {
+        'tsc': command_actions.tsc
+        'remove': command_actions_pareto_filesystem_unrestricted_api.remove
+        'chmod': command_actions_pareto_filesystem_unrestricted_api.chmod
+    }
+>
 
-export namespace commands {
+export type build_and_test = p_.Command_Procedure<
+    command_actions.build_and_test,
+    null,
+    null,
+    {
+        'build': command_actions.build
+        'node': command_actions_pareto_resources.execute_sandboxed.command_executable
+    }
+>
 
-    export type analyze_file_structure = p_.Command<d_get_project_files.Error, d_get_project_files.Parameters>
-    export type api = p_.Command<d_api.Error, d_api.Parameters>
-    export type build = p_.Command<d_build.Error, d_build.Parameters>
-    export type build_and_test = p_.Command<d_build_and_test.Error, d_build_and_test.Parameters>
-    export type create_dependency_graph = p_.Command<d_create_dependency_graph.Error, d_create_dependency_graph.Parameters>
-    export type version_control_commit = p_.Command<d_version_control_commit.Error, d_version_control_commit.Parameters>
-    export type publish = p_.Command<d_publish.Error, d_publish.Parameters>
-    export type tsc = p_.Command<d_tsc.Error, d_tsc.Parameters>
-    export type update_package_dependencies = p_.Command<d_update_package_dependencies.Error, d_update_package_dependencies.Parameters>
-    
-}
+export type create_dependency_graph = p_.Command_Procedure<
+    command_actions.create_dependency_graph,
+    null,
+    {
+        'package dependencies': query_actions.get_package_dependencies
+    },
+    {
+        'log': command_actions_pareto_stream_api.log
+    }
+>
 
-export namespace procedures {
+export type version_control_commit = p_.Command_Procedure<
+    command_actions.version_control_commit,
+    null,
+    null,
+    {
+        'build and test': command_actions.build_and_test
+        'version control extended commit': command_actions_version_control.extended_commit
+    }
+>
 
-    export type analyze_file_structure = p_.Command_Procedure<
-        commands.analyze_file_structure,
-        null,
-        {
-            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
-            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-        },
-        {
-            'log': resources_pareto_stream_api.commands.log
-        }
-    >
+export type list_file_structure_problems = p_.Command_Procedure<
+    command_actions.analyze_file_structure,
+    null,
+    {
+        'read directory': query_actions_pareto_filesystem_unrestricted_api.read_directory,
+        'read file': query_actions_pareto_filesystem_unrestricted_api.read_file
+    },
+    {
+        'log': command_actions_pareto_stream_api.log
+    }
+>
 
-    export type api = p_.Command_Procedure<
-        commands.api,
-        null,
-        {
-            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory
-        },
-        {
-            'analyze file structure': commands.analyze_file_structure
-            'build and test': commands.build_and_test
-            'build': commands.build
-            'create dependency graph': commands.create_dependency_graph
-            'version control assert no open changes': resources_version_control.commands.assert_no_open_changes
-            'commit changes': commands.version_control_commit
-            'list file structure problems': commands.analyze_file_structure
-            'npm set up comparison against published': resources_npm.commands.set_up_comparison_against_published
-            'publish': commands.publish
-            'update package dependencies': commands.update_package_dependencies
-        }
-    >
+export type main = p_.Command_Procedure<
+    command_actions_pareto_application_api.main,
+    null,
+    null,
+    {
+        'api': command_actions.api
+        'log error': command_actions_pareto_stream_api.log_error
 
-    export type build = p_.Command_Procedure<
-        commands.build,
-        null,
-        {
-            'stat': resources_pareto.filesystem_unrestricted.queries.stat_possible_node
-        },
-        {
-            'tsc': commands.tsc
-            'remove': resources_pareto.filesystem_unrestricted.commands.remove
-            'chmod': resources_pareto.filesystem_unrestricted.commands.chmod
-        }
-    >
+    }
+>
 
-    export type build_and_test = p_.Command_Procedure<
-        commands.build_and_test,
-        null,
-        null,
-        {
-            'build': commands.build
-            'node': resources_pareto.execute_sandboxed.commands.command_executable
-        }
-    >
+export type publish = p_.Command_Procedure<
+    command_actions.publish,
+    null,
+    {
+        'read file': query_actions_pareto_filesystem_unrestricted_api.read_file
+    },
+    {
+        'version control push': command_actions_version_control.push
+        'version control extended commit': command_actions_version_control.extended_commit
+        'version control assert no open changes': command_actions_version_control.assert_no_open_changes
+        'version control make pristine': command_actions_version_control.make_pristine
+        'update package dependencies': command_actions.update_package_dependencies
+        'build and test': command_actions.build_and_test
+        'npm': command_actions_npm.npm
+        'npm publish': command_actions_npm.npm_publish
+        'log': command_actions_pareto_stream_api.log
+    }
+>
 
-    export type create_dependency_graph = p_.Command_Procedure<
-        commands.create_dependency_graph,
-        null,
-        {
-            'package dependencies': queries.queries.get_package_dependencies
-        },
-        {
-            'log': resources_pareto_stream_api.commands.log
-        }
-    >
+export type tsc = p_.Command_Procedure<
+    command_actions.tsc,
+    null,
+    null,
+    {
+        'tsc': command_actions_pareto_resources.execute_sandboxed.smelly_command_executable
+    }
+>
 
-    export type version_control_commit = p_.Command_Procedure<
-        commands.version_control_commit,
-        null,
-        null,
-        {
-            'build and test': commands.build_and_test
-            'version control extended commit': resources_version_control.commands.extended_commit
-        }
-    >
-
-    export type list_file_structure_problems = p_.Command_Procedure<
-        commands.analyze_file_structure,
-        null,
-        {
-            'read directory': resources_pareto.filesystem_unrestricted.queries.read_directory,
-            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-        },
-        {
-            'log': resources_pareto_stream_api.commands.log
-        }
-    >
-
-    export type main = p_.Command_Procedure<
-        resources_pareto_application_api.resources.commands.main,
-        null,
-        null,
-        {
-            'api': commands.api
-            'log error': resources_pareto_stream_api.commands.log_error
-
-        }
-    >
-
-    export type publish = p_.Command_Procedure<
-        commands.publish,
-        null,
-        {
-            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-        },
-        {
-            'version control push': resources_version_control.commands.push
-            'version control extended commit': resources_version_control.commands.extended_commit
-            'version control assert no open changes': resources_version_control.commands.assert_no_open_changes
-            'version control make pristine': resources_version_control.commands.make_pristine
-            'update package dependencies': commands.update_package_dependencies
-            'build and test': commands.build_and_test
-            'npm': resources_npm.commands.npm
-            'npm publish': resources_npm.commands.npm_publish
-            'log': resources_pareto_stream_api.commands.log
-        }
-    >
-
-    export type tsc = p_.Command_Procedure<
-        commands.tsc,
-        null,
-        null,
-        {
-            'tsc': resources_pareto.execute_sandboxed.commands.smelly_command_executable
-        }
-    >
-
-    export type update_package_dependencies = p_.Command_Procedure<
-        commands.update_package_dependencies,
-        null,
-        {
-            'stat': resources_pareto.filesystem_unrestricted.queries.stat_possible_node
-        },
-        {
-            'npm update package dependencies': resources_npm.commands.update_package_dependencies
-        }
-    >
-}
+export type update_package_dependencies = p_.Command_Procedure<
+    command_actions.update_package_dependencies,
+    null,
+    {
+        'stat': query_actions_pareto_filesystem_unrestricted_api.stat_possible_node
+    },
+    {
+        'npm update package dependencies': command_actions_npm.update_package_dependencies
+    }
+>

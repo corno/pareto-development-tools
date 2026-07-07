@@ -1,75 +1,59 @@
 import * as p_ from 'pareto-core/interface/command'
 
-import * as d_npm from "./data/npm_tool.js"
-import * as d_npm_publish from "./data/npm_publish.js"
-import * as d_update2latest from "./data/update2latest.js"
-import * as d_set_up_comparison_against_published from "./data/set_up_comparison_against_published.js"
-import * as d_update_package_dependencies from "./data/update_package_dependencies.js"
+import * as command_actions from "./command_actions.js"
+import * as command_actions_pareto_resources from "pareto-resources/interface/command_actions"
+import * as query_actions_pareto_resources from "pareto-resources/interface/query_actions"
+import * as command_actions_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/command_actions"
+import * as query_actions_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
 
-export namespace commands {
+export type npm = p_.Command_Procedure<
+    command_actions.npm,
+    null,
+    null,
+    {
+        'npm': command_actions_pareto_resources.execute_sandboxed.command_executable
+    }
+>
 
-    export type npm = p_.Command<d_npm.Error, d_npm.Parameters>
-    export type npm_publish = p_.Command<d_npm_publish.Error, d_npm_publish.Parameters>
-    export type update2latest = p_.Command<d_update2latest.Error, d_update2latest.Parameters>
-    export type set_up_comparison_against_published = p_.Command<d_set_up_comparison_against_published.Error, d_set_up_comparison_against_published.Parameters>
-    export type update_package_dependencies = p_.Command<d_update_package_dependencies.Error, d_update_package_dependencies.Parameters>
+export type npm_publish = p_.Command_Procedure<
+    command_actions.npm_publish,
+    null,
+    null,
+    {
+        'npm': command_actions_pareto_resources.execute_sandboxed.command_executable
+    }
+>
 
-}
+export type set_up_comparison_against_published = p_.Command_Procedure<
+    command_actions.set_up_comparison_against_published,
+    null,
+    {
+        'read file': query_actions_pareto_filesystem_unrestricted_api.read_file
+        'npm': query_actions_pareto_resources.execute_sandboxed.query_executable
+    },
+    {
+        'npm': command_actions_pareto_resources.execute_sandboxed.command_executable
+        'tar': command_actions_pareto_resources.execute_sandboxed.command_executable
+        'make directory': command_actions_pareto_filesystem_unrestricted_api.make_directory
+    }
+>
 
-import * as resources_pareto from "pareto-resources/interface/resources"
+export type update2latest = p_.Command_Procedure<
+    command_actions.update2latest,
+    null,
+    null,
+    {
+        'update2latest': command_actions_pareto_resources.execute_sandboxed.command_executable
+    }
+>
 
-export namespace procedures {
-
-    export type npm = p_.Command_Procedure<
-        commands.npm,
-        null,
-        null,
-        {
-            'npm': resources_pareto.execute_sandboxed.commands.command_executable
-        }
-    >
-
-    export type npm_publish = p_.Command_Procedure<
-        commands.npm_publish,
-        null,
-        null,
-        {
-            'npm': resources_pareto.execute_sandboxed.commands.command_executable
-        }
-    >
-
-    export type set_up_comparison_against_published = p_.Command_Procedure<
-        commands.set_up_comparison_against_published,
-        null,
-        {
-            'read file': resources_pareto.filesystem_unrestricted.queries.read_file
-            'npm': resources_pareto.execute_sandboxed.queries.query_executable
-        },
-        {
-            'npm': resources_pareto.execute_sandboxed.commands.command_executable
-            'tar': resources_pareto.execute_sandboxed.commands.command_executable
-            'make directory': resources_pareto.filesystem_unrestricted.commands.make_directory
-        }
-    >
-
-    export type update2latest = p_.Command_Procedure<
-        commands.update2latest,
-        null,
-        null,
-        {
-            'update2latest': resources_pareto.execute_sandboxed.commands.command_executable
-        }
-    >
-
-    export type update_package_dependencies = p_.Command_Procedure<
-        commands.update_package_dependencies,
-        null,
-        null,
-        {
-            'remove': resources_pareto.filesystem_unrestricted.commands.remove
-            'update2latest': commands.update2latest
-            'npm': commands.npm
-        }
-    >
-
-}
+export type update_package_dependencies = p_.Command_Procedure<
+    command_actions.update_package_dependencies,
+    null,
+    null,
+    {
+        'remove': command_actions_pareto_filesystem_unrestricted_api.remove
+        'update2latest': command_actions.update2latest
+        'npm': command_actions.npm
+    }
+>

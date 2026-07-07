@@ -10,7 +10,7 @@ import * as d from "../../../../version_control_api/interface/data/push.js"
 import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 
 
-export const $$: interface_.procedures.push = p_.command_procedure(
+export const $$: interface_.push = p_.command(
     ($d, $s, $q, $c) => [
         $c.git.execute(
             {

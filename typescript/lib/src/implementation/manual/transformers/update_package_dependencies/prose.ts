@@ -12,7 +12,7 @@ export type Error = p_i.Transformer<
 >
 
 //dependencies
-import * as t_stat_possible_node_to_prose from "pareto-resources/implementation/manual/transformers/stat_possible_node/prose"
+import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/stat_possible_node/prose"
 import * as t_utd_to_prose from "../../../../modules/npm/implementation/manual/transformers/update_package_dependencies/prose.js"
 
 export const Error: Error = ($) => p_.from.state($).decide(

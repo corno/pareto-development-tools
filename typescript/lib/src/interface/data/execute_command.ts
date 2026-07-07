@@ -9,7 +9,7 @@ import * as d_dependency_graph from "./create_dependency_graph.js"
 import * as d_git_commit from "./git_commit.js"
 import * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
 import * as d_publish from "./publish.js"
-import * as d_read_directory from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
+import * as d_read_directory from "pareto-filesystem-unrestricted-api/interface/generated/liana/schemas/fs_unrestricted_read_directory/data"
 import * as d_set_up_comparison_against_published from "../../modules/npm/interface/data/set_up_comparison_against_published.js"
 import * as d_update_dependencies from "./update_package_dependencies.js"
 

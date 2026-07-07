@@ -12,7 +12,7 @@ import * as d from "../../../interface/data/execute_command.js"
 import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 
 
-export const $$: interface_.procedures.api = p_.command_procedure(
+export const $$: interface_.api = p_.command(
     ($d, $s, $q, $c) => [
         p_.decide.state($d.type, ($) => {
             switch ($[0]) {

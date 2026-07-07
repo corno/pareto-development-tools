@@ -5,7 +5,7 @@ import * as interface_ from "../../../interface/commands.js"
 
 //dependencies
 
-export const $$: interface_.procedures.npm_publish = p_.command_procedure(
+export const $$: interface_.npm_publish = p_.command(
     ($d, $s, $q, $c) => [
         $c['npm'].execute(
             {

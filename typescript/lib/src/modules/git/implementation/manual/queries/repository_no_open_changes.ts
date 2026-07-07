@@ -10,7 +10,7 @@ import * as d from "../../../../version_control_api/interface/data/repository_no
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: interface_.query_functions.repository_no_open_changes = p_.query_function(
+export const $$: interface_.repository_no_open_changes = p_.query(
     ($d, $s, $q) =>  p_super_query_result($q.git(
         {
             'working directory': p_.literal.not_set(),

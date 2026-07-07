@@ -12,7 +12,7 @@ import * as d_npm_package from "../../../modules/npm/interface/data/npm_package.
 import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
 import { NPM_Package as r_parse_npm_package } from "../../../modules/npm/implementation/manual/refiners/npm_package/list_of_characters.js"
 
-export const $$: interface_.query_functions.get_package_dependencies = p_.query_function(
+export const $$: interface_.get_package_dependencies = p_.query(
     ($d, $s, $q) => p_super_query_result($q['read directory'](
         {
             'path': t_path_to_path.extend_context_path_with_single_step($d['path'], { 'addition': "packages" }),

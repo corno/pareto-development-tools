@@ -6,7 +6,7 @@ import * as interface_ from "../../../interface/commands.js"
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
 
-export const $$: interface_.procedures.tsc = p_.command_procedure(
+export const $$: interface_.tsc = p_.command(
 
     // tsc
     ($d, $s, $q, $c) => [
