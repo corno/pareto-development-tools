@@ -2,7 +2,8 @@ import * as p_ from 'pareto-core/interface/command'
 
 import * as queries from "./queries.js"
 import * as resources_pareto from "pareto-resources/interface/resources"
-import * as resources_pareto_stream from "pareto-stream-api/interface/commands"
+import * as resources_pareto_application_api from "pareto-application-api/interface/resources"
+import * as resources_pareto_stream_api from "pareto-stream-api/interface/commands"
 import * as resources_version_control from "../modules/version_control_api/interface/commands.js"
 import * as resources_npm from "../modules/npm/interface/commands.js"
 
@@ -42,7 +43,7 @@ export namespace procedures {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
         },
         {
-            'log': resources_pareto_stream.commands.log
+            'log': resources_pareto_stream_api.commands.log
         }
     >
 
@@ -96,7 +97,7 @@ export namespace procedures {
             'package dependencies': queries.queries.get_package_dependencies
         },
         {
-            'log': resources_pareto_stream.commands.log
+            'log': resources_pareto_stream_api.commands.log
         }
     >
 
@@ -118,17 +119,17 @@ export namespace procedures {
             'read file': resources_pareto.filesystem_unrestricted.queries.read_file
         },
         {
-            'log': resources_pareto_stream.commands.log
+            'log': resources_pareto_stream_api.commands.log
         }
     >
 
     export type main = p_.Command_Procedure<
-        resources_pareto.resources.commands.main,
+        resources_pareto_application_api.resources.commands.main,
         null,
         null,
         {
             'api': commands.api
-            'log error': resources_pareto_stream.commands.log_error
+            'log error': resources_pareto_stream_api.commands.log_error
 
         }
     >
@@ -148,7 +149,7 @@ export namespace procedures {
             'build and test': commands.build_and_test
             'npm': resources_npm.commands.npm
             'npm publish': resources_npm.commands.npm_publish
-            'log': resources_pareto_stream.commands.log
+            'log': resources_pareto_stream_api.commands.log
         }
     >
 

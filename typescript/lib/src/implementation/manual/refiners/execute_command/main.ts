@@ -4,7 +4,7 @@ import p_iterate from 'pareto-core/implementation/refiner/specials/iterate'
 
 import * as d_out from "../../../../interface/data/execute_command.js"
 import * as d_function from "../../../../interface/data/parse.js"
-import * as d_in from "pareto-resources/interface/data/temp_main"
+import * as d_in from "pareto-application-api/interface/data/main"
 import * as d_publish from "../../../../interface/data/publish.js"
 
 import p_unreachable_code_path from 'pareto-core/implementation/transformer/specials/unreachable_code_path'
