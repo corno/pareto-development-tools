@@ -1,10 +1,10 @@
 import * as p_ from 'pareto-core/interface/command_action'
 
 //data types
-import * as d_assert_no_open_changes from "../data/assert_no_open_changes.js"
-import * as d_make_pristine from "../data/make_pristine.js"
-import * as d_push from "../data/push.js"
-import * as d_extended_commit from "../data/extended_commit.js"
+import type * as d_assert_no_open_changes from "../data/assert_no_open_changes.js"
+import type * as d_make_pristine from "../data/make_pristine.js"
+import type * as d_push from "../data/push.js"
+import type * as d_extended_commit from "../data/extended_commit.js"
 
 export type assert_no_open_changes = p_.Command_Action<d_assert_no_open_changes.Error, d_assert_no_open_changes.Parameters>
 export type make_pristine = p_.Command_Action<d_make_pristine.Error, d_make_pristine.Parameters>

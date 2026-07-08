@@ -1,14 +1,14 @@
 import * as p_ from 'pareto-core/interface/command_action'
 
-import * as d_get_project_files from "../data/get_project_files.js"
-import * as d_api from "../data/execute_command.js"
-import * as d_build from "../data/build.js"
-import * as d_build_and_test from "../data/build_and_test.js"
-import * as d_create_dependency_graph from "../data/create_dependency_graph.js"
-import * as d_publish from "../data/publish.js"
-import * as d_tsc from "../data/tsc.js"
-import * as d_update_package_dependencies from "../data/update_package_dependencies.js"
-import * as d_version_control_commit from "../data/git_commit.js"
+import type * as d_get_project_files from "../data/get_project_files.js"
+import type * as d_api from "../data/execute_command.js"
+import type * as d_build from "../data/build.js"
+import type * as d_build_and_test from "../data/build_and_test.js"
+import type * as d_create_dependency_graph from "../data/create_dependency_graph.js"
+import type * as d_publish from "../data/publish.js"
+import type * as d_tsc from "../data/tsc.js"
+import type * as d_update_package_dependencies from "../data/update_package_dependencies.js"
+import type * as d_version_control_commit from "../data/git_commit.js"
 
 export type analyze_file_structure = p_.Command_Action<d_get_project_files.Error, d_get_project_files.Parameters>
 export type api = p_.Command_Action<d_api.Error, d_api.Parameters>

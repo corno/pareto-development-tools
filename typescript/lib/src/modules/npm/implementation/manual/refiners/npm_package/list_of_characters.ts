@@ -1,9 +1,9 @@
 import * as p_ri from 'pareto-core/interface/refiner'
 
 //data types
-import * as d_in from "pareto-fountain-pen/interface/generated/liana/schemas/list_of_characters/data"
-import * as d_out from "../../../../interface/data/npm_package.js"
-import * as d_function from "../../../../interface/data/deserialize_package_json.js"
+import type * as d_in from "pareto-fountain-pen/interface/generated/liana/schemas/list_of_characters/data"
+import type * as d_out from "../../../../interface/data/npm_package.js"
+import type * as d_function from "../../../../interface/data/deserialize_package_json.js"
 
 //dependencies
 import * as r_parse_tree_from_list_of_characters from "astn-core/implementation/manual/refiners/parse_tree/list_of_characters"

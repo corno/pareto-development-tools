@@ -4,9 +4,9 @@ import * as p_temp from 'pareto-core/implementation/transformer'
 import * as interface_ from "../../../interface/declarations/commands.js"
 
 //data types
-import * as d_main from "pareto-application-api/interface/data/main"
-import * as d_parse from "../../../interface/data/parse.js"
-import * as d_execute_command from "../../../interface/data/execute_command.js"
+import type * as d_main from "pareto-application-api/interface/data/main"
+import type * as d_parse from "../../../interface/data/parse.js"
+import type * as d_execute_command from "../../../interface/data/execute_command.js"
 
 //dependencies
 import * as r_instruction from "../refiners/execute_command/main.js"

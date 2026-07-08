@@ -2,10 +2,10 @@ import * as p_ from 'pareto-core/implementation/refiner'
 import * as p_i from 'pareto-core/interface/refiner'
 import p_iterate from 'pareto-core/implementation/refiner/specials/iterate'
 
-import * as d_out from "../../../../interface/data/execute_command.js"
-import * as d_function from "../../../../interface/data/parse.js"
-import * as d_in from "pareto-application-api/interface/data/main"
-import * as d_publish from "../../../../interface/data/publish.js"
+import type * as d_out from "../../../../interface/data/execute_command.js"
+import type * as d_function from "../../../../interface/data/parse.js"
+import type * as d_in from "pareto-application-api/interface/data/main"
+import type * as d_publish from "../../../../interface/data/publish.js"
 
 import p_unreachable_code_path from 'pareto-core/implementation/transformer/specials/unreachable_code_path'
 

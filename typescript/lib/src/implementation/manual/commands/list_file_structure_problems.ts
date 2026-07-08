@@ -5,7 +5,7 @@ import * as interface_ from "../../../interface/declarations/commands.js"
 
 //data types
 import * as d from "../../../interface/data/get_project_files.js"
-import * as d_file_analysis from "../../../interface/data/file_structure_analysis.js"
+import type * as d_file_analysis from "../../../interface/data/file_structure_analysis.js"
 
 //dependencies
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"

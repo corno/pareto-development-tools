@@ -6,7 +6,7 @@ import * as interface_ from "../../../interface/declarations/queries.js"
 
 //data types
 import * as d from "../../../interface/data/get_package_dependencies.js"
-import * as d_npm_package from "../../../modules/npm/interface/data/npm_package.js"
+import type * as d_npm_package from "../../../modules/npm/interface/data/npm_package.js"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"

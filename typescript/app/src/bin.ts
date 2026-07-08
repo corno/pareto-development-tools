@@ -6,9 +6,9 @@ import * as p_qi from 'pareto-core/interface/query_action'
 
 
 //data types
-import * as d_ece from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
-import * as d_espe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
-import * as d_eqe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
+import type * as d_ece from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
+import type * as d_espe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_smelly_command_executable/data"
+import type * as d_eqe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
 
 //resources
 import * as rs_execute_unrestricted from "pareto-resource-execute-unrestricted/index"

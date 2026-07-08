@@ -6,7 +6,7 @@ import * as interface_ from "../../../interface/declarations/queries.js"
 
 //data types
 import * as d from "../../../interface/data/get_project_files.js"
-import * as d_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
+import type * as d_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
 
 
 //dependencies

@@ -3,8 +3,8 @@ import * as p_i from 'pareto-core/interface/transformer'
 import p_list_from_text from 'pareto-core/implementation/refiner/specials/list_from_text'
 
 //data types
-import * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
-import * as d_in from "../../../../interface/data/csv.js"
+import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
+import type * as d_in from "../../../../interface/data/csv.js"
 
 
 export type Signature = p_i.Transformer_With_Parameter<
