@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/implementation/query'
 import * as p_t from 'pareto-core/implementation/transformer'
 
-import * as interface_ from "../../../interface/queries.js"
+import * as interface_ from "../../../interface/declarations/queries.js"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"

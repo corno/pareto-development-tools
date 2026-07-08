@@ -1,32 +1,31 @@
 import * as sh from "../shorthands/structure/manual.js"
 
-const $_interface = sh.g.directory_group({
-    "commands.ts": sh.g.file_manual(),
-    "command_actions.ts": sh.g.file_manual(),
-    "generated": sh.g.directory_generated(true),
-    "queries.ts": sh.g.file_manual(),
-    "query_actions.ts": sh.g.file_manual(),
-    "data": sh.g.directory_wildcards(0, false, ["ts"], true),
+const $_algorithms = sh.g.directory_group({
+    "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
+    "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
     "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
     "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
 })
 
-const $_implementation = sh.g.directory_group({
-    "generated": sh.g.directory_generated(true),
-    "manual": sh.g.directory_group({
-        "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
-        "productions": sh.g.directory_wildcards(1, false, ["ts"], false),
-        "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
+const $_interface = sh.g.directory_group({
+    "actions": sh.g.directory_group({
+        "commands.ts": sh.g.file_manual(),
+        "queries.ts": sh.g.file_manual(),
+    }),
+    "data": sh.g.directory_wildcards(0, false, ["ts"], true),
+    "declarations": sh.g.directory_group({
+        "commands.ts": sh.g.file_manual(),
+        "queries.ts": sh.g.file_manual(),
         "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
         "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
     }),
-    "to_be_generated": sh.g.directory_group({
-        "commands": sh.g.directory_generated(false),
-        "productions": sh.g.directory_generated(false),
-        "queries": sh.g.directory_generated(false),
-        "refiners": sh.g.directory_generated(false),
-        "transformers": sh.g.directory_generated(false),
-    }),
+    "generated": sh.g.directory_generated(true),
+})
+
+const $_implementation = sh.g.directory_group({
+    "generated": sh.g.directory_generated(true),
+    "manual": $_algorithms,
+    "to_be_generated": $_algorithms,
 
 })
 
@@ -61,29 +60,31 @@ export const $$ = sh.dgroup({
             "package-lock.json": sh.g.file_generated(true),
             "package.json": sh.g.file_manual(),
             "src": sh.g.directory_group({
-                "data": sh.g.directory_wildcards(0, true, ["ts"], false),
-
-                "globals.ts": sh.g.file_generated(true),
-                "implementation": $_implementation,
-                "interface": $_interface,
-                "index.ts": sh.g.file_generated(true),
                 "modules": sh.g.directory_dictionary(
                     sh.dgroup({
                         "interface": $_interface,
-                        "implementation": $_implementation,
                         "shorthands": sh.g.directory_dictionary(
                             sh.dgroup({
                                 "deprecated.ts": sh.g.file_manual(),
                                 "manual.ts": sh.g.file_manual(),
                                 "target.ts": sh.g.file_manual(),
-                            })),
-                    })),
+                            })
+                        ),
+                        "implementation": $_implementation,
+                    })
+                ),
+                "interface": $_interface,
                 "shorthands": sh.g.directory_dictionary(
                     sh.dgroup({
                         "deprecated.ts": sh.g.file_manual(),
                         "manual.ts": sh.g.file_manual(),
                         "target.ts": sh.g.file_manual(),
-                    })),
+                    })
+                ),
+                "data": sh.g.directory_wildcards(0, true, ["ts"], false),
+                "implementation": $_implementation,
+                "globals.ts": sh.g.file_generated(true),
+                "index.ts": sh.g.file_generated(true),
             }),
             "tsconfig.json": sh.g.file_generated(true)
         }),

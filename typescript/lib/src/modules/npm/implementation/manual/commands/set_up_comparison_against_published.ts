@@ -5,7 +5,7 @@ import p_list_build_deprecated from 'pareto-core/implementation/refiner/specials
 import p_text_from_list from 'pareto-core/implementation/transformer/specials/text_from_list'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import * as interface_ from "../../../interface/commands.js"
+import * as interface_ from "../../../interface/declarations/commands.js"
 
 //data types
 import * as d from "../../../interface/data/set_up_comparison_against_published.js"

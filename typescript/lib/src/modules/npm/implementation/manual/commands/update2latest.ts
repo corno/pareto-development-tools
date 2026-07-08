@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/implementation/command'
 import * as p_temp from 'pareto-core/implementation/transformer'
 
-import * as interface_ from "../../../interface/commands.js"
+import * as interface_ from "../../../interface/declarations/commands.js"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"

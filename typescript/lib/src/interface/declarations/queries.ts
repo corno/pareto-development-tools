@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/interface/query'
 
 import * as query_actions_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
-import * as query_actions from "./query_actions.js"
+import * as query_actions from "../actions/queries.js"
 
 
     export type get_project_files = p_.Query<
