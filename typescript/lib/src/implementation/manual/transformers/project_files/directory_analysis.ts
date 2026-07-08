@@ -10,7 +10,7 @@ import type * as d_in_directory_content from "pareto-filesystem-unrestricted-api
 import type * as d_out from "../../../../interface/data/file_structure_analysis.js"
 import type * as d_structure from "../../../../interface/generated/liana/schemas/structure/data.js"
 
-export namespace d_xxx {
+namespace d_xxx {
     export type Parameters = {
         'expected structure': d_structure.Directory,
         'structure path': d_out.Path,
@@ -143,7 +143,7 @@ const extension: interface_.extension = ($) => {
         )
     }
 }
-export namespace defined {
+namespace defined {
 
     export const Directory: interface_.defined.Directory = ($, $p) => {
         //both found and expected are directories
@@ -343,7 +343,7 @@ export namespace defined {
 
 }
 
-export namespace undefined {
+namespace undefined {
 
     export const Directory: interface_.undefined.Directory = ($, $p) => {
         return ['dictionary', p_.from.dictionary($).map(
@@ -388,7 +388,7 @@ export namespace undefined {
 
 }
 
-export namespace wildcard {
+namespace wildcard {
 
     export const Directory: interface_.wildcard.Directory = ($, $p) => {
         return ['dictionary', p_.from.dictionary($).map(
