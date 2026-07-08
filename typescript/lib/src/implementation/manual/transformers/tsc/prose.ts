@@ -15,6 +15,7 @@ export namespace interface_ {
         }
     >
 }
+import * as temp_interface_ from "../../../../interface/declarations/transformers/tsc/prose.js"
 
 //dependencies
 import * as t_espe_to_prose from "pareto-resources/implementation/manual/transformers/execute_smelly_command_executable/prose"

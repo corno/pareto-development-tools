@@ -13,6 +13,7 @@ export namespace interface_ {
         d_out.Text
     >
 }
+import * as temp_interface_ from "../../../../interface/declarations/transformers/file_structure_analysis/text.js"
 
 
 export const Path: interface_.Path = ($) => p_text_from_list(

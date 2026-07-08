@@ -12,6 +12,7 @@ export namespace interface_ {
     >
 
 }
+import * as temp_interface_ from "../../../../interface/declarations/transformers/get_package_dependencies/prose.js"
 
 //dependencies
 import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/read_directory/prose"

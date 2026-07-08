@@ -87,6 +87,7 @@ export namespace interface_ {
     }
 
 }
+import * as temp_interface_ from "../../../../interface/declarations/transformers/project_files/directory_analysis.js"
 
 //data
 import { $$ as x_structure } from "../../../../data/structure.js"

@@ -19,6 +19,7 @@ export namespace interface_ {
         d_in.Parameters
     >
 }
+import * as temp_interface_ from "../../../../interface/declarations/refiners/execute_command/main.js"
 
 export const Command: interface_.Command = ($, abort) => p_iterate<
     d_out.Parameters,

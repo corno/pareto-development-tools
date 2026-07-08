@@ -13,6 +13,7 @@ export namespace interface_ {
         d_out.Graph
     >
 }
+import * as temp_interface_ from "../../../../interface/declarations/transformers/package_dependencies/graphviz.js"
 
 export const Result: interface_.Result = ($) => {
     const $v_packages = $.packages

@@ -15,6 +15,7 @@ export namespace interface_ {
         d_out.CSV
     >
 }
+import * as temp_interface_ from "../../../../interface/declarations/transformers/file_structure_analysis/csv.js"
 
 export const File_Analysis_List: interface_.Signature = ($) => p_.literal.segmented_list([
     p_.literal.list([

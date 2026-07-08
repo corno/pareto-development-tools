@@ -11,6 +11,7 @@ export namespace interface_ {
         d_out.Phrase
     >
 }
+import * as temp_interface_ from "../../../../interface/declarations/transformers/git_commit/prose.js"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"

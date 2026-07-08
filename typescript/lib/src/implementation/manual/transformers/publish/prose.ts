@@ -14,6 +14,7 @@ export namespace interface_ {
         d_out.Phrase
     >
 }
+import * as temp_interface_ from "../../../../interface/declarations/transformers/publish/prose.js"
 
 //dependencies
 import * as t_git_push_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/push/prose.js"

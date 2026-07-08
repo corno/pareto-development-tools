@@ -22,6 +22,7 @@ export namespace interface_ {
         }
     >
 }
+import * as temp_interface_ from "../../../../interface/declarations/transformers/build_and_test/prose.js"
 
 export const Error: interface_.Error = ($, $p) => p_.from.state($).decide(
     ($) => {
