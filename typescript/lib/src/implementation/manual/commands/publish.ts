@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/implementation/command'
 import p_variables from 'pareto-core/implementation/command/specials/variables'
 
-import * as interface_ from "../../../interface/declarations/commands.js"
+import type * as interface_ from "../../../interface/declarations/commands.js"
 
 //data types
 import * as d from "../../../interface/data/publish.js"

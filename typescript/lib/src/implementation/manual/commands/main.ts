@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/implementation/command'
 import * as p_temp from 'pareto-core/implementation/transformer'
 
-import * as interface_ from "../../../interface/declarations/commands.js"
+import type * as interface_ from "../../../interface/declarations/commands.js"
 
 //data types
 import type * as d_main from "pareto-application-api/interface/data/main"

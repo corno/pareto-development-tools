@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/implementation/command'
 import * as p_t from 'pareto-core/implementation/transformer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import * as interface_ from "../../../interface/declarations/commands.js"
+import type * as interface_ from "../../../interface/declarations/commands.js"
 
 //data types
 import * as d from "../../../../version_control_api/interface/data/extended_commit.js"
