@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+
 import type * as p_i from 'pareto-core/interface/transformer'
 
 //data types
@@ -8,10 +8,10 @@ import type * as d_out from "../../../../modules/csv/interface/data/csv.js"
 //dependencies
 import * as t_to_text from "./text.js"
 
-export namespace interface_ {
+
 
     export type Signature = p_i.Transformer<
         d_in.File_Analysis_List,
         d_out.CSV
     >
-}
+

@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+
 import type * as p_i from 'pareto-core/interface/transformer'
 
 //data types
@@ -12,7 +12,7 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 import * as t_build_to_prose from "../build/prose.js"
 import * as t_epe_to_prose from "pareto-resources/implementation/manual/transformers/execute_command_executable/prose"
 
-export namespace interface_ {
+
 
     export type Error = p_i.Transformer_With_Parameter<
         d_in.Error,
@@ -21,4 +21,4 @@ export namespace interface_ {
             'concise': boolean
         }
     >
-}
+
