@@ -8,10 +8,10 @@ import p_text_from_list from 'pareto-core/implementation/transformer/specials/te
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //data types
-import type * as d_in from "../../../../interface/data/project_files.js"
+import type * as d_in from "../../../data/project_files.js"
 import type * as d_in_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
-import type * as d_out from "../../../../interface/data/file_structure_analysis.js"
-import type * as d_structure from "../../../../interface/generated/liana/schemas/structure/data.js"
+import type * as d_out from "../../../data/file_structure_analysis.js"
+import type * as d_structure from "../../../generated/liana/schemas/structure/data.js"
 
 export namespace d_xxx {
     export type Parameters = {
