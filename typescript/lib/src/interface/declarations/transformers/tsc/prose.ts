@@ -7,11 +7,11 @@ import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schem
 
 
 
-    export type Error = p_.Transformer_With_Parameter<
-        d_in.Error,
-        d_out.Paragraph,
-        {
-            'concise': boolean
-        }
-    >
+export type Error = p_.Transformer_With_Parameter<
+    d_in.Error,
+    d_out.Paragraph,
+    {
+        'concise': boolean
+    }
+>
 

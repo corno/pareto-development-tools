@@ -10,8 +10,8 @@ import * as t_to_text from "./text.js"
 
 
 
-    export type Signature = p_.Transformer<
-        d_in.File_Analysis_List,
-        d_out.CSV
-    >
+export type Signature = p_.Transformer<
+    d_in.File_Analysis_List,
+    d_out.CSV
+>
 

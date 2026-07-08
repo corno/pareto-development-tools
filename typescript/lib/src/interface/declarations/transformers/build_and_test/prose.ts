@@ -14,11 +14,11 @@ import * as t_epe_to_prose from "pareto-resources/implementation/manual/transfor
 
 
 
-    export type Error = p_.Transformer_With_Parameter<
-        d_in.Error,
-        d_out.Phrase,
-        {
-            'concise': boolean
-        }
-    >
+export type Error = p_.Transformer_With_Parameter<
+    d_in.Error,
+    d_out.Phrase,
+    {
+        'concise': boolean
+    }
+>
 

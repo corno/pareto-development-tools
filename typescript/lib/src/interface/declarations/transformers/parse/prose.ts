@@ -8,8 +8,8 @@ import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schem
 
 
 
-    export type Error = p_.Transformer<
-        d_in.Error,
-        d_out.Phrase
-    >
+export type Error = p_.Transformer<
+    d_in.Error,
+    d_out.Phrase
+>
 
