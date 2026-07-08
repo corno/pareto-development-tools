@@ -124,13 +124,13 @@ export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary
                                                         x($, `${path}/${id}`)
                                                         return null
                                                     })
-                                                    default: return p_.au($[0])
+                                                    default: return p_.exhaustive($[0])
                                                 }
                                             })
                                     })
                                 return null
                             })
-                            default: return p_.au($[0])
+                            default: return p_.exhaustive($[0])
                         }
                     })
 
@@ -250,7 +250,7 @@ export namespace defined {
                                                                         switch ($[0]) {
                                                                             case 'generated': return p_.option($, ($) => ['file', ['generated', null]])
                                                                             case 'manual': return p_.option($, ($) => ['file', ['manual', null]])
-                                                                            default: return p_.au($[0])
+                                                                            default: return p_.exhaustive($[0])
                                                                         }
                                                                     }))
                                                                 case 'directory': return p_.option($, ($) => ['directory', p_.from.state($).decide(
@@ -262,10 +262,10 @@ export namespace defined {
                                                                             case 'generated': return p_.option($, ($) => ['generated', null])
                                                                             case 'dictionary': return p_.option($, ($) => ['dictionary', null])
                                                                             case 'group': return p_.option($, ($) => ['group', null])
-                                                                            default: return p_.au($[0])
+                                                                            default: return p_.exhaustive($[0])
                                                                         }
                                                                     })])
-                                                                default: return p_.au($[0])
+                                                                default: return p_.exhaustive($[0])
                                                             }
                                                         })
                                                 },
@@ -279,13 +279,13 @@ export namespace defined {
                                                                     switch ($[0]) {
                                                                         case 'generated': return p_.option($, ($) => p_.literal.not_set())
                                                                         case 'manual': return p_.option($, ($) => p_.literal.not_set())
-                                                                        default: return p_.au($[0])
+                                                                        default: return p_.exhaustive($[0])
                                                                     }
                                                                 }))
                                                             case 'directory': return p_.option($, ($) => p_.literal.set(p_.literal.list([
                                                                 $p['name'],
                                                             ])))
-                                                            default: return p_.au($[0])
+                                                            default: return p_.exhaustive($[0])
                                                         }
                                                     })
                                             })])
@@ -303,12 +303,12 @@ export namespace defined {
                                                                     'structure path': $p['structure path'],
                                                                 }
                                                             ))
-                                                            default: return p_.au($[0])
+                                                            default: return p_.exhaustive($[0])
                                                         }
                                                     })]
                                             })
                                             case 'other': return p_.option($, ($) => ['other', null])
-                                            default: return p_.au($[0])
+                                            default: return p_.exhaustive($[0])
                                         }
                                     })
                                 return p_.from.dictionary($v_expected).get_possible_entry(
@@ -403,11 +403,11 @@ export namespace defined {
                                                 id,
                                             ])),
                                         }])
-                                        default: return p_.au($[0])
+                                        default: return p_.exhaustive($[0])
                                     }
                                 }))]
                     })
-                    default: return p_.au($[0])
+                    default: return p_.exhaustive($[0])
                 }
             })
     }
@@ -452,7 +452,7 @@ export namespace undefined {
                         )]
                     })
                     case 'other': return p_.option($, ($) => ['other', null])
-                    default: return p_.au($[0])
+                    default: return p_.exhaustive($[0])
                 }
             })
     }
@@ -518,7 +518,7 @@ export namespace wildcard {
                                     }
                                 )
                             })]
-                            default: return p_.au($[0])
+                            default: return p_.exhaustive($[0])
                         }
                     })
             })]

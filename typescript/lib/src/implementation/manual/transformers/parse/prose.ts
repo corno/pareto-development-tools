@@ -31,6 +31,6 @@ export const Error: Error = ($) => p_.from.state($).decide(
                 sh.ph.literal($['description'])
             ]))
             case 'too many arguments': return p_.option($, ($) => sh.ph.literal("too many arguments"))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

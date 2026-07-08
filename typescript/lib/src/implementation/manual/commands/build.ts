@@ -78,7 +78,7 @@ export const $$: interface_.build = p_.command(
                                         case 'does not exist': return p_temp.ss($, ($) => false)
                                         case 'file': return p_temp.ss($, ($) => false)
                                         case 'directory': return p_temp.ss($, ($) => true)
-                                        default: return p_temp.au($[0])
+                                        default: return p_temp.exhaustive($[0])
                                     }
                                 }),
                             p_variables(

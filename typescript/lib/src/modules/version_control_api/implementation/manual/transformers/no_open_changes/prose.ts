@@ -26,6 +26,6 @@ export const Error: Error = ($) => p_.from.state($).decide(
                 sh.ph.literal("unknown issue while checking if git is clean: "),
                 t_is_inside_work_tree_to_prose.Error($)
             ]))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

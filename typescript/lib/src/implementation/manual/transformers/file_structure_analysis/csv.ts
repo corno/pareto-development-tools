@@ -42,7 +42,7 @@ export const File_Analysis_List: Signature = ($) => p_.literal.segmented_list([
                                     case 'dictionary': return p_.option($, ($) => "dictionary")
                                     case 'group': return p_.option($, ($) => "group")
                                     case 'freeform': return p_.option($, ($) => "freeform")
-                                    default: return p_.au($[0])
+                                    default: return p_.exhaustive($[0])
                                 }
                             }))
                         case 'file': return p_.option($, ($) => "file " + p_.from.state($).decide(
@@ -50,7 +50,7 @@ export const File_Analysis_List: Signature = ($) => p_.literal.segmented_list([
                                 switch ($[0]) {
                                     case 'generated': return p_.option($, ($) => "generated")
                                     case 'manual': return p_.option($, ($) => "manual")
-                                    default: return p_.au($[0])
+                                    default: return p_.exhaustive($[0])
                                 }
                             }))
                     }

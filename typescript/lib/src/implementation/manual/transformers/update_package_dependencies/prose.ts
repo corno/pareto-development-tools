@@ -34,6 +34,6 @@ export const Error: Error = ($) => p_.from.state($).decide(
                 sh.ph.literal("error statting /app directory: "),
                 t_stat_possible_node_to_prose.Error($)
             ]))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

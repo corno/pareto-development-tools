@@ -39,7 +39,7 @@ export const Error: signatures.Error = ($) => p_.from.state($).decide(
                         case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_prose.Error($))
                         case 'commit changes': return p_.option($, ($) => t_git_commit_to_prose.Error($))
 
-                        default: return p_.au($[0])
+                        default: return p_.exhaustive($[0])
                     }
                 }))
             case 'get project files': return p_.option($, ($) => t_line_count_to_prose.Error($))
@@ -71,7 +71,7 @@ export const Error: signatures.Error = ($) => p_.from.state($).decide(
                                                         case 'commit changes': return p_.option($, ($) => t_git_commit_to_prose.Error($))
                                                         case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))
                                                         case 'update dependencies': return p_.option($, ($) => t_update_dependencies.Error($))
-                                                        default: return p_.au($[0])
+                                                        default: return p_.exhaustive($[0])
                                                     }
                                                 })
                                         ])
@@ -83,10 +83,10 @@ export const Error: signatures.Error = ($) => p_.from.state($).decide(
                             sh.ph.literal("could not read packages directory: "),
                             t_read_directory_to_prose.Error($)
                         ]))
-                        default: return p_.au($[0])
+                        default: return p_.exhaustive($[0])
                     }
                 }))
             case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

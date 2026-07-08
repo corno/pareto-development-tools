@@ -35,7 +35,7 @@ export const Error: Error = ($) => {
                     sh.ph.literal("could not install dependencies typescript dependencies: "),
                     t_npm_to_prose.Error($)
                 ]))
-                default: return p_.au($[0])
+                default: return p_.exhaustive($[0])
             }
         })
 }

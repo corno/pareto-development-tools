@@ -22,7 +22,7 @@ export const $$: interface_.npm_publish = p_.command(
                                     // "--otp",
                                     // $['one time password'],
                                 ]))
-                                default: return p_temp.au($[0])
+                                default: return p_temp.exhaustive($[0])
                             }
                         }),
                 ]),

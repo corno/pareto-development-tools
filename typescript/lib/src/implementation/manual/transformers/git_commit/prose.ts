@@ -23,6 +23,6 @@ export const Error: Error = ($) => p_.from.state($).decide(
             case 'error while running build and test': return p_.option($, ($) => sh.ph.composed([
                 t_build_and_test_to_prose.Error($, { 'concise': true })
             ]))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

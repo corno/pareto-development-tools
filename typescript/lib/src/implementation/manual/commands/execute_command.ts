@@ -102,7 +102,7 @@ export const $$: interface_.api = p_.command(
                                                         ($): d.All__Package_Error => ['update dependencies', $],
                                                     )
                                                 ])
-                                                default: return p_.au($[0])
+                                                default: return p_.exhaustive($[0])
                                             }
                                         })
                                     ],
@@ -153,7 +153,7 @@ export const $$: interface_.api = p_.command(
                                         ($): d.Error => ['package', ['update dependencies', $]],
                                     )
                                 ])
-                                default: return p_.au($[0])
+                                default: return p_.exhaustive($[0])
                             }
                         })
                     ]
@@ -188,7 +188,7 @@ export const $$: interface_.api = p_.command(
                                     )
                                 ])
 
-                                default: return p_.au($[0])
+                                default: return p_.exhaustive($[0])
                             }
                         })
                     ]
@@ -216,7 +216,7 @@ export const $$: interface_.api = p_.command(
                         )
                     )
                 ])
-                default: return p_.au($[0])
+                default: return p_.exhaustive($[0])
             }
         })
     ]

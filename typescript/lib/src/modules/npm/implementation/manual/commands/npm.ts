@@ -47,11 +47,11 @@ export const $$: interface_.npm = p_.command(
                                             switch ($[0]) {
                                                 case 'patch': return p_temp.ss($, ($) => "patch")
                                                 case 'minor': return p_temp.ss($, ($) => "minor")
-                                                default: return p_temp.au($[0])
+                                                default: return p_temp.exhaustive($[0])
                                             }
                                         })
                                 ]))
-                                default: return p_temp.au($[0])
+                                default: return p_temp.exhaustive($[0])
                             }
                         })
                 ]),

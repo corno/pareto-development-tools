@@ -40,7 +40,7 @@ export const Error: signatures.Error = ($) => sh.ph.composed([
                 case 'name': return p_.option($, ($) => sh.ph.literal(" : missing or invalid 'name' property in package.json"))
                 case 'version': return p_.option($, ($) => sh.ph.literal(" : missing or invalid 'version' property in package.json"))
                 case 'dependencies': return p_.option($, ($) => sh.ph.literal(" : missing or invalid 'dependencies' property in package.json"))
-                default: return p_.au($[0])
+                default: return p_.exhaustive($[0])
             }
         })
 ])

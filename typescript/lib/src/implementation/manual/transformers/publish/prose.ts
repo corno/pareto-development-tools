@@ -32,7 +32,7 @@ export const Error: Error = ($) => p_.from.state($).decide(
                         switch ($[0]) {
                             case 'unexpected error': return p_.option($, ($) => t_git_is_clean_to_prose.Error($))
                             case 'working directory has open changes': return p_.option($, ($) => sh.ph.literal("working directory has open changes at the start"))
-                            default: return p_.au($[0])
+                            default: return p_.exhaustive($[0])
                         }
                     })
             ]))
@@ -49,7 +49,7 @@ export const Error: Error = ($) => p_.from.state($).decide(
                         switch ($[0]) {
                             case 'unexpected error': return p_.option($, ($) => t_git_is_clean_to_prose.Error($))
                             case 'working directory has open changes': return p_.option($, ($) => sh.ph.literal("working directory has open changes after updating package dependencies"))
-                            default: return p_.au($[0])
+                            default: return p_.exhaustive($[0])
                         }
                     })
             ]))
@@ -77,6 +77,6 @@ export const Error: Error = ($) => p_.from.state($).decide(
                 t_git_ec_to_prose.Error($)
             ]))
 
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

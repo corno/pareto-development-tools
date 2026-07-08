@@ -33,7 +33,7 @@ export const Error: Error = ($) => p_.from.state($).decide(
                                                 case 'not a directory': return p_.option($, ($) => sh.ph.literal("not a directory"))
                                                 case 'no package.json file': return p_.option($, ($) => sh.ph.literal("no package.json file"))
                                                 case 'parse error': return p_.option($, ($) => t_deserialize_package_json_to_prose.Error($))
-                                                default: return p_.au($[0])
+                                                default: return p_.exhaustive($[0])
                                             }
                                         })
                                 ])
@@ -41,6 +41,6 @@ export const Error: Error = ($) => p_.from.state($).decide(
                     ])
                 )))
             case 'read directory': return p_.option($, ($) => t_read_directory_to_prose.Error($))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

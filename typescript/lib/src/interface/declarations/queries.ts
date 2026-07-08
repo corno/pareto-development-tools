@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/interface/query'
 
-import * as query_actions_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
+import * as actions_queries_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
 import * as query_actions from "../actions/queries.js"
 
 
@@ -8,8 +8,8 @@ import * as query_actions from "../actions/queries.js"
         query_actions.get_project_files,
         null,
         {
-            'read directory': query_actions_pareto_filesystem_unrestricted_api.read_directory,
-            'read file': query_actions_pareto_filesystem_unrestricted_api.read_file
+            'read directory': actions_queries_pareto_filesystem_unrestricted_api.read_directory,
+            'read file': actions_queries_pareto_filesystem_unrestricted_api.read_file
 
         }
     >
@@ -18,8 +18,8 @@ import * as query_actions from "../actions/queries.js"
         query_actions.get_package_dependencies,
         null,
         {
-            'read directory': query_actions_pareto_filesystem_unrestricted_api.read_directory,
-            'read file': query_actions_pareto_filesystem_unrestricted_api.read_file
+            'read directory': actions_queries_pareto_filesystem_unrestricted_api.read_directory,
+            'read file': actions_queries_pareto_filesystem_unrestricted_api.read_file
 
         }
     >

@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/interface/command'
 
 import * as query_actions from "../../../version_control_api/interface/actions/queries.js"
-import * as command_actions_pareto_resources from "pareto-resources/interface/command_actions"
+import * as actions_commands_pareto_resources from "pareto-resources/interface/command_actions"
 
 import * as command_actions from "../../../version_control_api/interface/actions/commands.js"
 
@@ -12,7 +12,7 @@ export type assert_no_open_changes = p_.Command<
         'repository no open changes': query_actions.repository_no_open_changes
     },
     {
-        'git': command_actions_pareto_resources.execute_sandboxed.command_executable
+        'git': actions_commands_pareto_resources.execute_sandboxed.command_executable
     }
 >
 
@@ -21,7 +21,7 @@ export type make_pristine = p_.Command<
     null,
     null,
     {
-        'git': command_actions_pareto_resources.execute_sandboxed.command_executable
+        'git': actions_commands_pareto_resources.execute_sandboxed.command_executable
     }
 >
 
@@ -32,7 +32,7 @@ export type extended_commit = p_.Command<
         'repository no open changes': query_actions.repository_no_open_changes
     },
     {
-        'git': command_actions_pareto_resources.execute_sandboxed.command_executable
+        'git': actions_commands_pareto_resources.execute_sandboxed.command_executable
     }
 >
 
@@ -41,6 +41,6 @@ export type push = p_.Command<
     null,
     null,
     {
-        'git': command_actions_pareto_resources.execute_sandboxed.command_executable
+        'git': actions_commands_pareto_resources.execute_sandboxed.command_executable
     }
 >

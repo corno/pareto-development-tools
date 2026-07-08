@@ -24,6 +24,6 @@ export const Error: Error = ($) => p_.from.state($).decide(
                 sh.ph.composed(p_.from.list($.lines).map(
                     ($) => sh.ph.literal($)))
             ]))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

@@ -45,7 +45,7 @@ export const $$: interface_.get_package_dependencies = p_.query(
                                 }]),
                             )
                         ))
-                        default: return p_.au($[0])
+                        default: return p_.exhaustive($[0])
                     }
                 })
             },

@@ -57,7 +57,7 @@ export const Error: Error = ($) => {
                         ])),
                 ]))
                 case 'error while getting package.json': return p_.option($, ($) => t_get_package_json_to_prose.Error($))
-                default: return p_.au($[0])
+                default: return p_.exhaustive($[0])
             }
         }
     )

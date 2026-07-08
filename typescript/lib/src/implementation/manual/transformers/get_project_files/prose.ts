@@ -38,7 +38,7 @@ export const Error: Error = ($) => p_.from.state($).decide(
                                         switch ($[0]) {
                                             case 'not a directory': return p_.option($, ($) => sh.ph.literal("not a directory"))
                                             case 'directory content': return p_.option($, ($) => t_read_directory_content_to_prose.Error($))
-                                            default: return p_.au($[0])
+                                            default: return p_.exhaustive($[0])
                                         }
                                     })
 
@@ -48,6 +48,6 @@ export const Error: Error = ($) => p_.from.state($).decide(
             case 'read directory': return p_.option($, ($) => sh.ph.composed([
                 t_read_directory_to_prose.Error($)
             ]))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

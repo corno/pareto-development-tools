@@ -54,7 +54,7 @@ export const $$: interface_.main = p_.command(
                                         switch ($[0]) {
                                             case 'parse': return p_temp.ss($, ($) => t_bin_to_prose.Error($))
                                             case 'execute command': return p_temp.ss($, ($) => t_api_to_prose.Error($))
-                                            default: return p_temp.au($[0])
+                                            default: return p_temp.exhaustive($[0])
                                         }
                                     })
                             ])

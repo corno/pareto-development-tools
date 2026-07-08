@@ -43,7 +43,7 @@ export const $$: interface_.is_inside_work_tree = p_.query(
                         ? p_.e.direct_result(false)
                         : p_.e.direct_error(['unexpected output', $.stderr])
                     )
-                    default: return p_.au($[0])
+                    default: return p_.exhaustive($[0])
                 }
             })
         }

@@ -23,6 +23,6 @@ export const Error: Error = ($) => p_.from.state($).decide(
                 sh.ph.literal("unexpected error:"),
                 t_git_is_clean_to_prose.Error($)
             ]))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

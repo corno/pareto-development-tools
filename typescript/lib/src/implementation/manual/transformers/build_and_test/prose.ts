@@ -25,6 +25,6 @@ export const Error: Error = ($, $p) => p_.from.state($).decide(
                 sh.ph.literal("error while testing:"),
                 t_epe_to_prose.Error($),
             ]))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

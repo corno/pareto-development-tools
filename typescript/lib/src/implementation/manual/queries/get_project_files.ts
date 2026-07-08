@@ -34,7 +34,7 @@ export const $$: interface_.get_project_files = p_.query(
                             },
                             ($): d.Package_Error => ['directory content', $],
                         ))
-                        default: return p_.au($[0])
+                        default: return p_.exhaustive($[0])
                     }
                 })
             },

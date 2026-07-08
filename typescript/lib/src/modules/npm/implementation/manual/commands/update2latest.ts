@@ -24,7 +24,7 @@ export const $$: interface_.update2latest = p_.command(
                                 case 'dev-dependencies': return p_temp.ss($, ($) => {
                                     return p_temp.literal.list(["devDependencies"])
                                 })
-                                default: return p_temp.au($[0])
+                                default: return p_temp.exhaustive($[0])
                             }
                         }),
                     p_temp.literal.list(["verbose"])

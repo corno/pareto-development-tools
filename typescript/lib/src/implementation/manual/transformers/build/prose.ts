@@ -99,6 +99,6 @@ export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
                 sh.ph.literal(")"),
                 t_chmod_to_prose.Error($.error)
             ]))
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })

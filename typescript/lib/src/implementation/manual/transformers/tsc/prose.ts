@@ -31,6 +31,6 @@ export const Error: Error = ($, $p) => p_.from.state($).decide(
                     //
                 ])
             )
-            default: return p_.au($[0])
+            default: return p_.exhaustive($[0])
         }
     })
