@@ -1,5 +1,5 @@
 
-import type * as p_i from 'pareto-core/interface/transformer'
+import type * as p_ from 'pareto-core/interface/transformer'
 
 
 //data types
@@ -8,7 +8,7 @@ import type * as d_out from "pareto-graphviz/interface/generated/liana/schemas/h
 import type * as d_out_attributes from "pareto-graphviz/interface/generated/liana/schemas/attributes/data"
 
 
-    export type Result = p_i.Transformer<
+    export type Result = p_.Transformer<
         d_in.Result,
         d_out.Graph
     >

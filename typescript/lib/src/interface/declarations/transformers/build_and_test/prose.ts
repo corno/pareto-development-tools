@@ -1,5 +1,5 @@
 
-import type * as p_i from 'pareto-core/interface/transformer'
+import type * as p_ from 'pareto-core/interface/transformer'
 
 //data types
 import type * as d_in from "../../../data/build_and_test.js"
@@ -14,7 +14,7 @@ import * as t_epe_to_prose from "pareto-resources/implementation/manual/transfor
 
 
 
-    export type Error = p_i.Transformer_With_Parameter<
+    export type Error = p_.Transformer_With_Parameter<
         d_in.Error,
         d_out.Phrase,
         {

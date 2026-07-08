@@ -1,5 +1,5 @@
 
-import type * as p_i from 'pareto-core/interface/refiner'
+import type * as p_ from 'pareto-core/interface/refiner'
 import p_iterate from 'pareto-core/implementation/refiner/specials/iterate'
 
 import type * as d_out from "../../../data/execute_command.js"
@@ -13,7 +13,7 @@ import p_unreachable_code_path from 'pareto-core/implementation/transformer/spec
 import * as t_context_path_from_text from "pareto-resources/implementation/manual/refiners/path_unrestricted/text"
 
 
-    export type Command = p_i.Refiner<
+    export type Command = p_.Refiner<
         d_out.Parameters,
         d_function.Error,
         d_in.Parameters

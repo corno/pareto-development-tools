@@ -1,6 +1,6 @@
 
 import type * as p_di from 'pareto-core/interface/data'
-import type * as p_i from 'pareto-core/interface/transformer'
+import type * as p_ from 'pareto-core/interface/transformer'
 
 //data types
 import type * as d_in from "../../../data/project_files.js"
@@ -17,17 +17,17 @@ export namespace d_xxx {
 }
 
 
-export type line_count = p_i.Transformer<
+export type line_count = p_.Transformer<
     string,
     number
 >
 
-export type extension = p_i.Transformer<
+export type extension = p_.Transformer<
     string,
     p_di.Optional_Value<string>
 >
 
-export type Project_Files = p_i.Transformer<
+export type Project_Files = p_.Transformer<
     d_in.Project_Files,
     d_out.File_Analysis_List
 >
@@ -35,7 +35,7 @@ export type Project_Files = p_i.Transformer<
 
 export namespace defined {
 
-    export type Directory = p_i.Transformer_With_Parameter<
+    export type Directory = p_.Transformer_With_Parameter<
         d_in_directory_content.Directory,
         d_out.Directory,
         d_xxx.Parameters
@@ -45,7 +45,7 @@ export namespace defined {
 
 export namespace undefined {
 
-    export type Directory = p_i.Transformer_With_Parameter<
+    export type Directory = p_.Transformer_With_Parameter<
         d_in_directory_content.Directory,
         d_out.Directory,
         {
@@ -54,7 +54,7 @@ export namespace undefined {
         }
     >
 
-    export type Node = p_i.Transformer_With_Parameter<
+    export type Node = p_.Transformer_With_Parameter<
         d_in_directory_content.Node,
         d_out.Node,
         {
@@ -68,7 +68,7 @@ export namespace undefined {
 
 export namespace wildcard {
 
-    export type Directory = p_i.Transformer_With_Parameter<
+    export type Directory = p_.Transformer_With_Parameter<
         d_in_directory_content.Directory,
         d_out.Directory,
         {

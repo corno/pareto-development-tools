@@ -1,5 +1,5 @@
 
-import type * as p_i from 'pareto-core/interface/transformer'
+import type * as p_ from 'pareto-core/interface/transformer'
 
 //data types
 import type * as d_in from "../../../data/file_structure_analysis.js"
@@ -10,7 +10,7 @@ import * as t_to_text from "./text.js"
 
 
 
-    export type Signature = p_i.Transformer<
+    export type Signature = p_.Transformer<
         d_in.File_Analysis_List,
         d_out.CSV
     >
