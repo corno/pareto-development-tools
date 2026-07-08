@@ -1,21 +1,9 @@
 import * as p_ from 'pareto-core/implementation/transformer'
-import type * as p_i from 'pareto-core/interface/transformer'
 
-//data types
-import type * as d_in from "../../../../interface/data/file_structure_analysis.js"
-import type * as d_out from "../../../../modules/csv/interface/data/csv.js"
+import type * as interface_ from "../../../../interface/declarations/transformers/file_structure_analysis/csv.js"
 
 //dependencies
 import * as t_to_text from "./text.js"
-
-export namespace interface_ {
-
-    export type Signature = p_i.Transformer<
-        d_in.File_Analysis_List,
-        d_out.CSV
-    >
-}
-import * as temp_interface_ from "../../../../interface/declarations/transformers/file_structure_analysis/csv.js"
 
 export const File_Analysis_List: interface_.Signature = ($) => p_.literal.segmented_list([
     p_.literal.list([

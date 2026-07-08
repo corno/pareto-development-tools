@@ -1,16 +1,6 @@
 import * as p_ from 'pareto-core/implementation/transformer'
-import type * as p_i from 'pareto-core/interface/transformer'
 
-import type * as d_in from "../../../../interface/data/execute_command.js"
-import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
-
-export namespace interface_ {
-    export type Error = p_i.Transformer<
-        d_in.Error,
-        d_out.Phrase
-    >
-}
-import * as temp_interface_ from "../../../../interface/declarations/transformers/execute_command/prose.js"
+import type * as interface_ from "../../../../interface/declarations/transformers/execute_command/prose.js"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
