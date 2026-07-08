@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/interface/query'
 
 import * as queries_actions from "../../../version_control_api/interface/actions/queries.js"
-import * as actions_queries_pareto_resources from "pareto-resources/interface/query_actions"
+import type * as actions_queries_pareto_resources from "pareto-resources/interface/query_actions"
 
 export type is_inside_work_tree = p_.Query<
     queries_actions.is_inside_work_tree,

@@ -1,14 +1,14 @@
 import * as p_ from 'pareto-core/interface/command'
 
 import * as query_actions from "../actions/queries.js"
-import * as actions_queries_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
+import type * as actions_queries_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
 import * as command_actions from "../actions/commands.js"
-import * as actions_commands_npm from "../../modules/npm/interface/actions/commands.js"
-import * as actions_commands_pareto_application_api from "pareto-application-api/interface/command_actions"
-import * as actions_commands_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/command_actions"
-import * as actions_commands_pareto_resources from "pareto-resources/interface/command_actions"
-import * as actions_commands_pareto_stream_api from "pareto-stream-api/interface/command_actions"
-import * as actions_commands_version_control from "../../modules/version_control_api/interface/actions/commands.js"
+import type * as actions_commands_npm from "../../modules/npm/interface/actions/commands.js"
+import type * as actions_commands_pareto_application_api from "pareto-application-api/interface/command_actions"
+import type * as actions_commands_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/command_actions"
+import type * as actions_commands_pareto_resources from "pareto-resources/interface/command_actions"
+import type * as actions_commands_pareto_stream_api from "pareto-stream-api/interface/command_actions"
+import type * as actions_commands_version_control from "../../modules/version_control_api/interface/actions/commands.js"
 
 export type analyze_file_structure = p_.Command<
     command_actions.analyze_file_structure,

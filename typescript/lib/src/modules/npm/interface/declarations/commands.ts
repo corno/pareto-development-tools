@@ -1,10 +1,10 @@
 import * as p_ from 'pareto-core/interface/command'
 
 import * as command_actions from "../actions/commands.js"
-import * as actions_commands_pareto_resources from "pareto-resources/interface/command_actions"
-import * as actions_queries_pareto_resources from "pareto-resources/interface/query_actions"
-import * as actions_commands_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/command_actions"
-import * as actions_queries_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
+import type * as actions_commands_pareto_resources from "pareto-resources/interface/command_actions"
+import type * as actions_queries_pareto_resources from "pareto-resources/interface/query_actions"
+import type * as actions_commands_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/command_actions"
+import type * as actions_queries_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
 
 export type npm = p_.Command<
     command_actions.npm,

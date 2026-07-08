@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/interface/query'
 
-import * as actions_queries_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
+import type * as actions_queries_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/query_actions"
 import * as query_actions from "../actions/queries.js"
 
 

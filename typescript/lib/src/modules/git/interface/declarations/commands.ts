@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/interface/command'
 
 import * as query_actions from "../../../version_control_api/interface/actions/queries.js"
-import * as actions_commands_pareto_resources from "pareto-resources/interface/command_actions"
+import type * as actions_commands_pareto_resources from "pareto-resources/interface/command_actions"
 
 import * as command_actions from "../../../version_control_api/interface/actions/commands.js"
 
