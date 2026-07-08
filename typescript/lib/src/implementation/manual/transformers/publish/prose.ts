@@ -1,16 +1,21 @@
 import * as p_ from 'pareto-core/implementation/transformer'
-import * as p_i from 'pareto-core/interface/transformer'
+import type * as p_i from 'pareto-core/interface/transformer'
 
+//data types
 import type * as d_in from "../../../../interface/data/publish.js"
 import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
 
+//shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
-export type Error = p_i.Transformer<
-    d_in.Error,
-    d_out.Phrase
->
+export namespace interface_ {
+    export type Error = p_i.Transformer<
+        d_in.Error,
+        d_out.Phrase
+    >
+}
 
+//dependencies
 import * as t_git_push_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/push/prose.js"
 import * as t_git_make_pristine_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/make_pristine/prose.js"
 import * as t_clean_and_update_package_dependencies_to_prose from "../update_package_dependencies/prose.js"
@@ -20,7 +25,7 @@ import * as t_build_and_test_to_prose from "../build_and_test/prose.js"
 import * as t_get_package_json_to_prose from "../../../../modules/npm/implementation/manual/transformers/get_package_json/prose.js"
 import * as t_git_ec_to_prose from "../../../../modules/version_control_api/implementation/manual/transformers/extended_commit/prose.js"
 
-export const Error: Error = ($) => p_.from.state($).decide(
+export const Error: interface_.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error while running git push': return p_.option($, ($) => sh.ph.composed([

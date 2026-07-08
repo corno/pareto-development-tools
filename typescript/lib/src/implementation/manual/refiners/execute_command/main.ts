@@ -1,5 +1,5 @@
 import * as p_ from 'pareto-core/implementation/refiner'
-import * as p_i from 'pareto-core/interface/refiner'
+import type * as p_i from 'pareto-core/interface/refiner'
 import p_iterate from 'pareto-core/implementation/refiner/specials/iterate'
 
 import type * as d_out from "../../../../interface/data/execute_command.js"

@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/implementation/transformer'
-import * as p_di from 'pareto-core/interface/data'
-import * as p_i from 'pareto-core/interface/transformer'
+import type * as p_di from 'pareto-core/interface/data'
+import type * as p_i from 'pareto-core/interface/transformer'
 
 import p_list_from_text from 'pareto-core/implementation/refiner/specials/list_from_text'
 import p_list_build_deprecated from 'pareto-core/implementation/refiner/specials/list_build_deprecated'
@@ -13,15 +13,12 @@ import type * as d_in_directory_content from "pareto-filesystem-unrestricted-api
 import type * as d_out from "../../../../interface/data/file_structure_analysis.js"
 import type * as d_structure from "../../../../interface/generated/liana/schemas/structure/data.js"
 
-//data
-import { $$ as x_structure } from "../../../../data/structure.js"
-
-export type Parameters = {
-    'expected structure': d_structure.Directory,
-    'structure path': d_out.Path,
+export namespace d_xxx {
+    export type Parameters = {
+        'expected structure': d_structure.Directory,
+        'structure path': d_out.Path,
+    }
 }
-
-
 
 export namespace interface_ {
 
@@ -46,7 +43,7 @@ export namespace interface_ {
         export type Directory = p_i.Transformer_With_Parameter<
             d_in_directory_content.Directory,
             d_out.Directory,
-            Parameters
+            d_xxx.Parameters
         >
 
     }
@@ -91,6 +88,8 @@ export namespace interface_ {
 
 }
 
+//data
+import { $$ as x_structure } from "../../../../data/structure.js"
 
 
 export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary($).flatten_to_list(

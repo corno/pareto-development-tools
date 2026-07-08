@@ -1,4 +1,4 @@
-import * as p_ri from 'pareto-core/interface/refiner'
+import type * as p_ri from 'pareto-core/interface/refiner'
 
 //data types
 import type * as d_in from "pareto-fountain-pen/interface/generated/liana/schemas/list_of_characters/data"
