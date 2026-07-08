@@ -4,7 +4,7 @@ import * as p_i from 'pareto-core/interface/transformer'
 import type * as d_in from "../../../../interface/data/execute_command.js"
 import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
 
-export namespace signatures {
+export namespace interface_ {
     export type Error = p_i.Transformer<
         d_in.Error,
         d_out.Phrase
@@ -27,7 +27,7 @@ import * as t_update_dependencies from "../update_package_dependencies/prose.js"
 import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/read_directory/prose"
 import * as t_set_up_comparison_against_published from "../../../../modules/npm/implementation/manual/transformers/set_up_comparison_against_published/prose.js"
 
-export const Error: signatures.Error = ($) => p_.from.state($).decide(
+export const Error: interface_.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'package': return p_.option($, ($) => p_.from.state($).decide(

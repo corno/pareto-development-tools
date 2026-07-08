@@ -4,7 +4,7 @@ import * as p_i from 'pareto-core/interface/transformer'
 import type * as d_in from "../../../../interface/data/build.js"
 import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
 
-export namespace signatures {
+export namespace interface_ {
     export type Error = p_i.Transformer_With_Parameter<
         d_in.Error,
         d_out.Phrase,
@@ -24,7 +24,7 @@ import * as t_path_to_loc from "pareto-resources/implementation/manual/transform
 import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/stat_possible_node/prose"
 import * as t_chmod_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/chmod/prose"
 
-export const Error: signatures.Error = ($, $p) => p_.from.state($).decide(
+export const Error: interface_.Error = ($, $p) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error removing lib dist dir': return p_.option($, ($) => sh.ph.composed([

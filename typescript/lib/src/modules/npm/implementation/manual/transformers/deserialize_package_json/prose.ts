@@ -4,7 +4,7 @@ import * as p_i from 'pareto-core/interface/transformer'
 import type * as d_in from "../../../../interface/data/deserialize_package_json.js"
 import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
 
-export namespace signatures {
+export namespace interface_ {
     export type Error = p_i.Transformer<
         d_in.Error,
         d_out.Phrase
@@ -20,7 +20,7 @@ import * as t_path_to_text from "pareto-resources/implementation/manual/transfor
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
-export const Error: signatures.Error = ($) => sh.ph.composed([
+export const Error: interface_.Error = ($) => sh.ph.composed([
     sh.ph.literal(t_path_to_text.Node_Path($['path'])),
     p_.from.state($.type).decide(
         ($) => {
