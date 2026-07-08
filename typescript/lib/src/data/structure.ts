@@ -2,8 +2,10 @@ import * as sh from "../shorthands/structure/manual.js"
 
 const $_interface = sh.g.directory_group({
     "commands.ts": sh.g.file_manual(),
+    "command_actions.ts": sh.g.file_manual(),
     "generated": sh.g.directory_generated(true),
     "queries.ts": sh.g.file_manual(),
+    "query_actions.ts": sh.g.file_manual(),
     "data": sh.g.directory_wildcards(0, false, ["ts"], true),
     "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
     "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
