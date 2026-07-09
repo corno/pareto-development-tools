@@ -7,10 +7,10 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
 import * as t_tsc_to_prose from "../tsc/prose.js"
-import * as t_remove_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/remove/prose"
-import * as t_path_to_loc from "pareto-resources/implementation/manual/transformers/unrestricted_path/deprecated_list_of_characters"
-import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/stat_possible_node/prose"
-import * as t_chmod_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/chmod/prose"
+import * as t_remove_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/remove/prose"
+import * as t_path_to_loc from "pareto-resources/implementation/transformers/unrestricted_path/deprecated_list_of_characters"
+import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/stat_possible_node/prose"
+import * as t_chmod_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/chmod/prose"
 
 export const Error: interface_.Error = ($, $p) => p_.from.state($).decide(
     ($) => {

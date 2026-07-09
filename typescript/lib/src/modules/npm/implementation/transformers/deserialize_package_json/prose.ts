@@ -12,10 +12,10 @@ export namespace interface_ {
 }
 
 //dependencies
-import * as t_deserialize_parse_tree_to_prose from "astn-core/implementation/manual/transformers/deserialize_parse_tree/prose"
-import * as t_deserialize_parse_tree_to_location from "astn-core/implementation/manual/transformers/deserialize_parse_tree/location"
-import * as t_location_to_prose from "astn-core/implementation/manual/transformers/location/prose"
-import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
+import * as t_deserialize_parse_tree_to_prose from "astn-core/implementation/transformers/deserialize_parse_tree/prose"
+import * as t_deserialize_parse_tree_to_location from "astn-core/implementation/transformers/deserialize_parse_tree/location"
+import * as t_location_to_prose from "astn-core/implementation/transformers/location/prose"
+import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"

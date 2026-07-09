@@ -15,7 +15,7 @@ import * as t_dependency_graph_to_prose from "../create_dependency_graph/prose.j
 import * as t_line_count_to_prose from "../get_project_files/prose.js"
 import * as t_publish from "../publish/prose.js"
 import * as t_update_dependencies from "../update_package_dependencies/prose.js"
-import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/read_directory/prose"
+import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/read_directory/prose"
 import * as t_set_up_comparison_against_published from "../../../modules/npm/implementation/transformers/set_up_comparison_against_published/prose.js"
 
 export const Error: interface_.Error = ($) => p_.from.state($).decide(

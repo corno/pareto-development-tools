@@ -17,7 +17,7 @@ export namespace interface_ {
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
-import * as t_read_file_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/read_file/prose"
+import * as t_read_file_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/read_file/prose"
 import * as t_deserialize_package_json_to_prose from "../deserialize_package_json/prose.js"
 
 export const Error: interface_.Error = ($) => {

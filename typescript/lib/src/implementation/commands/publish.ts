@@ -7,7 +7,7 @@ import type * as interface_ from "../../declarations/commands.js"
 import * as d from "../../interface/data/publish.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 import * as q_get_package_json from "../../modules/npm/implementation/queries/get_package_json.js"
 
 //shorthands

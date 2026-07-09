@@ -17,9 +17,9 @@ import * as rs_filesystem_unrestricted from "pareto-resource-filesystem-unrestri
 
 //dependencies
 //pareto-resources
-import { $$ as q_execute_sandboxed_query_executable } from "pareto-resources/implementation/manual/queries/execute_sandboxed_query_executable"
-import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/implementation/manual/commands/execute_sandboxed_command_executable"
-import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/implementation/manual/commands/execute_sandboxed_smelly_command_executable"
+import { $$ as q_execute_sandboxed_query_executable } from "pareto-resources/implementation/queries/execute_sandboxed_query_executable"
+import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/implementation/commands/execute_sandboxed_command_executable"
+import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/implementation/commands/execute_sandboxed_smelly_command_executable"
 //git module
 import { $$ as q_git_is_repository_clean } from "lib/modules/git/implementation/queries/repository_no_open_changes"
 import { $$ as q_git_is_inside_work_tree } from "lib/modules/git/implementation/queries/is_inside_work_tree"

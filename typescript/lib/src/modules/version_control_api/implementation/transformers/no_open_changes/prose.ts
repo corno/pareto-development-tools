@@ -16,7 +16,7 @@ export namespace interface_ {
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
-import * as t_eqe_to_prose from "pareto-resources/implementation/manual/transformers/execute_query_executable/prose"
+import * as t_eqe_to_prose from "pareto-resources/implementation/transformers/execute_query_executable/prose"
 import * as t_is_inside_work_tree_to_prose from "../is_inside_work_tree/prose.js"
 
 export const Error: interface_.Error = ($) => p_.from.state($).decide(

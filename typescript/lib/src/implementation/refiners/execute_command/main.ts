@@ -9,7 +9,7 @@ import type * as d_function from "../../../interface/data/parse.js"
 import type * as d_publish from "../../../interface/data/publish.js"
 
 //dependencies
-import * as t_context_path_from_text from "pareto-resources/implementation/manual/refiners/path_unrestricted/text"
+import * as t_context_path_from_text from "pareto-resources/implementation/refiners/path_unrestricted/text"
 
 export const Command: interface_.Command = ($, abort) => p_iterate<
     d_out.Parameters,

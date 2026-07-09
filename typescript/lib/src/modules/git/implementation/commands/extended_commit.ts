@@ -8,7 +8,7 @@ import type * as interface_ from "../../declarations/commands.js"
 import * as d from "../../../version_control_api/interface/data/extended_commit.js"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
+import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
 
 export const $$: interface_.extended_commit = p_.command(
     ($d, $s, $q, $c) => [

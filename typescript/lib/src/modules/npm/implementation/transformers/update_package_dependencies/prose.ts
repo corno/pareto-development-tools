@@ -18,7 +18,7 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
 import * as t_u2l_to_prose from "../update2latest/prose.js"
-import * as t_remove_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/remove/prose"
+import * as t_remove_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/remove/prose"
 import * as t_npm_to_prose from "../npm/prose.js"
 
 export const Error: interface_.Error = ($) => {

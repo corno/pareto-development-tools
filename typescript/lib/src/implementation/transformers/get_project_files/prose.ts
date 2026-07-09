@@ -6,8 +6,8 @@ import type * as interface_ from "../../../declarations/transformers/get_project
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
-import * as t_read_directory_content_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/read_directory_content/prose"
-import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/read_directory/prose"
+import * as t_read_directory_content_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/read_directory_content/prose"
+import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/read_directory/prose"
 
 export const Error: interface_.Error = ($) => p_.from.state($).decide(
     ($) => {

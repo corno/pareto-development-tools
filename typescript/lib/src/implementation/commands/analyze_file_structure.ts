@@ -7,7 +7,7 @@ import type * as interface_ from "../../declarations/commands.js"
 import * as d from "../../interface/data/get_project_files.js"
 
 //dependencies
-import * as t_csv_to_prose from "pareto-csv/implementation/manual/transformers/csv/prose"
+import * as t_csv_to_prose from "pareto-csv/implementation/transformers/csv/prose"
 import * as t_file_structure_analysis_to_csv from "../transformers/file_structure_analysis/csv.js"
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
 import { $$ as q_get_project_files } from "../queries/get_project_files.js"

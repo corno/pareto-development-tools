@@ -19,7 +19,7 @@ export namespace interface_ {
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
-import * as t_ece_to_prose from "pareto-resources/implementation/manual/transformers/execute_command_executable/prose"
+import * as t_ece_to_prose from "pareto-resources/implementation/transformers/execute_command_executable/prose"
 import * as t_git_is_clean_to_prose from "../repository_has_no_open_changes/prose.js"
 
 export const Error: interface_.Error = ($) => p_.from.state($).decide(

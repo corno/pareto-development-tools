@@ -8,7 +8,7 @@ import * as d from "../../interface/data/create_dependency_graph.js"
 
 //dependencies
 import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz.js"
-import * as t_graphviz_to_prose from "pareto-graphviz/implementation/manual/transformers/high_level_simple/prose"
+import * as t_graphviz_to_prose from "pareto-graphviz/implementation/transformers/high_level_simple/prose"
 
 export const $$: interface_.create_dependency_graph = p_.command(
     ($d, $s, $q, $c) => [

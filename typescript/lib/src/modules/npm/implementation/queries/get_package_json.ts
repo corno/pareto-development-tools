@@ -8,7 +8,7 @@ import type * as interface_ from "../../declarations/queries.js"
 import * as d from "../../interface/data/get_package_json.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 import { NPM_Package as r_parse_npm_package } from "../refiners/npm_package/list_of_characters.js"
 
 export const $$: interface_.get_package_json = p_.query(

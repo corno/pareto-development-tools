@@ -9,7 +9,7 @@ import * as d from "../../interface/data/get_package_dependencies.js"
 import type * as d_npm_package from "../../modules/npm/interface/data/npm_package.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 import { NPM_Package as r_parse_npm_package } from "../../modules/npm/implementation/refiners/npm_package/list_of_characters.js"
 
 export const $$: interface_.get_package_dependencies = p_.query(

@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/implementation/transformer'
 import type * as interface_ from "../../../declarations/transformers/update_package_dependencies/prose.js"
 
 //dependencies
-import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/stat_possible_node/prose"
+import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/stat_possible_node/prose"
 import * as t_utd_to_prose from "../../../modules/npm/implementation/transformers/update_package_dependencies/prose.js"
 
 //shorthands

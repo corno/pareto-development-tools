@@ -6,8 +6,8 @@ import type * as interface_ from "../../declarations/commands.js"
 import * as d from "../../interface/data/build_and_test.js"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/implementation/manual/transformers/unrestricted_path/text"
-import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
+import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 
 export const $$: interface_.build_and_test = p_.command(
     ($d, $s, $q, $c) => [
