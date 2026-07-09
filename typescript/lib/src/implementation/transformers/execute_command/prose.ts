@@ -7,7 +7,7 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
 import * as t_git_commit_to_prose from "../git_commit/prose.js"
-import * as t_git_assert_no_open_changes_to_prose from "../../../modules/version_control_api/implementation/manual/transformers/assert_no_open_changes/prose.js"
+import * as t_git_assert_no_open_changes_to_prose from "../../../modules/version_control_api/implementation/transformers/assert_no_open_changes/prose.js"
 
 import * as t_build_and_test_to_prose from "../build_and_test/prose.js"
 import * as t_build_to_prose from "../build/prose.js"
@@ -16,7 +16,7 @@ import * as t_line_count_to_prose from "../get_project_files/prose.js"
 import * as t_publish from "../publish/prose.js"
 import * as t_update_dependencies from "../update_package_dependencies/prose.js"
 import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/read_directory/prose"
-import * as t_set_up_comparison_against_published from "../../../modules/npm/implementation/manual/transformers/set_up_comparison_against_published/prose.js"
+import * as t_set_up_comparison_against_published from "../../../modules/npm/implementation/transformers/set_up_comparison_against_published/prose.js"
 
 export const Error: interface_.Error = ($) => p_.from.state($).decide(
     ($) => {

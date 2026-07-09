@@ -8,7 +8,7 @@ import * as d from "../../interface/data/publish.js"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/manual/transformers/unrestricted_path/unrestricted_path"
-import * as q_get_package_json from "../../modules/npm/implementation/manual/queries/get_package_json.js"
+import * as q_get_package_json from "../../modules/npm/implementation/queries/get_package_json.js"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
