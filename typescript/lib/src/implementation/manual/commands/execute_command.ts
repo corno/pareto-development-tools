@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/implementation/command'
 
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
-import type * as interface_ from "../../../interface/declarations/commands.js"
+import type * as interface_ from "../../../declarations/commands.js"
 
 //data types
 import * as d from "../../../interface/data/execute_command.js"

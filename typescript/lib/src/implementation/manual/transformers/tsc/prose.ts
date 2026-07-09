@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../../interface/declarations/transformers/tsc/prose.js"
+import type * as interface_ from "../../../../declarations/transformers/tsc/prose.js"
 
 //dependencies
 import * as t_espe_to_prose from "pareto-resources/implementation/manual/transformers/execute_smelly_command_executable/prose"

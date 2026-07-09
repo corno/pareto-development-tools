@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../../interface/declarations/transformers/update_package_dependencies/prose.js"
+import type * as interface_ from "../../../../declarations/transformers/update_package_dependencies/prose.js"
 
 //dependencies
 import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-api/implementation/manual/transformers/stat_possible_node/prose"

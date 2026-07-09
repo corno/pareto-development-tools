@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/implementation/refiner'
 import p_iterate from 'pareto-core/implementation/refiner/specials/iterate'
 import p_unreachable_code_path from 'pareto-core/implementation/transformer/specials/unreachable_code_path'
 
-import type * as interface_ from "../../../../interface/declarations/refiners/execute_command/main.js"
+import type * as interface_ from "../../../../declarations/refiners/execute_command/main.js"
 
 import type * as d_out from "../../../../interface/data/execute_command.js"
 import type * as d_function from "../../../../interface/data/parse.js"

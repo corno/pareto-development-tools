@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/implementation/command'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import type * as interface_ from "../../../interface/declarations/commands.js"
+import type * as interface_ from "../../../declarations/commands.js"
 
 //data types
 import * as d from "../../../interface/data/create_dependency_graph.js"

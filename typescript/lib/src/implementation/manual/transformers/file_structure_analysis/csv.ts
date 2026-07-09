@@ -1,24 +1,25 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../../interface/declarations/transformers/file_structure_analysis/csv.js"
+import type * as interface_ from "../../../../declarations/transformers/file_structure_analysis/csv.js"
 
 //dependencies
 import * as t_to_text from "./text.js"
 
-export const File_Analysis_List: interface_.Signature = ($) => p_.literal.segmented_list([
-    p_.literal.list([
-        p_.literal.list([
-            "package",
-            "filepath",
-            "structure path",
-            "classification",
-            "extension",
-            "unexpected",
-            "line count",
-        ]),
-    ]),
+//shorthands
+import * as sh from "pareto-csv/shorthands/csv/target"
+
+export const File_Analysis_List: interface_.Signature = ($) => sh.CSV(
+    p_.literal.set(sh.row(p_.literal.list([
+        "package",
+        "filepath",
+        "structure path",
+        "classification",
+        "extension",
+        "unexpected",
+        "line count",
+    ]))),
     p_.from.list($).map(
-        ($) => p_.literal.list<string>([
+        ($) => sh.row(p_.literal.list([
             $.package,
             $.path,
             t_to_text.Path($.analysis.structure.path),
@@ -54,6 +55,6 @@ export const File_Analysis_List: interface_.Signature = ($) => p_.literal.segmen
                 () => ""
             ),
             `${$.analysis['line count']}`, //number to string
-        ])
+        ]))
     )
-])
+)

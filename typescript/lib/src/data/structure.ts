@@ -7,18 +7,17 @@ const $_algorithms = sh.g.directory_group({
     "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
 })
 
+const $_declarations = sh.g.directory_group({
+    "commands.ts": sh.g.file_manual(),
+    "queries.ts": sh.g.file_manual(),
+    "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
+    "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
+})
+
 const $_interface = sh.g.directory_group({
-    "actions": sh.g.directory_group({
-        "commands.ts": sh.g.file_manual(),
-        "queries.ts": sh.g.file_manual(),
-    }),
+    "commands.ts": sh.g.file_manual(),
+    "queries.ts": sh.g.file_manual(),
     "data": sh.g.directory_wildcards(0, false, ["ts"], true),
-    "declarations": sh.g.directory_group({
-        "commands.ts": sh.g.file_manual(),
-        "queries.ts": sh.g.file_manual(),
-        "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
-        "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
-    }),
     "generated": sh.g.directory_generated(true),
 })
 
@@ -70,6 +69,7 @@ export const $$ = sh.dgroup({
                                 "target.ts": sh.g.file_manual(),
                             })
                         ),
+                        "declarations": $_declarations,
                         "implementation": $_implementation,
                     })
                 ),
@@ -82,6 +82,7 @@ export const $$ = sh.dgroup({
                     })
                 ),
                 "data": sh.g.directory_wildcards(0, true, ["ts"], false),
+                "declarations": $_declarations,
                 "implementation": $_implementation,
                 "globals.ts": sh.g.file_generated(true),
                 "index.ts": sh.g.file_generated(true),

@@ -16,7 +16,7 @@ namespace d_xxx {
         'structure path': d_out.Path,
     }
 }
-import type * as interface_ from "../../../../interface/declarations/transformers/project_files/directory_analysis.js"
+import type * as interface_ from "../../../../declarations/transformers/project_files/directory_analysis.js"
 
 //data
 import { $$ as x_structure } from "../../../../data/structure.js"
