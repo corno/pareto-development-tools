@@ -19,10 +19,10 @@ namespace d_xxx {
 import type * as interface_ from "../../../declarations/transformers/project_files/directory_analysis.js"
 
 //data
-import { $$ as x_structure } from "../../../data/structure.js"
+// import { $$ as x_structure } from "../../../data/structure.js"
 
 
-export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary($).flatten_to_list(
+export const Project_Files: interface_.Project_Files = ($, $p) => p_.from.dictionary($).flatten_to_list(
     ($, id): d_out.File_Analysis_List => {
         const package_name = id
         const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {
@@ -71,7 +71,7 @@ export const Project_Files: interface_.Project_Files = ($) => p_.from.dictionary
             defined.Directory(
                 $,
                 {
-                    'expected structure': x_structure,
+                    'expected structure': $p.structure,
                     'structure path': p_.literal.list([]),
                 }
             )

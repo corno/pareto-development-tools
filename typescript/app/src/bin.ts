@@ -47,6 +47,9 @@ import { $$ as c_publish } from "lib/implementation/commands/publish"
 import { $$ as c_tsc } from "lib/implementation/commands/tsc"
 import { $$ as c_update_package_dependencies } from "lib/implementation/commands/update_package_dependencies"
 
+//data
+import * as data_structure from "./data/structure.js"
+
 p_h.run_main_command(
     () => {
         const create_eqe = (
@@ -280,7 +283,9 @@ p_h.run_main_command(
                         'build': build,
                         'create dependency graph': dependency_graph,
                         'analyze file structure': c_analyze_file_structure(
-                            null,
+                            {
+                                'structure': data_structure.$$,
+                            },
                             {
                                 'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
                                 'read file': rs_filesystem_unrestricted.$.queries['read file'],
@@ -290,7 +295,9 @@ p_h.run_main_command(
                             },
                         ),
                         'list file structure problems': c_list_file_structure_problems(
-                            null,
+                            {
+                                'structure': data_structure.$$,
+                            },
                             {
                                 'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
                                 'read file': rs_filesystem_unrestricted.$.queries['read file'],

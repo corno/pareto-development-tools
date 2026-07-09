@@ -1,18 +1,23 @@
 import * as p_ from 'pareto-core/interface/command_implementation'
 
-import * as query_interfaces from "../interface/queries.js"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
-import * as command_interfaces from "../interface/commands.js"
+import type * as command_interfaces from "../interface/commands.js"
 import type * as command_interfaces_npm from "../modules/npm/interface/commands.js"
 import type * as command_interfaces_pareto_application_api from "pareto-application-api/interface/commands"
 import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/commands"
 import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
 import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
 import type * as command_interfaces_version_control from "../modules/version_control_api/interface/commands.js"
+import type * as query_interfaces from "../interface/queries.js"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
+
+//data types
+import * as d_structure from "../interface/generated/liana/schemas/structure/data.js"
 
 export type analyze_file_structure = p_.Command_Implementation<
     command_interfaces.analyze_file_structure,
-    null,
+    {
+        'structure': d_structure.Directory
+    },
     {
         'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory,
         'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file
@@ -88,7 +93,9 @@ export type version_control_commit = p_.Command_Implementation<
 
 export type list_file_structure_problems = p_.Command_Implementation<
     command_interfaces.analyze_file_structure,
-    null,
+    {
+        'structure': d_structure.Directory
+    },
     {
         'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory,
         'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file

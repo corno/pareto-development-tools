@@ -1,9 +1,9 @@
 import * as p_ from 'pareto-core/interface/command_implementation'
 
-import * as query_interfaces from "../../version_control_api/interface/queries.js"
+import type * as query_interfaces from "../../version_control_api/interface/queries.js"
 import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
 
-import * as command_interfaces from "../../version_control_api/interface/commands.js"
+import type * as command_interfaces from "../../version_control_api/interface/commands.js"
 
 export type assert_no_open_changes = p_.Command_Implementation<
     command_interfaces.assert_no_open_changes,

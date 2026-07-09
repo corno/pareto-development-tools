@@ -33,7 +33,12 @@ export const $$: interface_.list_file_structure_problems = p_.command(
                         'message': sh.pg.sentences(
                             p_temp.from.list(
                                 p_temp.from.list(
-                                    t_project_files_to_file_analysis_list.Project_Files($v)
+                                    t_project_files_to_file_analysis_list.Project_Files(
+                                        $v,
+                                        {
+                                            'structure': $s.structure
+                                        }
+                                    )
                                 ).map_optionally<d_file_analysis.File_Analysis2>(
                                     ($) => {
                                         const x = $

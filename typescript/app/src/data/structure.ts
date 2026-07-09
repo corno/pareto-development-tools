@@ -1,4 +1,4 @@
-import * as sh from "../shorthands/structure/manual.js"
+import * as sh from "lib/shorthands/structure/manual"
 
 const $_declarations = sh.g.directory_group({
     "commands.ts": sh.g.file_manual(),
@@ -51,6 +51,7 @@ export const $$ = sh.dgroup({
             "src": sh.g.directory_group({
                 "bin": sh.g.directory_wildcards(0, false, ["ts"], false),
                 "bin.ts": sh.g.file_manual(),
+                "data": sh.g.directory_wildcards(0, true, ["ts"], false),
                 "globals.ts": sh.g.file_generated(true),
                 "index.ts": sh.g.file_generated(true),
             }),
@@ -72,7 +73,6 @@ export const $$ = sh.dgroup({
                 ),
                 "interface": $_interface,
                 "shorthands": $_shorthands,
-                "data": sh.g.directory_wildcards(0, true, ["ts"], false),
                 "declarations": $_declarations,
                 "implementation": $_implementation,
                 "globals.ts": sh.g.file_generated(true),

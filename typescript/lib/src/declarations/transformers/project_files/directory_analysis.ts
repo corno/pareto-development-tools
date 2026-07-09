@@ -27,9 +27,12 @@ export type extension = p_.Transformer<
     p_di.Optional_Value<string>
 >
 
-export type Project_Files = p_.Transformer<
+export type Project_Files = p_.Transformer_With_Parameter<
     d_in.Project_Files,
-    d_out.File_Analysis_List
+    d_out.File_Analysis_List,
+    {
+        'structure': d_structure.Directory,
+    }
 >
 
 
