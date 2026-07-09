@@ -23,8 +23,11 @@ const $_interface = sh.g.directory_group({
 
 const $_implementation = sh.g.directory_group({
     "generated": sh.g.directory_generated(true),
-    "manual": $_algorithms,
-    "to_be_generated": $_algorithms,
+    "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
+    "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
+    "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
+    "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
+    "to_be_generated": sh.g.directory_wildcards(0, true, ["ts"], true),
 
 })
 
