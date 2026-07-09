@@ -1,12 +1,5 @@
 import * as sh from "../shorthands/structure/manual.js"
 
-const $_algorithms = sh.g.directory_group({
-    "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
-    "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
-    "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
-    "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
-})
-
 const $_declarations = sh.g.directory_group({
     "commands.ts": sh.g.file_manual(),
     "queries.ts": sh.g.file_manual(),
@@ -22,14 +15,21 @@ const $_interface = sh.g.directory_group({
 })
 
 const $_implementation = sh.g.directory_group({
-    "generated": sh.g.directory_generated(true),
     "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
+    "generated": sh.g.directory_generated(true),
     "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
     "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
-    "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
     "to_be_generated": sh.g.directory_wildcards(0, true, ["ts"], true),
-
+    "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
 })
+
+const $_shorthands = sh.g.directory_dictionary(
+    sh.dgroup({
+        "deprecated.ts": sh.g.file_manual(),
+        "manual.ts": sh.g.file_manual(),
+        "target.ts": sh.g.file_manual(),
+    })
+)
 
 export const $$ = sh.dgroup({
     ".git": sh.g.directory_ignore(),
@@ -65,25 +65,13 @@ export const $$ = sh.dgroup({
                 "modules": sh.g.directory_dictionary(
                     sh.dgroup({
                         "interface": $_interface,
-                        "shorthands": sh.g.directory_dictionary(
-                            sh.dgroup({
-                                "deprecated.ts": sh.g.file_manual(),
-                                "manual.ts": sh.g.file_manual(),
-                                "target.ts": sh.g.file_manual(),
-                            })
-                        ),
+                        "shorthands": $_shorthands,
                         "declarations": $_declarations,
                         "implementation": $_implementation,
                     })
                 ),
                 "interface": $_interface,
-                "shorthands": sh.g.directory_dictionary(
-                    sh.dgroup({
-                        "deprecated.ts": sh.g.file_manual(),
-                        "manual.ts": sh.g.file_manual(),
-                        "target.ts": sh.g.file_manual(),
-                    })
-                ),
+                "shorthands": $_shorthands,
                 "data": sh.g.directory_wildcards(0, true, ["ts"], false),
                 "declarations": $_declarations,
                 "implementation": $_implementation,
