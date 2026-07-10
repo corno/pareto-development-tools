@@ -97,6 +97,5 @@ export const $$ = sh.dgroup({
         }),
     }),
     "README.md": sh.g.file_manual(),
-    "temp": sh.g.directory_ignore(),
     "testdata": sh.g.directory_freeform(),
 })
