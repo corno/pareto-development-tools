@@ -12,7 +12,7 @@ export const Error: interface_.Error = ($, $p) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error while running tsc': return p_.option($, ($) => $p.concise
-                ? sh.pg.composed([])
+                ? sh.pg.deprecated_composed([])
                 : sh.pg.sentences([
                     sh.sentence([
                         sh.ph.literal("error while running tsc: "),
