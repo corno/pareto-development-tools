@@ -8,7 +8,7 @@ import p_change_context from 'pareto-core/implementation/refiner/specials/change
 //data types
 import type * as d_in_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
 import type * as d_out from "../../../interface/data/file_structure_analysis.js"
-import type * as d_structure from "../../../interface/generated/liana/schemas/structure/data.js"
+import type * as d_structure from "../../../interface/data/structure.js"
 
 namespace d_xxx {
     export type Parameters = {
