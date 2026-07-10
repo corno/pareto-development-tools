@@ -11,12 +11,10 @@ const $_interface = sh.g.directory_group({
     "commands.ts": sh.g.file_manual(),
     "queries.ts": sh.g.file_manual(),
     "data": sh.g.directory_wildcards(0, false, ["ts"], true),
-    "generated": sh.g.directory_generated(true),
 })
 
 const $_implementation = sh.g.directory_group({
     "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
-    "generated": sh.g.directory_generated(true),
     "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
     "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
     "to_be_generated": sh.g.directory_wildcards(0, true, ["ts"], true),
