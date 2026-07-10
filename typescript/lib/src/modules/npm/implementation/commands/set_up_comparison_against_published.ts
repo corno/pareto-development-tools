@@ -9,7 +9,7 @@ import type * as interface_ from "../../declarations/commands.js"
 
 //data types
 import * as d from "../../interface/data/set_up_comparison_against_published.js"
-import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/list_of_characters/data"
+import type * as d_out from "pareto-fountain-pen/interface/data/list_of_characters"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"

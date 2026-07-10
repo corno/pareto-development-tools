@@ -1,5 +1,5 @@
 
-import type * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
+import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
 import type * as d_git_extended_commit from "../../modules/version_control_api/interface/data/extended_commit.js"
 import type * as d_build_and_test from "../data/build_and_test.js"
 

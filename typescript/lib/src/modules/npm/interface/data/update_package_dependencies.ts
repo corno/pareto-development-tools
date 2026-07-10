@@ -1,9 +1,9 @@
 
 import type * as d_update2latest from "./update2latest.js"
 
-import type * as d_remove from "pareto-filesystem-unrestricted-api/interface/generated/liana/schemas/fs_unrestricted_remove/data"
+import type * as d_remove from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_remove"
 import type * as d_npm from "./npm_tool.js"
-import type * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
+import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
 
 export type Parameters = {
     'path': d_path.Context_Path,

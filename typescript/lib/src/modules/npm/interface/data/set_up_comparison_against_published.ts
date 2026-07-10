@@ -1,8 +1,8 @@
 
-import type * as d_epe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
-import type * as d_eqe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_query_executable/data"
-import type * as d_make_directory from "pareto-filesystem-unrestricted-api/interface/generated/liana/schemas/fs_unrestricted_make_directory/data"
-import type * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
+import type * as d_epe from "pareto-resources/interface/data/execute_sandboxed_command_executable"
+import type * as d_eqe from "pareto-resources/interface/data/execute_sandboxed_query_executable"
+import type * as d_make_directory from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_make_directory"
+import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
 import type * as d_get_package_json from "./get_package_json.js"
 
 export type Parameters = {

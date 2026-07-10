@@ -1,6 +1,6 @@
 
-import type * as d_epe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
-import type * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
+import type * as d_epe from "pareto-resources/interface/data/execute_sandboxed_command_executable"
+import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
 
 export type Parameters = {
     'path': d_path.Context_Path,

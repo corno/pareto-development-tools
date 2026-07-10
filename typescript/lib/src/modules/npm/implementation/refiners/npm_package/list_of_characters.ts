@@ -1,7 +1,7 @@
 import type * as p_ri from 'pareto-core/interface/refiner'
 
 //data types
-import type * as d_in from "pareto-fountain-pen/interface/generated/liana/schemas/list_of_characters/data"
+import type * as d_in from "pareto-fountain-pen/interface/data/list_of_characters"
 import type * as d_out from "../../../interface/data/npm_package.js"
 import type * as d_function from "../../../interface/data/deserialize_package_json.js"
 

@@ -1,5 +1,5 @@
-// import type * as d_epe from "pareto-resources/interface/generated/liana/schemas/execute_sandboxed_command_executable/data"
-import type * as d_path from "pareto-resources/interface/generated/liana/schemas/fs_unrestricted_path/data"
+// import type * as d_epe from "pareto-resources/interface/data/execute_sandboxed_command_executable"
+import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
 import type * as d_push from "../../modules/version_control_api/interface/data/push.js"
 import type * as d_git_aic from "../../modules/version_control_api/interface/data/assert_no_open_changes.js"
 import type * as d_git_make_pristine from "../../modules/version_control_api/interface/data/make_pristine.js"

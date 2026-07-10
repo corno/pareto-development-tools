@@ -2,7 +2,7 @@
 import type * as p_ from 'pareto-core/interface/transformer'
 
 import type * as d_in from "../../../interface/data/git_commit.js"
-import type * as d_out from "pareto-fountain-pen/interface/generated/liana/schemas/prose/data"
+import type * as d_out from "pareto-fountain-pen/interface/data/prose"
 
 
 
