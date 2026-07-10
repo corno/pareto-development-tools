@@ -42,6 +42,7 @@ export const $$ = sh.dgroup({
         ".liana": sh.g.directory_ignore(),
         "module.liana.lna": sh.g.file_manual(),
     }),
+    "completions": sh.g.directory_wildcards(0, false, ["bash"], false),
     "typescript": sh.g.directory_group({
         "app": sh.g.directory_group({
             "dist": sh.g.directory_generated(false),
@@ -86,6 +87,7 @@ export const $$ = sh.dgroup({
             "package-lock.json": sh.g.file_generated(true),
             "package.json": sh.g.file_manual(),
             "src": sh.g.directory_group({
+                "data": sh.g.directory_wildcards(0, true, ["ts"], false),
                 "bin": sh.g.directory_group({
                     "test.ts": sh.g.file_generated(true)
                 }),
