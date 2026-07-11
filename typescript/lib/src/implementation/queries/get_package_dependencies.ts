@@ -5,8 +5,8 @@ import p_super_query_result from 'pareto-core/implementation/query/super_query_r
 import type * as interface_ from "../../declarations/queries.js"
 
 //data types
-import * as d from "../../interface/data/get_package_dependencies.js"
-import type * as d_npm_package from "../../submodules/npm/interface/data/npm_package.js"
+import * as d from "../../interface/schemas/get_package_dependencies.js"
+import type * as d_npm_package from "../../submodules/npm/interface/schemas/npm_package.js"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"

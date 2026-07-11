@@ -4,8 +4,8 @@ import * as p_temp from 'pareto-core/implementation/transformer'
 import type * as interface_ from "../../declarations/commands.js"
 
 //data types
-import * as d from "../../interface/data/get_project_files.js"
-import type * as d_file_analysis from "../../interface/data/file_structure_analysis.js"
+import * as d from "../../interface/schemas/get_project_files.js"
+import type * as d_file_analysis from "../../interface/schemas/file_structure_analysis.js"
 
 //dependencies
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"

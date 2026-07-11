@@ -5,8 +5,8 @@ import type * as interface_ from "../../declarations/commands.js"
 
 //data types
 import type * as d_main from "pareto-application-api/interface/data/main"
-import type * as d_parse from "../../interface/data/parse.js"
-import type * as d_execute_command from "../../interface/data/execute_command.js"
+import type * as d_parse from "../../interface/schemas/parse.js"
+import type * as d_execute_command from "../../interface/schemas/execute_command.js"
 
 //dependencies
 import * as r_instruction from "../refiners/execute_command/main.js"

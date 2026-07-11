@@ -4,9 +4,9 @@ import p_unreachable_code_path from 'pareto-core/implementation/transformer/spec
 
 import type * as interface_ from "../../../declarations/refiners/execute_command/main.js"
 
-import type * as d_out from "../../../interface/data/execute_command.js"
-import type * as d_function from "../../../interface/data/parse.js"
-import type * as d_publish from "../../../interface/data/publish.js"
+import type * as d_out from "../../../interface/schemas/execute_command.js"
+import type * as d_function from "../../../interface/schemas/parse.js"
+import type * as d_publish from "../../../interface/schemas/publish.js"
 
 //dependencies
 import * as t_context_path_from_text from "pareto-resources/implementation/refiners/path_unrestricted/text"

@@ -4,7 +4,7 @@ import p_super_query_result from 'pareto-core/implementation/query/super_query_r
 import type * as interface_ from "../../declarations/commands.js"
 
 //data types
-import * as d from "../../interface/data/create_dependency_graph.js"
+import * as d from "../../interface/schemas/create_dependency_graph.js"
 
 //dependencies
 import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz.js"

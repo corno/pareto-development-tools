@@ -3,10 +3,10 @@ import type * as p_di from 'pareto-core/interface/data'
 import type * as p_ from 'pareto-core/interface/transformer'
 
 //data types
-import type * as d_in from "../../../interface/data/project_files.js"
+import type * as d_in from "../../../interface/schemas/project_files.js"
 import type * as d_in_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
-import type * as d_out from "../../../interface/data/file_structure_analysis.js"
-import type * as d_structure from "../../../interface/data/structure.js"
+import type * as d_out from "../../../interface/schemas/file_structure_analysis.js"
+import type * as d_structure from "../../../interface/schemas/structure.js"
 
 export namespace d_xxx {
     export type Parameters = {

@@ -6,8 +6,8 @@ import p_change_context from 'pareto-core/implementation/refiner/specials/change
 
 //data types
 import type * as d_in from "astn-core/interface/data/parse_tree"
-import type * as d_out from "../../../interface/data/npm_package.js"
-import type * as d_function from "../../../interface/data/deserialize_package_json.js"
+import type * as d_out from "../../../interface/schemas/npm_package.js"
+import type * as d_function from "../../../interface/schemas/deserialize_package_json.js"
 
 
 type Error_Expect_Object =

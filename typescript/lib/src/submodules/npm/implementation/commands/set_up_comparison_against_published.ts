@@ -8,7 +8,7 @@ import p_super_query_result from 'pareto-core/implementation/query/super_query_r
 import type * as interface_ from "../../declarations/commands.js"
 
 //data types
-import * as d from "../../interface/data/set_up_comparison_against_published.js"
+import * as d from "../../interface/schemas/set_up_comparison_against_published.js"
 import type * as d_out from "pareto-fountain-pen/interface/data/list_of_characters"
 
 //dependencies

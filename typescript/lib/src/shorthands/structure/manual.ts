@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core-shorthands/unconstrained_manual'
 
 
-import type * as d_structure from "../../interface/data/structure.js"
+import type * as d_structure from "../../interface/schemas/structure.js"
 
 export namespace g {
 

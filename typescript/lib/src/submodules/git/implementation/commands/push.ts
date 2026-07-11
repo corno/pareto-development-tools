@@ -4,7 +4,7 @@ import * as p_t from 'pareto-core/implementation/transformer'
 import type * as interface_ from "../../declarations/commands.js"
 
 //data types
-import * as d from "../../../version_control_api/interface/data/push.js"
+import * as d from "../../../version_control_api/interface/schemas/push.js"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"

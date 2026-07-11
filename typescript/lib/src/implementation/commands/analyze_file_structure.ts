@@ -4,7 +4,7 @@ import type * as interface_ from "../../declarations/commands.js"
 
 
 //data types
-import * as d from "../../interface/data/get_project_files.js"
+import * as d from "../../interface/schemas/get_project_files.js"
 
 //dependencies
 import * as t_csv_to_prose from "pareto-csv/implementation/transformers/csv/prose"

@@ -1,10 +1,10 @@
 import * as p_ from 'pareto-core/interface/command_interface'
 
-import type * as d_npm from "./data/npm_tool.js"
-import type * as d_npm_publish from "./data/npm_publish.js"
-import type * as d_update2latest from "./data/update2latest.js"
-import type * as d_set_up_comparison_against_published from "./data/set_up_comparison_against_published.js"
-import type * as d_update_package_dependencies from "./data/update_package_dependencies.js"
+import type * as d_npm from "./schemas/npm_tool.js"
+import type * as d_npm_publish from "./schemas/npm_publish.js"
+import type * as d_update2latest from "./schemas/update2latest.js"
+import type * as d_set_up_comparison_against_published from "./schemas/set_up_comparison_against_published.js"
+import type * as d_update_package_dependencies from "./schemas/update_package_dependencies.js"
 
 export type npm = p_.Command_Interface<
     d_npm.Error,

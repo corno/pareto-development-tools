@@ -11,7 +11,7 @@ import type * as query_interfaces from "../interface/queries.js"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
 
 //data types
-import * as d_structure from "../interface/data/structure.js"
+import * as d_structure from "../interface/schemas/structure.js"
 
 export type analyze_file_structure = p_.Command_Implementation<
     command_interfaces.analyze_file_structure,

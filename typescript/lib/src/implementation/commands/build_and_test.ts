@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/implementation/command'
 import type * as interface_ from "../../declarations/commands.js"
 
 //data types
-import * as d from "../../interface/data/build_and_test.js"
+import * as d from "../../interface/schemas/build_and_test.js"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"

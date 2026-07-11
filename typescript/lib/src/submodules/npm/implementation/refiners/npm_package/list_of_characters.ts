@@ -2,8 +2,8 @@ import type * as p_ri from 'pareto-core/interface/refiner'
 
 //data types
 import type * as d_in from "pareto-fountain-pen/interface/data/list_of_characters"
-import type * as d_out from "../../../interface/data/npm_package.js"
-import type * as d_function from "../../../interface/data/deserialize_package_json.js"
+import type * as d_out from "../../../interface/schemas/npm_package.js"
+import type * as d_function from "../../../interface/schemas/deserialize_package_json.js"
 
 //dependencies
 import * as r_parse_tree_from_list_of_characters from "astn-core/implementation/refiners/parse_tree/list_of_characters"
