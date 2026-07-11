@@ -4,18 +4,18 @@ import * as p_ from 'pareto-core/implementation/transformer'
 import type * as interface_ from "../../../declarations/transformers/package_dependencies/graphviz.js"
 
 //data types
-import type * as d_out from "pareto-graphviz/interface/data/high_level_simple"
-import type * as d_out_attributes from "pareto-graphviz/interface/data/attributes"
+import type * as s_out from "pareto-graphviz/interface/data/high_level_simple"
+import type * as s_out_attributes from "pareto-graphviz/interface/data/attributes"
 
 export const Result: interface_.Result = ($) => {
     const $v_packages = $.packages
     return {
-        'attributes': p_.literal.list<d_out_attributes.Attributes.L>([
+        'attributes': p_.literal.list<s_out_attributes.Attributes.L>([
             ['rankdir', ['LR', null]],
         ]),
         'nodes': p_.from.dictionary($.packages).map(
             ($) => ({
-                'attributes': p_.literal.list<d_out_attributes.Attributes.L>([]),
+                'attributes': p_.literal.list<s_out_attributes.Attributes.L>([]),
             })),
         'edges': p_.from.dictionary($.packages).flatten_to_list(
             ($, id) => {
@@ -28,7 +28,7 @@ export const Result: interface_.Result = ($) => {
                                     || id === "pareto-core-shorthands"
                                     //|| id === "pareto-host-nodejs"
                                 ) {
-                                    return p_.literal.not_set<d_out.Graph.edges.L>()
+                                    return p_.literal.not_set<s_out.Graph.edges.L>()
                                 }
                                 return p_.literal.set({
                                     'from': from,
@@ -36,7 +36,7 @@ export const Result: interface_.Result = ($) => {
                                     'attributes': p_.from.dictionary($v_packages).get_possible_entry(
                                         id,
                                         ($) => p_.literal.list([]),
-                                        () => p_.literal.list<d_out_attributes.Attributes.L>([
+                                        () => p_.literal.list<s_out_attributes.Attributes.L>([
                                             ['color', "red"]
                                         ])
                                     ),

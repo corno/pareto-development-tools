@@ -1,10 +1,10 @@
-import type * as d_deserialize from "astn-core/interface/data/deserialize_parse_tree"
-import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
+import type * as s_deserialize from "astn-core/interface/data/deserialize_parse_tree"
+import type * as s_path from "pareto-resources/interface/data/fs_unrestricted_path"
 
 export type Error = {
-    'path': d_path.Node_Path
+    'path': s_path.Node_Path
     'type':
-    | ['invalid ASTN', d_deserialize.Error]
+    | ['invalid ASTN', s_deserialize.Error]
     | ['missing root object', null]
     | ['name',
         | ['missing', null]

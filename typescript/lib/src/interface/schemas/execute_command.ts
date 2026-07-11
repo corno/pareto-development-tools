@@ -1,17 +1,17 @@
 import * as p_ from 'pareto-core/interface/data'
 
 
-import type * as d_get_project_files from "./get_project_files.js"
-import type * as d_assert_clean from "../../submodules/version_control_api/interface/schemas/assert_no_open_changes.js"
-import type * as d_build from "./build.js"
-import type * as d_build_and_test from "./build_and_test.js"
-import type * as d_dependency_graph from "./create_dependency_graph.js"
-import type * as d_git_commit from "./git_commit.js"
-import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
-import type * as d_publish from "./publish.js"
-import type * as d_read_directory from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_read_directory"
-import type * as d_set_up_comparison_against_published from "../../submodules/npm/interface/schemas/set_up_comparison_against_published.js"
-import type * as d_update_dependencies from "./update_package_dependencies.js"
+import type * as s_get_project_files from "./get_project_files.js"
+import type * as s_assert_clean from "../../submodules/version_control_api/interface/schemas/assert_no_open_changes.js"
+import type * as s_build from "./build.js"
+import type * as s_build_and_test from "./build_and_test.js"
+import type * as s_dependency_graph from "./create_dependency_graph.js"
+import type * as s_git_commit from "./git_commit.js"
+import type * as s_path from "pareto-resources/interface/data/fs_unrestricted_path"
+import type * as s_publish from "./publish.js"
+import type * as s_read_directory from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_read_directory"
+import type * as s_set_up_comparison_against_published from "../../submodules/npm/interface/schemas/set_up_comparison_against_published.js"
+import type * as s_update_dependencies from "./update_package_dependencies.js"
 
 export type Parameters = {
     'type':
@@ -26,18 +26,18 @@ export type Parameters = {
      * these directories can be diffed to determine what changes have not been published yet
      */
     | ['set up comparison', {
-        'path to package': d_path.Context_Path
+        'path to package': s_path.Context_Path
     }]
-    | ['publish', d_publish.Parameters]
+    | ['publish', s_publish.Parameters]
 }
 
 export type All_Packages = {
-    'path to project': d_path.Context_Path
+    'path to project': s_path.Context_Path
     'instruction': All_Pacakges_Instruction
 }
 
 export type Package = {
-    'path': d_path.Context_Path
+    'path': s_path.Context_Path
     'instruction':
     /**
      * asserts that the git working tree is clean for 1 specified package
@@ -46,13 +46,13 @@ export type Package = {
 
 
     | ['build and test', null]
-    | ['commit changes', d_git_commit.Instruction]
+    | ['commit changes', s_git_commit.Instruction]
     | ['update package dependencies', null]
 
 }
 
 export type Project = {
-    'path': d_path.Context_Path
+    'path': s_path.Context_Path
     'instruction':
 
     | ['dependency graph', null]
@@ -83,7 +83,7 @@ export type All_Pacakges_Instruction =
     /**
      * stages all changes, makes a commit with the given message, and pushes the commit
      */
-    | ['commit changes', d_git_commit.Instruction]
+    | ['commit changes', s_git_commit.Instruction]
 
     /**
      * sets up 2 directories in /temp of the package dir; one of the local package and one of the published package
@@ -103,34 +103,34 @@ export type Error =
     | ['all', All_Error]
     | ['package', Package_Error]
 
-    | ['get project files', d_get_project_files.Error]
-    | ['dependency graph', d_dependency_graph.Error]
+    | ['get project files', s_get_project_files.Error]
+    | ['dependency graph', s_dependency_graph.Error]
 
-    | ['set up comparison', d_set_up_comparison_against_published.Error]
+    | ['set up comparison', s_set_up_comparison_against_published.Error]
 
 export type Project_Error = null
 
 export type Package_Error =
     | ['build and test', {
-        'error': d_build_and_test.Error,
+        'error': s_build_and_test.Error,
         'concise': boolean
     }]
-    | ['version control assert no open changes', d_assert_clean.Error]
-    | ['commit changes', d_git_commit.Error]
-    | ['publish', d_publish.Error]
-    | ['update dependencies', d_update_dependencies.Error]
+    | ['version control assert no open changes', s_assert_clean.Error]
+    | ['commit changes', s_git_commit.Error]
+    | ['publish', s_publish.Error]
+    | ['update dependencies', s_update_dependencies.Error]
 
 export type All_Error =
-    | ['could not read packages directory', d_read_directory.Error]
+    | ['could not read packages directory', s_read_directory.Error]
     | ['packages', p_.Dictionary<All__Package_Error>]
 
 export type All__Package_Error =
     | ['build and test', {
-        'error': d_build_and_test.Error,
+        'error': s_build_and_test.Error,
         'concise': boolean
     }]
-    | ['build', d_build.Error]
-    | ['version control assert no open changes', d_assert_clean.Error]
-    | ['commit changes', d_git_commit.Error]
-    | ['update dependencies', d_update_dependencies.Error]
-    | ['set up comparison', d_set_up_comparison_against_published.Error]
+    | ['build', s_build.Error]
+    | ['version control assert no open changes', s_assert_clean.Error]
+    | ['commit changes', s_git_commit.Error]
+    | ['update dependencies', s_update_dependencies.Error]
+    | ['set up comparison', s_set_up_comparison_against_published.Error]

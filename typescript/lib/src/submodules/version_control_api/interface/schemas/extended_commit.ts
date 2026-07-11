@@ -1,18 +1,18 @@
 import * as p_ from 'pareto-core/interface/data'
 
-import type * as d_ece from "pareto-resources/interface/data/execute_sandboxed_command_executable"
-import type * as d_repository_no_open_changes from "./repository_no_open_changes.js"
-import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
+import type * as s_ece from "pareto-resources/interface/data/execute_sandboxed_command_executable"
+import type * as s_repository_no_open_changes from "./repository_no_open_changes.js"
+import type * as s_path from "pareto-resources/interface/data/fs_unrestricted_path"
 
 export type Error =
-    | ['asserting no open changes', d_repository_no_open_changes.Error]
-    | ['could not stage', d_ece.Error]
-    | ['could not commit', d_ece.Error]
-    | ['could not push', d_ece.Error]
+    | ['asserting no open changes', s_repository_no_open_changes.Error]
+    | ['could not stage', s_ece.Error]
+    | ['could not commit', s_ece.Error]
+    | ['could not push', s_ece.Error]
 
 
 export type Parameters = {
-    'path': p_.Optional_Value<d_path.Context_Path>,
+    'path': p_.Optional_Value<s_path.Context_Path>,
     'instruction': Instruction,
 }
 

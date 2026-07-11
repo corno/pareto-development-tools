@@ -5,9 +5,9 @@ import type * as p_ri from 'pareto-core/interface/refiner'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //data types
-import type * as d_in from "astn-core/interface/data/parse_tree"
-import type * as d_out from "../../../interface/schemas/npm_package.js"
-import type * as d_function from "../../../interface/schemas/deserialize_package_json.js"
+import type * as s_in from "astn-core/interface/data/parse_tree"
+import type * as s_out from "../../../interface/schemas/npm_package.js"
+import type * as s_function from "../../../interface/schemas/deserialize_package_json.js"
 
 
 type Error_Expect_Object =
@@ -15,16 +15,16 @@ type Error_Expect_Object =
     | ['duplicate identifier', string]
     | ['missing value', null]
 
-type Object_ = p_di.Dictionary<d_in.Value>
+type Object_ = p_di.Dictionary<s_in.Value>
 
 const Object_: p_ri.Refiner<
     Object_,
     Error_Expect_Object,
-    d_in.Value
+    s_in.Value
 > = ($, abort) => {
 
-    const expect_unique_identifiers_fixme = ($: d_in.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object_ => {
-        const temp: { [id: string]: d_in.Value } = {}
+    const expect_unique_identifiers_fixme = ($: s_in.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object_ => {
+        const temp: { [id: string]: s_in.Value } = {}
         p_.from.list($).map(
             ($) => {
                 if (temp[$.id.token.value] !== undefined) {
@@ -67,7 +67,7 @@ const Object_: p_ri.Refiner<
 const Text: p_ri.Refiner<
     string,
     ['not a text', null],
-    d_in.Value
+    s_in.Value
 > = ($, abort) => p_.from.state($.type).decide(
     ($) => {
         switch ($[0]) {
@@ -83,13 +83,13 @@ const Text: p_ri.Refiner<
     })
 
 const Property: p_ri.Refiner_With_Parameter<
-    d_in.Value,
+    s_in.Value,
     ['missing property', string],
     Object_,
     {
         'id': string
     }
-> = ($, abort, $p): d_in.Value => p_.from.dictionary($).get_entry(
+> = ($, abort, $p): s_in.Value => p_.from.dictionary($).get_entry(
     $p.id,
     {
         no_such_entry: () => abort(['missing property', $p.id])
@@ -97,9 +97,9 @@ const Property: p_ri.Refiner_With_Parameter<
 )
 
 export const NPM_Package: p_ri.Refiner<
-    d_out.NPM_Package,
-    d_function.Error['type'],
-    d_in.Document
+    s_out.NPM_Package,
+    s_function.Error['type'],
+    s_in.Document
 > = ($, abort) => {
 
     return p_change_context(

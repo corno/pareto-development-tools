@@ -1,41 +1,41 @@
 
-import type * as d_tsc from "./tsc.js"
-import type * as d_remove from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_remove"
-import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
-import type * as d_stat from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_stat_possible_node"
-import type * as d_chmod from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_chmod"
+import type * as s_tsc from "./tsc.js"
+import type * as s_remove from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_remove"
+import type * as s_path from "pareto-resources/interface/data/fs_unrestricted_path"
+import type * as s_stat from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_stat_possible_node"
+import type * as s_chmod from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_chmod"
 
 export type Parameters = {
-    'path': d_path.Context_Path,
+    'path': s_path.Context_Path,
 }
 
 export type Error =
     | ['error removing lib dist dir', {
-        'path': d_path.Context_Path
-        'error': d_remove.Error
+        'path': s_path.Context_Path
+        'error': s_remove.Error
     }]
     | ['error building lib', {
-        'path': d_path.Context_Path
-        'error': d_tsc.Error
+        'path': s_path.Context_Path
+        'error': s_tsc.Error
     }]
     | ['error removing test dist dir', {
-        'path': d_path.Context_Path
-        'error': d_remove.Error
+        'path': s_path.Context_Path
+        'error': s_remove.Error
     }]
     | ['error building test', {
-        'path': d_path.Context_Path
-        'error': d_tsc.Error
+        'path': s_path.Context_Path
+        'error': s_tsc.Error
     }]
-    | ['error statting app dir', d_stat.Error]
+    | ['error statting app dir', s_stat.Error]
     | ['error removing app dist dir', {
-        'path': d_path.Context_Path
-        'error': d_remove.Error
+        'path': s_path.Context_Path
+        'error': s_remove.Error
     }]
     | ['error building app', {
-        'path': d_path.Context_Path
-        'error': d_tsc.Error
+        'path': s_path.Context_Path
+        'error': s_tsc.Error
     }]
     | ['error setting permissions on app dist bin.js', {
-        'path': d_path.Context_Path
-        'error': d_chmod.Error
+        'path': s_path.Context_Path
+        'error': s_chmod.Error
     }]

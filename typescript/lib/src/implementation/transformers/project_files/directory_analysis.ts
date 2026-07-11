@@ -6,14 +6,14 @@ import p_text_from_list from 'pareto-core/implementation/transformer/specials/te
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //data types
-import type * as d_in_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
-import type * as d_out from "../../../interface/schemas/file_structure_analysis.js"
-import type * as d_structure from "../../../interface/schemas/structure.js"
+import type * as s_in_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
+import type * as s_out from "../../../interface/schemas/file_structure_analysis.js"
+import type * as s_structure from "../../../interface/schemas/structure.js"
 
-namespace d_xxx {
+namespace s_xxx {
     export type Parameters = {
-        'expected structure': d_structure.Directory,
-        'structure path': d_out.Path,
+        'expected structure': s_structure.Directory,
+        'structure path': s_out.Path,
     }
 }
 import type * as interface_ from "../../../declarations/transformers/project_files/directory_analysis.js"
@@ -23,11 +23,11 @@ import type * as interface_ from "../../../declarations/transformers/project_fil
 
 
 export const Project_Files: interface_.Project_Files = ($, $p) => p_.from.dictionary($).flatten_to_list(
-    ($, id): d_out.File_Analysis_List => {
+    ($, id): s_out.File_Analysis_List => {
         const package_name = id
-        const Directory2 = ($: d_out.Directory): d_out.Flattened_Directory_With_Line_Counts => {
-            const temp: { [id: string]: d_out.File_Analysis } = {}
-            const x = ($: d_out.Directory, path: string): void => {
+        const Directory2 = ($: s_out.Directory): s_out.Flattened_Directory_With_Line_Counts => {
+            const temp: { [id: string]: s_out.File_Analysis } = {}
+            const x = ($: s_out.Directory, path: string): void => {
                 p_.from.state($).decide(
                     ($): null => {
                         switch ($[0]) {
@@ -150,7 +150,7 @@ namespace defined {
 
         const $v_dir = $
         return p_.from.state($p['expected structure']).decide(
-            ($): d_out.Directory => {
+            ($): s_out.Directory => {
                 switch ($[0]) {
 
                     case 'group': return p_.option($, ($) => {
@@ -159,20 +159,20 @@ namespace defined {
                             ($, id) => {
                                 const node = $
                                 const NodeX = (
-                                    $: d_in_directory_content.Node,
+                                    $: s_in_directory_content.Node,
                                     $p: {
                                         'name': string,
-                                        'expected structure': d_structure.Directory.group.D,
-                                        'structure path': d_out.Path,
+                                        'expected structure': s_structure.Directory.group.D,
+                                        'structure path': s_out.Path,
                                     }
-                                ): d_out.Node => p_.from.state($).decide(
-                                    ($): d_out.Node => {
+                                ): s_out.Node => p_.from.state($).decide(
+                                    ($): s_out.Node => {
                                         switch ($[0]) {
-                                            case 'file': return p_.option($, ($): d_out.Node => ['file', ({
+                                            case 'file': return p_.option($, ($): s_out.Node => ['file', ({
                                                 'structure': {
                                                     'path': $p['structure path'],
                                                     'classification': p_.from.state($p['expected structure']).decide(
-                                                        ($): d_out.Classification => {
+                                                        ($): s_out.Classification => {
                                                             switch ($[0]) {
                                                                 case 'file': return p_.option($, ($) => p_.from.state($).decide(
                                                                     ($) => {
@@ -183,7 +183,7 @@ namespace defined {
                                                                         }
                                                                     }))
                                                                 case 'directory': return p_.option($, ($) => ['directory', p_.from.state($).decide(
-                                                                    ($): d_out.Directory_Classification => {
+                                                                    ($): s_out.Directory_Classification => {
                                                                         switch ($[0]) {
                                                                             case 'wildcards': return p_.option($, ($) => ['wildcards', null])
                                                                             case 'freeform': return p_.option($, ($) => ['freeform', null])
@@ -218,11 +218,11 @@ namespace defined {
                                                         }
                                                     })
                                             })])
-                                            case 'directory': return p_.option($, ($): d_out.Node => {
+                                            case 'directory': return p_.option($, ($): s_out.Node => {
                                                 //found a directory in the filesystem, check expected structure
                                                 const dir = $
                                                 return ['directory', p_.from.state($p['expected structure']).decide(
-                                                    ($): d_out.Directory => {
+                                                    ($): s_out.Directory => {
                                                         switch ($[0]) {
                                                             case 'file': return p_.option($, ($) => ['expected a file', null])
                                                             case 'directory': return p_.option($, ($) => Directory(
@@ -304,8 +304,8 @@ namespace defined {
                         const struct = $
 
                         return ['dictionary', p_.from.dictionary($v_dir).map(
-                            ($, id): d_out.Node => p_.from.state($).decide(
-                                ($): d_out.Node => {
+                            ($, id): s_out.Node => p_.from.state($).decide(
+                                ($): s_out.Node => {
                                     switch ($[0]) {
                                         case 'directory': return p_.option($, ($) => ['directory', Directory(
                                             $,
@@ -318,7 +318,7 @@ namespace defined {
                                             }
                                         )])
                                         case 'other': return p_.option($, ($) => ['other', null])
-                                        case 'file': return p_.option($, ($): d_out.Node => ['file', {
+                                        case 'file': return p_.option($, ($): s_out.Node => ['file', {
                                             'structure': {
                                                 'path': p_.literal.chain(
                                                     $p['structure path'],
@@ -363,9 +363,9 @@ namespace undefined {
 
     export const Node: interface_.undefined.Node = ($, $p) => {
         return p_.from.state($).decide(
-            ($): d_out.Node => {
+            ($): s_out.Node => {
                 switch ($[0]) {
-                    case 'file': return p_.option($, ($): d_out.Node => ['file', {
+                    case 'file': return p_.option($, ($): s_out.Node => ['file', {
                         'unexpected path tail': $p['unexpected path tail'],
                         'structure': $p['structure'],
                         'extension': extension($p['name']),
@@ -398,16 +398,16 @@ namespace wildcard {
                     id,
                 )
                 return p_.from.state($).decide(
-                    ($): d_out.Node => {
+                    ($): s_out.Node => {
                         switch ($[0]) {
                             case 'other': return p_.option($, ($) => ['other', null])
-                            case 'file': return p_.option($, ($): d_out.Node => ['file', {
+                            case 'file': return p_.option($, ($): s_out.Node => ['file', {
                                 'structure': {
                                     'path': $p['structure path'],
                                     'classification': ['directory', ['wildcards', null]],
                                 },
                                 'extension': extension(id),
-                                'unexpected path tail': p_change_context($, ($): d_out.File_Analysis['unexpected path tail'] => {
+                                'unexpected path tail': p_change_context($, ($): s_out.File_Analysis['unexpected path tail'] => {
                                     if ($p['number of directories encountered'] < $p['wildcard']['required directories']) {
                                         //files are not allowed yet, haven't descended through enough required directories
                                         return p_.literal.set(tail)

@@ -10,7 +10,7 @@ const $_declarations = sh.g.directory_group({
 const $_interface = sh.g.directory_group({
     "commands.ts": sh.g.file_manual(),
     "queries.ts": sh.g.file_manual(),
-    "data": sh.g.directory_wildcards(0, false, ["ts"], true),
+    "schemas": sh.g.directory_wildcards(0, false, ["ts"], true),
 })
 
 const $_implementation = sh.g.directory_group({

@@ -11,12 +11,12 @@ import type * as query_interfaces from "../interface/queries.js"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
 
 //data types
-import * as d_structure from "../interface/schemas/structure.js"
+import * as s_structure from "../interface/schemas/structure.js"
 
 export type analyze_file_structure = p_.Command_Implementation<
     command_interfaces.analyze_file_structure,
     {
-        'structure': d_structure.Directory
+        'structure': s_structure.Directory
     },
     {
         'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory,
@@ -94,7 +94,7 @@ export type version_control_commit = p_.Command_Implementation<
 export type list_file_structure_problems = p_.Command_Implementation<
     command_interfaces.analyze_file_structure,
     {
-        'structure': d_structure.Directory
+        'structure': s_structure.Directory
     },
     {
         'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory,

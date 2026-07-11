@@ -6,9 +6,9 @@ import * as p_qi from 'pareto-core/interface/query_interface'
 
 
 //data types
-import type * as d_ece from "pareto-resources/interface/data/execute_sandboxed_command_executable"
-import type * as d_espe from "pareto-resources/interface/data/execute_sandboxed_smelly_command_executable"
-import type * as d_eqe from "pareto-resources/interface/data/execute_sandboxed_query_executable"
+import type * as s_ece from "pareto-resources/interface/data/execute_sandboxed_command_executable"
+import type * as s_espe from "pareto-resources/interface/data/execute_sandboxed_smelly_command_executable"
+import type * as s_eqe from "pareto-resources/interface/data/execute_sandboxed_query_executable"
 
 //resources
 import * as rs_execute_unrestricted from "pareto-resource-execute-unrestricted/index"
@@ -54,7 +54,7 @@ p_h.run_main_command(
     () => {
         const create_eqe = (
             program: string,
-        ): p_qi.Query_Interface<d_eqe.Result, d_eqe.Error, d_eqe.Parameters> => q_execute_sandboxed_query_executable(
+        ): p_qi.Query_Interface<s_eqe.Result, s_eqe.Error, s_eqe.Parameters> => q_execute_sandboxed_query_executable(
             {
                 'program': program,
             },
@@ -65,7 +65,7 @@ p_h.run_main_command(
 
         const create_ece = (
             program: string,
-        ): p_ci.Command_Interface<d_ece.Error, d_ece.Parameters> => c_execute_sandboxed_command_executable(
+        ): p_ci.Command_Interface<s_ece.Error, s_ece.Parameters> => c_execute_sandboxed_command_executable(
             {
                 'program': program,
             },
@@ -77,7 +77,7 @@ p_h.run_main_command(
 
         const create_espe = (
             program: string,
-        ): p_ci.Command_Interface<d_espe.Error, d_espe.Parameters> => c_execute_sandboxed_smelly_command_executable(
+        ): p_ci.Command_Interface<s_espe.Error, s_espe.Parameters> => c_execute_sandboxed_smelly_command_executable(
             {
                 'program': program,
             },

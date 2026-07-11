@@ -5,7 +5,7 @@ import type * as interface_ from "../../declarations/commands.js"
 
 //data types
 import * as d from "../../interface/schemas/get_project_files.js"
-import type * as d_file_analysis from "../../interface/schemas/file_structure_analysis.js"
+import type * as s_file_analysis from "../../interface/schemas/file_structure_analysis.js"
 
 //dependencies
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
@@ -39,7 +39,7 @@ export const $$: interface_.list_file_structure_problems = p_.command(
                                             'structure': $s.structure
                                         }
                                     )
-                                ).map_optionally<d_file_analysis.File_Analysis2>(
+                                ).map_optionally<s_file_analysis.File_Analysis2>(
                                     ($) => {
                                         const x = $
                                         return p_temp.from.optional($.analysis['unexpected path tail']).map(

@@ -4,15 +4,15 @@ import p_unreachable_code_path from 'pareto-core/implementation/transformer/spec
 
 import type * as interface_ from "../../../declarations/refiners/execute_command/main.js"
 
-import type * as d_out from "../../../interface/schemas/execute_command.js"
-import type * as d_function from "../../../interface/schemas/parse.js"
-import type * as d_publish from "../../../interface/schemas/publish.js"
+import type * as s_out from "../../../interface/schemas/execute_command.js"
+import type * as s_function from "../../../interface/schemas/parse.js"
+import type * as s_publish from "../../../interface/schemas/publish.js"
 
 //dependencies
 import * as t_context_path_from_text from "pareto-resources/implementation/refiners/path_unrestricted/text"
 
 export const Command: interface_.Command = ($, abort) => p_iterate<
-    d_out.Parameters,
+    s_out.Parameters,
     string,
     null
 >({
@@ -26,9 +26,9 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                 "project": null,
                 "publish": null,
                 "set-up-comparison": null,
-            })] as d_function.Error,
+            })] as s_function.Error,
             (end_info, expected) => abort(expected),
-            ($): d_out.Parameters['type'] => {
+            ($): s_out.Parameters['type'] => {
                 {
                     switch ($) {
                         case "all": return ['all packages', {
@@ -46,9 +46,9 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                                     "commit-changes": null,
                                     "set-up-comparison": null,
                                     "update-dependencies": null,
-                                })] as d_function.Error,
+                                })] as s_function.Error,
                                 (end_info, expected) => abort(expected),
-                                ($, expected): d_out.All_Pacakges_Instruction => {
+                                ($, expected): s_out.All_Pacakges_Instruction => {
                                     switch ($) {
                                         case "assert-no-open-changes": return ['assert no open changes', null]
                                         case "build-and-test": return ['build and test', {
@@ -100,7 +100,7 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                                     "build-and-test": null,
                                     "commit-changes": null,
                                     "update-dependencies": null,
-                                })] as d_function.Error,
+                                })] as s_function.Error,
                                 (end_info, expected) => abort(expected),
                                 ($, expected) => {
                                     switch ($) {
@@ -141,7 +141,7 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                                     "analyze-file-structure": null,
                                     "dependency-graph": null,
                                     "list-file-structure-problems": null,
-                                })] as d_function.Error,
+                                })] as s_function.Error,
                                 (end_info, expected) => abort(expected),
                                 ($, expected) => {
                                     switch ($) {
@@ -166,7 +166,7 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                                 ['expected one of', p_.literal.dictionary({
                                     "patch": null,
                                     "minor": null,
-                                })] as d_function.Error,
+                                })] as s_function.Error,
                                 (end_info, expected) => abort(expected),
                                 ($, expected) => {
                                     switch ($) {
@@ -186,7 +186,7 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                                     //     (end_info, abort) => abort(['expected a text', { 'description': "one time password" }])
                                     // )
                                 }],
-                                ($, expected): d_publish.Parameters['impact'] => {
+                                ($, expected): s_publish.Parameters['impact'] => {
                                     switch ($) {
                                         case "dry-run": return ['dry run', null]
                                         default: return abort(['expected one of', p_.literal.dictionary({
