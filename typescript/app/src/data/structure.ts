@@ -62,7 +62,7 @@ export const $$ = sh.dgroup({
             "package-lock.json": sh.g.file_generated(true),
             "package.json": sh.g.file_manual(),
             "src": sh.g.directory_group({
-                "modules": sh.g.directory_dictionary(
+                "submodules": sh.g.directory_dictionary(
                     sh.dgroup({
                         "interface": $_interface,
                         "shorthands": $_shorthands,
