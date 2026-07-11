@@ -6,7 +6,7 @@ import type * as interface_ from "../../../declarations/transformers/git_commit/
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
-import * as t_git_extended_commit_to_prose from "../../../modules/version_control_api/implementation/transformers/extended_commit/prose.js"
+import * as t_git_extended_commit_to_prose from "../../../submodules/version_control_api/implementation/transformers/extended_commit/prose.js"
 import * as t_build_and_test_to_prose from "../build_and_test/prose.js"
 
 export const Error: interface_.Error = ($) => p_.from.state($).decide(

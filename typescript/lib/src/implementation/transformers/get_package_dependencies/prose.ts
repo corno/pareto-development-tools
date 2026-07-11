@@ -4,7 +4,7 @@ import type * as interface_ from "../../../declarations/transformers/get_package
 
 //dependencies
 import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/read_directory/prose"
-import * as t_deserialize_package_json_to_prose from "../../../modules/npm/implementation/transformers/deserialize_package_json/prose.js"
+import * as t_deserialize_package_json_to_prose from "../../../submodules/npm/implementation/transformers/deserialize_package_json/prose.js"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"

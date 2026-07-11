@@ -1,12 +1,12 @@
 import * as p_ from 'pareto-core/interface/command_implementation'
 
 import type * as command_interfaces from "../interface/commands.js"
-import type * as command_interfaces_npm from "../modules/npm/interface/commands.js"
+import type * as command_interfaces_npm from "../submodules/npm/interface/commands.js"
 import type * as command_interfaces_pareto_application_api from "pareto-application-api/interface/commands"
 import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/commands"
 import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
 import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
-import type * as command_interfaces_version_control from "../modules/version_control_api/interface/commands.js"
+import type * as command_interfaces_version_control from "../submodules/version_control_api/interface/commands.js"
 import type * as query_interfaces from "../interface/queries.js"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
 

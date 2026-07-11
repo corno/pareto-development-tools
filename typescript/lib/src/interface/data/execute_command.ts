@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/interface/data'
 
 
 import type * as d_get_project_files from "./get_project_files.js"
-import type * as d_assert_clean from "../../modules/version_control_api/interface/data/assert_no_open_changes.js"
+import type * as d_assert_clean from "../../submodules/version_control_api/interface/data/assert_no_open_changes.js"
 import type * as d_build from "./build.js"
 import type * as d_build_and_test from "./build_and_test.js"
 import type * as d_dependency_graph from "./create_dependency_graph.js"
@@ -10,7 +10,7 @@ import type * as d_git_commit from "./git_commit.js"
 import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
 import type * as d_publish from "./publish.js"
 import type * as d_read_directory from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_read_directory"
-import type * as d_set_up_comparison_against_published from "../../modules/npm/interface/data/set_up_comparison_against_published.js"
+import type * as d_set_up_comparison_against_published from "../../submodules/npm/interface/data/set_up_comparison_against_published.js"
 import type * as d_update_dependencies from "./update_package_dependencies.js"
 
 export type Parameters = {

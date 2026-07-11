@@ -6,14 +6,14 @@ import type * as interface_ from "../../../declarations/transformers/publish/pro
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 //dependencies
-import * as t_git_push_to_prose from "../../../modules/version_control_api/implementation/transformers/push/prose.js"
-import * as t_git_make_pristine_to_prose from "../../../modules/version_control_api/implementation/transformers/make_pristine/prose.js"
+import * as t_git_push_to_prose from "../../../submodules/version_control_api/implementation/transformers/push/prose.js"
+import * as t_git_make_pristine_to_prose from "../../../submodules/version_control_api/implementation/transformers/make_pristine/prose.js"
 import * as t_clean_and_update_package_dependencies_to_prose from "../update_package_dependencies/prose.js"
-import * as t_git_is_clean_to_prose from "../../../modules/version_control_api/implementation/transformers/repository_has_no_open_changes/prose.js"
-import * as t_npm_to_prose from "../../../modules/npm/implementation/transformers/npm/prose.js"
+import * as t_git_is_clean_to_prose from "../../../submodules/version_control_api/implementation/transformers/repository_has_no_open_changes/prose.js"
+import * as t_npm_to_prose from "../../../submodules/npm/implementation/transformers/npm/prose.js"
 import * as t_build_and_test_to_prose from "../build_and_test/prose.js"
-import * as t_get_package_json_to_prose from "../../../modules/npm/implementation/transformers/get_package_json/prose.js"
-import * as t_git_ec_to_prose from "../../../modules/version_control_api/implementation/transformers/extended_commit/prose.js"
+import * as t_get_package_json_to_prose from "../../../submodules/npm/implementation/transformers/get_package_json/prose.js"
+import * as t_git_ec_to_prose from "../../../submodules/version_control_api/implementation/transformers/extended_commit/prose.js"
 
 export const Error: interface_.Error = ($) => p_.from.state($).decide(
     ($) => {

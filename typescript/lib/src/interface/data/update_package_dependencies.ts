@@ -1,5 +1,5 @@
 
-import type * as d_utd from "../../modules/npm/interface/data/update_package_dependencies.js"
+import type * as d_utd from "../../submodules/npm/interface/data/update_package_dependencies.js"
 import type * as d_path from "pareto-resources/interface/data/fs_unrestricted_path"
 import type * as d_stat from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_stat_possible_node"
 
