@@ -3,9 +3,9 @@ import type * as p_i from 'pareto-core/interface/transformer'
 
 //schemas
 import type * as s_in from "../../../interface/schemas/update_package_dependencies.js"
-import type * as s_out from "pareto-fountain-pen/interface/data/prose"
 
-export namespace interface_ {
+import type * as s_out from "../../../interface/schemas/prose.js"
+namespace declarations {
 
     export type Error = p_i.Transformer<
         s_in.Error,
@@ -21,7 +21,7 @@ import * as t_u2l_to_prose from "../update2latest/prose.js"
 import * as t_remove_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/remove/prose"
 import * as t_npm_to_prose from "../npm/prose.js"
 
-export const Error: interface_.Error = ($) => {
+export const Error: declarations.Error = ($) => {
     return p_.from.state($).decide(
         ($) => {
             switch ($[0]) {

@@ -6,7 +6,7 @@ import type * as query_interfaces_pareto_filesystem_unrestricted_api from "paret
 
 //schemas
 import * as d from "../../interface/schemas/get_project_files.js"
-import type * as s_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
+import type * as s_directory_content from "../../interface/schemas/directory_content.js"
 
 
 //dependencies

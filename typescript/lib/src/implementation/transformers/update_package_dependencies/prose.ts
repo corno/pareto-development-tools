@@ -1,6 +1,15 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../declarations/transformers/update_package_dependencies/prose.js"
+//schemas
+import type * as s_in from "../../../interface/schemas/update_package_dependencies.js"
+import type * as s_out from "../../../interface/schemas/prose.js"
+
+namespace declarations {
+    export type Error = p_.Transformer<
+        s_in.Error,
+        s_out.Phrase
+    >
+}
 
 //dependencies
 import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/stat_possible_node/prose"
@@ -9,7 +18,7 @@ import * as t_utd_to_prose from "../../../submodules/npm/implementation/transfor
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
-export const Error: interface_.Error = ($) => p_.from.state($).decide(
+export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error updating lib': return p_.option($, ($) => sh.ph.composed([

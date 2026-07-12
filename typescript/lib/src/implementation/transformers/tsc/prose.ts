@@ -1,6 +1,18 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../declarations/transformers/tsc/prose.js"
+//schemas
+import type * as s_in from "../../../interface/schemas/tsc.js"
+import type * as s_out from "../../../interface/schemas/prose.js"
+
+namespace declarations {
+    export type Error = p_.Transformer_With_Parameter<
+        s_in.Error,
+        s_out.Paragraph,
+        {
+        'concise': boolean
+    }
+    >
+}
 
 //dependencies
 import * as t_espe_to_prose from "pareto-resources/implementation/transformers/execute_smelly_command_executable/prose"
@@ -8,7 +20,7 @@ import * as t_espe_to_prose from "pareto-resources/implementation/transformers/e
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
-export const Error: interface_.Error = ($, $p) => p_.from.state($).decide(
+export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error while running tsc': return p_.option($, ($) => $p.concise

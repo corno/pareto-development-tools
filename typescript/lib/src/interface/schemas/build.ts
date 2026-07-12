@@ -1,9 +1,9 @@
 
 import type * as s_tsc from "./tsc.js"
-import type * as s_remove from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_remove"
-import type * as s_path from "pareto-resources/interface/data/fs_unrestricted_path"
-import type * as s_stat from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_stat_possible_node"
-import type * as s_chmod from "pareto-filesystem-unrestricted-api/interface/data/fs_unrestricted_chmod"
+import type * as s_remove from "./fs_unrestricted_remove.js"
+import type * as s_path from "./fs_unrestricted_path.js"
+import type * as s_stat from "./fs_unrestricted_stat_possible_node.js"
+import type * as s_chmod from "./fs_unrestricted_chmod.js"
 
 export type Parameters = {
     'path': s_path.Context_Path,

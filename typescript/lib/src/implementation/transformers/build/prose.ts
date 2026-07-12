@@ -1,6 +1,18 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../declarations/transformers/build/prose.js"
+//schemas
+import type * as s_in from "../../../interface/schemas/build.js"
+import type * as s_out from "../../../interface/schemas/prose.js"
+
+namespace declarations {
+    export type Error = p_.Transformer_With_Parameter<
+        s_in.Error,
+        s_out.Phrase,
+        {
+        'concise': boolean
+    }
+    >
+}
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
@@ -12,7 +24,7 @@ import * as t_path_to_loc from "pareto-resources/implementation/transformers/unr
 import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/stat_possible_node/prose"
 import * as t_chmod_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/chmod/prose"
 
-export const Error: interface_.Error = ($, $p) => p_.from.state($).decide(
+export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error removing lib dist dir': return p_.option($, ($) => sh.ph.composed([

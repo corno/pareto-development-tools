@@ -6,8 +6,7 @@ import p_text_from_list from 'pareto-core/implementation/transformer/specials/te
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //schemas
-import type * as s_in_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
-import type * as s_out from "../../../interface/schemas/file_structure_analysis.js"
+import type * as s_in_directory_content from "../../../interface/schemas/directory_content.js"
 import type * as s_structure from "../../../interface/schemas/structure.js"
 
 namespace s_xxx {
@@ -16,13 +15,78 @@ namespace s_xxx {
         'structure path': s_out.Path,
     }
 }
-import type * as interface_ from "../../../declarations/transformers/project_files/directory_analysis.js"
+import type * as p_di from 'pareto-core/interface/data'
+import type * as s_in from "../../../interface/schemas/project_files.js"
+import type * as s_out from "../../../interface/schemas/file_structure_analysis.js"
+
+namespace declarations {
+    export type line_count = p_.Transformer<
+        string,
+        number
+    >
+    export type extension = p_.Transformer<
+        string,
+        p_di.Optional_Value<string>
+    >
+    export type Project_Files = p_.Transformer_With_Parameter<
+        s_in.Project_Files,
+        s_out.File_Analysis_List,
+        {
+            'structure': s_structure.Directory,
+        }
+    >
+    export namespace wildcard {
+        export type Directory = p_.Transformer_With_Parameter<
+            s_in_directory_content.Directory,
+            s_out.Directory,
+            {
+                'wildcard': s_structure.Directory.wildcards,
+                'structure path': s_out.Path,
+                'tail': s_out.Path,
+                'number of directories encountered': number,
+            }
+        >
+
+    }
+    export namespace defined {
+        export type Directory = p_.Transformer_With_Parameter<
+            s_in_directory_content.Directory,
+            s_out.Directory,
+            s_xxx.Parameters
+        >
+
+    }
+    export namespace undefined {
+        export type Directory = p_.Transformer_With_Parameter<
+            s_in_directory_content.Directory,
+            s_out.Directory,
+            {
+                'structure': s_out.Structure_Analysis,
+                'unexpected path tail': p_di.Optional_Value<s_out.Path>,
+            }
+        >
+        export type Node = p_.Transformer_With_Parameter<
+            s_in_directory_content.Node,
+            s_out.Node,
+            {
+                'structure': s_out.Structure_Analysis,
+                'name': string,
+                'unexpected path tail': p_di.Optional_Value<s_out.Path>,
+            }
+        >
+
+    }
+
+
+
+
+}
 
 //data
 // import { $$ as x_structure } from "../../../data/structure.js"
 
 
-export const Project_Files: interface_.Project_Files = ($, $p) => p_.from.dictionary($).flatten_to_list(
+export const Project_Files: declarations.Project_Files = ($, $p) => p_.from.dictionary($).flatten_to_list(
     ($, id): s_out.File_Analysis_List => {
         const package_name = id
         const Directory2 = ($: s_out.Directory): s_out.Flattened_Directory_With_Line_Counts => {
@@ -89,7 +153,7 @@ export const Project_Files: interface_.Project_Files = ($, $p) => p_.from.dictio
 
 
 
-const line_count: interface_.line_count = ($) => {
+const line_count: declarations.line_count = ($) => {
     let lineCount = 0
     p_.from.list(p_list_from_text(
         $,
@@ -104,7 +168,7 @@ const line_count: interface_.line_count = ($) => {
     return lineCount + 1 //add one for the last line if it doesn't end with a newline
 }
 
-const extension: interface_.extension = ($) => {
+const extension: declarations.extension = ($) => {
     const $v_characters = p_list_from_text(
         $,
         ($) => $
@@ -145,7 +209,7 @@ const extension: interface_.extension = ($) => {
 }
 namespace defined {
 
-    export const Directory: interface_.defined.Directory = ($, $p) => {
+    export const Directory: declarations.defined.Directory = ($, $p) => {
         //both found and expected are directories
 
         const $v_dir = $
@@ -345,7 +409,7 @@ namespace defined {
 
 namespace undefined {
 
-    export const Directory: interface_.undefined.Directory = ($, $p) => {
+    export const Directory: declarations.undefined.Directory = ($, $p) => {
         return ['dictionary', p_.from.dictionary($).map(
             ($, id) => Node(
                 $,
@@ -361,7 +425,7 @@ namespace undefined {
             ))]
     }
 
-    export const Node: interface_.undefined.Node = ($, $p) => {
+    export const Node: declarations.undefined.Node = ($, $p) => {
         return p_.from.state($).decide(
             ($): s_out.Node => {
                 switch ($[0]) {
@@ -390,7 +454,7 @@ namespace undefined {
 
 namespace wildcard {
 
-    export const Directory: interface_.wildcard.Directory = ($, $p) => {
+    export const Directory: declarations.wildcard.Directory = ($, $p) => {
         return ['dictionary', p_.from.dictionary($).map(
             ($, id) => {
                 const tail = p_.literal.chain(

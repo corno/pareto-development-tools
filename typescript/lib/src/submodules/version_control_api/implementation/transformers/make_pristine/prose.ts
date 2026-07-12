@@ -3,9 +3,9 @@ import type * as p_i from 'pareto-core/interface/transformer'
 
 //schemas
 import type * as s_in from "../../../interface/schemas/make_pristine.js"
-import type * as s_out from "pareto-fountain-pen/interface/data/prose"
+import type * as s_out from "../../../interface/schemas/prose.js"
 
-export namespace interface_ {
+namespace declarations {
 
     export type Error = p_i.Transformer<
         s_in.Error,
@@ -19,7 +19,7 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 //dependencies
 import * as t_epe_to_prose from "pareto-resources/implementation/transformers/execute_command_executable/prose"
 
-export const Error: interface_.Error = ($) => p_.from.state($).decide(
+export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'unexpected error': return p_.option($, ($) => sh.ph.composed([

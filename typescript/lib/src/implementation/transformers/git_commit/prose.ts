@@ -1,6 +1,15 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../declarations/transformers/git_commit/prose.js"
+//schemas
+import type * as s_in from "../../../interface/schemas/git_commit.js"
+import type * as s_out from "../../../interface/schemas/prose.js"
+
+namespace declarations {
+    export type Error = p_.Transformer<
+        s_in.Error,
+        s_out.Phrase
+    >
+}
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
@@ -9,7 +18,7 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 import * as t_git_extended_commit_to_prose from "../../../submodules/version_control_api/implementation/transformers/extended_commit/prose.js"
 import * as t_build_and_test_to_prose from "../build_and_test/prose.js"
 
-export const Error: interface_.Error = ($) => p_.from.state($).decide(
+export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'version control extended commit': return p_.option($, ($) => sh.ph.composed([

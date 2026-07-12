@@ -1,6 +1,15 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../declarations/transformers/execute_command/prose.js"
+//schemas
+import type * as s_in from "../../../interface/schemas/execute_command.js"
+import type * as s_out from "../../../interface/schemas/prose.js"
+
+namespace declarations {
+    export type Error = p_.Transformer<
+        s_in.Error,
+        s_out.Phrase
+    >
+}
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
@@ -18,7 +27,7 @@ import * as t_update_dependencies from "../update_package_dependencies/prose.js"
 import * as t_read_directory_to_prose from "pareto-filesystem-unrestricted-api/implementation/transformers/read_directory/prose"
 import * as t_set_up_comparison_against_published from "../../../submodules/npm/implementation/transformers/set_up_comparison_against_published/prose.js"
 
-export const Error: interface_.Error = ($) => p_.from.state($).decide(
+export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'package': return p_.option($, ($) => p_.from.state($).decide(

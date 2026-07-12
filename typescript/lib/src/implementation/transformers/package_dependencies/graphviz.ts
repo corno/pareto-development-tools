@@ -1,13 +1,21 @@
 
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../declarations/transformers/package_dependencies/graphviz.js"
+//schemas
+import type * as s_in from "../../../interface/schemas/get_package_dependencies.js"
+import type * as s_out from "../../../interface/schemas/graphviz.js"
+import type * as s_out_attributes from "../../../interface/schemas/graphviz_attributes.js"
+
+namespace declarations {
+    export type Result = p_.Transformer<
+        s_in.Result,
+        s_out.Graph
+    >
+}
 
 //schemas
-import type * as s_out from "pareto-graphviz/interface/data/high_level_simple"
-import type * as s_out_attributes from "pareto-graphviz/interface/data/attributes"
 
-export const Result: interface_.Result = ($) => {
+export const Result: declarations.Result = ($) => {
     const $v_packages = $.packages
     return {
         'attributes': p_.literal.list<s_out_attributes.Attributes.L>([

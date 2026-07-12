@@ -5,6 +5,9 @@ import p_list_build_deprecated from 'pareto-core/implementation/refiner/specials
 import p_text_from_list from 'pareto-core/implementation/transformer/specials/text_from_list'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
+//schemas
+import type * as s_out from "../../interface/schemas/list_of_characters.js"
+
 //interface dependencies
 import type * as command_interfaces from "../../interface/commands.js"
 import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
@@ -14,7 +17,6 @@ import type * as query_interfaces_pareto_resources from "pareto-resources/interf
 
 //schemas
 import * as d from "../../interface/schemas/set_up_comparison_against_published.js"
-import type * as s_out from "pareto-fountain-pen/interface/data/list_of_characters"
 
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"

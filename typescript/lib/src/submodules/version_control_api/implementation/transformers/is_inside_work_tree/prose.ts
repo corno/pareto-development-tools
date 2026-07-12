@@ -3,9 +3,9 @@ import type * as p_i from 'pareto-core/interface/transformer'
 
 //schemas
 import type * as s_in from "../../../interface/schemas/is_inside_work_tree.js"
-import type * as s_out from "pareto-fountain-pen/interface/data/prose"
 
-export namespace interface_ {
+import type * as s_out from "../../../interface/schemas/prose.js"
+namespace declarations {
 
     export type Error = p_i.Transformer<
         s_in.Error,
@@ -17,7 +17,7 @@ export namespace interface_ {
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
-export const Error: interface_.Error = ($) => p_.from.state($).decide(
+export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'could not run git command': return p_.option($, ($) => sh.ph.composed([

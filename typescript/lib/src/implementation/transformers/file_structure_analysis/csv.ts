@@ -1,6 +1,14 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../declarations/transformers/file_structure_analysis/csv.js"
+//schemas
+import type * as s_in from "../../../interface/schemas/file_structure_analysis.js"
+import type * as s_out from "../../../interface/schemas/csv.js"
+namespace declarations {
+    export type Signature = p_.Transformer<
+        s_in.File_Analysis_List,
+        s_out.CSV
+    >
+}
 
 //dependencies
 import * as t_to_text from "./text.js"
@@ -8,7 +16,7 @@ import * as t_to_text from "./text.js"
 //shorthands
 import * as sh from "pareto-csv/shorthands/csv/target"
 
-export const File_Analysis_List: interface_.Signature = ($) => sh.CSV(
+export const File_Analysis_List: declarations.Signature = ($) => sh.CSV(
     p_.literal.set(sh.row(p_.literal.list([
         "package",
         "filepath",

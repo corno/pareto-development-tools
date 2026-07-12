@@ -1,5 +1,5 @@
 
-import type * as s_path from "pareto-resources/interface/data/fs_unrestricted_path"
+import type * as s_path from "./fs_unrestricted_path.js"
 import type * as s_git_extended_commit from "../../submodules/version_control_api/interface/schemas/extended_commit.js"
 import type * as s_build_and_test from "../schemas/build_and_test.js"
 

@@ -4,8 +4,9 @@ import p_unreachable_code_path from 'pareto-core/implementation/transformer/spec
 
 import type * as interface_ from "../../../declarations/refiners/execute_command/main.js"
 
+//schemas
 import type * as s_out from "../../../interface/schemas/execute_command.js"
-import type * as s_function from "../../../interface/schemas/parse.js"
+import type * as s_error from "../../../interface/schemas/parse.js"
 import type * as s_publish from "../../../interface/schemas/publish.js"
 
 //dependencies
@@ -26,7 +27,7 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                 "project": null,
                 "publish": null,
                 "set-up-comparison": null,
-            })] as s_function.Error,
+            })] as s_error.Error,
             (end_info, expected) => abort(expected),
             ($): s_out.Parameters['type'] => {
                 {
@@ -46,7 +47,7 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                                     "commit-changes": null,
                                     "set-up-comparison": null,
                                     "update-dependencies": null,
-                                })] as s_function.Error,
+                                })] as s_error.Error,
                                 (end_info, expected) => abort(expected),
                                 ($, expected): s_out.All_Pacakges_Instruction => {
                                     switch ($) {
@@ -100,7 +101,7 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                                     "build-and-test": null,
                                     "commit-changes": null,
                                     "update-dependencies": null,
-                                })] as s_function.Error,
+                                })] as s_error.Error,
                                 (end_info, expected) => abort(expected),
                                 ($, expected) => {
                                     switch ($) {
@@ -141,7 +142,7 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                                     "analyze-file-structure": null,
                                     "dependency-graph": null,
                                     "list-file-structure-problems": null,
-                                })] as s_function.Error,
+                                })] as s_error.Error,
                                 (end_info, expected) => abort(expected),
                                 ($, expected) => {
                                     switch ($) {
@@ -166,7 +167,7 @@ export const Command: interface_.Command = ($, abort) => p_iterate<
                                 ['expected one of', p_.literal.dictionary({
                                     "patch": null,
                                     "minor": null,
-                                })] as s_function.Error,
+                                })] as s_error.Error,
                                 (end_info, expected) => abort(expected),
                                 ($, expected) => {
                                     switch ($) {

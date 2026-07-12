@@ -2,9 +2,9 @@ import * as p_ from 'pareto-core/implementation/transformer'
 import type * as p_i from 'pareto-core/interface/transformer'
 
 import type * as s_in from "../../../interface/schemas/deserialize_package_json.js"
-import type * as s_out from "pareto-fountain-pen/interface/data/prose"
 
-export namespace interface_ {
+import type * as s_out from "../../../interface/schemas/prose.js"
+namespace declarations {
     export type Error = p_i.Transformer<
         s_in.Error,
         s_out.Phrase
@@ -20,7 +20,7 @@ import * as t_path_to_text from "pareto-resources/implementation/transformers/un
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
-export const Error: interface_.Error = ($) => sh.ph.composed([
+export const Error: declarations.Error = ($) => sh.ph.composed([
     sh.ph.literal(t_path_to_text.Node_Path($['path'])),
     p_.from.state($.type).decide(
         ($) => {

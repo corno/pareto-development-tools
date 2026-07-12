@@ -1,8 +1,8 @@
 import * as p_ from 'pareto-core/interface/data'
 
-import type * as s_ece from "pareto-resources/interface/data/execute_sandboxed_command_executable"
+import type * as s_ece from "./execute_sandboxed_command_executable.js"
 import type * as s_repository_no_open_changes from "./repository_no_open_changes.js"
-import type * as s_path from "pareto-resources/interface/data/fs_unrestricted_path"
+import type * as s_path from "./fs_unrestricted_path.js"
 
 export type Error =
     | ['asserting no open changes', s_repository_no_open_changes.Error]

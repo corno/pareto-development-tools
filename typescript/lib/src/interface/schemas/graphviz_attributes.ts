@@ -1,0 +1,1 @@
+export * from "pareto-graphviz/interface/schemas/attributes"

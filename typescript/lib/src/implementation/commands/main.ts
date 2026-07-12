@@ -8,7 +8,8 @@ import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/in
 
 
 //schemas
-import type * as s_main from "pareto-application-api/interface/data/main"
+import type * as s_main from "./main.js"
+import type * as s_application_api_main from "../../interface/schemas/application_api_main.js"
 import type * as s_parse from "../../interface/schemas/parse.js"
 import type * as s_execute_command from "../../interface/schemas/execute_command.js"
 
@@ -36,7 +37,7 @@ export const $$: p_.Command_Implementation<
     }
 > = p_.command(
     ($d, $s, $q, $c) => [
-        p_.s.handle_error<s_main.Error, My_Error>(
+        p_.s.handle_error<s_application_api_main.Error, My_Error>(
             [
                 p_.s.refine(
 

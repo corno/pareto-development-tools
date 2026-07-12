@@ -1,5 +1,5 @@
-// import type * as s_epe from "pareto-resources/interface/data/execute_sandboxed_command_executable"
-import type * as s_path from "pareto-resources/interface/data/fs_unrestricted_path"
+// import type * as s_epe from "./execute_sandboxed_command_executable.js"
+import type * as s_path from "./fs_unrestricted_path.js"
 import type * as s_push from "../../submodules/version_control_api/interface/schemas/push.js"
 import type * as s_git_aic from "../../submodules/version_control_api/interface/schemas/assert_no_open_changes.js"
 import type * as s_git_make_pristine from "../../submodules/version_control_api/interface/schemas/make_pristine.js"

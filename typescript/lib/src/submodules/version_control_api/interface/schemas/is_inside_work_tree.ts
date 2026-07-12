@@ -1,8 +1,8 @@
 import * as p_ from 'pareto-core/interface/data'
 
-import type * as s_terminal_output from "pareto-resources/interface/data/terminal_output"
+import type * as s_terminal_output from "./terminal_output.js"
 
-import type * as s_path from "pareto-resources/interface/data/fs_unrestricted_path"
+import type * as s_path from "./fs_unrestricted_path.js"
 
 export type Parameters = {
     'path': p_.Optional_Value<s_path.Context_Path>,

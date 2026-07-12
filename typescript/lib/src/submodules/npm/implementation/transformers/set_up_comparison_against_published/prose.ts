@@ -2,9 +2,9 @@ import * as p_ from 'pareto-core/implementation/transformer'
 import type * as p_i from 'pareto-core/interface/transformer'
 
 import type * as s_in from "../../../interface/schemas/set_up_comparison_against_published.js"
-import type * as s_out from "pareto-fountain-pen/interface/data/prose"
 
-export namespace interface_ {
+import type * as s_out from "../../../interface/schemas/prose.js"
+namespace declarations {
 
     export type Error = p_i.Transformer<
         s_in.Error, s_out.Phrase
@@ -21,7 +21,7 @@ import * as t_make_directory_to_prose from "pareto-filesystem-unrestricted-api/i
 import * as t_get_package_json_to_prose from "../get_package_json/prose.js"
 
 
-export const Error: interface_.Error = ($) => {
+export const Error: declarations.Error = ($) => {
     return p_.from.state($).decide(
         ($) => {
             switch ($[0]) {

@@ -3,9 +3,9 @@ import type * as p_i from 'pareto-core/interface/transformer'
 
 //schemas
 import type * as s_in from "../../../interface/schemas/repository_no_open_changes.js"
-import type * as s_out from "pareto-fountain-pen/interface/data/prose"
+import type * as s_out from "../../../interface/schemas/prose.js"
 
-export namespace interface_ {
+namespace declarations {
     export type Error = p_i.Transformer<
         s_in.Error,
         s_out.Phrase
@@ -19,7 +19,7 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 import * as t_eqe_to_prose from "pareto-resources/implementation/transformers/execute_query_executable/prose"
 import * as t_is_inside_work_tree_to_prose from "../is_inside_work_tree/prose.js"
 
-export const Error: interface_.Error = ($) => p_.from.state($).decide(
+export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($): s_out.Phrase => {
         switch ($[0]) {
             case 'not a repository': return p_.option($, ($) => sh.ph.literal("not a repository"))

@@ -3,10 +3,9 @@ import type * as p_i from 'pareto-core/interface/transformer'
 
 //schemas
 import type * as s_in from "../../../interface/schemas/assert_no_open_changes.js"
-import type * as s_out from "pareto-fountain-pen/interface/data/prose"
+import type * as s_out from "../../../interface/schemas/prose.js"
 
-
-export namespace interface_ {
+namespace declarations {
 
     export type Error = p_i.Transformer<
         s_in.Error,
@@ -24,7 +23,7 @@ import * as t_git_is_clean_to_prose from "../repository_has_no_open_changes/pros
 
 
 
-export const Error: interface_.Error = ($) => p_.from.state($).decide(
+export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'working directory has open changes': return p_.option($, ($) => sh.ph.composed([

@@ -5,9 +5,9 @@ import type * as p_ri from 'pareto-core/interface/refiner'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //schemas
-import type * as s_in from "astn-core/interface/data/parse_tree"
+import type * as s_in from "../../../interface/schemas/parse_tree.js"
 import type * as s_out from "../../../interface/schemas/npm_package.js"
-import type * as s_function from "../../../interface/schemas/deserialize_package_json.js"
+import type * as s_error from "../../../interface/schemas/deserialize_package_json.js"
 
 
 type Error_Expect_Object =
@@ -98,7 +98,7 @@ const Property: p_ri.Refiner_With_Parameter<
 
 export const NPM_Package: p_ri.Refiner<
     s_out.NPM_Package,
-    s_function.Error['type'],
+    s_error.Error['type'],
     s_in.Document
 > = ($, abort) => {
 

@@ -1,6 +1,18 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../../declarations/transformers/build_and_test/prose.js"
+//schemas
+import type * as s_in from "../../../interface/schemas/build_and_test.js"
+import type * as s_out from "../../../interface/schemas/prose.js"
+
+namespace declarations {
+    export type Error = p_.Transformer_With_Parameter<
+        s_in.Error,
+        s_out.Phrase,
+        {
+        'concise': boolean
+    }
+    >
+}
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
@@ -9,7 +21,7 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 import * as t_build_to_prose from "../build/prose.js"
 import * as t_epe_to_prose from "pareto-resources/implementation/transformers/execute_command_executable/prose"
 
-export const Error: interface_.Error = ($, $p) => p_.from.state($).decide(
+export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error building': return p_.option($, ($) => t_build_to_prose.Error($, $p))
