@@ -2,7 +2,8 @@ import * as p_ from 'pareto-core/implementation/query'
 import * as p_t from 'pareto-core/implementation/transformer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import type * as interface_ from "../../declarations/queries.js"
+import * as queries_actions from "../../../version_control_api/interface/queries.js"
+import type * as query_interfaces_pareto_resources from "pareto-resources/interface/queries"
 
 //schemas
 import * as d from "../../../version_control_api/interface/schemas/repository_no_open_changes.js"
@@ -10,7 +11,14 @@ import * as d from "../../../version_control_api/interface/schemas/repository_no
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
 
-export const $$: interface_.repository_no_open_changes = p_.query(
+export const $$: p_.Query_Implementation<
+    queries_actions.repository_no_open_changes,
+    null,
+    {
+        'is inside work tree': queries_actions.is_inside_work_tree,
+        'git': query_interfaces_pareto_resources.execute_sandboxed.query_executable
+    }
+> = p_.query(
     ($d, $s, $q) =>  p_super_query_result($q.git(
         {
             'working directory': p_.literal.not_set(),

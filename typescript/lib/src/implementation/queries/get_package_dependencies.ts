@@ -1,8 +1,8 @@
 import * as p_ from 'pareto-core/implementation/query'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-
-import type * as interface_ from "../../declarations/queries.js"
+import type * as query_interfaces from "../../interface/queries.js"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
 
 //schemas
 import * as d from "../../interface/schemas/get_package_dependencies.js"
@@ -12,7 +12,14 @@ import type * as s_npm_package from "../../submodules/npm/interface/schemas/npm_
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 import { NPM_Package as r_parse_npm_package } from "../../submodules/npm/implementation/refiners/npm_package/list_of_characters.js"
 
-export const $$: interface_.get_package_dependencies = p_.query(
+export const $$: p_.Query_Implementation<
+    query_interfaces.get_package_dependencies,
+    null,
+    {
+        'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory,
+        'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file,
+    }
+> = p_.query(
     ($d, $s, $q) => p_super_query_result($q['read directory'](
         {
             'path': t_path_to_path.extend_context_path_with_single_step($d['path'], { 'addition': "packages" }),
