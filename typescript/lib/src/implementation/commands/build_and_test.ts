@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/implementation/command'
 
 import type * as interface_ from "../../declarations/commands.js"
 
-//data types
+//schemas
 import * as d from "../../interface/schemas/build_and_test.js"
 
 //dependencies

@@ -3,7 +3,7 @@ import * as p_t from 'pareto-core/implementation/transformer'
 
 import type * as interface_ from "../../declarations/commands.js"
 
-//data types
+//schemas
 import * as d from "../../interface/schemas/git_commit.js"
 
 export const $$: interface_.version_control_commit = p_.command(

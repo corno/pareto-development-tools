@@ -5,7 +5,7 @@ import p_super_query_result from 'pareto-core/implementation/query/super_query_r
 
 import type * as interface_ from "../../declarations/commands.js"
 
-//data types
+//schemas
 import * as d from "../../interface/schemas/build.js"
 
 //dependencies

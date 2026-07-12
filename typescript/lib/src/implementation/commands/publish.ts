@@ -3,7 +3,7 @@ import p_variables from 'pareto-core/implementation/command/specials/variables'
 
 import type * as interface_ from "../../declarations/commands.js"
 
-//data types
+//schemas
 import * as d from "../../interface/schemas/publish.js"
 
 //dependencies

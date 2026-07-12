@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/interface/command_interface'
 
-//data types
+//schemas
 import type * as s_assert_no_open_changes from "./schemas/assert_no_open_changes.js"
 import type * as s_make_pristine from "./schemas/make_pristine.js"
 import type * as s_push from "./schemas/push.js"

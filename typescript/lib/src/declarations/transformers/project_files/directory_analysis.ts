@@ -2,7 +2,7 @@
 import type * as p_di from 'pareto-core/interface/data'
 import type * as p_ from 'pareto-core/interface/transformer'
 
-//data types
+//schemas
 import type * as s_in from "../../../interface/schemas/project_files.js"
 import type * as s_in_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
 import type * as s_out from "../../../interface/schemas/file_structure_analysis.js"

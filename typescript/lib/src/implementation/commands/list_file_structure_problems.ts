@@ -3,7 +3,7 @@ import * as p_temp from 'pareto-core/implementation/transformer'
 
 import type * as interface_ from "../../declarations/commands.js"
 
-//data types
+//schemas
 import * as d from "../../interface/schemas/get_project_files.js"
 import type * as s_file_analysis from "../../interface/schemas/file_structure_analysis.js"
 

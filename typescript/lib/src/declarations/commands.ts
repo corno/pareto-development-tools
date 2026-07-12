@@ -10,7 +10,7 @@ import type * as command_interfaces_version_control from "../submodules/version_
 import type * as query_interfaces from "../interface/queries.js"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
 
-//data types
+//schemas
 import * as s_structure from "../interface/schemas/structure.js"
 
 export type analyze_file_structure = p_.Command_Implementation<

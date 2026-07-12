@@ -4,7 +4,7 @@ import type * as p_di from 'pareto-core/interface/data'
 import type * as p_ri from 'pareto-core/interface/refiner'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
-//data types
+//schemas
 import type * as s_in from "astn-core/interface/data/parse_tree"
 import type * as s_out from "../../../interface/schemas/npm_package.js"
 import type * as s_function from "../../../interface/schemas/deserialize_package_json.js"

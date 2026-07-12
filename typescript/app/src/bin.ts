@@ -5,7 +5,7 @@ import * as p_ci from 'pareto-core/interface/command_interface'
 import * as p_qi from 'pareto-core/interface/query_interface'
 
 
-//data types
+//schemas
 import type * as s_ece from "pareto-resources/interface/data/execute_sandboxed_command_executable"
 import type * as s_espe from "pareto-resources/interface/data/execute_sandboxed_smelly_command_executable"
 import type * as s_eqe from "pareto-resources/interface/data/execute_sandboxed_query_executable"

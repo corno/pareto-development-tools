@@ -4,7 +4,7 @@ import p_super_query_result from 'pareto-core/implementation/query/super_query_r
 
 import type * as interface_ from "../../declarations/queries.js"
 
-//data types
+//schemas
 import * as d from "../../interface/schemas/get_project_files.js"
 import type * as s_directory_content from "pareto-filesystem-unrestricted-api/interface/data/directory_content"
 

@@ -3,7 +3,7 @@ import * as p_temp from 'pareto-core/implementation/transformer'
 
 import type * as interface_ from "../../declarations/commands.js"
 
-//data types
+//schemas
 import type * as s_main from "pareto-application-api/interface/data/main"
 import type * as s_parse from "../../interface/schemas/parse.js"
 import type * as s_execute_command from "../../interface/schemas/execute_command.js"

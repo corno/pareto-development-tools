@@ -5,7 +5,7 @@ import p_change_context from 'pareto-core/implementation/refiner/specials/change
 
 import type * as interface_ from "../../declarations/commands.js"
 
-//data types
+//schemas
 import * as d from "../../interface/schemas/execute_command.js"
 
 //dependencies

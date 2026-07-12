@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/implementation/command'
 
 import type * as interface_ from "../../declarations/commands.js"
 
-//data types
+//schemas
 import * as d from "../../../version_control_api/interface/schemas/assert_no_open_changes.js"
 
 export const $$: interface_.assert_no_open_changes = p_.command(
