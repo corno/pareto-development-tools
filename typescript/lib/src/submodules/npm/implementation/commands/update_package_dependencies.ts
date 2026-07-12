@@ -1,6 +1,8 @@
 import * as p_ from 'pareto-core/implementation/command'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../interface/commands.js"
+import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/commands"
 
 //schemas
 import * as d from "../../interface/schemas/update_package_dependencies.js"
@@ -8,7 +10,16 @@ import * as d from "../../interface/schemas/update_package_dependencies.js"
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: interface_.update_package_dependencies = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces.update_package_dependencies,
+    null,
+    null,
+    {
+        'remove': command_interfaces_pareto_filesystem_unrestricted_api.remove
+        'update2latest': command_interfaces.update2latest
+        'npm': command_interfaces.npm
+    }
+> = p_.command(
     ($d, $s, $q, $c) => [
 
         // clean

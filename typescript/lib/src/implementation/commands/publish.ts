@@ -1,7 +1,12 @@
 import * as p_ from 'pareto-core/implementation/command'
 import p_variables from 'pareto-core/implementation/command/specials/variables'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../interface/commands.js"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
+import type * as command_interfaces_version_control from "../../submodules/version_control_api/interface/commands.js"
+import type * as command_interfaces_npm from "../../submodules/npm/interface/commands.js"
+import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
 
 //schemas
 import * as d from "../../interface/schemas/publish.js"
@@ -13,7 +18,24 @@ import * as q_get_package_json from "../../submodules/npm/implementation/queries
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
-export const $$: interface_.publish = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces.publish,
+    null,
+    {
+        'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file
+    },
+    {
+        'version control push': command_interfaces_version_control.push
+        'version control extended commit': command_interfaces_version_control.extended_commit
+        'version control assert no open changes': command_interfaces_version_control.assert_no_open_changes
+        'version control make pristine': command_interfaces_version_control.make_pristine
+        'update package dependencies': command_interfaces.update_package_dependencies
+        'build and test': command_interfaces.build_and_test
+        'npm': command_interfaces_npm.npm
+        'npm publish': command_interfaces_npm.npm_publish
+        'log': command_interfaces_pareto_stream_api.log
+    }
+> = p_.command(
 
     ($d, $s, $q, $c) => p_variables(
         () => {

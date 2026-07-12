@@ -5,7 +5,12 @@ import p_list_build_deprecated from 'pareto-core/implementation/refiner/specials
 import p_text_from_list from 'pareto-core/implementation/transformer/specials/text_from_list'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../interface/commands.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
+import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/commands"
+import type * as query_interfaces_pareto_resources from "pareto-resources/interface/queries"
 
 //schemas
 import * as d from "../../interface/schemas/set_up_comparison_against_published.js"
@@ -39,7 +44,19 @@ const remove_n_characters_from_end = ($: string, n: number): s_out.List_of_Chara
         })
 }
 
-export const $$: interface_.set_up_comparison_against_published = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces.set_up_comparison_against_published,
+    null,
+    {
+        'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file
+        'npm': query_interfaces_pareto_resources.execute_sandboxed.query_executable
+    },
+    {
+        'npm': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+        'tar': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+        'make directory': command_interfaces_pareto_filesystem_unrestricted_api.make_directory
+    }
+> = p_.command(
     ($d, $s, $q, $c) => {
         // const path_x = t_path_to_path.create_node_path($d['path to local package'], { 'node': "package.json" })
         return [

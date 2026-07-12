@@ -1,11 +1,20 @@
 import * as p_ from 'pareto-core/implementation/command'
 import * as p_temp from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../interface/commands.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
 
 //dependencies
 
-export const $$: interface_.npm_publish = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces.npm_publish,
+    null,
+    null,
+    {
+        'npm': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+    }
+> = p_.command(
     ($d, $s, $q, $c) => [
         $c['npm'].execute(
             {

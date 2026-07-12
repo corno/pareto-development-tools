@@ -1,6 +1,8 @@
 import * as p_ from 'pareto-core/implementation/command'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../interface/commands.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
 
 //schemas
 import * as d from "../../interface/schemas/build_and_test.js"
@@ -9,7 +11,15 @@ import * as d from "../../interface/schemas/build_and_test.js"
 import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: interface_.build_and_test = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces.build_and_test,
+    null,
+    null,
+    {
+        'build': command_interfaces.build
+        'node': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+    }
+> = p_.command(
     ($d, $s, $q, $c) => [
 
         // build

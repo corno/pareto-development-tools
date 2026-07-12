@@ -1,7 +1,10 @@
 import * as p_ from 'pareto-core/implementation/command'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../interface/commands.js"
+import type * as query_interfaces from "../../interface/queries.js"
+import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
 
 //schemas
 import * as d from "../../interface/schemas/create_dependency_graph.js"
@@ -10,7 +13,16 @@ import * as d from "../../interface/schemas/create_dependency_graph.js"
 import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz.js"
 import * as t_graphviz_to_prose from "pareto-graphviz/implementation/transformers/high_level_simple/prose"
 
-export const $$: interface_.create_dependency_graph = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces.create_dependency_graph,
+    null,
+    {
+        'package dependencies': query_interfaces.get_package_dependencies
+    },
+    {
+        'log': command_interfaces_pareto_stream_api.log
+    }
+> = p_.command(
     ($d, $s, $q, $c) => [
 
         p_.s.query(

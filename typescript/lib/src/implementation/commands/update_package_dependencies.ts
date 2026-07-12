@@ -3,7 +3,10 @@ import * as p_temp from 'pareto-core/implementation/transformer'
 import p_variables from 'pareto-core/implementation/command/specials/variables'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../interface/commands.js"
+import type * as command_interfaces_npm from "../../submodules/npm/interface/commands.js"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
 
 //schemas
 import * as d from "../../interface/schemas/update_package_dependencies.js"
@@ -11,7 +14,16 @@ import * as d from "../../interface/schemas/update_package_dependencies.js"
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 
-export const $$: interface_.update_package_dependencies = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces.update_package_dependencies,
+    null,
+    {
+        'stat': query_interfaces_pareto_filesystem_unrestricted_api.stat_possible_node
+    },
+    {
+        'npm update package dependencies': command_interfaces_npm.update_package_dependencies
+    }
+> = p_.command(
     ($d, $s, $q, $c) => p_variables(
         () => {
             const typescript_path = t_path_to_path.extend_context_path_with_single_step($d.path, { 'addition': "typescript" })

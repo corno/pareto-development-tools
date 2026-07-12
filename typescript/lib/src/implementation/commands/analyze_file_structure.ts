@@ -1,6 +1,10 @@
 import * as p_ from 'pareto-core/implementation/command'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../interface/commands.js"
+import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
+import type * as s_structure from "../../interface/schemas/structure.js"
 
 
 //schemas
@@ -12,7 +16,19 @@ import * as t_file_structure_analysis_to_csv from "../transformers/file_structur
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
 import { $$ as q_get_project_files } from "../queries/get_project_files.js"
 
-export const $$: interface_.analyze_file_structure = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces.analyze_file_structure,
+    {
+        'structure': s_structure.Directory
+    },
+    {
+        'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory,
+        'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file
+    },
+    {
+        'log': command_interfaces_pareto_stream_api.log
+    }
+> = p_.command(
     ($d, $s, $q, $c) => [
 
         p_.s.query(

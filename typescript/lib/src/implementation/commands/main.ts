@@ -1,7 +1,11 @@
 import * as p_ from 'pareto-core/implementation/command'
 import * as p_temp from 'pareto-core/implementation/transformer'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../interface/commands.js"
+import type * as command_interfaces_pareto_application_api from "pareto-application-api/interface/commands"
+import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
+
 
 //schemas
 import type * as s_main from "pareto-application-api/interface/data/main"
@@ -21,7 +25,16 @@ type My_Error =
     | ['parse', s_parse.Error]
     | ['execute command', s_execute_command.Error]
 
-export const $$: interface_.main = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces_pareto_application_api.main,
+    null,
+    null,
+    {
+        'api': command_interfaces.api
+        'log error': command_interfaces_pareto_stream_api.log_error
+
+    }
+> = p_.command(
     ($d, $s, $q, $c) => [
         p_.s.handle_error<s_main.Error, My_Error>(
             [

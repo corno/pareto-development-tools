@@ -2,7 +2,10 @@ import * as p_ from 'pareto-core/implementation/command'
 import * as p_t from 'pareto-core/implementation/transformer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import type * as interface_ from "../../declarations/commands.js"
+//interface dependencies
+import type * as command_interfaces from "../../../version_control_api/interface/commands.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
+import type * as query_interfaces from "../../../version_control_api/interface/queries.js"
 
 //schemas
 import * as d from "../../../version_control_api/interface/schemas/extended_commit.js"
@@ -10,7 +13,16 @@ import * as d from "../../../version_control_api/interface/schemas/extended_comm
 //dependencies
 import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
 
-export const $$: interface_.extended_commit = p_.command(
+export const $$: p_.Command_Implementation<
+    command_interfaces.extended_commit,
+    null,
+    {
+        'repository no open changes': query_interfaces.repository_no_open_changes
+    },
+    {
+        'git': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+    }
+> = p_.command(
     ($d, $s, $q, $c) => [
 
         p_.s.query(
