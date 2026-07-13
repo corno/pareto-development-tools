@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/data'
+import * as p_ from 'pareto-core/interface/schema'
 
 import type * as s_repository_no_open_changes from "./repository_no_open_changes.js"
 import type * as s_path from "./fs_unrestricted_path.js"

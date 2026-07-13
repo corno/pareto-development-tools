@@ -15,7 +15,7 @@ namespace s_xxx {
         'structure path': s_out.Path,
     }
 }
-import type * as p_di from 'pareto-core/interface/data'
+import type * as p_di from 'pareto-core/interface/schema'
 import type * as s_in from "../../../interface/schemas/project_files.js"
 import type * as s_out from "../../../interface/schemas/file_structure_analysis.js"
 

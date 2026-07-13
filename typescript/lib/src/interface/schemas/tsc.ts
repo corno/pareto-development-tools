@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/data'
+import * as p_ from 'pareto-core/interface/schema'
 
 import type * as s_espe from "./execute_sandboxed_smelly_command_executable.js"
 import type * as s_path from "./fs_unrestricted_path.js"
