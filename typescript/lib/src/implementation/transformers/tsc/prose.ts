@@ -1,21 +1,19 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/serializer'
 
 //schemas
 import type * as s_in from "../../../interface/schemas/tsc.js"
-import type * as s_out from "../../../interface/schemas/prose.js"
 
 namespace declarations {
-    export type Error = p_.Transformer_With_Parameter<
+    export type Error = p_.Paragraph_Serializer_With_Parameter<
         s_in.Error,
-        s_out.Paragraph,
         {
-        'concise': boolean
-    }
+            'concise': boolean
+        }
     >
 }
 
 //dependencies
-import * as t_espe_to_prose from "pareto-resources/implementation/transformers/execute_smelly_command_executable/prose"
+import * as t_espe_to_prose from "pareto-resources/implementation/serializers/execute_smelly_command_executable"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"

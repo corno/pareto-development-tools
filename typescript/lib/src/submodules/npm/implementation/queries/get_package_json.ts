@@ -27,7 +27,7 @@ export const $$: p_.Query_Implementation<
                 ($): d.Error => ['error while reading package.json', $],
             )).refine(
                 ($, abort) => r_parse_npm_package(
-                    $,
+                    $.data,
                     ($) => abort(['error while parsing package.json', {
                         'type': $,
                         'path': path,

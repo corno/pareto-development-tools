@@ -184,7 +184,10 @@ p_h.run_main_command(
         )
 
         const dependency_graph = c_dependency_graph(
-            null,
+            {
+                'indentation': "    ",
+                'newline': "\n",
+            },
             {
                 'package dependencies': q_package_dependencies(
                     null,
@@ -268,7 +271,10 @@ p_h.run_main_command(
         )
 
         return c_main(
-            null,
+            {
+                'indentation': "    ",
+                'newline': "\n",
+            },
             null,
             {
                 'log error': rs_stream.$.commands['log error'],
@@ -285,6 +291,8 @@ p_h.run_main_command(
                         'analyze file structure': c_analyze_file_structure(
                             {
                                 'structure': data_structure.$$,
+                                'indentation': "    ",
+                                'newline': "\n",
                             },
                             {
                                 'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
@@ -297,6 +305,8 @@ p_h.run_main_command(
                         'list file structure problems': c_list_file_structure_problems(
                             {
                                 'structure': data_structure.$$,
+                                'indentation': "    ",
+                                'newline': "\n",
                             },
                             {
                                 'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
@@ -317,7 +327,10 @@ p_h.run_main_command(
                         ),
                         'npm set up comparison against published': set_up_comparison_against_published,
                         'publish': c_publish(
-                            null,
+                            {
+                                'indentation': "    ",
+                                'newline': "\n",
+                            },
                             {
                                 'read file': rs_filesystem_unrestricted.$.queries['read file']
                             },

@@ -6,22 +6,23 @@ import p_text_from_list from 'pareto-core/implementation/transformer/specials/te
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //schemas
-import type * as s_in_directory_content from "../../../interface/schemas/directory_content.js"
+import type * as s_in_directory_content from "../../../interface/schemas/directory_content_as_read.js"
 import type * as s_structure from "../../../interface/schemas/structure.js"
 
 namespace s_xxx {
     export type Parameters = {
         'expected structure': s_structure.Directory,
-        'structure path': s_out.Path,
+        'structure path': s_path.Path,
     }
 }
 import type * as p_di from 'pareto-core/interface/schema'
 import type * as s_in from "../../../interface/schemas/project_files.js"
 import type * as s_out from "../../../interface/schemas/file_structure_analysis.js"
+import type * as s_path from "../../../interface/schemas/path.js"
 
 namespace declarations {
     export type line_count = p_.Transformer<
-        string,
+        p_di.List<number>,
         number
     >
     export type extension = p_.Transformer<
@@ -41,8 +42,8 @@ namespace declarations {
             s_out.Directory,
             {
                 'wildcard': s_structure.Directory.wildcards,
-                'structure path': s_out.Path,
-                'tail': s_out.Path,
+                'structure path': s_path.Path,
+                'tail': s_path.Path,
                 'number of directories encountered': number,
             }
         >
@@ -62,7 +63,7 @@ namespace declarations {
             s_out.Directory,
             {
                 'structure': s_out.Structure_Analysis,
-                'unexpected path tail': p_di.Optional_Value<s_out.Path>,
+                'unexpected path tail': p_di.Optional_Value<s_path.Path>,
             }
         >
         export type Node = p_.Transformer_With_Parameter<
@@ -71,7 +72,7 @@ namespace declarations {
             {
                 'structure': s_out.Structure_Analysis,
                 'name': string,
-                'unexpected path tail': p_di.Optional_Value<s_out.Path>,
+                'unexpected path tail': p_di.Optional_Value<s_path.Path>,
             }
         >
 
@@ -155,10 +156,9 @@ export const Project_Files: declarations.Project_Files = ($, $p) => p_.from.dict
 
 const line_count: declarations.line_count = ($) => {
     let lineCount = 0
-    p_.from.list(p_list_from_text(
-        $,
-        ($) => $
-    )).map(
+    p_.from.list(
+        $
+    ).map(
         ($) => {
             if ($ === 10) { //newline character
                 lineCount++
@@ -227,7 +227,7 @@ namespace defined {
                                     $p: {
                                         'name': string,
                                         'expected structure': s_structure.Directory.group.D,
-                                        'structure path': s_out.Path,
+                                        'structure path': s_path.Path,
                                     }
                                 ): s_out.Node => p_.from.state($).decide(
                                     ($): s_out.Node => {
@@ -263,7 +263,7 @@ namespace defined {
                                                         })
                                                 },
                                                 'extension': extension($p['name']),
-                                                'line count': line_count($),
+                                                'line count': line_count($.data),
                                                 'unexpected path tail': p_.from.state($p['expected structure']).decide(
                                                     ($) => {
                                                         switch ($[0]) {
@@ -391,7 +391,7 @@ namespace defined {
                                                 'classification': ['directory', ['dictionary', null]],
                                             },
                                             'extension': extension(id),
-                                            'line count': line_count($),
+                                            'line count': line_count($.data),
                                             'unexpected path tail': p_.literal.set(p_.literal.list([
                                                 id,
                                             ])),
@@ -433,7 +433,7 @@ namespace undefined {
                         'unexpected path tail': $p['unexpected path tail'],
                         'structure': $p['structure'],
                         'extension': extension($p['name']),
-                        'line count': line_count($),
+                        'line count': line_count($.data),
                     }])
                     case 'directory': return p_.option($, ($) => {
                         return ['directory', Directory(
@@ -498,7 +498,7 @@ namespace wildcard {
                                         : p_.literal.set(tail)
 
                                 }),
-                                'line count': line_count($),
+                                'line count': line_count($.data),
                             }])
                             case 'directory': return ['directory', p_.option($, ($) => {
                                 return Directory(

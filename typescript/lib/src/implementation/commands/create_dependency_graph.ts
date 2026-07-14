@@ -11,11 +11,14 @@ import * as d from "../../interface/schemas/create_dependency_graph.js"
 
 //dependencies
 import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz.js"
-import * as t_graphviz_to_prose from "pareto-graphviz/implementation/transformers/high_level_simple/prose"
+import * as ser_graphviv from "pareto-graphviz/implementation/serializers/high_level_simple"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.create_dependency_graph,
-    null,
+    {
+        'indentation': string
+        'newline': string
+    },
     {
         'package dependencies': query_interfaces.get_package_dependencies
     },
@@ -34,12 +37,14 @@ export const $$: p_.Command_Implementation<
             )).transform(
                 ($) => t_package_dependencies_to_graphviz.Result($)
             ).transform(
-                ($) => t_graphviz_to_prose.Graph($)
+                ($) => ser_graphviv.Graph($)
             ),
             ($v) => [
                 $c['log'].execute(
                     {
-                        'message': $v
+                        'paragraph': $v,
+                        'indentation': $s['indentation'],
+                        'newline': $s['newline'],
                     },
                     ($): d.Error => ['log', null],
                 )

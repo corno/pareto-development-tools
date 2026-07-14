@@ -1,5 +1,6 @@
 import * as p_ from 'pareto-core/implementation/command'
 import * as p_t from 'pareto-core/implementation/transformer'
+import * as p_s from 'pareto-core/implementation/serializer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
 //interface dependencies
@@ -11,7 +12,7 @@ import type * as query_interfaces from "../../../version_control_api/interface/q
 import * as d from "../../../version_control_api/interface/schemas/extended_commit.js"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
+import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.extended_commit,
@@ -47,7 +48,11 @@ export const $$: p_.Command_Implementation<
                                             p_t.from.optional($d.path).decide(
                                                 ($) => p_.literal.list([
                                                     "-C",
-                                                    t_path_to_text.Context_Path($),
+                                                    p_s.text_from_phrase(
+                                                        ser_path.Context_Path($),
+                                                        "",
+                                                        ""
+                                                    ),
                                                 ]),
                                                 () => p_.literal.list([])
                                             ),
@@ -69,7 +74,11 @@ export const $$: p_.Command_Implementation<
                                     p_t.from.optional($d.path).decide(
                                         ($) => p_.literal.list([
                                             "-C",
-                                            t_path_to_text.Context_Path($),
+                                            p_s.text_from_phrase(
+                                                ser_path.Context_Path($),
+                                                "",
+                                                ""
+                                            ),
                                         ]),
                                         () => p_.literal.list([])
                                     ),
@@ -93,7 +102,11 @@ export const $$: p_.Command_Implementation<
                                             p_t.from.optional($d.path).decide(
                                                 ($) => p_.literal.list([
                                                     "-C",
-                                                    t_path_to_text.Context_Path($),
+                                                    p_s.text_from_phrase(
+                                                        ser_path.Context_Path($),
+                                                        "",
+                                                        ""
+                                                    ),
                                                 ]),
                                                 () => p_.literal.list([])
                                             ),

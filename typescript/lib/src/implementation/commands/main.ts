@@ -15,8 +15,8 @@ import type * as s_execute_command from "../../interface/schemas/execute_command
 
 //dependencies
 import * as r_instruction from "../refiners/execute_command/main.js"
-import * as t_api_to_prose from "../transformers/execute_command/prose.js"
-import * as t_bin_to_prose from "../transformers/parse/prose.js"
+import * as t_api_to_prose from "../serializers/execute_command.js"
+import * as t_bin_to_prose from "../serializers/parse.js"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
@@ -28,7 +28,10 @@ type My_Error =
 
 export const $$: p_.Command_Implementation<
     command_interfaces_pareto_application_api.main,
-    null,
+    {
+        'indentation': string
+        'newline': string
+    },
     null,
     {
         'api': command_interfaces.api
@@ -61,18 +64,16 @@ export const $$: p_.Command_Implementation<
 
                 $c['log error'].execute(
                     {
-                        'message': sh.pg.sentences([
-                            sh.sentence([
-                                p_temp.from.state($).decide(
-                                    ($) => {
-                                        switch ($[0]) {
-                                            case 'parse': return p_temp.ss($, ($) => t_bin_to_prose.Error($))
-                                            case 'execute command': return p_temp.ss($, ($) => t_api_to_prose.Error($))
-                                            default: return p_temp.exhaustive($[0])
-                                        }
-                                    })
-                            ])
-                        ])
+                        'phrase': p_temp.from.state($).decide(
+                            ($) => {
+                                switch ($[0]) {
+                                    case 'parse': return p_temp.ss($, ($) => t_bin_to_prose.Error($))
+                                    case 'execute command': return p_temp.ss($, ($) => t_api_to_prose.Error($))
+                                    default: return p_temp.exhaustive($[0])
+                                }
+                            }),
+                        'indentation': $s.indentation,
+                        'newline': $s.newline,
                     },
                     ($) => ({
                         'exit code': 2

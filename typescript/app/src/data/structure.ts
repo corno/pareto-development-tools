@@ -1,12 +1,5 @@
 import * as sh from "lib/shorthands/structure/manual"
 
-const $_declarations = sh.g.directory_group({
-    "commands.ts": sh.g.file_manual(),
-    "queries.ts": sh.g.file_manual(),
-    "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
-    "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
-})
-
 const $_interface = sh.g.directory_group({
     "commands.ts": sh.g.file_manual(),
     "queries.ts": sh.g.file_manual(),
@@ -66,13 +59,11 @@ export const $$ = sh.dgroup({
                     sh.dgroup({
                         "interface": $_interface,
                         "shorthands": $_shorthands,
-                        "declarations": $_declarations,
                         "implementation": $_implementation,
                     })
                 ),
                 "interface": $_interface,
                 "shorthands": $_shorthands,
-                "declarations": $_declarations,
                 "implementation": $_implementation,
                 "globals.ts": sh.g.file_generated(true),
                 "index.ts": sh.g.file_generated(true),

@@ -1,4 +1,5 @@
 import * as p_ from 'pareto-core/implementation/query'
+import * as p_s from 'pareto-core/implementation/serializer'
 import * as p_t from 'pareto-core/implementation/transformer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
@@ -9,7 +10,7 @@ import type * as query_interfaces_pareto_resources from "pareto-resources/interf
 import * as d from "../../../version_control_api/interface/schemas/repository_no_open_changes.js"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
+import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
 
 export const $$: p_.Query_Implementation<
     queries_actions.repository_no_open_changes,
@@ -26,7 +27,11 @@ export const $$: p_.Query_Implementation<
                 p_t.from.optional($d.path).decide(
                     ($) => p_.literal.list([
                         "-C",
-                        t_path_to_text.Context_Path($),
+                        p_s.text_from_phrase(
+                            ser_path.Context_Path($),
+                            "",
+                            ""
+                        ),
                     ]),
                     () => p_.literal.list([])
                 ),

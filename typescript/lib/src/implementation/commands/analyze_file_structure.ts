@@ -11,7 +11,7 @@ import type * as s_structure from "../../interface/schemas/structure.js"
 import * as d from "../../interface/schemas/get_project_files.js"
 
 //dependencies
-import * as t_csv_to_prose from "pareto-csv/implementation/transformers/csv/prose"
+import * as ser_csv from "pareto-csv/implementation/serializers/csv"
 import * as t_file_structure_analysis_to_csv from "../transformers/file_structure_analysis/csv.js"
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
 import { $$ as q_get_project_files } from "../queries/get_project_files.js"
@@ -20,6 +20,8 @@ export const $$: p_.Command_Implementation<
     command_interfaces.analyze_file_structure,
     {
         'structure': s_structure.Directory
+        'indentation': string
+        'newline': string
     },
     {
         'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory,
@@ -43,7 +45,7 @@ export const $$: p_.Command_Implementation<
 
                 $c.log.execute(
                     {
-                        'message': t_csv_to_prose.CSV(
+                        'paragraph': ser_csv.CSV(
                             t_file_structure_analysis_to_csv.File_Analysis_List(
                                 t_project_files_to_file_analysis_list.Project_Files(
                                     $v,
@@ -56,6 +58,8 @@ export const $$: p_.Command_Implementation<
                                 'separator': 0x2C, //comma
                             }
                         ),
+                        'indentation': $s['indentation'],
+                        'newline': $s['newline'],
                     },
                     ($): d.Error => ['log', $],
                 )

@@ -1,11 +1,12 @@
 import * as p_ from 'pareto-core/interface/schema'
 
+import * as s_path from "./path.js"
+
 export type Directory =
     | ['ignored', null]
     | ['dictionary', p_.Dictionary<Node>]
     | ['expected a file', null]
 
-export type Path = p_.List<string>
 
 export type Node =
     | ['other', null]
@@ -31,12 +32,12 @@ export type File_Classification =
 export type File_Analysis = {
     'structure': Structure_Analysis,
     'extension': p_.Optional_Value<string>,
-    'unexpected path tail': p_.Optional_Value<Path>,
+    'unexpected path tail': p_.Optional_Value<s_path.Path>,
     'line count': number,
 }
 
 export type Structure_Analysis = {
-    'path': Path,
+    'path': s_path.Path,
     'classification': Classification
 }
 

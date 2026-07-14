@@ -1,1 +1,0 @@
-export * from "pareto-filesystem-unrestricted-api/interface/schemas/directory_content"

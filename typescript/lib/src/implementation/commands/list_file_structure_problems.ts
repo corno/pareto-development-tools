@@ -22,7 +22,9 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 export const $$: p_.Command_Implementation<
     command_interfaces.analyze_file_structure,
     {
-        'structure': s_structure.Directory
+        'structure': s_structure.Directory,
+        'indentation': string
+        'newline': string
     },
     {
         'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory,
@@ -46,7 +48,7 @@ export const $$: p_.Command_Implementation<
 
                 $c.log.execute(
                     {
-                        'message': sh.pg.sentences(
+                        'paragraph': sh.pg.sentences(
                             p_temp.from.list(
                                 p_temp.from.list(
                                     t_project_files_to_file_analysis_list.Project_Files(
@@ -72,7 +74,10 @@ export const $$: p_.Command_Implementation<
 
                                     ])
                                 }
-                            ))
+                            )
+                        ),
+                        'indentation': $s.indentation,
+                        'newline': $s.newline,
                     },
                     ($): s.Error => ['log', $],
                 )

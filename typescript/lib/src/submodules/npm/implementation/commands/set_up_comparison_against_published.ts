@@ -1,12 +1,13 @@
 import * as p_ from 'pareto-core/implementation/command'
 import * as p_t from 'pareto-core/implementation/transformer'
+import * as p_s from 'pareto-core/implementation/serializer'
+import * as p_schema from 'pareto-core/interface/schema'
 import p_list_from_text from 'pareto-core/implementation/refiner/specials/list_from_text'
 import p_list_build_deprecated from 'pareto-core/implementation/refiner/specials/list_build_deprecated'
 import p_text_from_list from 'pareto-core/implementation/transformer/specials/text_from_list'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
 //schemas
-import type * as s_out from "../../interface/schemas/list_of_characters.js"
 
 //interface dependencies
 import type * as command_interfaces from "../../interface/commands.js"
@@ -19,11 +20,11 @@ import type * as query_interfaces_pareto_resources from "pareto-resources/interf
 import * as d from "../../interface/schemas/set_up_comparison_against_published.js"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
+import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 import * as q_get_package_json from "../queries/get_package_json.js"
 
-const remove_n_characters_from_end = ($: string, n: number): s_out.List_of_Characters => {
+const remove_n_characters_from_end = ($: string, n: number): p_schema.List<number> => {
 
     const chars = p_list_from_text(
         $,
@@ -110,9 +111,17 @@ export const $$: p_.Command_Implementation<
                                 'working directory': p_.literal.not_set(),
                                 'args': p_.literal.list([
                                     "pack",
-                                    t_path_to_text.Context_Path($d['path to local package']),
+                                    p_s.text_from_phrase(
+                                        ser_path.Context_Path($d['path to local package']),
+                                        "",
+                                        ""
+                                    ),
                                     "--pack-destination",
-                                    t_path_to_text.Node_Path($d['path to temp directory']),
+                                    p_s.text_from_phrase(
+                                        ser_path.Node_Path($d['path to temp directory']),
+                                        "",
+                                        ""
+                                    ),
                                 ]),
                             },
                             ($) => ['error while running npm command', $],
@@ -133,9 +142,19 @@ export const $$: p_.Command_Implementation<
                                 'working directory': p_.literal.not_set(),
                                 'args': p_.literal.list([
                                     "-xzmf",
-                                    `${t_path_to_text.Node_Path($d['path to temp directory'])}/${filename}`,
+                                    p_s.text_from_phrase(
+                                        ser_path.Node_Path(
+                                            t_path_to_path.deprecated_extend_node_path($d['path to temp directory'], { 'addition': filename })
+                                        ),
+                                        "",
+                                        ""
+                                    ),
                                     "-C",
-                                    t_path_to_text.Node_Path($d['path to output local directory']),
+                                    p_s.text_from_phrase(
+                                        ser_path.Node_Path($d['path to output local directory']),
+                                        "",
+                                        ""
+                                    ),
                                     "--strip-components=1",
                                 ]),
                             },
@@ -158,7 +177,13 @@ export const $$: p_.Command_Implementation<
                                     "pack",
                                     `${package_info.name}@${package_info.version}`,
                                     "--pack-destination",
-                                    `${t_path_to_text.Node_Path($d['path to temp directory'])}/npm`,
+                                    p_s.text_from_phrase(
+                                        ser_path.Node_Path(
+                                            t_path_to_path.deprecated_extend_node_path($d['path to temp directory'], { 'addition': "npm" })
+                                        ),
+                                        "",
+                                        ""
+                                    ),
                                 ])
                             },
                             ($) => ['error while running npm command', $],
@@ -194,12 +219,32 @@ export const $$: p_.Command_Implementation<
                                         'working directory': p_.literal.not_set(),
                                         'args': p_.literal.list([
                                             "-xzmf",
-                                            `${t_path_to_text.Node_Path($d['path to temp directory'])}/npm/${package_info.name}-${p_text_from_list(
-                                                $v,
-                                                ($) => $
-                                            )}.tgz`,
+                                            p_s.text_from_phrase(
+                                                ser_path.Node_Path(
+                                                    t_path_to_path.deprecated_extend_node_path(
+                                                        t_path_to_path.deprecated_extend_node_path(
+                                                            $d['path to temp directory'],
+                                                            {
+                                                                'addition': "npm"
+                                                            }
+                                                        ),
+                                                        {
+                                                            'addition': `${package_info.name}-${p_text_from_list(
+                                                                $v,
+                                                                ($) => $
+                                                            )}.tgz`
+                                                        }
+                                                    )
+                                                ),
+                                                "",
+                                                ""
+                                            ),
                                             "-C",
-                                            `${t_path_to_text.Node_Path($d['path to output published directory'])}`,
+                                            p_s.text_from_phrase(
+                                                ser_path.Node_Path($d['path to output published directory']),
+                                                "",
+                                                ""
+                                            ),
                                             "--strip-components=1",
                                         ])
                                     },

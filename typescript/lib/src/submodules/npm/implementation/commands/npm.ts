@@ -1,4 +1,5 @@
 import * as p_ from 'pareto-core/implementation/command'
+import * as p_s from 'pareto-core/implementation/serializer'
 import * as p_temp from 'pareto-core/implementation/transformer'
 
 //interface dependencies
@@ -6,7 +7,7 @@ import type * as command_interfaces from "../../interface/commands.js"
 import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
 
 //dependencies
-import * as t_path_to_text from "pareto-resources/implementation/transformers/unrestricted_path/text"
+import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.npm,
@@ -24,7 +25,11 @@ export const $$: p_.Command_Implementation<
                     p_temp.from.optional($d.path).decide(
                         ($) => p_.literal.list([
                             "--prefix",
-                            t_path_to_text.Context_Path($),
+                            p_s.text_from_phrase(
+                                ser_path.Context_Path($),
+                                "",
+                                ""
+                            )
                         ]),
                         () => p_.literal.list([])
                     ),

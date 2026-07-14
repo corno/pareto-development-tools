@@ -1,4 +1,4 @@
-import type * as s_deserialize from "./deserialize_parse_tree.js"
+import type * as s_deserialize from "./parse_tree_deserialization.js"
 import type * as s_path from "./fs_unrestricted_path.js"
 
 export type Error = {

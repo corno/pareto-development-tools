@@ -1,8 +1,10 @@
 import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_s from 'pareto-core/implementation/serializer'
 
 //schemas
 import type * as s_in from "../../../interface/schemas/file_structure_analysis.js"
 import type * as s_out from "../../../interface/schemas/csv.js"
+
 namespace declarations {
     export type Signature = p_.Transformer<
         s_in.File_Analysis_List,
@@ -11,7 +13,7 @@ namespace declarations {
 }
 
 //dependencies
-import * as t_to_text from "./text.js"
+import * as ser_path from "../../serializers/path.js"
 
 //shorthands
 import * as sh from "pareto-csv/shorthands/csv/target"
@@ -30,7 +32,11 @@ export const File_Analysis_List: declarations.Signature = ($) => sh.CSV(
         ($) => sh.row(p_.literal.list([
             $.package,
             $.path,
-            t_to_text.Path($.analysis.structure.path),
+            p_s.text_from_phrase(
+                ser_path.Path($.analysis.structure.path),
+                "",
+                ""
+            ),
             p_.from.state($.analysis.structure.classification).decide(
                 ($) => {
                     switch ($[0]) {
@@ -59,7 +65,11 @@ export const File_Analysis_List: declarations.Signature = ($) => sh.CSV(
             p_.from.optional($.analysis.extension).decide(
                 ($) => $, () => ""),
             p_.from.optional($.analysis['unexpected path tail']).decide(
-                ($) => t_to_text.Path($),
+                ($) => p_s.text_from_phrase(
+                    ser_path.Path($),
+                    "",
+                    ""
+                ),
                 () => ""
             ),
             `${$.analysis['line count']}`, //number to string

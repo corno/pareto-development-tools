@@ -6,7 +6,7 @@ import type * as query_interfaces_pareto_filesystem_unrestricted_api from "paret
 
 //schemas
 import * as d from "../../interface/schemas/get_project_files.js"
-import type * as s_directory_content from "../../interface/schemas/directory_content.js"
+import type * as s_directory_content from "../../interface/schemas/directory_content_as_read.js"
 
 
 //dependencies
@@ -29,12 +29,12 @@ export const $$: p_.Query_Implementation<
     )).query(
         ($v) => p_.e.dictionary(
             $v,
-            ($)=> {
+            ($): p_.Query_Result<s_directory_content.Directory, d.Package_Error> => {
                 const path = $.path
                 return p_.decide.state($['node type'], ($) => {
                     switch ($[0]) {
-                        case 'other': return p_.option($, ($) => p_.e.direct_error<s_directory_content.Directory, d.Package_Error>(['not a directory', null]))
-                        case 'file': return p_.option($, ($) => p_.e.direct_error<s_directory_content.Directory, d.Package_Error>(['not a directory', null]))
+                        case 'other': return p_.option($, ($) => p_.e.direct_error(['not a directory', null]))
+                        case 'file': return p_.option($, ($) => p_.e.direct_error(['not a directory', null]))
                         case 'directory': return p_.option($, ($) => q_directory_content(null, $q)(
                             {
                                 'path': t_path_to_path.deprecated_node_path_to_context_path(path),

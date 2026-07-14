@@ -20,7 +20,10 @@ import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.publish,
-    null,
+    {
+        'indentation': string
+        'newline': string
+    },
     {
         'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file
     },
@@ -141,14 +144,16 @@ export const $$: p_.Command_Implementation<
 
                             $c.log.execute(
                                 {
-                                    'message': sh.pg.sentences([
+                                    'paragraph': sh.pg.sentences([
                                         sh.sentence([
                                             sh.ph.literal("published:"),
                                             sh.ph.literal(package_info.name),
                                             sh.ph.literal("@"),
                                             sh.ph.literal(package_info.version),
                                         ])
-                                    ])
+                                    ]),
+                                    'indentation': $s.indentation,
+                                    'newline': $s.newline,
                                 },
                                 ($): d.Error => ['error while logging', $],
                             ),
