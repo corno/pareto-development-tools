@@ -10,7 +10,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose_simple/deprecated"
 
 //dependencies
 import * as t_git_extended_commit_to_prose from "../../submodules/version_control_api/implementation/serializers/extended_commit.js"

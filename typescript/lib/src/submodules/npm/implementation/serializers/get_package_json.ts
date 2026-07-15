@@ -13,7 +13,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose_extended/deprecated"
 
 //dependencies
 import * as t_read_file_to_prose from "pareto-filesystem-unrestricted-api/implementation/serializers/read_file"

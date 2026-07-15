@@ -10,7 +10,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose_extended/deprecated"
     
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {

@@ -10,7 +10,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose_simple/deprecated"
 
 //dependencies
 import * as t_eqe_to_prose from "pareto-resources/implementation/serializers/execute_query_executable"

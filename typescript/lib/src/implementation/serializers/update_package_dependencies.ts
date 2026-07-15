@@ -14,7 +14,7 @@ import * as t_stat_possible_node_to_prose from "pareto-filesystem-unrestricted-a
 import * as t_utd_to_prose from "../../submodules/npm/implementation/serializers/update_package_dependencies.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose_simple/deprecated"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {

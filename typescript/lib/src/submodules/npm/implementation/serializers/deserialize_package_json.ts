@@ -15,7 +15,7 @@ import * as t_location_to_prose from "astn-core/_implementation/serializers/loca
 import * as t_path_to_text from "pareto-resources/implementation/serializers/unrestricted_path"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose_simple/deprecated"
 
 export const Error: declarations.Error = ($) => sh.ph.composed([
     t_path_to_text.Node_Path($['path']),

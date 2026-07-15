@@ -14,7 +14,7 @@ import * as ser_read_directory from "pareto-filesystem-unrestricted-api/implemen
 import * as ser_deserialize_package_json from "../../submodules/npm/implementation/serializers/deserialize_package_json.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose_extended/deprecated"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {

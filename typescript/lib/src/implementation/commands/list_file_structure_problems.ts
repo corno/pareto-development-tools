@@ -16,7 +16,7 @@ import * as t_project_files_to_file_analysis_list from "../transformers/project_
 import { $$ as q_get_project_files } from "../queries/get_project_files.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose_extended/deprecated"
 
 
 export const $$: p_.Command_Implementation<

@@ -19,7 +19,7 @@ import * as t_api_to_prose from "../serializers/execute_command.js"
 import * as t_bin_to_prose from "../serializers/parse.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/prose_simple/deprecated"
 
 
 type My_Error =
