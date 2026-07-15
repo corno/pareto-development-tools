@@ -36,38 +36,30 @@ export const $$: p_.Command_Implementation<
             {
                 'working directory': p_.literal.not_set(),
                 'args': p_.literal.list([
-                    p_s.text_from_phrase(
-                        ser_path.Context_Path(
-                            t_path_to_path.extend_context_path_with_list(
-                                $d.path,
-                                {
-                                    'addition': p_.literal.list([
-                                        "typescript",
-                                        "test",
-                                        "dist",
-                                        "bin",
-                                        "test.js",
-                                    ])
-                                }
-                            )
-                        ),
-                        "",
-                        ""
+                    ser_path.Context_Path(
+                        t_path_to_path.extend_context_path_with_list(
+                            $d.path,
+                            {
+                                'addition': p_.literal.list([
+                                    "typescript",
+                                    "test",
+                                    "dist",
+                                    "bin",
+                                    "test.js",
+                                ])
+                            }
+                        )
                     ),
-                    p_s.text_from_phrase(
-                        ser_path.Context_Path(
-                            t_path_to_path.extend_context_path_with_list(
-                                $d.path,
-                                {
-                                    'addition': p_.literal.list([
-                                        "testdata",
-                                    ])
-                                }
-                            )
-                        ),
-                        "",
-                        ""
-                    )
+                    ser_path.Context_Path(
+                        t_path_to_path.extend_context_path_with_list(
+                            $d.path,
+                            {
+                                'addition': p_.literal.list([
+                                    "testdata",
+                                ])
+                            }
+                        )
+                    ),
                 ])
             },
             ($): d.Error => ['error testing', $],

@@ -11,7 +11,8 @@ import type * as s_structure from "../../interface/schemas/structure.js"
 import * as d from "../../interface/schemas/get_project_files.js"
 
 //dependencies
-import * as ser_csv from "pareto-csv/implementation/serializers/csv"
+import * as t_csv_to_paragraph from "pareto-csv/implementation/transformers/csv/paragraph"
+import * as t_paragraph_to_serialized from "pareto-fountain-pen/_implementation/transformers/paragraph/serialized"
 import * as t_file_structure_analysis_to_csv from "../transformers/file_structure_analysis/csv.js"
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
 import { $$ as q_get_project_files } from "../queries/get_project_files.js"
@@ -21,14 +22,13 @@ export const $$: p_.Command_Implementation<
     {
         'structure': s_structure.Directory
         'indentation': string
-        'newline': string
     },
     {
         'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory,
         'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file
     },
     {
-        'log': command_interfaces_pareto_stream_api.log
+        'log lines': command_interfaces_pareto_stream_api.log_lines
     }
 > = p_.command(
     ($d, $s, $q, $c) => [
@@ -43,23 +43,26 @@ export const $$: p_.Command_Implementation<
             ),
             ($v) => [
 
-                $c.log.execute(
+                $c['log lines'].execute(
                     {
-                        'paragraph': ser_csv.CSV(
-                            t_file_structure_analysis_to_csv.File_Analysis_List(
-                                t_project_files_to_file_analysis_list.Project_Files(
-                                    $v,
-                                    {
-                                        'structure': $s.structure,
-                                    }
-                                )
+                        'messages': t_paragraph_to_serialized.Paragraph(
+                            t_csv_to_paragraph.CSV(
+                                t_file_structure_analysis_to_csv.File_Analysis_List(
+                                    t_project_files_to_file_analysis_list.Project_Files(
+                                        $v,
+                                        {
+                                            'structure': $s.structure,
+                                        }
+                                    )
+                                ),
+                                {
+                                    'separator': 0x2C, //comma
+                                }
                             ),
                             {
-                                'separator': 0x2C, //comma
+                                'indentation': $s.indentation,
                             }
                         ),
-                        'indentation': $s['indentation'],
-                        'newline': $s['newline'],
                     },
                     ($): d.Error => ['log', $],
                 )

@@ -24,11 +24,7 @@ export const $$: p_.Command_Implementation<
                     p_t.from.optional($d.path).decide(
                         ($) => p_.literal.list([
                             "-C",
-                            p_s.text_from_phrase(
                                 ser_path.Context_Path($),
-                                "",
-                                ""
-                            ),
                         ]),
                         () => p_.literal.list([])
                     ),

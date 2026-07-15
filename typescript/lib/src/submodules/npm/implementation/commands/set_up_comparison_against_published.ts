@@ -111,17 +111,9 @@ export const $$: p_.Command_Implementation<
                                 'working directory': p_.literal.not_set(),
                                 'args': p_.literal.list([
                                     "pack",
-                                    p_s.text_from_phrase(
-                                        ser_path.Context_Path($d['path to local package']),
-                                        "",
-                                        ""
-                                    ),
+                                    ser_path.Context_Path($d['path to local package']),
                                     "--pack-destination",
-                                    p_s.text_from_phrase(
-                                        ser_path.Node_Path($d['path to temp directory']),
-                                        "",
-                                        ""
-                                    ),
+                                    ser_path.Node_Path($d['path to temp directory']),
                                 ]),
                             },
                             ($) => ['error while running npm command', $],
@@ -142,19 +134,11 @@ export const $$: p_.Command_Implementation<
                                 'working directory': p_.literal.not_set(),
                                 'args': p_.literal.list([
                                     "-xzmf",
-                                    p_s.text_from_phrase(
-                                        ser_path.Node_Path(
-                                            t_path_to_path.deprecated_extend_node_path($d['path to temp directory'], { 'addition': filename })
-                                        ),
-                                        "",
-                                        ""
+                                    ser_path.Node_Path(
+                                        t_path_to_path.deprecated_extend_node_path($d['path to temp directory'], { 'addition': filename })
                                     ),
                                     "-C",
-                                    p_s.text_from_phrase(
-                                        ser_path.Node_Path($d['path to output local directory']),
-                                        "",
-                                        ""
-                                    ),
+                                    ser_path.Node_Path($d['path to output local directory']),
                                     "--strip-components=1",
                                 ]),
                             },
@@ -177,12 +161,8 @@ export const $$: p_.Command_Implementation<
                                     "pack",
                                     `${package_info.name}@${package_info.version}`,
                                     "--pack-destination",
-                                    p_s.text_from_phrase(
-                                        ser_path.Node_Path(
-                                            t_path_to_path.deprecated_extend_node_path($d['path to temp directory'], { 'addition': "npm" })
-                                        ),
-                                        "",
-                                        ""
+                                    ser_path.Node_Path(
+                                        t_path_to_path.deprecated_extend_node_path($d['path to temp directory'], { 'addition': "npm" })
                                     ),
                                 ])
                             },
@@ -219,32 +199,24 @@ export const $$: p_.Command_Implementation<
                                         'working directory': p_.literal.not_set(),
                                         'args': p_.literal.list([
                                             "-xzmf",
-                                            p_s.text_from_phrase(
-                                                ser_path.Node_Path(
+                                            ser_path.Node_Path(
+                                                t_path_to_path.deprecated_extend_node_path(
                                                     t_path_to_path.deprecated_extend_node_path(
-                                                        t_path_to_path.deprecated_extend_node_path(
-                                                            $d['path to temp directory'],
-                                                            {
-                                                                'addition': "npm"
-                                                            }
-                                                        ),
+                                                        $d['path to temp directory'],
                                                         {
-                                                            'addition': `${package_info.name}-${p_text_from_list(
-                                                                $v,
-                                                                ($) => $
-                                                            )}.tgz`
+                                                            'addition': "npm"
                                                         }
-                                                    )
-                                                ),
-                                                "",
-                                                ""
+                                                    ),
+                                                    {
+                                                        'addition': `${package_info.name}-${p_text_from_list(
+                                                            $v,
+                                                            ($) => $
+                                                        )}.tgz`
+                                                    }
+                                                )
                                             ),
                                             "-C",
-                                            p_s.text_from_phrase(
-                                                ser_path.Node_Path($d['path to output published directory']),
-                                                "",
-                                                ""
-                                            ),
+                                            ser_path.Node_Path($d['path to output published directory']),
                                             "--strip-components=1",
                                         ])
                                     },

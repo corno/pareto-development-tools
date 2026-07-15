@@ -25,11 +25,7 @@ export const $$: p_.Command_Implementation<
                     p_temp.from.optional($d.path).decide(
                         ($) => p_.literal.list([
                             "--prefix",
-                            p_s.text_from_phrase(
-                                ser_path.Context_Path($),
-                                "",
-                                ""
-                            )
+                            ser_path.Context_Path($)
                         ]),
                         () => p_.literal.list([])
                     ),

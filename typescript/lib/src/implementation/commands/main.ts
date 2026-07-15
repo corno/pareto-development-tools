@@ -15,11 +15,10 @@ import type * as s_execute_command from "../../interface/schemas/execute_command
 
 //dependencies
 import * as r_instruction from "../refiners/execute_command/main.js"
-import * as t_api_to_prose from "../serializers/execute_command.js"
-import * as t_bin_to_prose from "../serializers/parse.js"
+import * as t_api_to_paragraph from "../transformers/execute_command/paragraph.js"
+import * as t_bin_to_paragraph from "../transformers/parse/paragraph.js"
+import * as t_paragraph_to_serialized from "pareto-fountain-pen/_implementation/transformers/paragraph/serialized"
 
-//shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose_simple/deprecated"
 
 
 type My_Error =
@@ -30,12 +29,11 @@ export const $$: p_.Command_Implementation<
     command_interfaces_pareto_application_api.main,
     {
         'indentation': string
-        'newline': string
     },
     null,
     {
         'api': command_interfaces.api
-        'log error': command_interfaces_pareto_stream_api.log_error
+        'log error lines': command_interfaces_pareto_stream_api.log_error_lines
 
     }
 > = p_.command(
@@ -62,18 +60,22 @@ export const $$: p_.Command_Implementation<
             ],
             ($) => [
 
-                $c['log error'].execute(
+                $c['log error lines'].execute(
                     {
-                        'phrase': p_temp.from.state($).decide(
-                            ($) => {
-                                switch ($[0]) {
-                                    case 'parse': return p_temp.ss($, ($) => t_bin_to_prose.Error($))
-                                    case 'execute command': return p_temp.ss($, ($) => t_api_to_prose.Error($))
-                                    default: return p_temp.exhaustive($[0])
+                        'messages': t_paragraph_to_serialized.Phrase(
+                            p_temp.from.state($).decide(
+                                ($) => {
+                                    switch ($[0]) {
+                                        case 'parse': return p_temp.ss($, ($) => t_bin_to_paragraph.Error($))
+                                        case 'execute command': return p_temp.ss($, ($) => t_api_to_paragraph.Error($))
+                                        default: return p_temp.exhaustive($[0])
+                                    }
                                 }
-                            }),
-                        'indentation': $s.indentation,
-                        'newline': $s.newline,
+                            ),
+                            {
+                                'indentation': $s.indentation,
+                            },
+                        ),
                     },
                     ($) => ({
                         'exit code': 2

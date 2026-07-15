@@ -32,11 +32,7 @@ export const File_Analysis_List: declarations.Signature = ($) => sh.CSV(
         ($) => sh.row(p_.literal.list([
             $.package,
             $.path,
-            p_s.text_from_phrase(
-                ser_path.Path($.analysis.structure.path),
-                "",
-                ""
-            ),
+            ser_path.Path($.analysis.structure.path),
             p_.from.state($.analysis.structure.classification).decide(
                 ($) => {
                     switch ($[0]) {
@@ -65,11 +61,7 @@ export const File_Analysis_List: declarations.Signature = ($) => sh.CSV(
             p_.from.optional($.analysis.extension).decide(
                 ($) => $, () => ""),
             p_.from.optional($.analysis['unexpected path tail']).decide(
-                ($) => p_s.text_from_phrase(
-                    ser_path.Path($),
-                    "",
-                    ""
-                ),
+                ($) => ser_path.Path($),
                 () => ""
             ),
             `${$.analysis['line count']}`, //number to string

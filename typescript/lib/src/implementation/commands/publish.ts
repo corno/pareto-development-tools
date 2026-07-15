@@ -1,5 +1,6 @@
 import * as p_ from 'pareto-core/implementation/command'
 import p_variables from 'pareto-core/implementation/command/specials/variables'
+import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
 import type * as command_interfaces from "../../interface/commands.js"
@@ -16,13 +17,12 @@ import * as t_path_to_path from "pareto-resources/implementation/transformers/un
 import * as q_get_package_json from "../../submodules/npm/implementation/queries/get_package_json.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/prose_extended/deprecated"
+import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.publish,
     {
         'indentation': string
-        'newline': string
     },
     {
         'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file
@@ -36,7 +36,7 @@ export const $$: p_.Command_Implementation<
         'build and test': command_interfaces.build_and_test
         'npm': command_interfaces_npm.npm
         'npm publish': command_interfaces_npm.npm_publish
-        'log': command_interfaces_pareto_stream_api.log
+        'log lines': command_interfaces_pareto_stream_api.log_lines
     }
 > = p_.command(
 
@@ -142,18 +142,17 @@ export const $$: p_.Command_Implementation<
                                 ($) => ['error while running npm publish', $],
                             ),
 
-                            $c.log.execute(
+                            $c['log lines'].execute(
                                 {
-                                    'paragraph': sh.pg.sentences([
-                                        sh.sentence([
-                                            sh.ph.literal("published:"),
-                                            sh.ph.literal(package_info.name),
-                                            sh.ph.literal("@"),
-                                            sh.ph.literal(package_info.version),
+                                    'messages': p_.literal.list([
+                                        p_s.ph.composed([
+
+                                            p_s.ph.literal("published:"),
+                                            p_s.ph.literal(package_info.name),
+                                            p_s.ph.literal("@"),
+                                            p_s.ph.literal(package_info.version),
                                         ])
                                     ]),
-                                    'indentation': $s.indentation,
-                                    'newline': $s.newline,
                                 },
                                 ($): d.Error => ['error while logging', $],
                             ),

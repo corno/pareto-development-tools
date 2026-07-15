@@ -17,35 +17,31 @@ export const $$: p_.Command_Implementation<
         'update2latest': command_interfaces_pareto_resources.execute_sandboxed.command_executable
     }
 >
- = p_.command(
-    ($d, $s, $q, $c) => [
-        $c.update2latest.execute(
-            {
-                'working directory': p_.literal.not_set(),
-                'args': p_temp.literal.segmented_list([
-                    p_temp.literal.list([
-                        p_s.text_from_phrase(
+    = p_.command(
+        ($d, $s, $q, $c) => [
+            $c.update2latest.execute(
+                {
+                    'working directory': p_.literal.not_set(),
+                    'args': p_temp.literal.segmented_list([
+                        p_temp.literal.list([
                             ser_path.Context_Path($d.path),
-                            "",
-                            ""
-                        ),
+                        ]),
+                        p_temp.from.state($d.what).decide(
+                            ($) => {
+                                switch ($[0]) {
+                                    case 'dependencies': return p_temp.ss($, ($) => {
+                                        return p_temp.literal.list(["dependencies"])
+                                    })
+                                    case 'dev-dependencies': return p_temp.ss($, ($) => {
+                                        return p_temp.literal.list(["devDependencies"])
+                                    })
+                                    default: return p_temp.exhaustive($[0])
+                                }
+                            }),
+                        p_temp.literal.list(["verbose"])
                     ]),
-                    p_temp.from.state($d.what).decide(
-                        ($) => {
-                            switch ($[0]) {
-                                case 'dependencies': return p_temp.ss($, ($) => {
-                                    return p_temp.literal.list(["dependencies"])
-                                })
-                                case 'dev-dependencies': return p_temp.ss($, ($) => {
-                                    return p_temp.literal.list(["devDependencies"])
-                                })
-                                default: return p_temp.exhaustive($[0])
-                            }
-                        }),
-                    p_temp.literal.list(["verbose"])
-                ]),
-            },
-            ($) => ['error while running update2latest', $],
-        )
-    ]
-)
+                },
+                ($) => ['error while running update2latest', $],
+            )
+        ]
+    )

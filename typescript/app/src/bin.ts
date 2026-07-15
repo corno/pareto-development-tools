@@ -186,7 +186,6 @@ p_h.run_main_command(
         const dependency_graph = c_dependency_graph(
             {
                 'indentation': "    ",
-                'newline': "\n",
             },
             {
                 'package dependencies': q_package_dependencies(
@@ -198,7 +197,7 @@ p_h.run_main_command(
                 ),
             },
             {
-                'log': rs_stream.$.commands.log,
+                'log lines': rs_stream.$.commands['log lines'],
             },
         )
 
@@ -273,11 +272,10 @@ p_h.run_main_command(
         return c_main(
             {
                 'indentation': "    ",
-                'newline': "\n",
             },
             null,
             {
-                'log error': rs_stream.$.commands['log error'],
+                'log error lines': rs_stream.$.commands['log error lines'],
                 'api': c_api(
                     null,
                     {
@@ -292,28 +290,26 @@ p_h.run_main_command(
                             {
                                 'structure': data_structure.$$,
                                 'indentation': "    ",
-                                'newline': "\n",
                             },
                             {
                                 'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
                                 'read file': rs_filesystem_unrestricted.$.queries['read file'],
                             },
                             {
-                                'log': rs_stream.$.commands.log,
+                                'log lines': rs_stream.$.commands['log lines'],
                             },
                         ),
                         'list file structure problems': c_list_file_structure_problems(
                             {
                                 'structure': data_structure.$$,
                                 'indentation': "    ",
-                                'newline': "\n",
                             },
                             {
                                 'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
                                 'read file': rs_filesystem_unrestricted.$.queries['read file'],
                             },
                             {
-                                'log': rs_stream.$.commands.log,
+                                'log lines': rs_stream.$.commands['log lines'],
                             },
                         ),
                         'update package dependencies': update_package_dependencies,
@@ -329,7 +325,6 @@ p_h.run_main_command(
                         'publish': c_publish(
                             {
                                 'indentation': "    ",
-                                'newline': "\n",
                             },
                             {
                                 'read file': rs_filesystem_unrestricted.$.queries['read file']
@@ -343,7 +338,7 @@ p_h.run_main_command(
                                 'npm publish': npm_publish,
                                 'update package dependencies': update_package_dependencies,
                                 'version control extended commit': git.commands['extended commit'],
-                                'log': rs_stream.$.commands.log,
+                                'log lines': rs_stream.$.commands['log lines'],
                             },
                         ),
                     },

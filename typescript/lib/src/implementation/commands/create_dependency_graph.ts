@@ -11,19 +11,19 @@ import * as d from "../../interface/schemas/create_dependency_graph.js"
 
 //dependencies
 import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz.js"
-import * as ser_graphviv from "pareto-graphviz/implementation/serializers/high_level_simple"
+import * as t_graphviz_to_paragraph from "pareto-graphviz/implementation/transformers/high_level_simple/paragraph"
+import * as t_paragraph_to_serialized from "pareto-fountain-pen/_implementation/transformers/paragraph/serialized"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.create_dependency_graph,
     {
         'indentation': string
-        'newline': string
     },
     {
         'package dependencies': query_interfaces.get_package_dependencies
     },
     {
-        'log': command_interfaces_pareto_stream_api.log
+        'log lines': command_interfaces_pareto_stream_api.log_lines
     }
 > = p_.command(
     ($d, $s, $q, $c) => [
@@ -37,14 +37,17 @@ export const $$: p_.Command_Implementation<
             )).transform(
                 ($) => t_package_dependencies_to_graphviz.Result($)
             ).transform(
-                ($) => ser_graphviv.Graph($)
+                ($) => t_graphviz_to_paragraph.Graph($)
             ),
             ($v) => [
-                $c['log'].execute(
+                $c['log lines'].execute(
                     {
-                        'paragraph': $v,
-                        'indentation': $s['indentation'],
-                        'newline': $s['newline'],
+                        'messages': t_paragraph_to_serialized.Paragraph(
+                            $v,
+                            {
+                                'indentation': $s.indentation,
+                            }
+                        )
                     },
                     ($): d.Error => ['log', null],
                 )

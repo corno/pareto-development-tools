@@ -6,18 +6,16 @@ import p_list_from_text from 'pareto-core/implementation/refiner/specials/list_f
 import type * as s_in from "../../interface/schemas/path.js"
 
 namespace declarations {
-    export type Path = p_.Phrase_Serializer<
+    export type Path = p_.Serializer<
         s_in.Path
     >
 }
 
-import * as sh from "pareto-fountain-pen/shorthands/prose_simple/deprecated"
-
-export const Path: declarations.Path = ($) => sh.ph.composed(
+export const Path: declarations.Path = ($) => p_.ph.list(
     p_.from.list($).flatten(
         ($) => p_.literal.list([
-            sh.ph.literal("/"),
-            sh.ph.literal($)
+            p_.ph.literal("/"),
+            p_.ph.literal($)
         ])
     )
 )
