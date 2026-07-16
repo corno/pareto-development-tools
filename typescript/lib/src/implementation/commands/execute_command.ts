@@ -8,7 +8,7 @@ import type * as command_interfaces_npm from "../../submodules/npm/interface/com
 import type * as command_interfaces_version_control from "../../submodules/version_control_api/interface/commands.js"
 
 //schemas
-import * as d from "../../interface/schemas/execute_command.js"
+import * as d from "../../interface/schemas/command_error.js"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"

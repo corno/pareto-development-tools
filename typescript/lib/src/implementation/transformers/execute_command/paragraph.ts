@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
 //schemas
-import type * as s_in from "../../../interface/schemas/execute_command.js"
+import type * as s_in from "../../../interface/schemas/command_error.js"
 import type * as s_out from "../../../interface/schemas/paragraph.js"
 
 namespace declarations {
@@ -20,8 +20,8 @@ import * as t_git_assert_no_open_changes_to_prose from "../../../submodules/vers
 
 import * as t_build_and_test_to_prose from "../build_and_test/paragraph.js"
 import * as t_build_to_prose from "../build/paragraph.js"
-import * as t_dependency_graph_to_prose from "../create_dependency_graph/paragraph.js"
-import * as t_line_count_to_prose from "../get_project_files/paragraph.js"
+import * as t_dependency_graph_to_prose from "../../../submodules/dependency_graph/implementation/transformers/create_dependency_graph/paragraph.js"
+import * as t_line_count_to_prose from "../../../submodules/file_structure_analysis/implementation/transformers/get_project_files/paragraph.js"
 import * as t_publish from "../publish/paragraph.js"
 import * as t_update_dependencies from "../update_package_dependencies/paragraph.js"
 import * as ser_read_directory from "pareto-filesystem-unrestricted-api/implementation/serializers/read_directory"

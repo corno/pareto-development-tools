@@ -5,8 +5,8 @@ import type * as query_interfaces from "../../interface/queries.js"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
 
 //schemas
-import * as d from "../../interface/schemas/get_project_files.js"
-import type * as s_directory_content from "../../interface/schemas/directory_content_as_read.js"
+import * as d from "../../submodules/file_structure_analysis/schemas/get_project_files.js"
+import type * as s_directory_content from "../../submodules/file_structure_analysis/schemas/directory_content_as_read.js"
 
 
 //dependencies

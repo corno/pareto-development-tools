@@ -8,13 +8,12 @@ import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/in
 
 
 //schemas
-import type * as s_main from "./main.js"
-import type * as s_application_api_main from "../../interface/schemas/application_api_main.js"
+import type * as s_application_api_main from "pareto-application-api/interface/schemas/main"
 import type * as s_parse from "../../interface/schemas/parse.js"
-import type * as s_execute_command from "../../interface/schemas/execute_command.js"
+import type * as s_command_error from "../../interface/schemas/command_error.js"
 
 //dependencies
-import * as r_instruction from "../refiners/execute_command/main.js"
+import * as r_instruction from "../refiners/command_instruction/main.js"
 import * as t_api_to_paragraph from "../transformers/execute_command/paragraph.js"
 import * as t_bin_to_paragraph from "../transformers/parse/paragraph.js"
 import * as t_paragraph_to_serialized from "pareto-fountain-pen/_implementation/transformers/paragraph/serialized"
@@ -23,7 +22,7 @@ import * as t_paragraph_to_serialized from "pareto-fountain-pen/_implementation/
 
 type My_Error =
     | ['parse', s_parse.Error]
-    | ['execute command', s_execute_command.Error]
+    | ['execute command', s_command_error.Error]
 
 export const $$: p_.Command_Implementation<
     command_interfaces_pareto_application_api.main,
