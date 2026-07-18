@@ -9,7 +9,7 @@ import type * as s_error from "../../../interface/schemas/parse.js"
 import type * as s_publish from "../../../interface/schemas/publish.js"
 
 //dependencies
-import * as t_context_path_from_text from "pareto-resources/implementation/refiners/path_unrestricted/text"
+import * as deser_path from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/deserializers/path"
 
 export const Command: p_.Refiner<
     s_out.Parameters,
@@ -37,7 +37,7 @@ export const Command: p_.Refiner<
                     {
                         switch ($) {
                             case "all": return ['all packages', {
-                                'path to project': t_context_path_from_text.Context_Path(
+                                'path to project': deser_path.Context_Path(
                                     iterator.consume(
                                         ($) => abort(['expected a text', { 'description': "path to project" }]),
                                         ($) => $,
@@ -93,7 +93,7 @@ export const Command: p_.Refiner<
 
                             }]
                             case "package": return ['package', {
-                                'path': t_context_path_from_text.Context_Path(
+                                'path': deser_path.Context_Path(
                                     iterator.consume(
                                         ($) => abort(['expected a text', { 'description': "path to package" }]),
                                         ($) => $,
@@ -135,7 +135,7 @@ export const Command: p_.Refiner<
 
                             }]
                             case "project": return ['project', {
-                                'path': t_context_path_from_text.Context_Path(
+                                'path': deser_path.Context_Path(
                                     iterator.consume(
                                         ($) => abort(['expected a text', { 'description': "path to package" }]),
                                         ($) => $,
@@ -160,7 +160,7 @@ export const Command: p_.Refiner<
 
                             }]
                             case "publish": return ['publish', {
-                                'path to package': t_context_path_from_text.Context_Path(
+                                'path to package': deser_path.Context_Path(
                                     iterator.consume(
                                         ($) => abort(['expected a text', { 'description': "path to package" }]),
                                         ($) => $,
@@ -205,7 +205,7 @@ export const Command: p_.Refiner<
                                 ),
                             }]
                             case "set-up-comparison": return ['set up comparison', {
-                                'path to package': t_context_path_from_text.Context_Path(
+                                'path to package': deser_path.Context_Path(
                                     iterator.consume(
                                         ($) => abort(['expected a text', { 'description': "path to package" }]),
                                         ($) => $,
