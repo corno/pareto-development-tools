@@ -15,8 +15,8 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
 
 //dependencies
-import * as t_read_directory_content_to_paragraph from "pareto-filesystem-unrestricted-api/implementation/transformers/read_directory_content/paragraph"
-import * as ser_read_directory from "pareto-filesystem-unrestricted-api/implementation/serializers/read_directory"
+import * as t_read_directory_content_to_paragraph from "pareto-filesystem-unrestricted-api/modules/helpers/implementation/transformers/read_directory_content/paragraph"
+import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/read_directory"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {

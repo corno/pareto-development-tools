@@ -18,7 +18,7 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
 
 //dependencies
-import * as ser_read_file from "pareto-filesystem-unrestricted-api/implementation/serializers/read_file"
+import * as ser_read_file from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/read_file"
 import * as t_deserialize_package_json_to_prose from "../deserialize_package_json/paragraph.js"
 
 export const Error: declarations.Error = ($) => {

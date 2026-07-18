@@ -1,1 +1,1 @@
-export * from "pareto-filesystem-unrestricted-api/interface/schemas/fs_unrestricted_make_directory"
+export * from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/schemas/make_directory"

@@ -1,1 +1,1 @@
-export * from "astn-core/interface/schemas/parse_tree_deserialization"
+export * from "astn-core/modules/deserialization/schemas/parse_tree_deserialization"

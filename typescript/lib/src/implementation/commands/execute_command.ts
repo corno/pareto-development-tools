@@ -3,7 +3,7 @@ import p_change_context from 'pareto-core/implementation/refiner/specials/change
 
 //interface dependencies
 import type * as command_interfaces from "../../interface/commands.js"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
 import type * as command_interfaces_npm from "../../submodules/npm/interface/commands.js"
 import type * as command_interfaces_version_control from "../../submodules/version_control_api/interface/commands.js"
 

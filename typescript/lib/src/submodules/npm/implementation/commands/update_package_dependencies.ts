@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/implementation/command'
 
 //interface dependencies
 import type * as command_interfaces from "../../interface/commands.js"
-import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/commands"
+import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/commands"
 
 //schemas
 import * as d from "../../interface/schemas/update_package_dependencies.js"

@@ -4,7 +4,7 @@ import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
 import type * as command_interfaces from "../../interface/commands.js"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
 import type * as command_interfaces_version_control from "../../submodules/version_control_api/interface/commands.js"
 import type * as command_interfaces_npm from "../../submodules/npm/interface/commands.js"
 import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
@@ -144,7 +144,7 @@ export const $$: p_.Command_Implementation<
 
                             $c['log lines'].execute(
                                 {
-                                    'messages': p_.literal.list([
+                                    'lines': p_.literal.list([
                                         p_s.ph.composed([
 
                                             p_s.ph.literal("published:"),

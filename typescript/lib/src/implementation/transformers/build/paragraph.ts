@@ -19,10 +19,10 @@ import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
 
 //dependencies
 import * as t_tsc_to_paragraph from "../tsc/paragraph.js"
-import * as ser_remove from "pareto-filesystem-unrestricted-api/implementation/serializers/remove"
+import * as ser_remove from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/remove"
 import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
-import * as ser_stat_possible_node from "pareto-filesystem-unrestricted-api/implementation/serializers/stat_possible_node"
-import * as ser_chmod from "pareto-filesystem-unrestricted-api/implementation/serializers/chmod"
+import * as ser_stat_possible_node from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/stat_possible_node"
+import * as ser_chmod from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/chmod"
 
 export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
     ($) => {

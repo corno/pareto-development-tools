@@ -1,1 +1,1 @@
-export * from "pareto-filesystem-unrestricted-api/interface/schemas/directory_content_as_read"
+export * from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/directory_content_as_read"

@@ -11,9 +11,9 @@ namespace declarations {
 }
 
 //dependencies
-import * as ser_parse_tree_deserialization from "astn-core/_implementation/serializers/parse_tree_deserialization"
-import * as t_deserialize_parse_tree_to_location from "astn-core/_implementation/transformers/parse_tree_deserialization/location"
-import * as ser_location from "astn-core/_implementation/serializers/location"
+import * as ser_parse_tree_deserialization from "astn-core/modules/deserialization/implementation/serializers/parse_tree_deserialization"
+import * as t_deserialize_parse_tree_to_location from "astn-core/modules/deserialization/implementation/transformers/parse_tree_deserialization/location"
+import * as ser_location from "astn-core/modules/deserialization/implementation/serializers/location"
 import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
 
 //shorthands

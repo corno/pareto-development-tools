@@ -12,8 +12,8 @@ import p_super_query_result from 'pareto-core/implementation/query/super_query_r
 //interface dependencies
 import type * as command_interfaces from "../../interface/commands.js"
 import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
-import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/commands"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
+import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/commands"
 import type * as query_interfaces_pareto_resources from "pareto-resources/interface/queries"
 
 //schemas

@@ -42,7 +42,7 @@ export const $$: p_.Command_Implementation<
             ($v) => [
                 $c['log lines'].execute(
                     {
-                        'messages': t_paragraph_to_serialized.Paragraph(
+                        'lines': t_paragraph_to_serialized.Paragraph(
                             $v,
                             {
                                 'indentation': $s.indentation,

@@ -12,7 +12,7 @@ namespace declarations {
 }
 
 //dependencies
-import * as ser_read_directory from "pareto-filesystem-unrestricted-api/implementation/serializers/read_directory"
+import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/read_directory"
 import * as ser_deserialize_package_json from "../../../../../submodules/npm/implementation/transformers/deserialize_package_json/paragraph.js"
 
 //shorthands

@@ -6,7 +6,7 @@ import p_super_query_result from 'pareto-core/implementation/query/super_query_r
 //interface dependencies
 import type * as command_interfaces from "../../interface/commands.js"
 import type * as command_interfaces_npm from "../../submodules/npm/interface/commands.js"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
 
 //schemas
 import * as d from "../../interface/schemas/update_package_dependencies.js"

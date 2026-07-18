@@ -18,7 +18,7 @@ import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
 //dependencies
 import * as t_epe_to_prose from "pareto-resources/implementation/transformers/execute_unrestricted_command_executable/paragraph"
 import * as t_eqe_to_prose from "pareto-resources/implementation/transformers/execute_query_executable/paragraph"
-import * as ser_make_directory from "pareto-filesystem-unrestricted-api/implementation/serializers/make_directory"
+import * as ser_make_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/make_directory"
 import * as t_get_package_json_to_prose from "../get_package_json/paragraph.js"
 
 

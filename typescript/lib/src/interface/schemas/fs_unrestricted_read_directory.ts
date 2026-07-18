@@ -1,1 +1,1 @@
-export * from "pareto-filesystem-unrestricted-api/interface/schemas/fs_unrestricted_read_directory"
+export * from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/schemas/read_directory"

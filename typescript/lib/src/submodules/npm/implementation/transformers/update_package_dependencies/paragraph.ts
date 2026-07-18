@@ -17,7 +17,7 @@ import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
 
 //dependencies
 import * as t_u2l_to_prose from "../update2latest/paragraph.js"
-import * as ser_remove from "pareto-filesystem-unrestricted-api/implementation/serializers/remove"
+import * as ser_remove from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/remove"
 import * as t_npm_to_prose from "../npm/paragraph.js"
 
 export const Error: declarations.Error = ($) => {

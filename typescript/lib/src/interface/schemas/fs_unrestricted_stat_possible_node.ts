@@ -1,1 +1,1 @@
-export * from "pareto-filesystem-unrestricted-api/interface/schemas/fs_unrestricted_stat_possible_node"
+export * from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/schemas/stat_possible_node"

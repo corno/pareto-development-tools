@@ -4,7 +4,7 @@ import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
 import type * as command_interfaces from "../../../../interface/commands.js"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/interface/queries"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
 import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
 
 //schemas
@@ -45,7 +45,7 @@ export const $$: p_.Command_Implementation<
 
                 $c['log lines'].execute(
                     {
-                        'messages': p_temp.from.list(
+                        'lines': p_temp.from.list(
                             p_temp.from.list(
                                 t_project_files_to_file_analysis_list.Project_Files(
                                     $v,

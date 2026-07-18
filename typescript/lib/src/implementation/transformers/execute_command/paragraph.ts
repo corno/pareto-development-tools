@@ -24,7 +24,7 @@ import * as t_dependency_graph_to_prose from "../../../submodules/dependency_gra
 import * as t_line_count_to_prose from "../../../submodules/file_structure_analysis/implementation/transformers/get_project_files/paragraph.js"
 import * as t_publish from "../publish/paragraph.js"
 import * as t_update_dependencies from "../update_package_dependencies/paragraph.js"
-import * as ser_read_directory from "pareto-filesystem-unrestricted-api/implementation/serializers/read_directory"
+import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/read_directory"
 import * as t_set_up_comparison_against_published from "../../../submodules/npm/implementation/transformers/set_up_comparison_against_published/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(

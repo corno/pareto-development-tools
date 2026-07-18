@@ -61,7 +61,7 @@ export const $$: p_.Command_Implementation<
 
                 $c['log error lines'].execute(
                     {
-                        'messages': t_paragraph_to_serialized.Phrase(
+                        'lines': t_paragraph_to_serialized.Phrase(
                             p_temp.from.state($).decide(
                                 ($) => {
                                     switch ($[0]) {

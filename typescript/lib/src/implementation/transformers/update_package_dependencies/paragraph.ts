@@ -12,7 +12,7 @@ namespace declarations {
 }
 
 //dependencies
-import * as ser_stat_possible_node from "pareto-filesystem-unrestricted-api/implementation/serializers/stat_possible_node"
+import * as ser_stat_possible_node from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/stat_possible_node"
 import * as t_utd_to_paragraph from "../../../submodules/npm/implementation/transformers/update_package_dependencies/paragraph.js"
 
 //shorthands
