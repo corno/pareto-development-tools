@@ -18,17 +18,19 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_build_to_prose from "../build/paragraph.js"
+import * as t_build_to_paragraph from "../build/paragraph.js"
 import * as t_ece_to_paragraph from "pareto-resources/implementation/transformers/execute_unrestricted_command_executable/paragraph"
+import * as t_file_structure_validation_to_paragraph from "../../../submodules/file_structure_analysis/implementation/transformers/file_structure_validation/paragraph.js"
 
 export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
-            case 'error building': return p_.option($, ($) => t_build_to_prose.Error($, $p))
-            case 'error testing': return p_.option($, ($) => sh.ph.composed([
+            case 'building': return p_.option($, ($) => t_build_to_paragraph.Error($, $p))
+            case 'testing': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.text("error while testing:"),
                 t_ece_to_paragraph.Error($),
             ]))
+            case 'file structure validation': return p_.option($, ($) => t_file_structure_validation_to_paragraph.Error($, $p))
             default: return p_.exhaustive($[0])
         }
     })

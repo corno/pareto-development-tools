@@ -1,9 +1,9 @@
 import * as p_ from 'pareto-core/implementation/command'
-import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
 import type * as command_interfaces from "../../interface/commands.js"
 import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
+import type * as command_interfaces_file_structure_analysis from "../../submodules/file_structure_analysis/commands.js"
 
 //schemas
 import * as d from "../../interface/schemas/build_and_validate.js"
@@ -17,8 +17,9 @@ export const $$: p_.Command_Implementation<
     null,
     null,
     {
-        'build': command_interfaces.build
-        'node': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+        'build': command_interfaces.build,
+        'node': command_interfaces_pareto_resources.execute_sandboxed.command_executable,
+        'validate no file structure problems': command_interfaces_file_structure_analysis.validate_no_file_structure_problems
     }
 > = p_.command(
     ($d, $s, $q, $c) => [
@@ -28,7 +29,7 @@ export const $$: p_.Command_Implementation<
             {
                 'path': $d.path,
             },
-            ($): d.Error => ['error building', $],
+            ($): d.Error => ['building', $],
         ),
 
         // test
@@ -62,7 +63,16 @@ export const $$: p_.Command_Implementation<
                     ),
                 ])
             },
-            ($): d.Error => ['error testing', $],
+            ($): d.Error => ['testing', $],
         ),
+
+
+        // list file structure problems
+        // $c['validate no file structure problems'].execute(
+        //     {
+        //         'path to package': $d.path,
+        //     },
+        //     ($): d.Error => ['file structure validation', $],
+        // ),
     ]
 )

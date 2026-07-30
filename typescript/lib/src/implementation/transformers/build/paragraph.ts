@@ -9,8 +9,8 @@ namespace declarations {
         s_in.Error,
         s_out.Phrase,
         {
-        'concise': boolean
-    }
+            'concise': boolean
+        }
     >
 }
 
@@ -80,7 +80,7 @@ export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
                 sh.ph.indent(
                     sh.pg.sentences([
                         sh.sentence([
-                           sh.ph.text(ser_remove.Error($.error))
+                            sh.ph.text(ser_remove.Error($.error))
                         ])
                     ])
                 )

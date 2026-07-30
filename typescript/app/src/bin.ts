@@ -33,11 +33,15 @@ import { $$ as c_npm_publish } from "lib/submodules/npm/implementation/commands/
 import { $$ as c_set_up_comparison_against_published } from "lib/submodules/npm/implementation/commands/set_up_comparison_against_published"
 import { $$ as c_npm_update_package_dependencies } from "lib/submodules/npm/implementation/commands/update_package_dependencies"
 import { $$ as c_update2latest } from "lib/submodules/npm/implementation/commands/update2latest"
-//internal
-import { $$ as q_package_dependencies } from "lib/submodules/dependency_graph/implementation/queries/get_package_dependencies"
+
+//file structure analysis module
 import { $$ as c_analyze_file_structure } from "lib/submodules/file_structure_analysis/implementation/commands/analyze_project_file_structure"
 import { $$ as c_list_package_file_structure_problems } from "lib/submodules/file_structure_analysis/implementation/commands/list_package_file_structure_problems"
 import { $$ as c_list_project_file_structure_problems } from "lib/submodules/file_structure_analysis/implementation/commands/list_project_file_structure_problems"
+import { $$ as c_file_structure_validation } from "lib/submodules/file_structure_analysis/implementation/commands/file_structure_validation"
+
+//internal
+import { $$ as q_package_dependencies } from "lib/submodules/dependency_graph/implementation/queries/get_package_dependencies"
 import { $$ as c_api } from "lib/implementation/commands/execute_command"
 import { $$ as c_main } from "lib/implementation/commands/main"
 import { $$ as c_build } from "lib/implementation/commands/build"
@@ -209,6 +213,19 @@ p_h.run_main_command(
             {
                 'build': build,
                 'node': ece_node,
+                'validate no file structure problems': c_file_structure_validation(
+                    {
+                        'structure': data_structure.$$,
+                        'indentation': "    ",
+                    },
+                    {
+                        'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
+                        'read file': rs_filesystem_unrestricted.$.queries['read file'],
+                    },
+                    {
+                        'log lines': rs_stream.$.commands['log lines'],
+                    },
+                ),
             },
         )
 
