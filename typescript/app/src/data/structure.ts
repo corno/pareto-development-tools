@@ -8,17 +8,22 @@ const $_interface = sh.g.directory_group({
 const $_implementation = sh.g.directory_group({
     "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
     "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
-    "refiners": sh.g.directory_wildcards(1, false, ["ts"], false),
-    "transformers": sh.g.directory_wildcards(1, false, ["ts"], false),
-    "serializers": sh.g.directory_wildcards(0, false, ["ts"], false),
-    "deserializers": sh.g.directory_wildcards(0, false, ["ts"], false),
 })
 
-const $_shorthands = sh.g.directory_group({
-    "deprecated.ts": sh.g.file_manual(),
-    "manual.ts": sh.g.file_manual(),
-    "target.ts": sh.g.file_manual(),
-})
+const $_schemas = sh.g.directory_dictionary(
+    sh.dgroup({
+        "deserializers.ts": sh.g.file_manual(),
+        "refiners": sh.g.directory_wildcards(0, false, ["ts"], false),
+        "schema.ts": sh.g.file_manual(),
+        "serializers.ts": sh.g.file_manual(),
+        "shorthands": sh.g.directory_group({
+            "deprecated.ts": sh.g.file_manual(),
+            "manual.ts": sh.g.file_manual(),
+            "target.ts": sh.g.file_manual(),
+        }),
+        "transformers": sh.g.directory_wildcards(0, false, ["ts"], false),
+    })
+)
 
 export const $$ = sh.dgroup({
     ".git": sh.g.directory_ignore(),
@@ -53,12 +58,11 @@ export const $$ = sh.dgroup({
             "package-lock.json": sh.g.file_generated(true),
             "package.json": sh.g.file_manual(),
             "src": sh.g.directory_group({
+                "schemas": $_schemas,
                 "modules": sh.g.directory_dictionary(
                     sh.dgroup({
-                        "interface": $_interface,
-                        "schemas": sh.g.directory_wildcards(0, false, ["ts"], true),
-                        "shorthands": $_shorthands,
-                        "implementation": $_implementation,
+                        // "interface": $_interface,
+                        "schemas": $_schemas,
                     })
                 ),
                 "globals.ts": sh.g.file_generated(true),

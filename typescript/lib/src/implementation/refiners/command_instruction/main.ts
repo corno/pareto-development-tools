@@ -129,13 +129,6 @@ export const Command: p_.Refiner<
                                             }]
                                             case "list-file-structure-problems": return ['list file structure problems', null]
                                             case "publish": return ['publish', {
-                                                'path to package': deser_path.Context_Path(
-                                                    iterator.consume(
-                                                        ($) => abort(['expected a text', { 'description': "path to package" }]),
-                                                        ($) => $,
-
-                                                    )
-                                                ),
                                                 'generation': iterator.consume_with_expectation(
                                                     ['expected one of', p_.literal.dictionary({
                                                         "patch": null,
