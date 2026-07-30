@@ -107,6 +107,7 @@ export const Command: p_.Refiner<
                                         "assert-no-open-changes": null,
                                         "build-and-test": null,
                                         "commit-changes": null,
+                                        "list-file-structure-problems": null,
                                         "publish": null,
                                         "update-dependencies": null,
                                     })] as s_error.Error,
@@ -130,6 +131,7 @@ export const Command: p_.Refiner<
                                                         : false,
                                                 ),
                                             }]
+                                            case "list-file-structure-problems": return ['list file structure problems', null]
                                             case "publish": return ['publish', {
                                                 'path to package': deser_path.Context_Path(
                                                     iterator.consume(

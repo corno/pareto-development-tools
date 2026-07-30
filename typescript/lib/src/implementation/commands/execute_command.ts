@@ -6,6 +6,7 @@ import type * as command_interfaces from "../../interface/commands.js"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
 import type * as command_interfaces_npm from "../../submodules/npm/interface/commands.js"
 import type * as command_interfaces_version_control from "../../submodules/version_control_api/interface/commands.js"
+import type * as command_interfaces_file_structure_analysis from "../../submodules/file_structure_analysis/commands.js"
 
 //schemas
 import * as d from "../../interface/schemas/command_error.js"
@@ -21,13 +22,14 @@ export const $$: p_.Command_Implementation<
         'read directory': query_interfaces_pareto_filesystem_unrestricted_api.read_directory
     },
     {
-        'analyze file structure': command_interfaces.analyze_file_structure
+        'analyze project file structure': command_interfaces_file_structure_analysis.analyze_project_file_structure
         'build and test': command_interfaces.build_and_test
         'build': command_interfaces.build
         'create dependency graph': command_interfaces.create_dependency_graph
         'version control assert no open changes': command_interfaces_version_control.assert_no_open_changes
         'commit changes': command_interfaces.version_control_commit
-        'list file structure problems': command_interfaces.analyze_file_structure
+        'list project file structure problems': command_interfaces_file_structure_analysis.list_project_file_structure_problems
+        'list package file structure problems': command_interfaces_file_structure_analysis.list_package_file_structure_problems
         'npm set up comparison against published': command_interfaces_npm.set_up_comparison_against_published
         'publish': command_interfaces.publish
         'update package dependencies': command_interfaces.update_package_dependencies
@@ -58,7 +60,7 @@ export const $$: p_.Command_Implementation<
                                             const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
                                             switch ($[0]) {
                                                 case 'analyze file structure': return p_.option($, ($) => [
-                                                    $c['analyze file structure'].execute(
+                                                    $c['analyze project file structure'].execute(
                                                         {
                                                             'path to project': context_path
                                                         },
@@ -102,7 +104,7 @@ export const $$: p_.Command_Implementation<
                                                     )
                                                 ])
                                                 case 'list file structure problems': return p_.option($, ($) => [
-                                                    $c['list file structure problems'].execute(
+                                                    $c['list project file structure problems'].execute(
                                                         {
                                                             'path to project': context_path
                                                         },
@@ -179,6 +181,14 @@ export const $$: p_.Command_Implementation<
                                             'instruction': $,
                                         },
                                         ($): d.Error => ['package', ['commit changes', $]],
+                                    )
+                                ])
+                                case 'list file structure problems': return p_.option($, ($) => [
+                                    $c['list package file structure problems'].execute(
+                                        {
+                                            'path to package': path
+                                        },
+                                        ($): d.Error => ['package', ['get files', $]],
                                     )
                                 ])
                                 case 'publish': return p_.option($, ($) => [

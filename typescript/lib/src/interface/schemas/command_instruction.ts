@@ -38,6 +38,9 @@ export type Package = {
 
     | ['build and test', null]
     | ['commit changes', s_git_commit.Instruction]
+
+
+    | ['list file structure problems', null]
     | ['publish', s_publish.Parameters2]
     | ['update package dependencies', null]
 

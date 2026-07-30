@@ -35,8 +35,9 @@ import { $$ as c_npm_update_package_dependencies } from "lib/submodules/npm/impl
 import { $$ as c_update2latest } from "lib/submodules/npm/implementation/commands/update2latest"
 //internal
 import { $$ as q_package_dependencies } from "lib/submodules/dependency_graph/implementation/queries/get_package_dependencies"
-import { $$ as c_analyze_file_structure } from "lib/submodules/file_structure_analysis/implementation/commands/analyze_file_structure"
-import { $$ as c_list_file_structure_problems } from "lib/submodules/file_structure_analysis/implementation/commands/list_file_structure_problems"
+import { $$ as c_analyze_file_structure } from "lib/submodules/file_structure_analysis/implementation/commands/analyze_project_file_structure"
+import { $$ as c_list_package_file_structure_problems } from "lib/submodules/file_structure_analysis/implementation/commands/list_package_file_structure_problems"
+import { $$ as c_list_project_file_structure_problems } from "lib/submodules/file_structure_analysis/implementation/commands/list_project_file_structure_problems"
 import { $$ as c_api } from "lib/implementation/commands/execute_command"
 import { $$ as c_main } from "lib/implementation/commands/main"
 import { $$ as c_build } from "lib/implementation/commands/build"
@@ -286,7 +287,7 @@ p_h.run_main_command(
                         'build and test': build_and_test,
                         'build': build,
                         'create dependency graph': dependency_graph,
-                        'analyze file structure': c_analyze_file_structure(
+                        'analyze project file structure': c_analyze_file_structure(
                             {
                                 'structure': data_structure.$$,
                                 'indentation': "    ",
@@ -299,7 +300,20 @@ p_h.run_main_command(
                                 'log lines': rs_stream.$.commands['log lines'],
                             },
                         ),
-                        'list file structure problems': c_list_file_structure_problems(
+                        'list project file structure problems': c_list_project_file_structure_problems(
+                            {
+                                'structure': data_structure.$$,
+                                'indentation': "    ",
+                            },
+                            {
+                                'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
+                                'read file': rs_filesystem_unrestricted.$.queries['read file'],
+                            },
+                            {
+                                'log lines': rs_stream.$.commands['log lines'],
+                            },
+                        ),
+                        'list package file structure problems': c_list_package_file_structure_problems(
                             {
                                 'structure': data_structure.$$,
                                 'indentation': "    ",

@@ -1,6 +1,5 @@
 import * as p_ from 'pareto-core/interface/command_interface'
 
-import type * as s_get_project_files from "../submodules/file_structure_analysis/schemas/get_project_files.js"
 import type * as s_command_instruction from "./schemas/command_instruction.js"
 import type * as s_command_error from "./schemas/command_error.js"
 import type * as s_build from "./schemas/build.js"
@@ -11,10 +10,6 @@ import type * as s_tsc from "./schemas/tsc.js"
 import type * as s_update_package_dependencies from "./schemas/update_package_dependencies.js"
 import type * as s_version_control_commit from "./schemas/git_commit.js"
 
-export type analyze_file_structure = p_.Command_Interface<
-    s_get_project_files.Error,
-    s_get_project_files.Parameters
->
 export type api = p_.Command_Interface<
     s_command_error.Error,
     s_command_instruction.Parameters

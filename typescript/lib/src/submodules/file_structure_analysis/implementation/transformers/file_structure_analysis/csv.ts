@@ -7,7 +7,7 @@ import type * as s_out from "../../../schemas/csv.js"
 
 namespace declarations {
     export type Signature = p_.Transformer<
-        s_in.File_Analysis_List,
+        s_in.Project_File_Analysis_List,
         s_out.CSV
     >
 }

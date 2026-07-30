@@ -3,22 +3,24 @@ import * as p_temp from 'pareto-core/implementation/transformer'
 import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
-import type * as command_interfaces from "../../../../interface/commands.js"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
 import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
+import type * as command_interfaces from "../../commands.js"
 
 //schemas
 import type * as s_structure from "../../schemas/structure.js"
-import type * as s from "../../schemas/get_project_files.js"
+import type * as s from "../../schemas/get_package_files.js"
 import type * as s_file_analysis from "../../schemas/file_structure_analysis.js"
+import type * as s_get_package_files from "../../schemas/get_package_files.js"
 
 //dependencies
-import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
-import { $$ as q_get_project_files } from "../../../../implementation/queries/get_project_files.js"
+import * as t_package_files_to_file_analysis_list from "../transformers/package_files/directory_analysis.js"
+import { $$ as q_get_package_files } from "../queries/get_package_files.js"
 
 
 export const $$: p_.Command_Implementation<
-    command_interfaces.analyze_file_structure,
+    command_interfaces.list_package_file_structure_problems,
+
     {
         'structure': s_structure.Directory,
         'indentation': string
@@ -34,9 +36,9 @@ export const $$: p_.Command_Implementation<
     ($d, $s, $q, $c) => [
 
         p_.s.query(
-            q_get_project_files(null, $q)(
+            q_get_package_files(null, $q)(
                 {
-                    'path to project': $d['path to project'],
+                    'path to package': $d['path to package'],
                 },
                 ($): s.Error => $,
 
@@ -47,13 +49,13 @@ export const $$: p_.Command_Implementation<
                     {
                         'lines': p_temp.from.list(
                             p_temp.from.list(
-                                t_project_files_to_file_analysis_list.Project_Files(
+                                t_package_files_to_file_analysis_list.Package_Files(
                                     $v,
                                     {
                                         'structure': $s.structure
                                     }
                                 )
-                            ).map_optionally<s_file_analysis.File_Analysis2>(
+                            ).map_optionally<s_file_analysis.Package_File_Analysis>(
                                 ($) => {
                                     const x = $
                                     return p_temp.from.optional($.analysis['unexpected path tail']).map(
@@ -63,11 +65,9 @@ export const $$: p_.Command_Implementation<
                             )
                         ).map(
                             ($) => p_s.ph.composed([
-                                    p_s.ph.literal("./packages/"),
-                                    p_s.ph.literal($.package),
-                                    p_s.ph.literal($['path']),
+                                p_s.ph.literal($['path']),
                             ])
-                            
+
                         ),
                     },
                     ($): s.Error => ['log', $],
