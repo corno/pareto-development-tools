@@ -16,7 +16,7 @@ import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated
 
 //dependencies
 import * as t_git_extended_commit_to_prose from "../../../submodules/version_control_api/implementation/transformers/extended_commit/paragraph.js"
-import * as t_build_and_test_to_prose from "../build_and_test/paragraph.js"
+import * as t_build_and_validate_to_prose from "../build_and_validate/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
@@ -24,8 +24,8 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
             case 'version control extended commit': return p_.option($, ($) => sh.ph.composed([
                 t_git_extended_commit_to_prose.Error($)
             ]))
-            case 'error while running build and test': return p_.option($, ($) => sh.ph.composed([
-                t_build_and_test_to_prose.Error($, { 'concise': true })
+            case 'error while running build and validate': return p_.option($, ($) => sh.ph.composed([
+                t_build_and_validate_to_prose.Error($, { 'concise': true })
             ]))
             default: return p_.exhaustive($[0])
         }

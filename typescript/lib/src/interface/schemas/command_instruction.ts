@@ -36,7 +36,7 @@ export type Package = {
     | ['assert no open changes', null]
 
 
-    | ['build and test', null]
+    | ['build and validate', null]
     | ['commit changes', s_git_commit.Instruction]
 
 
@@ -66,7 +66,7 @@ export type All_Pacakges_Instruction =
     /**
      * builds all packages and runs their tests
      */
-    | ['build and test', {
+    | ['build and validate', {
         'concise': boolean
     }]
 

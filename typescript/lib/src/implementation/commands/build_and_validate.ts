@@ -6,14 +6,14 @@ import type * as command_interfaces from "../../interface/commands.js"
 import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
 
 //schemas
-import * as d from "../../interface/schemas/build_and_test.js"
+import * as d from "../../interface/schemas/build_and_validate.js"
 
 //dependencies
 import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 
 export const $$: p_.Command_Implementation<
-    command_interfaces.build_and_test,
+    command_interfaces.build_and_validate,
     null,
     null,
     {

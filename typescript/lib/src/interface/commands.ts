@@ -3,7 +3,7 @@ import * as p_ from 'pareto-core/interface/command_interface'
 import type * as s_command_instruction from "./schemas/command_instruction.js"
 import type * as s_command_error from "./schemas/command_error.js"
 import type * as s_build from "./schemas/build.js"
-import type * as s_build_and_test from "./schemas/build_and_test.js"
+import type * as s_build_and_validate from "./schemas/build_and_validate.js"
 import type * as s_create_dependency_graph from "../submodules/dependency_graph/schemas/create_dependency_graph.js"
 import type * as s_publish from "./schemas/publish.js"
 import type * as s_tsc from "./schemas/tsc.js"
@@ -18,9 +18,9 @@ export type build = p_.Command_Interface<
     s_build.Error,
     s_build.Parameters
 >
-export type build_and_test = p_.Command_Interface<
-    s_build_and_test.Error,
-    s_build_and_test.Parameters
+export type build_and_validate = p_.Command_Interface<
+    s_build_and_validate.Error,
+    s_build_and_validate.Parameters
 >
 export type create_dependency_graph = p_.Command_Interface<
     s_create_dependency_graph.Error,

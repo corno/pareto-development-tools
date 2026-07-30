@@ -23,7 +23,7 @@ export const $$: p_.Command_Implementation<
     },
     {
         'analyze project file structure': command_interfaces_file_structure_analysis.analyze_project_file_structure
-        'build and test': command_interfaces.build_and_test
+        'build and validate': command_interfaces.build_and_validate
         'build': command_interfaces.build
         'create dependency graph': command_interfaces.create_dependency_graph
         'version control assert no open changes': command_interfaces_version_control.assert_no_open_changes
@@ -83,12 +83,12 @@ export const $$: p_.Command_Implementation<
                                                         ($): d.All__Package_Error => ['build', $],
                                                     )
                                                 ])
-                                                case 'build and test': return p_.option($, ($x) => [
-                                                    $c['build and test'].execute(
+                                                case 'build and validate': return p_.option($, ($x) => [
+                                                    $c['build and validate'].execute(
                                                         {
                                                             'path': context_path,
                                                         },
-                                                        ($): d.All__Package_Error => ['build and test', {
+                                                        ($): d.All__Package_Error => ['build and validate', {
                                                             'error': $,
                                                             'concise': $x.concise
                                                         }],
@@ -163,12 +163,12 @@ export const $$: p_.Command_Implementation<
                                         ($): d.Error => ['package', ['version control assert no open changes', $]],
                                     )
                                 ])
-                                case 'build and test': return p_.option($, ($) => [
-                                    $c['build and test'].execute(
+                                case 'build and validate': return p_.option($, ($) => [
+                                    $c['build and validate'].execute(
                                         {
                                             'path': path,
                                         },
-                                        ($): d.Error => ['package', ['build and test', {
+                                        ($): d.Error => ['package', ['build and validate', {
                                             'error': $,
                                             'concise': false,
                                         }]],

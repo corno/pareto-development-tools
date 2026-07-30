@@ -13,7 +13,7 @@ export const $$: p_.Command_Implementation<
     null,
     null,
     {
-        'build and test': command_interfaces.build_and_test
+        'build and validate': command_interfaces.build_and_validate
         'version control extended commit': command_interfaces_version_control.extended_commit
     }
 > = p_.command(
@@ -27,7 +27,7 @@ export const $$: p_.Command_Implementation<
                 p_.s.test_for_successful_execution<d.Error, null>( //testing to determine the commit message
                     [
 
-                        $c['build and test'].execute(
+                        $c['build and validate'].execute(
                             {
                                 'path': $d['path'],
                             },
@@ -60,11 +60,11 @@ export const $$: p_.Command_Implementation<
 
             ],
             [
-                $c['build and test'].execute(
+                $c['build and validate'].execute(
                     {
                         'path': $d['path'],
                     },
-                    ($): d.Error => ['error while running build and test', $],
+                    ($): d.Error => ['error while running build and validate', $],
                 ),
                 $c['version control extended commit'].execute(
                     {

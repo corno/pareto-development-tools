@@ -18,7 +18,7 @@ import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated
 import * as t_git_commit_to_prose from "../git_commit/paragraph.js"
 import * as t_git_assert_no_open_changes_to_prose from "../../../submodules/version_control_api/implementation/transformers/assert_no_open_changes/paragraph.js"
 
-import * as t_build_and_test_to_prose from "../build_and_test/paragraph.js"
+import * as t_build_and_validate_to_prose from "../build_and_validate/paragraph.js"
 import * as t_build_to_prose from "../build/paragraph.js"
 import * as t_dependency_graph_to_prose from "../../../submodules/dependency_graph/implementation/transformers/create_dependency_graph/paragraph.js"
 import * as t_get_project_files_to_paragraph from "../../../submodules/file_structure_analysis/implementation/transformers/get_project_files/paragraph.js"
@@ -34,7 +34,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
             case 'package': return p_.option($, ($) => p_.from.state($).decide(
                 ($) => {
                     switch ($[0]) {
-                        case 'build and test': return p_.option($, ($) => t_build_and_test_to_prose.Error($.error, { 'concise': $.concise }))
+                        case 'build and validate': return p_.option($, ($) => t_build_and_validate_to_prose.Error($.error, { 'concise': $.concise }))
                         case 'get files': return p_.option($, ($) => t_get_package_files_to_paragraph.Error($))
                         case 'publish': return p_.option($, ($) => t_publish.Error($))
                         case 'update dependencies': return p_.option($, ($) => t_update_dependencies.Error($))
@@ -61,7 +61,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                                             p_.from.state($).decide(
                                                 ($) => {
                                                     switch ($[0]) {
-                                                        case 'build and test': return p_.option($, ($) => t_build_and_test_to_prose.Error(
+                                                        case 'build and validate': return p_.option($, ($) => t_build_and_validate_to_prose.Error(
                                                             $.error,
                                                             { 'concise': $.concise }
                                                         ))

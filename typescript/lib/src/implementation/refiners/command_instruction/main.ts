@@ -58,7 +58,7 @@ export const Command: p_.Refiner<
                                         switch ($) {
                                             case "analyze-file-structure": return ['analyze file structure', null]
                                             case "assert-no-open-changes": return ['assert no open changes', null]
-                                            case "build-and-test": return ['build and test', {
+                                            case "build-and-test": return ['build and validate', {
                                                 'concise': iterator.peek(
                                                     () => false,
                                                     ($) => $ === "concise"
@@ -115,7 +115,7 @@ export const Command: p_.Refiner<
                                     ($, expected) => {
                                         switch ($) {
                                             case "assert-no-open-changes": return ['assert no open changes', null]
-                                            case "build-and-test": return ['build and test', null]
+                                            case "build-and-test": return ['build and validate', null]
                                             case "commit-changes": return ['commit changes', {
                                                 'commit message': iterator.consume(
                                                     ($) => abort(['expected a text', { 'description': "commit message" }]),

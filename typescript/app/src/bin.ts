@@ -41,7 +41,7 @@ import { $$ as c_list_project_file_structure_problems } from "lib/submodules/fil
 import { $$ as c_api } from "lib/implementation/commands/execute_command"
 import { $$ as c_main } from "lib/implementation/commands/main"
 import { $$ as c_build } from "lib/implementation/commands/build"
-import { $$ as c_build_and_test } from "lib/implementation/commands/build_and_test"
+import { $$ as c_build_and_validate } from "lib/implementation/commands/build_and_validate"
 import { $$ as c_dependency_graph } from "lib/submodules/dependency_graph/implementation/commands/create_dependency_graph"
 import { $$ as c_git_commit } from "lib/implementation/commands/version_control_commit"
 import { $$ as c_publish } from "lib/implementation/commands/publish"
@@ -203,7 +203,7 @@ p_h.run_main_command(
         )
 
 
-        const build_and_test = c_build_and_test(
+        const build_and_validate = c_build_and_validate(
             null,
             null,
             {
@@ -284,7 +284,7 @@ p_h.run_main_command(
                     },
                     {
                         'version control assert no open changes': git.commands['assert no open changes'],
-                        'build and test': build_and_test,
+                        'build and validate': build_and_validate,
                         'build': build,
                         'create dependency graph': dependency_graph,
                         'analyze project file structure': c_analyze_file_structure(
@@ -331,7 +331,7 @@ p_h.run_main_command(
                             null,
                             null,
                             {
-                                'build and test': build_and_test,
+                                'build and validate': build_and_validate,
                                 'version control extended commit': git.commands['extended commit'],
                             },
                         ),
@@ -344,7 +344,7 @@ p_h.run_main_command(
                                 'read file': rs_filesystem_unrestricted.$.queries['read file']
                             },
                             {
-                                'build and test': build_and_test,
+                                'build and validate': build_and_validate,
                                 'version control push': git.commands['push'],
                                 'version control assert no open changes': git.commands['assert no open changes'],
                                 'version control make pristine': git.commands['make pristine'],

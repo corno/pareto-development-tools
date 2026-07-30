@@ -33,7 +33,7 @@ export const $$: p_.Command_Implementation<
         'version control assert no open changes': command_interfaces_version_control.assert_no_open_changes
         'version control make pristine': command_interfaces_version_control.make_pristine
         'update package dependencies': command_interfaces.update_package_dependencies
-        'build and test': command_interfaces.build_and_test
+        'build and validate': command_interfaces.build_and_validate
         'npm': command_interfaces_npm.npm
         'npm publish': command_interfaces_npm.npm_publish
         'log lines': command_interfaces_pareto_stream_api.log_lines
@@ -73,11 +73,11 @@ export const $$: p_.Command_Implementation<
                     ($) => ['error while running update package dependencies', $],
                 ),
 
-                $c['build and test'].execute(
+                $c['build and validate'].execute(
                     {
                         'path': $d['path to package'],
                     },
-                    ($) => ['error while running build and test', $],
+                    ($) => ['error while running build and validate', $],
                 ),
 
                 // $c['version control assert is clean'].execute(

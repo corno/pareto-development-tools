@@ -5,7 +5,7 @@ import type * as s_git_aic from "../../submodules/version_control_api/interface/
 import type * as s_git_make_pristine from "../../submodules/version_control_api/interface/schemas/make_pristine.js"
 import type * as s_npm from "../../submodules/npm/interface/schemas/npm_tool.js"
 import type * as s_update_package_dependencies from "./update_package_dependencies.js"
-import type * as s_build_and_test from "./build_and_test.js"
+import type * as s_build_and_validate from "./build_and_validate.js"
 import type * as s_get_package_json from "../../submodules/npm/interface/schemas/get_package_json.js"
 import type * as s_git_ec from "../../submodules/version_control_api/interface/schemas/extended_commit.js"
 
@@ -30,7 +30,7 @@ export type Error =
     | ['error while running git assert no open changes at the start', s_git_aic.Error]
     | ['error while running git make pristine', s_git_make_pristine.Error]
     | ['error while running update package dependencies', s_update_package_dependencies.Error]
-    | ['error while running build and test', s_build_and_test.Error]
+    | ['error while running build and validate', s_build_and_validate.Error]
     | ['error while running git assert no open changes after updating package dependencies', s_git_aic.Error]
     | ['error while running npm version', s_npm.Error]
     | ['error while running npm update', s_npm.Error]

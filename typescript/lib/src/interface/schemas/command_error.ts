@@ -5,7 +5,7 @@ import type * as s_get_project_files from "../../submodules/file_structure_analy
 import type * as s_get_package_files from "../../submodules/file_structure_analysis/schemas/get_package_files.js"
 import type * as s_assert_clean from "../../submodules/version_control_api/interface/schemas/assert_no_open_changes.js"
 import type * as s_build from "./build.js"
-import type * as s_build_and_test from "./build_and_test.js"
+import type * as s_build_and_validate from "./build_and_validate.js"
 import type * as s_dependency_graph from "../../submodules/dependency_graph/schemas/create_dependency_graph.js"
 import type * as s_git_commit from "./git_commit.js"
 import type * as s_publish from "./publish.js"
@@ -24,8 +24,8 @@ export type Error =
 export type Project_Error = null
 
 export type Package_Error =
-    | ['build and test', {
-        'error': s_build_and_test.Error,
+    | ['build and validate', {
+        'error': s_build_and_validate.Error,
         'concise': boolean
     }]
     | ['get files', s_get_package_files.Error]
@@ -39,8 +39,8 @@ export type All_Error =
     | ['packages', p_.Dictionary<All__Package_Error>]
 
 export type All__Package_Error =
-    | ['build and test', {
-        'error': s_build_and_test.Error,
+    | ['build and validate', {
+        'error': s_build_and_validate.Error,
         'concise': boolean
     }]
     | ['build', s_build.Error]
