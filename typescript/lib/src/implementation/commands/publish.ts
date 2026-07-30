@@ -90,7 +90,7 @@ export const $$: p_.Command_Implementation<
                 $c.npm.execute(
                     {
                         'path': p_.literal.set(lib_path),
-                        'operation': ['version', $d.generation],
+                        'operation': ['version', $d['parameters 2'].generation],
                     },
                     ($) => ['error while running npm version', $],
                 ),
@@ -137,7 +137,7 @@ export const $$: p_.Command_Implementation<
                             $c['npm publish'].execute(
                                 {
                                     'path': lib_path,
-                                    'impact': $d.impact,
+                                    'impact': $d['parameters 2'].impact,
                                 },
                                 ($) => ['error while running npm publish', $],
                             ),

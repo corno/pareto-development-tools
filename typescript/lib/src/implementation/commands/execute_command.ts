@@ -57,6 +57,14 @@ export const $$: p_.Command_Implementation<
                                         p_.decide.state(ap.instruction, ($) => {
                                             const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
                                             switch ($[0]) {
+                                                case 'analyze file structure': return p_.option($, ($) => [
+                                                    $c['analyze file structure'].execute(
+                                                        {
+                                                            'path to project': context_path
+                                                        },
+                                                        ($): d.All__Package_Error => ['get project files', $],
+                                                    )
+                                                ])
                                                 case 'assert no open changes': return p_.option($, ($) => [
                                                     $c['version control assert no open changes'].execute(
                                                         {
@@ -91,6 +99,14 @@ export const $$: p_.Command_Implementation<
                                                             'instruction': $,
                                                         },
                                                         ($): d.All__Package_Error => ['commit changes', $],
+                                                    )
+                                                ])
+                                                case 'list file structure problems': return p_.option($, ($) => [
+                                                    $c['list file structure problems'].execute(
+                                                        {
+                                                            'path to project': context_path
+                                                        },
+                                                        ($): d.All__Package_Error => ['get project files', $],
                                                     )
                                                 ])
                                                 case 'set up comparison': return p_.option($, ($): p_.Command_Block<d.All__Package_Error> => {
@@ -165,6 +181,15 @@ export const $$: p_.Command_Implementation<
                                         ($): d.Error => ['package', ['commit changes', $]],
                                     )
                                 ])
+                                case 'publish': return p_.option($, ($) => [
+                                    $c['publish'].execute(
+                                        {
+                                            'path to package': path,
+                                            'parameters 2': $,
+                                        },
+                                        ($): d.Error => ['package', ['publish', $]],
+                                    )
+                                ])
                                 case 'update package dependencies': return p_.option($, ($) => [
                                     $c['update package dependencies'].execute(
                                         {
@@ -183,14 +208,6 @@ export const $$: p_.Command_Implementation<
                     return [
                         p_.decide.state($.instruction, ($) => {
                             switch ($[0]) {
-                                case 'analyze file structure': return p_.option($, ($) => [
-                                    $c['analyze file structure'].execute(
-                                        {
-                                            'path to project': path
-                                        },
-                                        ($): d.Error => ['get project files', $],
-                                    )
-                                ])
                                 case 'dependency graph': return p_.option($, ($) => [
                                     $c['create dependency graph'].execute(
                                         {
@@ -199,26 +216,12 @@ export const $$: p_.Command_Implementation<
                                         ($): d.Error => ['dependency graph', $],
                                     )
                                 ])
-                                case 'list file structure problems': return p_.option($, ($) => [
-                                    $c['list file structure problems'].execute(
-                                        {
-                                            'path to project': path
-                                        },
-                                        ($): d.Error => ['get project files', $],
-                                    )
-                                ])
 
                                 default: return p_.exhaustive($[0])
                             }
                         })
                     ]
                 })
-                case 'publish': return p_.option($, ($) => [
-                    $c['publish'].execute(
-                        $,
-                        ($): d.Error => ['package', ['publish', $]],
-                    )
-                ])
                 case 'set up comparison': return p_.option($, ($) => [
                     p_change_context(
                         {

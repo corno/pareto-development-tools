@@ -20,7 +20,6 @@ export type Parameters = {
     | ['set up comparison', {
         'path to package': s_path.Context_Path
     }]
-    | ['publish', s_publish.Parameters]
 }
 
 export type All_Packages = {
@@ -39,6 +38,7 @@ export type Package = {
 
     | ['build and test', null]
     | ['commit changes', s_git_commit.Instruction]
+    | ['publish', s_publish.Parameters2]
     | ['update package dependencies', null]
 
 }
@@ -48,15 +48,12 @@ export type Project = {
     'instruction':
 
     | ['dependency graph', null]
-
-
-    | ['analyze file structure', null]
-
-
-    | ['list file structure problems', null]
 }
 
 export type All_Pacakges_Instruction =
+
+
+    | ['analyze file structure', null]
 
     /**
      * verifies that the git working tree is clean, raises an error if not
@@ -76,6 +73,9 @@ export type All_Pacakges_Instruction =
      * stages all changes, makes a commit with the given message, and pushes the commit
      */
     | ['commit changes', s_git_commit.Instruction]
+
+
+    | ['list file structure problems', null]
 
     /**
      * sets up 2 directories in /temp of the package dir; one of the local package and one of the published package

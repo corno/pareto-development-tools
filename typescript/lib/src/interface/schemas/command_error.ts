@@ -16,7 +16,6 @@ export type Error =
     | ['all', All_Error]
     | ['package', Package_Error]
 
-    | ['get project files', s_get_project_files.Error]
     | ['dependency graph', s_dependency_graph.Error]
 
     | ['set up comparison', s_set_up_comparison_against_published.Error]
@@ -43,6 +42,7 @@ export type All__Package_Error =
         'concise': boolean
     }]
     | ['build', s_build.Error]
+    | ['get project files', s_get_project_files.Error]
     | ['version control assert no open changes', s_assert_clean.Error]
     | ['commit changes', s_git_commit.Error]
     | ['update dependencies', s_update_dependencies.Error]

@@ -41,8 +41,8 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
 
                         default: return p_.exhaustive($[0])
                     }
-                }))
-            case 'get project files': return p_.option($, ($) => t_line_count_to_prose.Error($))
+                }
+            ))
             case 'dependency graph': return p_.option($, ($) => t_dependency_graph_to_prose.Error($))
             case 'all': return p_.option($, ($) => p_.from.state($).decide(
                 ($) => {
@@ -67,6 +67,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                                                             $,
                                                             { 'concise': false }
                                                         ))
+                                                        case 'get project files': return p_.option($, ($) => t_line_count_to_prose.Error($))
                                                         case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_prose.Error($))
                                                         case 'commit changes': return p_.option($, ($) => t_git_commit_to_prose.Error($))
                                                         case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))

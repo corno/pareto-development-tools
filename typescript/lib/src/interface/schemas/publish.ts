@@ -11,6 +11,10 @@ import type * as s_git_ec from "../../submodules/version_control_api/interface/s
 
 export type Parameters = {
     'path to package': s_path.Context_Path
+    'parameters 2': Parameters2
+}
+
+export type Parameters2 = {
     'generation':
     | ['minor', null]
     | ['patch', null]

@@ -9,16 +9,16 @@ _pdt_completions() {
     local prev="${COMP_WORDS[COMP_CWORD-1]}"
     
     # List of currently available commands (updated from text.ts)
-    local commands="all package project publish set-up-comparison"
+    local commands="all package project set-up-comparison"
     
     # All packages sub-commands
-    local all_subcommands="assert-no-open-changes build-and-test build commit-changes set-up-comparison update-dependencies"
+    local all_subcommands="analyze-file-structure assert-no-open-changes build-and-test build commit-changes list-file-structure-problems set-up-comparison update-dependencies"
     
     # Package sub-commands
-    local package_subcommands="assert-no-open-changes build-and-test commit-changes update-dependencies"
+    local package_subcommands="assert-no-open-changes build-and-test commit-changes publish update-dependencies"
     
     # Project sub-commands
-    local project_subcommands="analyze-file-structure dependency-graph list-file-structure-problems"
+    local project_subcommands="dependency-graph"
     
     # Publish generation options
     local publish_generations="patch minor"
@@ -54,6 +54,12 @@ _pdt_completions() {
             elif [ "$COMP_CWORD" -eq 3 ]; then
                 # Complete package sub-command
                 COMPREPLY=($(compgen -W "${package_subcommands}" -- ${cur}))
+            elif [ "$COMP_CWORD" -eq 4 ] && [ "${COMP_WORDS[3]}" == "publish" ]; then
+                # Complete generation type for publish
+                COMPREPLY=($(compgen -W "${publish_generations}" -- ${cur}))
+            elif [ "$COMP_CWORD" -eq 5 ] && [ "${COMP_WORDS[3]}" == "publish" ]; then
+                # For --dry-run flag
+                COMPREPLY=($(compgen -W "--dry-run" -- ${cur}))
             fi
             return 0
             ;;
@@ -67,8 +73,8 @@ _pdt_completions() {
             fi
             return 0
             ;;
-        analyze-file-structure|dependency-graph|list-file-structure-problems)
-            # These commands take a project path
+        dependency-graph)
+            # This command takes a project path
             if [ "$COMP_CWORD" -eq 2 ]; then
                 COMPREPLY=($(compgen -d -- ${cur}))
             fi
@@ -84,36 +90,7 @@ _pdt_completions() {
             fi
             return 0
             ;;
-        analyze-file-structure|dependency-graph|list-file-structure-problems)
-            # These commands take a project path
-            if [ "$COMP_CWORD" -eq 2 ]; then
-                COMPREPLY=($(compgen -d -- ${cur}))
-            fi
-            return 0
-            ;;
-        assert-no-open-changes|build-and-test)
-            # These commands take a project path
-            if [ "$COMP_CWORD" -eq 2 ]; then
-                COMPREPLY=($(compgen -d -- ${cur}))
-            elif [ "$COMP_CWORD" -eq 3 ] && [ "${COMP_WORDS[1]}" == "build-and-test" ]; then
-                # Optional 'concise' flag for build-and-test
-                COMPREPLY=($(compgen -W "concise" -- ${cur}))
-            fi
-            return 0
-            ;;
-        publish)
-            if [ "$COMP_CWORD" -eq 2 ]; then
-                # Complete package path
-                COMPREPLY=($(compgen -d -- ${cur}))
-            elif [ "$COMP_CWORD" -eq 3 ]; then
-                # Complete generation type
-                COMPREPLY=($(compgen -W "${publish_generations}" -- ${cur}))
-            elif [ "$COMP_CWORD" -eq 4 ]; then
-                # For one time password or --dry-run
-                COMPREPLY=($(compgen -W "--dry-run" -- ${cur}))
-            fi
-            return 0
-            ;;
+
         set-up-comparison)
             # This command takes a package path
             if [ "$COMP_CWORD" -eq 2 ]; then

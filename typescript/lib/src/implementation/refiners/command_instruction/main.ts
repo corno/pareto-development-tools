@@ -29,7 +29,6 @@ export const Command: p_.Refiner<
                     "all": null,
                     "package": null,
                     "project": null,
-                    "publish": null,
                     "set-up-comparison": null,
                 })] as s_error.Error,
                 (end_info, expected) => abort(expected),
@@ -45,16 +44,19 @@ export const Command: p_.Refiner<
                                 ),
                                 'instruction': iterator.consume_with_expectation(
                                     ['expected one of', p_.literal.dictionary({
+                                        "analyze-file-structure": null,
                                         "assert-no-open-changes": null,
                                         "build-and-test": null,
                                         "build": null,
                                         "commit-changes": null,
+                                        "list-file-structure-problems": null,
                                         "set-up-comparison": null,
                                         "update-dependencies": null,
                                     })] as s_error.Error,
                                     (end_info, expected) => abort(expected),
                                     ($, expected): s_out.All_Pacakges_Instruction => {
                                         switch ($) {
+                                            case "analyze-file-structure": return ['analyze file structure', null]
                                             case "assert-no-open-changes": return ['assert no open changes', null]
                                             case "build-and-test": return ['build and test', {
                                                 'concise': iterator.peek(
@@ -83,6 +85,7 @@ export const Command: p_.Refiner<
                                                         : false,
                                                 ),
                                             }]
+                                            case "list-file-structure-problems": return ['list file structure problems', null]
                                             case "set-up-comparison": return ['set up comparison', null]
                                             case "update-dependencies": return ['update package dependencies', null]
                                             default: return abort(expected)
@@ -104,6 +107,7 @@ export const Command: p_.Refiner<
                                         "assert-no-open-changes": null,
                                         "build-and-test": null,
                                         "commit-changes": null,
+                                        "publish": null,
                                         "update-dependencies": null,
                                     })] as s_error.Error,
                                     (end_info, expected) => abort(expected),
@@ -126,6 +130,51 @@ export const Command: p_.Refiner<
                                                         : false,
                                                 ),
                                             }]
+                                            case "publish": return ['publish', {
+                                                'path to package': deser_path.Context_Path(
+                                                    iterator.consume(
+                                                        ($) => abort(['expected a text', { 'description': "path to package" }]),
+                                                        ($) => $,
+
+                                                    )
+                                                ),
+                                                'generation': iterator.consume_with_expectation(
+                                                    ['expected one of', p_.literal.dictionary({
+                                                        "patch": null,
+                                                        "minor": null,
+                                                    })] as s_error.Error,
+                                                    (end_info, expected) => abort(expected),
+                                                    ($, expected) => {
+                                                        switch ($) {
+                                                            case "patch": return ['patch', null]
+                                                            case "minor": return ['minor', null]
+                                                            default: return abort(expected)
+                                                        }
+                                                    },
+
+                                                ),
+                                                'impact': iterator.consume_with_expectation(
+                                                    null,
+                                                    ($) => ['actual publish', {
+
+                                                        // 'one time password': iterator.xconsume(
+                                                        //     ($) => $,
+                                                        //     (end_info, abort) => abort(['expected a text', { 'description': "one time password" }])
+                                                        // )
+                                                    }],
+                                                    ($, expected): s_publish.Parameters2['impact'] => {
+                                                        switch ($) {
+                                                            case "dry-run": return ['dry run', null]
+                                                            default: return abort(['expected one of', p_.literal.dictionary({
+                                                                "dry-run": null,
+                                                            })])
+                                                        }
+                                                    },
+
+
+
+                                                ),
+                                            }]
                                             case "update-dependencies": return ['update package dependencies', null]
                                             default: return abort(expected)
                                         }
@@ -143,66 +192,17 @@ export const Command: p_.Refiner<
                                 ),
                                 'instruction': iterator.consume_with_expectation(
                                     ['expected one of', p_.literal.dictionary({
-                                        "analyze-file-structure": null,
                                         "dependency-graph": null,
-                                        "list-file-structure-problems": null,
                                     })] as s_error.Error,
                                     (end_info, expected) => abort(expected),
                                     ($, expected) => {
                                         switch ($) {
-                                            case "analyze-file-structure": return ['analyze file structure', null]
                                             case "dependency-graph": return ['dependency graph', null]
-                                            case "list-file-structure-problems": return ['list file structure problems', null]
                                             default: return abort(expected)
                                         }
                                     },
                                 )
 
-                            }]
-                            case "publish": return ['publish', {
-                                'path to package': deser_path.Context_Path(
-                                    iterator.consume(
-                                        ($) => abort(['expected a text', { 'description': "path to package" }]),
-                                        ($) => $,
-
-                                    )
-                                ),
-                                'generation': iterator.consume_with_expectation(
-                                    ['expected one of', p_.literal.dictionary({
-                                        "patch": null,
-                                        "minor": null,
-                                    })] as s_error.Error,
-                                    (end_info, expected) => abort(expected),
-                                    ($, expected) => {
-                                        switch ($) {
-                                            case "patch": return ['patch', null]
-                                            case "minor": return ['minor', null]
-                                            default: return abort(expected)
-                                        }
-                                    },
-
-                                ),
-                                'impact': iterator.consume_with_expectation(
-                                    null,
-                                    ($) => ['actual publish', {
-
-                                        // 'one time password': iterator.xconsume(
-                                        //     ($) => $,
-                                        //     (end_info, abort) => abort(['expected a text', { 'description': "one time password" }])
-                                        // )
-                                    }],
-                                    ($, expected): s_publish.Parameters['impact'] => {
-                                        switch ($) {
-                                            case "dry-run": return ['dry run', null]
-                                            default: return abort(['expected one of', p_.literal.dictionary({
-                                                "dry-run": null,
-                                            })])
-                                        }
-                                    },
-
-
-
-                                ),
                             }]
                             case "set-up-comparison": return ['set up comparison', {
                                 'path to package': deser_path.Context_Path(
