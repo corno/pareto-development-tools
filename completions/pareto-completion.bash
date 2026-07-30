@@ -15,7 +15,7 @@ _pdt_completions() {
     local all_subcommands="analyze-file-structure assert-no-open-changes build-and-test build commit-changes list-file-structure-problems set-up-comparison update-dependencies"
     
     # Package sub-commands
-    local package_subcommands="assert-no-open-changes build-and-test commit-changes publish update-dependencies"
+    local package_subcommands="assert-no-open-changes build-and-test commit-changes list-file-structure-problems publish update-dependencies"
     
     # Project sub-commands
     local project_subcommands="dependency-graph"
