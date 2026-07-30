@@ -38,15 +38,17 @@ export const $$: p_.Command_Implementation<
             ($): d.Error => ['could not remove package-lock.json', $],
         ),
 
-        // update dependencies
-        $c['update2latest'].execute(
-            {
-                'path': $d.path,
-                'verbose': false,
-                'what': ['dependencies', null],
-            },
-            ($) => ['could not update to latest', $],
-        ),
+        //don't update to the latest dependecies anymore... Maybe just report that there is a newer minor/major?
+
+        // // update dependencies
+        // $c['update2latest'].execute(
+        //     {
+        //         'path': $d.path,
+        //         'verbose': false,
+        //         'what': ['dependencies', null],
+        //     },
+        //     ($) => ['could not update to latest', $],
+        // ),
 
         // install/update updated dependencies
         $c['npm'].execute(

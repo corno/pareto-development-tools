@@ -16,7 +16,7 @@ import type * as s_command_error from "../../interface/schemas/command_error.js"
 import * as r_instruction from "../refiners/command_instruction/main.js"
 import * as t_api_to_paragraph from "../transformers/execute_command/paragraph.js"
 import * as t_bin_to_paragraph from "../transformers/parse/paragraph.js"
-import * as t_paragraph_to_serialized from "pareto-fountain-pen/_implementation/transformers/paragraph/serialized"
+import * as t_paragraph_to_serialized from "pareto-fountain-pen/modules/paragraph/implementation/transformers/paragraph/serialized"
 
 
 

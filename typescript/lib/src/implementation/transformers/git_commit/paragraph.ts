@@ -12,7 +12,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
 
 //dependencies
 import * as t_git_extended_commit_to_prose from "../../../submodules/version_control_api/implementation/transformers/extended_commit/paragraph.js"

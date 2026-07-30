@@ -12,7 +12,7 @@ import * as d from "../../schemas/get_project_files.js"
 
 //dependencies
 import * as t_csv_to_paragraph from "pareto-csv/implementation/transformers/csv/paragraph"
-import * as t_paragraph_to_serialized from "pareto-fountain-pen/_implementation/transformers/paragraph/serialized"
+import * as t_paragraph_to_serialized from "pareto-fountain-pen/modules/paragraph/implementation/transformers/paragraph/serialized"
 import * as t_file_structure_analysis_to_csv from "../transformers/file_structure_analysis/csv.js"
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
 import { $$ as q_get_project_files } from "../../../../implementation/queries/get_project_files.js"

@@ -17,7 +17,7 @@ import * as ser_location from "astn-core/modules/deserialization/implementation/
 import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
 
 export const Error: declarations.Error = ($) => sh.ph.composed([
     sh.ph.text(ser_path.Node_Path($['path'])),

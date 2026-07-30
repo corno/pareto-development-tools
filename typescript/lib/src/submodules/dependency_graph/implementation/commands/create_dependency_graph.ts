@@ -12,7 +12,7 @@ import * as d from "../../schemas/create_dependency_graph.js"
 //dependencies
 import * as t_package_dependencies_to_graphviz from "../transformers/package_dependencies/graphviz.js"
 import * as t_graphviz_to_paragraph from "pareto-graphviz/implementation/transformers/high_level_simple/paragraph"
-import * as t_paragraph_to_serialized from "pareto-fountain-pen/_implementation/transformers/paragraph/serialized"
+import * as t_paragraph_to_serialized from "pareto-fountain-pen/modules/paragraph/implementation/transformers/paragraph/serialized"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.create_dependency_graph,

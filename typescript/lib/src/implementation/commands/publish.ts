@@ -17,7 +17,7 @@ import * as t_path_to_path from "pareto-resources/implementation/transformers/un
 import * as q_get_package_json from "../../submodules/npm/implementation/queries/get_package_json.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.publish,

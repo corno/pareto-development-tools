@@ -13,7 +13,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
 
 //dependencies
 import * as t_u2l_to_prose from "../update2latest/paragraph.js"

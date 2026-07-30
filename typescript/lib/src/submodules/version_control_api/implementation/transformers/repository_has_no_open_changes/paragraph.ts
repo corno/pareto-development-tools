@@ -13,7 +13,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
 
 //dependencies
 import * as t_eqe_to_prose from "pareto-resources/implementation/transformers/execute_query_executable/paragraph"

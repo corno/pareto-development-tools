@@ -18,7 +18,7 @@ namespace declarations {
 import * as t_espe_to_paragraph from "pareto-resources/implementation/transformers/execute_unrestricted_smelly_command_executable/paragraph"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
 
 export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
     ($) => {

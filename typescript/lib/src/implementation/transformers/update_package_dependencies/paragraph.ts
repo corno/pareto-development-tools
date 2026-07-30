@@ -16,7 +16,7 @@ import * as ser_stat_possible_node from "pareto-filesystem-unrestricted-api/modu
 import * as t_utd_to_paragraph from "../../../submodules/npm/implementation/transformers/update_package_dependencies/paragraph.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/shorthands/paragraph/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
