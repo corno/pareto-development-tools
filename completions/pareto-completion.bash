@@ -12,10 +12,10 @@ _pdt_completions() {
     local commands="all package project set-up-comparison"
     
     # All packages sub-commands
-    local all_subcommands="analyze-file-structure assert-no-open-changes build-and-test build commit-changes list-file-structure-problems set-up-comparison update-dependencies"
+    local all_subcommands="analyze-file-structure assert-no-open-changes build-and-validate build commit-changes list-file-structure-problems set-up-comparison update-dependencies"
     
     # Package sub-commands
-    local package_subcommands="assert-no-open-changes build-and-test commit-changes list-file-structure-problems publish update-dependencies"
+    local package_subcommands="assert-no-open-changes build-and-validate commit-changes list-file-structure-problems publish update-dependencies"
     
     # Project sub-commands
     local project_subcommands="dependency-graph"
@@ -41,8 +41,8 @@ _pdt_completions() {
             elif [ "$COMP_CWORD" -eq 4 ] && [ "${COMP_WORDS[3]}" == "commit-changes" ]; then
                 # For commit-changes, expect a commit message (no completion)
                 COMPREPLY=()
-            elif [ "$COMP_CWORD" -eq 4 ] && [ "${COMP_WORDS[3]}" == "build-and-test" ]; then
-                # Optional 'concise' flag for build-and-test
+            elif [ "$COMP_CWORD" -eq 4 ] && [ "${COMP_WORDS[3]}" == "build-and-validate" ]; then
+                # Optional 'concise' flag for build-and-validate
                 COMPREPLY=($(compgen -W "concise" -- ${cur}))
             fi
             return 0
@@ -80,12 +80,12 @@ _pdt_completions() {
             fi
             return 0
             ;;
-        assert-no-open-changes|build-and-test)
+        assert-no-open-changes|build-and-validate)
             # These commands take a project path
             if [ "$COMP_CWORD" -eq 2 ]; then
                 COMPREPLY=($(compgen -d -- ${cur}))
-            elif [ "$COMP_CWORD" -eq 3 ] && [ "${COMP_WORDS[1]}" == "build-and-test" ]; then
-                # Optional 'concise' flag for build-and-test
+            elif [ "$COMP_CWORD" -eq 3 ] && [ "${COMP_WORDS[1]}" == "build-and-validate" ]; then
+                # Optional 'concise' flag for build-and-validate
                 COMPREPLY=($(compgen -W "concise" -- ${cur}))
             fi
             return 0

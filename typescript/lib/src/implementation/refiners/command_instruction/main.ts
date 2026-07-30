@@ -46,7 +46,7 @@ export const Command: p_.Refiner<
                                     ['expected one of', p_.literal.dictionary({
                                         "analyze-file-structure": null,
                                         "assert-no-open-changes": null,
-                                        "build-and-test": null,
+                                        "build-and-validate": null,
                                         "build": null,
                                         "commit-changes": null,
                                         "list-file-structure-problems": null,
@@ -58,7 +58,7 @@ export const Command: p_.Refiner<
                                         switch ($) {
                                             case "analyze-file-structure": return ['analyze file structure', null]
                                             case "assert-no-open-changes": return ['assert no open changes', null]
-                                            case "build-and-test": return ['build and validate', {
+                                            case "build-and-validate": return ['build and validate', {
                                                 'concise': iterator.peek(
                                                     () => false,
                                                     ($) => $ === "concise"
@@ -105,7 +105,7 @@ export const Command: p_.Refiner<
                                 'instruction': iterator.consume_with_expectation(
                                     ['expected one of', p_.literal.dictionary({
                                         "assert-no-open-changes": null,
-                                        "build-and-test": null,
+                                        "build-and-validate": null,
                                         "commit-changes": null,
                                         "list-file-structure-problems": null,
                                         "publish": null,
@@ -115,7 +115,7 @@ export const Command: p_.Refiner<
                                     ($, expected) => {
                                         switch ($) {
                                             case "assert-no-open-changes": return ['assert no open changes', null]
-                                            case "build-and-test": return ['build and validate', null]
+                                            case "build-and-validate": return ['build and validate', null]
                                             case "commit-changes": return ['commit changes', {
                                                 'commit message': iterator.consume(
                                                     ($) => abort(['expected a text', { 'description': "commit message" }]),
