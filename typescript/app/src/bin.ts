@@ -37,8 +37,7 @@ import { $$ as c_update2latest } from "lib/submodules/npm/implementation/command
 //file structure analysis module
 import { $$ as c_analyze_file_structure } from "lib/submodules/file_structure_analysis/implementation/commands/analyze_project_file_structure"
 import { $$ as c_list_package_file_structure_problems } from "lib/submodules/file_structure_analysis/implementation/commands/list_package_file_structure_problems"
-import { $$ as c_list_project_file_structure_problems } from "lib/submodules/file_structure_analysis/implementation/commands/list_project_file_structure_problems"
-import { $$ as c_file_structure_validation } from "lib/submodules/file_structure_analysis/implementation/commands/file_structure_validation"
+import { $$ as c_validate_file_structure } from "lib/submodules/file_structure_analysis/implementation/commands/validate_file_structure"
 
 //internal
 import { $$ as q_package_dependencies } from "lib/submodules/dependency_graph/implementation/queries/get_package_dependencies"
@@ -213,7 +212,7 @@ p_h.run_main_command(
             {
                 'build': build,
                 'node': ece_node,
-                'validate no file structure problems': c_file_structure_validation(
+                'validate file structure': c_validate_file_structure(
                     {
                         'structure': data_structure.$$,
                         'indentation': "    ",
@@ -305,19 +304,6 @@ p_h.run_main_command(
                         'build': build,
                         'create dependency graph': dependency_graph,
                         'analyze project file structure': c_analyze_file_structure(
-                            {
-                                'structure': data_structure.$$,
-                                'indentation': "    ",
-                            },
-                            {
-                                'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
-                                'read file': rs_filesystem_unrestricted.$.queries['read file'],
-                            },
-                            {
-                                'log lines': rs_stream.$.commands['log lines'],
-                            },
-                        ),
-                        'list project file structure problems': c_list_project_file_structure_problems(
                             {
                                 'structure': data_structure.$$,
                                 'indentation': "    ",

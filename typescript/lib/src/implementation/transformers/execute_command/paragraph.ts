@@ -45,7 +45,6 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                     }
                 }
             ))
-            case 'dependency graph': return p_.option($, ($) => t_dependency_graph_to_prose.Error($))
             case 'all': return p_.option($, ($) => p_.from.state($).decide(
                 ($) => {
                     switch ($[0]) {
@@ -69,7 +68,6 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                                                             $,
                                                             { 'concise': false }
                                                         ))
-                                                        case 'get project files': return p_.option($, ($) => t_get_project_files_to_paragraph.Error($))
                                                         case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_prose.Error($))
                                                         case 'commit changes': return p_.option($, ($) => t_git_commit_to_prose.Error($))
                                                         case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))
@@ -88,7 +86,17 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                         ]))
                         default: return p_.exhaustive($[0])
                     }
-                }))
+                }
+            ))
+            case 'project': return p_.option($, ($) => p_.from.state($).decide(
+                ($) => {
+                    switch ($[0]) {
+                        case 'analyze file structure': return p_.option($, ($) => t_get_project_files_to_paragraph.Error($))
+                        case 'dependency graph': return p_.option($, ($) => t_dependency_graph_to_prose.Error($))
+                        default: return p_.au($[0])
+                    }
+                }
+            ))
             case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))
             default: return p_.exhaustive($[0])
         }

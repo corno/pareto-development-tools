@@ -28,7 +28,6 @@ export const $$: p_.Command_Implementation<
         'create dependency graph': command_interfaces.create_dependency_graph
         'version control assert no open changes': command_interfaces_version_control.assert_no_open_changes
         'commit changes': command_interfaces.version_control_commit
-        'list project file structure problems': command_interfaces_file_structure_analysis.list_project_file_structure_problems
         'list package file structure problems': command_interfaces_file_structure_analysis.list_package_file_structure_problems
         'npm set up comparison against published': command_interfaces_npm.set_up_comparison_against_published
         'publish': command_interfaces.publish
@@ -59,14 +58,6 @@ export const $$: p_.Command_Implementation<
                                         p_.decide.state(ap.instruction, ($) => {
                                             const context_path = t_path_to_path.deprecated_node_path_to_context_path($xx.path)
                                             switch ($[0]) {
-                                                case 'analyze file structure': return p_.option($, ($) => [
-                                                    $c['analyze project file structure'].execute(
-                                                        {
-                                                            'path to project': context_path
-                                                        },
-                                                        ($): d.All__Package_Error => ['get project files', $],
-                                                    )
-                                                ])
                                                 case 'assert no open changes': return p_.option($, ($) => [
                                                     $c['version control assert no open changes'].execute(
                                                         {
@@ -101,14 +92,6 @@ export const $$: p_.Command_Implementation<
                                                             'instruction': $,
                                                         },
                                                         ($): d.All__Package_Error => ['commit changes', $],
-                                                    )
-                                                ])
-                                                case 'list file structure problems': return p_.option($, ($) => [
-                                                    $c['list project file structure problems'].execute(
-                                                        {
-                                                            'path to project': context_path
-                                                        },
-                                                        ($): d.All__Package_Error => ['get project files', $],
                                                     )
                                                 ])
                                                 case 'set up comparison': return p_.option($, ($): p_.Command_Block<d.All__Package_Error> => {
@@ -218,12 +201,20 @@ export const $$: p_.Command_Implementation<
                     return [
                         p_.decide.state($.instruction, ($) => {
                             switch ($[0]) {
+                                case 'analyze file structure': return p_.option($, ($) => [
+                                    $c['analyze project file structure'].execute(
+                                        {
+                                            'path to project': path
+                                        },
+                                        ($): d.Error => ['project', ['analyze file structure', $]],
+                                    )
+                                ])
                                 case 'dependency graph': return p_.option($, ($) => [
                                     $c['create dependency graph'].execute(
                                         {
                                             'path to project': path
                                         },
-                                        ($): d.Error => ['dependency graph', $],
+                                        ($): d.Error => ['project', ['dependency graph', $]],
                                     )
                                 ])
 

@@ -19,7 +19,7 @@ export const $$: p_.Command_Implementation<
     {
         'build': command_interfaces.build,
         'node': command_interfaces_pareto_resources.execute_sandboxed.command_executable,
-        'validate no file structure problems': command_interfaces_file_structure_analysis.validate_no_file_structure_problems
+        'validate file structure': command_interfaces_file_structure_analysis.validate_file_structure
     }
 > = p_.command(
     ($d, $s, $q, $c) => [
@@ -67,12 +67,12 @@ export const $$: p_.Command_Implementation<
         ),
 
 
-        // list file structure problems
-        // $c['validate no file structure problems'].execute(
-        //     {
-        //         'path to package': $d.path,
-        //     },
-        //     ($): d.Error => ['file structure validation', $],
-        // ),
+        // validate no file structure problems
+        $c['validate file structure'].execute(
+            {
+                'path to package': $d.path,
+            },
+            ($): d.Error => ['file structure validation', $],
+        ),
     ]
 )

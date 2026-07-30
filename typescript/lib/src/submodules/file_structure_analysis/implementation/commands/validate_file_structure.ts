@@ -19,7 +19,7 @@ import { $$ as q_get_package_files } from "../queries/get_package_files.js"
 
 
 export const $$: p_.Command_Implementation<
-    command_interfaces.validate_no_file_structure_problems,
+    command_interfaces.validate_file_structure,
 
     {
         'structure': s_structure.Directory,

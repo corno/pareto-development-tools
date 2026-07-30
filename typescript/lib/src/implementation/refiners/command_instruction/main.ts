@@ -44,19 +44,16 @@ export const Command: p_.Refiner<
                                 ),
                                 'instruction': iterator.consume_with_expectation(
                                     ['expected one of', p_.literal.dictionary({
-                                        "analyze-file-structure": null,
                                         "assert-no-open-changes": null,
                                         "build-and-validate": null,
                                         "build": null,
                                         "commit-changes": null,
-                                        "list-file-structure-problems": null,
                                         "set-up-comparison": null,
                                         "update-dependencies": null,
                                     })] as s_error.Error,
                                     (end_info, expected) => abort(expected),
                                     ($, expected): s_out.All_Pacakges_Instruction => {
                                         switch ($) {
-                                            case "analyze-file-structure": return ['analyze file structure', null]
                                             case "assert-no-open-changes": return ['assert no open changes', null]
                                             case "build-and-validate": return ['build and validate', {
                                                 'concise': iterator.peek(
@@ -85,7 +82,6 @@ export const Command: p_.Refiner<
                                                         : false,
                                                 ),
                                             }]
-                                            case "list-file-structure-problems": return ['list file structure problems', null]
                                             case "set-up-comparison": return ['set up comparison', null]
                                             case "update-dependencies": return ['update package dependencies', null]
                                             default: return abort(expected)
@@ -194,11 +190,13 @@ export const Command: p_.Refiner<
                                 ),
                                 'instruction': iterator.consume_with_expectation(
                                     ['expected one of', p_.literal.dictionary({
+                                        "analyze-file-structure": null,
                                         "dependency-graph": null,
                                     })] as s_error.Error,
                                     (end_info, expected) => abort(expected),
                                     ($, expected) => {
                                         switch ($) {
+                                            case "analyze-file-structure": return ['analyze file structure', null]
                                             case "dependency-graph": return ['dependency graph', null]
                                             default: return abort(expected)
                                         }
