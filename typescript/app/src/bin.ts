@@ -1,6 +1,6 @@
 #!/usr/bin/env -S node --enable-source-maps
 
-import * as p_h from 'pareto-host-nodejs/index'
+import * as p_h from 'pareto-core-application/index'
 import * as p_ci from 'pareto-core/interface/command_interface'
 import * as p_qi from 'pareto-core/interface/query_interface'
 
