@@ -1,13 +1,13 @@
 // import type * as s_epe from "./execute_sandboxed_command_executable.js"
 import type * as s_path from "./fs_unrestricted_path.js"
-import type * as s_push from "../../submodules/version_control_api/interface/schemas/push.js"
-import type * as s_git_aic from "../../submodules/version_control_api/interface/schemas/assert_no_open_changes.js"
-import type * as s_git_make_pristine from "../../submodules/version_control_api/interface/schemas/make_pristine.js"
-import type * as s_npm from "../../submodules/npm/interface/schemas/npm_tool.js"
+import type * as s_push from "../../submodules/version_control_api/schemas/push.js"
+import type * as s_git_aic from "../../submodules/version_control_api/schemas/assert_no_open_changes.js"
+import type * as s_git_make_pristine from "../../submodules/version_control_api/schemas/make_pristine.js"
+import type * as s_npm from "../../submodules/npm/schemas/npm_tool.js"
 import type * as s_update_package_dependencies from "./update_package_dependencies.js"
 import type * as s_build_and_validate from "./build_and_validate.js"
-import type * as s_get_package_json from "../../submodules/npm/interface/schemas/get_package_json.js"
-import type * as s_git_ec from "../../submodules/version_control_api/interface/schemas/extended_commit.js"
+import type * as s_get_package_json from "../../submodules/npm/schemas/get_package_json.js"
+import type * as s_git_ec from "../../submodules/version_control_api/schemas/extended_commit.js"
 
 export type Parameters = {
     'path to package': s_path.Context_Path

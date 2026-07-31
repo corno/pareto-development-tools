@@ -6,10 +6,10 @@ import type * as query_interfaces_pareto_filesystem_unrestricted_api from "paret
 
 //schemas
 import * as d from "../../schemas/get_package_dependencies.js"
-import type * as s_npm_package from "../../../npm/interface/schemas/npm_package.js"
+import type * as s_npm_package from "../../../npm/schemas/npm_package.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 import { NPM_Package as r_parse_npm_package } from "../../../npm/implementation/refiners/npm_package/list_of_characters.js"
 
 export const $$: p_.Query_Implementation<

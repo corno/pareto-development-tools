@@ -15,7 +15,7 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_git_extended_commit_to_prose from "../../../submodules/version_control_api/implementation/transformers/extended_commit/paragraph.js"
+import * as t_git_extended_commit_to_prose from "../../../submodules/version_control_api/schemas/extended_commit/transformers/paragraph.js"
 import * as t_build_and_validate_to_prose from "../build_and_validate/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(

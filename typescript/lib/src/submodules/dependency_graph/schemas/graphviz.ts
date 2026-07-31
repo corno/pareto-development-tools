@@ -1,1 +1,0 @@
-export * from "pareto-graphviz/interface/schemas/high_level_simple"

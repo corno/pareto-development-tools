@@ -6,7 +6,7 @@ import p_text_from_list from 'pareto-core/implementation/transformer/specials/te
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //schemas
-import type * as s_in_nested_directory_content from "../../../schemas/nested_directory_content_as_read.js"
+import type * as s_in_nested_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/nested_directory_content_as_read/schema"
 import type * as s_structure from "../../../schemas/structure.js"
 
 namespace s_xxx {

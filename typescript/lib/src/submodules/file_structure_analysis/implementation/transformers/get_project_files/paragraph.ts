@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/implementation/transformer'
 
 //schemas
 import type * as s_in from "../../../schemas/get_project_files.js"
-import type * as s_out from "../../../schemas/paragraph.js"
+import type * as s_out from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/schema"
 
 namespace declarations {
     export type Error = p_.Transformer<
@@ -15,8 +15,8 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_read_directory_content_to_paragraph from "pareto-filesystem-unrestricted-api/modules/helpers/implementation/transformers/read_directory_content/paragraph"
-import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/read_directory"
+import * as t_read_directory_content_to_paragraph from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/read_nested_directory_content/transformers/paragraph"
+import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/read_directory/serializers"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {

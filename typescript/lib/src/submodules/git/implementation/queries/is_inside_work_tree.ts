@@ -6,10 +6,10 @@ import * as queries_actions from "../../../version_control_api/queries/interface
 import type * as query_interfaces_pareto_resources from "pareto-resources/queries/interfaces"
 
 //schemas
-import * as s_schema from "../../../version_control_api/interface/schemas/is_inside_work_tree.js"
+import * as s_schema from "../../../version_control_api/schemas/is_inside_work_tree.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
+import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
 
 export const $$: p_.Query_Implementation<
     queries_actions.is_inside_work_tree,

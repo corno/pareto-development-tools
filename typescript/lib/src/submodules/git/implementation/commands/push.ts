@@ -7,10 +7,10 @@ import type * as command_interfaces from "../../../version_control_api/commands/
 import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
 
 //schemas
-import * as d from "../../../version_control_api/interface/schemas/push.js"
+import * as d from "../../../version_control_api/schemas/push.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
+import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
 
 
 export const $$: p_.Command_Implementation<

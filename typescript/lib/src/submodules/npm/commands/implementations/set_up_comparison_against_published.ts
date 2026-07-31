@@ -20,9 +20,9 @@ import type * as query_interfaces_pareto_resources from "pareto-resources/querie
 import * as d from "../../schemas/set_up_comparison_against_published.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
-import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
-import * as q_get_package_json from "../queries/get_package_json.js"
+import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
+import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
+import * as q_get_package_json from "../../queries/implementations/get_package_json.js"
 
 const remove_n_characters_from_end = ($: string, n: number): p_schema.List<number> => {
 

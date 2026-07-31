@@ -7,10 +7,10 @@ import * as queries_actions from "../../../version_control_api/queries/interface
 import type * as query_interfaces_pareto_resources from "pareto-resources/queries/interfaces"
 
 //schemas
-import * as d from "../../../version_control_api/interface/schemas/repository_no_open_changes.js"
+import * as d from "../../../version_control_api/schemas/repository_no_open_changes.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
+import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
 
 export const $$: p_.Query_Implementation<
     queries_actions.repository_no_open_changes,

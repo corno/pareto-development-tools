@@ -12,7 +12,7 @@ import type * as query_interfaces_pareto_filesystem_unrestricted_api from "paret
 import * as d from "../../schemas/update_package_dependencies.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.update_package_dependencies,

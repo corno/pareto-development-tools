@@ -15,14 +15,14 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_git_push_to_prose from "../../../submodules/version_control_api/implementation/transformers/push/paragraph.js"
-import * as t_git_make_pristine_to_prose from "../../../submodules/version_control_api/implementation/transformers/make_pristine/paragraph.js"
+import * as t_git_push_to_prose from "../../../submodules/version_control_api/schemas/push/transformers/paragraph.js"
+import * as t_git_make_pristine_to_prose from "../../../submodules/version_control_api/schemas/make_pristine/transformers/paragraph.js"
 import * as t_clean_and_update_package_dependencies_to_prose from "../update_package_dependencies/paragraph.js"
-import * as t_git_is_clean_to_prose from "../../../submodules/version_control_api/implementation/transformers/repository_has_no_open_changes/paragraph.js"
-import * as t_npm_to_prose from "../../../submodules/npm/implementation/transformers/npm/paragraph.js"
+import * as t_git_is_clean_to_prose from "../../../submodules/version_control_api/schemas/repository_has_no_open_changes/transformers/paragraph.js"
+import * as t_npm_to_prose from "../../../submodules/npm/schemas/npm/transformers/paragraph.js"
 import * as t_build_and_validate_to_prose from "../build_and_validate/paragraph.js"
-import * as t_get_package_json_to_prose from "../../../submodules/npm/implementation/transformers/get_package_json/paragraph.js"
-import * as t_git_ec_to_prose from "../../../submodules/version_control_api/implementation/transformers/extended_commit/paragraph.js"
+import * as t_get_package_json_to_prose from "../../../submodules/npm/schemas/get_package_json/transformers/paragraph.js"
+import * as t_git_ec_to_prose from "../../../submodules/version_control_api/schemas/extended_commit/transformers/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {

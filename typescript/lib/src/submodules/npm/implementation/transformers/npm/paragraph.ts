@@ -17,7 +17,7 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_epe_to_prose from "pareto-resources/implementation/transformers/execute_unrestricted_command_executable/paragraph"
+import * as t_epe_to_prose from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
 
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(

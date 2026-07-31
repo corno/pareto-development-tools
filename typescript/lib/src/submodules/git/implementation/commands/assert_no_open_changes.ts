@@ -6,7 +6,7 @@ import type * as query_interfaces from "../../../version_control_api/queries/int
 import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
 
 //schemas
-import * as d from "../../../version_control_api/interface/schemas/assert_no_open_changes.js"
+import * as d from "../../../version_control_api/schemas/assert_no_open_changes.js"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.assert_no_open_changes,

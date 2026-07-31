@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/interface/schema'
 
-import type * as s_path from "../../../schemas/fs_unrestricted_path.js"
-import type * as s_directory_content from "./read_nested_directory_content.js"
+import type * as s_path from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/path/schema"
+import type * as s_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/read_nested_directory_content/schema"
 
 export type Parameters = {
     'path to package': s_path.Context_Path,

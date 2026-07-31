@@ -16,17 +16,17 @@ import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/sho
 
 //dependencies
 import * as t_git_commit_to_prose from "../git_commit/paragraph.js"
-import * as t_git_assert_no_open_changes_to_prose from "../../../submodules/version_control_api/implementation/transformers/assert_no_open_changes/paragraph.js"
+import * as t_git_assert_no_open_changes_to_prose from "../../../submodules/version_control_api/schemas/assert_no_open_changes/transformers/paragraph.js"
 
 import * as t_build_and_validate_to_prose from "../build_and_validate/paragraph.js"
 import * as t_build_to_prose from "../build/paragraph.js"
-import * as t_dependency_graph_to_prose from "../../../submodules/dependency_graph/implementation/transformers/create_dependency_graph/paragraph.js"
-import * as t_get_project_files_to_paragraph from "../../../submodules/file_structure_analysis/implementation/transformers/get_project_files/paragraph.js"
-import * as t_get_package_files_to_paragraph from "../../../submodules/file_structure_analysis/implementation/transformers/get_package_files/paragraph.js"
+import * as t_dependency_graph_to_prose from "../../../submodules/dependency_graph/schemas/create_dependency_graph/transformers/paragraph.js"
+import * as t_get_project_files_to_paragraph from "../../../submodules/file_structure_analysis/schemas/get_project_files/transformers/paragraph.js"
+import * as t_get_package_files_to_paragraph from "../../../submodules/file_structure_analysis/schemas/get_package_files/transformers/paragraph.js"
 import * as t_publish from "../publish/paragraph.js"
 import * as t_update_dependencies from "../update_package_dependencies/paragraph.js"
-import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/read_directory"
-import * as t_set_up_comparison_against_published from "../../../submodules/npm/implementation/transformers/set_up_comparison_against_published/paragraph.js"
+import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/read_directory/serializers"
+import * as t_set_up_comparison_against_published from "../../../submodules/npm/schemas/set_up_comparison_against_published/transformers/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {

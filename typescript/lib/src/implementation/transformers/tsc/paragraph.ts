@@ -15,7 +15,7 @@ namespace declarations {
 }
 
 //dependencies
-import * as t_espe_to_paragraph from "pareto-resources/implementation/transformers/execute_unrestricted_smelly_command_executable/paragraph"
+import * as t_espe_to_paragraph from "pareto-resources/schemas/execute_unrestricted_smelly_command_executable/transformers/paragraph"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"

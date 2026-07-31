@@ -9,10 +9,10 @@ import type * as command_interfaces_pareto_resources from "pareto-resources/comm
 import type * as query_interfaces from "../../../version_control_api/queries/interfaces.js"
 
 //schemas
-import * as d from "../../../version_control_api/interface/schemas/extended_commit.js"
+import * as d from "../../../version_control_api/schemas/extended_commit.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
+import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.extended_commit,

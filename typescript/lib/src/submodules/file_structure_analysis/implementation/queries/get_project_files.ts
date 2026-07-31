@@ -6,12 +6,12 @@ import type * as query_interfaces_pareto_filesystem_unrestricted_api from "paret
 
 //schemas
 import * as d from "../../schemas/get_project_files.js"
-import type * as s_nested_directory_content from "../../schemas/nested_directory_content_as_read.js"
+import type * as s_nested_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/nested_directory_content_as_read/schema"
 
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
-import { $$ as q_read_nested_directory_content } from "pareto-filesystem-unrestricted-api/modules/helpers/implementation/queries/read_nested_directory_content"
+import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
+import { $$ as q_read_nested_directory_content } from "pareto-filesystem-unrestricted-api/modules/helpers/queries/implementations/read_nested_directory_content"
 
 export const $$: p_.Query_Implementation<
     query_interfaces.get_project_files,

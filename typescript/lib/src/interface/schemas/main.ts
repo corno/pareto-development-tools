@@ -1,1 +1,0 @@
-export * from "pareto-application-api/schemas/main/schema"

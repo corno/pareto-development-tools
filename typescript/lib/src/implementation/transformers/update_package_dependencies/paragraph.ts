@@ -12,8 +12,8 @@ namespace declarations {
 }
 
 //dependencies
-import * as ser_stat_possible_node from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/stat_possible_node"
-import * as t_utd_to_paragraph from "../../../submodules/npm/implementation/transformers/update_package_dependencies/paragraph.js"
+import * as ser_stat_possible_node from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/stat_possible_node/serializers"
+import * as t_utd_to_paragraph from "../../../submodules/npm/schemas/update_package_dependencies/transformers/paragraph.js"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"

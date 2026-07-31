@@ -12,7 +12,7 @@ import type * as command_interfaces_pareto_filesystem_unrestricted_api from "par
 import * as d from "../../schemas/build.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
+import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.build,

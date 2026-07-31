@@ -13,8 +13,8 @@ import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/co
 import * as d from "../../schemas/publish.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
-import * as q_get_package_json from "../../submodules/npm/implementation/queries/get_package_json.js"
+import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
+import * as q_get_package_json from "../../submodules/npm/queries/implementations/get_package_json.js"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"

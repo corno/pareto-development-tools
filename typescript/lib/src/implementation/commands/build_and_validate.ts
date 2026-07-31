@@ -9,8 +9,8 @@ import type * as command_interfaces_file_structure_analysis from "../../submodul
 import * as d from "../../schemas/build_and_validate.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
-import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
+import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
+import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.build_and_validate,

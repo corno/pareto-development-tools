@@ -2,8 +2,8 @@ import * as p_ from 'pareto-core/interface/schema'
 
 import type * as s_read_directory from "../../../schemas/fs_unrestricted_read_directory.js"
 import type * as s_path from "../../../schemas/fs_unrestricted_path.js"
-import type * as s_deseralize_package_json from "../../npm/interface/schemas/deserialize_package_json.js"
-import type * as s_npm_package from "../../npm/interface/schemas/npm_package.js"
+import type * as s_deseralize_package_json from "../../npm/schemas/deserialize_package_json.js"
+import type * as s_npm_package from "../../npm/schemas/npm_package.js"
 
 export type Parameters = {
     'path': s_path.Context_Path,

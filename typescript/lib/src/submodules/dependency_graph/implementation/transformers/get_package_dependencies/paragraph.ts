@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/implementation/transformer'
 
 //schemas
 import type * as s_in from "../../../schemas/get_package_dependencies.js"
-import type * as s_out from "../../../schemas/paragraph.js"
+import type * as s_out from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/schema"
 
 namespace declarations {
     export type Error = p_.Transformer<
@@ -12,8 +12,8 @@ namespace declarations {
 }
 
 //dependencies
-import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/read_directory"
-import * as ser_deserialize_package_json from "../../../../../submodules/npm/implementation/transformers/deserialize_package_json/paragraph.js"
+import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/read_directory/serializers"
+import * as ser_deserialize_package_json from "../../../../../submodules/npm/schemas/deserialize_package_json/transformers/paragraph.js"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"

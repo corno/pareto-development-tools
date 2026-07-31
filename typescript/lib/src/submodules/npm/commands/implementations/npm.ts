@@ -7,7 +7,7 @@ import type * as command_interfaces from "../../commands/interfaces.js"
 import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
 
 //dependencies
-import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
+import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.npm,

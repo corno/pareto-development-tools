@@ -14,7 +14,7 @@ namespace declarations {
 import * as ser_parse_tree_deserialization from "astn-core/modules/deserialization/schemas/parse_tree_deserialization/serializers"
 import * as t_deserialize_parse_tree_to_location from "astn-core/modules/deserialization/schemas/parse_tree_deserialization/transformers/location"
 import * as ser_location from "astn-core/modules/deserialization/schemas/location/serializers"
-import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
+import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"

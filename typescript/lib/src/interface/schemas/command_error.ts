@@ -3,14 +3,14 @@ import * as p_ from 'pareto-core/interface/schema'
 
 import type * as s_get_project_files from "../../submodules/file_structure_analysis/schemas/get_project_files.js"
 import type * as s_get_package_files from "../../submodules/file_structure_analysis/schemas/get_package_files.js"
-import type * as s_assert_clean from "../../submodules/version_control_api/interface/schemas/assert_no_open_changes.js"
+import type * as s_assert_clean from "../../submodules/version_control_api/schemas/assert_no_open_changes.js"
 import type * as s_build from "./build.js"
 import type * as s_build_and_validate from "./build_and_validate.js"
 import type * as s_dependency_graph from "../../submodules/dependency_graph/schemas/create_dependency_graph.js"
 import type * as s_git_commit from "./git_commit.js"
 import type * as s_publish from "./publish.js"
 import type * as s_read_directory from "./fs_unrestricted_read_directory.js"
-import type * as s_set_up_comparison_against_published from "../../submodules/npm/interface/schemas/set_up_comparison_against_published.js"
+import type * as s_set_up_comparison_against_published from "../../submodules/npm/schemas/set_up_comparison_against_published.js"
 import type * as s_update_dependencies from "./update_package_dependencies.js"
 
 export type Error =

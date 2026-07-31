@@ -1,5 +1,5 @@
 
-import type * as s_utd from "../../submodules/npm/interface/schemas/update_package_dependencies.js"
+import type * as s_utd from "../../submodules/npm/schemas/update_package_dependencies.js"
 import type * as s_path from "./fs_unrestricted_path.js"
 import type * as s_stat from "./fs_unrestricted_stat_possible_node.js"
 
