@@ -2,8 +2,8 @@ import * as p_ from 'pareto-core/implementation/command'
 
 //interface dependencies
 import type * as command_interfaces from "../../commands.js"
-import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
+import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/commands/interfaces"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
 import type * as s_structure from "../../schemas/structure.js"
 
 
@@ -12,7 +12,7 @@ import * as d from "../../schemas/get_project_files.js"
 
 //dependencies
 import * as t_csv_to_paragraph from "pareto-csv/implementation/transformers/csv/paragraph"
-import * as t_paragraph_to_serialized from "pareto-fountain-pen/modules/paragraph/implementation/transformers/paragraph/serialized"
+import * as t_paragraph_to_serialized from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/transformers/serialized"
 import * as t_file_structure_analysis_to_csv from "../transformers/file_structure_analysis/csv.js"
 import * as t_project_files_to_file_analysis_list from "../transformers/project_files/directory_analysis.js"
 import { $$ as q_get_project_files } from "../queries/get_project_files.js"

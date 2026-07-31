@@ -1,9 +1,9 @@
 import * as p_ from 'pareto-core/implementation/command'
 
 //interface dependencies
-import type * as command_interfaces from "../../../version_control_api/interface/commands.js"
-import type * as query_interfaces from "../../../version_control_api/interface/queries.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
+import type * as command_interfaces from "../../../version_control_api/commands/interfaces.js"
+import type * as query_interfaces from "../../../version_control_api/queries/interfaces.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
 
 //schemas
 import * as d from "../../../version_control_api/interface/schemas/assert_no_open_changes.js"

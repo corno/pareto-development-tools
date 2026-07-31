@@ -1,5 +1,5 @@
-import type * as s_deserialize from "./parse_tree_deserialization.js"
-import type * as s_path from "./fs_unrestricted_path.js"
+import type * as s_deserialize from "astn-core/modules/deserialization/schemas/parse_tree_deserialization/schema"
+import type * as s_path from "pareto-resources/schemas/fs_unrestricted_path/schema"
 
 export type Error = {
     'path': s_path.Node_Path

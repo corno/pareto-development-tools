@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/implementation/transformer'
 
 //schemas
 import type * as s_in from "../../../schemas/file_structure_validation.js"
-import type * as s_out from "pareto-fountain-pen/modules/paragraph/schemas/paragraph"
+import type * as s_out from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/schema"
 
 namespace declarations {
     export type Error = p_.Transformer_With_Parameter<
@@ -15,7 +15,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 export const Error: declarations.Error = ($, $p) => sh.ph.composed([
     sh.ph.text("file structure problems"),

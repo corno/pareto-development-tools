@@ -1,12 +1,12 @@
 import * as p_ from 'pareto-core/implementation/command'
 
 //interface dependencies
-import type * as command_interfaces from "../../interface/commands.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
+import type * as command_interfaces from "../../commands/interfaces.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
 import type * as command_interfaces_file_structure_analysis from "../../submodules/file_structure_analysis/commands.js"
 
 //schemas
-import * as d from "../../interface/schemas/build_and_validate.js"
+import * as d from "../../schemas/build_and_validate.js"
 
 //dependencies
 import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"

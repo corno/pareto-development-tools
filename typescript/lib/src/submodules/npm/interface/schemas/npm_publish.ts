@@ -1,6 +1,6 @@
 
-import type * as s_epe from "./execute_sandboxed_command_executable.js"
-import type * as s_path from "./fs_unrestricted_path.js"
+import type * as s_epe from "pareto-resources/schemas/execute_sandboxed_command_executable/schema"
+import type * as s_path from "pareto-resources/schemas/fs_unrestricted_path/schema"
 
 export type Parameters = {
     'path': s_path.Context_Path,

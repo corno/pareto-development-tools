@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as s_in from "../../../interface/schemas/deserialize_package_json.js"
-import type * as s_out from "../../../interface/schemas/paragraph.js"
+import type * as s_in from "../../../schemas/deserialize_package_json.js"
+import type * as s_out from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/schema"
 
 namespace declarations {
     export type Error = p_.Transformer<
@@ -11,13 +11,13 @@ namespace declarations {
 }
 
 //dependencies
-import * as ser_parse_tree_deserialization from "astn-core/modules/deserialization/implementation/serializers/parse_tree_deserialization"
-import * as t_deserialize_parse_tree_to_location from "astn-core/modules/deserialization/implementation/transformers/parse_tree_deserialization/location"
-import * as ser_location from "astn-core/modules/deserialization/implementation/serializers/location"
+import * as ser_parse_tree_deserialization from "astn-core/modules/deserialization/schemas/parse_tree_deserialization/serializers"
+import * as t_deserialize_parse_tree_to_location from "astn-core/modules/deserialization/schemas/parse_tree_deserialization/transformers/location"
+import * as ser_location from "astn-core/modules/deserialization/schemas/location/serializers"
 import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 export const Error: declarations.Error = ($) => sh.ph.composed([
     sh.ph.text(ser_path.Node_Path($['path'])),

@@ -2,8 +2,8 @@ import * as p_ from 'pareto-core/implementation/query'
 import * as p_t from 'pareto-core/implementation/transformer'
 import * as p_s from 'pareto-core/implementation/serializer'
 
-import * as queries_actions from "../../../version_control_api/interface/queries.js"
-import type * as query_interfaces_pareto_resources from "pareto-resources/interface/queries"
+import * as queries_actions from "../../../version_control_api/queries/interfaces.js"
+import type * as query_interfaces_pareto_resources from "pareto-resources/queries/interfaces"
 
 //schemas
 import * as s_schema from "../../../version_control_api/interface/schemas/is_inside_work_tree.js"

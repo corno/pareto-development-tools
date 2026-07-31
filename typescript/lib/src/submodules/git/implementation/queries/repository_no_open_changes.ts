@@ -3,8 +3,8 @@ import * as p_s from 'pareto-core/implementation/serializer'
 import * as p_t from 'pareto-core/implementation/transformer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
-import * as queries_actions from "../../../version_control_api/interface/queries.js"
-import type * as query_interfaces_pareto_resources from "pareto-resources/interface/queries"
+import * as queries_actions from "../../../version_control_api/queries/interfaces.js"
+import type * as query_interfaces_pareto_resources from "pareto-resources/queries/interfaces"
 
 //schemas
 import * as d from "../../../version_control_api/interface/schemas/repository_no_open_changes.js"

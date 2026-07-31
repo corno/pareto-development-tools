@@ -1,6 +1,6 @@
 
-import type * as s_read_file from "./fs_unrestricted_read_file.js"
-import type * as s_path from "./fs_unrestricted_path.js"
+import type * as s_read_file from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/read_file/schema"
+import type * as s_path from "pareto-resources/schemas/fs_unrestricted_path/schema"
 import type * as s_deserialize_package_json from "./deserialize_package_json.js"
 import type * as s_npm_package from "./npm_package.js"
 

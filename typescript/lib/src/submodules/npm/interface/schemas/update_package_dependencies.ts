@@ -1,9 +1,9 @@
 
 import type * as s_update2latest from "./update2latest.js"
 
-import type * as s_remove from "./fs_unrestricted_remove.js"
+import type * as s_remove from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/remove/schema"
 import type * as s_npm from "./npm_tool.js"
-import type * as s_path from "./fs_unrestricted_path.js"
+import type * as s_path from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/path/schema"
 
 export type Parameters = {
     'path': s_path.Context_Path,

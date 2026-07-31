@@ -1,13 +1,14 @@
 import * as sh from "lib/shorthands/structure/manual"
 
-const $_interface = sh.g.directory_group({
-    "commands.ts": sh.g.file_manual(),
-    "queries.ts": sh.g.file_manual(),
+
+const $_commands = sh.g.directory_group({
+    "interfaces.ts": sh.g.file_manual(),
+    "implementations": sh.g.directory_wildcards(0, false, ["ts"], false),
 })
 
-const $_implementation = sh.g.directory_group({
-    "commands": sh.g.directory_wildcards(0, false, ["ts"], false),
-    "queries": sh.g.directory_wildcards(0, false, ["ts"], false),
+const $_queries = sh.g.directory_group({
+    "interfaces.ts": sh.g.file_manual(),
+    "implementations": sh.g.directory_wildcards(0, false, ["ts"], false),
 })
 
 const $_schemas = sh.g.directory_dictionary(
@@ -58,10 +59,13 @@ export const $$ = sh.dgroup({
             "package-lock.json": sh.g.file_generated(true),
             "package.json": sh.g.file_manual(),
             "src": sh.g.directory_group({
+                "commands": $_commands,
+                "queries": $_queries,
                 "schemas": $_schemas,
                 "modules": sh.g.directory_dictionary(
                     sh.dgroup({
-                        // "interface": $_interface,
+                        "commands": $_commands,
+                        "queries": $_queries,
                         "schemas": $_schemas,
                     })
                 ),

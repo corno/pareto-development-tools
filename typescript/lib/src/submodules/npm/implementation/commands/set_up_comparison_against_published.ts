@@ -10,14 +10,14 @@ import p_super_query_result from 'pareto-core/implementation/query/super_query_r
 //schemas
 
 //interface dependencies
-import type * as command_interfaces from "../../interface/commands.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
-import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/commands"
-import type * as query_interfaces_pareto_resources from "pareto-resources/interface/queries"
+import type * as command_interfaces from "../../commands/interfaces.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
+import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/commands/interfaces"
+import type * as query_interfaces_pareto_resources from "pareto-resources/queries/interfaces"
 
 //schemas
-import * as d from "../../interface/schemas/set_up_comparison_against_published.js"
+import * as d from "../../schemas/set_up_comparison_against_published.js"
 
 //dependencies
 import * as ser_path from "pareto-resources/implementation/serializers/unrestricted_path"

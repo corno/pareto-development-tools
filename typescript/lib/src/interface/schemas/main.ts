@@ -1,1 +1,1 @@
-export * from "pareto-application-api/interface/schemas/main"
+export * from "pareto-application-api/schemas/main/schema"

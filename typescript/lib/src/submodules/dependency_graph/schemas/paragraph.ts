@@ -1,1 +1,1 @@
-export * from "pareto-fountain-pen/modules/paragraph/schemas/paragraph"
+export * from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/schema"

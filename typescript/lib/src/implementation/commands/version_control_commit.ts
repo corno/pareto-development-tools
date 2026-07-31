@@ -2,11 +2,11 @@ import * as p_ from 'pareto-core/implementation/command'
 import * as p_t from 'pareto-core/implementation/transformer'
 
 //interface dependencies
-import type * as command_interfaces from "../../interface/commands.js"
-import type * as command_interfaces_version_control from "../../submodules/version_control_api/interface/commands.js"
+import type * as command_interfaces from "../../commands/interfaces.js"
+import type * as command_interfaces_version_control from "../../submodules/version_control_api/commands/interfaces.js"
 
 //schemas
-import * as d from "../../interface/schemas/git_commit.js"
+import * as d from "../../schemas/git_commit.js"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.version_control_commit,

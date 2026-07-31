@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
-import type * as s_in from "../../../interface/schemas/set_up_comparison_against_published.js"
-import type * as s_out from "../../../interface/schemas/paragraph.js"
+import type * as s_in from "../../../schemas/set_up_comparison_against_published.js"
+import type * as s_out from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/schema"
 
 
 namespace declarations {
@@ -13,12 +13,12 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_epe_to_prose from "pareto-resources/implementation/transformers/execute_unrestricted_command_executable/paragraph"
-import * as t_eqe_to_prose from "pareto-resources/implementation/transformers/execute_query_executable/paragraph"
-import * as ser_make_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/serializers/make_directory"
+import * as t_epe_to_prose from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
+import * as t_eqe_to_prose from "pareto-resources/schemas/execute_sandboxed_query_executable/transformers//paragraph"
+import * as ser_make_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/make_directory/serializers"
 import * as t_get_package_json_to_prose from "../get_package_json/paragraph.js"
 
 

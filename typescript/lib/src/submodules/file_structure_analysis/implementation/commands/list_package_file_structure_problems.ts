@@ -3,8 +3,8 @@ import * as p_temp from 'pareto-core/implementation/transformer'
 import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
-import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
+import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/commands/interfaces"
 import type * as command_interfaces from "../../commands.js"
 
 //schemas

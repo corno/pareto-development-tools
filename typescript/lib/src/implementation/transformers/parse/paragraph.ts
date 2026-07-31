@@ -1,8 +1,8 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
 //schemas
-import type * as s_in from "../../../interface/schemas/parse.js"
-import type * as s_out from "../../../interface/schemas/paragraph.js"
+import type * as s_in from "../../../schemas/parse.js"
+import type * as s_out from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/schema"
 
 namespace declarations {
     export type Error = p_.Transformer<
@@ -12,7 +12,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
     
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {

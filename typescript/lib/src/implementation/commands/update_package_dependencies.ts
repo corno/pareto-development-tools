@@ -4,12 +4,12 @@ import p_variables from 'pareto-core/implementation/command/specials/variables'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
 //interface dependencies
-import type * as command_interfaces from "../../interface/commands.js"
-import type * as command_interfaces_npm from "../../submodules/npm/interface/commands.js"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
+import type * as command_interfaces from "../../commands/interfaces.js"
+import type * as command_interfaces_npm from "../../submodules/npm/commands/interfaces.js"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
 
 //schemas
-import * as d from "../../interface/schemas/update_package_dependencies.js"
+import * as d from "../../schemas/update_package_dependencies.js"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"

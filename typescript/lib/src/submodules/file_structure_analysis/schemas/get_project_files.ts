@@ -1,7 +1,7 @@
 import * as p_ from 'pareto-core/interface/schema'
 
-import type * as s_path from "../../../interface/schemas/fs_unrestricted_path.js"
-import type * as s_read_directory from "../../../interface/schemas/fs_unrestricted_read_directory.js"
+import type * as s_path from "../../../schemas/fs_unrestricted_path.js"
+import type * as s_read_directory from "../../../schemas/fs_unrestricted_read_directory.js"
 import type * as s_directory_content from "./read_nested_directory_content.js"
 import type * as s_project_files from "./project_files.js"
 

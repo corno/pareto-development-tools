@@ -1,8 +1,8 @@
 import * as p_ from 'pareto-core/interface/schema'
 
-import type * as s_eqe from "./execute_sandboxed_query_executable.js"
+import type * as s_eqe from "pareto-resources/schemas/execute_sandboxed_query_executable/schema"
 import type * as s_iwt from "./is_inside_work_tree.js"
-import type * as s_path from "./fs_unrestricted_path.js"
+import type * as s_path from "pareto-resources/schemas/fs_unrestricted_path/schema"
 
 export type Result = boolean
 

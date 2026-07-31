@@ -1,8 +1,8 @@
 import * as p_ from 'pareto-core/implementation/transformer'
 
 //schemas
-import type * as s_in from "../../../interface/schemas/repository_no_open_changes.js"
-import type * as s_out from "../../../interface/schemas/paragraph.js"
+import type * as s_in from "../../../schemas/repository_no_open_changes.js"
+import type * as s_out from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/schema"
 
 namespace declarations {
 
@@ -13,10 +13,10 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_eqe_to_prose from "pareto-resources/implementation/transformers/execute_query_executable/paragraph"
+import * as t_eqe_to_prose from "pareto-resources/schemas/execute_sandboxed_query_executable/transformers/paragraph"
 import * as t_is_inside_work_tree_to_prose from "../is_inside_work_tree/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(

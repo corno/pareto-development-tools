@@ -1,1 +1,0 @@
-export * from "pareto-resources/interface/schemas/fs_unrestricted_path"

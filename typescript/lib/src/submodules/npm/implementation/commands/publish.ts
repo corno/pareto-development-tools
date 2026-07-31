@@ -2,8 +2,8 @@ import * as p_ from 'pareto-core/implementation/command'
 import * as p_temp from 'pareto-core/implementation/transformer'
 
 //interface dependencies
-import type * as command_interfaces from "../../interface/commands.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
+import type * as command_interfaces from "../../commands/interfaces.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
 
 //dependencies
 

@@ -1,8 +1,8 @@
 
-import type * as s_epe from "./execute_sandboxed_command_executable.js"
-import type * as s_eqe from "./execute_sandboxed_query_executable.js"
-import type * as s_make_directory from "./fs_unrestricted_make_directory.js"
-import type * as s_path from "./fs_unrestricted_path.js"
+import type * as s_epe from "pareto-resources/schemas/execute_sandboxed_command_executable/schema"
+import type * as s_eqe from "pareto-resources/schemas/execute_sandboxed_query_executable/schema"
+import type * as s_make_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/make_directory/schema"
+import type * as s_path from "pareto-resources/schemas/fs_unrestricted_path/schema"
 import type * as s_get_package_json from "./get_package_json.js"
 
 export type Parameters = {

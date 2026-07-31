@@ -2,11 +2,11 @@ import * as p_ from 'pareto-core/implementation/refiner'
 import p_iterate from 'pareto-core/implementation/refiner/specials/iterate'
 import p_unreachable_code_path from 'pareto-core/implementation/transformer/specials/unreachable_code_path'
 
-import type * as s_in from "../../../interface/schemas/main.js"
+import type * as s_in from "../../../schemas/main.js"
 //schemas
-import type * as s_out from "../../../interface/schemas/command_instruction.js"
-import type * as s_error from "../../../interface/schemas/parse.js"
-import type * as s_publish from "../../../interface/schemas/publish.js"
+import type * as s_out from "../../../schemas/command_instruction.js"
+import type * as s_error from "../../../schemas/parse.js"
+import type * as s_publish from "../../../schemas/publish.js"
 
 //dependencies
 import * as deser_path from "pareto-filesystem-unrestricted-api/modules/unrestricted/implementation/deserializers/path"

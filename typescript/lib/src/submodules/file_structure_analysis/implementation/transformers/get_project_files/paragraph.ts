@@ -12,7 +12,7 @@ namespace declarations {
 }
 
 //shorthands
-import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
 import * as t_read_directory_content_to_paragraph from "pareto-filesystem-unrestricted-api/modules/helpers/implementation/transformers/read_directory_content/paragraph"

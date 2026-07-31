@@ -2,14 +2,14 @@ import * as p_ from 'pareto-core/implementation/command'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //interface dependencies
-import type * as command_interfaces from "../../interface/commands.js"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
-import type * as command_interfaces_npm from "../../submodules/npm/interface/commands.js"
-import type * as command_interfaces_version_control from "../../submodules/version_control_api/interface/commands.js"
+import type * as command_interfaces from "../../commands/interfaces.js"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
+import type * as command_interfaces_npm from "../../submodules/npm/commands/interfaces.js"
+import type * as command_interfaces_version_control from "../../submodules/version_control_api/commands/interfaces.js"
 import type * as command_interfaces_file_structure_analysis from "../../submodules/file_structure_analysis/commands.js"
 
 //schemas
-import * as d from "../../interface/schemas/command_error.js"
+import * as d from "../../schemas/command_error.js"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"

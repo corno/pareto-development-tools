@@ -3,8 +3,8 @@ import * as p_t from 'pareto-core/implementation/transformer'
 import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
-import type * as command_interfaces from "../../../version_control_api/interface/commands.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
+import type * as command_interfaces from "../../../version_control_api/commands/interfaces.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
 
 //schemas
 import * as d from "../../../version_control_api/interface/schemas/push.js"

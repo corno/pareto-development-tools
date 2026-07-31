@@ -5,9 +5,9 @@ import type * as p_ri from 'pareto-core/interface/refiner'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //schemas
-import type * as s_in from "../../../interface/schemas/parse_tree.js"
-import type * as s_out from "../../../interface/schemas/npm_package.js"
-import type * as s_error from "../../../interface/schemas/deserialize_package_json.js"
+import type * as s_in from "astn-core/modules/deserialization/schemas/parse_tree/schema"
+import type * as s_out from "../../../schemas/npm_package.js"
+import type * as s_error from "../../../schemas/deserialize_package_json.js"
 
 
 type Error_Expect_Object =

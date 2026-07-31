@@ -2,21 +2,21 @@ import * as p_ from 'pareto-core/implementation/command'
 import * as p_temp from 'pareto-core/implementation/transformer'
 
 //interface dependencies
-import type * as command_interfaces from "../../interface/commands.js"
-import type * as command_interfaces_pareto_application_api from "pareto-application-api/interface/commands"
-import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
+import type * as command_interfaces from "../../commands/interfaces.js"
+import type * as command_interfaces_pareto_application_api from "pareto-application-api/commands/interfaces"
+import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/commands/interfaces"
 
 
 //schemas
-import type * as s_application_api_main from "pareto-application-api/interface/schemas/main"
-import type * as s_parse from "../../interface/schemas/parse.js"
-import type * as s_command_error from "../../interface/schemas/command_error.js"
+import type * as s_application_api_main from "pareto-application-api/schemas/main/schema"
+import type * as s_parse from "../../schemas/parse.js"
+import type * as s_command_error from "../../schemas/command_error.js"
 
 //dependencies
 import * as r_instruction from "../refiners/command_instruction/main.js"
 import * as t_api_to_paragraph from "../transformers/execute_command/paragraph.js"
 import * as t_bin_to_paragraph from "../transformers/parse/paragraph.js"
-import * as t_paragraph_to_serialized from "pareto-fountain-pen/modules/paragraph/implementation/transformers/paragraph/serialized"
+import * as t_paragraph_to_serialized from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/transformers/serialized"
 
 
 

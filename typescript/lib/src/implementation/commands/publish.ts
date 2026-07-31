@@ -3,21 +3,21 @@ import p_variables from 'pareto-core/implementation/command/specials/variables'
 import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
-import type * as command_interfaces from "../../interface/commands.js"
-import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/interface/queries"
-import type * as command_interfaces_version_control from "../../submodules/version_control_api/interface/commands.js"
-import type * as command_interfaces_npm from "../../submodules/npm/interface/commands.js"
-import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/interface/commands"
+import type * as command_interfaces from "../../commands/interfaces.js"
+import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
+import type * as command_interfaces_version_control from "../../submodules/version_control_api/commands/interfaces.js"
+import type * as command_interfaces_npm from "../../submodules/npm/commands/interfaces.js"
+import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/commands/interfaces"
 
 //schemas
-import * as d from "../../interface/schemas/publish.js"
+import * as d from "../../schemas/publish.js"
 
 //dependencies
 import * as t_path_to_path from "pareto-resources/implementation/transformers/unrestricted_path/unrestricted_path"
 import * as q_get_package_json from "../../submodules/npm/implementation/queries/get_package_json.js"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/modules/paragraph/shorthands/deprecated"
+import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.publish,

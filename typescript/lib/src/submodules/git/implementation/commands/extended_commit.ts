@@ -4,9 +4,9 @@ import * as p_s from 'pareto-core/implementation/serializer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
 //interface dependencies
-import type * as command_interfaces from "../../../version_control_api/interface/commands.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/interface/commands"
-import type * as query_interfaces from "../../../version_control_api/interface/queries.js"
+import type * as command_interfaces from "../../../version_control_api/commands/interfaces.js"
+import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
+import type * as query_interfaces from "../../../version_control_api/queries/interfaces.js"
 
 //schemas
 import * as d from "../../../version_control_api/interface/schemas/extended_commit.js"
