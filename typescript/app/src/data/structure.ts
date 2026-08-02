@@ -1,4 +1,4 @@
-import * as sh from "lib/shorthands/structure/manual"
+import * as sh from "lib/modules/file_structure_analysis/schemas/structure/shorthands/manual"
 
 
 const $_commands = sh.g.directory_group({

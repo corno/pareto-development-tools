@@ -6,9 +6,9 @@ import * as p_qi from 'pareto-core/interface/query_interface'
 
 
 //schemas
-import type * as s_ece from "pareto-resources/interface/schemas/execute_sandboxed_command_executable"
-import type * as s_espe from "pareto-resources/interface/schemas/execute_sandboxed_smelly_command_executable"
-import type * as s_eqe from "pareto-resources/interface/schemas/execute_sandboxed_query_executable"
+import type * as s_ece from "pareto-resources/schemas/execute_sandboxed_command_executable/schema"
+import type * as s_espe from "pareto-resources/schemas/execute_sandboxed_smelly_command_executable/schema"
+import type * as s_eqe from "pareto-resources/schemas/execute_sandboxed_query_executable/schema"
 
 //resources
 import * as rs_execute_unrestricted from "pareto-resource-execute-unrestricted/index"
@@ -21,31 +21,31 @@ import { $$ as q_execute_sandboxed_query_executable } from "pareto-resources/que
 import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/commands/implementations/execute_sandboxed_command_executable"
 import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/commands/implementations/execute_sandboxed_smelly_command_executable"
 //git module
-import { $$ as q_git_is_repository_clean } from "lib/submodules/git/queries/implementations/repository_no_open_changes"
-import { $$ as q_git_is_inside_work_tree } from "lib/submodules/git/queries/implementations/is_inside_work_tree"
-import { $$ as c_git_assert_clean } from "lib/submodules/git/commands/implementations/assert_no_open_changes"
-import { $$ as c_git_make_pristine } from "lib/submodules/git/commands/implementations/make_pristine"
-import { $$ as c_git_extended_commit } from "lib/submodules/git/commands/implementations/extended_commit"
-import { $$ as c_git_push } from "lib/submodules/git/commands/implementations/push"
+import { $$ as q_git_is_repository_clean } from "lib/modules/git/queries/implementations/repository_no_open_changes"
+import { $$ as q_git_is_inside_work_tree } from "lib/modules/git/queries/implementations/is_inside_work_tree"
+import { $$ as c_git_assert_clean } from "lib/modules/git/commands/implementations/assert_no_open_changes"
+import { $$ as c_git_make_pristine } from "lib/modules/git/commands/implementations/make_pristine"
+import { $$ as c_git_extended_commit } from "lib/modules/git/commands/implementations/extended_commit"
+import { $$ as c_git_push } from "lib/modules/git/commands/implementations/push"
 //npm module
-import { $$ as c_npm } from "lib/submodules/npm/commands/implementations/npm"
-import { $$ as c_npm_publish } from "lib/submodules/npm/commands/implementations/publish"
-import { $$ as c_set_up_comparison_against_published } from "lib/submodules/npm/commands/implementations/set_up_comparison_against_published"
-import { $$ as c_npm_update_package_dependencies } from "lib/submodules/npm/commands/implementations/update_package_dependencies"
-import { $$ as c_update2latest } from "lib/submodules/npm/commands/implementations/update2latest"
+import { $$ as c_npm } from "lib/modules/npm/commands/implementations/npm"
+import { $$ as c_npm_publish } from "lib/modules/npm/commands/implementations/publish"
+import { $$ as c_set_up_comparison_against_published } from "lib/modules/npm/commands/implementations/set_up_comparison_against_published"
+import { $$ as c_npm_update_package_dependencies } from "lib/modules/npm/commands/implementations/update_package_dependencies"
+import { $$ as c_update2latest } from "lib/modules/npm/commands/implementations/update2latest"
 
 //file structure analysis module
-import { $$ as c_analyze_file_structure } from "lib/submodules/file_structure_analysis/commands/implementations/analyze_project_file_structure"
-import { $$ as c_list_package_file_structure_problems } from "lib/submodules/file_structure_analysis/commands/implementations/list_package_file_structure_problems"
-import { $$ as c_validate_file_structure } from "lib/submodules/file_structure_analysis/commands/implementations/validate_file_structure"
+import { $$ as c_analyze_file_structure } from "lib/modules/file_structure_analysis/commands/implementations/analyze_project_file_structure"
+import { $$ as c_list_package_file_structure_problems } from "lib/modules/file_structure_analysis/commands/implementations/list_package_file_structure_problems"
+import { $$ as c_validate_file_structure } from "lib/modules/file_structure_analysis/commands/implementations/validate_file_structure"
 
 //internal
-import { $$ as q_package_dependencies } from "lib/submodules/dependency_graph/queries/implementations/get_package_dependencies"
+import { $$ as q_package_dependencies } from "lib/modules/dependency_graph/queries/implementations/get_package_dependencies"
 import { $$ as c_api } from "lib/commands/implementations/execute_command"
 import { $$ as c_main } from "lib/commands/implementations/main"
 import { $$ as c_build } from "lib/commands/implementations/build"
 import { $$ as c_build_and_validate } from "lib/commands/implementations/build_and_validate"
-import { $$ as c_dependency_graph } from "lib/submodules/dependency_graph/commands/implementations/create_dependency_graph"
+import { $$ as c_dependency_graph } from "lib/modules/dependency_graph/commands/implementations/create_dependency_graph"
 import { $$ as c_git_commit } from "lib/commands/implementations/version_control_commit"
 import { $$ as c_publish } from "lib/commands/implementations/publish"
 import { $$ as c_tsc } from "lib/commands/implementations/tsc"
