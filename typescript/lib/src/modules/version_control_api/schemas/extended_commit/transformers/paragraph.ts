@@ -17,28 +17,28 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_ece_to_prose from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
+import * as t_ece_to_paragraph from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
 
-import * as t_git_is_clean_to_prose from "../../repository_no_open_changes/transformers/paragraph.js"
+import * as t_git_is_clean_to_paragraph from "../../repository_no_open_changes/transformers/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'asserting no open changes': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.text("error while asserting no open changes: "),
-                t_git_is_clean_to_prose.Error($)
+                t_git_is_clean_to_paragraph.Error($)
             ]))
             case 'could not stage': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.text("could not stage: "),
-                t_ece_to_prose.Error($)
+                t_ece_to_paragraph.Error($)
             ]))
             case 'could not commit': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.text("could not commit: "),
-                t_ece_to_prose.Error($)
+                t_ece_to_paragraph.Error($)
             ]))
             case 'could not push': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.text("could not push: "),
-                t_ece_to_prose.Error($)
+                t_ece_to_paragraph.Error($)
             ]))
             default: return p_.exhaustive($[0])
         }

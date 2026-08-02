@@ -18,7 +18,7 @@ import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/sho
 
 
 //dependencies
-import * as t_git_is_clean_to_prose from "../../repository_no_open_changes/transformers/paragraph.js"
+import * as t_git_is_clean_to_paragraph from "../../repository_no_open_changes/transformers/paragraph.js"
 
 
 
@@ -30,7 +30,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
             ]))
             case 'unexpected error': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.text("unexpected error:"),
-                t_git_is_clean_to_prose.Error($)
+                t_git_is_clean_to_paragraph.Error($)
             ]))
             default: return p_.exhaustive($[0])
         }

@@ -15,17 +15,17 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_git_extended_commit_to_prose from "../../../modules/version_control_api/schemas/extended_commit/transformers/paragraph.js"
-import * as t_build_and_validate_to_prose from "../../../schemas/build_and_validate/transformers/paragraph.js"
+import * as t_git_extended_commit_to_paragraph from "../../../modules/version_control_api/schemas/extended_commit/transformers/paragraph.js"
+import * as t_build_and_validate_to_paragraph from "../../../schemas/build_and_validate/transformers/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'version control extended commit': return p_.option($, ($) => sh.ph.composed([
-                t_git_extended_commit_to_prose.Error($)
+                t_git_extended_commit_to_paragraph.Error($)
             ]))
             case 'error while running build and validate': return p_.option($, ($) => sh.ph.composed([
-                t_build_and_validate_to_prose.Error($, { 'concise': true })
+                t_build_and_validate_to_paragraph.Error($, { 'concise': true })
             ]))
             default: return p_.exhaustive($[0])
         }

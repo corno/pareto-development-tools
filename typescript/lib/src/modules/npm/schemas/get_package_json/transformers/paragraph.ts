@@ -19,7 +19,7 @@ import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/sho
 
 //dependencies
 import * as ser_read_file from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/read_file/serializers"
-import * as t_deserialize_package_json_to_prose from "../../deserialize_package_json/transformers/paragraph.js"
+import * as t_deserialize_package_json_to_paragraph from "../../deserialize_package_json/transformers/paragraph.js"
 
 export const Error: declarations.Error = ($) => {
     return p_.from.state($).decide(
@@ -39,7 +39,7 @@ export const Error: declarations.Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_deserialize_package_json_to_prose.Error($)
+                                t_deserialize_package_json_to_paragraph.Error($)
                             ])
                         ])),
                 ]))

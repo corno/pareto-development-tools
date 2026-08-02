@@ -16,10 +16,10 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_epe_to_prose from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
-import * as t_eqe_to_prose from "pareto-resources/schemas/execute_sandboxed_query_executable/transformers//paragraph"
+import * as t_epe_to_paragraph from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
+import * as t_eqe_to_paragraph from "pareto-resources/schemas/execute_sandboxed_query_executable/transformers//paragraph"
 import * as ser_make_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/make_directory/serializers"
-import * as t_get_package_json_to_prose from "../../get_package_json/transformers/paragraph.js"
+import * as t_get_package_json_to_paragraph from "../../get_package_json/transformers/paragraph.js"
 
 
 export const Error: declarations.Error = ($) => {
@@ -31,7 +31,7 @@ export const Error: declarations.Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_epe_to_prose.Error($)
+                                t_epe_to_paragraph.Error($)
                             ])
                         ])),
                 ]))
@@ -40,7 +40,7 @@ export const Error: declarations.Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_eqe_to_prose.Error($)
+                                t_eqe_to_paragraph.Error($)
                             ])
                         ])),
                 ]))
@@ -49,7 +49,7 @@ export const Error: declarations.Error = ($) => {
                     sh.ph.indent(
                         sh.pg.sentences([
                             sh.sentence([
-                                t_epe_to_prose.Error($)
+                                t_epe_to_paragraph.Error($)
                             ])
                         ])),
                 ]))
@@ -62,7 +62,7 @@ export const Error: declarations.Error = ($) => {
                             ])
                         ])),
                 ]))
-                case 'error while getting package.json': return p_.option($, ($) => t_get_package_json_to_prose.Error($))
+                case 'error while getting package.json': return p_.option($, ($) => t_get_package_json_to_paragraph.Error($))
                 default: return p_.exhaustive($[0])
             }
         }

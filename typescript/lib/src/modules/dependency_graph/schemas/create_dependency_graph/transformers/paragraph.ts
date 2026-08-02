@@ -15,7 +15,7 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_get_package_dependencies_to_prose from "../../get_package_dependencies/transformers/paragraph.js"
+import * as t_get_package_dependencies_to_paragraph from "../../get_package_dependencies/transformers/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
@@ -32,7 +32,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                 sh.ph.indent(
                     sh.pg.sentences([
                         sh.sentence([
-                            t_get_package_dependencies_to_prose.Error($)
+                            t_get_package_dependencies_to_paragraph.Error($)
                         ])
                     ])
                 )

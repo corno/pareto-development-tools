@@ -16,8 +16,8 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_eqe_to_prose from "pareto-resources/schemas/execute_sandboxed_query_executable/transformers/paragraph"
-import * as t_is_inside_work_tree_to_prose from "../../is_inside_work_tree/transformers/paragraph.js"
+import * as t_eqe_to_paragraph from "pareto-resources/schemas/execute_sandboxed_query_executable/transformers/paragraph"
+import * as t_is_inside_work_tree_to_paragraph from "../../is_inside_work_tree/transformers/paragraph.js"
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
     ($) => {
@@ -25,11 +25,11 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
             case 'not a repository': return p_.option($, ($) => sh.ph.text("not a repository"))
             case 'could not determine status': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.text("could not determine git status: "),
-                t_eqe_to_prose.Error($)
+                t_eqe_to_paragraph.Error($)
             ]))
             case 'unknown issue': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.text("unknown issue while checking if git is clean: "),
-                t_is_inside_work_tree_to_prose.Error($)
+                t_is_inside_work_tree_to_paragraph.Error($)
             ]))
             default: return p_.exhaustive($[0])
         }

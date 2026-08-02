@@ -16,9 +16,9 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_u2l_to_prose from "../../update2latest/transformers/paragraph.js"
+import * as t_u2l_to_paragraph from "../../update2latest/transformers/paragraph.js"
 import * as ser_remove from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/remove/serializers"
-import * as t_npm_to_prose from "../../npm_tool/transformers/paragraph.js"
+import * as t_npm_to_paragraph from "../../npm_tool/transformers/paragraph.js"
 
 export const Error: declarations.Error = ($) => {
     return p_.from.state($).decide(
@@ -34,11 +34,11 @@ export const Error: declarations.Error = ($) => {
                 ]))
                 case 'could not update to latest': return p_.option($, ($) => sh.ph.composed([
                     sh.ph.text("could not update to latest typescript dependencies: "),
-                    t_u2l_to_prose.Error($)
+                    t_u2l_to_paragraph.Error($)
                 ]))
                 case 'could not install dependencies': return p_.option($, ($) => sh.ph.composed([
                     sh.ph.text("could not install dependencies typescript dependencies: "),
-                    t_npm_to_prose.Error($)
+                    t_npm_to_paragraph.Error($)
                 ]))
                 default: return p_.exhaustive($[0])
             }

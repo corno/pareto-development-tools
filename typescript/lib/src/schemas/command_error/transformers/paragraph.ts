@@ -15,12 +15,12 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_git_commit_to_prose from "../../git_commit/transformers/paragraph.js"
-import * as t_git_assert_no_open_changes_to_prose from "../../../modules/version_control_api/schemas/assert_no_open_changes/transformers/paragraph.js"
+import * as t_git_commit_to_paragraph from "../../git_commit/transformers/paragraph.js"
+import * as t_git_assert_no_open_changes_to_paragraph from "../../../modules/version_control_api/schemas/assert_no_open_changes/transformers/paragraph.js"
 
-import * as t_build_and_validate_to_prose from "../../build_and_validate/transformers/paragraph.js"
-import * as t_build_to_prose from "../../build/transformers/paragraph.js"
-import * as t_dependency_graph_to_prose from "../../../modules/dependency_graph/schemas/create_dependency_graph/transformers/paragraph.js"
+import * as t_build_and_validate_to_paragraph from "../../build_and_validate/transformers/paragraph.js"
+import * as t_build_to_paragraph from "../../build/transformers/paragraph.js"
+import * as t_dependency_graph_to_paragraph from "../../../modules/dependency_graph/schemas/create_dependency_graph/transformers/paragraph.js"
 import * as t_get_project_files_to_paragraph from "../../../modules/file_structure_analysis/schemas/get_project_files/transformers/paragraph.js"
 import * as t_get_package_files_to_paragraph from "../../../modules/file_structure_analysis/schemas/get_package_files/transformers/paragraph.js"
 import * as t_publish from "../../publish/transformers/paragraph.js"
@@ -34,12 +34,12 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
             case 'package': return p_.option($, ($) => p_.from.state($).decide(
                 ($) => {
                     switch ($[0]) {
-                        case 'build and validate': return p_.option($, ($) => t_build_and_validate_to_prose.Error($.error, { 'concise': $.concise }))
+                        case 'build and validate': return p_.option($, ($) => t_build_and_validate_to_paragraph.Error($.error, { 'concise': $.concise }))
                         case 'get files': return p_.option($, ($) => t_get_package_files_to_paragraph.Error($))
                         case 'publish': return p_.option($, ($) => t_publish.Error($))
                         case 'update dependencies': return p_.option($, ($) => t_update_dependencies.Error($))
-                        case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_prose.Error($))
-                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_prose.Error($))
+                        case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_paragraph.Error($))
+                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_paragraph.Error($))
 
                         default: return p_.exhaustive($[0])
                     }
@@ -60,16 +60,16 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                                             p_.from.state($).decide(
                                                 ($) => {
                                                     switch ($[0]) {
-                                                        case 'build and validate': return p_.option($, ($) => t_build_and_validate_to_prose.Error(
+                                                        case 'build and validate': return p_.option($, ($) => t_build_and_validate_to_paragraph.Error(
                                                             $.error,
                                                             { 'concise': $.concise }
                                                         ))
-                                                        case 'build': return p_.option($, ($) => t_build_to_prose.Error(
+                                                        case 'build': return p_.option($, ($) => t_build_to_paragraph.Error(
                                                             $,
                                                             { 'concise': false }
                                                         ))
-                                                        case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_prose.Error($))
-                                                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_prose.Error($))
+                                                        case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_paragraph.Error($))
+                                                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_paragraph.Error($))
                                                         case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))
                                                         case 'update dependencies': return p_.option($, ($) => t_update_dependencies.Error($))
                                                         default: return p_.exhaustive($[0])
@@ -92,7 +92,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                 ($) => {
                     switch ($[0]) {
                         case 'analyze file structure': return p_.option($, ($) => t_get_project_files_to_paragraph.Error($))
-                        case 'dependency graph': return p_.option($, ($) => t_dependency_graph_to_prose.Error($))
+                        case 'dependency graph': return p_.option($, ($) => t_dependency_graph_to_paragraph.Error($))
                         default: return p_.au($[0])
                     }
                 }

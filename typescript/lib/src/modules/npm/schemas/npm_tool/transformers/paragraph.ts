@@ -17,7 +17,7 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_epe_to_prose from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
+import * as t_epe_to_paragraph from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
 
 
 export const Error: declarations.Error = ($) => p_.from.state($).decide(
@@ -25,7 +25,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
         switch ($[0]) {
             case 'error while running npm': return p_.option($, ($) => sh.ph.composed([
                 sh.ph.text("error while running npm: "),
-                t_epe_to_prose.Error($)
+                t_epe_to_paragraph.Error($)
             ]))
             default: return p_.exhaustive($[0])
         }
