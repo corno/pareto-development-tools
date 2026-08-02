@@ -69,6 +69,7 @@ export const $$ = sh.dgroup({
                         "schemas": $_schemas,
                     })
                 ),
+                "temp": sh.g.directory_wildcards(0, true, ["ts"], false),
                 "globals.ts": sh.g.file_generated(true),
                 "index.ts": sh.g.file_generated(true),
             }),
