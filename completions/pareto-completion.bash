@@ -12,13 +12,13 @@ _pdt_completions() {
     local commands="all package project set-up-comparison"
     
     # All packages sub-commands
-    local all_subcommands="analyze-file-structure assert-no-open-changes build-and-validate build commit-changes list-file-structure-problems set-up-comparison update-dependencies"
+    local all_subcommands="assert-no-open-changes build-and-validate build commit-changes list-file-structure-problems set-up-comparison update-dependencies"
     
     # Package sub-commands
     local package_subcommands="assert-no-open-changes build-and-validate commit-changes list-file-structure-problems publish update-dependencies"
     
     # Project sub-commands
-    local project_subcommands="dependency-graph"
+    local project_subcommands="analyze-file-structure dependency-graph"
     
     # Publish generation options
     local publish_generations="patch minor"
