@@ -10,10 +10,10 @@ import type * as command_interfaces from "../interfaces.js"
 //schemas
 import type * as s_structure from "../../schemas/structure/schema.js"
 import type * as s from "../../schemas/get_package_files/schema.js"
-import type * as s_file_analysis from "../../schemas/file_structure_analysis/schema.js"
+import type * as s_package_file_analysis from "../../schemas/package_file_analysis/schema.js"
 
 //dependencies
-import * as t_package_files_to_file_analysis_list from "../../schemas/package_files/transformers/directory_analysis.js"
+import * as r_analysis_from_package_files from "../../schemas/package_file_analysis/refiners/package_files.js"
 import { $$ as q_get_package_files } from "../../queries/implementations/get_package_files.js"
 
 
@@ -47,26 +47,28 @@ export const $$: p_.Command_Implementation<
                 $c['log lines'].execute(
                     {
                         'lines': p_temp.from.list(
-                            p_temp.from.list(
-                                t_package_files_to_file_analysis_list.Package_Files(
+                            p_temp.from.dictionary(
+                                r_analysis_from_package_files.Package_File_Analysis_Dictionary(
                                     $v,
                                     {
                                         'structure': $s.structure
                                     }
-                                )
-                            ).map_optionally<s_file_analysis.Package_File_Analysis>(
-                                ($) => {
-                                    const x = $
-                                    return p_temp.from.optional($.analysis['unexpected path tail']).map(
-                                        ($) => x
-                                    )
-                                }
+                                ),
+                            ).convert_to_list(
+                                ($, id) => ({
+                                    'path': id,
+                                    'analysis': $,
+                                })
                             )
-                        ).map(
-                            ($) => p_s.ph.composed([
-                                p_s.ph.literal($['path']),
-                            ])
-
+                        ).map_optionally(
+                            ($) => {
+                                const x = $
+                                return p_temp.from.optional($.analysis['unexpected path tail']).map(
+                                    ($) => p_s.ph.composed([
+                                        p_s.ph.literal(x['path']),
+                                    ])
+                                )
+                            }
                         ),
                     },
                     ($): s.Error => ['log', $],

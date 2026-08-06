@@ -1,21 +1,21 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/refiner'
 import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
 
 //schemas
 import type * as s_in_nested_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/nested_directory_content_as_read/schema"
 import type * as s_structure from "../../structure/schema.js"
 
-import type * as s_out from "../../file_structure_analysis/schema.js"
+import type * as s_out from "../schema.js"
 import type * as s_path from "../../path/schema.js"
 
 //dependencies
-import * as t_temp from "./temp.js"
-import * as t_loc_to_line_count from "../../list_of_characters/transformers/line_count.js"
+import * as t_temp from "../../extension/deserializers.js"
+import * as t_loc_to_line_count from "../../line_count/refiners/list_of_characters.js"
 
 namespace declarations {
-    export type Directory = p_.Transformer_With_Parameter<
-        s_in_nested_directory_content.Directory,
+    export type Directory = p_.Refiner_Without_Error_With_Parameter<
         s_out.Directory,
+        s_in_nested_directory_content.Directory,
         {
             'wildcard': s_structure.Directory.wildcards,
             'structure path': s_path.Path,
@@ -27,7 +27,7 @@ namespace declarations {
 
 
     export const Directory: declarations.Directory = ($, $p) => {
-        return ['dictionary', p_.from.dictionary($).map(
+        return ['wildcard dictionary', p_.from.dictionary($).map(
             ($, id) => {
                 const tail = p_.literal.chain(
                     $p.tail,

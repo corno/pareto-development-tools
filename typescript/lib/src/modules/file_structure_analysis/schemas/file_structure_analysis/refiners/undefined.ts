@@ -1,5 +1,4 @@
-import * as p_ from 'pareto-core/implementation/transformer'
-import * as p_schema from 'pareto-core/interface/schema'
+import * as p_ from 'pareto-core/implementation/refiner'
 
 //schemas
 import type * as s_in_nested_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/nested_directory_content_as_read/schema"
@@ -13,26 +12,26 @@ namespace s_xxx {
 }
 import type * as p_di from 'pareto-core/interface/schema'
 import type * as s_in from "../schema.js"
-import type * as s_out from "../../file_structure_analysis/schema.js"
+import type * as s_out from "../schema.js"
 import type * as s_path from "../../path/schema.js"
 
 
 //dependencies
-import * as t_temp from "./temp.js"
-import * as t_loc_to_line_count from "../../list_of_characters/transformers/line_count.js"
+import * as t_temp from "../../extension/deserializers.js"
+import * as t_loc_to_line_count from "../../line_count/refiners/list_of_characters.js"
 
 namespace declarations {
-    export type Directory = p_.Transformer_With_Parameter<
-        s_in_nested_directory_content.Directory,
+    export type Directory = p_.Refiner_Without_Error_With_Parameter<
         s_out.Directory,
+        s_in_nested_directory_content.Directory,
         {
             'structure': s_out.Structure_Analysis,
             'unexpected path tail': p_di.Optional_Value<s_path.Path>,
         }
     >
-    export type Node = p_.Transformer_With_Parameter<
-        s_in_nested_directory_content.Node,
+    export type Node = p_.Refiner_Without_Error_With_Parameter<
         s_out.Node,
+        s_in_nested_directory_content.Node,
         {
             'structure': s_out.Structure_Analysis,
             'name': string,
@@ -41,14 +40,8 @@ namespace declarations {
     >
 }
 
-//data
-// import { $$ as x_structure } from "../../../data/structure.js"
-
-
-
-
 export const Directory: declarations.Directory = ($, $p) => {
-    return ['dictionary', p_.from.dictionary($).map(
+    return ['undefined directory', p_.from.dictionary($).map(
         ($, id) => Node(
             $,
             {

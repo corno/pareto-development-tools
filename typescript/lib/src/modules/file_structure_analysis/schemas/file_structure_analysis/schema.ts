@@ -4,7 +4,9 @@ import * as s_path from "../path/schema.js"
 
 export type Directory =
     | ['ignored', null]
-    | ['dictionary', p_.Dictionary<Node>]
+    | ['wildcard dictionary', p_.Dictionary<Node>]
+    | ['defined directory', p_.Dictionary<Node>]
+    | ['undefined directory', p_.Dictionary<Node>]
     | ['expected a file', null]
 
 
@@ -39,11 +41,4 @@ export type File_Analysis = {
 export type Structure_Analysis = {
     'path': s_path.Path,
     'classification': Classification
-}
-
-export type Package_File_Analysis_List = p_.List<Package_File_Analysis>
-
-export type Package_File_Analysis = {
-    'path': string,
-    'analysis': File_Analysis,
 }

@@ -1,13 +1,14 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/refiner'
 
 //schemas
 
-import type * as s_in from "../schema.js"
+import type * as s_in from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/list_of_characters/schema"
+import type * as s_out from "../schema.js"
 
 namespace declarations {
-    export type line_count = p_.Transformer<
-        s_in.List_Of_Characters,
-        number
+    export type line_count = p_.Refiner_Without_Error<
+        s_out.line_count,
+        s_in.List_Of_Characters
     >
 }
 

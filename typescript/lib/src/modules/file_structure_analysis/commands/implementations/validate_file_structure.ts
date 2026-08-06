@@ -14,7 +14,7 @@ import type * as s_file_analysis from "../../schemas/file_structure_analysis/sch
 import type * as s from "../../schemas/file_structure_validation/schema.js"
 
 //dependencies
-import * as t_package_files_to_file_analysis_list from "../../schemas/package_files/transformers/directory_analysis.js"
+import * as r_analysis_from_package_files from "../../schemas/package_file_analysis/refiners/package_files.js"
 import { $$ as q_get_package_files } from "../../queries/implementations/get_package_files.js"
 
 
@@ -44,17 +44,24 @@ export const $$: p_.Command_Implementation<
             ),
             ($v) => {
                 const problems = p_temp.from.list(
-                    t_package_files_to_file_analysis_list.Package_Files(
-                        $v,
-                        {
-                            'structure': $s.structure
-                        }
+                    p_temp.from.dictionary(
+                        r_analysis_from_package_files.Package_File_Analysis_Dictionary(
+                            $v,
+                            {
+                                'structure': $s.structure
+                            }
+                        )
+                    ).convert_to_list(
+                        ($, id) => ({
+                            'path': id,
+                            'is a problem': p_temp.from.optional($['unexpected path tail']).decide(
+                                ($) => true,
+                                () => false
+                            )
+                        })
                     )
                 ).filter(
-                    ($) => p_temp.from.optional($.analysis['unexpected path tail']).decide(
-                        () => false,
-                        () => true
-                    )
+                    ($) => $['is a problem']
                 )
                 return [
 

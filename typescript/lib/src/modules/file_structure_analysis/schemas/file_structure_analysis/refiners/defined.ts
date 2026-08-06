@@ -1,4 +1,5 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/refiner'
+import * as p_temp from 'pareto-core/implementation/transformer'
 
 //schemas
 import type * as s_in_nested_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/nested_directory_content_as_read/schema"
@@ -11,21 +12,21 @@ namespace s_xxx {
     }
 }
 
-import type * as s_out from "../../file_structure_analysis/schema.js"
+import type * as s_out from "../schema.js"
 import type * as s_path from "../../path/schema.js"
 
 
 //dependencies
-import * as t_temp from "./temp.js"
+import * as t_temp from "../../extension/deserializers.js"
 import * as t_wildcard from "./wildcard.js"
 import * as t_undefined from "./undefined.js"
-import * as t_loc_to_line_count from "../../list_of_characters/transformers/line_count.js"
+import * as t_loc_to_line_count from "../../line_count/refiners/list_of_characters.js"
 
 namespace declarations {
 
-    export type Directory = p_.Transformer_With_Parameter<
-        s_in_nested_directory_content.Directory,
+    export type Directory = p_.Refiner_Without_Error_With_Parameter<
         s_out.Directory,
+        s_in_nested_directory_content.Directory,
         s_xxx.Parameters
     >
 }
@@ -40,7 +41,7 @@ export const Directory: declarations.Directory = ($, $p) => {
 
                 case 'group': return p_.option($, ($) => {
                     const $v_expected = $
-                    return ['dictionary', p_.from.dictionary($v_dir).map(
+                    return ['defined directory', p_.from.dictionary($v_dir).map(
                         ($, id) => {
                             const node = $
                             const NodeX = (
@@ -125,7 +126,7 @@ export const Directory: declarations.Directory = ($, $p) => {
                                         default: return p_.exhaustive($[0])
                                     }
                                 })
-                            return p_.from.dictionary($v_expected).get_possible_entry(
+                            return p_temp.from.dictionary($v_expected).get_possible_entry(
                                 id,
                                 ($) => NodeX(
                                     node,
@@ -188,7 +189,7 @@ export const Directory: declarations.Directory = ($, $p) => {
                     //expecting a dictionary of directories
                     const struct = $
 
-                    return ['dictionary', p_.from.dictionary($v_dir).map(
+                    return ['defined directory', p_.from.dictionary($v_dir).map(
                         ($, id): s_out.Node => p_.from.state($).decide(
                             ($): s_out.Node => {
                                 switch ($[0]) {

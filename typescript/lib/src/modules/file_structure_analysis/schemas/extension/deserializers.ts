@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/implementation/refiner'
 import type * as p_di from 'pareto-core/interface/schema'
 
 import p_list_from_text from 'pareto-core/implementation/refiner/specials/list_from_text'
@@ -7,9 +7,9 @@ import p_text_from_list from 'pareto-core/implementation/transformer/specials/te
 
 //schemas
 namespace declarations {
-    export type extension = p_.Transformer<
-        string,
-        p_di.Optional_Value<string>
+    export type extension = p_.Refiner_Without_Error<
+        p_di.Optional_Value<string>,
+        string
     >
 }
 
