@@ -17,7 +17,7 @@ import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/sho
 
 //dependencies
 import * as t_epe_to_paragraph from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
-import * as t_eqe_to_paragraph from "pareto-resources/schemas/execute_sandboxed_query_executable/transformers//paragraph"
+import * as t_eqe_to_paragraph from "pareto-resources/schemas/execute_sandboxed_query_executable/transformers/paragraph"
 import * as ser_make_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/make_directory/serializers"
 import * as t_get_package_json_to_paragraph from "../../get_package_json/transformers/paragraph.js"
 
