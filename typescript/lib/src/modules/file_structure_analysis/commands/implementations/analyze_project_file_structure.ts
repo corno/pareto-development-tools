@@ -13,8 +13,8 @@ import * as d from "../../schemas/get_project_files/schema.js"
 //dependencies
 import * as t_csv_to_paragraph from "pareto-csv/schemas/csv/transformers/paragraph"
 import * as t_paragraph_to_serialized from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/transformers/serialized"
-import * as t_file_structure_analysis_to_csv from "../../schemas/file_structure_analysis/transformers/csv.js"
-import * as t_project_files_to_file_analysis_list from "../../schemas/project_files/transformers/directory_analysis.js"
+import * as t_project_file_analysis_to_csv from "../../schemas/project_file_analysis/transformers/csv.js"
+import * as t_project_files_to_file_analysis_list from "../../schemas/project_files/transformers/project_file_analysis.js"
 import { $$ as q_get_project_files } from "../../queries/implementations/get_project_files.js"
 
 export const $$: p_.Command_Implementation<
@@ -47,7 +47,7 @@ export const $$: p_.Command_Implementation<
                     {
                         'lines': t_paragraph_to_serialized.Paragraph(
                             t_csv_to_paragraph.CSV(
-                                t_file_structure_analysis_to_csv.File_Analysis_List(
+                                t_project_file_analysis_to_csv.File_Analysis_List(
                                     t_project_files_to_file_analysis_list.Project_Files(
                                         $v,
                                         {

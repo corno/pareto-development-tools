@@ -11,7 +11,6 @@ import type * as command_interfaces from "../interfaces.js"
 import type * as s_structure from "../../schemas/structure/schema.js"
 import type * as s from "../../schemas/get_package_files/schema.js"
 import type * as s_file_analysis from "../../schemas/file_structure_analysis/schema.js"
-import type * as s_get_package_files from "../../schemas/get_package_files/schema.js"
 
 //dependencies
 import * as t_package_files_to_file_analysis_list from "../../schemas/package_files/transformers/directory_analysis.js"

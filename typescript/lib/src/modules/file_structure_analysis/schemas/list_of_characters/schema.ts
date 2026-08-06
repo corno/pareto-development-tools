@@ -1,0 +1,1 @@
+export * from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/list_of_characters/schema"

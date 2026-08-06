@@ -41,18 +41,9 @@ export type Structure_Analysis = {
     'classification': Classification
 }
 
-export type Flattened_Directory = p_.Dictionary<File_Analysis>
-
 export type Package_File_Analysis_List = p_.List<Package_File_Analysis>
-export type Project_File_Analysis_List = p_.List<Project_File_Analysis>
 
 export type Package_File_Analysis = {
-    'path': string,
-    'analysis': File_Analysis,
-}
-
-export type Project_File_Analysis = {
-    'package': string,
     'path': string,
     'analysis': File_Analysis,
 }

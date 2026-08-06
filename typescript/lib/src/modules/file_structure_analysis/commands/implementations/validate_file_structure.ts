@@ -50,13 +50,11 @@ export const $$: p_.Command_Implementation<
                             'structure': $s.structure
                         }
                     )
-                ).map_optionally<s_file_analysis.Package_File_Analysis>(
-                    ($) => {
-                        const x = $
-                        return p_temp.from.optional($.analysis['unexpected path tail']).map(
-                            ($) => x
-                        )
-                    }
+                ).filter(
+                    ($) => p_temp.from.optional($.analysis['unexpected path tail']).decide(
+                        () => false,
+                        () => true
+                    )
                 )
                 return [
 
@@ -66,19 +64,6 @@ export const $$: p_.Command_Implementation<
                             () => false,
                         ),
                         [
-                            // $c['log lines'].execute(
-                            //     {
-                            //         'lines': p_temp.from.list(
-                            //             problems
-                            //         ).map(
-                            //             ($) => p_s.ph.composed([
-                            //                 p_s.ph.literal($['path']),
-                            //             ])
-
-                            //         ),
-                            //     },
-                            //     ($): s.Error => ['log', $],
-                            // ),
 
                             p_.s.fail(['file structure problems', p_temp.from.list(
                                 problems
