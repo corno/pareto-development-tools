@@ -38,6 +38,7 @@ namespace declarations {
                         switch ($[0]) {
                             case 'other': return p_.option($, ($) => ['other', null])
                             case 'file': return p_.option($, ($): s_out.Node => ['file', {
+                                'content': $.data,
                                 'structure': {
                                     'path': $p['structure path'],
                                     'classification': ['directory', ['wildcards', null]],
@@ -70,7 +71,6 @@ namespace declarations {
                                         : p_.literal.set(tail)
 
                                 }),
-                                'line count': t_loc_to_line_count.line_count($.data),
                             }])
                             case 'directory': return ['directory', p_.option($, ($) => {
                                 return Directory(

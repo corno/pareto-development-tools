@@ -61,10 +61,10 @@ export const Node: declarations.Node = ($, $p) => {
         ($): s_out.Node => {
             switch ($[0]) {
                 case 'file': return p_.option($, ($): s_out.Node => ['file', {
+                    'content': $.data,
                     'unexpected path tail': $p['unexpected path tail'],
                     'structure': $p['structure'],
                     'extension': t_temp.extension($p['name']),
-                    'line count': t_loc_to_line_count.line_count($.data),
                 }])
                 case 'directory': return p_.option($, ($) => {
                     return ['directory', Directory(

@@ -14,6 +14,7 @@ namespace declarations {
 
 //dependencies
 import * as ser_path from "../../path/serializers.js"
+import * as r_line_count_from_loc from "../../line_count/refiners/list_of_characters.js"
 
 //shorthands
 import * as sh from "pareto-csv/schemas/csv/shorthands/target"
@@ -64,7 +65,7 @@ export const File_Analysis_List: declarations.Signature = ($) => sh.CSV(
                 ($) => ser_path.Path($),
                 () => ""
             ),
-            `${$.analysis['line count']}`, //number to string
+            `${r_line_count_from_loc.line_count($.analysis.content)}`, //number to string
         ]))
     )
 )

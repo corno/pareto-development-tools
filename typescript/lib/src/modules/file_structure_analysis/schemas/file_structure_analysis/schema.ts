@@ -1,6 +1,7 @@
 import * as p_ from 'pareto-core/interface/schema'
 
 import * as s_path from "../path/schema.js"
+import * as s_loc from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/list_of_characters/schema"
 
 export type Directory =
     | ['ignored', null]
@@ -32,13 +33,13 @@ export type File_Classification =
     | ['generated', null]
 
 export type File_Analysis = {
-    'structure': Structure_Analysis,
-    'extension': p_.Optional_Value<string>,
-    'unexpected path tail': p_.Optional_Value<s_path.Path>,
-    'line count': number,
+    'content': s_loc.List_Of_Characters
+    'structure': Structure_Analysis
+    'extension': p_.Optional_Value<string>
+    'unexpected path tail': p_.Optional_Value<s_path.Path>
 }
 
 export type Structure_Analysis = {
-    'path': s_path.Path,
+    'path': s_path.Path
     'classification': Classification
 }

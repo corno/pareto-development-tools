@@ -55,6 +55,7 @@ export const Directory: declarations.Directory = ($, $p) => {
                                 ($): s_out.Node => {
                                     switch ($[0]) {
                                         case 'file': return p_.option($, ($): s_out.Node => ['file', ({
+                                            'content': $.data,
                                             'structure': {
                                                 'path': $p['structure path'],
                                                 'classification': p_.from.state($p['expected structure']).decide(
@@ -85,7 +86,6 @@ export const Directory: declarations.Directory = ($, $p) => {
                                                     })
                                             },
                                             'extension': t_temp.extension($p['name']),
-                                            'line count': t_loc_to_line_count.line_count($.data),
                                             'unexpected path tail': p_.from.state($p['expected structure']).decide(
                                                 ($) => {
                                                     switch ($[0]) {
@@ -205,6 +205,7 @@ export const Directory: declarations.Directory = ($, $p) => {
                                     )])
                                     case 'other': return p_.option($, ($) => ['other', null])
                                     case 'file': return p_.option($, ($): s_out.Node => ['file', {
+                                        'content': $.data,
                                         'structure': {
                                             'path': p_.literal.chain(
                                                 $p['structure path'],
@@ -213,7 +214,6 @@ export const Directory: declarations.Directory = ($, $p) => {
                                             'classification': ['directory', ['dictionary', null]],
                                         },
                                         'extension': t_temp.extension(id),
-                                        'line count': t_loc_to_line_count.line_count($.data),
                                         'unexpected path tail': p_.literal.set(p_.literal.list([
                                             id,
                                         ])),
