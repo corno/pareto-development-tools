@@ -1,7 +1,7 @@
 
-import type * as s_epe from "pareto-resources/schemas/execute_sandboxed_command_executable/schema"
+import type * as s_epe from "pareto-execute-sandboxed/schemas/execute_sandboxed_command_executable/schema"
 import type * as s_build from "../build/schema.js"
-import type * as s_path from "pareto-resources/schemas/fs_unrestricted_path/schema"
+import type * as s_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/schema"
 import type * as s_file_structure_validation from "../../modules/file_structure_analysis/schemas/file_structure_validation/schema.js"
 
 export type Parameters = {

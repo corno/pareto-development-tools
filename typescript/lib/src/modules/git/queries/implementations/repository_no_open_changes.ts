@@ -4,20 +4,20 @@ import * as p_t from 'pareto-core/implementation/transformer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
 import * as queries_actions from "../../../version_control_api/queries/interfaces.js"
-import type * as query_interfaces_pareto_resources from "pareto-resources/queries/interfaces"
+import type * as query_interfaces_pareto_resources from "pareto-execute-sandboxed/queries/interfaces"
 
 //schemas
 import * as d from "../../../version_control_api/schemas/repository_no_open_changes/schema.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
+import * as ser_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/serializers"
 
 export const $$: p_.Query_Implementation<
     queries_actions.repository_no_open_changes,
     null,
     {
         'is inside work tree': queries_actions.is_inside_work_tree,
-        'git': query_interfaces_pareto_resources.execute_sandboxed.query_executable
+        'git': query_interfaces_pareto_resources.query_executable
     }
 > = p_.query(
     ($d, $s, $q) =>  p_super_query_result($q.git(

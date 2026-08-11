@@ -1,8 +1,8 @@
 import * as p_ from 'pareto-core/interface/schema'
 
-import type * as s_ece from "pareto-resources/schemas/execute_sandboxed_command_executable/schema"
+import type * as s_ece from "pareto-execute-sandboxed/schemas/execute_sandboxed_command_executable/schema"
 import type * as s_repository_no_open_changes from "../repository_no_open_changes/schema.js"
-import type * as s_path from "pareto-resources/schemas/fs_unrestricted_path/schema"
+import type * as s_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/schema"
 
 export type Error =
     | ['asserting no open changes', s_repository_no_open_changes.Error]

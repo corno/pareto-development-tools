@@ -4,17 +4,17 @@ import * as p_temp from 'pareto-core/implementation/transformer'
 
 //interface dependencies
 import type * as command_interfaces from "../interfaces.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
+import type * as command_interfaces_pareto_resources from "pareto-execute-sandboxed/commands/interfaces"
 
 //dependencies
-import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
+import * as ser_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/serializers"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.npm,
     null,
     null,
     {
-        'npm': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+        'npm': command_interfaces_pareto_resources.command_executable
     }
 > = p_.command(
     ($d, $s, $q, $c) => [

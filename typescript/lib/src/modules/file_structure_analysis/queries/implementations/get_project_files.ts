@@ -10,7 +10,7 @@ import type * as s_nested_directory_content from "pareto-filesystem-unrestricted
 
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
+import * as t_path_to_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 import { $$ as q_read_nested_directory_content } from "pareto-filesystem-unrestricted-api/modules/helpers/queries/implementations/read_nested_directory_content"
 
 export const $$: p_.Query_Implementation<

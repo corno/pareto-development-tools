@@ -11,17 +11,17 @@ import p_super_query_result from 'pareto-core/implementation/query/super_query_r
 
 //interface dependencies
 import type * as command_interfaces from "../interfaces.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
+import type * as command_interfaces_pareto_resources from "pareto-execute-sandboxed/commands/interfaces"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
 import type * as command_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/commands/interfaces"
-import type * as query_interfaces_pareto_resources from "pareto-resources/queries/interfaces"
+import type * as query_interfaces_pareto_resources from "pareto-execute-sandboxed/queries/interfaces"
 
 //schemas
 import * as d from "../../schemas/set_up_comparison_against_published/schema.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
-import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
+import * as ser_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/serializers"
+import * as t_path_to_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 import * as q_get_package_json from "../../queries/implementations/get_package_json.js"
 
 const remove_n_characters_from_end = ($: string, n: number): p_schema.List<number> => {
@@ -52,11 +52,11 @@ export const $$: p_.Command_Implementation<
     null,
     {
         'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file
-        'npm': query_interfaces_pareto_resources.execute_sandboxed.query_executable
+        'npm': query_interfaces_pareto_resources.query_executable
     },
     {
-        'npm': command_interfaces_pareto_resources.execute_sandboxed.command_executable
-        'tar': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+        'npm': command_interfaces_pareto_resources.command_executable
+        'tar': command_interfaces_pareto_resources.command_executable
         'make directory': command_interfaces_pareto_filesystem_unrestricted_api.make_directory
     }
 > = p_.command(

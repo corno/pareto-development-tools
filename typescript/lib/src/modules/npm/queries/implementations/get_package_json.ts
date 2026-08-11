@@ -9,7 +9,7 @@ import type * as query_interfaces_pareto_filesystem_unrestricted_api from "paret
 import * as d from "../../schemas/get_package_json/schema.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
+import * as t_path_to_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 import * as r_npm_package_from_list_of_characters from "../../schemas/npm_package/refiners/list_of_characters.js"
 
 export const $$: p_.Query_Implementation<

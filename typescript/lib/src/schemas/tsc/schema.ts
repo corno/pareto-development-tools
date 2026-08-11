@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/interface/schema'
 
-import type * as s_espe from "pareto-resources/schemas/execute_sandboxed_smelly_command_executable/schema"
+import type * as s_espe from "pareto-execute-sandboxed/schemas/execute_sandboxed_smelly_command_executable/schema"
 import type * as s_path from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/path/schema"
 
 

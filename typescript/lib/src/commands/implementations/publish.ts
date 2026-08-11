@@ -13,7 +13,7 @@ import type * as command_interfaces_pareto_stream_api from "pareto-stream-api/co
 import * as d from "../../schemas/publish/schema.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
+import * as t_path_to_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 import * as q_get_package_json from "../../modules/npm/queries/implementations/get_package_json.js"
 
 //shorthands

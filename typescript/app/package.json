@@ -11,6 +11,7 @@
     "lib": "file:../lib",
     "pareto-core": "^0.1.0",
     "pareto-core-application": "^0.1.0",
+    "pareto-execute-sandboxed": "^0.1.2",
     "pareto-resource-execute-unrestricted": "^0.1.0",
     "pareto-resource-filesystem-unrestricted": "^0.1.0",
     "pareto-resource-stream": "^0.1.0"

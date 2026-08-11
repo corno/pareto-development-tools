@@ -3,19 +3,19 @@ import * as p_t from 'pareto-core/implementation/transformer'
 import * as p_s from 'pareto-core/implementation/serializer'
 
 import * as queries_actions from "../../../version_control_api/queries/interfaces.js"
-import type * as query_interfaces_pareto_resources from "pareto-resources/queries/interfaces"
+import type * as query_interfaces_pareto_resources from "pareto-execute-sandboxed/queries/interfaces"
 
 //schemas
 import * as s_schema from "../../../version_control_api/schemas/is_inside_work_tree/schema.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
+import * as ser_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/serializers"
 
 export const $$: p_.Query_Implementation<
     queries_actions.is_inside_work_tree,
     null,
     {
-        'git': query_interfaces_pareto_resources.execute_sandboxed.query_executable
+        'git': query_interfaces_pareto_resources.query_executable
     }
 > = p_.query(
     ($d, $s, $q) => p_.e.observe_behavior(

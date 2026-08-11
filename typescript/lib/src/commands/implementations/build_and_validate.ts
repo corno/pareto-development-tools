@@ -2,15 +2,15 @@ import * as p_ from 'pareto-core/implementation/command'
 
 //interface dependencies
 import type * as command_interfaces from "../interfaces.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
+import type * as command_interfaces_pareto_resources from "pareto-execute-sandboxed/commands/interfaces"
 import type * as command_interfaces_file_structure_analysis from "../../modules/file_structure_analysis/commands/interfaces.js"
 
 //schemas
 import * as d from "../../schemas/build_and_validate/schema.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
-import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
+import * as ser_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/serializers"
+import * as t_path_to_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.build_and_validate,
@@ -18,7 +18,7 @@ export const $$: p_.Command_Implementation<
     null,
     {
         'build': command_interfaces.build,
-        'node': command_interfaces_pareto_resources.execute_sandboxed.command_executable,
+        'node': command_interfaces_pareto_resources.command_executable,
         'validate file structure': command_interfaces_file_structure_analysis.validate_file_structure
     }
 > = p_.command(

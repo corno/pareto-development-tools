@@ -3,7 +3,7 @@ import * as p_temp from 'pareto-core/implementation/transformer'
 
 //interface dependencies
 import type * as command_interfaces from "../interfaces.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
+import type * as command_interfaces_pareto_resources from "pareto-execute-sandboxed/commands/interfaces"
 
 //dependencies
 
@@ -12,7 +12,7 @@ export const $$: p_.Command_Implementation<
     null,
     null,
     {
-        'npm': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+        'npm': command_interfaces_pareto_resources.command_executable
     }
 > = p_.command(
     ($d, $s, $q, $c) => [

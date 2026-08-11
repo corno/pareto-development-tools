@@ -17,7 +17,7 @@ namespace declarations {
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/deprecated"
 
 //dependencies
-import * as t_ece_to_paragraph from "pareto-resources/schemas/execute_unrestricted_command_executable/transformers/paragraph"
+import * as t_ece_to_paragraph from "pareto-execute-unrestricted-api/schemas/execute_unrestricted_command_executable/transformers/paragraph"
 
 import * as t_git_is_clean_to_paragraph from "../../repository_no_open_changes/transformers/paragraph.js"
 

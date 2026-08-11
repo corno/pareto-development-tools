@@ -6,9 +6,9 @@ import * as p_qi from 'pareto-core/interface/query_interface'
 
 
 //schemas
-import type * as s_ece from "pareto-resources/schemas/execute_sandboxed_command_executable/schema"
-import type * as s_espe from "pareto-resources/schemas/execute_sandboxed_smelly_command_executable/schema"
-import type * as s_eqe from "pareto-resources/schemas/execute_sandboxed_query_executable/schema"
+import type * as s_ece from "pareto-execute-sandboxed/schemas/execute_sandboxed_command_executable/schema"
+import type * as s_espe from "pareto-execute-sandboxed/schemas/execute_sandboxed_smelly_command_executable/schema"
+import type * as s_eqe from "pareto-execute-sandboxed/schemas/execute_sandboxed_query_executable/schema"
 
 //resources
 import * as rs_execute_unrestricted from "pareto-resource-execute-unrestricted/index"
@@ -17,9 +17,9 @@ import * as rs_filesystem_unrestricted from "pareto-resource-filesystem-unrestri
 
 //dependencies
 //pareto-resources
-import { $$ as q_execute_sandboxed_query_executable } from "pareto-resources/queries/implementations/execute_sandboxed_query_executable"
-import { $$ as c_execute_sandboxed_command_executable } from "pareto-resources/commands/implementations/execute_sandboxed_command_executable"
-import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-resources/commands/implementations/execute_sandboxed_smelly_command_executable"
+import { $$ as q_execute_sandboxed_query_executable } from "pareto-execute-sandboxed/queries/implementations/execute_sandboxed_query_executable"
+import { $$ as c_execute_sandboxed_command_executable } from "pareto-execute-sandboxed/commands/implementations/execute_sandboxed_command_executable"
+import { $$ as c_execute_sandboxed_smelly_command_executable } from "pareto-execute-sandboxed/commands/implementations/execute_sandboxed_smelly_command_executable"
 //git module
 import { $$ as q_git_is_repository_clean } from "lib/modules/git/queries/implementations/repository_no_open_changes"
 import { $$ as q_git_is_inside_work_tree } from "lib/modules/git/queries/implementations/is_inside_work_tree"

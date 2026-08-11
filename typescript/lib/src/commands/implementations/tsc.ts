@@ -4,17 +4,17 @@ import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
 import type * as command_interfaces from "../interfaces.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
+import type * as command_interfaces_pareto_resources from "pareto-execute-sandboxed/commands/interfaces"
 
 //dependencies
-import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
+import * as ser_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/serializers"
 
 export const $$: p_.Command_Implementation<
     command_interfaces.tsc,
     null,
     null,
     {
-        'tsc': command_interfaces_pareto_resources.execute_sandboxed.smelly_command_executable
+        'tsc': command_interfaces_pareto_resources.smelly_command_executable
     }
 > = p_.command(
 

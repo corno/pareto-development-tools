@@ -9,7 +9,7 @@ import * as d from "../../schemas/get_package_dependencies/schema.js"
 import type * as s_npm_package from "../../../npm/schemas/npm_package/schema.js"
 
 //dependencies
-import * as t_path_to_path from "pareto-resources/schemas/fs_unrestricted_path/transformers/unrestricted_path"
+import * as t_path_to_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/transformers/unrestricted_path"
 import { NPM_Package as r_parse_npm_package } from "../../../npm/schemas/npm_package/refiners/list_of_characters.js"
 
 export const $$: p_.Query_Implementation<

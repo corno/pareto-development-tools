@@ -4,13 +4,13 @@ import * as p_s from 'pareto-core/implementation/serializer'
 
 //interface dependencies
 import type * as command_interfaces from "../../../version_control_api/commands/interfaces.js"
-import type * as command_interfaces_pareto_resources from "pareto-resources/commands/interfaces"
+import type * as command_interfaces_pareto_resources from "pareto-execute-sandboxed/commands/interfaces"
 
 //schemas
 import * as d from "../../../version_control_api/schemas/push/schema.js"
 
 //dependencies
-import * as ser_path from "pareto-resources/schemas/fs_unrestricted_path/serializers"
+import * as ser_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/serializers"
 
 
 export const $$: p_.Command_Implementation<
@@ -18,7 +18,7 @@ export const $$: p_.Command_Implementation<
     null,
     null,
     {
-        'git': command_interfaces_pareto_resources.execute_sandboxed.command_executable
+        'git': command_interfaces_pareto_resources.command_executable
     }
 > = p_.command(
     ($d, $s, $q, $c) => [
