@@ -26,7 +26,7 @@ export const Project_File_Analysis_List: declarations.Project_File_Analysis_List
     ($, id): s_out.Project_File_Analysis_List => {
         const package_name = id
         return p_temp.from.dictionary(
-            r_analysis_from_package_files.Package_File_Analysis_Dictionary(
+            r_analysis_from_package_files.Analyzed_Package_Nodes(
                 $,
                 {
                     'structure': $p.structure,

@@ -5,9 +5,9 @@ import * as s_loc from "pareto-filesystem-unrestricted-api/modules/unrestricted/
 
 export type Directory =
     | ['ignored', null]
-    | ['wildcard dictionary', p_.Dictionary<Node>]
-    | ['defined directory', p_.Dictionary<Node>]
-    | ['undefined directory', p_.Dictionary<Node>]
+    | ['wildcard', p_.Dictionary<Node>]
+    | ['defined', p_.Dictionary<Node>]
+    | ['undefined', p_.Dictionary<Node>]
     | ['expected a file', null]
 
 
@@ -43,3 +43,10 @@ export type Structure_Analysis = {
     'path': s_path.Path
     'classification': Classification
 }
+
+export type Analyzed_Node =
+    | ['file', File_Analysis]
+    | ['unexpected directory', null]
+    | ['other', null]
+
+export type Flattened_Tree = p_.Dictionary<Analyzed_Node>

@@ -41,7 +41,7 @@ export const Directory: declarations.Directory = ($, $p) => {
 
                 case 'group': return p_.option($, ($) => {
                     const $v_expected = $
-                    return ['defined directory', p_.from.dictionary($v_dir).map(
+                    return ['defined', p_.from.dictionary($v_dir).map(
                         ($, id) => {
                             const node = $
                             const NodeX = (
@@ -189,7 +189,7 @@ export const Directory: declarations.Directory = ($, $p) => {
                     //expecting a dictionary of directories
                     const struct = $
 
-                    return ['defined directory', p_.from.dictionary($v_dir).map(
+                    return ['defined', p_.from.dictionary($v_dir).map(
                         ($, id): s_out.Node => p_.from.state($).decide(
                             ($): s_out.Node => {
                                 switch ($[0]) {

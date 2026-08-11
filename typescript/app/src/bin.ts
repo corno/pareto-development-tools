@@ -39,6 +39,10 @@ import { $$ as c_analyze_file_structure } from "lib/modules/file_structure_analy
 import { $$ as c_list_package_file_structure_problems } from "lib/modules/file_structure_analysis/commands/implementations/list_package_file_structure_problems"
 import { $$ as c_validate_file_structure } from "lib/modules/file_structure_analysis/commands/implementations/validate_file_structure"
 
+//typescript module
+import { $$ as q_parse_untyped_typescript_file } from "pareto-resource-typescript-parser/queries/implementations/parse_file"
+import { $$ as q_parse_typescript_file } from "pareto-typescript/queries/implementations/parse_file"
+
 //internal
 import { $$ as q_package_dependencies } from "lib/modules/dependency_graph/queries/implementations/get_package_dependencies"
 import { $$ as c_api } from "lib/commands/implementations/execute_command"
@@ -220,6 +224,12 @@ p_h.run_main_command(
                     {
                         'read directory': rs_filesystem_unrestricted.$.queries['read directory'],
                         'read file': rs_filesystem_unrestricted.$.queries['read file'],
+                        'parse typescript file': q_parse_typescript_file(
+                            null,
+                            {
+                                'parse file': q_parse_untyped_typescript_file
+                            }
+                        )
                     },
                     {
                         'log lines': rs_stream.$.commands['log lines'],

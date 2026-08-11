@@ -22,7 +22,7 @@ import * as t_build_and_validate_to_paragraph from "../../build_and_validate/tra
 import * as t_build_to_paragraph from "../../build/transformers/paragraph.js"
 import * as t_dependency_graph_to_paragraph from "../../../modules/dependency_graph/schemas/create_dependency_graph/transformers/paragraph.js"
 import * as t_get_project_files_to_paragraph from "../../../modules/file_structure_analysis/schemas/get_project_files/transformers/paragraph.js"
-import * as t_get_package_files_to_paragraph from "../../../modules/file_structure_analysis/schemas/get_package_files/transformers/paragraph.js"
+import * as t_list_package_file_structure_problems_to_paragraph from "../../../modules/file_structure_analysis/schemas/list_package_file_structure_problems/transformers/paragraph.js"
 import * as t_publish from "../../publish/transformers/paragraph.js"
 import * as t_update_dependencies from "../../update_package_dependencies/transformers/paragraph.js"
 import * as ser_read_directory from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/read_directory/serializers"
@@ -34,12 +34,18 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
             case 'package': return p_.option($, ($) => p_.from.state($).decide(
                 ($) => {
                     switch ($[0]) {
-                        case 'build and validate': return p_.option($, ($) => t_build_and_validate_to_paragraph.Error($.error, { 'concise': $.concise }))
-                        case 'get files': return p_.option($, ($) => t_get_package_files_to_paragraph.Error($))
-                        case 'publish': return p_.option($, ($) => t_publish.Error($))
+                        case 'build and validate': return p_.option($, ($) => t_build_and_validate_to_paragraph.Error(
+                            $.error,
+                            {
+                                'concise': $.concise,
+                                'context path': ""
+                            }
+                        ))
+                        case 'list package file structure problems': return p_.option($, ($) => t_list_package_file_structure_problems_to_paragraph.Error($))
+                        case 'publish': return p_.option($, ($) => t_publish.Error($, { 'context path': "" }))
                         case 'update dependencies': return p_.option($, ($) => t_update_dependencies.Error($))
                         case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_paragraph.Error($))
-                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_paragraph.Error($))
+                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_paragraph.Error($, { 'context path': "" }))
 
                         default: return p_.exhaustive($[0])
                     }
@@ -62,14 +68,22 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                                                     switch ($[0]) {
                                                         case 'build and validate': return p_.option($, ($) => t_build_and_validate_to_paragraph.Error(
                                                             $.error,
-                                                            { 'concise': $.concise }
+                                                            {
+                                                                'concise': $.concise,
+                                                                'context path': "/packages/" + id
+                                                            }
                                                         ))
                                                         case 'build': return p_.option($, ($) => t_build_to_paragraph.Error(
                                                             $,
                                                             { 'concise': false }
                                                         ))
                                                         case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_paragraph.Error($))
-                                                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_paragraph.Error($))
+                                                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_paragraph.Error(
+                                                            $,
+                                                            {
+                                                                'context path': "/packages/" + id
+                                                            }
+                                                        ))
                                                         case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))
                                                         case 'update dependencies': return p_.option($, ($) => t_update_dependencies.Error($))
                                                         default: return p_.exhaustive($[0])

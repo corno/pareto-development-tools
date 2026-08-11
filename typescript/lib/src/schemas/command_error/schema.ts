@@ -2,7 +2,7 @@ import * as p_ from 'pareto-core/interface/schema'
 
 
 import type * as s_get_project_files from "../../modules/file_structure_analysis/schemas/get_project_files/schema.js"
-import type * as s_get_package_files from "../../modules/file_structure_analysis/schemas/get_package_files/schema.js"
+import type * as s_list_package_file_structure_problems from "../../modules/file_structure_analysis/schemas/list_package_file_structure_problems/schema.js"
 import type * as s_assert_clean from "../../modules/version_control_api/schemas/assert_no_open_changes/schema.js"
 import type * as s_build from "../build/schema.js"
 import type * as s_build_and_validate from "../build_and_validate/schema.js"
@@ -30,7 +30,7 @@ export type Package_Error =
         'error': s_build_and_validate.Error,
         'concise': boolean
     }]
-    | ['get files', s_get_package_files.Error]
+    | ['list package file structure problems', s_list_package_file_structure_problems.Error]
     | ['version control assert no open changes', s_assert_clean.Error]
     | ['commit changes', s_git_commit.Error]
     | ['publish', s_publish.Error]

@@ -10,7 +10,6 @@ import type * as s_path from "../../path/schema.js"
 
 //dependencies
 import * as t_temp from "../../extension/deserializers.js"
-import * as t_loc_to_line_count from "../../line_count/refiners/list_of_characters.js"
 
 namespace declarations {
     export type Directory = p_.Refiner_Without_Error_With_Parameter<
@@ -27,7 +26,7 @@ namespace declarations {
 
 
     export const Directory: declarations.Directory = ($, $p) => {
-        return ['wildcard dictionary', p_.from.dictionary($).map(
+        return ['wildcard', p_.from.dictionary($).map(
             ($, id) => {
                 const tail = p_.literal.chain(
                     $p.tail,

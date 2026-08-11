@@ -10,6 +10,7 @@ namespace declarations {
         s_out.Phrase,
         {
             'concise': boolean
+            'context path': string
         }
     >
 }
@@ -26,18 +27,26 @@ export const Error: declarations.Error = ($, $p) => sh.ph.composed([
                     switch ($[0]) {
                         case 'file structure problems': return p_.ss($, ($) => $p.concise
                             ? p_.literal.list([])
-                            : p_.from.list($).map(($) => sh.sentence([
-                                sh.ph.text($),
+                            : p_.from.dictionary($).convert_to_list(($, id) => sh.sentence([
+                                sh.ph.text($p['context path']),
+                                sh.ph.text(id),
+                                sh.ph.indent(
+                                    sh.pg.sentences(
+                                        p_.from.list($).map(($) => sh.sentence([
+                                            sh.ph.text($),
+                                        ]))
+                                    )
+                                ),
                             ]))
                         )
-                        case 'log': return p_.ss($, ($) => p_.literal.list([
-                            sh.sentence([
-                                sh.ph.text("could not log"),
-                            ])
-                        ]))
                         case 'directory content processing': return p_.ss($, ($) => p_.literal.list([
                             sh.sentence([
                                 sh.ph.text("could not process directory content"),
+                            ])
+                        ]))
+                        case 'node analysis': return p_.ss($, ($) => p_.literal.list([
+                            sh.sentence([
+                                sh.ph.text("could not analyze 1 or more nodes"),
                             ])
                         ]))
                         default: return p_.au($[0])

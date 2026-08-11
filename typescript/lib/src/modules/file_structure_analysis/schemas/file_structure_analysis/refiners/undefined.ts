@@ -41,7 +41,7 @@ namespace declarations {
 }
 
 export const Directory: declarations.Directory = ($, $p) => {
-    return ['undefined directory', p_.from.dictionary($).map(
+    return ['undefined', p_.from.dictionary($).map(
         ($, id) => Node(
             $,
             {

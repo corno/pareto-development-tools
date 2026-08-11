@@ -10,6 +10,7 @@ namespace declarations {
         s_out.Phrase,
         {
             'concise': boolean
+            'context path': string
         }
     >
 }

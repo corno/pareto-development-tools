@@ -5,9 +5,12 @@ import type * as s_in from "../schema.js"
 import type * as s_out from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/schema"
 
 namespace declarations {
-    export type Error = p_.Transformer<
+    export type Error = p_.Transformer_With_Parameter<
         s_in.Error,
-        s_out.Phrase
+        s_out.Phrase,
+        {
+            'context path': string
+        }
     >
 }
 
@@ -24,7 +27,7 @@ import * as t_build_and_validate_to_paragraph from "../../../schemas/build_and_v
 import * as t_get_package_json_to_paragraph from "../../../modules/npm/schemas/get_package_json/transformers/paragraph.js"
 import * as t_git_ec_to_paragraph from "../../../modules/version_control_api/schemas/extended_commit/transformers/paragraph.js"
 
-export const Error: declarations.Error = ($) => p_.from.state($).decide(
+export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
             case 'error while running git push': return p_.option($, ($) => sh.ph.composed([
@@ -46,7 +49,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
             case 'error while running update package dependencies': return p_.option($, ($) => sh.ph.composed([
                 t_clean_and_update_package_dependencies_to_paragraph.Error($)
             ]))
-            case 'error while running build and validate': return p_.option($, ($) => t_build_and_validate_to_paragraph.Error($, { 'concise': false }))
+            case 'error while running build and validate': return p_.option($, ($) => t_build_and_validate_to_paragraph.Error($, { 'concise': false, 'context path': $p['context path'] }))
             case 'error while running git assert no open changes after updating package dependencies': return p_.option($, ($) => sh.ph.composed([
                 p_.from.state($).decide(
                     ($) => {

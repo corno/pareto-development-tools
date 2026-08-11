@@ -172,7 +172,7 @@ export const $$: p_.Command_Implementation<
                                         {
                                             'path to package': path
                                         },
-                                        ($): d.Error => ['package', ['get files', $]],
+                                        ($): d.Error => ['package', ['list package file structure problems', $]],
                                     )
                                 ])
                                 case 'publish': return p_.option($, ($) => [

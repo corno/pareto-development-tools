@@ -14,7 +14,9 @@
     "pareto-execute-sandboxed": "^0.1.2",
     "pareto-resource-execute-unrestricted": "^0.1.0",
     "pareto-resource-filesystem-unrestricted": "^0.1.0",
-    "pareto-resource-stream": "^0.1.0"
+    "pareto-resource-stream": "^0.1.0",
+    "pareto-resource-typescript-parser": "^0.1.8",
+    "pareto-typescript": "^0.1.14"
   },
   "bin": {
     "pdt": "./dist/bin.js"
