@@ -20,10 +20,6 @@ import * as t_paragraph_to_serialized from "pareto-fountain-pen/modules/paragrap
 
 
 
-type My_Error =
-    | ['parse', s_parse.Error]
-    | ['execute command', s_command_error.Error]
-
 export const $$: p_.Command_Implementation<
     command_interfaces_pareto_application_api.main,
     {
@@ -37,7 +33,11 @@ export const $$: p_.Command_Implementation<
     }
 > = p_.command(
     ($d, $s, $q, $c) => [
-        p_.s.handle_error<s_application_api_main.Error, My_Error>(
+        p_.s.handle_error<
+            s_application_api_main.Error,
+            | ['parse', s_parse.Error]
+            | ['execute command', s_command_error.Error]
+        >(
             [
                 p_.s.refine(
 

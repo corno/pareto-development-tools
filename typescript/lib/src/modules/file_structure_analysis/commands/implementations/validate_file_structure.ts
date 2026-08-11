@@ -4,6 +4,7 @@ import * as p_s from 'pareto-core/implementation/serializer'
 import * as p_q from 'pareto-core/implementation/query'
 import * as p_schema from 'pareto-core/interface/schema'
 import p_sqr from 'pareto-core/implementation/query/super_query_result'
+import p_unreachable_path from 'pareto-core/implementation/transformer/specials/unreachable_code_path'
 
 //interface dependencies
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
@@ -144,45 +145,230 @@ export const $$: p_.Command_Implementation<
                                                             ),
                                                             {
                                                                 'success': ($) => {
-                                                                    return p_q.e.direct_result(p_temp.from.list($['source file'].statements).map_optionally(
+
+                                                                    const command_implementation = () => p_temp.from.list($['source file'].statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
-                                                                                    case 'function': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'function'"))
-                                                                                    case 'return': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'return'"))
-                                                                                    case 'block': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'block'"))
-                                                                                    case 'break': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'break'"))
-                                                                                    case 'class': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'class'"))
-                                                                                    case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
-                                                                                    case 'continue': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'continue'"))
-                                                                                    case 'debugger': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'debugger'"))
-                                                                                    case 'do': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'do'"))
-                                                                                    case 'empty': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'empty'"))
-                                                                                    case 'enum': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'enum'"))
-                                                                                    case 'export assignment': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'export assignment'"))
-                                                                                    case 'export declaration': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    case 'for': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'for'"))
-                                                                                    case 'for in': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'for in'"))
-                                                                                    case 'for of': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'for of'"))
-                                                                                    case 'if': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'if'"))
                                                                                     case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    case 'import equals': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'import equals'"))
-                                                                                    case 'interface': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'interface'"))
-                                                                                    case 'labeled': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'labeled'"))
-                                                                                    case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    case 'namespace export': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'namespace export'"))
-                                                                                    case 'switch': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'switch'"))
-                                                                                    case 'throw': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'throw'"))
-                                                                                    case 'try': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'try'"))
-                                                                                    case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    case 'while': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'while'"))
-                                                                                    case 'with': return p_temp.ss($, ($) => p_temp.literal.set("unexpected statement 'with'"))
-                                                                                    default: return p_temp.au($[0])
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                                                 }
                                                                             }
                                                                         )
-                                                                    ))
+                                                                    )
+                                                                    const query_interface = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    const query_implementation = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    const command_interface = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    const deserializer = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    const serializer = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    const refiner = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    const transformer = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    const shorthands = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    const schema = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+                                                                                switch ($[0]) {
+                                                                                    case 'export declaration': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    return p_q.e.direct_result((() => {
+                                                                        switch (path) {
+                                                                            case "/typescript/app/src/bin": return p_temp.from.list($['source file'].statements).map_optionally(
+                                                                                ($) => p_temp.from.state($).decide(
+                                                                                    ($): p_schema.Optional_Value<string> => {
+                                                                                        switch ($[0]) {
+                                                                                            case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
+                                                                                            case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                        }
+                                                                                    }
+                                                                                )
+                                                                            )
+                                                                            case "/typescript/app/src/bin.ts": return p_temp.from.list($['source file'].statements).map_optionally(
+                                                                                ($) => p_temp.from.state($).decide(
+                                                                                    ($): p_schema.Optional_Value<string> => {
+                                                                                        switch ($[0]) {
+                                                                                            case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
+                                                                                            case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                        }
+                                                                                    }
+                                                                                )
+                                                                            )
+                                                                            case "/typescript/app/src/data": return p_temp.from.list($['source file'].statements).map_optionally(
+                                                                                ($) => p_temp.from.state($).decide(
+                                                                                    ($): p_schema.Optional_Value<string> => {
+                                                                                        switch ($[0]) {
+                                                                                            case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                        }
+                                                                                    }
+                                                                                )
+                                                                            )
+                                                                            case "/typescript/lib/src/commands/implementations": return command_implementation()
+                                                                            case "/typescript/lib/src/commands/interfaces.ts": return command_interface()
+
+
+                                                                            case "/typescript/lib/src/modules/*/commands/implementations": return command_implementation()
+                                                                            case "/typescript/lib/src/modules/*/commands/interfaces.ts": return command_interface()
+                                                                            case "/typescript/lib/src/modules/*/queries/implementations": return query_implementation()
+                                                                            case "/typescript/lib/src/modules/*/queries/interfaces.ts": return query_interface()
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/deserializers.ts": return deserializer()
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/refiners": return refiner()
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/schema.ts": return schema()
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/serializers.ts": return serializer()
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/shorthands/deprecated.ts": return shorthands()
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/shorthands/manual.ts": return shorthands()
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/shorthands/target.ts": return shorthands()
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/transformers": return transformer()
+                                                                            case "/typescript/lib/src/queries/implementations": return query_implementation()
+                                                                            case "/typescript/lib/src/queries/interfaces.ts": return query_interface()
+                                                                            case "/typescript/lib/src/schemas/*/deserializers.ts": return deserializer()
+                                                                            case "/typescript/lib/src/schemas/*/refiners": return refiner()
+                                                                            case "/typescript/lib/src/schemas/*/schema.ts": return schema()
+                                                                            case "/typescript/lib/src/schemas/*/serializers.ts": return serializer()
+                                                                            case "/typescript/lib/src/schemas/*/shorthands/manual.ts": return shorthands()
+                                                                            case "/typescript/lib/src/schemas/*/shorthands/target.ts": return shorthands()
+                                                                            case "/typescript/lib/src/schemas/*/transformers": return transformer()
+                                                                            case "/typescript/lib/src/temp": return p_temp.from.list($['source file'].statements).map_optionally(
+                                                                                ($) => p_temp.from.state($).decide(
+                                                                                    ($): p_schema.Optional_Value<string> => {
+                                                                                        switch ($[0]) {
+                                                                                            // case 'export declaration': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                        }
+                                                                                    }
+                                                                                )
+                                                                            )
+
+
+                                                                            case "/typescript/test/src/bin/test.ts": return p_temp.from.list($['source file'].statements).map_optionally(
+                                                                                ($) => p_temp.from.state($).decide(
+                                                                                    ($): p_schema.Optional_Value<string> => {
+                                                                                        switch ($[0]) {
+                                                                                            case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
+                                                                                            case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                        }
+                                                                                    }
+                                                                                )
+                                                                            )
+                                                                            case "/typescript/test/src/data": return p_temp.from.list($['source file'].statements).map_optionally(
+                                                                                ($) => p_temp.from.state($).decide(
+                                                                                    ($): p_schema.Optional_Value<string> => {
+                                                                                        switch ($[0]) {
+                                                                                            case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                            default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                        }
+                                                                                    }
+                                                                                )
+                                                                            )
+                                                                            default: return p_unreachable_path("these are paths that have been tested earlier: " + path)
+                                                                        }
+                                                                    })())
                                                                     //     .refine(
                                                                     //     ($, abort) => {
                                                                     //         r_cst_from_ust.Source_File(
