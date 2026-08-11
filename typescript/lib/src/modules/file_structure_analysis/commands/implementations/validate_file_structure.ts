@@ -232,7 +232,6 @@ export const $$: p_.Command_Implementation<
                                                                                 switch ($[0]) {
                                                                                     case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    // case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                                                 }
@@ -272,7 +271,6 @@ export const $$: p_.Command_Implementation<
                                                                                         switch ($[0]) {
                                                                                             case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
                                                                                             case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                            case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                             default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                                                         }
                                                                                     }
@@ -284,7 +282,6 @@ export const $$: p_.Command_Implementation<
                                                                                         switch ($[0]) {
                                                                                             case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
                                                                                             case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                            case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                             default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                                                         }
                                                                                     }
@@ -330,7 +327,6 @@ export const $$: p_.Command_Implementation<
                                                                                 ($) => p_temp.from.state($).decide(
                                                                                     ($): p_schema.Optional_Value<string> => {
                                                                                         switch ($[0]) {
-                                                                                            // case 'export declaration': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                             case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                             case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                             case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
@@ -348,7 +344,6 @@ export const $$: p_.Command_Implementation<
                                                                                         switch ($[0]) {
                                                                                             case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
                                                                                             case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                            case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                             default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                                                         }
                                                                                     }
