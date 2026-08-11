@@ -220,7 +220,6 @@ export const $$: p_.Command_Implementation<
                                                                                 switch ($[0]) {
                                                                                     case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                                                 }
@@ -233,7 +232,7 @@ export const $$: p_.Command_Implementation<
                                                                                 switch ($[0]) {
                                                                                     case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    // case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
                                                                                     default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                                                 }
