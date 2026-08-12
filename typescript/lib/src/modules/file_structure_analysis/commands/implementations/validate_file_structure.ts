@@ -16,6 +16,7 @@ import type * as s_structure from "../../schemas/structure/schema.js"
 import type * as s_x from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/read_nested_directory_content/schema"
 import type * as s from "../../schemas/file_structure_validation/schema.js"
 import type * as s_ust from "pareto-untyped-syntax-tree-api/schemas/untyped_syntax_tree/schema"
+import type * as s_cst from "pareto-typescript/schemas/concrete_syntax_tree/schema"
 
 //dependencies
 import * as r_analysis_from_package_files from "../../schemas/package_file_analysis/refiners/package_files.js"
@@ -146,7 +147,7 @@ export const $$: p_.Command_Implementation<
                                                             {
                                                                 'success': ($) => {
 
-                                                                    const command_implementation = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                    const command_implementation: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
@@ -157,7 +158,7 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         )
                                                                     )
-                                                                    const query_interface = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                    const query_interface: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
@@ -168,7 +169,7 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         )
                                                                     )
-                                                                    const query_implementation = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                    const query_implementation: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
@@ -179,7 +180,7 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         )
                                                                     )
-                                                                    const command_interface = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                    const command_interface: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
@@ -190,7 +191,7 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         )
                                                                     )
-                                                                    const deserializer = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                    const deserializer: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
@@ -202,7 +203,56 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         )
                                                                     )
-                                                                    const serializer = () => p_temp.from.list($['source file'].statements).map_optionally(
+
+                                                                    // const location: p_temp.Transformer<s_cst.Statement, s_ust.Node['location']> = ($) => {
+                                                                    //     switch ($[0]) {
+                                                                    //         case 'import': return p_temp.ss($, ($) => $['import keyword'].location)
+                                                                    //         case 'module': return p_temp.ss($, ($) => p_temp.from.state($.type).decide(
+                                                                    //             ($) => {
+                                                                    //                 switch ($[0]) {
+                                                                    //                     case 'module': return p_temp.ss($, ($) => $.keyword.location)
+                                                                    //                     case 'global':return p_temp.ss($, ($) => $.location)
+                                                                    //                     case 'namespace':return p_temp.ss($, ($) => $.keyword.location)
+                                                                    //                     default: return p_temp.au($[0])
+                                                                    //                 }
+                                                                    //             }
+                                                                    //         ))
+                                                                    //         case 'variable': return p_temp.from.state($).decide(
+                                                                    //             ($) => {
+                                                                    //                 switch ($[0]) {
+                                                                    //                     case 'variable': return p_temp.ss($, ($) => p_temp.from.state($['variable declaration list'].mutability).decide(
+                                                                    //                         ($) => {
+                                                                    //                             switch ($[0]) {
+                                                                    //                                 case 'const': return p_temp.ss($, ($) => $.location)
+                                                                    //                                 case 'await using': return p_temp.ss($, ($) => $['await keyword'].location)
+                                                                    //                                 case 'let': return p_temp.ss($, ($) => $.location)
+                                                                    //                                 case 'using': return p_temp.ss($, ($) => $.location)
+                                                                    //                                 case 'var': return p_temp.ss($, ($) => $.location)
+                                                                    //                                 default: return p_temp.au($[0])
+                                                                    //                             }
+                                                                    //                         }
+                                                                    //                     ))
+                                                                    //                     default: return p_temp.au($[0])
+                                                                    //                 }
+                                                                    //             }
+                                                                    //         )
+                                                                    //         default: return p_temp.au($[0])
+                                                                    //     }
+                                                                    // }
+                                                                    const serializer: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
+                                                                        ($) => p_temp.from.state($).decide(
+                                                                            ($): p_schema.Optional_Value<string> => {
+
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    )
+                                                                    const refiner: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
@@ -214,7 +264,7 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         )
                                                                     )
-                                                                    const refiner = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                    const transformer: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
@@ -226,7 +276,7 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         )
                                                                     )
-                                                                    const transformer = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                    const shorthands: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
@@ -238,19 +288,7 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         )
                                                                     )
-                                                                    const shorthands = () => p_temp.from.list($['source file'].statements).map_optionally(
-                                                                        ($) => p_temp.from.state($).decide(
-                                                                            ($): p_schema.Optional_Value<string> => {
-                                                                                switch ($[0]) {
-                                                                                    case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                                                    default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
-                                                                                }
-                                                                            }
-                                                                        )
-                                                                    )
-                                                                    const schema = () => p_temp.from.list($['source file'].statements).map_optionally(
+                                                                    const schema: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
                                                                                 switch ($[0]) {
@@ -298,31 +336,31 @@ export const $$: p_.Command_Implementation<
                                                                                     }
                                                                                 )
                                                                             )
-                                                                            case "/typescript/lib/src/commands/implementations": return command_implementation()
-                                                                            case "/typescript/lib/src/commands/interfaces.ts": return command_interface()
+                                                                            case "/typescript/lib/src/commands/implementations": return command_implementation($['source file'])
+                                                                            case "/typescript/lib/src/commands/interfaces.ts": return command_interface($['source file'])
 
 
-                                                                            case "/typescript/lib/src/modules/*/commands/implementations": return command_implementation()
-                                                                            case "/typescript/lib/src/modules/*/commands/interfaces.ts": return command_interface()
-                                                                            case "/typescript/lib/src/modules/*/queries/implementations": return query_implementation()
-                                                                            case "/typescript/lib/src/modules/*/queries/interfaces.ts": return query_interface()
-                                                                            case "/typescript/lib/src/modules/*/schemas/*/deserializers.ts": return deserializer()
-                                                                            case "/typescript/lib/src/modules/*/schemas/*/refiners": return refiner()
-                                                                            case "/typescript/lib/src/modules/*/schemas/*/schema.ts": return schema()
-                                                                            case "/typescript/lib/src/modules/*/schemas/*/serializers.ts": return serializer()
-                                                                            case "/typescript/lib/src/modules/*/schemas/*/shorthands/deprecated.ts": return shorthands()
-                                                                            case "/typescript/lib/src/modules/*/schemas/*/shorthands/manual.ts": return shorthands()
-                                                                            case "/typescript/lib/src/modules/*/schemas/*/shorthands/target.ts": return shorthands()
-                                                                            case "/typescript/lib/src/modules/*/schemas/*/transformers": return transformer()
-                                                                            case "/typescript/lib/src/queries/implementations": return query_implementation()
-                                                                            case "/typescript/lib/src/queries/interfaces.ts": return query_interface()
-                                                                            case "/typescript/lib/src/schemas/*/deserializers.ts": return deserializer()
-                                                                            case "/typescript/lib/src/schemas/*/refiners": return refiner()
-                                                                            case "/typescript/lib/src/schemas/*/schema.ts": return schema()
-                                                                            case "/typescript/lib/src/schemas/*/serializers.ts": return serializer()
-                                                                            case "/typescript/lib/src/schemas/*/shorthands/manual.ts": return shorthands()
-                                                                            case "/typescript/lib/src/schemas/*/shorthands/target.ts": return shorthands()
-                                                                            case "/typescript/lib/src/schemas/*/transformers": return transformer()
+                                                                            case "/typescript/lib/src/modules/*/commands/implementations": return command_implementation($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/commands/interfaces.ts": return command_interface($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/queries/implementations": return query_implementation($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/queries/interfaces.ts": return query_interface($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/deserializers.ts": return deserializer($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/refiners": return refiner($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/schema.ts": return schema($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/serializers.ts": return serializer($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/shorthands/deprecated.ts": return shorthands($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/shorthands/manual.ts": return shorthands($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/shorthands/target.ts": return shorthands($['source file'])
+                                                                            case "/typescript/lib/src/modules/*/schemas/*/transformers": return transformer($['source file'])
+                                                                            case "/typescript/lib/src/queries/implementations": return query_implementation($['source file'])
+                                                                            case "/typescript/lib/src/queries/interfaces.ts": return query_interface($['source file'])
+                                                                            case "/typescript/lib/src/schemas/*/deserializers.ts": return deserializer($['source file'])
+                                                                            case "/typescript/lib/src/schemas/*/refiners": return refiner($['source file'])
+                                                                            case "/typescript/lib/src/schemas/*/schema.ts": return schema($['source file'])
+                                                                            case "/typescript/lib/src/schemas/*/serializers.ts": return serializer($['source file'])
+                                                                            case "/typescript/lib/src/schemas/*/shorthands/manual.ts": return shorthands($['source file'])
+                                                                            case "/typescript/lib/src/schemas/*/shorthands/target.ts": return shorthands($['source file'])
+                                                                            case "/typescript/lib/src/schemas/*/transformers": return transformer($['source file'])
                                                                             case "/typescript/lib/src/temp": return p_temp.from.list($['source file'].statements).map_optionally(
                                                                                 ($) => p_temp.from.state($).decide(
                                                                                     ($): p_schema.Optional_Value<string> => {
@@ -363,28 +401,6 @@ export const $$: p_.Command_Implementation<
                                                                             default: return p_unreachable_path("these are paths that have been tested earlier: " + path)
                                                                         }
                                                                     })())
-                                                                    //     .refine(
-                                                                    //     ($, abort) => {
-                                                                    //         r_cst_from_ust.Source_File(
-                                                                    //             $['untyped syntax tree'].root,
-                                                                    //             ($) => abort(null)
-                                                                    //         )
-                                                                    //         const xxxx = ($: s_ust.Node): p_schema.List<string> => {
-                                                                    //             return p_temp.from.list($.children).map(
-                                                                    //                 ($) => p_.from.state($).decide(
-                                                                    //                     ($) => {
-                                                                    //                         switch ($[0]) {
-
-                                                                    //                             default: return p_.au($[0])
-                                                                    //                         }
-                                                                    //                     }
-                                                                    //                 )
-                                                                    //             )
-                                                                    //         }
-                                                                    //         return xxxx($['untyped syntax tree'].root)
-                                                                    //     }
-                                                                    // )
-                                                                    // return p_q.e.direct_result(p_.literal.list<string>([]))
                                                                 },
                                                                 'error': ($) => p_q.e.direct_result(p_temp.from.state($).decide(
                                                                     ($) => {
