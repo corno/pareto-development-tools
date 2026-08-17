@@ -203,42 +203,6 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         )
                                                                     )
-
-                                                                    // const location: p_temp.Transformer<s_cst.Statement, s_ust.Node['location']> = ($) => {
-                                                                    //     switch ($[0]) {
-                                                                    //         case 'import': return p_temp.ss($, ($) => $['import keyword'].location)
-                                                                    //         case 'module': return p_temp.ss($, ($) => p_temp.from.state($.type).decide(
-                                                                    //             ($) => {
-                                                                    //                 switch ($[0]) {
-                                                                    //                     case 'module': return p_temp.ss($, ($) => $.keyword.location)
-                                                                    //                     case 'global':return p_temp.ss($, ($) => $.location)
-                                                                    //                     case 'namespace':return p_temp.ss($, ($) => $.keyword.location)
-                                                                    //                     default: return p_temp.au($[0])
-                                                                    //                 }
-                                                                    //             }
-                                                                    //         ))
-                                                                    //         case 'variable': return p_temp.from.state($).decide(
-                                                                    //             ($) => {
-                                                                    //                 switch ($[0]) {
-                                                                    //                     case 'variable': return p_temp.ss($, ($) => p_temp.from.state($['variable declaration list'].mutability).decide(
-                                                                    //                         ($) => {
-                                                                    //                             switch ($[0]) {
-                                                                    //                                 case 'const': return p_temp.ss($, ($) => $.location)
-                                                                    //                                 case 'await using': return p_temp.ss($, ($) => $['await keyword'].location)
-                                                                    //                                 case 'let': return p_temp.ss($, ($) => $.location)
-                                                                    //                                 case 'using': return p_temp.ss($, ($) => $.location)
-                                                                    //                                 case 'var': return p_temp.ss($, ($) => $.location)
-                                                                    //                                 default: return p_temp.au($[0])
-                                                                    //                             }
-                                                                    //                         }
-                                                                    //                     ))
-                                                                    //                     default: return p_temp.au($[0])
-                                                                    //                 }
-                                                                    //             }
-                                                                    //         )
-                                                                    //         default: return p_temp.au($[0])
-                                                                    //     }
-                                                                    // }
                                                                     const serializer: p_temp.Transformer<s_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).map_optionally(
                                                                         ($) => p_temp.from.state($).decide(
                                                                             ($): p_schema.Optional_Value<string> => {
