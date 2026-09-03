@@ -1,5 +1,5 @@
 import * as p_ from 'pareto-core/interface/schema'
-
+import type * as s_cst from "pareto-untyped-syntax-tree-api/schemas/untyped_syntax_tree/schema"
 import type * as s_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/read_nested_directory_content/schema"
 import type * as s_path from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/path/schema"
 import type * as s_ust from "pareto-untyped-syntax-tree-api/schemas/parse_file/schema"
@@ -24,19 +24,24 @@ export type Error =
 export type Node_Error =
 | ['typescript parse error', s_ts.Error]
 
+export type Location = {
+    'context path': s_path.Context_Path
+    'internal path': string
+    'name': string
+}
+
 export type Pareto_Parsing_Error = 
-| ['no such node', {
-    'context path': s_path.Context_Path
-    'internal path': string
-    'name': string
+| ['typescript parsing failed', {
+    'location': Location
 }]
-| ['not a directory', {
-    'context path': s_path.Context_Path
-    'internal path': string
-    'name': string
+| ['aggregated', {
+    'errors': p_.List<Pareto_Parsing_Error>
 }]
-| ['not a file', {
-    'context path': s_path.Context_Path
-    'internal path': string
+| ['no such node', Location]
+| ['not a directory', Location]
+| ['not a file', Location]
+| ['unexpected construct', {
     'name': string
+    'file location': Location
+    'location in file': s_cst.Node['location']
 }]

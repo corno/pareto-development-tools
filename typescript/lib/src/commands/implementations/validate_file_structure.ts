@@ -24,12 +24,15 @@ import type * as s from "../../schemas/file_structure_validation/schema.js"
 import type * as s_ust from "pareto-untyped-syntax-tree-api/schemas/untyped_syntax_tree/schema"
 import type * as s_typescript_cst from "pareto-typescript/schemas/concrete_syntax_tree/schema"
 import type * as s_get_typescript_files from "../../schemas/get_typescript_files/schema.js"
+import type * as s_file_structure_validation from "../../schemas/file_structure_validation/schema.js"
+
 
 //dependencies
 import * as r_analysis_from_package_files from "../../modules/file_structure_analysis/schemas/package_file_analysis/refiners/package_files.js"
 import { $$ as q_directory_content } from "pareto-filesystem-unrestricted-api/modules/helpers/queries/implementations/read_nested_directory_content"
 import * as ser_path from "../../modules/file_structure_analysis/schemas/path/serializers.js"
 import * as ser_fs_pat from "pareto-filesystem-unrestricted-api/modules/unrestricted/schemas/path/serializers"
+import * as t_cst_to_location from "pareto-typescript/schemas/concrete_syntax_tree/transformers/location"
 
 //shorthands
 import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/target"
@@ -261,6 +264,41 @@ export const $$: p_.Command_Implementation<
                                         'name': "src",
                                     }]])
                                 }
+                                const globals_file = p_r.from.dictionary(src_dir[1]).get_entry(
+                                    "globals.ts",
+                                    {
+                                        'no_such_entry': ($) => abort(['pareto parsing', ['no such node', {
+                                            'context path': $d['path to package'],
+                                            'internal path': "/typescript/lib/src",
+                                            'name': "globals.ts",
+                                        }]])
+                                    }
+                                )
+                                if (globals_file[0] !== 'file') {
+                                    return abort(['pareto parsing', ['not a file', {
+                                        'context path': $d['path to package'],
+                                        'internal path': "/typescript/lib/src",
+                                        'name': "globals.ts",
+                                    }]])
+                                }
+
+                                const index_file = p_r.from.dictionary(src_dir[1]).get_entry(
+                                    "index.ts",
+                                    {
+                                        'no_such_entry': ($) => abort(['pareto parsing', ['no such node', {
+                                            'context path': $d['path to package'],
+                                            'internal path': "/typescript/lib/src",
+                                            'name': "index.ts",
+                                        }]])
+                                    }
+                                )
+                                if (index_file[0] !== 'file') {
+                                    return abort(['pareto parsing', ['not a file', {
+                                        'context path': $d['path to package'],
+                                        'internal path': "/typescript/lib/src",
+                                        'name': "index.ts",
+                                    }]])
+                                }
 
                                 const schemas_dir = p_r.from.dictionary(src_dir[1]).get_possible_entry(
                                     "schemas",
@@ -274,53 +312,72 @@ export const $$: p_.Command_Implementation<
                                                 'name': "schemas",
                                             }]])
                                         }
-                                        return p_r.from.dictionary($[1]).map(
-                                            ($, id): Schema => {
+                                        return p_r.from.dictionary($[1]).map_and_aggregate_error<Schema, s_file_structure_validation.Error, s_file_structure_validation.Pareto_Parsing_Error>(
+                                            abort,
+                                            ($, id, abort): Schema => {
 
                                                 if ($[0] !== 'directory') {
-                                                    return abort(['pareto parsing', ['not a directory', {
+                                                    return abort(['not a directory', {
                                                         'context path': $d['path to package'],
                                                         'internal path': "/typescript/lib/src/schemas",
                                                         'name': id,
-                                                    }]])
+                                                    }])
                                                 }
                                                 const schema_file = p_r.from.dictionary($[1]).get_entry(
                                                     "schema.ts",
                                                     {
-                                                        'no_such_entry': ($) => abort(['pareto parsing', ['no such node', {
+                                                        'no_such_entry': ($) => abort(['no such node', {
                                                             'context path': $d['path to package'],
                                                             'internal path': "/typescript/lib/src/schemas/" + id,
                                                             'name': "schema.ts",
-                                                        }]])
+                                                        }])
                                                     }
                                                 )
                                                 if (schema_file[0] !== 'file') {
-                                                    return abort(['pareto parsing', ['not a file', {
+                                                    return abort(['not a file', {
                                                         'context path': $d['path to package'],
                                                         'internal path': "/typescript/lib/src/schemas/" + id,
                                                         'name': "schema.ts",
-                                                    }]])
+                                                    }])
                                                 }
                                                 p_temp.from.state(schema_file[1]).decide(
                                                     ($): null => {
                                                         switch ($[0]) {
-                                                            case 'failure': return p_temp.ss($, ($) => null)
+                                                            case 'failure': return p_temp.ss($, ($) => abort(['typescript parsing failed', {
+                                                                'location': {
+                                                                    'context path': $d['path to package'],
+                                                                    'internal path': "/typescript/lib/src/schemas/" + id,
+                                                                    'name': "schema.ts"
+                                                                }
+                                                            }]))
                                                             case 'success': return p_temp.ss($, ($) => {
 
-                                                                const schema: p_temp.Transformer<s_typescript_cst.Source_File, p_schema.List<string>> = ($) => p_temp.from.list($.statements).flatten(
-                                                                    ($) => p_temp.from.state($).decide(
-                                                                        ($): p_schema.List<string> => {
+                                                                const schema: p_r.Refiner<p_schema.List<string>, s_file_structure_validation.Pareto_Parsing_Error, s_typescript_cst.Source_File> = ($, abort) => p_r.from.list($.statements).map_and_aggregate_error<string, s_file_structure_validation.Pareto_Parsing_Error, s_file_structure_validation.Pareto_Parsing_Error>(
+                                                                    abort,
+                                                                    ($): string => p_temp.from.state($).decide(
+                                                                        ($): string => {
                                                                             switch ($[0]) {
-                                                                                case 'export declaration': return p_temp.ss($, ($) => p_temp.literal.list(["uitwerken"]))
-                                                                                case 'import': return p_temp.ss($, ($) => p_temp.literal.list(["uitwerken"]))
-                                                                                case 'module': return p_temp.ss($, ($) => p_temp.literal.list(["uitwerken"]))
-                                                                                case 'type alias': return p_temp.ss($, ($) => p_temp.literal.list(["uitwerken"]))
-                                                                                default: return p_temp.literal.list(["unexpected statement '" + $[0] + "'"])
+                                                                                case 'export declaration': return p_temp.ss($, ($) => "uitwerken")
+                                                                                case 'import': return p_temp.ss($, ($) => "uitwerken")
+                                                                                case 'module': return p_temp.ss($, ($) => "uitwerken")
+                                                                                case 'type alias': return p_temp.ss($, ($) => "uitwerken")
+                                                                                default: return abort(['unexpected construct', {
+                                                                                    'name': $[0],
+                                                                                    'file location': {
+                                                                                        'context path': $d['path to package'],
+                                                                                        'internal path': "/typescript/lib/src/schemas/" + id,
+                                                                                        'name': "schema.ts"
+                                                                                    },
+                                                                                    'location in file': t_cst_to_location.Statement($)
+                                                                                }])
                                                                             }
                                                                         }
-                                                                    )
+                                                                    ),
+                                                                    ($): s_file_structure_validation.Pareto_Parsing_Error => ['aggregated', {
+                                                                        'errors': $
+                                                                    }]
                                                                 )
-                                                                schema($)
+                                                                schema($, abort)
                                                                 return null
                                                             })
                                                             default: return p_temp.au($[0])
@@ -330,13 +387,30 @@ export const $$: p_.Command_Implementation<
                                                 return {
                                                     'schema': schema_file[1]
                                                 }
-                                            }
+                                            },
+                                            ($) => abort(['pareto parsing', ['aggregated', {
+                                                'errors': p_temp.from.dictionary($).convert_to_list(($, id) => $)
+                                            }]])
                                         )
 
                                     },
                                     () => {
                                         return p_.literal.dictionary({})
                                     }
+                                )
+
+
+                                const commands_dir = p_r.from.dictionary(src_dir[1]).get_possible_entry(
+                                    "commands",
+                                )
+                                const queries_dir = p_r.from.dictionary(src_dir[1]).get_possible_entry(
+                                    "queries",
+                                )
+                                const modules_dir = p_r.from.dictionary(src_dir[1]).get_possible_entry(
+                                    "modules",
+                                )
+                                const temp_dir = p_r.from.dictionary(src_dir[1]).get_possible_entry(
+                                    "temp",
                                 )
 
                                 const package_: Package = {
