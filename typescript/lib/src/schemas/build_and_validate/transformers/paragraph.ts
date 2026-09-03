@@ -21,7 +21,7 @@ import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/sho
 //dependencies
 import * as t_build_to_paragraph from "../../build/transformers/paragraph.js"
 import * as t_ece_to_paragraph from "pareto-execute-unrestricted-api/schemas/execute_unrestricted_command_executable/transformers/paragraph"
-import * as t_file_structure_validation_to_paragraph from "../../../modules/file_structure_analysis/schemas/file_structure_validation/transformers/paragraph.js"
+import * as t_file_structure_validation_to_paragraph from "../../file_structure_validation/transformers/paragraph.js"
 
 export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
     ($) => {

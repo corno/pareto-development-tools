@@ -8,6 +8,7 @@ import type * as s_publish from "../schemas/publish/schema.js"
 import type * as s_tsc from "../schemas/tsc/schema.js"
 import type * as s_update_package_dependencies from "../schemas/update_package_dependencies/schema.js"
 import type * as s_version_control_commit from "../schemas/git_commit/schema.js"
+import type * as s_file_structure_validation from "../schemas/file_structure_validation/schema.js"
 
 export type api = p_.Command_Interface<
     s_command_error.Error,
@@ -36,4 +37,10 @@ export type tsc = p_.Command_Interface<
 export type update_package_dependencies = p_.Command_Interface<
     s_update_package_dependencies.Error,
     s_update_package_dependencies.Parameters
+>
+
+
+export type validate_file_structure = p_.Command_Interface<
+    s_file_structure_validation.Error,
+    s_file_structure_validation.Parameters
 >

@@ -19,7 +19,7 @@ export const $$: p_.Command_Implementation<
     {
         'build': command_interfaces.build,
         'node': command_interfaces_pareto_resources.command_executable,
-        'validate file structure': command_interfaces_file_structure_analysis.validate_file_structure
+        'validate file structure': command_interfaces.validate_file_structure
     }
 > = p_.command(
     ($d, $s, $q, $c) => [

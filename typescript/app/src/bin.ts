@@ -37,7 +37,7 @@ import { $$ as c_update2latest } from "lib/modules/npm/commands/implementations/
 //file structure analysis module
 import { $$ as c_analyze_file_structure } from "lib/modules/file_structure_analysis/commands/implementations/analyze_project_file_structure"
 import { $$ as c_list_package_file_structure_problems } from "lib/modules/file_structure_analysis/commands/implementations/list_package_file_structure_problems"
-import { $$ as c_validate_file_structure } from "lib/modules/file_structure_analysis/commands/implementations/validate_file_structure"
+import { $$ as c_validate_file_structure } from "lib/commands/implementations/validate_file_structure"
 
 //typescript module
 import { $$ as q_parse_untyped_typescript_file } from "pareto-resource-typescript-parser/queries/implementations/parse_file"
@@ -232,7 +232,8 @@ p_h.run_main_command(
                         )
                     },
                     {
-                        'log lines': rs_stream.$.commands['log lines'],
+                        
+                        'log': rs_stream.$.commands['log lines'],
                     },
                 ),
             },
