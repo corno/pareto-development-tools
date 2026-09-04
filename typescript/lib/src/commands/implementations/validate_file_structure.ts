@@ -1,12 +1,9 @@
 import * as p_ from 'pareto-core/implementation/command'
 import * as p_temp from 'pareto-core/implementation/transformer'
-import * as p_s from 'pareto-core/implementation/serializer'
 import * as p_q from 'pareto-core/implementation/query'
 import * as p_r from 'pareto-core/implementation/refiner'
 import * as p_schema from 'pareto-core/interface/schema'
-import p_sqr from 'pareto-core/implementation/query/super_query_result'
-import p_unreachable_path from 'pareto-core/implementation/transformer/specials/unreachable_code_path'
-import p_log_debug_message from 'pareto-core-dev/log_debug_message'
+import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
 //interface dependencies
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
@@ -18,11 +15,7 @@ import { $$ as q_get_typescript_files } from "../../queries/implementations/get_
 
 //schemas
 import type * as s_structure from "../../modules/file_structure_analysis/schemas/structure/schema.js"
-import type * as s_x from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/read_nested_directory_content/schema"
-import type * as s_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/nested_directory_content_as_read/schema"
 import type * as s from "../../schemas/file_structure_validation/schema.js"
-import type * as s_ust from "pareto-untyped-syntax-tree-api/schemas/untyped_syntax_tree/schema"
-import type * as s_typescript_cst from "pareto-typescript/schemas/concrete_syntax_tree/schema"
 import type * as s_get_typescript_files from "../../schemas/get_typescript_files/schema.js"
 import type * as s_file_structure_validation from "../../schemas/file_structure_validation/schema.js"
 
@@ -35,8 +28,6 @@ import * as ser_fs_pat from "pareto-filesystem-unrestricted-api/modules/unrestri
 import * as t_cst_to_location from "pareto-typescript/schemas/concrete_syntax_tree/transformers/location"
 
 //shorthands
-import * as sh from "pareto-fountain-pen/modules/paragraph/schemas/paragraph/shorthands/target"
-
 
 
 export const $$: p_.Command_Implementation<
@@ -59,7 +50,7 @@ export const $$: p_.Command_Implementation<
 
 
         p_.s.query(
-            p_sqr(
+            p_super_query_result(
                 q_directory_content(null, $q)(
                     {
                         'path': $d['path to package'],
@@ -187,7 +178,7 @@ export const $$: p_.Command_Implementation<
 
                 return [
                     p_.s.query(
-                        p_sqr(
+                        p_super_query_result(
                             q_get_typescript_files(null, $q)(
                                 $v,
                                 ($): s.Error => ['typescript parsing', $],
@@ -312,10 +303,9 @@ export const $$: p_.Command_Implementation<
                                                 'name': "schemas",
                                             }]])
                                         }
-                                        return p_r.from.dictionary($[1]).map_and_aggregate_error<Schema, s_file_structure_validation.Error, s_file_structure_validation.Pareto_Parsing_Error>(
-                                            abort,
+                                        return p_r.from.dictionary($[1]).map_and_aggregate_error<Schema, s_file_structure_validation.Pareto_Parsing_Error>(
                                             ($, id, abort): Schema => {
-
+                                                const schema_id = id
                                                 if ($[0] !== 'directory') {
                                                     return abort(['not a directory', {
                                                         'context path': $d['path to package'],
@@ -343,24 +333,23 @@ export const $$: p_.Command_Implementation<
                                                 p_temp.from.state(schema_file[1]).decide(
                                                     ($): null => {
                                                         switch ($[0]) {
-                                                            case 'failure': return p_temp.ss($, ($) => abort(['typescript parsing failed', {
+                                                            case 'failure': return p_temp.option($, ($) => abort(['typescript parsing failed', {
                                                                 'location': {
                                                                     'context path': $d['path to package'],
                                                                     'internal path': "/typescript/lib/src/schemas/" + id,
                                                                     'name': "schema.ts"
                                                                 }
                                                             }]))
-                                                            case 'success': return p_temp.ss($, ($) => {
+                                                            case 'success': return p_temp.option($, ($) => {
 
-                                                                const schema: p_r.Refiner<p_schema.List<string>, s_file_structure_validation.Pareto_Parsing_Error, s_typescript_cst.Source_File> = ($, abort) => p_r.from.list($.statements).map_and_aggregate_error<string, s_file_structure_validation.Pareto_Parsing_Error, s_file_structure_validation.Pareto_Parsing_Error>(
-                                                                    abort,
-                                                                    ($): string => p_temp.from.state($).decide(
+                                                                p_r.from.list($.statements).map_and_aggregate_error<string, s_file_structure_validation.Pareto_Parsing_Error>(
+                                                                    ($, abort): string => p_temp.from.state($).decide(
                                                                         ($): string => {
                                                                             switch ($[0]) {
-                                                                                case 'export declaration': return p_temp.ss($, ($) => "uitwerken")
-                                                                                case 'import': return p_temp.ss($, ($) => "uitwerken")
-                                                                                case 'module': return p_temp.ss($, ($) => "uitwerken")
-                                                                                case 'type alias': return p_temp.ss($, ($) => "uitwerken")
+                                                                                case 'export declaration': return p_temp.option($, ($) => "uitwerken")
+                                                                                case 'import': return p_temp.option($, ($) => "uitwerken")
+                                                                                case 'module': return p_temp.option($, ($) => "uitwerken")
+                                                                                case 'type alias': return p_temp.option($, ($) => "uitwerken")
                                                                                 default: return abort(['unexpected construct', {
                                                                                     'name': $[0],
                                                                                     'file location': {
@@ -373,17 +362,279 @@ export const $$: p_.Command_Implementation<
                                                                             }
                                                                         }
                                                                     ),
-                                                                    ($): s_file_structure_validation.Pareto_Parsing_Error => ['aggregated', {
+                                                                    ($) => abort(['aggregated', {
                                                                         'errors': $
-                                                                    }]
+                                                                    }])
                                                                 )
-                                                                schema($, abort)
                                                                 return null
                                                             })
-                                                            default: return p_temp.au($[0])
+                                                            default: return p_temp.exhaustive($[0])
                                                         }
                                                     }
                                                 )
+
+                                                const serializer_file = p_r.from.dictionary($[1]).get_possible_entry(
+                                                    "serializers.ts",
+                                                )
+                                                p_r.from.optional(serializer_file).map(
+                                                    ($) => {
+                                                        if ($[0] !== 'file') {
+                                                            return abort(['not a file', {
+                                                                'context path': $d['path to package'],
+                                                                'internal path': "/typescript/lib/src/schemas/" + id,
+                                                                'name': "serializers.ts",
+                                                            }])
+                                                        }
+
+                                                        p_temp.from.state($[1]).decide(
+                                                            ($): null => {
+                                                                switch ($[0]) {
+                                                                    case 'failure': return p_temp.option($, ($) => abort(['typescript parsing failed', {
+                                                                        'location': {
+                                                                            'context path': $d['path to package'],
+                                                                            'internal path': "/typescript/lib/src/schemas/" + id,
+                                                                            'name': "schema.ts"
+                                                                        }
+                                                                    }]))
+                                                                    case 'success': return p_temp.option($, ($) => {
+
+                                                                        p_r.from.list($.statements).map_and_aggregate_error<string, s_file_structure_validation.Pareto_Parsing_Error>(
+                                                                            ($, abort): string => p_temp.from.state($).decide(
+                                                                                ($): string => {
+                                                                                    switch ($[0]) {
+                                                                                        case 'import': return p_temp.option($, ($) => "uitwerken")
+                                                                                        case 'module': return p_temp.option($, ($) => "uitwerken")
+                                                                                        case 'variable': return p_temp.option($, ($) => "uitwerken")
+                                                                                        default: return abort(['unexpected construct', {
+                                                                                            'name': $[0],
+                                                                                            'file location': {
+                                                                                                'context path': $d['path to package'],
+                                                                                                'internal path': "/typescript/lib/src/schemas/" + id,
+                                                                                                'name': "schema.ts"
+                                                                                            },
+                                                                                            'location in file': t_cst_to_location.Statement($)
+                                                                                        }])
+                                                                                    }
+                                                                                }
+                                                                            ),
+                                                                            ($) => abort(['aggregated', {
+                                                                                'errors': $
+                                                                            }])
+                                                                        )
+                                                                        return null
+                                                                    })
+                                                                    default: return p_temp.exhaustive($[0])
+                                                                }
+                                                            }
+                                                        )
+                                                        return null
+                                                    }
+                                                )
+                                                const deserializer_file = p_r.from.dictionary($[1]).get_possible_entry(
+                                                    "deserializers.ts",
+                                                )
+                                                p_r.from.optional(deserializer_file).map(
+                                                    ($) => {
+                                                        if ($[0] !== 'file') {
+                                                            return abort(['not a file', {
+                                                                'context path': $d['path to package'],
+                                                                'internal path': "/typescript/lib/src/schemas/" + id,
+                                                                'name': "deserializers.ts",
+                                                            }])
+                                                        }
+
+                                                        p_temp.from.state($[1]).decide(
+                                                            ($): null => {
+                                                                switch ($[0]) {
+                                                                    case 'failure': return p_temp.option($, ($) => abort(['typescript parsing failed', {
+                                                                        'location': {
+                                                                            'context path': $d['path to package'],
+                                                                            'internal path': "/typescript/lib/src/schemas/" + id,
+                                                                            'name': "deserializers.ts"
+                                                                        }
+                                                                    }]))
+                                                                    case 'success': return p_temp.option($, ($) => {
+
+                                                                        p_r.from.list($.statements).map_and_aggregate_error<string, s_file_structure_validation.Pareto_Parsing_Error>(
+                                                                            ($, abort): string => p_temp.from.state($).decide(
+                                                                                ($): string => {
+                                                                                    switch ($[0]) {
+                                                                                        case 'import': return p_temp.option($, ($) => "uitwerken")
+                                                                                        case 'module': return p_temp.option($, ($) => "uitwerken")
+                                                                                        case 'variable': return p_temp.option($, ($) => "uitwerken")
+                                                                                        default: return abort(['unexpected construct', {
+                                                                                            'name': $[0],
+                                                                                            'file location': {
+                                                                                                'context path': $d['path to package'],
+                                                                                                'internal path': "/typescript/lib/src/schemas/" + id,
+                                                                                                'name': "deserializers.ts"
+                                                                                            },
+                                                                                            'location in file': t_cst_to_location.Statement($)
+                                                                                        }])
+                                                                                    }
+                                                                                }
+                                                                            ),
+                                                                            ($) => abort(['aggregated', {
+                                                                                'errors': $
+                                                                            }])
+                                                                        )
+                                                                        return null
+                                                                    })
+                                                                    default: return p_temp.exhaustive($[0])
+                                                                }
+                                                            }
+                                                        )
+                                                        return null
+                                                    }
+                                                )
+
+
+                                                const transformers_dir = p_r.from.dictionary($[1]).get_possible_entry(
+                                                    "transformers",
+                                                )
+                                                p_r.from.optional(transformers_dir).map(($) => {
+
+                                                    if ($[0] !== 'directory') {
+                                                        return abort(['not a directory', {
+                                                            'context path': $d['path to package'],
+                                                            'internal path': "/typescript/lib/src/schemas/" + schema_id,
+                                                            'name': "transformers",
+                                                        }])
+                                                    }
+
+                                                    return p_r.from.dictionary($[1]).map_and_aggregate_error<null, s_file_structure_validation.Pareto_Parsing_Error>(
+                                                        ($, id, abort): null => {
+
+                                                            if ($[0] !== 'file') {
+                                                                return abort(['not a file', {
+                                                                    'context path': $d['path to package'],
+                                                                    'internal path': "/typescript/lib/src/schemas/" + schema_id + "/transformers",
+                                                                    'name': id,
+                                                                }])
+                                                            }
+                                                            p_temp.from.state($[1]).decide(
+                                                                ($): null => {
+                                                                    switch ($[0]) {
+                                                                        case 'failure': return p_temp.option($, ($) => abort(['typescript parsing failed', {
+                                                                            'location': {
+                                                                                'context path': $d['path to package'],
+                                                                                'internal path': "/typescript/lib/src/schemas/" + schema_id + "/transformers",
+                                                                                'name': id,
+                                                                            }
+                                                                        }]))
+                                                                        case 'success': return p_temp.option($, ($) => {
+
+                                                                            p_r.from.list($.statements).map_and_aggregate_error<string, s_file_structure_validation.Pareto_Parsing_Error>(
+                                                                                ($, abort): string => p_temp.from.state($).decide(
+                                                                                    ($): string => {
+                                                                                        switch ($[0]) {
+                                                                                            case 'import': return p_temp.option($, ($) => "uitwerken")
+                                                                                            case 'module': return p_temp.option($, ($) => "uitwerken")
+                                                                                            case 'variable': return p_temp.option($, ($) => "uitwerken")
+                                                                                            default: return abort(['unexpected construct', {
+                                                                                                'name': $[0],
+                                                                                                'file location': {
+                                                                                                    'context path': $d['path to package'],
+                                                                                                    'internal path': "/typescript/lib/src/schemas/" + schema_id + "/transformers",
+                                                                                                    'name': id,
+                                                                                                },
+                                                                                                'location in file': t_cst_to_location.Statement($)
+                                                                                            }])
+                                                                                        }
+                                                                                    }
+                                                                                ),
+                                                                                ($) => abort(['aggregated', {
+                                                                                    'errors': $
+                                                                                }])
+                                                                            )
+                                                                            return null
+                                                                        })
+                                                                        default: return p_temp.exhaustive($[0])
+                                                                    }
+                                                                }
+                                                            )
+
+                                                            return null
+                                                        },
+                                                        ($) => abort(['aggregated', {
+                                                            'errors': p_temp.from.dictionary($).convert_to_list(($, id) => $)
+                                                        }])
+                                                    )
+
+                                                })
+                                                const refiners_dir = p_r.from.dictionary($[1]).get_possible_entry(
+                                                    "refiners",
+                                                )
+                                                p_r.from.optional(refiners_dir).map(($) => {
+
+                                                    if ($[0] !== 'directory') {
+                                                        return abort(['not a directory', {
+                                                            'context path': $d['path to package'],
+                                                            'internal path': "/typescript/lib/src/schemas/" + schema_id,
+                                                            'name': "refiners",
+                                                        }])
+                                                    }
+
+                                                    return p_r.from.dictionary($[1]).map_and_aggregate_error<null, s_file_structure_validation.Pareto_Parsing_Error>(
+                                                        ($, id, abort): null => {
+
+                                                            if ($[0] !== 'file') {
+                                                                return abort(['not a file', {
+                                                                    'context path': $d['path to package'],
+                                                                    'internal path': "/typescript/lib/src/schemas/" + schema_id + "/refiners",
+                                                                    'name': id,
+                                                                }])
+                                                            }
+                                                            p_temp.from.state($[1]).decide(
+                                                                ($): null => {
+                                                                    switch ($[0]) {
+                                                                        case 'failure': return p_temp.option($, ($) => abort(['typescript parsing failed', {
+                                                                            'location': {
+                                                                                'context path': $d['path to package'],
+                                                                                'internal path': "/typescript/lib/src/schemas/" + schema_id + "/refiners",
+                                                                                'name': id,
+                                                                            }
+                                                                        }]))
+                                                                        case 'success': return p_temp.option($, ($) => {
+
+                                                                            p_r.from.list($.statements).map_and_aggregate_error<string, s_file_structure_validation.Pareto_Parsing_Error>(
+                                                                                ($, abort): string => p_temp.from.state($).decide(
+                                                                                    ($): string => {
+                                                                                        switch ($[0]) {
+                                                                                            case 'import': return p_temp.option($, ($) => "uitwerken")
+                                                                                            case 'module': return p_temp.option($, ($) => "uitwerken")
+                                                                                            case 'variable': return p_temp.option($, ($) => "uitwerken")
+                                                                                            default: return abort(['unexpected construct', {
+                                                                                                'name': $[0],
+                                                                                                'file location': {
+                                                                                                    'context path': $d['path to package'],
+                                                                                                    'internal path': "/typescript/lib/src/schemas/" + schema_id + "/transformers",
+                                                                                                    'name': id,
+                                                                                                },
+                                                                                                'location in file': t_cst_to_location.Statement($)
+                                                                                            }])
+                                                                                        }
+                                                                                    }
+                                                                                ),
+                                                                                ($) => abort(['aggregated', {
+                                                                                    'errors': $
+                                                                                }])
+                                                                            )
+                                                                            return null
+                                                                        })
+                                                                        default: return p_temp.exhaustive($[0])
+                                                                    }
+                                                                }
+                                                            )
+
+                                                            return null
+                                                        },
+                                                        ($) => abort(['aggregated', {
+                                                            'errors': p_temp.from.dictionary($).convert_to_list(($, id) => $)
+                                                        }])
+                                                    )
+
+                                                })
                                                 return {
                                                     'schema': schema_file[1]
                                                 }
@@ -430,7 +681,7 @@ export const $$: p_.Command_Implementation<
                                 $c.log.execute(
                                     {
                                         'lines': p_.literal.list([
-                                            "done parsing typescript files" + ser_fs_pat.Context_Path($d['path to package'])
+                                            "done parsing typescript files: " + ser_fs_pat.Context_Path($d['path to package'])
                                         ])
                                     },
                                     ($) => ['log', $]
@@ -442,7 +693,7 @@ export const $$: p_.Command_Implementation<
 
                     //FIXME move this to it's own query file in the 'file structure analysis' module
                     p_.s.query(
-                        p_q.e.dictionary(
+                        p_q.e_deprecated.dictionary(
                             r_analysis_from_package_files.Analyzed_Package_Nodes(
                                 $v,
                                 {
@@ -452,12 +703,12 @@ export const $$: p_.Command_Implementation<
                             ($, id) => p_q.decide.state($,
                                 ($): p_q.Query_Result<p_schema.List<string>, s.Node_Error> => {
                                     switch ($[0]) {
-                                        case 'unexpected directory': return p_q.ss($, ($) => p_q.e.direct_result(p_.literal.list(["unexpected directory"])))
-                                        case 'other': return p_q.ss($, ($) => p_q.e.direct_result(p_.literal.list(["unexpected node, not a dir and not a file"])))
-                                        case 'file': return p_q.ss($, ($): p_q.Query_Result<p_schema.List<string>, s.Node_Error> => {
+                                        case 'unexpected directory': return p_q.option($, ($) => p_q.e_deprecated.direct_result(p_.literal.list(["unexpected directory"])))
+                                        case 'other': return p_q.option($, ($) => p_q.e_deprecated.direct_result(p_.literal.list(["unexpected node, not a dir and not a file"])))
+                                        case 'file': return p_q.option($, ($): p_q.Query_Result<p_schema.List<string>, s.Node_Error> => {
                                             const xxx = $.content
                                             return p_q.decide.optional($['unexpected path tail'],
-                                                ($) => p_q.e.direct_result(p_.literal.list(["unexpected path tail"])),
+                                                ($) => p_q.e_deprecated.direct_result(p_.literal.list(["unexpected path tail"])),
                                                 (): p_q.Query_Result<p_schema.List<string>, s.Node_Error> => {
                                                     const path = ser_path.Path($.structure.path)
 
@@ -520,7 +771,7 @@ export const $$: p_.Command_Implementation<
                                                     const looked_up_path = known_paths[path]
 
                                                     if (looked_up_path === undefined) {
-                                                        return p_q.e.direct_result(p_.literal.list(["unknown path: " + path]))
+                                                        return p_q.e_deprecated.direct_result(p_.literal.list(["unknown path: " + path]))
                                                     }
 
                                                     // if (looked_up_path === true) { //typescript source file
@@ -538,8 +789,8 @@ export const $$: p_.Command_Implementation<
                                                     //                     ($) => p_temp.from.state($).decide(
                                                     //                         ($): p_schema.Optional_Value<string> => {
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -549,8 +800,8 @@ export const $$: p_.Command_Implementation<
                                                     //                     ($) => p_temp.from.state($).decide(
                                                     //                         ($): p_schema.Optional_Value<string> => {
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'type alias': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -560,8 +811,8 @@ export const $$: p_.Command_Implementation<
                                                     //                     ($) => p_temp.from.state($).decide(
                                                     //                         ($): p_schema.Optional_Value<string> => {
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -571,8 +822,8 @@ export const $$: p_.Command_Implementation<
                                                     //                     ($) => p_temp.from.state($).decide(
                                                     //                         ($): p_schema.Optional_Value<string> => {
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'type alias': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -582,9 +833,9 @@ export const $$: p_.Command_Implementation<
                                                     //                     ($) => p_temp.from.state($).decide(
                                                     //                         ($): p_schema.Optional_Value<string> => {
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'module': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -595,9 +846,9 @@ export const $$: p_.Command_Implementation<
                                                     //                         ($): p_schema.Optional_Value<string> => {
 
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'module': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -607,9 +858,9 @@ export const $$: p_.Command_Implementation<
                                                     //                     ($) => p_temp.from.state($).decide(
                                                     //                         ($): p_schema.Optional_Value<string> => {
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'module': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -619,9 +870,9 @@ export const $$: p_.Command_Implementation<
                                                     //                     ($) => p_temp.from.state($).decide(
                                                     //                         ($): p_schema.Optional_Value<string> => {
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'module': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -631,9 +882,9 @@ export const $$: p_.Command_Implementation<
                                                     //                     ($) => p_temp.from.state($).decide(
                                                     //                         ($): p_schema.Optional_Value<string> => {
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'module': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -643,10 +894,10 @@ export const $$: p_.Command_Implementation<
                                                     //                     ($) => p_temp.from.state($).decide(
                                                     //                         ($): p_schema.Optional_Value<string> => {
                                                     //                             switch ($[0]) {
-                                                    //                                 case 'export declaration': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                 case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'export declaration': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'module': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                 case 'type alias': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                 default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                             }
                                                     //                         }
@@ -658,8 +909,8 @@ export const $$: p_.Command_Implementation<
                                                     //                             ($) => p_temp.from.state($).decide(
                                                     //                                 ($): p_schema.Optional_Value<string> => {
                                                     //                                     switch ($[0]) {
-                                                    //                                         case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
-                                                    //                                         case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'expression': return p_temp.option($, ($) => p_temp.literal.not_set()) //shebang
+                                                    //                                         case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                         default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                                     }
                                                     //                                 }
@@ -669,8 +920,8 @@ export const $$: p_.Command_Implementation<
                                                     //                             ($) => p_temp.from.state($).decide(
                                                     //                                 ($): p_schema.Optional_Value<string> => {
                                                     //                                     switch ($[0]) {
-                                                    //                                         case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
-                                                    //                                         case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'expression': return p_temp.option($, ($) => p_temp.literal.not_set()) //shebang
+                                                    //                                         case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                         default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                                     }
                                                     //                                 }
@@ -680,8 +931,8 @@ export const $$: p_.Command_Implementation<
                                                     //                             ($) => p_temp.from.state($).decide(
                                                     //                                 ($): p_schema.Optional_Value<string> => {
                                                     //                                     switch ($[0]) {
-                                                    //                                         case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                         case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                         default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                                     }
                                                     //                                 }
@@ -716,10 +967,10 @@ export const $$: p_.Command_Implementation<
                                                     //                             ($) => p_temp.from.state($).decide(
                                                     //                                 ($): p_schema.Optional_Value<string> => {
                                                     //                                     switch ($[0]) {
-                                                    //                                         case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                         case 'module': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                         case 'type alias': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                         case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'module': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'type alias': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                         default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                                     }
                                                     //                                 }
@@ -731,8 +982,8 @@ export const $$: p_.Command_Implementation<
                                                     //                             ($) => p_temp.from.state($).decide(
                                                     //                                 ($): p_schema.Optional_Value<string> => {
                                                     //                                     switch ($[0]) {
-                                                    //                                         case 'expression': return p_temp.ss($, ($) => p_temp.literal.not_set()) //shebang
-                                                    //                                         case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'expression': return p_temp.option($, ($) => p_temp.literal.not_set()) //shebang
+                                                    //                                         case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                         default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                                     }
                                                     //                                 }
@@ -742,8 +993,8 @@ export const $$: p_.Command_Implementation<
                                                     //                             ($) => p_temp.from.state($).decide(
                                                     //                                 ($): p_schema.Optional_Value<string> => {
                                                     //                                     switch ($[0]) {
-                                                    //                                         case 'import': return p_temp.ss($, ($) => p_temp.literal.not_set())
-                                                    //                                         case 'variable': return p_temp.ss($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'import': return p_temp.option($, ($) => p_temp.literal.not_set())
+                                                    //                                         case 'variable': return p_temp.option($, ($) => p_temp.literal.not_set())
                                                     //                                         default: return p_temp.literal.set("unexpected statement '" + $[0] + "'")
                                                     //                                     }
                                                     //                                 }
@@ -756,20 +1007,20 @@ export const $$: p_.Command_Implementation<
                                                     //             'error': ($) => p_q.e.direct_result(p_temp.from.state($).decide(
                                                     //                 ($) => {
                                                     //                     switch ($[0]) {
-                                                    //                         case 'typed': return p_temp.ss($, ($) => p_temp.literal.list([
+                                                    //                         case 'typed': return p_temp.option($, ($) => p_temp.literal.list([
                                                     //                             "typescript parse error: " + $.type[0]
                                                     //                         ]))
-                                                    //                         case 'untyped': return p_temp.ss($, ($) => p_temp.from.state($).decide(
+                                                    //                         case 'untyped': return p_temp.option($, ($) => p_temp.from.state($).decide(
                                                     //                             ($) => {
                                                     //                                 switch ($[0]) {
-                                                    //                                     case 'syntax errors': return p_temp.ss($, ($) => p_temp.from.list($.messages).map(
+                                                    //                                     case 'syntax errors': return p_temp.option($, ($) => p_temp.from.list($.messages).map(
                                                     //                                         ($) => "typescript parse error: " + $
                                                     //                                     ))
-                                                    //                                     default: return p_temp.au($[0])
+                                                    //                                     default: return p_temp.exhaustive($[0])
                                                     //                                 }
                                                     //                             }
                                                     //                         ))
-                                                    //                         default: return p_temp.au($[0])
+                                                    //                         default: return p_temp.exhaustive($[0])
                                                     //                     }
                                                     //                 }
                                                     //             )),
@@ -779,12 +1030,12 @@ export const $$: p_.Command_Implementation<
                                                     // } else {
                                                     //     return p_q.e.direct_result(p_.literal.list<string>([]))
                                                     // }
-                                                    return p_q.e.direct_result(p_.literal.list<string>([]))
+                                                    return p_q.e_deprecated.direct_result(p_.literal.list<string>([]))
 
                                                 }
                                             )
                                         })
-                                        default: return p_q.au($[0])
+                                        default: return p_q.exhaustive($[0])
                                     }
                                 }
                             ),

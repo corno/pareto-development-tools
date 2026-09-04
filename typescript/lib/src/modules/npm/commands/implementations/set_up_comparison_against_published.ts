@@ -1,6 +1,5 @@
 import * as p_ from 'pareto-core/implementation/command'
 import * as p_t from 'pareto-core/implementation/transformer'
-import * as p_s from 'pareto-core/implementation/serializer'
 import * as p_schema from 'pareto-core/interface/schema'
 import p_list_from_text from 'pareto-core/implementation/refiner/specials/list_from_text'
 import p_list_build_deprecated from 'pareto-core/implementation/refiner/specials/list_build_deprecated'

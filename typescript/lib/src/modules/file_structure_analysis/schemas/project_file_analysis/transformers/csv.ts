@@ -37,9 +37,9 @@ export const File_Analysis_List: declarations.Signature = ($) => sh.CSV(
             return p_.from.state($.analysis).decide(
                 ($): p_schema.Optional_Value<s_out.Row>  => {
                     switch ($[0]) {
-                        case 'unexpected directory': return p_.ss($, ($) => p_.literal.not_set())
-                        case 'other': return p_.ss($, ($) => p_.literal.not_set())
-                        case 'file': return p_.ss($, ($) => p_.literal.set(sh.row(p_.literal.list<string>([
+                        case 'unexpected directory': return p_.option($, ($) => p_.literal.not_set())
+                        case 'other': return p_.option($, ($) => p_.literal.not_set())
+                        case 'file': return p_.option($, ($) => p_.literal.set(sh.row(p_.literal.list<string>([
                             package_,
                             path,
                             ser_path.Path($.structure.path),
@@ -76,7 +76,7 @@ export const File_Analysis_List: declarations.Signature = ($) => sh.CSV(
                             ),
                             `${r_line_count_from_loc.line_count($.content)}`, //number to string
                         ]))))
-                        default: return p_.au($[0])
+                        default: return p_.exhaustive($[0])
                     }
                 }
             )

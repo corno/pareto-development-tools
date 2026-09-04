@@ -26,8 +26,8 @@ export const $$: p_.Command_Implementation<
                     p_temp.from.state($d.impact).decide(
                         ($) => {
                             switch ($[0]) {
-                                case 'dry run': return p_temp.ss($, ($) => p_temp.literal.list(["--dry-run"]))
-                                case 'actual publish': return p_temp.ss($, ($) => p_temp.literal.list([
+                                case 'dry run': return p_temp.option($, ($) => p_temp.literal.list(["--dry-run"]))
+                                case 'actual publish': return p_temp.option($, ($) => p_temp.literal.list([
                                     // "--otp",
                                     // $['one time password'],
                                 ]))

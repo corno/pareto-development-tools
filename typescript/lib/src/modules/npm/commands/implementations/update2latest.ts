@@ -29,10 +29,10 @@ export const $$: p_.Command_Implementation<
                         p_temp.from.state($d.what).decide(
                             ($) => {
                                 switch ($[0]) {
-                                    case 'dependencies': return p_temp.ss($, ($) => {
+                                    case 'dependencies': return p_temp.option($, ($) => {
                                         return p_temp.literal.list(["dependencies"])
                                     })
-                                    case 'dev-dependencies': return p_temp.ss($, ($) => {
+                                    case 'dev-dependencies': return p_temp.option($, ($) => {
                                         return p_temp.literal.list(["devDependencies"])
                                     })
                                     default: return p_temp.exhaustive($[0])

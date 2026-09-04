@@ -61,9 +61,9 @@ export const $$: p_.Command_Implementation<
                             p_temp.from.state($).decide(
                                 ($): boolean => {
                                     switch ($[0]) {
-                                        case 'does not exist': return p_temp.ss($, ($) => false)
-                                        case 'file': return p_temp.ss($, ($) => false)
-                                        case 'directory': return p_temp.ss($, ($) => true)
+                                        case 'does not exist': return p_temp.option($, ($) => false)
+                                        case 'file': return p_temp.option($, ($) => false)
+                                        case 'directory': return p_temp.option($, ($) => true)
                                         default: return p_temp.exhaustive($[0])
                                     }
                                 }),

@@ -107,7 +107,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                     switch ($[0]) {
                         case 'analyze file structure': return p_.option($, ($) => t_get_project_files_to_paragraph.Error($))
                         case 'dependency graph': return p_.option($, ($) => t_dependency_graph_to_paragraph.Error($))
-                        default: return p_.au($[0])
+                        default: return p_.exhaustive($[0])
                     }
                 }
             ))

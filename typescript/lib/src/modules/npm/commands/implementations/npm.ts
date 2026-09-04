@@ -32,7 +32,7 @@ export const $$: p_.Command_Implementation<
                     p_temp.from.state($d.operation).decide(
                         ($) => {
                             switch ($[0]) {
-                                case 'update': return p_temp.ss($, ($) => p_.literal.segmented_list([
+                                case 'update': return p_temp.option($, ($) => p_.literal.segmented_list([
                                     p_.literal.list([
                                         "update",
                                     ]),
@@ -41,7 +41,7 @@ export const $$: p_.Command_Implementation<
                                         : p_.literal.list([])
 
                                 ]))
-                                case 'install': return p_temp.ss($, ($) => p_.literal.segmented_list([
+                                case 'install': return p_temp.option($, ($) => p_.literal.segmented_list([
                                     p_.literal.list([
                                         "install",
                                     ]),
@@ -50,13 +50,13 @@ export const $$: p_.Command_Implementation<
                                         : p_.literal.list([])
 
                                 ]))
-                                case 'version': return p_temp.ss($, ($) => p_.literal.list([
+                                case 'version': return p_temp.option($, ($) => p_.literal.list([
                                     "version",
                                     p_temp.from.state($).decide(
                                         ($) => {
                                             switch ($[0]) {
-                                                case 'patch': return p_temp.ss($, ($) => "patch")
-                                                case 'minor': return p_temp.ss($, ($) => "minor")
+                                                case 'patch': return p_temp.option($, ($) => "patch")
+                                                case 'minor': return p_temp.option($, ($) => "minor")
                                                 default: return p_temp.exhaustive($[0])
                                             }
                                         })

@@ -65,8 +65,8 @@ export const $$: p_.Command_Implementation<
                             p_temp.from.state($).decide(
                                 ($) => {
                                     switch ($[0]) {
-                                        case 'parse': return p_temp.ss($, ($) => t_bin_to_paragraph.Error($))
-                                        case 'execute command': return p_temp.ss($, ($) => t_api_to_paragraph.Error($))
+                                        case 'parse': return p_temp.option($, ($) => t_bin_to_paragraph.Error($))
+                                        case 'execute command': return p_temp.option($, ($) => t_api_to_paragraph.Error($))
                                         default: return p_temp.exhaustive($[0])
                                     }
                                 }

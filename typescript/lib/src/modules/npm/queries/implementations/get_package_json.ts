@@ -19,9 +19,9 @@ export const $$: p_.Query_Implementation<
         'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file,
     }
 > = p_.query(
-    ($d, $s, $r) => p_variables(
+    (e, $s, $r, $d) => p_variables(
         () => {
-            const path = t_path_to_path.create_node_path($d['path to package'], { 'node': "package.json" })
+            const path = t_path_to_path.create_node_path($d.deprecated['path to package'], { 'node': "package.json" })
             return p_super_query_result($r['read file'](
                 path,
                 ($): d.Error => ['error while reading package.json', $],

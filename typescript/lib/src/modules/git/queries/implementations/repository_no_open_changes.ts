@@ -1,5 +1,4 @@
 import * as p_ from 'pareto-core/implementation/query'
-import * as p_s from 'pareto-core/implementation/serializer'
 import * as p_t from 'pareto-core/implementation/transformer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
@@ -20,30 +19,32 @@ export const $$: p_.Query_Implementation<
         'git': query_interfaces_pareto_resources.query_executable
     }
 > = p_.query(
-    ($d, $s, $q) =>  p_super_query_result($q.git(
-        {
-            'working directory': p_.literal.not_set(),
-            'args': p_.literal.segmented_list([
-                p_t.from.optional($d.path).decide(
-                    ($) => p_.literal.list([
-                        "-C",
+    (e, $s, $q, $d) => p_super_query_result(
+        $q.git(
+            {
+                'working directory': p_.literal.not_set(),
+                'args': p_.literal.segmented_list([
+                    p_t.from.optional($d.deprecated.path).decide(
+                        ($) => p_.literal.list([
+                            "-C",
                             ser_path.Context_Path($),
-                    ]),
-                    () => p_.literal.list([])
-                ),
-                p_.literal.list([
-                    "status",
-                    "--porcelain",
-                ])
-            ]),
-        },
-        ($) => $,
-    )).transform<boolean>(
+                        ]),
+                        () => p_.literal.list([])
+                    ),
+                    p_.literal.list([
+                        "status",
+                        "--porcelain",
+                    ])
+                ]),
+            },
+            ($) => $,
+        )
+    ).transform<boolean>(
         ($) => $.stdout.raw === ""
     ).rework_error_temp(
-        ($current) =>  p_super_query_result($q['is inside work tree'](
+        ($current) => p_super_query_result($q['is inside work tree'](
             {
-                'path': $d.path
+                'path': $d.deprecated.path
             },
             ($) => $
         )).transform<d.Error>(

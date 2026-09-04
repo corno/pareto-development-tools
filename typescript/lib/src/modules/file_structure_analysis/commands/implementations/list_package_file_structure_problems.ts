@@ -66,12 +66,12 @@ export const $$: p_.Command_Implementation<
                                 return p_temp.from.state($.analysis).decide(
                                     ($): p_schema.Optional_Value<string> => {
                                         switch ($[0]) {
-                                            case 'file': return p_temp.ss($, ($) => p_temp.from.optional($['unexpected path tail']).map(
+                                            case 'file': return p_temp.option($, ($) => p_temp.from.optional($['unexpected path tail']).map(
                                                 ($) => p_s.ph.literal(path)
                                             ))
-                                            case 'other': return p_temp.ss($, ($) => p_temp.literal.set(p_s.ph.literal(path)))
-                                            case 'unexpected directory':  return p_temp.ss($, ($) => p_temp.literal.set(p_s.ph.literal(path)))
-                                            default: return p_temp.au($[0])
+                                            case 'other': return p_temp.option($, ($) => p_temp.literal.set(p_s.ph.literal(path)))
+                                            case 'unexpected directory':  return p_temp.option($, ($) => p_temp.literal.set(p_s.ph.literal(path)))
+                                            default: return p_temp.exhaustive($[0])
                                         }
                                     }
                                 )

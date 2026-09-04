@@ -1,6 +1,5 @@
 import * as p_ from 'pareto-core/implementation/command'
 import * as p_t from 'pareto-core/implementation/transformer'
-import * as p_s from 'pareto-core/implementation/serializer'
 import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
 //interface dependencies

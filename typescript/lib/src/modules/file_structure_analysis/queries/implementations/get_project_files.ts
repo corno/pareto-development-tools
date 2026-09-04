@@ -1,5 +1,4 @@
 import * as p_ from 'pareto-core/implementation/query'
-import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
 
 import type * as query_interfaces from "../interfaces.js"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
@@ -21,13 +20,15 @@ export const $$: p_.Query_Implementation<
         'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file,
     }
 > = p_.query(
-    ($d, $s, $q) => p_super_query_result($q['read directory'](
-        {
-            'path': t_path_to_path.extend_context_path_with_single_step($d['path to project'], { 'addition': "packages" }),
-        },
-        ($): d.Error => ['read directory', $],
-    )).query(
-        ($v) => p_.e.dictionary(
+    (e, $s, $q) => e.query(
+        ($d) => $q['read directory'](
+            {
+                'path': t_path_to_path.extend_context_path_with_single_step($d['path to project'], { 'addition': "packages" }),
+            },
+            ($): d.Error => ['read directory', $],
+        )
+    ).query(
+        ($v) => p_.e_deprecated.dictionary(
             $v,
             ($): p_.Query_Result<s_nested_directory_content.Directory, d.Package_Error> => {
                 const path = $.path

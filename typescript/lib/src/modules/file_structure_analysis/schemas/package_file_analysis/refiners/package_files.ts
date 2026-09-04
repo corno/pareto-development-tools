@@ -40,11 +40,11 @@ export const Analyzed_Package_Nodes: declarations.Analyzed_Package_Nodes = ($, $
         // const internal2 = ($: s_out_fsa.Directory): s_out_fsa.Flattened_Tree => p_.from.state($).decide(
         //     ($) => {
         //         switch ($[0]) {
-        //             case 'defined': return p_.ss($, ($) => )
-        //             case 'expected a file':return p_.ss($, ($) => )
-        //             case 'ignored': return p_.ss($, ($) => )
-        //             case 'undefined': return p_.ss($, ($) => )
-        //             default: return p_.au($[0])
+        //             case 'defined': return p_.option($, ($) => )
+        //             case 'expected a file':return p_.option($, ($) => )
+        //             case 'ignored': return p_.option($, ($) => )
+        //             case 'undefined': return p_.option($, ($) => )
+        //             default: return p_.exhaustive($[0])
         //         }
         //     }
         // )

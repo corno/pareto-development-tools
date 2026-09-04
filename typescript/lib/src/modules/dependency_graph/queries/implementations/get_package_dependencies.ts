@@ -20,14 +20,16 @@ export const $$: p_.Query_Implementation<
         'read file': query_interfaces_pareto_filesystem_unrestricted_api.read_file,
     }
 > = p_.query(
-    ($d, $s, $q) => p_super_query_result($q['read directory'](
-        {
-            'path': t_path_to_path.extend_context_path_with_single_step($d['path'], { 'addition': "packages" }),
-        },
-        ($): d.Error => ['read directory', $],
-    )).query(
-        ($) => p_super_query_result(p_.e.dictionary(
-            $,
+    (e, $s, $q, $d) => e.query(
+        ($d) => $q['read directory'](
+            {
+                'path': t_path_to_path.extend_context_path_with_single_step($d['path'], { 'addition': "packages" }),
+            },
+            ($): d.Error => ['read directory', $],
+        )
+    ).query(
+        ($d) => p_.e_deprecated.dictionary(
+            $d,
             ($) => {
                 const lib_path = t_path_to_path.extend_context_path_with_list(
                     t_path_to_path.deprecated_node_path_to_context_path($.path),
@@ -38,8 +40,8 @@ export const $$: p_.Query_Implementation<
                 const package_json_path = t_path_to_path.create_node_path(lib_path, { 'node': "package.json" })
                 return p_.decide.state($['node type'], ($): p_.Query_Result<s_npm_package.NPM_Package, d.Package_Error> => {
                     switch ($[0]) {
-                        case 'file': return p_.option($, ($) => p_.e.direct_error(['not a directory', null]))
-                        case 'other': return p_.option($, ($) => p_.e.direct_error(['not a directory', null]))
+                        case 'file': return p_.option($, ($) => p_.e_deprecated.direct_error(['not a directory', null]))
+                        case 'other': return p_.option($, ($) => p_.e_deprecated.direct_error(['not a directory', null]))
                         case 'directory': return p_.option($, ($) => p_super_query_result($q['read file'](
                             package_json_path,
                             ($): d.Package_Error => ['no package.json file', null],
@@ -57,10 +59,10 @@ export const $$: p_.Query_Implementation<
                 })
             },
             ($): d.Error => ['directory content processing', $],
-        )).transform(
-            ($) => ({
-                'packages': $,
-            })
         )
+    ).transform(
+        ($) => ({
+            'packages': $,
+        })
     )
 )

@@ -20,13 +20,13 @@ export const $$: p_.Query_Implementation<
         'parse typescript file': query_typescript_api.parse_file,
     }
 > = p_.query(
-    ($d, $s, $q) => p_.e.dictionary(
-        $d,
+    (e, $s, $q, $d) => p_.e_deprecated.dictionary(
+        $d.deprecated,
         ($): p_.Query_Result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error> => p_.decide.state(
             $,
             ($) => {
                 switch ($[0]) {
-                    case 'directory': return p_.ss($, ($): p_.Query_Result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error> => p_super_query_result(
+                    case 'directory': return p_.option($, ($): p_.Query_Result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error> => p_super_query_result(
                         $$(null, $q)(
                             $,
                             ($): s_get_typescript_files.Node_Error => ['directory', $],
@@ -34,22 +34,22 @@ export const $$: p_.Query_Implementation<
                     ).transform(
                         ($) => ['directory', $]
                     ))
-                    case 'file': return p_.ss($, ($): p_.Query_Result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error> => p_super_query_result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error>(
-                        p_.e.observe_behavior(
+                    case 'file': return p_.option($, ($): p_.Query_Result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error> => p_super_query_result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error>(
+                        p_.e_deprecated.observe_behavior(
                             $q['parse typescript file'](
                                 $,
                                 ($) => $
                             ),
                             {
-                                'error': ($): p_.Query_Result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error> => p_.e.direct_result(['file', ['failure', $]]),
-                                'success': ($): p_.Query_Result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error> => p_.e.direct_result(['file', ['success', $['source file']]]),
+                                'error': ($): p_.Query_Result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error> => p_.e_deprecated.direct_result(['file', ['failure', $]]),
+                                'success': ($): p_.Query_Result<s_get_typescript_files.Node, s_get_typescript_files.Node_Error> => p_.e_deprecated.direct_result(['file', ['success', $['source file']]]),
                             }
                         )
                     ).transform(
                         ($): s_get_typescript_files.Node => $
                     ))
-                    case 'other': return p_.ss($, ($) => p_.e.direct_result(['other', null]))
-                    default: return p_.au($[0])
+                    case 'other': return p_.option($, ($) => p_.e_deprecated.direct_result(['other', null]))
+                    default: return p_.exhaustive($[0])
                 }
             }
         ),
