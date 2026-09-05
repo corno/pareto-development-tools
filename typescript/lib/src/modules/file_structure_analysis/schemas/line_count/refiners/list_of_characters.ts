@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/refiner'
+import * as p_ from 'pareto-core/refiner'
 
 //schemas
 

@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/schema'
+import * as p_ from 'pareto-core/schema'
 
 import type * as s_repository_no_open_changes from "../repository_no_open_changes/schema.js"
 import type * as s_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/schema"

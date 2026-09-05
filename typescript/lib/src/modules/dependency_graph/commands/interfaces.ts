@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/command_interface'
+import * as p_ from 'pareto-core/command_interface'
 
 import type * as s_create_dependency_graph from "../schemas/create_dependency_graph/schema.js"
 

@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/transformer'
 
 //schemas
 import type * as s_in from "../schema.js"
@@ -9,7 +9,7 @@ namespace declarations {
         s_in.Error,
         s_out.Phrase,
         {
-            'context path': string
+            'context pathx': string
         }
     >
 }
@@ -49,7 +49,7 @@ export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
             case 'error while running update package dependencies': return p_.option($, ($) => sh.ph.composed([
                 t_clean_and_update_package_dependencies_to_paragraph.Error($)
             ]))
-            case 'error while running build and validate': return p_.option($, ($) => t_build_and_validate_to_paragraph.Error($, { 'concise': false, 'context path': $p['context path'] }))
+            case 'error while running build and validate': return p_.option($, ($) => t_build_and_validate_to_paragraph.Error($, { 'concise': false, 'context pathx': $p['context pathx'] }))
             case 'error while running git assert no open changes after updating package dependencies': return p_.option($, ($) => sh.ph.composed([
                 p_.from.state($).decide(
                     ($) => {

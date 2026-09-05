@@ -1,10 +1,10 @@
-import * as p_ from 'pareto-core/implementation/command'
-import * as p_t from 'pareto-core/implementation/transformer'
-import * as p_schema from 'pareto-core/interface/schema'
-import p_list_from_text from 'pareto-core/implementation/refiner/specials/list_from_text'
-import p_list_build_deprecated from 'pareto-core/implementation/refiner/specials/list_build_deprecated'
-import p_text_from_list from 'pareto-core/implementation/transformer/specials/text_from_list'
-import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
+import * as p_ from 'pareto-core/command'
+import * as p_t from 'pareto-core/transformer'
+import * as p_schema from 'pareto-core/schema'
+import p_list_from_text from 'pareto-core/refiner/specials/list_from_text'
+import p_list_build_deprecated from 'pareto-core/refiner/specials/list_build_deprecated'
+import p_text_from_list from 'pareto-core/transformer/specials/text_from_list'
+import p_super_query_result from 'pareto-core/query/super_query_result'
 
 //schemas
 

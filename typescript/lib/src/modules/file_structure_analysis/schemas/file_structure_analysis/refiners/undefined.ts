@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/refiner'
+import * as p_ from 'pareto-core/refiner'
 
 //schemas
 import type * as s_in_nested_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/nested_directory_content_as_read/schema"
@@ -10,7 +10,7 @@ namespace s_xxx {
         'structure path': s_path.Path,
     }
 }
-import type * as p_di from 'pareto-core/interface/schema'
+import type * as p_di from 'pareto-core/schema'
 import type * as s_in from "../schema.js"
 import type * as s_out from "../schema.js"
 import type * as s_path from "../../path/schema.js"

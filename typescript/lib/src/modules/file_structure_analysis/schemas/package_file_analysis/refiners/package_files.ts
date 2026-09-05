@@ -1,6 +1,6 @@
-import * as p_ from 'pareto-core/implementation/refiner'
-import * as p_temp from 'pareto-core/implementation/transformer'
-import * as p_schema from 'pareto-core/interface/schema'
+import * as p_ from 'pareto-core/refiner'
+import * as p_temp from 'pareto-core/transformer'
+import * as p_schema from 'pareto-core/schema'
 
 //schemas
 import type * as s_structure from "../../structure/schema.js"

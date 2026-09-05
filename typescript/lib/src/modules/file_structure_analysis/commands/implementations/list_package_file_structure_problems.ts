@@ -1,7 +1,7 @@
-import * as p_ from 'pareto-core/implementation/command'
-import * as p_temp from 'pareto-core/implementation/transformer'
-import * as p_s from 'pareto-core/implementation/serializer'
-import * as p_schema from 'pareto-core/interface/schema'
+import * as p_ from 'pareto-core/command'
+import * as p_temp from 'pareto-core/transformer'
+import * as p_s from 'pareto-core/serializer'
+import * as p_schema from 'pareto-core/schema'
 
 //interface dependencies
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"

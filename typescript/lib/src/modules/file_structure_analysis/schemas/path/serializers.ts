@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/serializer'
+import * as p_ from 'pareto-core/serializer'
 
 //schemas
 import type * as s_in from "./schema.js"

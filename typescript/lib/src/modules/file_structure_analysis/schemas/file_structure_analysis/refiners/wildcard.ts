@@ -1,5 +1,5 @@
-import * as p_ from 'pareto-core/implementation/refiner'
-import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
+import * as p_ from 'pareto-core/refiner'
+import p_change_context from 'pareto-core/refiner/specials/change_context'
 
 //schemas
 import type * as s_in_nested_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/nested_directory_content_as_read/schema"

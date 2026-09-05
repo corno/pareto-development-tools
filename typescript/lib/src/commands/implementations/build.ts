@@ -1,7 +1,7 @@
-import * as p_ from 'pareto-core/implementation/command'
-import * as p_temp from 'pareto-core/implementation/transformer'
-import p_variables from 'pareto-core/implementation/command/specials/variables'
-import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
+import * as p_ from 'pareto-core/command'
+import * as p_temp from 'pareto-core/transformer'
+import p_variables from 'pareto-core/command/specials/variables'
+import p_super_query_result from 'pareto-core/query/super_query_result'
 
 //interface dependencies
 import type * as command_interfaces from "../interfaces.js"

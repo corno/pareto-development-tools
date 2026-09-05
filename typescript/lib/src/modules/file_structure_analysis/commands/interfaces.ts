@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/command_interface'
+import * as p_ from 'pareto-core/command_interface'
 
 import type * as s_get_project_files from "../schemas/get_project_files/schema.js"
 import type * as s_list_package_file_structure_problems from "../schemas/list_package_file_structure_problems/schema.js"

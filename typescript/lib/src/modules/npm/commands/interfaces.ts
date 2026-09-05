@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/command_interface'
+import * as p_ from 'pareto-core/command_interface'
 
 import type * as s_npm from "../schemas/npm_tool/schema.js"
 import type * as s_npm_publish from "../schemas/npm_publish/schema.js"

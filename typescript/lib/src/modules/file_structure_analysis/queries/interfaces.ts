@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/query_interface'
+import * as p_ from 'pareto-core/query_interface'
 
 import type * as s_get_project_files from "../schemas/get_project_files/schema.js"
 

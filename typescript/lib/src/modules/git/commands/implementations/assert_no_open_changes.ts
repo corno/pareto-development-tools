@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/command'
+import * as p_ from 'pareto-core/command'
 
 //interface dependencies
 import type * as command_interfaces from "../../../version_control_api/commands/interfaces.js"

@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/schema'
+import * as p_ from 'pareto-core/schema'
 
 import type * as s_eqe from "pareto-execute-sandboxed/schemas/execute_sandboxed_query_executable/schema"
 import type * as s_iwt from "../is_inside_work_tree/schema.js"

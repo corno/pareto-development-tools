@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/command_interface'
+import * as p_ from 'pareto-core/command_interface'
 
 //schemas
 import type * as s_assert_no_open_changes from "../schemas/assert_no_open_changes/schema.js"

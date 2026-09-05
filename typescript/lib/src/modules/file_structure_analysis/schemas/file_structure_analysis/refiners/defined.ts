@@ -1,5 +1,5 @@
-import * as p_ from 'pareto-core/implementation/refiner'
-import * as p_temp from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/refiner'
+import * as p_temp from 'pareto-core/transformer'
 
 //schemas
 import type * as s_in_nested_directory_content from "pareto-filesystem-unrestricted-api/modules/helpers/schemas/nested_directory_content_as_read/schema"

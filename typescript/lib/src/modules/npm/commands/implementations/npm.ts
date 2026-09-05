@@ -1,6 +1,6 @@
-import * as p_ from 'pareto-core/implementation/command'
-import * as p_s from 'pareto-core/implementation/serializer'
-import * as p_temp from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/command'
+import * as p_s from 'pareto-core/serializer'
+import * as p_temp from 'pareto-core/transformer'
 
 //interface dependencies
 import type * as command_interfaces from "../interfaces.js"

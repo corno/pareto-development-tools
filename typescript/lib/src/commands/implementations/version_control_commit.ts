@@ -1,5 +1,5 @@
-import * as p_ from 'pareto-core/implementation/command'
-import * as p_t from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/command'
+import * as p_t from 'pareto-core/transformer'
 
 //interface dependencies
 import type * as command_interfaces from "../interfaces.js"

@@ -1,5 +1,5 @@
-import * as p_ from 'pareto-core/implementation/command'
-import p_change_context from 'pareto-core/implementation/refiner/specials/change_context'
+import * as p_ from 'pareto-core/command'
+import p_change_context from 'pareto-core/refiner/specials/change_context'
 
 //interface dependencies
 import type * as command_interfaces from "../interfaces.js"

@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/transformer'
 
 //schemas
 import type * as s_in from "../schema.js"
@@ -38,14 +38,14 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                             $.error,
                             {
                                 'concise': $.concise,
-                                'context path': ""
+                                'context pathx': ""
                             }
                         ))
                         case 'list package file structure problems': return p_.option($, ($) => t_list_package_file_structure_problems_to_paragraph.Error($))
-                        case 'publish': return p_.option($, ($) => t_publish.Error($, { 'context path': "" }))
+                        case 'publish': return p_.option($, ($) => t_publish.Error($, { 'context pathx': "" }))
                         case 'update dependencies': return p_.option($, ($) => t_update_dependencies.Error($))
                         case 'version control assert no open changes': return p_.option($, ($) => t_git_assert_no_open_changes_to_paragraph.Error($))
-                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_paragraph.Error($, { 'context path': "" }))
+                        case 'commit changes': return p_.option($, ($) => t_git_commit_to_paragraph.Error($, { 'context pathx': "" }))
 
                         default: return p_.exhaustive($[0])
                     }
@@ -70,7 +70,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                                                             $.error,
                                                             {
                                                                 'concise': $.concise,
-                                                                'context path': "/packages/" + id
+                                                                'context pathx': "/packages/" + id
                                                             }
                                                         ))
                                                         case 'build': return p_.option($, ($) => t_build_to_paragraph.Error(
@@ -81,7 +81,7 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                                                         case 'commit changes': return p_.option($, ($) => t_git_commit_to_paragraph.Error(
                                                             $,
                                                             {
-                                                                'context path': "/packages/" + id
+                                                                'context pathx': "/packages/" + id
                                                             }
                                                         ))
                                                         case 'set up comparison': return p_.option($, ($) => t_set_up_comparison_against_published.Error($))

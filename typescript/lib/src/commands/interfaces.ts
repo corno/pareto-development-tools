@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/interface/command_interface'
+import * as p_ from 'pareto-core/command_interface'
 
 import type * as s_command_instruction from "../schemas/command_instruction/schema.js"
 import type * as s_command_error from "../schemas/command_error/schema.js"

@@ -1,4 +1,4 @@
-import * as p_ from 'pareto-core/implementation/transformer'
+import * as p_ from 'pareto-core/transformer'
 
 //schemas
 import type * as s_in from "../schema.js"
@@ -9,7 +9,7 @@ namespace declarations {
         s_in.Error,
         s_out.Phrase,
         {
-            'context path': string
+            'context pathx': string
         }
     >
 }
@@ -28,7 +28,7 @@ export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
                 t_git_extended_commit_to_paragraph.Error($)
             ]))
             case 'error while running build and validate': return p_.option($, ($) => sh.ph.composed([
-                t_build_and_validate_to_paragraph.Error($, { 'concise': true, 'context path': $p['context path'] })
+                t_build_and_validate_to_paragraph.Error($, { 'concise': true, 'context pathx': $p['context pathx'] })
             ]))
             default: return p_.exhaustive($[0])
         }

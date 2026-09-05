@@ -1,6 +1,6 @@
-import * as p_ from 'pareto-core/implementation/query'
-import p_variables from 'pareto-core/implementation/query/specials/variables'
-import p_super_query_result from 'pareto-core/implementation/query/super_query_result'
+import * as p_ from 'pareto-core/query'
+import p_variables from 'pareto-core/query/specials/variables'
+import p_super_query_result from 'pareto-core/query/super_query_result'
 
 import type * as query_interfaces from "../interfaces.js"
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"
