@@ -148,6 +148,46 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                     }
                 )
             }])
+            case 'call': return p_.option($, ($): s_out.Expression => ['call', {
+                'function selection': p_.from.state($.callee).decide(
+                    ($) => {
+                        switch ($[0]) {
+                            case 'expression': return p_.option($, ($) => Expression($, abort))
+                            case 'import': return p_.option($, ($) => abort({
+                                'name': "import",
+                                'location': $.location
+                            }))
+                            case 'super': return p_.option($, ($) => abort({
+                                'name': "super",
+                                'location': $.location
+                            }))
+                            default: return p_.exhaustive($[0])
+                        }
+                    }
+                ),
+                'arguments': p_temp.from.list($.arguments.arguments).map_optionally(
+                    ($): p_schema.Optional_Value<s_out.Expression> => p_.from.state($).decide(
+                        ($) => {
+                            switch ($[0]) {
+                                case 'separator': return p_.option($, ($) => p_.literal.not_set())
+                                case 'entry': return p_.option($, ($) => p_.literal.set(p_.from.state($).decide(
+                                    ($) => {
+                                        switch ($[0]) {
+                                            case 'expression': return p_.option($, ($) => Expression($, abort))
+                                            case 'spread': return p_.option($, ($) => abort({
+                                                'name': "spread",
+                                                'location': $['dot dot dot token'].location
+                                            }))
+                                            default: return p_.exhaustive($[0])
+                                        }
+                                    }
+                                )))
+                                default: return p_.exhaustive($[0])
+                            }
+                        }
+                    )
+                )
+            }])
             default: return abort({
                 'name': $[0],
                 'location': t_cst_to_location.Expression($)
