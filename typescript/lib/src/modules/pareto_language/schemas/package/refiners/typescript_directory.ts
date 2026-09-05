@@ -1,5 +1,6 @@
 import * as p_ from 'pareto-core/refiner'
 import * as p_temp from 'pareto-core/transformer'
+import * as p_schema from 'pareto-core/schema'
 
 import * as s_out from "../schema.js"
 import * as s_in from "../../typescript_directory/schema.js"
@@ -18,6 +19,7 @@ export namespace declarations {
 
 //dependencies
 import * as t_cst_to_location from "pareto-typescript/schemas/concrete_syntax_tree/transformers/location"
+import * as r_temp_typescript_from_cst from "../../temp_typescript_target/refiners/typescript_cst.js"
 
 
 export const Package: declarations.Package = ($, abort) => {
@@ -155,12 +157,14 @@ export const Package: declarations.Package = ($, abort) => {
                                                     case 'module': return p_.option($, ($) => "uitwerken")
                                                     case 'type alias': return p_.option($, ($) => "uitwerken")
                                                     default: return abort(['unexpected construct', {
-                                                        'name': $[0],
+                                                        'error': {
+                                                            'name': $[0],
+                                                            'location': t_cst_to_location.Statement($)
+                                                        },
                                                         'file location': {
                                                             'internal path': "/typescript/lib/src/schemas/" + id,
                                                             'name': "schema.ts"
                                                         },
-                                                        'location in file': t_cst_to_location.Statement($)
                                                     }])
                                                 }
                                             }
@@ -207,12 +211,14 @@ export const Package: declarations.Package = ($, abort) => {
                                                             case 'module': return p_.option($, ($) => "uitwerken")
                                                             case 'variable': return p_.option($, ($) => "uitwerken")
                                                             default: return abort(['unexpected construct', {
-                                                                'name': $[0],
+                                                                'error': {
+                                                                    'name': $[0],
+                                                                    'location': t_cst_to_location.Statement($)
+                                                                },
                                                                 'file location': {
                                                                     'internal path': "/typescript/lib/src/schemas/" + id,
                                                                     'name': "schema.ts"
                                                                 },
-                                                                'location in file': t_cst_to_location.Statement($)
                                                             }])
                                                         }
                                                     }
@@ -261,12 +267,14 @@ export const Package: declarations.Package = ($, abort) => {
                                                             case 'module': return p_.option($, ($) => "uitwerken")
                                                             case 'variable': return p_.option($, ($) => "uitwerken")
                                                             default: return abort(['unexpected construct', {
-                                                                'name': $[0],
+                                                                'error': {
+                                                                    'name': $[0],
+                                                                    'location': t_cst_to_location.Statement($)
+                                                                },
                                                                 'file location': {
                                                                     'internal path': "/typescript/lib/src/schemas/" + id,
                                                                     'name': "deserializers.ts"
                                                                 },
-                                                                'location in file': t_cst_to_location.Statement($)
                                                             }])
                                                         }
                                                     }
@@ -326,12 +334,14 @@ export const Package: declarations.Package = ($, abort) => {
                                                                 case 'module': return p_.option($, ($) => "uitwerken")
                                                                 case 'variable': return p_.option($, ($) => "uitwerken")
                                                                 default: return abort(['unexpected construct', {
-                                                                    'name': $[0],
+                                                                    'error': {
+                                                                        'name': $[0],
+                                                                        'location': t_cst_to_location.Statement($)
+                                                                    },
                                                                     'file location': {
                                                                         'internal path': "/typescript/lib/src/schemas/" + schema_id + "/transformers",
                                                                         'name': id,
                                                                     },
-                                                                    'location in file': t_cst_to_location.Statement($)
                                                                 }])
                                                             }
                                                         }
@@ -387,20 +397,49 @@ export const Package: declarations.Package = ($, abort) => {
                                             }]))
                                             case 'success': return p_.option($, ($) => {
 
-                                                p_.from.list($.statements).map_and_aggregate_error<string, s_error.Error>(
-                                                    ($, abort): string => p_.from.state($).decide(
-                                                        ($): string => {
+                                                p_.from.list($.statements).map_and_aggregate_error<any, s_error.Error>(
+                                                    ($, abort) => p_.from.state($).decide(
+                                                        ($) => {
                                                             switch ($[0]) {
                                                                 case 'import': return p_.option($, ($) => "uitwerken")
                                                                 case 'module': return p_.option($, ($) => "uitwerken")
-                                                                case 'variable': return p_.option($, ($) => "uitwerken")
+                                                                case 'variable': return p_.option($, ($) => p_temp.from.list($['variable declaration list'].declarations).map_optionally(
+                                                                    ($) => p_.from.state($).decide(
+                                                                        ($): p_schema.Optional_Value<string> => {
+                                                                            switch ($[0]) {
+                                                                                case 'entry': return p_.option($, ($) => {
+                                                                                    p_.from.optional($.assignment).map(
+                                                                                        ($) => {
+                                                                                            r_temp_typescript_from_cst.Expression(
+                                                                                                $.initializer.expression,
+                                                                                                ($) => abort(['unexpected construct', {
+                                                                                                    'error': $,
+                                                                                                    'file location': {
+                                                                                                        'internal path': "/typescript/lib/src/schemas/" + schema_id + "/refiners",
+                                                                                                        'name': id,
+                                                                                                    }
+                                                                                                }])
+                                                                                            )
+                                                                                            return null
+                                                                                        }
+                                                                                    )
+                                                                                    return p_.literal.set("foo")
+                                                                                })
+                                                                                case 'separator': return p_.option($, ($) => p_.literal.not_set())
+                                                                                default: return p_.exhaustive($[0])
+                                                                            }
+                                                                        }
+                                                                    )
+                                                                ))
                                                                 default: return abort(['unexpected construct', {
-                                                                    'name': $[0],
+                                                                    'error': {
+                                                                        'name': $[0],
+                                                                        'location': t_cst_to_location.Statement($)
+                                                                    },
                                                                     'file location': {
                                                                         'internal path': "/typescript/lib/src/schemas/" + schema_id + "/transformers",
                                                                         'name': id,
                                                                     },
-                                                                    'location in file': t_cst_to_location.Statement($)
                                                                 }])
                                                             }
                                                         }

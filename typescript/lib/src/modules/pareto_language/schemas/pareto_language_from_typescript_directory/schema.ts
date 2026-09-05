@@ -14,10 +14,14 @@ export type Error =
 | ['not a directory', Location]
 | ['not a file', Location]
 | ['unexpected construct', {
-    'name': string
     'file location': Location
-    'location in file': s_cst.Node['location']
+    'error': Unexpected_Construct_Error
 }]
+
+export type Unexpected_Construct_Error = {
+    'name': string
+    'location': s_cst.Node['location']
+}
 
 export type Location = {
     'internal path': string

@@ -48,7 +48,7 @@ export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
             ))
             case 'unexpected construct': return p_.option($, ($) => p_.literal.list([
                 sh.sentence([
-                    sh.ph.text("unexpected construct: " + $.name + " in " + ser_path.Context_Path($p['context path']) + $['file location']['internal path'] + "/" + $['file location'].name + ":" + $['location in file']['line'] + ":" + $['location in file']['column'])
+                    sh.ph.text("unexpected construct: " + $.error.name + " in " + ser_path.Context_Path($p['context path']) + $['file location']['internal path'] + "/" + $['file location'].name + ":" + $.error.location['line'] + ":" + $.error.location['column'])
                 ])
             ]))
             case 'typescript parsing failed': return p_.option($, ($) => p_.literal.list([
