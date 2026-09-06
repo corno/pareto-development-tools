@@ -27,32 +27,40 @@ export type All_Packages = {
     'instruction': All_Pacakges_Instruction
 }
 
+export namespace Package {
+    export type instruction =
+        /**
+         * asserts that the git working tree is clean for 1 specified package
+         */
+        | ['assert no open changes', null]
+
+
+        | ['build and validate', null]
+        | ['commit changes', s_git_commit.Instruction]
+
+
+        | ['list file structure problems', null]
+        | ['publish', s_publish.Parameters2]
+        | ['update package dependencies', null]
+}
+
 export type Package = {
     'path': s_path.Context_Path
-    'instruction':
-    /**
-     * asserts that the git working tree is clean for 1 specified package
-     */
-    | ['assert no open changes', null]
+    'instruction': Package.instruction
 
+}
 
-    | ['build and validate', null]
-    | ['commit changes', s_git_commit.Instruction]
+export namespace Project {
+    export type instruction =
 
+        | ['analyze file structure', null]
 
-    | ['list file structure problems', null]
-    | ['publish', s_publish.Parameters2]
-    | ['update package dependencies', null]
-
+        | ['dependency graph', null]
 }
 
 export type Project = {
     'path': s_path.Context_Path
-    'instruction':
-
-    | ['analyze file structure', null]
-
-    | ['dependency graph', null]
+    'instruction': Project.instruction
 }
 
 export type All_Pacakges_Instruction =

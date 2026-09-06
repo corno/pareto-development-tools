@@ -1,4 +1,5 @@
 import * as p_ from 'pareto-core/transformer'
+import * as p_s from 'pareto-core/serializer'
 
 //schemas
 import type * as s_in from "../schema.js"
@@ -70,7 +71,10 @@ export const Error: declarations.Error = ($) => p_.from.state($).decide(
                                                             $.error,
                                                             {
                                                                 'concise': $.concise,
-                                                                'context pathx': "/packages/" + id
+                                                                'context pathx': p_s.ph.list(p_.literal.list([
+                                                                    "/packages/",
+                                                                    id
+                                                                ]))
                                                             }
                                                         ))
                                                         case 'build': return p_.option($, ($) => t_build_to_paragraph.Error(

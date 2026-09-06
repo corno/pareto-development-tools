@@ -15,14 +15,19 @@ export type Parameters = {
 }
 
 export type Parameters2 = {
-    'generation':
-    | ['minor', null]
-    | ['patch', null]
-    'impact':
-    |['dry run', null]
-    |['actual publish', {
-        //'one time password': string
-    }]
+    'generation': Parameters2.generation
+    'impact': Parameters2.impact
+}
+
+export namespace Parameters2 {
+    export type generation =
+        | ['minor', null]
+        | ['patch', null]
+    export type impact =
+        | ['dry run', null]
+        | ['actual publish', {
+            //'one time password': string
+        }]
 }
 
 export type Error =
