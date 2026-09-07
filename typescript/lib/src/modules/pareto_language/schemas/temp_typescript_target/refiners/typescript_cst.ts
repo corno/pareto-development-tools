@@ -292,7 +292,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                 'collection': Expression($.expression, abort),
                 'index': Expression($['argument expression'], abort)
             }])
-            case 'false': return p_.option($, ($): s_out.Expression => ['false', null])
+            case 'false keyword': return p_.option($, ($): s_out.Expression => ['false', null])
             case 'identifier': return p_.option($, ($): s_out.Expression => ['identifier', {
                 'value': $.text
             }])
