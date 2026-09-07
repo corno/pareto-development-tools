@@ -15,15 +15,28 @@ export type Package = {
 
 export namespace Module {
     export type modules = p_schema.Dictionary<Module>
+    export type commands = {
+        'interfaces': p_schema.Dictionary<null>
+        'implementations': p_schema.Dictionary<null>
+    }
+    export type queries = {
+        'interfaces': p_schema.Dictionary<null>
+        'implementations': p_schema.Dictionary<null>
+    }
 }
 
 export type Module = {
     'schemas': Schemas
     'modules': Module.modules
+    'commands': Module.commands
 }
 
 export type Schemas = p_schema.Dictionary<Schema>
 
 export type Schema = {
-    'schema': s_typescript_directory.File
+    'schema': null
+    'transformers': p_schema.Dictionary<null>
+    'serializers': null
+    'refiners': null
+    'deserializers': null
 }

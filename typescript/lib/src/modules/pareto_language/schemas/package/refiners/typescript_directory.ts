@@ -1,5 +1,7 @@
 import * as p_ from 'pareto-core/refiner'
 import * as p_temp from 'pareto-core/transformer'
+import * as p_schema from 'pareto-core/schema'
+import p_build_group from 'pareto-core/refiner/specials/build_group_and_aggregate_errors'
 
 import * as s_out from "../schema.js"
 import * as s_in from "../../typescript_directory/schema.js"
@@ -62,7 +64,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
                             }])
                         }
                         return Module($[1], abort, {
-                            'path': $p.path + "/modules/" + id
+                            'path': $p.path + "/modules/" + module_id
                         })
                     },
                     ($) => abort(['aggregated', {
@@ -91,367 +93,452 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                 'name': id,
                             }])
                         }
-                        const schema_file = p_.from.dictionary($[1]).get_entry(
-                            "schema.ts",
-                            {
-                                'no_such_entry': ($) => abort(['no such node', {
-                                    'internal path': $p.path + "/schemas/" + id,
-                                    'name': "schema.ts",
-                                }])
-                            }
-                        )
-                        if (schema_file[0] !== 'file') {
-                            return abort(['not a file', {
-                                'internal path': $p.path + "/schemas/" + id,
-                                'name': "schema.ts",
-                            }])
-                        }
-                        p_.from.state(schema_file[1]).decide(
-                            ($): null => {
-                                switch ($[0]) {
-                                    case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
-                                        'location': {
-                                            'internal path': $p.path + "/schemas/" + id,
-                                            'name': "schema.ts"
-                                        }
-                                    }]))
-                                    case 'success': return p_.option($, ($) => {
 
-                                        p_.from.list($.statements).map_and_aggregate_error<string, s_error.Error>(
-                                            ($, abort): string => p_.from.state($).decide(
-                                                ($): string => {
-                                                    switch ($[0]) {
-                                                        case 'export declaration': return p_.option($, ($) => "uitwerken")
-                                                        case 'import': return p_.option($, ($) => "uitwerken")
-                                                        case 'module': return p_.option($, ($) => "uitwerken")
-                                                        case 'type alias': return p_.option($, ($) => "uitwerken")
-                                                        default: return abort(['source file', {
-                                                            'error': ['unexpected construct', {
-                                                                'name': $[0],
-                                                                'location': t_cst_to_location.Statement($)
-                                                            }],
-                                                            'file location': {
-                                                                'internal path': $p.path + "/schemas/" + id,
-                                                                'name': "schema.ts"
-                                                            },
-                                                        }])
-                                                    }
-                                                }
-                                            ),
-                                            ($) => abort(['aggregated', {
-                                                'errors': $
+
+
+                        return p_build_group<s_error.Error>()(
+                            [
+                                (abort): s_out.Schema['schema'] => {
+
+                                    const schema_file = p_.from.dictionary($[1]).get_entry(
+                                        "schema.ts",
+                                        {
+                                            'no_such_entry': ($) => abort(['no such node', {
+                                                'internal path': $p.path + "/schemas/" + schema_id,
+                                                'name': "schema.ts",
                                             }])
-                                        )
-                                        return null
-                                    })
-                                    default: return p_.exhaustive($[0])
-                                }
-                            }
-                        )
-
-                        const serializer_file = p_.from.dictionary($[1]).get_possible_entry(
-                            "serializers.ts",
-                        )
-                        p_.from.optional(serializer_file).map(
-                            ($) => {
-                                if ($[0] !== 'file') {
-                                    return abort(['not a file', {
-                                        'internal path': $p.path + "/schemas/" + id,
-                                        'name': "serializers.ts",
-                                    }])
-                                }
-
-                                p_.from.state($[1]).decide(
-                                    ($): null => {
-                                        switch ($[0]) {
-                                            case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
-                                                'location': {
-                                                    'internal path': $p.path + "/schemas/" + id,
-                                                    'name': "schema.ts"
-                                                }
-                                            }]))
-                                            case 'success': return p_.option($, ($) => {
-
-                                                p_.from.list($.statements).map_and_aggregate_error<string, s_error.Error>(
-                                                    ($, abort): string => p_.from.state($).decide(
-                                                        ($): string => {
-                                                            switch ($[0]) {
-                                                                case 'import': return p_.option($, ($) => "uitwerken")
-                                                                case 'module': return p_.option($, ($) => "uitwerken")
-                                                                case 'variable': return p_.option($, ($) => "uitwerken")
-                                                                default: return abort(['source file', {
-                                                                    'error': ['unexpected construct', {
-                                                                        'name': $[0],
-                                                                        'location': t_cst_to_location.Statement($)
-                                                                    }],
-                                                                    'file location': {
-                                                                        'internal path': $p.path + "/schemas/" + id,
-                                                                        'name': "schema.ts"
-                                                                    },
-                                                                }])
-                                                            }
-                                                        }
-                                                    ),
-                                                    ($) => abort(['aggregated', {
-                                                        'errors': $
-                                                    }])
-                                                )
-                                                return null
-                                            })
-                                            default: return p_.exhaustive($[0])
                                         }
-                                    }
-                                )
-                                return null
-                            }
-                        )
-                        const deserializer_file = p_.from.dictionary($[1]).get_possible_entry(
-                            "deserializers.ts",
-                        )
-                        p_.from.optional(deserializer_file).map(
-                            ($) => {
-                                if ($[0] !== 'file') {
-                                    return abort(['not a file', {
-                                        'internal path': $p.path + "/schemas/" + id,
-                                        'name': "deserializers.ts",
-                                    }])
-                                }
-
-                                p_.from.state($[1]).decide(
-                                    ($): null => {
-                                        switch ($[0]) {
-                                            case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
-                                                'location': {
-                                                    'internal path': $p.path + "/schemas/" + id,
-                                                    'name': "deserializers.ts"
-                                                }
-                                            }]))
-                                            case 'success': return p_.option($, ($) => {
-
-                                                p_.from.list($.statements).map_and_aggregate_error<string, s_error.Error>(
-                                                    ($, abort): string => p_.from.state($).decide(
-                                                        ($): string => {
-                                                            switch ($[0]) {
-                                                                case 'import': return p_.option($, ($) => "uitwerken")
-                                                                case 'module': return p_.option($, ($) => "uitwerken")
-                                                                case 'variable': return p_.option($, ($) => "uitwerken")
-                                                                default: return abort(['source file', {
-                                                                    'error': ['unexpected construct', {
-                                                                        'name': $[0],
-                                                                        'location': t_cst_to_location.Statement($)
-                                                                    }],
-                                                                    'file location': {
-                                                                        'internal path': $p.path + "/schemas/" + id,
-                                                                        'name': "deserializers.ts"
-                                                                    },
-                                                                }])
-                                                            }
-                                                        }
-                                                    ),
-                                                    ($) => abort(['aggregated', {
-                                                        'errors': $
-                                                    }])
-                                                )
-                                                return null
-                                            })
-                                            default: return p_.exhaustive($[0])
-                                        }
-                                    }
-                                )
-                                return null
-                            }
-                        )
-
-
-                        const transformers_dir = p_.from.dictionary($[1]).get_possible_entry(
-                            "transformers",
-                        )
-                        p_.from.optional(transformers_dir).map(($) => {
-
-                            if ($[0] !== 'directory') {
-                                return abort(['not a directory', {
-                                    'internal path': $p.path + "/schemas/" + schema_id,
-                                    'name': "transformers",
-                                }])
-                            }
-
-                            return p_.from.dictionary($[1]).map_and_aggregate_error<null, s_error.Error>(
-                                ($, id, abort): null => {
-
-                                    if ($[0] !== 'file') {
+                                    )
+                                    if (schema_file[0] !== 'file') {
                                         return abort(['not a file', {
-                                            'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
-                                            'name': id,
+                                            'internal path': $p.path + "/schemas/" + schema_id,
+                                            'name': "schema.ts",
                                         }])
                                     }
-                                    p_.from.state($[1]).decide(
+                                    return p_.from.state(schema_file[1]).decide(
                                         ($): null => {
                                             switch ($[0]) {
                                                 case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
                                                     'location': {
-                                                        'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
-                                                        'name': id,
+                                                        'internal path': $p.path + "/schemas/" + schema_id,
+                                                        'name': "schema.ts"
                                                     }
                                                 }]))
                                                 case 'success': return p_.option($, ($) => {
 
                                                     p_.from.list($.statements).map_and_aggregate_error<string, s_error.Error>(
-                                                        ($, abort) => p_.from.state($).decide(
-                                                            ($): any => {
+                                                        ($, abort): string => p_.from.state($).decide(
+                                                            ($): string => {
                                                                 switch ($[0]) {
+                                                                    case 'export declaration': return p_.option($, ($) => "uitwerken")
                                                                     case 'import': return p_.option($, ($) => "uitwerken")
                                                                     case 'module': return p_.option($, ($) => "uitwerken")
-                                                                    case 'variable': return p_.option($, ($) => p_.from.list($['variable declaration list'].declarations.entries).map_and_aggregate_error<any, s_error.Error>(
-                                                                        ($) => {
-                                                                            p_.from.optional($.data.assignment).map(
-                                                                                ($) => {
-                                                                                    r_temp_typescript_from_cst.Expression(
-                                                                                        $.initializer.expression,
-                                                                                        ($) => abort(['source file', {
-                                                                                            'error': $,
-                                                                                            'file location': {
-                                                                                                'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
-                                                                                                'name': id,
-                                                                                            }
-                                                                                        }])
-                                                                                    )
-                                                                                    return null
-                                                                                }
-                                                                            )
-                                                                            return p_.literal.set("foo")
+                                                                    case 'type alias': return p_.option($, ($) => "uitwerken")
+                                                                    default: return abort(['source file', {
+                                                                        'error': ['unexpected construct', {
+                                                                            'name': $[0],
+                                                                            'location': t_cst_to_location.Statement($)
+                                                                        }],
+                                                                        'file location': {
+                                                                            'internal path': $p.path + "/schemas/" + schema_id,
+                                                                            'name': "schema.ts"
                                                                         },
+                                                                    }])
+                                                                }
+                                                            }
+                                                        ),
+                                                        ($) => abort(['aggregated', {
+                                                            'errors': $
+                                                        }])
+                                                    )
+                                                    return null
+                                                })
+                                                default: return p_.exhaustive($[0])
+                                            }
+                                        }
+                                    )
+                                },
+                                (abort): s_out.Schema['transformers'] => {
+                                    const transformers_dir = p_.from.dictionary($[1]).get_possible_entry(
+                                        "transformers",
+                                    )
+                                    return p_.from.optional(transformers_dir).decide(
+                                        ($): p_schema.Dictionary<null> => {
+
+                                            if ($[0] !== 'directory') {
+                                                return abort(['not a directory', {
+                                                    'internal path': $p.path + "/schemas/" + schema_id,
+                                                    'name': "transformers",
+                                                }])
+                                            }
+
+                                            return p_.from.dictionary($[1]).map_and_aggregate_error<null, s_error.Error>(
+                                                ($, id, abort): null => {
+
+                                                    if ($[0] !== 'file') {
+                                                        return abort(['not a file', {
+                                                            'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
+                                                            'name': id,
+                                                        }])
+                                                    }
+                                                    p_.from.state($[1]).decide(
+                                                        ($): null => {
+                                                            switch ($[0]) {
+                                                                case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
+                                                                    'location': {
+                                                                        'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
+                                                                        'name': id,
+                                                                    }
+                                                                }]))
+                                                                case 'success': return p_.option($, ($) => {
+
+                                                                    p_.from.list($.statements).map_and_aggregate_error<string, s_error.Error>(
+                                                                        ($, abort) => p_.from.state($).decide(
+                                                                            ($): any => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_.option($, ($) => "uitwerken")
+                                                                                    case 'module': return p_.option($, ($) => "uitwerken")
+                                                                                    case 'variable': return p_.option($, ($) => p_.from.list($['variable declaration list'].declarations.entries).map_and_aggregate_error<any, s_error.Error>(
+                                                                                        ($) => {
+                                                                                            p_.from.optional($.data.assignment).map(
+                                                                                                ($) => {
+                                                                                                    r_temp_typescript_from_cst.Expression(
+                                                                                                        $.initializer.expression,
+                                                                                                        ($) => abort(['source file', {
+                                                                                                            'error': $,
+                                                                                                            'file location': {
+                                                                                                                'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
+                                                                                                                'name': id,
+                                                                                                            }
+                                                                                                        }])
+                                                                                                    )
+                                                                                                    return null
+                                                                                                }
+                                                                                            )
+                                                                                            return p_.literal.set("foo")
+                                                                                        },
+                                                                                        ($) => abort(['aggregated', {
+                                                                                            'errors': $
+                                                                                        }])
+                                                                                    ))
+                                                                                    default: return abort(['source file', {
+                                                                                        'error': ['unexpected construct', {
+                                                                                            'name': $[0],
+                                                                                            'location': t_cst_to_location.Statement($)
+                                                                                        }],
+                                                                                        'file location': {
+                                                                                            'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
+                                                                                            'name': id,
+                                                                                        },
+                                                                                    }])
+                                                                                }
+                                                                            }
+                                                                        ),
                                                                         ($) => abort(['aggregated', {
                                                                             'errors': $
                                                                         }])
-                                                                    ))
-                                                                    default: return abort(['source file', {
-                                                                        'error': ['unexpected construct', {
-                                                                            'name': $[0],
-                                                                            'location': t_cst_to_location.Statement($)
-                                                                        }],
-                                                                        'file location': {
-                                                                            'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
-                                                                            'name': id,
-                                                                        },
-                                                                    }])
-                                                                }
+                                                                    )
+                                                                    return null
+                                                                })
+                                                                default: return p_.exhaustive($[0])
                                                             }
-                                                        ),
-                                                        ($) => abort(['aggregated', {
-                                                            'errors': $
-                                                        }])
+                                                        }
                                                     )
+
                                                     return null
-                                                })
-                                                default: return p_.exhaustive($[0])
-                                            }
-                                        }
+                                                },
+                                                ($) => abort(['aggregated', {
+                                                    'errors': p_temp.from.dictionary($).convert_to_list(($, id) => $)
+                                                }])
+                                            )
+
+                                        },
+                                        () => p_.literal.dictionary({})
                                     )
 
-                                    return null
                                 },
-                                ($) => abort(['aggregated', {
-                                    'errors': p_temp.from.dictionary($).convert_to_list(($, id) => $)
-                                }])
-                            )
+                                (abort): s_out.Schema['serializers'] => {
 
-                        })
-                        const refiners_dir = p_.from.dictionary($[1]).get_possible_entry(
-                            "refiners",
-                        )
-                        p_.from.optional(refiners_dir).map(($) => {
+                                    const serializer_file = p_.from.dictionary($[1]).get_possible_entry(
+                                        "serializers.ts",
+                                    )
+                                    p_.from.optional(serializer_file).map(
+                                        ($) => {
+                                            if ($[0] !== 'file') {
+                                                return abort(['not a file', {
+                                                    'internal path': $p.path + "/schemas/" + schema_id,
+                                                    'name': "serializers.ts",
+                                                }])
+                                            }
 
-                            if ($[0] !== 'directory') {
-                                return abort(['not a directory', {
-                                    'internal path': $p.path + "/schemas/" + schema_id,
-                                    'name': "refiners",
-                                }])
-                            }
+                                            p_.from.state($[1]).decide(
+                                                ($): null => {
+                                                    switch ($[0]) {
+                                                        case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
+                                                            'location': {
+                                                                'internal path': $p.path + "/schemas/" + schema_id,
+                                                                'name': "serializers.ts"
+                                                            }
+                                                        }]))
+                                                        case 'success': return p_.option($, ($) => {
 
-                            return p_.from.dictionary($[1]).map_and_aggregate_error<null, s_error.Error>(
-                                ($, id, abort): null => {
-
-                                    if ($[0] !== 'file') {
-                                        return abort(['not a file', {
-                                            'internal path': $p.path + "/schemas/" + schema_id + "/refiners",
-                                            'name': id,
-                                        }])
-                                    }
-                                    p_.from.state($[1]).decide(
-                                        ($): null => {
-                                            switch ($[0]) {
-                                                case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
-                                                    'location': {
-                                                        'internal path': $p.path + "/schemas/" + schema_id + "/refiners",
-                                                        'name': id,
-                                                    }
-                                                }]))
-                                                case 'success': return p_.option($, ($) => {
-
-                                                    p_.from.list($.statements).map_and_aggregate_error<any, s_error.Error>(
-                                                        ($, abort) => p_.from.state($).decide(
-                                                            ($) => {
-                                                                switch ($[0]) {
-                                                                    case 'import': return p_.option($, ($) => "uitwerken")
-                                                                    case 'module': return p_.option($, ($) => "uitwerken")
-                                                                    case 'variable': return p_.option($, ($) => p_.from.list($['variable declaration list'].declarations.entries).map_and_aggregate_error<any, s_error.Error>(
-                                                                        ($) => {
-                                                                            p_.from.optional($.data.assignment).map(
+                                                            p_.from.list($.statements).map_and_aggregate_error<any, s_error.Error>(
+                                                                ($, abort) => p_.from.state($).decide(
+                                                                    ($) => {
+                                                                        switch ($[0]) {
+                                                                            case 'import': return p_.option($, ($) => "uitwerken")
+                                                                            case 'module': return p_.option($, ($) => "uitwerken")
+                                                                            case 'variable': return p_.option($, ($) => p_.from.list($['variable declaration list'].declarations.entries).map_and_aggregate_error<any, s_error.Error>(
                                                                                 ($) => {
-                                                                                    r_temp_typescript_from_cst.Expression(
-                                                                                        $.initializer.expression,
-                                                                                        ($) => abort(['source file', {
-                                                                                            'error': $,
-                                                                                            'file location': {
-                                                                                                'internal path': $p.path + "/schemas/" + schema_id + "/refiners",
-                                                                                                'name': id,
-                                                                                            }
-                                                                                        }])
+                                                                                    p_.from.optional($.data.assignment).map(
+                                                                                        ($) => {
+                                                                                            r_temp_typescript_from_cst.Expression(
+                                                                                                $.initializer.expression,
+                                                                                                ($) => abort(['source file', {
+                                                                                                    'error': $,
+                                                                                                    'file location': {
+                                                                                                        'internal path': $p.path + "/schemas/" + schema_id,
+                                                                                                        'name': "serializers.ts",
+                                                                                                    }
+                                                                                                }])
+                                                                                            )
+                                                                                            return null
+                                                                                        }
                                                                                     )
-                                                                                    return null
-                                                                                }
-                                                                            )
-                                                                            return p_.literal.set("foo")
-                                                                        },
-                                                                        ($) => abort(['aggregated', {
-                                                                            'errors': $,
-                                                                        }])
-                                                                    ))
-                                                                    default: return abort(['source file', {
-                                                                        'error': ['unexpected construct', {
-                                                                            'name': $[0],
-                                                                            'location': t_cst_to_location.Statement($)
-                                                                        }],
-                                                                        'file location': {
-                                                                            'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
-                                                                            'name': id,
-                                                                        },
-                                                                    }])
-                                                                }
-                                                            }
-                                                        ),
-                                                        ($) => abort(['aggregated', {
-                                                            'errors': $
-                                                        }])
-                                                    )
-                                                    return null
-                                                })
-                                                default: return p_.exhaustive($[0])
-                                            }
+                                                                                    return p_.literal.set("foo")
+                                                                                },
+                                                                                ($) => abort(['aggregated', {
+                                                                                    'errors': $,
+                                                                                }])
+                                                                            ))
+                                                                            default: return abort(['source file', {
+                                                                                'error': ['unexpected construct', {
+                                                                                    'name': $[0],
+                                                                                    'location': t_cst_to_location.Statement($)
+                                                                                }],
+                                                                                'file location': {
+                                                                                    'internal path': $p.path + "/schemas/" + id,
+                                                                                    'name': "serializers.ts"
+                                                                                },
+                                                                            }])
+                                                                        }
+                                                                    }
+                                                                ),
+                                                                ($) => abort(['aggregated', {
+                                                                    'errors': $
+                                                                }])
+                                                            )
+                                                            return null
+                                                        })
+                                                        default: return p_.exhaustive($[0])
+                                                    }
+                                                }
+                                            )
+                                            return null
                                         }
                                     )
-
                                     return null
                                 },
-                                ($) => abort(['aggregated', {
-                                    'errors': p_temp.from.dictionary($).convert_to_list(($, id) => $)
-                                }])
-                            )
+                                (abort): s_out.Schema['refiners'] => {
 
-                        })
-                        return {
-                            'schema': schema_file[1]
-                        }
+
+                                    return p_.from.optional(p_.from.dictionary($[1]).get_possible_entry(
+                                        "refiners",
+                                    )).decide(
+                                        ($) => {
+
+                                            if ($[0] !== 'directory') {
+                                                return abort(['not a directory', {
+                                                    'internal path': $p.path + "/schemas/" + schema_id,
+                                                    'name': "refiners",
+                                                }])
+                                            }
+
+                                             p_.from.dictionary($[1]).map_and_aggregate_error<null, s_error.Error>(
+                                                ($, id, abort): null => {
+                                                    const refiner_id = id
+                                                    if ($[0] !== 'file') {
+                                                        return abort(['not a file', {
+                                                            'internal path': $p.path + "/schemas/" + schema_id + "/refiners",
+                                                            'name': id,
+                                                        }])
+                                                    }
+                                                    p_.from.state($[1]).decide(
+                                                        ($): null => {
+                                                            switch ($[0]) {
+                                                                case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
+                                                                    'location': {
+                                                                        'internal path': $p.path + "/schemas/" + schema_id + "/refiners",
+                                                                        'name': refiner_id,
+                                                                    }
+                                                                }]))
+                                                                case 'success': return p_.option($, ($) => {
+
+                                                                    p_.from.list($.statements).map_and_aggregate_error<any, s_error.Error>(
+                                                                        ($, abort) => p_.from.state($).decide(
+                                                                            ($) => {
+                                                                                switch ($[0]) {
+                                                                                    case 'import': return p_.option($, ($) => "uitwerken")
+                                                                                    case 'module': return p_.option($, ($) => "uitwerken")
+                                                                                    case 'variable': return p_.option($, ($) => p_.from.list($['variable declaration list'].declarations.entries).map_and_aggregate_error<any, s_error.Error>(
+                                                                                        ($) => {
+                                                                                            p_.from.optional($.data.assignment).map(
+                                                                                                ($) => {
+                                                                                                    r_temp_typescript_from_cst.Expression(
+                                                                                                        $.initializer.expression,
+                                                                                                        ($) => abort(['source file', {
+                                                                                                            'error': $,
+                                                                                                            'file location': {
+                                                                                                                'internal path': $p.path + "/schemas/" + schema_id + "/refiners",
+                                                                                                                'name': refiner_id,
+                                                                                                            }
+                                                                                                        }])
+                                                                                                    )
+                                                                                                    return null
+                                                                                                }
+                                                                                            )
+                                                                                            return p_.literal.set("foo")
+                                                                                        },
+                                                                                        ($) => abort(['aggregated', {
+                                                                                            'errors': $,
+                                                                                        }])
+                                                                                    ))
+                                                                                    default: return abort(['source file', {
+                                                                                        'error': ['unexpected construct', {
+                                                                                            'name': $[0],
+                                                                                            'location': t_cst_to_location.Statement($)
+                                                                                        }],
+                                                                                        'file location': {
+                                                                                            'internal path': $p.path + "/schemas/" + schema_id + "/refiners",
+                                                                                            'name': refiner_id,
+                                                                                        },
+                                                                                    }])
+                                                                                }
+                                                                            }
+                                                                        ),
+                                                                        ($) => abort(['aggregated', {
+                                                                            'errors': $
+                                                                        }])
+                                                                    )
+                                                                    return null
+                                                                })
+                                                                default: return p_.exhaustive($[0])
+                                                            }
+                                                        }
+                                                    )
+
+                                                    return null
+                                                },
+                                                ($) => abort(['aggregated', {
+                                                    'errors': p_temp.from.dictionary($).convert_to_list(($, id) => $)
+                                                }])
+                                            )
+                                            return null
+
+                                        },
+                                        () => null
+                                    )
+                                },
+                                (abort): s_out.Schema['deserializers'] => {
+
+                                    const deserializer_file = p_.from.dictionary($[1]).get_possible_entry(
+                                        "deserializers.ts",
+                                    )
+                                    p_.from.optional(deserializer_file).map(
+                                        ($) => {
+                                            if ($[0] !== 'file') {
+                                                return abort(['not a file', {
+                                                    'internal path': $p.path + "/schemas/" + schema_id,
+                                                    'name': "deserializers.ts",
+                                                }])
+                                            }
+
+                                            p_.from.state($[1]).decide(
+                                                ($): null => {
+                                                    switch ($[0]) {
+                                                        case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
+                                                            'location': {
+                                                                'internal path': $p.path + "/schemas/" + schema_id,
+                                                                'name': "deserializers.ts"
+                                                            }
+                                                        }]))
+                                                        case 'success': return p_.option($, ($) => {
+
+                                                            p_.from.list($.statements).map_and_aggregate_error<any, s_error.Error>(
+                                                                ($, abort) => p_.from.state($).decide(
+                                                                    ($) => {
+                                                                        switch ($[0]) {
+                                                                            case 'import': return p_.option($, ($) => "uitwerken")
+                                                                            case 'module': return p_.option($, ($) => "uitwerken")
+                                                                            case 'variable': return p_.option($, ($) => p_.from.list($['variable declaration list'].declarations.entries).map_and_aggregate_error<any, s_error.Error>(
+                                                                                ($) => {
+                                                                                    p_.from.optional($.data.assignment).map(
+                                                                                        ($) => {
+                                                                                            r_temp_typescript_from_cst.Expression(
+                                                                                                $.initializer.expression,
+                                                                                                ($) => abort(['source file', {
+                                                                                                    'error': $,
+                                                                                                    'file location': {
+                                                                                                        'internal path': $p.path + "/schemas/" + schema_id,
+                                                                                                        'name': "deserializers.ts",
+                                                                                                    }
+                                                                                                }])
+                                                                                            )
+                                                                                            return null
+                                                                                        }
+                                                                                    )
+                                                                                    return p_.literal.set("foo")
+                                                                                },
+                                                                                ($) => abort(['aggregated', {
+                                                                                    'errors': $,
+                                                                                }])
+                                                                            ))
+                                                                            default: return abort(['source file', {
+                                                                                'error': ['unexpected construct', {
+                                                                                    'name': $[0],
+                                                                                    'location': t_cst_to_location.Statement($)
+                                                                                }],
+                                                                                'file location': {
+                                                                                    'internal path': $p.path + "/schemas/" + schema_id,
+                                                                                    'name': "deserializers.ts"
+                                                                                },
+                                                                            }])
+                                                                        }
+                                                                    }
+                                                                ),
+                                                                ($) => abort(['aggregated', {
+                                                                    'errors': $
+                                                                }])
+                                                            )
+                                                            return null
+                                                        })
+                                                        default: return p_.exhaustive($[0])
+                                                    }
+                                                }
+                                            )
+                                            return null
+                                        }
+                                    )
+                                    return null
+                                }
+                            ],
+                            ($) => abort(['aggregated', {
+                                'errors': $,
+                            }]),
+                            ([
+                                schema,
+                                transformers,
+                                serializers,
+                                refiners,
+                                deserializers,
+                            ]): s_out.Schema => ({
+                                'schema': schema,
+                                'transformers': transformers,
+                                'serializers': serializers,
+                                'refiners': refiners,
+                                'deserializers': deserializers
+                            })
+                        )
                     },
                     ($) => abort(['aggregated', {
                         'errors': p_temp.from.dictionary($).convert_to_list(($, id) => $)
@@ -462,7 +549,15 @@ export const Module: declarations.Module = ($, abort, $p) => {
             () => {
                 return p_.literal.dictionary({})
             }
-        )
+        ),
+        'commands': {
+            'interfaces': p_.literal.dictionary({}),
+            'implementations': p_.literal.dictionary({})
+        },
+        'queries': {
+            'interfaces': p_.literal.dictionary({}),
+            'implementations': p_.literal.dictionary({})
+        }
     }
 }
 export const Package: declarations.Package = ($, abort) => {
