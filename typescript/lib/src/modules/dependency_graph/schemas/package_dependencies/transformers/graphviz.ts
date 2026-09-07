@@ -31,13 +31,9 @@ export const Result: declarations.Result = ($) => {
                 return p_.from.optional($.dependencies).decide(
                     ($) => p_.from.dictionary(
                         p_.from.dictionary($).map_optionally(
-                            ($, id) => {
-                                if (id === "pareto-core"
-                                    || id === "pareto-core-shorthands"
-                                ) {
-                                    return p_.literal.not_set<s_out.Graph.edges.L>()
-                                }
-                                return p_.literal.set({
+                            ($, id) => (id === "pareto-core" || id === "pareto-core-shorthands")
+                                ? p_.literal.not_set<s_out.Graph.edges.L>()
+                                : p_.literal.set<s_out.Graph.edges.L>({
                                     'from': from,
                                     'to': id,
                                     'attributes': p_.from.dictionary($v_packages).get_possible_entry(
@@ -48,7 +44,7 @@ export const Result: declarations.Result = ($) => {
                                         ])
                                     ),
                                 })
-                            }
+
                         ),
                     ).convert_to_list(
                         ($) => $,

@@ -11,23 +11,28 @@ import * as s_error from "../../pareto_language_from_typescript_directory/schema
 namespace declarations {
     export type Block = p_.Refiner<
         s_out.Block,
-        s_error.Unexpected_Construct_Error,
+        s_error.Source_File_Error,
         s_in.Block
     >
     export type Expression = p_.Refiner<
         s_out.Expression,
-        s_error.Unexpected_Construct_Error,
+        s_error.Source_File_Error,
         s_in.Expression
     >
     export type Statement = p_.Refiner<
         s_out.Statements.L,
-        s_error.Unexpected_Construct_Error,
+        s_error.Source_File_Error,
         s_in.Statement
     >
     export type Type = p_.Refiner<
         s_out.Type,
-        s_error.Unexpected_Construct_Error,
+        s_error.Source_File_Error,
         s_in.Type
+    >
+    export type Property_Name = p_.Refiner<
+        s_out.Type.type_literal.properties.L.key, //this should be a type, it is used in object literal as well
+        s_error.Source_File_Error,
+        s_in.Property_Name
     >
 
 }
@@ -82,8 +87,9 @@ namespace t_cst_to_location_temp {
 
 }
 
-export const Block: declarations.Block = ($, abort) => p_.from.list($.statements).map(
-    ($) => Statement($, abort)
+export const Block: declarations.Block = ($, abort) => p_.from.list($.statements).map_and_aggregate_error<s_out.Statements.L, s_error.Source_File_Error>(
+    ($) => Statement($, abort),
+    ($) => abort(['composed', $])
 )
 
 export const Expression: declarations.Expression = ($, abort) => p_.from.state($).decide(
@@ -106,10 +112,10 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                                                     ($) => {
                                                         switch ($[0]) {
                                                             case 'identifier': return p_.option($, ($) => $.text)
-                                                            default: return abort({
+                                                            default: return abort(['unexpected construct', {
                                                                 'name': $[0],
                                                                 'location': t_cst_to_location_temp.Binding_Pattern($v_bp,)
-                                                            })
+                                                            }])
                                                         }
                                                     }
                                                 )
@@ -121,10 +127,10 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                                     ),
                                 })
                             ))
-                            case 'without parentheses': return p_.option($, ($) => abort({
+                            case 'without parentheses': return p_.option($, ($) => abort(['unexpected construct', {
                                 'name': "without parentheses",
                                 'location': t_cst_to_location_temp.Binding_Pattern($.parameter.name)
-                            }))
+                            }]))
                             default: return p_.exhaustive($[0])
                         }
                     }
@@ -134,7 +140,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                         ($) => {
                             switch ($[0]) {
                                 case 'type': return p_.option($, ($) => Type($, abort))
-                                case 'type predicate': return p_.option($, ($) => abort({
+                                case 'type predicate': return p_.option($, ($) => abort(['unexpected construct', {
                                     'name': "type predicate",
                                     'location': p_.from.state($['parameter name']).decide(
                                         ($) => {
@@ -145,7 +151,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                                             }
                                         }
                                     )
-                                }))
+                                }]))
                                 default: return p_.exhaustive($[0])
                             }
                         }
@@ -180,7 +186,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                                 case '||': return p_.option($, ($) => ['strictly not equal', null])
                                 case '+': return p_.option($, ($) => ['strictly not equal', null])
                                 case '-': return p_.option($, ($) => ['strictly not equal', null])
-                                default: return abort({
+                                default: return abort(['unexpected construct', {
                                     'name': $[0],
                                     'location': p_.from.state($v_operator_token).decide(
                                         ($) => {
@@ -238,7 +244,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                                             }
                                         }
                                     )
-                                })
+                                }])
                             }
                         }
                     )
@@ -250,14 +256,14 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                     ($) => {
                         switch ($[0]) {
                             case 'expression': return p_.option($, ($) => Expression($, abort))
-                            case 'import': return p_.option($, ($) => abort({
+                            case 'import': return p_.option($, ($) => abort(['unexpected construct', {
                                 'name': "import",
                                 'location': $.location
-                            }))
-                            case 'super': return p_.option($, ($) => abort({
+                            }]))
+                            case 'super': return p_.option($, ($) => abort(['unexpected construct', {
                                 'name': "super",
                                 'location': $.location
-                            }))
+                            }]))
                             default: return p_.exhaustive($[0])
                         }
                     }
@@ -267,10 +273,10 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                         ($) => {
                             switch ($[0]) {
                                 case 'expression': return p_.option($, ($) => Expression($, abort))
-                                case 'spread': return p_.option($, ($) => abort({
+                                case 'spread': return p_.option($, ($) => abort(['unexpected construct', {
                                     'name': "spread",
                                     'location': $['dot dot dot token'].location
-                                }))
+                                }]))
                                 default: return p_.exhaustive($[0])
                             }
                         }
@@ -303,58 +309,29 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                         ($): s_out.Expression.object_literal.properties.L => {
                             switch ($[0]) {
                                 case 'property': return p_.option($, ($): s_out.Expression.object_literal.properties.L => ({
-                                    'key': p_.from.state($.name.type).decide(
-                                        ($) => {
-                                            switch ($[0]) {
-                                                case 'identifier': return p_.option($, ($) => ['identifier', {
-                                                    'value': $.text
-                                                }])
-                                                case 'string literal': return p_.option($, ($) => ['string literal', {
-                                                    'value': $.text,
-                                                    'delimiter': ['apostrophe', null] //FIXME
-                                                }])
-                                                case 'big int literal': return p_.option($, ($) => abort({
-                                                    'name': "big int literal",
-                                                    'location': $.location
-                                                }))
-                                                case 'computed': return p_.option($, ($) => abort({
-                                                    'name': "computed",
-                                                    'location': $['open bracket token'].location
-                                                }))
-                                                case 'numeric literal': return p_.option($, ($) => abort({
-                                                    'name': "numeric literal",
-                                                    'location': $.location
-                                                }))
-                                                case 'private identifier': return p_.option($, ($) => abort({
-                                                    'name': "private identifier",
-                                                    'location': $.location
-                                                }))
-                                                default: return p_.exhaustive($[0])
-                                            }
-                                        }
-                                    ),
+                                    'key': Property_Name($.name, abort),
                                     'value': Expression($.initializer, abort)
                                 }))
-                                case 'spread': return p_.option($, ($) => abort({
+                                case 'spread': return p_.option($, ($) => abort(['unexpected construct', {
                                     'name': "spread",
                                     'location': $['dot dot dot token'].location
-                                }))
-                                case 'get accessor': return p_.option($, ($) => abort({
+                                }]))
+                                case 'get accessor': return p_.option($, ($) => abort(['unexpected construct', {
                                     'name': "get accessor",
                                     'location': $['get keyword'].location
-                                }))
-                                case 'set accessor': return p_.option($, ($) => abort({
+                                }]))
+                                case 'set accessor': return p_.option($, ($) => abort(['unexpected construct', {
                                     'name': "set accessor",
                                     'location': $['set keyword'].location
-                                }))
-                                case 'method': return p_.option($, ($) => abort({
+                                }]))
+                                case 'method': return p_.option($, ($) => abort(['unexpected construct', {
                                     'name': "method",
                                     'location': t_cst_to_location_temp.Property_Name($.name)
-                                }))
-                                case 'shorthand property': return p_.option($, ($) => abort({
+                                }]))
+                                case 'shorthand property': return p_.option($, ($) => abort(['unexpected construct', {
                                     'name': "shorthand property",
                                     'location': $.name.location
-                                }))
+                                }]))
                                 default: return p_.exhaustive($[0])
                             }
                         }
@@ -369,10 +346,10 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                         ($) => {
                             switch ($[0]) {
                                 case 'named': return p_.option($, ($) => $.text)
-                                case 'private': return p_.option($, ($) => abort({
+                                case 'private': return p_.option($, ($) => abort(['unexpected construct', {
                                     'name': "private",
                                     'location': $.location
-                                }))
+                                }]))
                                 default: return p_.exhaustive($[0])
                             }
                         }
@@ -384,13 +361,45 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                 'delimiter': ['quote', null], //FIXME
             }])
             case 'true keyword': return p_.option($, ($): s_out.Expression => ['true', null])
-            default: return abort({
+            default: return abort(['unexpected construct', {
                 'name': $[0],
                 'location': t_cst_to_location.Expression($)
-            })
+            }])
         }
     }
 )
+
+export const Property_Name: declarations.Property_Name = ($, abort) => p_.from.state($.type).decide(
+    ($) => {
+        switch ($[0]) {
+            case 'identifier': return p_.option($, ($) => ['identifier', {
+                'value': $.text
+            }])
+            case 'string literal': return p_.option($, ($) => ['string literal', {
+                'value': $.text,
+                'delimiter': ['apostrophe', null] //FIXME
+            }])
+            case 'big int literal': return p_.option($, ($) => abort(['unexpected construct', {
+                'name': "big int literal",
+                'location': $.location
+            }]))
+            case 'computed': return p_.option($, ($) => abort(['unexpected construct', {
+                'name': "computed",
+                'location': $['open bracket token'].location
+            }]))
+            case 'numeric literal': return p_.option($, ($) => abort(['unexpected construct', {
+                'name': "numeric literal",
+                'location': $.location
+            }]))
+            case 'private identifier': return p_.option($, ($) => abort(['unexpected construct', {
+                'name': "private identifier",
+                'location': $.location
+            }]))
+            default: return p_.exhaustive($[0])
+        }
+    }
+)
+
 export const Statement: declarations.Statement = ($, abort) => p_.from.state($).decide(
     ($) => {
         switch ($[0]) {
@@ -437,10 +446,10 @@ export const Statement: declarations.Statement = ($, abort) => p_.from.state($).
                                         case 'identifier': return p_.option($, ($) => ({
                                             'value': $.text
                                         }))
-                                        default: return abort({
+                                        default: return abort(['unexpected construct', {
                                             'location': t_cst_to_location_temp.Binding_Pattern($v_bp),
                                             'name': $[0]
-                                        })
+                                        }])
                                     }
                                 }
                             )
@@ -450,19 +459,19 @@ export const Statement: declarations.Statement = ($, abort) => p_.from.state($).
                         ($) => Type($.type, abort)
                     ),
                 }),
-                ($) => abort({
+                ($) => abort(['unexpected construct', {
                     'name': "unexpected",
                     'location': p_temp.from.list($).on_has_first_item(
                         ($) => t_cst_to_location_temp.Binding_Pattern($.data.name),
                         ($) => p_unreachable_code_path("we're in the multiple items handler")
                     )
-                }),
+                }]),
                 () => p_unreachable_code_path("Expected at least one variable in a variable declaration list"),
             )])
-            default: return abort({
+            default: return abort(['unexpected construct', {
                 'name': $[0],
                 'location': t_cst_to_location.Statement($)
-            })
+            }])
         }
     }
 )
@@ -472,40 +481,84 @@ export const Type: declarations.Type = ($, abort) => p_.from.state($).decide(
         switch ($[0]) {
             case 'boolean': return p_.option($, ($): s_out.Type => ['boolean', null])
             case 'string': return p_.option($, ($): s_out.Type => ['string', null])
-            case 'literal type': return p_.option($, ($): s_out.Type => ['literal type', {
-                'value': p_variables(
-                    () => {
-                        const $v_lit_type = $
-                        return p_.from.state($.type).decide(
-                            ($) => {
-                                switch ($[0]) {
-                                    case 'string literal': return p_.option($, ($) => $.text)
-                                    default: return abort({
-                                        'name': $[0],
-                                        'location': p_.from.state($v_lit_type.type).decide(
-                                            ($) => {
-                                                switch ($[0]) {
-                                                    case 'no substitution template literal': return p_.option($, ($) => $.location)
-                                                    case 'numeric literal': return p_.option($, ($) => $.location)
-                                                    case 'string literal': return p_.option($, ($) => $.location)
-                                                    case 'true keyword': return p_.option($, ($) => $.location)
-                                                    case 'bigint literal': return p_.option($, ($) => $.location)
-                                                    case 'false keyword': return p_.option($, ($) => $.location)
-                                                    case 'negative numeric literal': return p_.option($, ($) => $['minus token'].location)
-                                                    case 'null': return p_.option($, ($) => $.location)
-                                                    default: return p_.exhaustive($[0])
-                                                }
+            case 'literal type': return p_.option($, ($): s_out.Type => p_variables(
+                () => {
+                    const $v_lit_type = $
+                    return p_.from.state($.type).decide(
+                        ($) => {
+                            switch ($[0]) {
+                                case 'string literal': return p_.option($, ($) => ['literal type', {
+                                    'value': $.text,
+                                    'delimiter': ['apostrophe', null],
+                                }])
+                                case 'null': return p_.option($, ($) => ['null', null])
+                                default: return abort(['unexpected construct', {
+                                    'name': $[0],
+                                    'location': p_.from.state($v_lit_type.type).decide(
+                                        ($) => {
+                                            switch ($[0]) {
+                                                case 'no substitution template literal': return p_.option($, ($) => $.location)
+                                                case 'numeric literal': return p_.option($, ($) => $.location)
+                                                case 'string literal': return p_.option($, ($) => $.location)
+                                                case 'true keyword': return p_.option($, ($) => $.location)
+                                                case 'bigint literal': return p_.option($, ($) => $.location)
+                                                case 'false keyword': return p_.option($, ($) => $.location)
+                                                case 'negative numeric literal': return p_.option($, ($) => $['minus token'].location)
+                                                case 'null': return p_.option($, ($) => $.location)
+                                                default: return p_.exhaustive($[0])
                                             }
-                                        )
-                                    })
-                                }
+                                        }
+                                    )
+                                }])
                             }
-                        )
-                    }
-                ),
-                'delimiter': ['apostrophe', null],
-            }])
+                        }
+                    )
+                }
+            ))
             case 'number': return p_.option($, ($): s_out.Type => ['number', null])
+            case 'type literal': return p_.option($, ($): s_out.Type => ['type literal', {
+                'properties': p_.from.list($.signatures).map_and_aggregate_error<s_out.Type.type_literal.properties.L, s_error.Source_File_Error>(
+                    ($) => p_variables(
+                        (): s_out.Type.type_literal.properties.L => {
+                            const $v_prop = $
+                            return p_.from.state($).decide(
+                                ($): s_out.Type.type_literal.properties.L => {
+                                    switch ($[0]) {
+                                        case 'property': return p_.option($, ($): s_out.Type.type_literal.properties.L => ({
+                                            'readonly': true,
+                                            'key': Property_Name($.id, abort),
+                                            'type': p_.from.optional($['type annotation']).decide(
+                                                ($): s_out.Type => Type($.type, abort),
+                                                () => abort(['missing construct', {
+                                                    'location': t_cst_to_location_temp.Property_Name($.id)
+                                                }])
+                                            )
+                                        }))
+                                        default: return abort(['unexpected construct', {
+                                            'name': $[0],
+                                            'location': p_.from.state($v_prop).decide(
+                                                ($) => {
+                                                    switch ($[0]) {
+                                                        case 'call': return p_.option($, ($) => $.parameters['open parenthesis token'].location)
+                                                        case 'construct': return p_.option($, ($) => $.parameters['open parenthesis token'].location)
+                                                        case 'get accessor': return p_.option($, ($) => $['get keyword'].location)
+                                                        case 'index': return p_.option($, ($) => $['open bracket token'].location)
+                                                        case 'method': return p_.option($, ($) => $.parameters['open parenthesis token'].location)
+                                                        case 'property': return p_.option($, ($) => t_cst_to_location_temp.Property_Name($.id))
+                                                        case 'set accessor': return p_.option($, ($) => $['set keyword'].location)
+                                                        default: return p_.exhaustive($[0])
+                                                    }
+                                                }
+                                            )
+                                        }])
+                                    }
+                                }
+                            )
+                        }
+                    ),
+                    ($) => abort(['composed', $])
+                )
+            }])
             case 'type reference': return p_.option($, ($): s_out.Type => ['type reference', {
                 'start': p_.from.state($['entity name']).decide(
                     ($): s_out.Type.type_reference.start => {
@@ -543,10 +596,10 @@ export const Type: declarations.Type = ($, abort) => p_.from.state($).decide(
             case 'union type': return p_.option($, ($): s_out.Type => ['union', p_.from.list($.members.entries).map(
                 ($) => Type($.data, abort)
             )])
-            default: return abort({
+            default: return abort(['unexpected construct', {
                 'name': $[0],
                 'location': t_cst_to_location.Type($)
-            })
+            }])
         }
     }
 )

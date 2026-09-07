@@ -14,6 +14,13 @@ namespace declarations {
             'context path': s_path.Context_Path
         }
     >
+    export type Source_File_Error = p_.Transformer_With_Parameter<
+        s_in.Source_File_Error,
+        s_out.Paragraph.sentences,
+        {
+            'path': string
+        }
+    >
 }
 
 //dependencies
@@ -46,16 +53,33 @@ export const Error: declarations.Error = ($, $p) => p_.from.state($).decide(
             case 'aggregated': return p_.option($, ($) => p_.from.list($.errors).flatten(
                 ($) => Error($, $p)
             ))
-            case 'unexpected construct': return p_.option($, ($) => p_.literal.list([
-                sh.sentence([
-                    sh.ph.text("unexpected construct: " + $.error.name + " in " + ser_path.Context_Path($p['context path']) + $['file location']['internal path'] + "/" + $['file location'].name + ":" + $.error.location['line'] + ":" + $.error.location['column'])
-                ])
-            ]))
+            case 'source file': return p_.option($, ($) => Source_File_Error($.error, { 'path': ser_path.Context_Path($p['context path']) + $['file location']['internal path'] + "/" + $['file location'].name }))
             case 'typescript parsing failed': return p_.option($, ($) => p_.literal.list([
                 sh.sentence([
                     sh.ph.text("typescript parsing failed: " + $.location)
                 ])
             ]))
+            default: return p_.exhaustive($[0])
+        }
+    }
+)
+
+export const Source_File_Error: declarations.Source_File_Error = ($, $p) => p_.from.state($).decide(
+    ($): s_out.Paragraph.sentences => {
+        switch ($[0]) {
+            case 'missing construct': return p_.option($, ($) => p_.literal.list([
+                sh.sentence([
+                    sh.ph.text("unexpected construct at: " + $p.path + ":" + $.location['line'] + ":" + $.location['column'])
+                ])
+            ]))
+            case 'unexpected construct': return p_.option($, ($) => p_.literal.list([
+                sh.sentence([
+                    sh.ph.text("unexpected construct: " + $.name + " in " + $p.path + ":" + $.location['line'] + ":" + $.location['column'])
+                ])
+            ]))
+            case 'composed': return p_.option($, ($) => p_.from.list($).flatten(
+                ($) => Source_File_Error($, $p)
+            ))
             default: return p_.exhaustive($[0])
         }
     }

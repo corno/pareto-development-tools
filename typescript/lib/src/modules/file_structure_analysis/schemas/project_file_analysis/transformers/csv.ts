@@ -15,6 +15,7 @@ namespace declarations {
 
 //dependencies
 import * as ser_path from "../../path/serializers.js"
+import * as ser from "../serializers.js"
 import * as r_line_count_from_loc from "../../line_count/refiners/list_of_characters.js"
 
 //shorthands
@@ -74,7 +75,7 @@ export const File_Analysis_List: declarations.Signature = ($) => sh.CSV(
                                 ($) => ser_path.Path($),
                                 () => ""
                             ),
-                            `${r_line_count_from_loc.line_count($.content)}`, //number to string
+                            ser.Number(r_line_count_from_loc.line_count($.content)), //number to string
                         ]))))
                         default: return p_.exhaustive($[0])
                     }

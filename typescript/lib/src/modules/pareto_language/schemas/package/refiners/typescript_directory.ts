@@ -125,11 +125,11 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                         case 'import': return p_.option($, ($) => "uitwerken")
                                                         case 'module': return p_.option($, ($) => "uitwerken")
                                                         case 'type alias': return p_.option($, ($) => "uitwerken")
-                                                        default: return abort(['unexpected construct', {
-                                                            'error': {
+                                                        default: return abort(['source file', {
+                                                            'error': ['unexpected construct', {
                                                                 'name': $[0],
                                                                 'location': t_cst_to_location.Statement($)
-                                                            },
+                                                            }],
                                                             'file location': {
                                                                 'internal path': $p.path + "/schemas/" + id,
                                                                 'name': "schema.ts"
@@ -179,11 +179,11 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                                 case 'import': return p_.option($, ($) => "uitwerken")
                                                                 case 'module': return p_.option($, ($) => "uitwerken")
                                                                 case 'variable': return p_.option($, ($) => "uitwerken")
-                                                                default: return abort(['unexpected construct', {
-                                                                    'error': {
+                                                                default: return abort(['source file', {
+                                                                    'error': ['unexpected construct', {
                                                                         'name': $[0],
                                                                         'location': t_cst_to_location.Statement($)
-                                                                    },
+                                                                    }],
                                                                     'file location': {
                                                                         'internal path': $p.path + "/schemas/" + id,
                                                                         'name': "schema.ts"
@@ -235,11 +235,11 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                                 case 'import': return p_.option($, ($) => "uitwerken")
                                                                 case 'module': return p_.option($, ($) => "uitwerken")
                                                                 case 'variable': return p_.option($, ($) => "uitwerken")
-                                                                default: return abort(['unexpected construct', {
-                                                                    'error': {
+                                                                default: return abort(['source file', {
+                                                                    'error': ['unexpected construct', {
                                                                         'name': $[0],
                                                                         'location': t_cst_to_location.Statement($)
-                                                                    },
+                                                                    }],
                                                                     'file location': {
                                                                         'internal path': $p.path + "/schemas/" + id,
                                                                         'name': "deserializers.ts"
@@ -307,7 +307,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                                                 ($) => {
                                                                                     r_temp_typescript_from_cst.Expression(
                                                                                         $.initializer.expression,
-                                                                                        ($) => abort(['unexpected construct', {
+                                                                                        ($) => abort(['source file', {
                                                                                             'error': $,
                                                                                             'file location': {
                                                                                                 'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
@@ -324,11 +324,11 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                                             'errors': $
                                                                         }])
                                                                     ))
-                                                                    default: return abort(['unexpected construct', {
-                                                                        'error': {
+                                                                    default: return abort(['source file', {
+                                                                        'error': ['unexpected construct', {
                                                                             'name': $[0],
                                                                             'location': t_cst_to_location.Statement($)
-                                                                        },
+                                                                        }],
                                                                         'file location': {
                                                                             'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
                                                                             'name': id,
@@ -400,7 +400,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                                                 ($) => {
                                                                                     r_temp_typescript_from_cst.Expression(
                                                                                         $.initializer.expression,
-                                                                                        ($) => abort(['unexpected construct', {
+                                                                                        ($) => abort(['source file', {
                                                                                             'error': $,
                                                                                             'file location': {
                                                                                                 'internal path': $p.path + "/schemas/" + schema_id + "/refiners",
@@ -417,11 +417,11 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                                             'errors': $,
                                                                         }])
                                                                     ))
-                                                                    default: return abort(['unexpected construct', {
-                                                                        'error': {
+                                                                    default: return abort(['source file', {
+                                                                        'error': ['unexpected construct', {
                                                                             'name': $[0],
                                                                             'location': t_cst_to_location.Statement($)
-                                                                        },
+                                                                        }],
                                                                         'file location': {
                                                                             'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
                                                                             'name': id,

@@ -43,7 +43,7 @@ namespace declarations {
                                     'classification': ['directory', ['wildcards', null]],
                                 },
                                 'extension': t_temp.extension(id),
-                                'unexpected path tail': p_change_context($, ($): s_out.File_Analysis['unexpected path tail'] => {
+                                'unexpected path tail': p_change_context($, ($): s_out.File_Analysis.unexpected_path_tail => {
                                     if ($p['number of directories encountered'] < $p['wildcard']['required directories']) {
                                         //files are not allowed yet, haven't descended through enough required directories
                                         return p_.literal.set(tail)

@@ -36,7 +36,10 @@ export type File_Analysis = {
     'content': s_loc.List_Of_Characters
     'structure': Structure_Analysis
     'extension': p_.Optional_Value<string>
-    'unexpected path tail': p_.Optional_Value<s_path.Path>
+    'unexpected path tail': File_Analysis.unexpected_path_tail
+}
+export namespace File_Analysis {
+    export type unexpected_path_tail = p_.Optional_Value<s_path.Path>
 }
 
 export type Structure_Analysis = {

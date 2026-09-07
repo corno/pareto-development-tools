@@ -13,15 +13,20 @@ export type Error =
 | ['no such node', Location]
 | ['not a directory', Location]
 | ['not a file', Location]
-| ['unexpected construct', {
+| ['source file', {
     'file location': Location
-    'error': Unexpected_Construct_Error
+    'error': Source_File_Error
 }]
 
-export type Unexpected_Construct_Error = {
+export type Source_File_Error = 
+| ['unexpected construct', {
     'name': string
     'location': s_cst.Node['location']
-}
+}]
+| ['missing construct', {
+    'location': s_cst.Node['location']
+}]
+| ['composed', p_.List<Source_File_Error>]
 
 export type Location = {
     'internal path': string
