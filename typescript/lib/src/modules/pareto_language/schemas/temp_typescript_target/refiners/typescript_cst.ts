@@ -112,6 +112,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                                                     ($) => {
                                                         switch ($[0]) {
                                                             case 'identifier': return p_.option($, ($) => $.text)
+                                                            case 'array binding pattern': return p_.option($, ($) => "FIXME ARRAY BINDING PATTERN")
                                                             default: return abort(['unexpected construct', {
                                                                 'name': $[0],
                                                                 'location': t_cst_to_location_temp.Binding_Pattern($v_bp,)
@@ -190,6 +191,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                                 case '=': return p_.option($, ($) => ['strictly not equal', null])
                                 case '+=': return p_.option($, ($) => ['strictly not equal', null])
                                 case '%': return p_.option($, ($) => ['strictly not equal', null])
+                                case '/': return p_.option($, ($) => ['strictly not equal', null])
 
                                 default: return abort(['unexpected construct', {
                                     'name': $[0],
@@ -301,6 +303,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
             case 'identifier': return p_.option($, ($): s_out.Expression => ['identifier', {
                 'value': $.text
             }])
+            case 'non null': return p_.option($, ($): s_out.Expression => ['true', null]) //FIXME
             case 'null keyword': return p_.option($, ($): s_out.Expression => ['null', null])
             case 'numeric literal': return p_.option($, ($): s_out.Expression => ['number literal', $.text === "0"
                 ? 0
@@ -344,6 +347,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                 )
             }])
             case 'parenthesized': return p_.option($, ($): s_out.Expression => ['parenthesized', Expression($.expression, abort)])
+            case 'postfix unary': return p_.option($, ($): s_out.Expression => ['true', null]) //FIXME
             case 'prefix unary': return p_.option($, ($): s_out.Expression => ['true', null]) //FIXME
 
             case 'property access': return p_.option($, ($): s_out.Expression => ['property access', {
@@ -483,6 +487,8 @@ export const Statement: declarations.Statement = ($, abort) => p_.from.state($).
                 }]),
                 () => p_unreachable_code_path("Expected at least one variable in a variable declaration list"),
             )])
+            case 'while': return p_.option($, ($): s_out.Statements.L => ['block', p_.literal.list([])]) //FIXME
+
             default: return abort(['unexpected construct', {
                 'name': $[0],
                 'location': t_cst_to_location.Statement($)

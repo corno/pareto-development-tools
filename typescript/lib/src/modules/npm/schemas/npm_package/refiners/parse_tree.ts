@@ -9,92 +9,8 @@ import type * as s_in from "astn-core/modules/deserialization/schemas/parse_tree
 import type * as s_out from "../schema.js"
 import type * as s_error from "../../deserialize_package_json/schema.js"
 
-
-type Error_Expect_Object =
-    | ['not an object', null]
-    | ['duplicate identifier', string]
-    | ['missing value', null]
-
-type Object_ = p_di.Dictionary<s_in.Value>
-
-const Object_: p_ri.Refiner<
-    Object_,
-    Error_Expect_Object,
-    s_in.Value
-> = ($, abort) => {
-
-    const expect_unique_identifiers_fixme = ($: s_in.ID_Value_Pairs, abort: (error: Error_Expect_Object) => never): Object_ => {
-        const temp: { [id: string]: s_in.Value } = {}
-        p_.from.list($).map(
-            ($) => {
-                if (temp[$.id.token.value] !== undefined) {
-                    abort(['duplicate identifier', $.id.token.value])
-                } else {
-                    temp[$.id.token.value] = p_.from.optional($.assignment).decide(
-                        ($) => p_.from.optional($.value).decide(
-                            ($) => $,
-                            () => abort(['missing value', null]),
-                        ),
-                        () => abort(['missing value', null]),
-                    )
-                }
-                return null
-            })
-        return p_.literal.dictionary(temp)
-    }
-    return p_.from.state($.type).decide(
-        ($) => {
-            switch ($[0]) {
-                case 'concrete': return p_.option($, ($) => p_.from.state($).decide(
-                    ($) => {
-                        switch ($[0]) {
-                            case 'dictionary': return p_.option($, ($) => expect_unique_identifiers_fixme($.entries, abort))
-                            case 'group': return p_.option($, ($) => p_.from.state($).decide(
-                                ($) => {
-                                    switch ($[0]) {
-                                        case 'verbose': return p_.option($, ($) => expect_unique_identifiers_fixme($.properties, abort))
-                                        default: return abort(['not an object', null])
-                                    }
-                                }))
-                            default: return abort(['not an object', null])
-                        }
-                    }))
-                default: return abort(['not an object', null])
-            }
-        })
-}
-
-const Text: p_ri.Refiner<
-    string,
-    ['not a text', null],
-    s_in.Value
-> = ($, abort) => p_.from.state($.type).decide(
-    ($) => {
-        switch ($[0]) {
-            case 'concrete': return p_.option($, ($) => p_.from.state($).decide(
-                ($) => {
-                    switch ($[0]) {
-                        case 'text': return p_.option($, ($) => $.token.value)
-                        default: return abort(['not a text', null])
-                    }
-                }))
-            default: return abort(['not a text', null])
-        }
-    })
-
-const Property: p_ri.Refiner_With_Parameter<
-    s_in.Value,
-    ['missing property', string],
-    Object_,
-    {
-        'id': string
-    }
-> = ($, abort, $p): s_in.Value => p_.from.dictionary($).get_entry(
-    $p.id,
-    {
-        no_such_entry: () => abort(['missing property', $p.id])
-    }
-)
+//dependencies
+import * as r_temp_unmashalled_json_value_from_parse_tree from "../../temp_unmarshalled_json_value/refiners/parse_tree.js"
 
 export const NPM_Package: p_ri.Refiner<
     s_out.NPM_Package,
@@ -103,14 +19,14 @@ export const NPM_Package: p_ri.Refiner<
 > = ($, abort) => {
 
     return p_change_context(
-        Object_(
+        r_temp_unmashalled_json_value_from_parse_tree.Object_(
             $.content,
             ($) => abort(['missing root object', null])
         ),
         ($) => {
 
-            const $p_name = Text(
-                Property(
+            const $p_name = r_temp_unmashalled_json_value_from_parse_tree.Text(
+                r_temp_unmashalled_json_value_from_parse_tree.Property(
                     $,
                     ($) => abort(['name', ['missing', null]]),
                     {
@@ -120,8 +36,8 @@ export const NPM_Package: p_ri.Refiner<
                 (error) => abort(['name', ['not a text', null]])
             )
 
-            const $p_version = Text(
-                Property(
+            const $p_version = r_temp_unmashalled_json_value_from_parse_tree.Text(
+                r_temp_unmashalled_json_value_from_parse_tree.Property(
                     $,
                     ($) => abort(['version', ['missing', null]]),
                     {
@@ -137,12 +53,12 @@ export const NPM_Package: p_ri.Refiner<
                 'dependencies': p_t.from.dictionary($).get_possible_entry(
                     "dependencies",
                     ($) => p_.literal.set(p_change_context(
-                        Object_(
+                        r_temp_unmashalled_json_value_from_parse_tree.Object_(
                             $,
                             ($) => abort(['dependencies', ['not an object', null]])
                         ),
                         ($) => p_.from.dictionary($).map(
-                            ($, id) => Text(
+                            ($, id) => r_temp_unmashalled_json_value_from_parse_tree.Text(
                                 $,
                                 ($) => abort(['dependencies', ['not a text', id]])
                             )

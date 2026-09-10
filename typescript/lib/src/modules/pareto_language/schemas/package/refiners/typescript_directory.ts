@@ -163,7 +163,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                         "transformers",
                                     )
                                     return p_.from.optional(transformers_dir).decide(
-                                        ($): p_schema.Dictionary<null> => {
+                                        ($): s_out.Schema.transformers => {
 
                                             if ($[0] !== 'directory') {
                                                 return abort(['not a directory', {
@@ -172,8 +172,8 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                 }])
                                             }
 
-                                            return p_.from.dictionary($[1]).map_and_aggregate_error<null, s_error.Error>(
-                                                ($, id, abort): null => {
+                                            return p_.from.dictionary($[1]).map_and_aggregate_error<s_out.Schema.transformers.D, s_error.Error>(
+                                                ($, id, abort): s_out.Schema.transformers.D => {
 
                                                     if ($[0] !== 'file') {
                                                         return abort(['not a file', {
@@ -181,8 +181,8 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                             'name': id,
                                                         }])
                                                     }
-                                                    p_.from.state($[1]).decide(
-                                                        ($): null => {
+                                                    return p_.from.state($[1]).decide(
+                                                        ($): s_out.Schema.transformers.D => {
                                                             switch ($[0]) {
                                                                 case 'failure': return p_.option($, ($) => abort(['typescript parsing failed', {
                                                                     'location': {
@@ -190,37 +190,40 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                                         'name': id,
                                                                     }
                                                                 }]))
-                                                                case 'success': return p_.option($, ($) => {
+                                                                case 'success': return p_.option($, ($): s_out.Schema.transformers.D => ({
 
-                                                                    p_.from.list($.statements).map_and_aggregate_error<string, s_error.Error>(
+                                                                    'statements': p_.from.list($.statements).map_and_aggregate_error<s_out.Schema.transformers.statement, s_error.Error>(
                                                                         ($, abort) => p_.from.state($).decide(
-                                                                            ($): any => {
+                                                                            ($): s_out.Schema.transformers.statement => {
                                                                                 switch ($[0]) {
-                                                                                    case 'import': return p_.option($, ($) => "uitwerken")
-                                                                                    case 'module': return p_.option($, ($) => "uitwerken")
-                                                                                    case 'variable': return p_.option($, ($) => p_.from.list($['variable declaration list'].declarations.entries).map_and_aggregate_error<any, s_error.Error>(
-                                                                                        ($) => {
-                                                                                            p_.from.optional($.data.assignment).map(
-                                                                                                ($) => {
-                                                                                                    r_temp_typescript_from_cst.Expression(
-                                                                                                        $.initializer.expression,
-                                                                                                        ($) => abort(['source file', {
-                                                                                                            'error': $,
-                                                                                                            'file location': {
-                                                                                                                'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
-                                                                                                                'name': id,
-                                                                                                            }
-                                                                                                        }])
-                                                                                                    )
-                                                                                                    return null
-                                                                                                }
-                                                                                            )
-                                                                                            return p_.literal.set("foo")
-                                                                                        },
-                                                                                        ($) => abort(['aggregated', {
-                                                                                            'errors': $
-                                                                                        }])
-                                                                                    ))
+                                                                                    case 'import': return p_.option($, ($) => ['uitwerken', null])
+                                                                                    case 'module': return p_.option($, ($) => ['uitwerken', null])
+                                                                                    case 'variable': return p_.option($, ($) => {
+                                                                                        p_.from.list($['variable declaration list'].declarations.entries).map_and_aggregate_error<null, s_error.Error>(
+                                                                                            ($) => {
+                                                                                                p_.from.optional($.data.assignment).map(
+                                                                                                    ($) => {
+                                                                                                        r_temp_typescript_from_cst.Expression(
+                                                                                                            $.initializer.expression,
+                                                                                                            ($) => abort(['source file', {
+                                                                                                                'error': $,
+                                                                                                                'file location': {
+                                                                                                                    'internal path': $p.path + "/schemas/" + schema_id + "/transformers",
+                                                                                                                    'name': id,
+                                                                                                                }
+                                                                                                            }])
+                                                                                                        )
+                                                                                                        return null
+                                                                                                    }
+                                                                                                )
+                                                                                                return null
+                                                                                            },
+                                                                                            ($) => abort(['aggregated', {
+                                                                                                'errors': $
+                                                                                            }])
+                                                                                        )
+                                                                                        return ['uitwerken', null]
+                                                                                    })
                                                                                     default: return abort(['source file', {
                                                                                         'error': ['unexpected construct', {
                                                                                             'name': $[0],
@@ -238,14 +241,12 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                                             'errors': $
                                                                         }])
                                                                     )
-                                                                    return null
-                                                                })
+                                                                }))
                                                                 default: return p_.exhaustive($[0])
                                                             }
                                                         }
                                                     )
 
-                                                    return null
                                                 },
                                                 ($) => abort(['aggregated', {
                                                     'errors': p_temp.from.dictionary($).convert_to_list(($, id) => $)
@@ -354,7 +355,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                                 }])
                                             }
 
-                                             p_.from.dictionary($[1]).map_and_aggregate_error<null, s_error.Error>(
+                                            p_.from.dictionary($[1]).map_and_aggregate_error<null, s_error.Error>(
                                                 ($, id, abort): null => {
                                                     const refiner_id = id
                                                     if ($[0] !== 'file') {
@@ -439,7 +440,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                         () => null
                                     )
                                 },
-                                (abort): s_out.Schema['deserializers'] => {
+                                (abort): s_out.Schema.deserializers => {
 
                                     const deserializer_file = p_.from.dictionary($[1]).get_possible_entry(
                                         "deserializers.ts",

@@ -1,9 +1,6 @@
 
 
-import * as p_schema from "pareto-core/schema"
-
-import type * as s_typescript_directory from "../typescript_directory/schema.js"
-
+import * as p_ from "pareto-core/schema"
 
 export type Package = {
     'typescript': {
@@ -14,14 +11,14 @@ export type Package = {
 }
 
 export namespace Module {
-    export type modules = p_schema.Dictionary<Module>
+    export type modules = p_.Dictionary<Module>
     export type commands = {
-        'interfaces': p_schema.Dictionary<null>
-        'implementations': p_schema.Dictionary<null>
+        'interfaces': p_.Dictionary<null>
+        'implementations': p_.Dictionary<null>
     }
     export type queries = {
-        'interfaces': p_schema.Dictionary<null>
-        'implementations': p_schema.Dictionary<null>
+        'interfaces': p_.Dictionary<null>
+        'implementations': p_.Dictionary<null>
     }
 }
 
@@ -31,7 +28,7 @@ export type Module = {
     'commands': Module.commands
 }
 
-export type Schemas = p_schema.Dictionary<Schema>
+export type Schemas = p_.Dictionary<Schema>
 
 export type Schema = {
     'schema': Schema.schema
@@ -42,7 +39,14 @@ export type Schema = {
 }
 export namespace Schema {
     export type schema = null
-    export type transformers = p_schema.Dictionary<null>
+    export type transformers = p_.Dictionary<transformers.D>
+    export namespace transformers {
+        export type D = {
+            'statements': p_.List<statement>
+        }
+        export type statement = 
+        | ['uitwerken', null]
+    }
     export type serializers = null
     export type refiners = null
     export type deserializers = null
