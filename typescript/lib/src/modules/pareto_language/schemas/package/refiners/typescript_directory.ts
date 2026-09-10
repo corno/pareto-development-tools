@@ -98,7 +98,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
 
                         return p_build_group<s_error.Error>()(
                             [
-                                (abort): s_out.Schema['schema'] => {
+                                (abort): s_out.Schema.schema => {
 
                                     const schema_file = p_.from.dictionary($[1]).get_entry(
                                         "schema.ts",
@@ -158,7 +158,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                         }
                                     )
                                 },
-                                (abort): s_out.Schema['transformers'] => {
+                                (abort): s_out.Schema.transformers => {
                                     const transformers_dir = p_.from.dictionary($[1]).get_possible_entry(
                                         "transformers",
                                     )
@@ -257,7 +257,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                     )
 
                                 },
-                                (abort): s_out.Schema['serializers'] => {
+                                (abort): s_out.Schema.serializers => {
 
                                     const serializer_file = p_.from.dictionary($[1]).get_possible_entry(
                                         "serializers.ts",
@@ -339,7 +339,7 @@ export const Module: declarations.Module = ($, abort, $p) => {
                                     )
                                     return null
                                 },
-                                (abort): s_out.Schema['refiners'] => {
+                                (abort): s_out.Schema.refiners => {
 
 
                                     return p_.from.optional(p_.from.dictionary($[1]).get_possible_entry(

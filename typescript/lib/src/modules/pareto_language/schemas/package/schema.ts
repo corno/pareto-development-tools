@@ -34,9 +34,16 @@ export type Module = {
 export type Schemas = p_schema.Dictionary<Schema>
 
 export type Schema = {
-    'schema': null
-    'transformers': p_schema.Dictionary<null>
-    'serializers': null
-    'refiners': null
-    'deserializers': null
+    'schema': Schema.schema
+    'transformers': Schema.transformers
+    'serializers': Schema.serializers
+    'refiners': Schema.refiners
+    'deserializers': Schema.deserializers
+}
+export namespace Schema {
+    export type schema = null
+    export type transformers = p_schema.Dictionary<null>
+    export type serializers = null
+    export type refiners = null
+    export type deserializers = null
 }
