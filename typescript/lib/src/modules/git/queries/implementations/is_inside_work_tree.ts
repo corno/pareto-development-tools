@@ -39,19 +39,19 @@ export const $$: p_.Query_Implementation<
         ),
         {
             success: ($) => $.stdout.raw === "true"
-                ? p_.e_deprecated.direct_result(true)
-                : p_.e_deprecated.direct_result(false),
+                ? p_.e_deprecated.deprecated_direct_result(true)
+                : p_.e_deprecated.deprecated_direct_result(false),
             error: ($) => p_.decide.state($, ($): p_.Query_Result<boolean, s_schema.Error> => {
                 switch ($[0]) {
-                    case 'failed to spawn': return p_.option($, ($) => p_.e_deprecated.direct_error(['could not run git command', {
+                    case 'failed to spawn': return p_.option($, ($) => p_.e_deprecated.deprecated_direct_error(['could not run git command', {
                         'message': $.message
                     }]))
                     case 'non zero exit code': return p_.option($, ($) => p_t.from.optional($['exit code']).decide(
                         ($) => $ === 128,
                         () => false
                     )
-                        ? p_.e_deprecated.direct_result(false)
-                        : p_.e_deprecated.direct_error(['unexpected output', {
+                        ? p_.e_deprecated.deprecated_direct_result(false)
+                        : p_.e_deprecated.deprecated_direct_error(['unexpected output', {
                             'message': {
                                 'lines': $.stderr.lines
                             }

@@ -101,7 +101,7 @@ export const $$: p_.Command_Implementation<
 
                     //FIXME move this to it's own query file in the 'file structure analysis' module
                     p_.s.query(
-                        p_q.e_deprecated.dictionary(
+                        p_q.e_deprecated.deprecated_dictionary(
                             r_analysis_from_package_files.Analyzed_Package_Nodes(
                                 $v,
                                 {
@@ -111,12 +111,12 @@ export const $$: p_.Command_Implementation<
                             ($, id) => p_q.decide.state($,
                                 ($): p_q.Query_Result<p_schema.List<string>, s.Node_Error> => {
                                     switch ($[0]) {
-                                        case 'unexpected directory': return p_q.option($, ($) => p_q.e_deprecated.direct_result(p_.literal.list(["unexpected directory"])))
-                                        case 'other': return p_q.option($, ($) => p_q.e_deprecated.direct_result(p_.literal.list(["unexpected node, not a dir and not a file"])))
+                                        case 'unexpected directory': return p_q.option($, ($) => p_q.e_deprecated.deprecated_direct_result(p_.literal.list(["unexpected directory"])))
+                                        case 'other': return p_q.option($, ($) => p_q.e_deprecated.deprecated_direct_result(p_.literal.list(["unexpected node, not a dir and not a file"])))
                                         case 'file': return p_q.option($, ($): p_q.Query_Result<p_schema.List<string>, s.Node_Error> => {
                                             const xxx = $.content
                                             return p_q.decide.optional($['unexpected path tail'],
-                                                ($) => p_q.e_deprecated.direct_result(p_.literal.list(["unexpected path tail"])),
+                                                ($) => p_q.e_deprecated.deprecated_direct_result(p_.literal.list(["unexpected path tail"])),
                                                 (): p_q.Query_Result<p_schema.List<string>, s.Node_Error> => {
                                                     const path = ser_path.Path($.structure.path)
 
@@ -179,7 +179,7 @@ export const $$: p_.Command_Implementation<
                                                     const looked_up_path = known_paths[path]
 
                                                     if (looked_up_path === undefined) {
-                                                        return p_q.e_deprecated.direct_result(p_.literal.list(["unknown path: " + path]))
+                                                        return p_q.e_deprecated.deprecated_direct_result(p_.literal.list(["unknown path: " + path]))
                                                     }
 
                                                     // if (looked_up_path === true) { //typescript source file
@@ -438,7 +438,7 @@ export const $$: p_.Command_Implementation<
                                                     // } else {
                                                     //     return p_q.e.direct_result(p_.literal.list<string>([]))
                                                     // }
-                                                    return p_q.e_deprecated.direct_result(p_.literal.list<string>([]))
+                                                    return p_q.e_deprecated.deprecated_direct_result(p_.literal.list<string>([]))
 
                                                 }
                                             )

@@ -21,7 +21,7 @@ export const $$: p_.Query_Implementation<
         'parse typescript file': query_typescript_api.parse_file,
     }
 > = p_.query(
-    (e, $s, $q, $d) => p_.e_deprecated.dictionary(
+    (e, $s, $q, $d) => p_.e_deprecated.deprecated_dictionary(
         $d.deprecated,
         ($): p_.Query_Result<s_typescript_directory.Node, s_get_typescript_files.Node_Error> => p_.decide.state(
             $,
@@ -42,14 +42,14 @@ export const $$: p_.Query_Implementation<
                                 ($) => $
                             ),
                             {
-                                'error': ($): p_.Query_Result<s_typescript_directory.Node, s_get_typescript_files.Node_Error> => p_.e_deprecated.direct_result(['file', ['failure', $]]),
-                                'success': ($): p_.Query_Result<s_typescript_directory.Node, s_get_typescript_files.Node_Error> => p_.e_deprecated.direct_result(['file', ['success', $['source file']]]),
+                                'error': ($): p_.Query_Result<s_typescript_directory.Node, s_get_typescript_files.Node_Error> => p_.e_deprecated.deprecated_direct_result(['file', ['failure', $]]),
+                                'success': ($): p_.Query_Result<s_typescript_directory.Node, s_get_typescript_files.Node_Error> => p_.e_deprecated.deprecated_direct_result(['file', ['success', $['source file']]]),
                             }
                         )
                     ).transform(
                         ($): s_typescript_directory.Node => $
                     ))
-                    case 'other': return p_.option($, ($) => p_.e_deprecated.direct_result(['other', null]))
+                    case 'other': return p_.option($, ($) => p_.e_deprecated.deprecated_direct_result(['other', null]))
                     default: return p_.exhaustive($[0])
                 }
             }

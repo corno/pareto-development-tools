@@ -28,8 +28,8 @@ export const $$: p_.Query_Implementation<
             ($): d.Error => ['read directory', $],
         )
     ).query(
-        ($d) => p_.e_deprecated.dictionary(
-            $d,
+        ($d) => e.dictionary(
+            ($) => $d,
             ($) => {
                 const lib_path = t_path_to_path.extend_context_path_with_list(
                     t_path_to_path.deprecated_node_path_to_context_path($.path),
@@ -40,8 +40,8 @@ export const $$: p_.Query_Implementation<
                 const package_json_path = t_path_to_path.create_node_path(lib_path, { 'node': "package.json" })
                 return p_.decide.state($['node type'], ($): p_.Query_Result<s_npm_package.NPM_Package, d.Package_Error> => {
                     switch ($[0]) {
-                        case 'file': return p_.option($, ($) => p_.e_deprecated.direct_error(['not a directory', null]))
-                        case 'other': return p_.option($, ($) => p_.e_deprecated.direct_error(['not a directory', null]))
+                        case 'file': return p_.option($, ($) => p_.e_deprecated.deprecated_direct_error(['not a directory', null]))
+                        case 'other': return p_.option($, ($) => p_.e_deprecated.deprecated_direct_error(['not a directory', null]))
                         case 'directory': return p_.option($, ($) => p_super_query_result($q['read file'](
                             package_json_path,
                             ($): d.Package_Error => ['no package.json file', null],

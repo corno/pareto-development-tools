@@ -28,7 +28,7 @@ export const $$: p_.Query_Implementation<
             ($): d.Error => ['read directory', $],
         )
     ).query(
-        ($v) => p_.e_deprecated.dictionary(
+        ($v) => p_.e_deprecated.deprecated_dictionary(
             $v,
             ($): p_.Query_Result<s_nested_directory_content.Directory, d.Package_Error> => {
                 const path = $.path
