@@ -96,7 +96,7 @@ export const Analyzed_Package_Nodes: declarations.Analyzed_Package_Nodes = ($, $
                         ($): p_schema.Dictionary<s_out_fsa.Analyzed_Node> => foo($),
                         (parent, child) => parent + "/" + child,
                         {
-                            'duplicate_id': p_unreachable_code_path("node names do not contain slashes")
+                            'duplicate_id': () => p_unreachable_code_path("node names should not contain slashes")
                         }
                     ))
                     case 'leaf': return p_.option($, ($) => p_single_entry_dictionary.single_entry_dictionary(
