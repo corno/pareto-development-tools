@@ -4,7 +4,7 @@ import * as p_schema from 'pareto-core/schema'
 import p_list_from_text from 'pareto-core/refiner/specials/list_from_text'
 import p_list_build_deprecated from 'pareto-core/refiner/specials/list_build_deprecated'
 import p_text_from_list from 'pareto-core/transformer/specials/text_from_list'
-import p_super_query_result from 'pareto-core/query/super_query_result'
+import p_super_query_result from 'pareto-core/__internal/query/super_query_result'
 
 //schemas
 

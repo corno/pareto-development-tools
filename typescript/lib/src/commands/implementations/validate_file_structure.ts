@@ -3,7 +3,7 @@ import * as p_temp from 'pareto-core/transformer'
 import * as p_q from 'pareto-core/query'
 import * as p_r from 'pareto-core/refiner'
 import * as p_schema from 'pareto-core/schema'
-import p_super_query_result from 'pareto-core/query/super_query_result'
+import p_super_query_result from 'pareto-core/__internal/query/super_query_result'
 
 //interface dependencies
 import type * as query_interfaces_pareto_filesystem_unrestricted_api from "pareto-filesystem-unrestricted-api/modules/unrestricted/queries/interfaces"

@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/query'
 import * as p_t from 'pareto-core/transformer'
-import p_super_query_result from 'pareto-core/query/super_query_result'
+import p_super_query_result from 'pareto-core/__internal/query/super_query_result'
 
 import * as queries_actions from "../../../version_control_api/queries/interfaces.js"
 import type * as query_interfaces_pareto_resources from "pareto-execute-sandboxed/queries/interfaces"

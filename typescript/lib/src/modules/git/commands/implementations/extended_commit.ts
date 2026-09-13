@@ -1,6 +1,6 @@
 import * as p_ from 'pareto-core/command'
 import * as p_t from 'pareto-core/transformer'
-import p_super_query_result from 'pareto-core/query/super_query_result'
+import p_super_query_result from 'pareto-core/__internal/query/super_query_result'
 
 //interface dependencies
 import type * as command_interfaces from "../../../version_control_api/commands/interfaces.js"

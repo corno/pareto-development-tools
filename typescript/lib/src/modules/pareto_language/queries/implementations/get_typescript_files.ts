@@ -1,5 +1,5 @@
 import * as p_ from 'pareto-core/query'
-import p_super_query_result from 'pareto-core/query/super_query_result'
+import p_super_query_result from 'pareto-core/__internal/query/super_query_result'
 
 import type * as query_typescript_api from "pareto-typescript/queries/interfaces"
 
