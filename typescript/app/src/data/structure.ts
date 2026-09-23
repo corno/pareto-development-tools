@@ -33,10 +33,7 @@ export const $$ = sh.dgroup({
     "documentation": sh.g.directory_freeform(),
     "LICENSE": sh.g.file_generated(true),
     "out": sh.g.directory_generated(false),
-    "liana": sh.g.directory_group({
-        ".liana": sh.g.directory_ignore(),
-        "module.liana.lna": sh.g.file_manual(),
-    }),
+    "dsl_src": sh.g.directory_ignore(),
     "completions": sh.g.directory_wildcards(0, false, ["bash"], false),
     "typescript": sh.g.directory_group({
         "app": sh.g.directory_group({
