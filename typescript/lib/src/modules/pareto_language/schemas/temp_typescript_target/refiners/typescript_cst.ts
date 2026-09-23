@@ -99,13 +99,14 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                 ($) => Expression($.data, abort)
             )])
             case 'arrow function': return p_.option($, ($): s_out.Expression => ['arrow function', {
-                'parameters': p_.from.state($.parameters).decide(
-                    ($) => {
-                        switch ($[0]) {
-                            case 'with parentheses': return p_.option($, ($) => p_temp.from.list($.parameters.entries.entries).map(
-                                ($) => ({
-                                    'name': {
-                                        'value': p_variables(
+                'declaration': {
+                    'type parameters': p_.literal.list([]),
+                    'parameters': p_.from.state($.parameters).decide(
+                        ($) => {
+                            switch ($[0]) {
+                                case 'with parentheses': return p_.option($, ($) => p_temp.from.list($.parameters.entries.entries).map(
+                                    ($) => ({
+                                        'name': ['raw', p_variables(
                                             () => {
                                                 const $v_bp = $.data.name
                                                 return p_.from.state($.data.name.type).decide(
@@ -121,43 +122,44 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                                                     }
                                                 )
                                             }
-                                        )
-                                    },
-                                    'type': p_.from.optional($.data.type).map(
-                                        ($) => Type($.type, abort)
-                                    ),
-                                })
-                            ))
-                            case 'without parentheses': return p_.option($, ($) => abort(['unexpected construct', {
-                                'name': "without parentheses",
-                                'location': t_cst_to_location_temp.Binding_Pattern($.parameter.name)
-                            }]))
-                            default: return p_.exhaustive($[0])
-                        }
-                    }
-                ),
-                'return type': p_.from.optional($.type).map(
-                    ($) => p_.from.state($.kind).decide(
-                        ($) => {
-                            switch ($[0]) {
-                                case 'type': return p_.option($, ($) => Type($, abort))
-                                case 'type predicate': return p_.option($, ($) => abort(['unexpected construct', {
-                                    'name': "type predicate",
-                                    'location': p_.from.state($['parameter name']).decide(
-                                        ($) => {
-                                            switch ($[0]) {
-                                                case 'identifier': return p_.option($, ($) => $.location)
-                                                case 'this': return p_.option($, ($) => $.location)
-                                                default: return p_.exhaustive($[0])
-                                            }
-                                        }
-                                    )
+                                        )],
+                                        'type': p_.from.optional($.data.type).map(
+                                            ($) => Type($.type, abort)
+                                        ),
+                                    })
+                                ))
+                                case 'without parentheses': return p_.option($, ($) => abort(['unexpected construct', {
+                                    'name': "without parentheses",
+                                    'location': t_cst_to_location_temp.Binding_Pattern($.parameter.name)
                                 }]))
                                 default: return p_.exhaustive($[0])
                             }
                         }
-                    )
-                ),
+                    ),
+                    'return type': p_.from.optional($.type).map(
+                        ($) => p_.from.state($.kind).decide(
+                            ($) => {
+                                switch ($[0]) {
+                                    case 'type': return p_.option($, ($) => Type($, abort))
+                                    case 'type predicate': return p_.option($, ($) => abort(['unexpected construct', {
+                                        'name': "type predicate",
+                                        'location': p_.from.state($['parameter name']).decide(
+                                            ($) => {
+                                                switch ($[0]) {
+                                                    case 'identifier': return p_.option($, ($) => $.location)
+                                                    case 'this': return p_.option($, ($) => $.location)
+                                                    default: return p_.exhaustive($[0])
+                                                }
+                                            }
+                                        )
+                                    }]))
+                                    default: return p_.exhaustive($[0])
+                                }
+                            }
+                        )
+                    ),
+
+                },
                 'body': p_.from.state($.body).decide(
                     ($): s_out.Expression.arrow_function.body => {
                         switch ($[0]) {
@@ -275,6 +277,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                         }
                     }
                 ),
+                'arguments on own line': true,
                 'arguments': p_temp.from.list($.arguments.arguments.entries).map(
                     ($) => p_.from.state($.data).decide(
                         ($) => {
@@ -300,9 +303,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
                 'index': Expression($['argument expression'], abort)
             }])
             case 'false keyword': return p_.option($, ($): s_out.Expression => ['false', null])
-            case 'identifier': return p_.option($, ($): s_out.Expression => ['identifier', {
-                'value': $.text
-            }])
+            case 'identifier': return p_.option($, ($): s_out.Expression => ['identifier', ['raw', $.text]])
             case 'non null': return p_.option($, ($): s_out.Expression => ['true', null]) //FIXME
             case 'null keyword': return p_.option($, ($): s_out.Expression => ['null', null])
             case 'numeric literal': return p_.option($, ($): s_out.Expression => ['number literal', $.text === "0"
@@ -352,20 +353,18 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
 
             case 'property access': return p_.option($, ($): s_out.Expression => ['property access', {
                 'object': Expression($.expression, abort),
-                'property': {
-                    'value': p_.from.state($.identifier).decide(
-                        ($) => {
-                            switch ($[0]) {
-                                case 'named': return p_.option($, ($) => $.text)
-                                case 'private': return p_.option($, ($) => abort(['unexpected construct', {
-                                    'name': "private",
-                                    'location': $.location
-                                }]))
-                                default: return p_.exhaustive($[0])
-                            }
+                'property': ['raw', p_.from.state($.identifier).decide(
+                    ($) => {
+                        switch ($[0]) {
+                            case 'named': return p_.option($, ($) => $.text)
+                            case 'private': return p_.option($, ($) => abort(['unexpected construct', {
+                                'name': "private",
+                                'location': $.location
+                            }]))
+                            default: return p_.exhaustive($[0])
                         }
-                    )
-                },
+                    }
+                )],
             }])
             case 'string literal': return p_.option($, ($): s_out.Expression => ['string literal', {
                 'value': $.text,
@@ -384,9 +383,7 @@ export const Expression: declarations.Expression = ($, abort) => p_.from.state($
 export const Property_Name: declarations.Property_Name = ($, abort) => p_.from.state($.type).decide(
     ($) => {
         switch ($[0]) {
-            case 'identifier': return p_.option($, ($) => ['identifier', {
-                'value': $.text
-            }])
+            case 'identifier': return p_.option($, ($) => ['identifier', ['raw', $.text]])
             case 'string literal': return p_.option($, ($) => ['string literal', {
                 'value': $.text,
                 'delimiter': ['apostrophe', null] //FIXME
@@ -429,17 +426,17 @@ export const Statement: declarations.Statement = ($, abort) => p_.from.state($).
                     ($) => p_.from.state($).decide(
                         ($) => {
                             switch ($[0]) {
-                                case 'case': return p_.option($, ($): s_out.Statements.L.switch_.clauses.L => ({
+                                case 'case': return p_.option($, ($): s_out.Statement.switch_.clauses.L => ({
                                     'type': ['case', Expression($.expression, abort)],
-                                    'statements': p_.from.list($.statements).map(
+                                    'body': ['statements', p_.from.list($.statements).map(
                                         ($) => Statement($, abort)
-                                    )
+                                    )]
                                 }))
-                                case 'default': return p_.option($, ($): s_out.Statements.L.switch_.clauses.L => ({
+                                case 'default': return p_.option($, ($): s_out.Statement.switch_.clauses.L => ({
                                     'type': ['default', null],
-                                    'statements': p_.from.list($.statements).map(
+                                    'body': ['statements', p_.from.list($.statements).map(
                                         ($) => Statement($, abort)
-                                    )
+                                    )]
                                 }))
                                 default: return p_.exhaustive($[0])
                             }
@@ -462,9 +459,7 @@ export const Statement: declarations.Statement = ($, abort) => p_.from.state($).
                             return p_.from.state($.data.name.type).decide(
                                 ($) => {
                                     switch ($[0]) {
-                                        case 'identifier': return p_.option($, ($) => ({
-                                            'value': $.text
-                                        }))
+                                        case 'identifier': return p_.option($, ($) => ['raw', $.text])
                                         default: return abort(['unexpected construct', {
                                             'location': t_cst_to_location_temp.Binding_Pattern($v_bp),
                                             'name': $[0]
@@ -602,12 +597,8 @@ export const Type: declarations.Type = ($, abort) => p_.from.state($).decide(
                 'start': p_.from.state($['entity name']).decide(
                     ($): s_out.Type.type_reference.start => {
                         switch ($[0]) {
-                            case 'identifier': return p_.option($, ($) => ({
-                                'value': $.text
-                            }))
-                            case 'qualified name': return p_.option($, ($) => ({
-                                'value': "FIXME"
-                            }))
+                            case 'identifier': return p_.option($, ($) => ['raw', $.text])
+                            case 'qualified name': return p_.option($, ($) => ['raw', "FIXME"])
                             default: return p_.exhaustive($[0])
                         }
                     },
@@ -617,9 +608,7 @@ export const Type: declarations.Type = ($, abort) => p_.from.state($).decide(
                         switch ($[0]) {
                             case 'identifier': return p_.option($, ($) => p_.literal.list([]))
                             case 'qualified name': return p_.option($, ($) => p_.literal.list([
-                                {
-                                    'value': "FIXME"
-                                }
+                                ['raw', "FIXME"]
                             ])) //FIXME
                             default: return p_.exhaustive($[0])
                         }
