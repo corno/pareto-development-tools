@@ -1,6 +1,5 @@
 (
-    `omit (de)serializer`: false
-    `schema tree`: | `set` {
+    `schema`: | `set` {
         'structure': | `schema` (
             `schema imports`: {}
             `resolver imports`: {}
@@ -138,4 +137,8 @@
             `complexity`: | `unconstrained` ~
         )
     }
+    `schema path`: [ ]
+    `complexity`: | `constrained` (
+        `module resolver`: "Root"
+    )
 )
