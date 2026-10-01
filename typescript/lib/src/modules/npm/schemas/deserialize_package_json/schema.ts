@@ -1,4 +1,4 @@
-import type * as s_deserialize from "astn-core/modules/deserialization/schemas/parse_tree_deserialization/schema"
+import type * as s_deserialize from "astn-runtime/modules/deserialization/schemas/parse_tree_deserialization/schema"
 import type * as s_path from "pareto-execute-unrestricted-api/schemas/fs_unrestricted_path/schema"
 
 export type Error = {

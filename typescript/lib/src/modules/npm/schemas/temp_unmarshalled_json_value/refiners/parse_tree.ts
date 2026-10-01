@@ -5,7 +5,7 @@ import type * as p_ri from 'pareto-core/refiner'
 import p_change_context from 'pareto-core/refiner/specials/change_context'
 
 //schemas
-import type * as s_in from "astn-core/modules/deserialization/schemas/parse_tree/schema"
+import type * as s_in from "astn-runtime/modules/deserialization/schemas/parse_tree/schema"
 import type * as s_out from "../schema.js"
 import type * as s_error from "../../deserialize_package_json/schema.js"
 
